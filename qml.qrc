@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>TableWidget.qml</file>
+        <file>UavDataTableView.qml</file>
+        <file>UavManagement.qml</file>
+        <file>UavManageCommon.qml</file>
+        <file>MultiCombox.qml</file>
+        <file>GetTypeManagement.qml</file>
+        <file>UavMainManagement.qml</file>
+        <file>MultiTextOfCombox.qml</file>
+        <file>MountComponentManagement.qml</file>
+        <file>UavReconnaissancePayloadManagement.qml</file>
+        <file>UavAmmunitionLoadManagement.qml</file>
+        <file>AddUavReconnaissancePayloadData.qml</file>
+        <file>AddAmmunitionLoadData.qml</file>
+    </qresource>
+</RCC>
