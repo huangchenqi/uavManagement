@@ -9,6 +9,7 @@ Rectangle{
     width: 1600
     height: 820
     //title: "无人机型号管理系统 - V1.4"
+
     Rectangle{
         id: uavManageMentMain
         visible: true
@@ -205,26 +206,30 @@ Rectangle{
 
                 }
                 Page{
+                    UavManageCommon{
+                        id:uavManagementCommon
+                    }
+
                     //padding: 10
 
                     // width: 1500
                     // height: 800
-                    Loader {
-                               id: uavManagementLoader
-                               source: "./UavManageCommon.qml" // 这里指定你想要加载的QML文件的路径
+                    // Loader {
+                    //            id: uavManagementLoader
+                    //            source: "./UavManageCommon.qml" // 这里指定你想要加载的QML文件的路径
 
 
-                               onLoaded: {
-                                  // uavManagementLoader.item.onCustomSignal.connect(handleSignal)
+                    //            onLoaded: {
+                    //               // uavManagementLoader.item.onCustomSignal.connect(handleSignal)
 
 
-                               }
-                               function handleSignal(msg) {
-                                   uavManageMentMain.enabled = false
-                                   console.log("收到信号:", msg) // 直接连接信号
-                                   console.log(msg) }
+                    //            }
+                    //            function handleSignal(msg) {
+                    //                uavManageMentMain.enabled = false
+                    //                console.log("收到信号:", msg) // 直接连接信号
+                    //                console.log(msg) }
 
-                           }
+                    //        }
 
                            // 如果需要，你可以在Loader加载完成后访问其项（item）并进行操作
                    Component.onCompleted: {
@@ -234,10 +239,14 @@ Rectangle{
                 Page{
 
                     padding: 10
-                    Loader {
-                               id: uavLoadMountComponentLoader
-                               source: "./MountComponentManagement.qml" // 这里指定你想要加载的QML文件的路径
-                           }
+                    MountComponentManagement{
+                        id:uavLoadMountComponent
+                    }
+
+                    // Loader {
+                    //            id: uavLoadMountComponentLoader
+                    //            source: "./MountComponentManagement.qml" // 这里指定你想要加载的QML文件的路径
+                    //        }
 
                            // 如果需要，你可以在Loader加载完成后访问其项（item）并进行操作
                    Component.onCompleted: {
@@ -245,11 +254,15 @@ Rectangle{
                    }
                 }
                 Page{
-                    Text {
-                        id: thname
-                        anchors.centerIn: parent
-                        text: qsTr("textpage3")
+                    MountingSchemeManagement{
+                        id:mountingSchemeManagement
                     }
+
+                    // Text {
+                    //     id: thname
+                    //     anchors.centerIn: parent
+                    //     text: qsTr("textpage3")
+                    // }
                 }
             }
         }

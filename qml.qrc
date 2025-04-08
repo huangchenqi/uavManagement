@@ -3,7 +3,7 @@
         <file>main.qml</file>
         <file>TableWidget.qml</file>
         <file>UavDataTableView.qml</file>
-        <file>UavManagement.qml</file>
+        <file>AddUavModelData.qml</file>
         <file>UavManageCommon.qml</file>
         <file>MultiCombox.qml</file>
         <file>GetTypeManagement.qml</file>
@@ -14,5 +14,7 @@
         <file>UavAmmunitionLoadManagement.qml</file>
         <file>AddUavReconnaissancePayloadData.qml</file>
         <file>AddAmmunitionLoadData.qml</file>
+        <file>MountingSchemeManagement.qml</file>
+        <file>AddMountingSchemeData.qml</file>
     </qresource>
 </RCC>

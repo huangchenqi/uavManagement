@@ -183,7 +183,7 @@ Rectangle {
                        Layout.fillWidth: true
                        verticalAlignment: Text.AlignVCenter
                        horizontalAlignment: Text.AlignHCenter
-                       text: qsTr("无人机型号记录");
+                       text: qsTr("挂载方案记录");
                        font.pointSize: 20
                        color: "black"
                    }
@@ -208,34 +208,35 @@ Rectangle {
                            width:100
                            height:50
                            font.pointSize: 12
-                           text: "飞机类型:"
+                           text: "吊舱配置:"
                        }
                        ComboBox {
                            id: modelSelector
                            width: 160
                            height: 40
                            font.pointSize: 12
-                           model: ["全部","侦察无人机","攻击无人机","查打一体无人机"]
+                           model: ["无吊舱","200kg通侦吊舱","500kg吊舱"]
                        }
                        Label{
                            id:inputUavIdData
                            width:100
                            height:50
                            font.pointSize: 12
-                           text: "飞机编号:"
+                           text: "弹药类型:"
                        }
-                       TextField{
-                           id:uavIdSelect
-                           width: 100
-                           height:50
+                       ComboBox {
+                           id: inputUavId
+                           width: 160
+                           height: 40
                            font.pointSize: 12
+                           model: ["无炸弹","空地炸弹","制导炸弹"]
                        }
                        Label{
                            id:inputUavNameData
                            width:100
                            height:50
                            font.pointSize: 12
-                           text: "飞机名称:"
+                           text: "挂载数量:"
                        }
 
                        TextField{
@@ -789,7 +790,7 @@ Rectangle {
                    Item { Layout.fillWidth: true }
                    Button {
                        id: delUavManagement
-                       text: "删除型号"
+                       text: "删除方案"
                        onClicked: {
                            onDelButtonClicked();
                        }
@@ -797,12 +798,12 @@ Rectangle {
                    Item { Layout.leftMargin: 20 }
                    Button {
                        id: addUavManagement
-                       text: "新增型号"
+                       text: "新增方案"
                        onClicked: {
                            processInfo.loadViewType = "addUavData"
-                           pageUavModelLoader.setSource("qrc:./AddUavModelData.qml",
+                           pageUavModelLoader.setSource("qrc:./AddMountingSchemeData.qml",
                                                 {processInfo: processInfo,
-                                                    backUi: "qrc:/UavManageCommon.qml"})
+                                                    backUi: "qrc:/MountingSchemeManagement.qml"})
                            // 退出并隐藏界面
                            //uavManagementLoader.setSource = null // 卸载界面
                        }
