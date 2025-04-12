@@ -17,6 +17,7 @@
 
 #include <memory>
 #include <cstddef>
+#include <utility>
 
 #include <odb/core.hxx>
 #include <odb/traits.hxx>
@@ -677,7 +678,7 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        ::time_t,
+        ::QDateTime,
         pgsql::id_timestamp >::query_type,
       pgsql::id_timestamp >
     uavCreatModelTime_type_;
@@ -1236,7 +1237,7 @@ namespace odb
 
       // uavCreatModelTime_
       //
-      long long uavCreatModelTime_value;
+      unsigned long long uavCreatModelTime_value;
       bool uavCreatModelTime_null;
 
       // uavImgName_

@@ -1615,12 +1615,12 @@ namespace odb
     // uavCreatModelTime_
     //
     {
-      ::time_t const& v =
+      ::QDateTime const& v =
         o.uavCreatModelTime_;
 
       bool is_null (false);
       pgsql::value_traits<
-          ::time_t,
+          ::QDateTime,
           pgsql::id_timestamp >::set_image (
         i.uavCreatModelTime_value, is_null, v);
       i.uavCreatModelTime_null = is_null;
@@ -2364,11 +2364,11 @@ namespace odb
     // uavCreatModelTime_
     //
     {
-      ::time_t& v =
+      ::QDateTime& v =
         o.uavCreatModelTime_;
 
       pgsql::value_traits<
-          ::time_t,
+          ::QDateTime,
           pgsql::id_timestamp >::set_value (
         v,
         i.uavCreatModelTime_value,

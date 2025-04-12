@@ -206,9 +206,9 @@ Rectangle{
 
                 }
                 Page{
-                    UavManageCommon{
-                        id:uavManagementCommon
-                    }
+                        UavManageCommon{
+                            id:uavManagementCommon
+                        }
 
                     //padding: 10
 
@@ -219,19 +219,19 @@ Rectangle{
                     //            source: "./UavManageCommon.qml" // 这里指定你想要加载的QML文件的路径
 
 
-                    //            onLoaded: {
-                    //               // uavManagementLoader.item.onCustomSignal.connect(handleSignal)
+                    //            // onLoaded: {
+                    //            //    // uavManagementLoader.item.onCustomSignal.connect(handleSignal)
 
 
-                    //            }
-                    //            function handleSignal(msg) {
-                    //                uavManageMentMain.enabled = false
-                    //                console.log("收到信号:", msg) // 直接连接信号
-                    //                console.log(msg) }
+                    //            // }
+                    //            // function handleSignal(msg) {
+                    //            //     uavManageMentMain.enabled = false
+                    //            //     console.log("收到信号:", msg) // 直接连接信号
+                    //            //     console.log(msg) }
 
                     //        }
 
-                           // 如果需要，你可以在Loader加载完成后访问其项（item）并进行操作
+
                    Component.onCompleted: {
                        //myLoader.item.someProperty = someValue // 假设OtherFile.qml的根元素有一个名为someProperty的属性
                    }

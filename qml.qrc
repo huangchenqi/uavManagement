@@ -16,5 +16,7 @@
         <file>AddAmmunitionLoadData.qml</file>
         <file>MountingSchemeManagement.qml</file>
         <file>AddMountingSchemeData.qml</file>
+        <file>MultiTextDispay.qml</file>
+        <file>AddMountLocationManagement.qml</file>
     </qresource>
 </RCC>

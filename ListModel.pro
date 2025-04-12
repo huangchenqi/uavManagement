@@ -34,12 +34,14 @@ SOURCES += \
 #        TableModel.cpp \
     AmmunitionEntity-odb.cxx \
     UavModelLoadTypeEntity-odb.cxx \
+    UavModelMountLocationEntity-odb.cxx \
     databaseconnection.cpp \
         main.cpp \
 #        migration.cpp \
 #        uavdataoperationmodel.cpp \
         uavmodeldao.cpp \
-    uavmodelentity-odb.cxx
+    uavmodelentity-odb.cxx \
+    uavmountlocationdao.cpp
 
 
 RESOURCES += qml.qrc \
@@ -74,15 +76,20 @@ HEADERS += \
     ReconnaissancePayloadEntity.h \
     UavModelBombingMethodEntity.h \
     UavModelControlMethodEntity.h \
+    UavModelDataToJson.h \
     UavModelHangingCapability.h \
     UavModelLoadTypeEntity-odb.hxx \
     UavModelLoadTypeEntity.h \
+    UavModelMountLocationEntity-odb.hxx \
     UavModelMountLocationEntity.h \
     UavModelRecoveryModeEntity.h \
     databaseconnection.h \
+    datetime-traits.hxx \
+    json.hpp \
     uavmodeldao.h \
     uavmodelentity-odb.hxx \
-    uavmodelentity.h
+    uavmodelentity.h \
+    uavmountlocationdao.h
 
 DISTFILES += \
     AmmunitionEntity-odb.ixx \

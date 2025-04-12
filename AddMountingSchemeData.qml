@@ -135,8 +135,8 @@ Window{//Rectangle{
                                 // Layout.fillHeight: true
                                 spacing: 10
                                 Label{
-                                    id:uavType
-                                    text: "无人机类型:"
+                                    id:podType
+                                    text: "吊舱类型:"
                                     height: 50
                                     width:100
                                     // anchors.left: parent.left //锚点属性与锚点边距一起用。
@@ -146,515 +146,52 @@ Window{//Rectangle{
                                 }
 
                                 ComboBox{
-                                    id:uavTypeSelect
+                                    id:podTypeSelect
                                     width:100
                                     height:50
-                                    model:["侦察无人机","攻击无人机","查打一体无人机"]
-                                }
-
-                                Label{
-                                    id:uavName
-                                    text: "无人机名称:"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavNameText
-                                    width: 120
-                                }
-                                Label{
-                                    id:uavId
-                                    text: "无人机编号:"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavIdText
-                                    width: 120
-                                }
-                            }
-
-
-                            RowLayout {
-                                // anchors.fill: parent
-                                Layout.fillWidth: true
-                                // Layout.fillHeight: true
-                                spacing: 10
-                                Label{
-                                    id:uavLength
-                                    text: "机长(m):"
-                                    height: 50
-                                    width:100
-                                    // anchors.left: parent.left //锚点属性与锚点边距一起用。
-                                    // anchors.leftMargin: 10
-                                    Layout.leftMargin: 10
-
-                                }
-
-                                TextField{
-                                    id: uavLengthText
-                                    Layout.preferredWidth: 80
-                                    //width: 50
-                                }
-
-                                Label{
-                                    id:uavWidth
-                                    text: "翼展(m):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavWidthText
-                                    //width: 120
-                                    Layout.preferredWidth: 80
-                                }
-                                Label{
-                                    id:uavHeight
-                                    text: "机高(m):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavHeightText
-                                    //width: 120
-                                    Layout.preferredWidth: 80
-                                }
-
-                                Label{
-                                    id:uavInvisibility
-                                    text: "是否具备隐身:"
-                                    height: 50
-                                    width:100
-                                    // anchors.left: parent.left //锚点属性与锚点边距一起用。
-                                    // anchors.leftMargin: 10
-                                    Layout.leftMargin: 10
-
-                                }
-
-                                ComboBox{
-                                    id:uavInvisibilitySelect
-                                    width:100
-                                    height:50
-                                    model:["未定","是","否"]
-                                }
-
-
-
-                            }
-                            RowLayout {
-                                // anchors.fill: parent
-                                Layout.fillWidth: true
-                                // Layout.fillHeight: true
-                                spacing: 10
-                                Label{
-                                    id:uavFlightHeight
-                                    text: "飞行高度范围(m):"
-                                    height: 50
-                                    width:100
-                                    // anchors.left: parent.left //锚点属性与锚点边距一起用。
-                                    // anchors.leftMargin: 10
-                                    Layout.leftMargin: 10
-
-                                }
-
-                                TextField{
-                                    id: uavFlightHeightMin
-                                    //width: 50
-                                    Layout.preferredWidth: 50
-                                    //Layout.preferredHeight: 50
-                                }
-                                Label{
-                                    id:uavFlightHeightRange
-                                    text: "-"
-                                    height: 50
-                                    width:10
-                                }
-                                TextField{
-                                    id: uavFlightHeightMax
-                                    //width: 50
-                                    Layout.preferredWidth: 50
-                                    //Layout.preferredHeight: 50
-                                }
-
-                                Label{
-                                    id:uavFlightSpeed
-                                    text: "飞行速度范围(Km/h):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavFlightSpeedMin
-                                    Layout.preferredWidth: 50
-                                }
-                                Label{
-                                    id:uavFlightSpeedRange
-                                    text: "-"
-                                    height: 50
-                                    width:10
-                                }
-                                TextField{
-                                    id: uavFlightSpeedMax
-                                    Layout.preferredWidth: 50
-                                }
-                                Label{
-                                    id:uavFlightDistanceRange
-                                    text: "航程范围(km):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavFlightDistance
-                                    Layout.preferredWidth: 80
-                                }
-                                Label{
-                                    id:uavFlightTimeRange
-                                    text: "航时范围(h):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavFlightTime
-                                    Layout.preferredWidth: 80
-                                }
-                            }
-                            RowLayout {
-                                // anchors.fill: parent
-                                Layout.fillWidth: true
-                                // Layout.fillHeight: true
-                                spacing: 10
-                                Label{
-                                    id:uavTakeoffDistance
-                                    text: "起飞滑跑距离(m):"
-                                    height: 50
-                                    width:100
-                                    // anchors.left: parent.left //锚点属性与锚点边距一起用。
-                                    // anchors.leftMargin: 10
-                                    Layout.leftMargin: 10
-
-                                }
-
-                                TextField{
-                                    id: uavTakeoffDistanceValue
-                                    //width: 50
-                                    Layout.preferredWidth: 50
-                                    //Layout.preferredHeight: 50
-                                }
-
-                                Label{
-                                    id:uavLandDistance
-                                    text: "着陆滑跑距离(m):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavLandDistanceValue
-                                    Layout.preferredWidth: 50
-                                }
-                                Label{
-                                    id:uavTurningRadiusRange
-                                    text: "转弯半径范围(Km):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavTurningRadiusMin
-                                    Layout.preferredWidth: 80
-                                }
-                                Label{
-                                    id:uavFlightSpeedRangeValue
-                                    text: "-"
-                                    height: 50
-                                    width:10
-                                }
-                                TextField{
-                                    id: uavTurningRadiusMax
-                                    Layout.preferredWidth: 80
-                                }
-                                Label{
-                                    id:uavOperatioanalRadiusRange
-                                    text: "作战半径:"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavOperatioanalRadius
-                                    Layout.preferredWidth: 80
-                                }
-                            }
-
-                            RowLayout {
-                                // anchors.fill: parent
-                                Layout.fillWidth: true
-                                // Layout.fillHeight: true
-                                spacing: 10
-                                Label{
-                                    id:uavInvestigationPayloadType
-                                    text: "侦察载荷类型:"
-                                    height: 50
-                                    width:100
-                                    Layout.leftMargin: 10
-                                }
-                                // ButtonGroup {
-                                //         id: uavInvestigationPayloadTypeGroup
-                                //         exclusive: false // 关键！允许复选
-                                //         checkState: groupCheckBox.checkState
-                                //     }
-
-                                //     // CheckBox {
-                                //     //     id: groupCheckBox
-                                //     //     text: "全选"
-                                //     //     checkState: checkboxGroup.checkState
-                                //     //     onCheckStateChanged: {
-                                //     //         if (checkState === Qt.Checked) {
-                                //     //             checkboxGroup.checkAll()
-                                //     //         } else if (checkState === Qt.Unchecked) {
-                                //     //             checkboxGroup.uncheckAll()
-                                //     //         }
-                                //     //     }
-                                //     // }
-
-                                //     Repeater {
-                                //         id:uavInves
-                                //         model:["无载荷","电子侦察","图像侦察","气象侦察","激光引导"]
-                                //         CheckBox {
-
-                                //             text: modelData
-                                //             ButtonGroup.group: uavInvestigationPayloadTypeGroup
-
-                                //         }
-                                //     }
-                                MultiCombox{
-                                    id:uavInvestigationPayloadTypeMultiComBox
-                                    items: ["无载荷","电子侦察","图像侦察","气象侦察","激光引导"]
-                                    // 处理选中值变化
-                                    onSelectionChanged: {
-                                        // var selectedLabels = selectedItems.map(item => item.label)
-                                        // uavInvestigationPayloadTypeResult = selectedLabels.join(", ")
-                                        var value = selectedItems
-                                        uavInvestigationPayloadTypeResult = value
-                                        //console.log("uavInvestigationPayloadTypeMultiComBox"+value)
+                                    model:["无吊舱","200kg通侦吊舱","500kg吊舱"]
+                                    onActivated: {
+                                        refreshProblemDesc()
                                     }
                                 }
-                                Label{
-                                     id:uavLoadReconnaissanceRange
-                                     text: "载荷侦察范围(Km):"  //
-                                     height: 50
-                                     width:100
-                                     //visible: uavTypeSelect.currentText == "侦察无人机"
-                                     //Layout.leftMargin: 10
-                                 }
 
-                                 TextField{
-                                     id: uavLoadReconnaissanceRangeValue
-                                     //width: 50
-                                     Layout.preferredWidth: 80
-                                     //visible: uavTypeSelect.currentText == "侦察无人机"
-                                     //Layout.preferredHeight: 50
-                                 }
-                                 Label{
-                                     id:uavLoadReconnaissanceAccuracy
-                                     text: "载荷侦察精度(m):"  //
-                                     height: 50
-                                     width:100
-                                     //visible: uavTypeSelect.currentText == "侦察无人机"
-                                     Layout.leftMargin: 10
-                                 }
-
-                                 TextField{
-                                     id: uavLoadReconnaissanceAccuracyValue
-                                     //width: 50
-                                     Layout.preferredWidth: 80
-                                     //visible: uavTypeSelect.currentText == "侦察无人机"
-                                     //Layout.preferredHeight: 50
-                                 }
-                            }
-                            RowLayout {
-                                // anchors.fill: parent
-                                Layout.fillWidth: true
-                                // Layout.fillHeight: true
-
-                                spacing: 10
-                                Label{
-                                    id:uavRecoverymode
-                                    text: "回收方式:"
-                                    height: 50
-                                    width:100
-                                    Layout.leftMargin: 10
-                                }
-                                MultiCombox{
-                                    id:uavRecoverymodeMultiComBox
-                                    items: ["不可回收","伞降","滑跑着陆","垂直着陆"]
-                                    onSelectionChanged: {
-                                        var value = selectedItems
-                                        uavRecoveryModeResult = value
-                                        //console.log("uavRecoverymodeMultiComBox"+value)
-                                    }
-                                }
-                                Label{
-                                    id:operationMode
-                                    text: "操控方式:"
-                                    height: 50
-                                    width:100
-                                    Layout.leftMargin: 10
-                                }
-                                MultiCombox{
-                                    id:operationModeMultiComBox
-                                    items: ["指令模式","修正模式","自主控制模式","遥控指令模式"]
-                                    onSelectionChanged: {
-                                        //var selectedLabels = operationModeMultiComBox.selectedItems.map(item => item.label)
-                                        // = selectedLabels.join(", ")
-                                        var value = selectedItems
-                                        uavOperatioanalModeResult = value
-                                        //console.log("operationModeMultiComBox"+value)
-
-                                    }
-                                }
-                            }
-                            RowLayout {
-                                // anchors.fill: parent
-                                Layout.fillWidth: true
-                                // Layout.fillHeight: true
-                                spacing: 10
-                                Label{
-                                    id:uavLowAltitudeBreakthroughSpeed
-                                    text: "低空突防速度(km/h):"
-                                    height: 50
-                                    width:100
-                                    // anchors.left: parent.left //锚点属性与锚点边距一起用。
-                                    // anchors.leftMargin: 10
-                                    Layout.leftMargin: 10
-
-                                }
-
-                                TextField{
-                                    id: uavLowAltitudeBreakthroughSpeedValue
-                                    //width: 50
-                                    Layout.preferredWidth: 50
-                                    //Layout.preferredHeight: 50
-                                }
-
-                                Label{
-                                    id:uavHangingLocation
-                                    text: "挂载位置:"
-                                    height: 50
-                                    width:100
-                                }
-                                Text {
-                                    id: uavHangingLocationText
-                                    text: qsTr("请选择")
-                                }
-                                // 点击区域
-                                MouseArea {
-                                    anchors.fill: parent
-                                    onClicked: { //uavHangingLocationText.visible = !uavHangingLocationText.visible
-                                        payloadTypeManagementPopup.open()
-                                        uavManagementroot.managementType = "bombingMethod"
-                                        //uavManagementroot.enabled = false
-                                    }
-                                }
-                                // MultiTextOfCombox{
-                                //     id:uavHangingLocationMultiComBox
-                                //     items: ["左上","左下","右上","右下"]
-                                // }
-                                // Label{
-                                //     id:uavHangingpoints
-                                //     text: "挂点数量:"
-                                //     height: 50
-                                //     width:100
-                                // }
-                                // TextField{
-                                //     id: uavHangingpointsValue
-                                //     Layout.preferredWidth: 50
-                                // }
-                                // Label{
-                                //     id:uavPayloadcapacity
-                                //     text: "载弹量(颗):"
-                                //     height: 50
-                                //     width:100
-                                // }
-                                // TextField{
-                                //     id: uavPayloadcapacityValue
-                                //     Layout.preferredWidth: 50
-                                // }
-                            }
-                            RowLayout {
-                                    // anchors.fill: parent
-                                    Layout.fillWidth: true
-                                    // Layout.fillHeight: true
-                                    spacing: 10
-                                Label{
-                                    id:uavAttackaccuracy
-                                    text: "攻击精度(m):"
-                                    height: 50
-                                    width:100
-                                    Layout.leftMargin: 10
-                                }
-                                TextField{
-                                    id: uavAttackaccuracyValue
-                                    Layout.preferredWidth: 50
-                                }
-                                Label{
-                                    id:uavRadarCrossSection
-                                    text: "雷达反射面积(m²):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavRadarCrossSectionValue
-                                    Layout.preferredWidth: 50
-                                }
-                                Label{
-                                    id:uavCenterOfGravityFrontLimit
-                                    text: "重心前限(%MAC):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavCenterOfGravityFrontLimitValue
-                                    Layout.preferredWidth: 50
-                                }
-                                Label{
-                                    id:uavCenterOfGravityAfterwardLimit
-                                    text: "重心后限(%MAC):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavCenterOfGravityAfterwardLimitValue
-                                    Layout.preferredWidth: 50
-                                }
-                            }
-                            RowLayout {
-                                    // anchors.fill: parent
-                                    Layout.fillWidth: true
-                                    // Layout.fillHeight: true
-                                    spacing: 10
                                 Label{
                                     id:uavMaximumTakeoffWeight
                                     text: "最大起飞重量(Kg):"
                                     height: 50
                                     width:100
-                                    Layout.leftMargin: 10
                                 }
                                 TextField{
                                     id: uavMaximumTakeoffWeightValue
                                     Layout.preferredWidth: 50
+                                    onTextChanged: {
+                                        refreshProblemDesc()
+                                    }
                                 }
                                 Label{
                                     id:uavEmptyWeight
                                     text: "空机重量(Kg):"
                                     height: 50
                                     width:100
+
                                 }
                                 TextField{
                                     id: uavEmptyWeightValue
                                     Layout.preferredWidth: 50
                                 }
+                            }
+                            RowLayout {
+                                //anchors.fill: parent
+                                Layout.fillWidth: true  // 占满列布局宽度
+                                // Layout.fillHeight: true
+                                spacing: 10
+
                                 Label{
                                     id:uavMaximumFuelCapacity
                                     text: "最大载油量(Kg):"
                                     height: 50
                                     width:100
+                                    Layout.leftMargin: 10
                                 }
                                 TextField{
                                     id: uavMaximumFuelCapacityValue
@@ -671,164 +208,127 @@ Window{//Rectangle{
                                     Layout.preferredWidth: 50
                                 }
                             }
+
                             RowLayout {
-                                    // anchors.fill: parent
-                                    Layout.fillWidth: true
-                                    // Layout.fillHeight: true
-                                    spacing: 10
+                                // anchors.fill: parent
+                                Layout.fillWidth: true
+                                // Layout.fillHeight: true
+                                spacing: 10
                                 Label{
-                                    id:uavCeiling
-                                    text: "最大飞行高度(m):"
+                                    id:mountingWeight
+                                    text: "已挂载重量(kg):"
                                     height: 50
                                     width:100
+                                    // anchors.left: parent.left //锚点属性与锚点边距一起用。
+                                    // anchors.leftMargin: 10
                                     Layout.leftMargin: 10
+
                                 }
+
                                 TextField{
-                                    id: uavCeilingValue
-                                    Layout.preferredWidth: 50
+                                    id: mountingWeightText
+                                    Layout.preferredWidth: 80
+                                    //width: 50
                                 }
+
                                 Label{
-                                    id:uavMaximumGroundStartingHeight
-                                    text: "地面最大起动高度(m):"
+                                    id:remainingLoadCapacity
+                                    text: "剩余载重(kg):"
                                     height: 50
                                     width:100
                                 }
                                 TextField{
-                                    id: uavMaximumGroundStartingHeightValue
-                                    Layout.preferredWidth: 50
-                                }
-                                Label{
-                                    id:uavMaximumAirStartingAltitude
-                                    text: "空中最大起动高度(m):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavMaximumAirStartingAltitudeValue
-                                    Layout.preferredWidth: 50
-                                }
-                                Label{
-                                    id:uavMaximumEndurance
-                                    text: "最大续航时间(h):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavMaximumEnduranceValue
-                                    Layout.preferredWidth: 50
+                                    id: remainingLoadCapacityText
+                                    //width: 120
+                                    Layout.preferredWidth: 80
                                 }
                             }
+
+
                             RowLayout {
-                                    // anchors.fill: parent
-                                    Layout.fillWidth: true
-                                    // Layout.fillHeight: true
-                                    spacing: 10
+                                // anchors.fill: parent
+                                Layout.fillWidth: true
+                                // Layout.fillHeight: true
+                                spacing: 10
                                 Label{
-                                    id:uavMaximumFlightVacuumSpeed
-                                    text: "最大飞行真空速(Km/h):"
+                                    id:uavLowAltitudeBreakthroughSpeed
+                                    text: "挂载配置:"
                                     height: 50
                                     width:100
+                                    // anchors.left: parent.left //锚点属性与锚点边距一起用。
+                                    // anchors.leftMargin: 10
                                     Layout.leftMargin: 10
+
                                 }
-                                TextField{
-                                    id: uavMaximumFlightVacuumSpeedValue
-                                    Layout.preferredWidth: 50
+                                Text {
+                                    id: uavHangingLocationText
+                                    text: qsTr("请选择")
                                 }
-                                Label{
-                                    id:uavMinimumFlightMeterSpeed
-                                    text: "最小飞行表速(Km/h):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavMinimumFlightMeterSpeedValue
-                                    Layout.preferredWidth: 50
-                                }
-                                Label{
-                                    id:sealLevelTakeoffAndRollDistance
-                                    text: "海平面起飞滑跑距离(m):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: sealLevelTakeoffAndRollDistanceValue
-                                    Layout.preferredWidth: 50
-                                }
-                                Label{
-                                    id:sealLevelLandingAndRollDistance
-                                    text: "海平面着陆滑跑距离(h):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: sealLevelLandingAndRollDistanceValue
-                                    Layout.preferredWidth: 50
+                                // 点击区域
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: { //uavHangingLocationText.visible = !uavHangingLocationText.visible
+                                        payloadTypeManagementPopup.open()
+                                        uavManagementroot.managementType = "bombingMethod"
+                                        //uavManagementroot.enabled = false
+                                    }
                                 }
                             }
-                            RowLayout {
-                                    // anchors.fill: parent
-                                    Layout.fillWidth: true
-                                    // Layout.fillHeight: true
-                                    spacing: 10
-                                Label{
-                                    id:cruiseAltitudeReconnaissanceConfiguration
-                                    text: "侦察构型巡航高度(m):"
-                                    height: 50
-                                    width:100
-                                    Layout.leftMargin: 10
-                                }
+                        }
+                        ColumnLayout{
+                            //anchors.fill: parent
+                            //Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            spacing: 10
+                            Rectangle {
+                                id: aroot
+                                visible: true
+                                width:500
+                                height: 600
+                                // anchors.top: parent.top
+                                // anchors.topMargin: 40
+                                // anchors.right: parent.right
+                                // anchors.rightMargin: 2
+                                Layout.alignment:Qt.AlignRight
+                                color: "#ECF2FE"
+                                border.color: "#BDBDBD"
                                 TextField{
-                                    id: cruiseAltitudeReconnaissanceConfigurationValue
-                                    Layout.preferredWidth: 50
-                                }
-                                Label{
-                                    id:cruiseAltitudeFullExternalConfiguration
-                                    text: "满外挂构型巡航高度(m):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: cruiseAltitudeFullExternalConfigurationValue
-                                    Layout.preferredWidth: 50
-                                }
-                                Label{
-                                    id:uavBombingmethod
-                                    text: "投弹方式:"  // uavTypeSelect.currentText === "侦察无人机" ? "速度:" : "投弹方式:"
-                                    height: 50
-                                    width:100
-                                    visible: uavTypeSelect.currentText !== "侦察无人机"
-                                    Layout.leftMargin: 10
-                                }
-                                RowLayout {
-                                        visible: uavTypeSelect.currentText !== "侦察无人机"  // 非侦察机时显示
-                                        spacing: 5
-                                        MultiCombox{
-                                            id:uavBombingmethodMultiComBox
-                                            items: ["无载荷","电子侦察","图像侦察","气象侦察","激光引导"]
-                                            onSelectionChanged: {
-                                                // var selectedLabels = selectedItems.map(item => item.label)
-                                                // uavBombingmethodResult = selectedLabels.join(", ")
-                                                var value = selectedItems
-                                                uavBombingmethodResult = value
-                                                console.log("uavBombingmethodMultiComBox"+value)
-                                            }
+                                    id: describeTextArea
+                                    //width: 120
+                                    width:500
+                                    height: 600
+                                    // 对齐设置
+                                    verticalAlignment: Text.AlignTop      // 垂直顶部对齐
+                                    horizontalAlignment: Text.AlignLeft   // 水平左对齐
+                                    // 边距设置
+                                    leftPadding: 6       // 左侧零边距
+                                    topPadding: 10        // 顶部零边距
+                                    rightPadding: 6      // 右侧保留2像素防止滚动条遮挡
+                                    bottomPadding: 6     // 底部保留2像素
+                                    echoMode: TextField.Normal
+                                    inputMethodHints: Qt.ImhMultiLine
+                                    wrapMode: TextField.WrapAtWordBoundaryOrAnywhere
+                                    Layout.preferredWidth: 80
+                                    // 可选样式调整（根据实际需要）
+                                    background: Rectangle {
+                                        //color: "#D3E1FE"
+                                        //border.color: "gray"
+                                        border.width: 1
+                                        color: "#e0f0ff" // 淡蓝色
+                                        border.color: "#cccccc" // 边框颜色
+                                        radius: 4 // 圆角
+                                    }
+                                    // 设置字体颜色为黑色
+                                    color: "#000000"
 
-                                        }
+                                    // 设置字体大小为 12 点
+                                    font.pointSize: 12
                                 }
                             }
-                            // Text {
-                            //     Layout.fillWidth: true
-                            //     verticalAlignment: Text.AlignVCenter
-                            //     horizontalAlignment: Text.AlignHCenter
-                            //     text: qsTr("接装问题记录");
-                            //     font.pointSize: 28
-                            //     color: "black"
-                            // }
-
-
                         }
 
                     }
+
                 // 下部行布局（底部对齐）
                     RowLayout {
                         Layout.fillWidth: true
@@ -1213,94 +713,29 @@ Window{//Rectangle{
         console.log("jsonString"+jsonString);
 
         // uavModelInsertDao.insertModelDate(uavData)
+        //"^_^记录更新成功^_^" ^_^记录更新失败^_^
 
 
+    }
+    function refreshProblemDesc() {
+        let css1 = "   " //""<strong><div style=\"font-size:18px;\">"
+        let css2 = "" //"</div></strong>"
+
+        // 某方案总共8个挂载位置(左上、右上)可挂载600kg的外挂配置，现在挂载配置包含左上(1号位置)挂载1个制导炸弹(炸弹参数),共计1个制导炸弹挂载在左上(1号位置),其余位置未挂载配置,总计重量200kg,剩余载重500kg。
+        //let presentDate = proposedDate.content.split(" ")
+        let descContent = css1 + "某方案总共"+"8"+"个挂载位置("+"左上、右上"+")可挂载"+uavMaximumExternalWeightValue.text+"kg的外挂配置" + "，" + css2
+        descContent += "现在挂载配置包含"+"中心位置(7号)"
+        if (uavTypeSelect.currentText === "无吊舱") {
+            descContent += "不挂载吊舱" + css1
+        } else {
+            descContent += "挂载"+uavTypeSelect.currentText+","
+        }
+        describeTextArea.text = descContent;
     }
     function convertToJsonArray(jsonData) {
             return jsonData.map(function(item) {
                 return item.name;
             });
-    }
-    //ButtonGroup的接收值方法
-    // function getSelectedPayloads(buttons) {
-    //         return Array.from(buttons)
-    //             .filter(btn => btn.checked)
-    //             .map(btn => ({
-    //                 name: btn.text,
-    //                 code: btn.payloadCode
-    //             }))
-    // }
-    function saveDeliveryRecord() {
-        // let recordobj = new Commons.DeliveryRecordEntity()
-        // recordobj.setPlaneShape = modelSelector.currentText
-        // recordobj.setBatchNo = batchCommbox.currentText
-        // recordobj.setSortiesNo = beginSortieCommbox.currentText      // 架次
-        // recordobj.setDeliveryId = deliveryUser.content     // 交装者
-        // recordobj.setProfessionId = profSelector.currentText    // 专业
-        // recordobj.setShippingSpace = shipSpaceSelector.contentText  // 舱位
-        // recordobj.setInspectorId = inspectUser.content    // 检验员
-        // recordobj.setLevel1Classify = level1Classify.currentText
-        // recordobj.setLevel2Classify = level2Classify.currentText
-        // recordobj.setLevel3Classify = level3Classify.currentText
-        // recordobj.setPresenterId  = presenterSelector.content// 提出者
-        // recordobj.setUnit  = unitSelector.content            //部队
-        // recordobj.setProChartNo = productNoSelector.content      // 产品图号
-        // recordobj.setProChartName = productNameSelector.content  // 产品名称
-        // recordobj.setQualityNo = qualityNoSelector.content       // 质量编号
-        // recordobj.setReceiptNo = receiptNoSelector.content       // 单据编号
-        // recordobj.setProposedDate = proposedDate.content
-        // recordobj.setProblemDesc = textArea.text     // 问题描述
-        // recordobj.setProblemStatus = "处置中"
-        // recordobj.setPhotoFile = photoFilename
-
-        // recordobj.setDiscoveryMethod = discoveryMethod.currentText;
-        // recordobj.setInfoChannel = infoChannel.currentText;
-        // recordobj.setOccurChance = occurChance.currentText;
-
-        // let jsonString = ""
-        // let jsonObject = new Object
-        // if (windowModel === 0 && recordId === "") {
-        //     setRecordProcessInfo(recordobj, processInfo)
-
-        //     jsonString = deliveryRecordModel.insert(recordobj)
-        //     jsonObject = Commons.parseResponse(jsonString)
-        //     if (jsonObject.code === 200) {
-        //         toastModel.show("^_^记录保存成功^_^")
-        //         saveButton.enabled = false
-        //         saveButton.visible = false
-
-        //         editButton.enabled = true
-        //         editButton.visible = true
-
-        //         // 保存已经的数据据主键值，用于编辑时更新
-        //         if (jsonObject.hasOwnProperty("data")) {
-        //             recordId = jsonObject.data.recordId
-        //             savePhotoCacheList()
-        //         }
-        //         else {
-        //             console.log("\"_\"没有相应的记录ID\"_\"")
-        //         }
-        //     }
-        // }
-        // else {
-        //     //保存时TaskItem从本身的数据记录处获取
-        //     setRecordProcessInfo(recordobj, recordEntity);
-
-        //     jsonString = deliveryRecordModel.update(recordId, recordobj)
-        //     jsonObject = Commons.parseResponse(jsonString)
-        //     if (jsonObject.code === 200) {
-        //         toastModel.show("^_^记录更新成功^_^")
-        //         saveButton.enabled = false
-        //         saveButton.visible = false
-
-        //         editButton.enabled = true
-        //         editButton.visible = true
-        //     }
-        //     else {
-        //         toastModel.show("^_^记录更新失败^_^")
-        //         print("deliveryRecordModel.update ", jsonString)
-        //     }
-        // }
     }
 
 }

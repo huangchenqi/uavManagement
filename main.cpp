@@ -5,6 +5,7 @@
 #include "odb/pgsql/database.hxx"
 //#include "UavModelEntity-odb.hxx"
 #include "uavmodeldao.h"
+#include "uavmountlocationdao.h"
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -25,6 +26,7 @@ int main(int argc, char *argv[])
 
 
     qmlRegisterType<UavModelDao>("UavDaoModel",1,0,"UavModelDaoTableModel");
+    qmlRegisterType<UavMountLocationDao>("UavMountLocationDaoModel",1,0,"UavMountLocationDaoTableModel");
     //qmlRegisterType<TableModel>("Macai.App", 1, 0, "SqlTableModel");
     const QUrl url(QStringLiteral("qrc:/main.qml"));//mainUavDataTableView.qmlUavManageCommon
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

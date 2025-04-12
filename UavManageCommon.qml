@@ -26,6 +26,9 @@ Rectangle {
            property var rowData : ({test:1})
            property int bottonHeight: 50
 
+
+
+
            // 组件加载完成后生成测试数据
            Component.onCompleted:{
                loadUavAllData()
@@ -106,9 +109,7 @@ Rectangle {
                           managementType:uavManagementroot.managementType
 
                           onClose: payloadTypeManagementPopup.close() // 连接关闭信号
-
-
-                      }
+                    }
 
                   // 你的内容
                   // Item {
@@ -168,6 +169,23 @@ Rectangle {
                   //     }
                   // }
               }
+              Popup{
+                  id: addMountLocationManagementPopup
+                  width: 600  // 需明确设置宽度，否则可能无法显示完整内容
+                  height: 400
+                  modal: true
+                  focus: true
+                  anchors.centerIn: Overlay.overlay // 居中显示
+                  closePolicy: Popup.NoAutoClose    // 完全禁用自动关闭
+                  // 直接引用 admin.qml
+                    AddMountLocationManagement{  // 假设 admin.qml 的根元素是 Admin 类型
+                          id: addMountLocationPanel
+                          anchors.fill: parent
+                          //managementType:uavManagementroot.managementType
+
+                          onClose: payloadTypeManagementPopup.close() // 连接关闭信号
+                    }
+                }
 
            ColumnLayout {
                //@disable-check M16
@@ -488,10 +506,23 @@ Rectangle {
                                                width: 60
                                                height: 30
                                                onClicked: {
-                                                   var rowData = tableModel.rows[row]
+                                                   var rowData = tableModel.getRow(row) //.rows[row]
                                                    console.log("查看行数据:", JSON.stringify(rowData, null, 2))
+                                                   // 转换数据
+                                                   var transformedData = transformData(rowData)
+                                                   console.log("转换后的数据:", JSON.stringify(transformedData, null, 2))
+
+                                                   // 将转换后的数据转换为 JSON 字符串
+                                                   var jsonStr = JSON.stringify(transformedData)
+                                                   // processInfo.recordId = transformedData.recordId
+                                                   // processInfo.uavType = transformedData.uavType
+                                                   // processInfo.uavName = transformedData.uavName
+                                                   // processInfo.uavId = transformedData.uavId
                                                    processInfo.loadViewType = "query"
-                                                   pageUavModelLoader.setSource("qrc:./UavManagement.qml",
+                                                   //processInfo.jsonStr = transformedData
+                                                   assignmentEncapsulation(transformedData)
+                                                   console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
+                                                   pageUavModelLoader.setSource("qrc:./AddUavModelData.qml",
                                                                         {processInfo: processInfo,
                                                                             backUi: "qrc:/UavManageCommon.qml"})
                                                }
@@ -502,10 +533,21 @@ Rectangle {
                                                width: 60
                                                height: 30
                                                onClicked: {
+
                                                    var rowData = tableModel.rows[row]
-                                                   console.log("编辑行数据:", JSON.stringify(rowData, null, 2))
+                                                   console.log("查看行数据:", JSON.stringify(rowData, null, 2))
+                                                   // 转换数据
+                                                   var transformedData = transformData(rowData)
+                                                   console.log("转换后的数据:", JSON.stringify(transformedData, null, 2))
+
+                                                   // 将转换后的数据转换为 JSON 字符串
+                                                   var jsonStr = JSON.stringify(transformedData)
+
+                                                   console.log("编辑行数据:", JSON.stringify(transformedData, null, 2))
+
                                                    processInfo.loadViewType = "update"
-                                                   pageUavModelLoader.setSource("qrc:./UavManagement.qml",
+                                                   assignmentEncapsulation(transformedData)
+                                                   pageUavModelLoader.setSource("qrc:./AddUavModelData.qml",
                                                                         {processInfo: processInfo,
                                                                             backUi: "qrc:/UavManageCommon.qml"})
                                                }
@@ -755,8 +797,8 @@ Rectangle {
                        text: "挂载位置管理"
                        onClicked: {
                            //onCopyButtonClicked();
-                           payloadTypeManagementPopup.open()
-                           uavManagementroot.managementType = "uavHanging"
+                           addMountLocationManagementPopup.open()
+                           //uavManagementroot.managementType = "uavHanging"
                            uavManagementroot.enabled = false
                            //uavManagementroot.visible = false
                        }
@@ -803,8 +845,11 @@ Rectangle {
                            pageUavModelLoader.setSource("qrc:./AddUavModelData.qml",
                                                 {processInfo: processInfo,
                                                     backUi: "qrc:/UavManageCommon.qml"})
+
+
                            // 退出并隐藏界面
                            //uavManagementLoader.setSource = null // 卸载界面
+                           //uavManagementroot.visible = false
                        }
                    }
                    Item { Layout.rightMargin: 20 }
@@ -912,6 +957,34 @@ Rectangle {
                // 自动刷新表格
                tableModel.layoutChanged()
            }
+           function queryUavModelData(data){
+
+
+           }
+           // 转换函数
+           function transformData(data) {
+               return {
+                   "bombMethod": data.bombMethod,
+                   "hangingCapacity": data.hangingCapacity,
+                   "operationMethod": data.operationMethod,
+                   "payloadType": data.payloadType,
+                   "recordId": data.recordId,
+                   "recoveryMode": data.recoveryMode,
+                   "uavId": data.uavId,
+                   "uavName": data.uavName,
+                   "uavType": data.uavType
+               };
+           }
+
+           //行数值赋予下界面跳转
+           function assignmentEncapsulation(data){
+               processInfo.recordId = data.recordId
+               processInfo.uavType = data.uavType
+               processInfo.uavName = data.uavName
+               processInfo.uavId = data.uavId
+               processInfo.uavModelJsonStr = data
+           }
+
            // 生成测试数据函数
            function generateTestData() {
                const testData = [

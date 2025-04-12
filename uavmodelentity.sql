@@ -53,7 +53,7 @@ CREATE TABLE "public"."uav_models_data" (
   "sea_landing_roll" REAL NOT NULL,
   "recon_cruise_alt" REAL NOT NULL,
   "full_external_cruise_alt" REAL NOT NULL,
-  "recordcreation_time" timestamp NOT NULL,
+  "recordcreation_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "image_name" varchar(30) NOT NULL,
   "image_url" varchar(30) NOT NULL);
 

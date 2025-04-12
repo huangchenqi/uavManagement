@@ -3,9 +3,12 @@
 
 #include <string>
 #include <ctime>
+//#include "json.hpp"
 // ODB编译器需要QDateTime与数据库类型的转换规则
 //#include <odb/qt/date-time/pgsql/qdate-time-traits.hxx>
 #include <odb/core.hxx> // ODB核心头文件
+#include <QtCore/QDateTime>
+#include "datetime-traits.hxx"
 #pragma once
 #pragma db object schema("public") table("uav_models_data") // 指定表名
 class UavModelEntity
@@ -213,12 +216,44 @@ class UavModelEntity
 
 
     /******************** 系统记录 ********************/
-    #pragma db column("recordcreation_time")   type("timestamp")                // 创建时间
-        std::time_t uavCreatModelTime_;//QDateTime
+    #pragma db column("recordcreation_time") type("timestamp(0)") options("DEFAULT CURRENT_TIMESTAMP")               // 创建时间
+       QDateTime  uavCreatModelTime_;//std::time_t
     #pragma db column("image_name") type("varchar(30)")                    // 模型图片名称
         std::string uavImgName_;
     #pragma db column("image_url") type("varchar(30)")                  // 模型图片路径
         std::string uavImgUrl_;
+
+    // NLOHMANN_DEFINE_TYPE_INTRUSIVE(UavModelEntity,
+    //                                uavType_,uavName_,uavId_,uavLength_,uavWidth_,
+    //                                uavHeight_,uavInvisibility_,uavFlightHeightRangeMin_,
+    //                                uavFlightHeightRangeMax_,uavFlightSpeedRangeMin_,
+    //                                uavFlightSpeedRangeMax_,uavFlightDistanceRangeMin_,
+    //                                uavFlightDistanceRangeMax_,uavFlightTimeRangeMin_,
+    //                                uavFlightTimeRangeMax_,uavTakeoffDistance_,
+    //                                uavLandDistance_,uavTurningRadiusRangeMin_,
+    //                                uavTurningRadiusRangeMax_,
+    //                                uavOperatioanalRadius_,uavInvestigationPayloadType_,
+    //                                uavBombingway_,uavLoadReconnaissanceRangeMin_,
+    //                                uavLoadReconnaissanceRangeMax_,uavLoadReconnaissanceAccuracy_,
+    //                                uavRecoveryway_,uavLowAltitudeBreakthroughSpeed_,
+    //                                uavHangingLoctionCapacity_,
+
+    //                                // #pragma db column("hardpoint_num")                 // 挂点数量
+    //                                //     int uavHangingpoints_,
+
+    //                                // #pragma db column("payload_capacity")              // 载弹量(kg)
+    //                                //     int uavPayloadcapacity_,
+
+    //                                uavOperationWay_,uavAttackaccuracy_,uavRadarCrossSection_,
+    //                                uavCenterOfGravityFrontLimit_,uavCenterOfGravityAfterwardLimit_,
+    //                                uavMaximumTakeoffWeight_,uavEmptyWeight_,uavMaximumFuelCapacity_,
+    //                                uavMaximumExternalWeight_,uavCeiling_,uavMaximumGroundStartingHeight_,
+    //                                uavMaximumAirStartingAltitude_,uavMaximumEndurance_,
+    //                                uavMaximumFlightVacuumSpeed_,uavMinimumFlightMeterSpeed_,
+    //                                sealLevelTakeoffAndRollDistance_,sealLevelLandingAndRollDistance_,
+    //                                cruiseAltitudeReconnaissanceConfiguration_,
+    //                                cruiseAltitudeFullExternalConfiguration_,
+    //                                 uavCreatModelTime_,uavImgName_,uavImgUrl_);
 };
 //QX_REGISTER_HPP_EXPORT_DLL(UavModelEntity,qx::trait::no_base_class_defined,0)
 #endif // UAVMODELENTITY_H

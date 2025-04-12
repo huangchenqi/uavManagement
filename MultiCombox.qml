@@ -67,11 +67,12 @@ Rectangle {
                 width: parent.width
                 height: 40
                 text: modelData.label || modelData
-                checked: root.selectedItems.some(
-                    selectedItem =>
-                    (selectedItem.id || selectedItem) ===
-                    (modelData.id || modelData)
-                )
+                checked: root.selectedItems.includes(modelData) // 直接检查字符串是否在数组中
+                //     root.selectedItems.some(
+                //     selectedItem =>
+                //     (selectedItem.id || selectedItem) ===
+                //     (modelData.id || modelData)
+                // )
 
                 onCheckedChanged: {
                     var currentItem = modelData

@@ -28,8 +28,9 @@ Window{//Rectangle{
     property var uavPayloadTypeResult: ""
     // 组件加载完成后生成测试数据
     Component.onCompleted:{
-        //loadUavAllData()
+        //loadUavModelData()
         loadView()
+        generateTestData()
     }
     Popup {
             id: warningPopup
@@ -75,18 +76,22 @@ Window{//Rectangle{
             anchors.centerIn: Overlay.overlay // 居中显示
             closePolicy: Popup.NoAutoClose    // 完全禁用自动关闭
             // 直接引用 admin.qml
-              GetTypeManagement{  // 假设 admin.qml 的根元素是 Admin 类型
-                    id: adminPanel
-                    anchors.fill: parent
-                    managementType:uavManagementroot.managementType
+              // GetTypeManagement{  // 假设 admin.qml 的根元素是 Admin 类型
+              //       id: adminPanel
+              //       anchors.fill: parent
+              //       managementType:uavManagementroot.managementType
 
-                    onClose: payloadTypeManagementPopup.close() // 连接关闭信号
-
-
+              //       onClose: payloadTypeManagementPopup.close() // 连接关闭信号
+              //   }
+                MultiTextDispay {
+                     id: multiTextDispay
+                     anchors.fill: parent
+                     onClose: payloadTypeManagementPopup.close() // 连接关闭信号
                 }
+
         }
         UavModelDaoTableModel{
-            id:uavModelInsertDao
+            id:uavModelDao
         }
 
         ColumnLayout {
@@ -149,7 +154,7 @@ Window{//Rectangle{
                                     id:uavTypeSelect
                                     width:100
                                     height:50
-                                    model:["侦察无人机","攻击无人机","查打一体无人机"]
+                                    model:["侦察型无人机","攻击型无人机","查打一体无人机"]
                                 }
 
                                 Label{
@@ -426,13 +431,18 @@ Window{//Rectangle{
                                 MultiCombox{
                                     id:uavInvestigationPayloadTypeMultiComBox
                                     items: ["无载荷","电子侦察","图像侦察","气象侦察","激光引导"]
+                                    // Component.onCompleted: {
+                                    //             // 关键：创建新数组触发更新
+                                    //             //selectedItems = ["电子侦察", "图像侦察", "气象侦察", "激光引导"].slice();
+                                    //             loadUavModelData()
+                                    //         }
                                     // 处理选中值变化
                                     onSelectionChanged: {
                                         // var selectedLabels = selectedItems.map(item => item.label)
                                         // uavInvestigationPayloadTypeResult = selectedLabels.join(", ")
                                         var value = selectedItems
                                         uavInvestigationPayloadTypeResult = value
-                                        //console.log("uavInvestigationPayloadTypeMultiComBox"+value)
+                                        console.log("uavInvestigationPayloadTypeMultiComBox"+value)
                                     }
                                 }
                                 Label{
@@ -539,43 +549,38 @@ Window{//Rectangle{
                                     height: 50
                                     width:100
                                 }
-                                Text {
-                                    id: uavHangingLocationText
-                                    text: qsTr("请选择")
+                                TextField{
+                                    id: uavHangingLocationValue
+                                    Layout.preferredWidth: 50
                                 }
+                                // 下拉箭头
+                                // Text {
+                                //     id: dropdownIcon
+                                //     anchors.right: parent.right
+                                //     anchors.verticalCenter: parent.verticalCenter
+                                //     rightPadding: 10
+                                //     text: "▼"
+                                //     font.pixelSize: 12
+                                // }
+                                // Text {
+                                //     id: uavHangingLocationText
+                                //     text: qsTr("请选择")
+                                // }
                                 // 点击区域
-                                MouseArea {
-                                    anchors.fill: parent
-                                    onClicked: { //uavHangingLocationText.visible = !uavHangingLocationText.visible
-                                        payloadTypeManagementPopup.open()
-                                        uavManagementroot.managementType = "bombingMethod"
-                                        //uavManagementroot.enabled = false
-                                    }
-                                }
-                                // MultiTextOfCombox{
-                                //     id:uavHangingLocationMultiComBox
-                                //     items: ["左上","左下","右上","右下"]
+                                // MouseArea {
+                                //     anchors.fill: parent
+                                //     onClicked: { //uavHangingLocationText.visible = !uavHangingLocationText.visible
+                                //             payloadTypeManagementPopup.open()
+                                //             uavManagementroot.managementType = "bombingMethod"
+                                //             //uavManagementroot.enabled = false
+                                //         }
                                 // }
-                                // Label{
-                                //     id:uavHangingpoints
-                                //     text: "挂点数量:"
-                                //     height: 50
-                                //     width:100
-                                // }
-                                // TextField{
-                                //     id: uavHangingpointsValue
-                                //     Layout.preferredWidth: 50
-                                // }
-                                // Label{
-                                //     id:uavPayloadcapacity
-                                //     text: "载弹量(颗):"
-                                //     height: 50
-                                //     width:100
-                                // }
-                                // TextField{
-                                //     id: uavPayloadcapacityValue
-                                //     Layout.preferredWidth: 50
-                                // }
+
+
+                                // 直接调用组件的获取选中数据方法
+                                // const selectedData = multiTextDispay.getSelectedData()
+                                // console.log("=== 选中数据 ===", JSON.stringify(selectedData, null, 2))
+
                             }
                             RowLayout {
                                     // anchors.fill: parent
@@ -804,7 +809,7 @@ Window{//Rectangle{
                                         spacing: 5
                                         MultiCombox{
                                             id:uavBombingmethodMultiComBox
-                                            items: ["无载荷","电子侦察","图像侦察","气象侦察","激光引导"]
+                                            items: ["非精确制导","精确制导","自由落体","水平轰炸反俯冲轰炸","俯冲轰炸"]
                                             onSelectionChanged: {
                                                 // var selectedLabels = selectedItems.map(item => item.label)
                                                 // uavBombingmethodResult = selectedLabels.join(", ")
@@ -895,9 +900,27 @@ Window{//Rectangle{
                             height: 50
                             text: "保存"
                             onClicked:{
-                                addUavModelData.currentTime = new Date().toLocaleString()
-                                console.log("addUavModelData.currentTime"+addUavModelData.currentTime)
-                                saveUavData()
+                                if(processInfo.loadViewType === "addUavData"){
+
+                                    console.log("addUavDataView"+processInfo.loadViewType)
+                                    addUavModelData.currentTime = new Date().toLocaleString()
+                                    console.log("addUavModelData.currentTime"+addUavModelData.currentTime)
+                                    saveUavData()
+
+                                }else if(processInfo.loadViewType === "query"){
+                                    //loadUavModelData()
+                                    //writeControl(false)
+
+
+                                    console.log("addUavDataView"+processInfo.loadViewType)
+                                }else if(processInfo.loadViewType === "update"){
+                                    updataUavModelData()
+
+                                    console.log("addUavDataView"+processInfo.loadViewType)
+                                }else{
+                                    console.log("processInfo.loadViewType Unknown")
+                                }
+
                             }
                         }
 
@@ -928,9 +951,6 @@ Window{//Rectangle{
                             }
                         }
                     }
-
-
-
         }
 
 
@@ -940,26 +960,130 @@ Window{//Rectangle{
     function loadView(){
         var viewType = processInfo.loadViewType
         if(processInfo.loadViewType === "addUavData"){
+
             console.log("addUavDataView"+processInfo.loadViewType)
+
         }else if(processInfo.loadViewType === "query"){
+            loadUavModelData()
             writeControl(false)
+            saveButton.enabled = false
+
             console.log("addUavDataView"+processInfo.loadViewType)
         }else if(processInfo.loadViewType === "update"){
+            loadUavModelData()
             writeControl(true)
+            saveButton.text = "编辑"
             console.log("addUavDataView"+processInfo.loadViewType)
         }else{
             console.log("processInfo.loadViewType Unknown")
         }
     }
+    function loadUavModelData(){
+        var uavAllData = processInfo.uavModelJsonStr
+        var uavDataStr = JSON.stringify(uavAllData)
+        ///console.log("loadUavModelData"+ uavDataStr)
+        var selectUavData = uavModelDao.selectSomeUavModelDate(uavDataStr)
+        console.log("selectUavData"+JSON.stringify(selectUavData))
+
+
+        // if (selectUavData && selectUavData.payload_type) {
+
+        //         var payloadTypes = selectUavData.payload_type.split(",");
+        //         console.log("uavInvestigationPayloadTypeMultiComBox: "+payloadTypes)
+        //         uavInvestigationPayloadTypeMultiComBox.selectedItems = payloadTypes.slice();
+        //     }
+        loadMultiSelect(selectUavData)
+        //对于Combox组件加载数据
+        const uavTypeSelecttargetIndex = uavTypeSelect.model.indexOf(selectUavData.uavType);
+        console.log("索引值:", uavTypeSelecttargetIndex); // 输出 0
+        if (uavTypeSelecttargetIndex !== -1) {
+            uavTypeSelect.currentIndex = uavTypeSelecttargetIndex;
+        }
+        const uavInvisibilitySelecttargetIndex = uavInvisibilitySelect.model.indexOf(selectUavData.invisibility);
+        console.log("索引值:", uavInvisibilitySelecttargetIndex); // 输出 0
+        if (uavInvisibilitySelecttargetIndex !== -1) {
+            uavInvisibilitySelect.currentIndex = uavInvisibilitySelecttargetIndex;
+        }
+        //在MultiCombox加载数据
+        //generateTestData()
+        uavHangingLocationValue.text = selectUavData.hardpoint_loc
+        uavNameText.text = selectUavData.uavName
+        uavIdText.text = selectUavData.uavId
+        uavLengthText.text = selectUavData.uavLength
+        uavWidthText.text = selectUavData.uavWidth
+        uavHeightText.text = selectUavData.uavHeight
+
+        uavFlightHeightMin.text = selectUavData.flight_height_min
+        uavFlightHeightMax.text = selectUavData.flight_height_max
+        uavFlightSpeedMin.text = selectUavData.flight_speed_min
+        uavFlightSpeedMax.text = selectUavData.flight_speed_max
+        uavTurningRadiusMin.text = selectUavData.turn_radius_min
+        uavTurningRadiusMax.text = selectUavData.turn_radius_max
+        uavFlightDistance.text = selectUavData.flight_distance_max
+        //uavRecoveryModeResult.currentText = selectUavData.recovery_mode
+        uavFlightTime.text = selectUavData.flight_time_max
+        uavTakeoffDistanceValue.text = selectUavData.takeoff_distance
+        uavLandDistanceValue.text = selectUavData.landing_distance
+        uavOperatioanalRadius.text = selectUavData.combat_radius
+        uavLoadReconnaissanceRangeValue.text = selectUavData.recon_range_max
+        uavLoadReconnaissanceAccuracyValue.text = selectUavData.recon_accuracy
+        uavLowAltitudeBreakthroughSpeedValue.text = selectUavData.low_alt_speed
+        uavAttackaccuracyValue.text = selectUavData.attack_accuracy
+        uavRadarCrossSectionValue.text = selectUavData.rcs
+        uavCenterOfGravityFrontLimitValue.text = selectUavData.cg_front_limit
+        uavCenterOfGravityAfterwardLimitValue.text = selectUavData.cg_rear_limit
+        uavMaximumTakeoffWeightValue.text = selectUavData.max_takeoff_weight
+        uavMaximumFuelCapacityValue.text = selectUavData.max_fuel
+        uavMaximumExternalWeightValue.text = selectUavData.max_external_weight
+        uavCeilingValue.text = selectUavData.ceiling
+        uavMaximumAirStartingAltitudeValue.text = selectUavData.air_start_alt
+        uavMaximumGroundStartingHeightValue.text = selectUavData.ground_start_alt
+        uavMaximumEnduranceValue.text = selectUavData.endurance
+        uavMaximumFlightVacuumSpeedValue.text = selectUavData.max_vacuum_speed
+        uavMinimumFlightMeterSpeedValue.text = selectUavData.min_meter_speed
+        sealLevelTakeoffAndRollDistanceValue.text = selectUavData.sea_takeoff_roll
+        sealLevelLandingAndRollDistanceValue.text = selectUavData.sea_landing_roll
+        cruiseAltitudeReconnaissanceConfigurationValue.text = selectUavData.recon_cruise_alt
+        cruiseAltitudeFullExternalConfigurationValue.text = selectUavData.full_external_cruise_alt
+    }
+    function loadMultiSelect(selectUavData){
+
+        //var selectUavData = uavModelDao.selectSomeUavModelDate(uavDataStr)
+
+        console.log("loadMultiSelect"+JSON.stringify(selectUavData))
+        if (selectUavData && selectUavData.payload_type) {
+                var payloadTypes = selectUavData.payload_type.split(",");
+                console.log("uavInvestigationPayloadTypeMultiComBox: "+payloadTypes)
+                uavInvestigationPayloadTypeMultiComBox.selectedItems = payloadTypes.slice();
+        }
+        if (selectUavData && selectUavData.bomb_method) {
+                var bombMethod = selectUavData.bomb_method.split(",");
+                console.log("uavInvestigationPayloadTypeMultiComBox: "+bombMethod)
+                uavBombingmethodMultiComBox.selectedItems = bombMethod.slice();
+        }
+        if (selectUavData && selectUavData.operation_method) {
+                var operationMethod = selectUavData.operation_method.split(",");
+                console.log("uavInvestigationPayloadTypeMultiComBox: "+operationMethod)
+                operationModeMultiComBox.selectedItems = operationMethod.slice();
+        }
+        if (selectUavData && selectUavData.recovery_mode) {
+                var recoveryMode = selectUavData.recovery_mode.split(",");
+                console.log("uavInvestigationPayloadTypeMultiComBox: "+recoveryMode)
+                uavRecoverymodeMultiComBox.selectedItems = recoveryMode.slice();
+        }
+    }
+
     function writeControl(isEditable) {
         // 遍历输入容器的所有子元素
         for (var i = 0; i < controlUav.children.length; i++) {
             var child = controlUav.children[i];
             // 检查是否是输入框或下拉框
             if (child.hasOwnProperty("enabled")) {
-                child.enabled = isEditable;
+                //child.enabled = isEditable;
+
             }
         }
+
     }
 
     // 检查变量是否为空的函数
@@ -1281,10 +1405,180 @@ Window{//Rectangle{
         var jsonString = JSON.stringify(uavData);
         console.log("jsonString"+jsonString);
 
-        // uavModelInsertDao.insertModelDate(uavData)
+        // uavModelDao.insertModelDate(uavData)
+    }
+    function updataUavModelData(){
+        console.log("updateUavModelData")
+        var uavData = {
+            //-- 基础信息
+            id:0,
+            uav_type:"",
+            uav_name:"",
+            uav_id:"",
+            //-- 尺寸参数
+            length:0.0, // 浮点数
+            width:0.0, // 浮点数
+            height:0.0, // 浮点数
+            invisibility:0.0, // 浮点数
+            //-- 飞行性能
+            flight_height_min:0.0, // 浮点数
+            flight_height_max:0.0, // 浮点数
+            flight_speed_min:0.0, // 浮点数
+            flight_speed_max:0.0, // 浮点数
+            flight_distance_min:0.0, // 浮点数
+            flight_distance_max:0.0, // 浮点数
+            flight_time_min:0.0, // 浮点数
+            flight_time_max:0.0, // 浮点数
+            //-- 起降参数
+            //-- 机动性能
+            takeoff_distance:0.0, // 浮点数
+            landing_distance:0.0, // 浮点数
+            turn_radius_min:0.0, // 浮点数
+            turn_radius_max:0.0, // 浮点数
+            combat_radius:0.0, // 浮点数
 
+            //-- 载荷配置
+            payload_type:"",
+            bomb_method:"",
+            recon_range_min:0.0, // 浮点数
+            recon_range_max:0.0, // 浮点数
+            recon_accuracy:0.0, // 浮点数
+            //-- 回收与突防
+            //-- 挂载能力
+            //-- 操控与攻击
+            //-- 雷达特征
+            recovery_mode:"",
+            low_alt_speed:0.0, // 浮点数
+            hanging_capacity:"",
+            operation_method:"",
+            attack_accuracy:0.0, // 浮点数
+            rcs:0.0, // 浮点数
+            //-- 重量与平衡
+            //-- 燃油与载重
+            //-- 高度性能
+            //-- 续航性能
+            cg_front_limit:0.0, // 浮点数
+            cg_rear_limit:0.0, // 浮点数
+            max_takeoff_weight:0.0, // 浮点数
+            empty_weight:0.0, // 浮点数
+            max_fuel:0.0, // 浮点数
+            max_external_weight:0.0, // 浮点数
+            ceiling:0.0, // 浮点数
+            ground_start_alt:0.0, // 浮点数
+            air_start_alt:0.0, // 浮点数
+            endurance:0.0, // 浮点数
+            max_vacuum_speed:0.0, // 浮点数
+            min_meter_speed:0.0, // 浮点数
+            //-- 特殊场景性能
+            //-- 系统记录
+            sea_takeoff_roll:0.0, // 浮点数
+            sea_landing_roll:0.0, // 浮点数
+            recon_cruise_alt:0.0, // 浮点数
+            full_external_cruise_alt:0.0, // 浮点数
+            image_name:"",
+            image_url:"",
+            create_time:""
+        };
+        uavData.id = processInfo.recordId
+        console.log("uavData.id  processInfo.recordId"+uavData.id+"<>"+processInfo.recordId)
+        uavData.uav_type = uavTypeSelect.currentText
+        uavData.uav_name = uavNameText.text
+        uavData.uav_id = uavIdText.text
+        uavData.length = uavLengthText.text
+        uavData.width = uavWidthText.text
+        uavData.height = uavHeightText.text
+        uavData.invisibility = uavInvisibilitySelect.currentText
+
+        uavData.flight_height_min = uavFlightHeightMin.text
+        uavData.flight_height_max = uavFlightHeightMax.text
+        uavData.flight_speed_min = uavFlightSpeedMin.text
+        uavData.flight_speed_max = uavFlightSpeedMax.text
+        uavData.turn_radius_min = uavTurningRadiusMin.text
+        uavData.turn_radius_max = uavTurningRadiusMax.text
+
+        uavData.flight_distance_max = uavFlightDistance.text
+        //uavData.hanging_capacity = ""//uavRadarCrossSectionText.text
+        //检查是否填写完全
+        checkAllValue()
+        if(isEmpty(uavInvestigationPayloadTypeResult)){
+            warningPopup.open()
+            warningItem.text = "侦察载荷类型未选择!"
+            autoCloseTimer.start()
+        }else{
+            uavData.payload_type = JSON.stringify(uavInvestigationPayloadTypeResult.join(",")).replace(/^"|"$/g, "");//uavInvestigationPayloadTypeJsonStrresult
+
+        }
+        console.log("payload_type"+uavInvestigationPayloadTypeResult)
+        if(isEmpty(uavBombingmethodResult)){
+            if(uavTypeSelect.currentText === "侦察无人机"){
+                    uavData.bomb_method = "无"
+            }else{
+                    warningPopup.open()
+                    warningItem.text = "投弹方式未选择!"
+                    autoCloseTimer.start()
+            }
+
+        }else{
+            uavData.bomb_method = JSON.stringify(uavBombingmethodResult.join(",")).replace(/^"|"$/g, "");//uavBombingmethodGroupJsonStrresult
+        }
+        if(isEmpty(uavRecoveryModeResult)){
+            warningPopup.open()
+            warningItem.text = "回收方式未选择!"
+            autoCloseTimer.start()
+        }else{
+            uavData.recovery_mode = JSON.stringify(uavRecoveryModeResult.join(",")).replace(/^"|"$/g, "");//uavBombingmethodGroupJsonStrresult
+        }
+        if(isEmpty(uavOperatioanalModeResult)){
+            warningPopup.open()
+            warningItem.text = "操作方式未选择!"
+            autoCloseTimer.start()
+        }else{
+            uavData.operation_method = JSON.stringify(uavOperatioanalModeResult.join(",")).replace(/^"|"$/g, "");//uavInvestigationPayloadTypeJsonStrresult
+
+        }
+        uavData.hanging_capacity = ""//uavRadarCrossSectionText.text
+        uavData.operation_method = JSON.stringify(uavOperatioanalModeResult.join(",")).replace(/^"|"$/g, "");//uavOperatioanalmodeGroupJsonStrresult
+        uavData.recovery_mode = JSON.stringify(uavRecoveryModeResult.join(",")).replace(/^"|"$/g, "");//uavRecoverymodeGroupJsonStrresult
+
+        uavData.flight_time_max =  uavFlightTime.text
+        uavData.takeoff_distance = uavTakeoffDistanceValue.text
+        uavData.landing_distance = uavLandDistanceValue.text
+        uavData.combat_radius = uavOperatioanalRadius.text
+        //uavData.recon_range_min = uavLoadReconnaissanceAccuracyText.text
+        uavData.recon_range_max = uavLoadReconnaissanceRangeValue.text
+        uavData.recon_accuracy = uavLoadReconnaissanceAccuracyValue.text
+
+        uavData.low_alt_speed = uavLowAltitudeBreakthroughSpeedValue.text
+        uavData.combat_radius = uavOperatioanalRadius.text
+        uavData.attack_accuracy = uavAttackaccuracyValue.text
+        uavData.rcs = uavRadarCrossSectionValue.text
+        uavData.cg_front_limit = uavCenterOfGravityFrontLimitValue.text
+        uavData.cg_rear_limit = uavCenterOfGravityAfterwardLimitValue.text
+        uavData.max_takeoff_weight = uavMaximumTakeoffWeightValue.text
+        uavData.empty_weight = uavEmptyWeightValue.text
+        uavData.max_fuel = uavMaximumFuelCapacityValue.text
+        uavData.max_external_weight = uavMaximumExternalWeightValue.text
+        uavData.ceiling = uavCeilingValue.text
+        uavData.ground_start_alt = uavMaximumGroundStartingHeightValue.text
+        uavData.air_start_alt = uavMaximumAirStartingAltitudeValue.text
+        uavData.endurance = uavMaximumEnduranceValue.text
+        uavData.max_vacuum_speed = uavMaximumFlightVacuumSpeedValue.text
+        uavData.min_meter_speed = uavMinimumFlightMeterSpeedValue.text
+        uavData.sea_takeoff_roll = sealLevelTakeoffAndRollDistanceValue.text
+        uavData.sea_landing_roll = sealLevelLandingAndRollDistanceValue.text
+        uavData.recon_cruise_alt = cruiseAltitudeReconnaissanceConfigurationValue.text
+        uavData.full_external_cruise_alt = cruiseAltitudeFullExternalConfigurationValue.text
+
+        uavData.image_name = "hhhhhh"
+        uavData.image_url = "hhhhhhhh"
+        uavData.create_time = addUavModelData.currentTime
+        var jsonString = JSON.stringify(uavData);
+        console.log("jsonString"+jsonString);
+
+        uavModelDao.updateModelDate(jsonString)
 
     }
+
     function convertToJsonArray(jsonData) {
             return jsonData.map(function(item) {
                 return item.name;
@@ -1299,77 +1593,60 @@ Window{//Rectangle{
     //                 code: btn.payloadCode
     //             }))
     // }
-    function saveDeliveryRecord() {
-        // let recordobj = new Commons.DeliveryRecordEntity()
-        // recordobj.setPlaneShape = modelSelector.currentText
-        // recordobj.setBatchNo = batchCommbox.currentText
-        // recordobj.setSortiesNo = beginSortieCommbox.currentText      // 架次
-        // recordobj.setDeliveryId = deliveryUser.content     // 交装者
-        // recordobj.setProfessionId = profSelector.currentText    // 专业
-        // recordobj.setShippingSpace = shipSpaceSelector.contentText  // 舱位
-        // recordobj.setInspectorId = inspectUser.content    // 检验员
-        // recordobj.setLevel1Classify = level1Classify.currentText
-        // recordobj.setLevel2Classify = level2Classify.currentText
-        // recordobj.setLevel3Classify = level3Classify.currentText
-        // recordobj.setPresenterId  = presenterSelector.content// 提出者
-        // recordobj.setUnit  = unitSelector.content            //部队
-        // recordobj.setProChartNo = productNoSelector.content      // 产品图号
-        // recordobj.setProChartName = productNameSelector.content  // 产品名称
-        // recordobj.setQualityNo = qualityNoSelector.content       // 质量编号
-        // recordobj.setReceiptNo = receiptNoSelector.content       // 单据编号
-        // recordobj.setProposedDate = proposedDate.content
-        // recordobj.setProblemDesc = textArea.text     // 问题描述
-        // recordobj.setProblemStatus = "处置中"
-        // recordobj.setPhotoFile = photoFilename
-
-        // recordobj.setDiscoveryMethod = discoveryMethod.currentText;
-        // recordobj.setInfoChannel = infoChannel.currentText;
-        // recordobj.setOccurChance = occurChance.currentText;
-
-        // let jsonString = ""
-        // let jsonObject = new Object
-        // if (windowModel === 0 && recordId === "") {
-        //     setRecordProcessInfo(recordobj, processInfo)
-
-        //     jsonString = deliveryRecordModel.insert(recordobj)
-        //     jsonObject = Commons.parseResponse(jsonString)
-        //     if (jsonObject.code === 200) {
-        //         toastModel.show("^_^记录保存成功^_^")
-        //         saveButton.enabled = false
-        //         saveButton.visible = false
-
-        //         editButton.enabled = true
-        //         editButton.visible = true
-
-        //         // 保存已经的数据据主键值，用于编辑时更新
-        //         if (jsonObject.hasOwnProperty("data")) {
-        //             recordId = jsonObject.data.recordId
-        //             savePhotoCacheList()
-        //         }
-        //         else {
-        //             console.log("\"_\"没有相应的记录ID\"_\"")
-        //         }
-        //     }
-        // }
-        // else {
-        //     //保存时TaskItem从本身的数据记录处获取
-        //     setRecordProcessInfo(recordobj, recordEntity);
-
-        //     jsonString = deliveryRecordModel.update(recordId, recordobj)
-        //     jsonObject = Commons.parseResponse(jsonString)
-        //     if (jsonObject.code === 200) {
-        //         toastModel.show("^_^记录更新成功^_^")
-        //         saveButton.enabled = false
-        //         saveButton.visible = false
-
-        //         editButton.enabled = true
-        //         editButton.visible = true
-        //     }
-        //     else {
-        //         toastModel.show("^_^记录更新失败^_^")
-        //         print("deliveryRecordModel.update ", jsonString)
-        //     }
-        // }
+    // 生成测试数据函数修正
+    function generateTestData() {
+        const testData = [
+            {
+                mountCount: "2",
+                payloadCapacity: "500",
+                mountingPosition: "位置A",
+                positionNumber: "001",
+                checked: true
+            },
+            {
+                mountCount: "1",
+                payloadCapacity: "300",
+                mountingPosition: "位置B",
+                positionNumber: "002",
+                checked: false
+            },
+                           {
+                               mountCount: "1",
+                               payloadCapacity: "300",
+                               mountingPosition: "位置B",
+                               positionNumber: "002",
+                               checked: false
+                           },
+                           {
+                               mountCount: "1",
+                               payloadCapacity: "300",
+                               mountingPosition: "位置B",
+                               positionNumber: "002",
+                               checked: false
+                           },
+                           {
+                               mountCount: "1",
+                               payloadCapacity: "300",
+                               mountingPosition: "位置B",
+                               positionNumber: "002",
+                               checked: false
+                           },
+                           {
+                               mountCount: "1",
+                               payloadCapacity: "300",
+                               mountingPosition: "位置B",
+                               positionNumber: "002",
+                               checked: false
+                           },
+                           {
+                               mountCount: "1",
+                               payloadCapacity: "300",
+                               mountingPosition: "位置B",
+                               positionNumber: "002",
+                               checked: false
+                           }
+        ]
+         multiTextDispay.loadData = testData
     }
 
 }

@@ -14,9 +14,9 @@ Rectangle {
 
     // Signal to notify parent component about selection changes
     signal selectionChanged(var selectedItems)
-    property variant columnWidthArr: [100, 100, 90]
+    property variant columnWidthArr: [100, 100, 90, 50]
     // 显示10个字段
-    property var horHeader: ["挂载数量", "载弹量", "挂载位置"]
+    property var horHeader: ["挂载数量", "载弹量", "挂载位置","位置编号"]
     // 边框样式
     border.width: 1
     border.color: "#CCCCCC"
@@ -70,7 +70,7 @@ Rectangle {
         // 表头行
 
        //Item { Layout.toptMargin: 20 }
-        contentItem: ListView {
+        contentItem:ListView {
             id: itemsListView
             implicitHeight: contentHeight
             model: root.items
