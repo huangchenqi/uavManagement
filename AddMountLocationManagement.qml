@@ -576,7 +576,22 @@ Rectangle {
            function updateMountLocationData(){
                // 打印当前函数的名称
                 console.log("当前函数名称:", arguments.callee.name);
-                console.log("resultData"+JSON.stringify(resultData))
+                //console.log("resultData"+JSON.stringify(resultData))       
+               let result = uavMountLocationDaoTableModel.updateUavMountLocationDate(resultData)
+               loadUavMountLocationAllData()
+               if(result === true){
+                   warningItem.text = "挂载位置数据更新成功!"
+                   warningPopup.open()
+                   // 2秒后自动关闭
+                   autoCloseTimer.start()
+               }else if(result === false){
+                   warningItem.text = "挂载位置数据更新失败!"
+                   warningPopup.open()
+                   // 2秒后自动关闭
+                   autoCloseTimer.start()
+                }else{
+                   console.log("unknown deleteMountLocation")
+               }
            }
 
            function updateUavAllData(){ //更新挂载位置数据

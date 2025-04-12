@@ -73,7 +73,7 @@ bool UavMountLocationDao::updateUavMountLocationDate(const QJSValue &selectedDat
 {
     try {
         // 1. 建立数据库连接
-        qDebug() << "Connecting to database...";
+        qDebug() << "Connecting to updateUavMountLocationDate database...";
         auto& db = dbConn_->getDatabase(); // 使用成员变量获取数据库
 
         // 2. 创建事务
@@ -91,11 +91,12 @@ bool UavMountLocationDao::updateUavMountLocationDate(const QJSValue &selectedDat
             int  recordId = dataMap["recordId"].toInt();
             QString mountLocationNameStr = dataMap["uavmountLocationName"].toString();
             QString mountLocationIdStr = dataMap["uavmountLocationId"].toString();
-            auto rst = db.erase_query<UavModelMountLocationEntity>(//db.erase_query<UavModelEntity>
-                query::id == recordId
-                && query::mountLocationName == mountLocationNameStr.toStdString().c_str()
-                && query::mountLocationId == mountLocationIdStr.toStdString().c_str()
-                ); // 替换 condition1、condition2 为实际的字段名，value1、value2 为实际的值
+            db.load(recordId, entity);
+            entity.mountLocationName_ = mountLocationNameStr.toStdString();
+            entity.mountLocationId_ = mountLocationIdStr.toStdString();
+
+            // 4. 修改数据
+            db.update(entity);
             qDebug() << "recordId:" << dataMap["recordId"].toInt();
             qDebug() << "uavmountLocationName:" << dataMap["uavmountLocationName"].toString();
             qDebug() << "uavmountLocationId:" << dataMap["uavmountLocationId"].toString();
@@ -104,13 +105,11 @@ bool UavMountLocationDao::updateUavMountLocationDate(const QJSValue &selectedDat
 
         // 提交事务
         trans.commit();
-        qDebug() <<"当前函数名称:" << __FUNCTION__<<":"<< "Transaction committed, 删除成功";
+        qDebug() <<"当前函数名称:" << __FUNCTION__<<":"<< "Transaction committed, 更新成功";
     } catch (const std::exception& e) {
-        qCritical() << "Error:" << "删除操作出错: " << e.what();
+        qCritical() << "Error:" << "更新操作出错: " << e.what();
         return false;
     }
-
-    return true;
     return true;
 }
 
