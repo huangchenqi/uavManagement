@@ -12,6 +12,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+# # 将配置文件复制到构建目录
+# CONFIG += file_copies
+# COPIES += config/database.ini
 # 设置ODB和PostgreSQL的路径
 MINGW_ROOT = $$PWD/pgsqlconnect
 
@@ -33,14 +36,21 @@ SOURCES += \
 #        EasyTableModel.cpp \
 #        TableModel.cpp \
     AmmunitionEntity-odb.cxx \
+    UavModelBombingMethodEntity-odb.cxx \
     UavModelLoadTypeEntity-odb.cxx \
     UavModelMountLocationEntity-odb.cxx \
+    UavModelOperationWayEntity-odb.cxx \
+    UavModelRecoveryModeEntity-odb.cxx \
     databaseconnection.cpp \
         main.cpp \
 #        migration.cpp \
 #        uavdataoperationmodel.cpp \
+    uavmodelbombingmethoddao.cpp \
         uavmodeldao.cpp \
     uavmodelentity-odb.cxx \
+    uavmodelloadtypedao.cpp \
+    uavmodeloperationwaydao.cpp \
+    uavmodelrecoverymodedao.cpp \
     uavmountlocationdao.cpp
 
 
@@ -74,6 +84,7 @@ HEADERS += \
     MountingSchemeLoadConfigurationEntity.h \
     MountingSchemeMountingConfiguration.h \
     ReconnaissancePayloadEntity.h \
+    UavModelBombingMethodEntity-odb.hxx \
     UavModelBombingMethodEntity.h \
     UavModelControlMethodEntity.h \
     UavModelDataToJson.h \
@@ -82,13 +93,20 @@ HEADERS += \
     UavModelLoadTypeEntity.h \
     UavModelMountLocationEntity-odb.hxx \
     UavModelMountLocationEntity.h \
+    UavModelOperationWayEntity-odb.hxx \
+    UavModelOperationWayEntity.h \
+    UavModelRecoveryModeEntity-odb.hxx \
     UavModelRecoveryModeEntity.h \
     databaseconnection.h \
     datetime-traits.hxx \
     json.hpp \
+    uavmodelbombingmethoddao.h \
     uavmodeldao.h \
     uavmodelentity-odb.hxx \
     uavmodelentity.h \
+    uavmodelloadtypedao.h \
+    uavmodeloperationwaydao.h \
+    uavmodelrecoverymodedao.h \
     uavmountlocationdao.h
 
 DISTFILES += \

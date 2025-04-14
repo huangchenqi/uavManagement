@@ -1,6 +1,6 @@
-#include "uavmountlocationdao.h"
-#include "UavModelMountLocationEntity.h"
-#include "UavModelMountLocationEntity-odb.hxx"
+#include "uavmodelbombingmethoddao.h"
+#include "UavModelBombingMethodEntity.h"
+#include "UavModelBombingMethodEntity-odb.hxx"
 
 #include <stdexcept>
 // ODB 头文件
@@ -12,7 +12,7 @@
 #include "odb/pgsql/traits.hxx"
 #include <QJsonObject>
 #include <QJsonValue>
-UavMountLocationDao::UavMountLocationDao(QObject* parent) : QObject(parent) {
+UavModelBombingMethodDao::UavModelBombingMethodDao(QObject* parent) : QObject(parent) {
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
     dbConn_.reset(new DatabaseConnection(
         "uav_type_man",
@@ -23,39 +23,40 @@ UavMountLocationDao::UavMountLocationDao(QObject* parent) : QObject(parent) {
         ));
 }
 
-QJsonArray UavMountLocationDao::selectUavMountLocationAllData()
+
+QJsonArray UavModelBombingMethodDao::selectUavModelBombingMethodAllData()
 {
-    QJsonArray uavMountLocationData;
+    QJsonArray uavModelBombingMethodData;
 
     try{
 
         auto& db = dbConn_->getDatabase(); // 使用成员变量获取数据库
         // 2. 创建事务
         odb::transaction trans(db.begin());
-        qDebug() << "Transaction select all uavMountLocation started";
-        // 关键修正1：使用 query<UavModelEntity> 获取结果集
-        using query_t = odb::query<UavModelMountLocationEntity>;
+        qDebug() << "Transaction select all UavModelBombingMethodEntity started";
+        // 关键修正1：使用 query<UavModelBombingMethodEntity> 获取结果集
+        using query_t = odb::query<UavModelBombingMethodEntity>;
 
-        odb::result<UavModelMountLocationEntity> result = db.query<UavModelMountLocationEntity>(query_t::true_expr);
+        odb::result<UavModelBombingMethodEntity> result = db.query<UavModelBombingMethodEntity>(query_t::true_expr);
         qDebug() << "Query returned" << result.size() << "records";  // 添加此行
         // 关键修正2：遍历所有结果
         int sum = 0;
         bool checked = false;
         if(result.size()==0){
-            return uavMountLocationData;
+            return uavModelBombingMethodData;
         }
-        for (UavModelMountLocationEntity entity : result) { //auto&& entity : result) {
+        for (UavModelBombingMethodEntity entity : result) { //auto&& entity : result) {
             QJsonObject obj;
             qDebug() << "Processing record ID:" << entity.id_;  // 输出当前记录ID
             // 手动转换实体到 JSON（需要根据实际字段补充）
             obj["index"] = sum;
             obj["recordId"] = QString::number(entity.id_);
-            obj["uavmountLocationId"] = QString::fromStdString(entity.mountLocationId_);
-            obj["uavmountLocationName"] = QString::fromStdString(entity.mountLocationName_);
+            obj["uavComponeCode"] = QString::fromStdString(entity.bombingMethodCode_);
+            obj["uavComponeName"] = QString::fromStdString(entity.bombingMethodName_);
             obj["checked"] = checked;
             sum++;
             qDebug()<<"uavModelAllDatauavcreat:";
-            uavMountLocationData.append(obj);
+            uavModelBombingMethodData.append(obj);
         }
         trans.commit();
     }
@@ -63,25 +64,25 @@ QJsonArray UavMountLocationDao::selectUavMountLocationAllData()
         qCritical() << "Database error:" << e.what();
         throw; // 或返回包含错误信息的 JSON
     }
-    QJsonDocument doc(uavMountLocationData);
+    QJsonDocument doc(uavModelBombingMethodData);
     qDebug()<<"当前函数名称:" << __FUNCTION__<<":";
     qDebug().noquote() << doc.toJson(QJsonDocument::Indented);
-    return uavMountLocationData;
+    return uavModelBombingMethodData;
 }
 
-bool UavMountLocationDao::updateUavMountLocationDate(const QJSValue &selectedData)
+bool UavModelBombingMethodDao::updateUavModelBombingMethodDate(const QJSValue &selectedData)
 {
     try {
         // 1. 建立数据库连接
-        qDebug() << "Connecting to updateUavMountLocationDate database...";
+        qDebug() << "Connecting to updateUavModelBombingMethodDate database...";
         auto& db = dbConn_->getDatabase(); // 使用成员变量获取数据库
 
         // 2. 创建事务
         odb::transaction trans(db.begin());
         qDebug() << "Transaction delete started";
         // 3. 从JSON创建实体对象
-        UavModelMountLocationEntity entity;
-        typedef odb::query<UavModelMountLocationEntity> query;
+        UavModelBombingMethodEntity entity;
+        typedef odb::query<UavModelBombingMethodEntity> query;
         // 将 QJSValue 转换为 QVariantList
         QVariantList dataList = selectedData.toVariant().toList();
 
@@ -89,17 +90,17 @@ bool UavMountLocationDao::updateUavMountLocationDate(const QJSValue &selectedDat
         for (const QVariant &item : dataList) {
             QVariantMap dataMap = item.toMap();
             int  recordId = dataMap["recordId"].toInt();
-            QString mountLocationNameStr = dataMap["uavmountLocationName"].toString();
-            QString mountLocationIdStr = dataMap["uavmountLocationId"].toString();
+            QString uavComponeNameStr = dataMap["uavComponeName"].toString();
+            //QString uavComponeCodeStr = dataMap["uavComponeCode"].toString();
             db.load(recordId, entity);
-            entity.mountLocationName_ = mountLocationNameStr.toStdString();
-            entity.mountLocationId_ = mountLocationIdStr.toStdString();
+            entity.bombingMethodName_ = uavComponeNameStr.toStdString();
+            //entity.bombingMethodCode_ = uavComponeCodeStr.toStdString();
 
             // 4. 修改数据
             db.update(entity);
             qDebug() << "recordId:" << dataMap["recordId"].toInt();
-            qDebug() << "uavmountLocationName:" << dataMap["uavmountLocationName"].toString();
-            qDebug() << "uavmountLocationId:" << dataMap["uavmountLocationId"].toString();
+            qDebug() << "uavComponeName:" << dataMap["uavComponeName"].toString();
+            qDebug() << "uavComponeCode:" << dataMap["uavComponeCode"].toString();
             //qDebug() << "<<<<>>>>" << rst.size();
         }
 
@@ -113,7 +114,7 @@ bool UavMountLocationDao::updateUavMountLocationDate(const QJSValue &selectedDat
     return true;
 }
 
-bool UavMountLocationDao::deleteUavMountLocationDate(const QJSValue &selectedData)
+bool UavModelBombingMethodDao::deleteUavModelBombingMethodDate(const QJSValue &selectedData)
 {
     try {
         // 1. 建立数据库连接
@@ -124,8 +125,8 @@ bool UavMountLocationDao::deleteUavMountLocationDate(const QJSValue &selectedDat
         odb::transaction trans(db.begin());
         qDebug() << "Transaction delete started";
         // 3. 从JSON创建实体对象
-        UavModelMountLocationEntity entity;
-        typedef odb::query<UavModelMountLocationEntity> query;
+        UavModelBombingMethodEntity entity;
+        typedef odb::query<UavModelBombingMethodEntity> query;
         // 将 QJSValue 转换为 QVariantList
         QVariantList dataList = selectedData.toVariant().toList();
 
@@ -133,13 +134,13 @@ bool UavMountLocationDao::deleteUavMountLocationDate(const QJSValue &selectedDat
         for (const QVariant &item : dataList) {
             QVariantMap dataMap = item.toMap();
             int  recordId = dataMap["recordId"].toInt();
-            QString mountLocationNameStr = dataMap["uavmountLocationName"].toString();
-            QString mountLocationIdStr = dataMap["uavmountLocationId"].toString();
-            auto rst = db.erase_query<UavModelMountLocationEntity>(//db.erase_query<UavModelEntity>
-            query::id == recordId
-            && query::mountLocationName == mountLocationNameStr.toStdString().c_str()
-            && query::mountLocationId == mountLocationIdStr.toStdString().c_str()
-            ); // 替换 condition1、condition2 为实际的字段名，value1、value2 为实际的值
+            QString uavComponeNameStr = dataMap["uavComponeName"].toString();
+            //QString uavComponeCodeStr = dataMap["uavComponeCode"].toString();
+            auto rst = db.erase_query<UavModelBombingMethodEntity>(//db.erase_query<UavModelEntity>
+                query::id == recordId
+                && query::bombingMethodName == uavComponeNameStr.toStdString().c_str()
+                //&& query::bombingMethodCode == uavComponeCodeStr.toStdString().c_str()
+                ); // 替换 condition1、condition2 为实际的字段名，value1、value2 为实际的值
             qDebug() << "recordId:" << dataMap["recordId"].toInt();
             qDebug() << "uavmountLocationName:" << dataMap["uavmountLocationName"].toString();
             qDebug() << "uavmountLocationId:" << dataMap["uavmountLocationId"].toString();
@@ -157,8 +158,9 @@ bool UavMountLocationDao::deleteUavMountLocationDate(const QJSValue &selectedDat
     return true;
 }
 
-bool UavMountLocationDao::insertUavMountLocationDate(const QJsonObject &object)
-{   qDebug() << "Starting database insertUavMountLocationDate insertion...";
+bool UavModelBombingMethodDao::insertUavModelBombingMethodDate(const QJsonObject &object)
+{
+    qDebug() << "Starting database insertUavModelBombingMethodDate insertion...";
     try {
         // 1. 建立数据库连接
         qDebug() << "Connecting to database...";
@@ -169,13 +171,13 @@ bool UavMountLocationDao::insertUavMountLocationDate(const QJsonObject &object)
         qDebug() << "Transaction insert started";
 
         // 3. 从JSON创建实体对象
-        UavModelMountLocationEntity entity;
+        UavModelBombingMethodEntity entity;
         QDateTime recordCreationTime;//创建记录时间
 
         // 4. 映射JSON字段到实体属性
         // 基础字段
-        entity.mountLocationId_ = object["uavmountLocationId"].toString().toStdString();
-        entity.mountLocationName_ = object["uavmountLocationName"].toString().toStdString();
+        entity.bombingMethodCode_ = object["uavComponeCode"].toString().toStdString();
+        entity.bombingMethodName_ = object["uavComponeName"].toString().toStdString();
 
         // 6. 持久化到数据库
         qDebug() << "Persisting entity...";

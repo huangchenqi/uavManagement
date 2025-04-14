@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef UAV_MODEL_LOAD_TYPE_ENTITY_ODB_HXX
-#define UAV_MODEL_LOAD_TYPE_ENTITY_ODB_HXX
+#ifndef UAV_MODEL_BOMBING_METHOD_ENTITY_ODB_HXX
+#define UAV_MODEL_BOMBING_METHOD_ENTITY_ODB_HXX
 
 #include <odb/version.hxx>
 
@@ -13,7 +13,7 @@
 
 #include <odb/pre.hxx>
 
-#include "UavModelLoadTypeEntity.h"
+#include "UavModelBombingMethodEntity.h"
 
 #include <memory>
 #include <cstddef>
@@ -34,20 +34,20 @@
 
 namespace odb
 {
-  // UavModelLoadTypeEntity
+  // UavModelBombingMethodEntity
   //
   template <>
-  struct class_traits< ::UavModelLoadTypeEntity >
+  struct class_traits< ::UavModelBombingMethodEntity >
   {
     static const class_kind kind = class_object;
   };
 
   template <>
-  class access::object_traits< ::UavModelLoadTypeEntity >
+  class access::object_traits< ::UavModelBombingMethodEntity >
   {
     public:
-    typedef ::UavModelLoadTypeEntity object_type;
-    typedef ::UavModelLoadTypeEntity* pointer_type;
+    typedef ::UavModelBombingMethodEntity object_type;
+    typedef ::UavModelBombingMethodEntity* pointer_type;
     typedef odb::pointer_traits<pointer_type> pointer_traits;
 
     static const bool polymorphic = false;
@@ -91,10 +91,10 @@ namespace odb
 
 namespace odb
 {
-  // UavModelLoadTypeEntity
+  // UavModelBombingMethodEntity
   //
   template <typename A>
-  struct query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >
+  struct query_columns< ::UavModelBombingMethodEntity, id_pgsql, A >
   {
     // id
     //
@@ -108,7 +108,7 @@ namespace odb
 
     static const id_type_ id;
 
-    // loadTypeCode
+    // bombingMethodCode
     //
     typedef
     pgsql::query_column<
@@ -116,11 +116,11 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    loadTypeCode_type_;
+    bombingMethodCode_type_;
 
-    static const loadTypeCode_type_ loadTypeCode;
+    static const bombingMethodCode_type_ bombingMethodCode;
 
-    // loadTypeName
+    // bombingMethodName
     //
     typedef
     pgsql::query_column<
@@ -128,35 +128,35 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    loadTypeName_type_;
+    bombingMethodName_type_;
 
-    static const loadTypeName_type_ loadTypeName;
+    static const bombingMethodName_type_ bombingMethodName;
   };
 
   template <typename A>
-  const typename query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >::id_type_
-  query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >::
+  const typename query_columns< ::UavModelBombingMethodEntity, id_pgsql, A >::id_type_
+  query_columns< ::UavModelBombingMethodEntity, id_pgsql, A >::
   id (A::table_name, "\"id\"", 0);
 
   template <typename A>
-  const typename query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >::loadTypeCode_type_
-  query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >::
-  loadTypeCode (A::table_name, "\"loadtype_code\"", 0);
+  const typename query_columns< ::UavModelBombingMethodEntity, id_pgsql, A >::bombingMethodCode_type_
+  query_columns< ::UavModelBombingMethodEntity, id_pgsql, A >::
+  bombingMethodCode (A::table_name, "\"bombingway_code\"", 0);
 
   template <typename A>
-  const typename query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >::loadTypeName_type_
-  query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >::
-  loadTypeName (A::table_name, "\"loadtype_name\"", 0);
+  const typename query_columns< ::UavModelBombingMethodEntity, id_pgsql, A >::bombingMethodName_type_
+  query_columns< ::UavModelBombingMethodEntity, id_pgsql, A >::
+  bombingMethodName (A::table_name, "\"bombingway_name\"", 0);
 
   template <typename A>
-  struct pointer_query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >:
-    query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >
+  struct pointer_query_columns< ::UavModelBombingMethodEntity, id_pgsql, A >:
+    query_columns< ::UavModelBombingMethodEntity, id_pgsql, A >
   {
   };
 
   template <>
-  class access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >:
-    public access::object_traits< ::UavModelLoadTypeEntity >
+  class access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >:
+    public access::object_traits< ::UavModelBombingMethodEntity >
   {
     public:
     struct id_image_type
@@ -174,17 +174,17 @@ namespace odb
       long long id_value;
       bool id_null;
 
-      // loadTypeCode_
+      // bombingMethodCode_
       //
-      details::buffer loadTypeCode_value;
-      std::size_t loadTypeCode_size;
-      bool loadTypeCode_null;
+      details::buffer bombingMethodCode_value;
+      std::size_t bombingMethodCode_size;
+      bool bombingMethodCode_null;
 
-      // loadTypeName_
+      // bombingMethodName_
       //
-      details::buffer loadTypeName_value;
-      std::size_t loadTypeName_size;
-      bool loadTypeName_null;
+      details::buffer bombingMethodName_value;
+      std::size_t bombingMethodName_size;
+      bool bombingMethodName_null;
 
       std::size_t version;
     };
@@ -298,17 +298,17 @@ namespace odb
   };
 
   template <>
-  class access::object_traits_impl< ::UavModelLoadTypeEntity, id_common >:
-    public access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >
+  class access::object_traits_impl< ::UavModelBombingMethodEntity, id_common >:
+    public access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >
   {
   };
 
-  // UavModelLoadTypeEntity
+  // UavModelBombingMethodEntity
   //
 }
 
-#include "UavModelLoadTypeEntity-odb.ixx"
+#include "UavModelBombingMethodEntity-odb.ixx"
 
 #include <odb/post.hxx>
 
-#endif // UAV_MODEL_LOAD_TYPE_ENTITY_ODB_HXX
+#endif // UAV_MODEL_BOMBING_METHOD_ENTITY_ODB_HXX

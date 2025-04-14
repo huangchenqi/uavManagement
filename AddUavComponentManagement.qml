@@ -6,46 +6,90 @@ import Qt.labs.qmlmodels 1.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.12
-import UavDaoModel 1.0
+import UavMountLocationDaoModel 1.0
+import UavBombingMethodDaoModel 1.0
 /**
 https://blog.csdn.net/qq_24890953/article/details/104640454
   */
 //Window {
 Rectangle {
-           id: uavManagementroot
+           id: addUavComponentManagementroot
            visible: true
            color: "#ECF2FE"
            // 暴露接口给父组件
            // property alias tableModel: tableModel
            // signal saveRequested(var selectedData)
-           //property var payloadTypeManagementPopup: []
-           property var updateData: []
+           property var loadData: []
+           property var resultData: []
            property color borderColor: "#A5B3C0"
            property color headerColor: "#D3E1FE"
            property color fontColor: "#3E3E3E"
            property var rowsModel: []
            property string managementType: "";
+           property string horHeaderContext: ""
            property string queryedit: ""
-           width: 500;
+           property int fontpixelSize: 16   // 设置字体大小为 20 像素: value
+           width: 260;
            height: 60//width: screenWidth; height: screenHeight
            //property var rowData : ({test:1})
            property int bottonHeight: 50
            property int maxHeight: 200  // 下拉列表最大高度
            property int minHeight: 20  // 下拉列表最小高度
+           // 监听 managementType 变化
+           onManagementTypeChanged: {
+               console.log("managementType updated:", managementType)
+               // 在此处执行依赖 managementType 的初始化逻辑
+           }
+
+           // 定义警告对话框
+           Popup {
+                   id: warningPopup
+                   width: 200
+                   height: 100
+                   x: (parent.width - width) / 2
+                   y: (parent.height - height) / 2
+                   modal: true
+                   focus: true
+                   closePolicy: Popup.NoAutoClose // 禁止点击外部关闭
+
+                   background: Rectangle {
+                       color: "#ffeb3b"
+                       border.color: "#fbc02d"
+                       radius: 5
+                   }
+
+                   contentItem: Text {
+                       id:warningItem
+                       //text: "您查询的是全部数据！"
+                       horizontalAlignment: Text.AlignHCenter
+                       verticalAlignment: Text.AlignVCenter
+                       font.pixelSize: 16
+                   }
+               }
+           Timer {
+                   id: autoCloseTimer
+                   interval: 500 // 2秒
+                   onTriggered: warningPopup.close()
+               }
            // 组件加载完成后生成测试数据
            Component.onCompleted:{
-               loadUavAllData()
-
+               recieveUavComponentAllData()
            }
+           // UavMountLocationDaoTableModel{
+           //     id:uavMountLocationDaoTableModel
+           // }
+           UavBombingMethodDaoTableModel{
+              id:uavBombingMethodDaoModel
+           }
+
            // 数据模型
            // 表格数据模型
            TableModel {
               id: tableModel
               TableModelColumn { display: "checked" }//复选框
-              TableModelColumn { display: "positionNumber"   }        // 位置编号
-              TableModelColumn { display: "mountingPosition" }   // 挂载位置
-              TableModelColumn { display: "mountCount" }    // 挂载数量
-              TableModelColumn { display: "payloadCapacity" }      // 载弹量
+              TableModelColumn { display: "index"   }        // 序号
+              TableModelColumn { display: "uavComponeName" }   // 内容
+              //TableModelColumn { display: "uavComponeCode" }    // 位置编号
             }
 
                    ColumnLayout {
@@ -54,14 +98,86 @@ Rectangle {
                        Layout.fillWidth: true
                        Layout.fillHeight: true
                        RowLayout {
-                           Layout.minimumWidth: uavManagementroot.width
-                           Layout.minimumHeight: uavManagementroot.height-280
+                           Layout.minimumWidth: addUavComponentManagementroot.width
+                           Layout.minimumHeight: addUavComponentManagementroot.height-320
+                           Layout.fillHeight: true
+                           Layout.fillWidth: true
+
+
+                           Label {
+                               id:addMountLocationShow
+                               Layout.leftMargin: 12
+                               text: //"挂载位置:"
+                                     if (addUavComponentManagementroot.managementType === "loadType") {
+                                               addUavComponentManagementroot.horHeaderContext = "载荷类型内容"
+                                               return "载荷类型:";
+                                           } else if (addUavComponentManagementroot.managementType === "bombingMethod") {
+                                               addUavComponentManagementroot.horHeaderContext = "投弹方式内容"
+                                               return "投弹方式:";
+                                           } else if (addUavComponentManagementroot.managementType === "recoveryMode") {
+                                               addUavComponentManagementroot.horHeaderContext = "回收方式内容"
+                                               return "回收方式:";
+                                           }else if (addUavComponentManagementroot.managementType === "operationType") {
+                                               addUavComponentManagementroot.horHeaderContext = "操控方式内容"
+                                               return "操控方式:";
+                                           // }else if (addUavComponentManagementroot.managementType === "ammunitionType") {
+                                           //     return "新增弹药类型";
+                                           // }else if (addUavComponentManagementroot.managementType === "guidanceType") {
+                                           //     return "新增制导类型";
+                                           // }else if (addUavComponentManagementroot.managementType === "deliveryMethod") {
+                                           //     return "新增投放方式";
+                                           // }else if (addUavComponentManagementroot.managementType === "attackTargetType") {
+                                           //     return "新增打击目标类型";
+                                           // }else if (addUavComponentManagementroot.managementType === "killingMethod") {
+                                           //     return "新增杀伤方式";
+                                           } else {
+                                               return "未知操作";
+                                           }
+                               font.pointSize: 12
+                               width:80
+                               height:50
+                           }
+                           TextField{
+                               id:addUavComponentText
+                               font.pointSize: 12
+                               //Layout.leftMargin: 4
+                               Layout.preferredWidth: 200   // 指定宽度为 60 像素
+                               height: 50
+                           }
+                           Item { Layout.fillWidth: true }
+
+                           Button {
+                               id: addUavComponentButton
+                               Layout.rightMargin:10
+                               //Layout.bottomMargin: 2
+                               height: 50
+                               width: 80
+                               // Layout.preferredWidth: 100
+                               // Layout.preferredHeight: 50
+                               text: "添加"
+                               font.pixelSize: fontpixelSize   // 设置字体大小为 20 像素
+                               onClicked: {
+                                   console.log("addUavComponentManagementroot.managementType"+addUavComponentManagementroot.managementType)
+                                   //  saveUavComponentData()
+                                   //  recieveUavComponentAllData()
+                                   // // 2秒后自动关闭
+                                   // autoCloseTimer.start()
+                               }
+                            }
+
+
+                        }
+
+                       RowLayout {
+                           Layout.minimumWidth: addUavComponentManagementroot.width
+                           Layout.minimumHeight: addUavComponentManagementroot.height-280
                            Layout.fillHeight: true
                            Layout.fillWidth: true
                            Item {
                                id: control
-                               implicitHeight: uavManagementroot.width
-                               implicitWidth: uavManagementroot.height-280
+                               Layout.topMargin: 2
+                               implicitHeight: addUavComponentManagementroot.width
+                               implicitWidth: addUavComponentManagementroot.height-280
                                Layout.fillWidth: true
                                Layout.fillHeight: true
                                //表头行高
@@ -73,15 +189,15 @@ Rectangle {
                                property color scrollBarColor: "#E5E5E5"
                                property int scrollBarWidth: 7
                                //列宽
-                               property variant columnWidthArr: [50,130, 130, 130,120]
+                               property variant columnWidthArr: [50,80, 300]
                                // 显示10个字段
-                               property var horHeader: ["","挂载位置", "位置编号", "挂载数量","载弹量"]
+                               property var horHeader: ["","序号", addUavComponentManagementroot.horHeaderContext]
                                property int selected: -1
                                //数据展示
                                TableView {
                                    id: tableView
-                                   implicitHeight: uavManagementroot.width
-                                   implicitWidth: uavManagementroot.height-280
+                                   implicitHeight: addUavComponentManagementroot.width
+                                   implicitWidth: addUavComponentManagementroot.height-280
                                    Layout.fillWidth: true
                                    Layout.fillHeight: true
                                    anchors {
@@ -171,7 +287,7 @@ Rectangle {
                                          }
 
                                         DelegateChoice {
-                                             column:3
+                                             column:2
                                              delegate: Rectangle {
                                                  color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
                                                  width: control.columnWidthArr[column]
@@ -193,7 +309,7 @@ Rectangle {
                                                          // 方法1：通过模型索引修改（推荐）
                                                          const rowIndex = model.row    // 获取当前行索引
                                                          const colIndex = column      // 当前列索引
-                                                         updateData[rowIndex].mountCount = text
+                                                         resultData[rowIndex].uavmountLocationName = text
                                                          updateUavAllData()
                                                      }
                                                  }
@@ -213,7 +329,7 @@ Rectangle {
                                              }
                                          }
                                         DelegateChoice {
-                                            column: 4
+                                            column: 3
                                             delegate: Rectangle {
                                                 color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
                                                 width: control.columnWidthArr[column]
@@ -234,7 +350,7 @@ Rectangle {
                                                         const rowIndex = model.row    // 获取当前行索引
                                                         const colIndex = column      // 当前列索引
 
-                                                         updateData[rowIndex].payloadCapacity = text
+                                                         resultData[rowIndex].uavmountLocationId = text
                                                         updateUavAllData()
                                                     }
                                                 }
@@ -285,85 +401,7 @@ Rectangle {
                                             }
                                         }
                                     }
-                                   // 修正后的委托选择器
-                                           // delegate: DelegateChooser {
-                                           //     DelegateChoice {
-                                           //         column: 0
-                                           //         delegate: CheckBoxDelegate {}  // 提取为单独组件
-                                           //     }
-
-                                           //     DelegateChoice {
-                                           //         column: 3
-                                           //         delegate: TextFieldDelegate {
-                                           //             fieldName: "mountCount"  // 指定绑定的字段
-                                           //         }
-                                           //     }
-
-                                           //     DelegateChoice {
-                                           //         column: 4
-                                           //         delegate: TextFieldDelegate {
-                                           //             fieldName: "payloadCapacity"
-                                           //         }
-                                           //     }
-
-                                           //     DelegateChoice {
-                                           //         delegate: DefaultTextDelegate {}
-                                           //     }
-                                           // }
-                               }
-                               // 单独封装的委托组件
-                                   component CheckBoxDelegate: Rectangle {
-                                       color: (model.row % 2) ? "#FFFFFF" : "#EBF2FD"
-                                       width: control.columnWidthArr[column]
-                                       height: control.rowHeight
-
-                                       CheckBox {
-                                           checked: model.checked  // 直接绑定模型数据
-                                           anchors.centerIn: parent
-                                           onClicked: {
-                                               // 直接修改模型数据
-                                               tableModel.setData(tableModel.index(model.row, 0), checked, Qt.CheckStateRole)
-                                           }
-                                       }
-
-                                       // ...边框代码保持不变...
-                                   }
-
-                                   component TextFieldDelegate: Rectangle {
-                                       required property string fieldName
-                                       color: (model.row % 2) ? "#FFFFFF" : "#EBF2FD"
-                                       width: control.columnWidthArr[column]
-                                       height: control.rowHeight
-
-                                       TextField {
-                                           anchors.fill: parent
-                                           text: model[fieldName]  // 绑定指定字段
-                                           onTextChanged: {
-                                               tableModel.setData(
-                                                   tableModel.index(model.row, column),
-                                                   text,
-                                                   Qt.DisplayRole
-                                               )
-                                           }
-                                       }
-
-                                       // ...边框代码保持不变...
-                                   }
-
-                                   component DefaultTextDelegate: Rectangle {
-                                       color: (model.row % 2) ? "#FFFFFF" : "#EBF2FD"
-                                       width: control.columnWidthArr[column]
-                                       height: control.rowHeight
-
-                                       Text {
-                                           text: model.display
-                                           anchors.centerIn: parent
-                                       }
-
-                                       // ...边框代码保持不变...
-                                   }
-
-
+                                }
 
                                //表头
                                Item {
@@ -390,7 +428,7 @@ Rectangle {
                                                Text {
                                                    anchors.centerIn: parent
                                                    text: control.horHeader[index]
-                                                   font.pointSize: 8
+                                                   font.pointSize: 12
                                                    color: fontColor
                                                    elide: Text.ElideRight
                                                }
@@ -421,90 +459,235 @@ Rectangle {
                        }
 
                        RowLayout {
-                           Layout.minimumWidth: uavManagementroot.width
-                           Layout.minimumHeight: uavManagementroot.height-280
+                           Layout.minimumWidth: addUavComponentManagementroot.width
+                           Layout.minimumHeight: addUavComponentManagementroot.height-300
                            Layout.fillHeight: true
                            Layout.fillWidth: true
+                           Button{
+                               id:updateUavComponent
+                               Layout.leftMargin:12
+                               height: 50
+                               width:80
+                               font.pixelSize: fontpixelSize   // 设置字体大小为 20 像素
+                               text:"更新"
+                               onClicked: {
+                                   recieveUavComponentAllData()//updateUavComponentData()
 
+                               }
+                            }
+                           Button{
+                               id:deleteUavComponent
+                               Layout.leftMargin: 20
+                               height: 50
+                               width:80
+                               font.pixelSize: fontpixelSize   // 设置字体大小为 20 像素
+                               text:"删除"
+                               onClicked: {
+                                   deleteUavComponentData()
+                               }
+                            }
                            Item { Layout.fillWidth: true }
                            Button {
                                id: payLoadTypeBack
-                               Layout.rightMargin: 10
-                               Layout.bottomMargin: 2
+                               Layout.rightMargin:10
+                               // Layout.bottomMargin: 2
                                height: 50
                                width: 100
+                               font.pixelSize: fontpixelSize   // 设置字体大小为 20 像素
                                // Layout.preferredWidth: 100
                                // Layout.preferredHeight: 50
                                text: "返回"
                                onClicked: {
-                                   payloadTypeManagementPopup.close()// 或myPopup.visible = false
+                                   addUavComponentManagementPopup.close()// 或myPopup.visible = false
                                    uavManagementroot.enabled = true
                                    uavManagementroot.visible = true
                                }
                            }
+
                            Item { Layout.bottomMargin:2}
                         }
 
                    }
 
-           // Component {
-           //     id: rowDelegate
-           //     Rectangle {
-           //         visible: styleData.row === undefined ? false : true
-           //         //color: styleData.alternate ? "#F9F9F9":"#EAEAEA"
-           //         color: "#F9F9F9"
-           //         height: 60
-           //         Rectangle { // 底部边框
-           //             anchors.right: parent.right
-           //             anchors.left: parent.left
-           //             anchors.bottom: parent.bottom
-           //             height: 1
-           //             color: "gray"
-           //         }
-           //     }
-           // }
 
-           // Component {
-           //     id: itemDelegate
-           //     Text {
-           //         text: styleData.value+""
-           //         font.pointSize: 12
-           //         font.bold: false
-           //         color: "black"
-           //         //color: styleData.textColor
-           //         horizontalAlignment: Text.AlignHCenter
-           //         verticalAlignment: Text.AlignVCenter
-           //         elide: styleData.elideMode
-           //     }
-           // }
-
-           // Component {
-           //     id: headerDelegate
-           //     Rectangle {
-           //         height: 60
-           //         implicitHeight: 60
-           //         border.width: 1
-           //         color: "#0089CF"
-           //         border.color: "#FFFFFF"
-           //         Text {
-           //             id: headerName
-           //             text: styleData.value
-           //             font.pointSize: 12
-           //             font.bold: false
-           //             horizontalAlignment: Text.AlignHCenter
-           //             verticalAlignment: Text.AlignVCenter
-           //             anchors.fill: parent
-           //             color: "#FFFFFF"
-           //         }
-           //     }
-           // }
            // 定义关闭信号
            signal close()
 
            function dpH(h) {
                return h
            }
-           // 在 MultiTextDispay 组件中添加以下函数
+           //添加挂载位置
+           function saveUavComponentData(){
+               var uavMountLoactionData = {
+                   uavmountLocationId:"",
+                   uavmountLocationName:""
+               }
+               uavMountLoactionData.uavmountLocationId = addMountLocationIdText.text
+               uavMountLoactionData.uavmountLocationName = addMountLocationText.text
+               // 打印当前函数的名称
+                console.log("当前函数名称:", arguments.callee.name);
+               if(uavMountLoactionData.uavmountLocationName.length  === 0){
+                   warningItem.text = "挂载位置数据不能为空!"
+                   warningPopup.open()
+                   // 2秒后自动关闭
+                   autoCloseTimer.start()
+                   return false
+               }else if(uavMountLoactionData.uavmountLocationName.length > 0){
+                   let insertResult = uavMountLocationDaoTableModel.insertUavMountLocationDate(uavMountLoactionData)
+                   console.log("addMountLocationText"+insertResult)
+                   if(insertResult === true){
+                       warningItem.text = "挂载位置数据添加成功!"
+                       warningPopup.open()
+                   }else{
+                       warningItem.text = "挂载位置数据添加失败!"
+                       warningPopup.open()
+                   }
+               }else{
+                   console.log(" unknown saveUavMountLoactionData")
+               }
+           }
+           function recieveUavComponentAllData (){
+               // 确保 managementType 已赋值
+                   if (addUavComponentManagementroot.managementType === "") {
+                       console.log("managementType 未赋值");
+                       return;
+                   }
+
+                   var uavComponentType = addUavComponentManagementroot.managementType//processInfo.uavComponentType;
+                   console.log("hhha<<<>>>" + addUavComponentManagementroot.managementType + "<<<<>>>>>hhhhhhhhh");
+
+                   if (uavComponentType === "bombingMethod") {
+                       var receiveData = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
+                       console.log("投弹方式:+:", JSON.stringify(receiveData, null, 2));
+                       // 打印当前函数的名称
+                        console.log("当前函数名称:", arguments.callee.name);
+                        //清空旧数据
+                       tableModel.clear()
+                       rowsModel.length = 0;
+                       resultData = receiveData
+                       tableModel.rows = receiveData;
+                       rowsModel = tableModel.rows;
+                       tableModel.layoutChanged()
+                       console.log("hhha<<<>>>>>hhhhhhhhh")
+                   }else if(uavComponentType === "recoveryMode"){
+                       var receiveRecoveryData = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
+                       console.log("投弹方式:+:", JSON.stringify(receiveRecoveryData, null, 2));
+                       // 打印当前函数的名称
+                        console.log("当前函数名称:", arguments.callee.name);
+                        //清空旧数据
+                       tableModel.clear()
+                       rowsModel.length = 0;
+                       resultData = receiveRecoveryData
+                       tableModel.rows = receiveRecoveryData;
+                       rowsModel = tableModel.rows;
+                       tableModel.layoutChanged()
+
+                   }else if(uavComponentType === "loadType"){
+                       var receiveLoadData = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
+                       console.log("投弹方式:+:", JSON.stringify(receiveLoadData, null, 2));
+                       // 打印当前函数的名称
+                        console.log("当前函数名称:", arguments.callee.name);
+                        //清空旧数据
+                       tableModel.clear()
+                       rowsModel.length = 0;
+                       resultData = receiveLoadData
+                       tableModel.rows = receiveLoadData;
+                       rowsModel = tableModel.rows;
+                       tableModel.layoutChanged()
+
+                   }else if(uavComponentType === "operationType"){
+                       var receiveOpreationData = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
+                       console.log("投弹方式:+:", JSON.stringify(receiveOpreationData, null, 2));
+                       // 打印当前函数的名称
+                        console.log("当前函数名称:", arguments.callee.name);
+                        //清空旧数据
+                       tableModel.clear()
+                       rowsModel.length = 0;
+                       resultData = receiveOpreationData
+                       tableModel.rows = receiveOpreationData;
+                       rowsModel = tableModel.rows;
+                       tableModel.layoutChanged()
+
+                   }else{
+                      console.log("Unknown uavComponentType!")
+                   }
+           }
+
+           function loadUavComponentAllData(){ //加载数据
+           }
+           function deleteUavComponentData(){
+               var selectedRowsData = [];
+
+               for (var i = 0; i < tableModel.rowCount; i++) {
+
+                   //console.log("tableModel.rows[i].checked Rows JSON:", JSON.stringify(tableModel.rows[i]));
+                   //console.log("tablemodel",JSON.stringify(tableModel.rows))
+                   if (tableModel.rows[i].checked) {
+                       var rowData = {
+                           recordId: tableModel.rows[i].recordId,
+                           uavmountLocationName: tableModel.rows[i].uavmountLocationName,
+                           uavmountLocationId: tableModel.rows[i].uavmountLocationId
+                       };
+                       //console.log("tableModel.rows[i].uavType Rows JSON:", tableModel.rows[i].uavType);
+                       selectedRowsData.push(rowData);
+                   }
+               }
+               // 打印当前函数的名称
+                console.log("当前函数名称:", arguments.callee.name);
+               let result = uavMountLocationDaoTableModel.deleteUavMountLocationDate(selectedRowsData)
+               recieveUavComponentAllData()
+               if(result === true){
+                   warningItem.text = "挂载位置数据删除成功!"
+                   warningPopup.open()
+                   // 2秒后自动关闭
+                   autoCloseTimer.start()
+               }else if(result === false){
+                   warningItem.text = "挂载位置数据删除失败!"
+                   warningPopup.open()
+                   // 2秒后自动关闭
+                   autoCloseTimer.start()
+                }else{
+                   console.log("unknown deleteMountLocation")
+               }
+
+               // 将选中的行的数据转换为 JSONArray 格式
+               var selectedRowsJson = JSON.stringify(selectedRowsData);
+               console.log("Selected deleteMountLocationDataRows JSON:", selectedRowsJson);
+               return selectedRowsData
+           }
+           function updateUavComponentData(){
+               // 打印当前函数的名称
+                console.log("当前函数名称:", arguments.callee.name);
+                //console.log("resultData"+JSON.stringify(resultData))
+               let result = uavMountLocationDaoTableModel.updateUavMountLocationDate(resultData)
+               loadUavMountLocationAllData()
+               if(result === true){
+                   warningItem.text = "挂载位置数据更新成功!"
+                   warningPopup.open()
+                   // 2秒后自动关闭
+                   autoCloseTimer.start()
+               }else if(result === false){
+                   warningItem.text = "挂载位置数据更新失败!"
+                   warningPopup.open()
+                   // 2秒后自动关闭
+                   autoCloseTimer.start()
+                }else{
+                   console.log("unknown deleteMountLocation")
+               }
+           }
+
+           function updateUavAllData(){ //更新挂载位置数据
+               // var receiveData = uavModelDaoTable.selectUavModelAllData()
+               //console.log("loadUavAllData+:", JSON.stringify(loadData, null, 2));
+               // 打印当前函数的名称
+                console.log("当前函数名称:", arguments.callee.name);
+                //清空旧数据
+               tableModel.clear()
+               tableModel.rows = resultData;
+               rowsModel = tableModel.rows;
+               //tableModel.layoutChanged()
+            }
+
            function getSelectedData() {
                // let selected = []
                // for (let i = 0; i < tableModel.rowCount; ++i) {
@@ -559,25 +742,4 @@ Rectangle {
                }
                saveRequested(selectedData)  // 触发信号
            }
-           function loadUavAllData(){
-               // var receiveData = uavModelDaoTable.selectUavModelAllData()
-               //console.log("loadUavAllData+:", JSON.stringify(loadData, null, 2));
-                //清空旧数据
-               tableModel.clear()
-               rowsModel.length = 0;
-               updateData = loadData
-               tableModel.rows = loadData;
-
-               rowsModel = tableModel.rows;
-               tableModel.layoutChanged()
-           }
-           function updateUavAllData(){
-               // var receiveData = uavModelDaoTable.selectUavModelAllData()
-               //console.log("loadUavAllData+:", JSON.stringify(loadData, null, 2));
-                //清空旧数据
-               tableModel.clear()
-               tableModel.rows = updateData;
-               rowsModel = tableModel.rows;
-               //tableModel.layoutChanged()
-            }
 }

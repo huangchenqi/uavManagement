@@ -10,7 +10,7 @@
 #include <QtCore/QDateTime>
 #include "datetime-traits.hxx"
 #pragma once
-#pragma db object schema("public") table("uav_models_data") // 指定表名
+#pragma db object schema("uav_type_man") table("uav_models_data") // 指定表名
 class UavModelEntity
 {
 

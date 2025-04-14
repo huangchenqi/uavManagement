@@ -18,5 +18,10 @@
         <file>AddMountingSchemeData.qml</file>
         <file>MultiTextDispay.qml</file>
         <file>AddMountLocationManagement.qml</file>
+        <file>AddUavComponentManagement.qml</file>
+        <file>AddUavModelLoadType.qml</file>
+        <file>AddUavModelBombingMethod.qml</file>
+        <file>AddUavModelRecoveryMode.qml</file>
+        <file>AddUavModelOperationWay.qml</file>
     </qresource>
 </RCC>

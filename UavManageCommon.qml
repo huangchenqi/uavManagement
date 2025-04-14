@@ -169,7 +169,7 @@ Rectangle {
                   //     }
                   // }
               }
-              Popup{
+              Popup{//挂载位置管理
                   id: addMountLocationManagementPopup
                   width: 600  // 需明确设置宽度，否则可能无法显示完整内容
                   height: 400
@@ -181,11 +181,82 @@ Rectangle {
                     AddMountLocationManagement{  // 假设 admin.qml 的根元素是 Admin 类型
                           id: addMountLocationPanel
                           anchors.fill: parent
-                          //managementType:uavManagementroot.managementType
 
-                          onClose: payloadTypeManagementPopup.close() // 连接关闭信号
+                          onClose: addMountLocationManagementPopup.close() // 连接关闭信号
                     }
                 }
+              Popup{//其他消息管理
+                  id: addUavComponentManagementPopup
+                  width: 460  // 需明确设置宽度，否则可能无法显示完整内容
+                  height: 400
+                  modal: true
+                  focus: true
+                  anchors.centerIn: Overlay.overlay // 居中显示
+                  closePolicy: Popup.NoAutoClose    // 完全禁用自动关闭
+                  //   AddUavComponentManagement{  // 假设 admin.qml 的根元素是 Admin 类型
+                  //         id: addUavComponentPanel
+                  //         anchors.fill: parent
+                  //         managementType:uavManagementroot.managementType
+                  //         onClose: addUavComponentManagementPopup.close() // 连接关闭信号
+                  //   }
+                }
+              Popup{//投弹管理
+                  id: addUavModelBombingMethodPopup
+                  width: 460  // 需明确设置宽度，否则可能无法显示完整内容
+                  height: 400
+                  modal: true
+                  focus: true
+                  anchors.centerIn: Overlay.overlay // 居中显示
+                  closePolicy: Popup.NoAutoClose    // 完全禁用自动关闭
+                  AddUavModelBombingMethod{
+                            id: addUavModelBombingMethodPanel
+                            anchors.fill: parent
+                            onClose: addUavModelBombingMethodPopup.close() // 连接关闭信号
+                    }
+                }
+              Popup{//载荷管理
+                  id: addUavModelLoadTypePopup
+                  width: 460  // 需明确设置宽度，否则可能无法显示完整内容
+                  height: 400
+                  modal: true
+                  focus: true
+                  anchors.centerIn: Overlay.overlay // 居中显示
+                  closePolicy: Popup.NoAutoClose    // 完全禁用自动关闭
+                  AddUavModelLoadType{
+                            id: addUavModelLoadTypePanel
+                            anchors.fill: parent
+                            onClose: addUavModelLoadTypePopup.close() // 连接关闭信号
+                    }
+                }
+              Popup{//回收管理
+                  id: addUavModelRecoveryModePopup
+                  width: 460  // 需明确设置宽度，否则可能无法显示完整内容
+                  height: 400
+                  modal: true
+                  focus: true
+                  anchors.centerIn: Overlay.overlay // 居中显示
+                  closePolicy: Popup.NoAutoClose    // 完全禁用自动关闭
+                  AddUavModelRecoveryMode{
+                            id: addUavModelRecoveryModePanel
+                            anchors.fill: parent
+                            onClose: addUavModelRecoveryModePopup.close() // 连接关闭信号
+                    }
+                }
+              Popup{//操控管理
+                  id: addUavModelOperationWayPopup
+                  width: 460  // 需明确设置宽度，否则可能无法显示完整内容
+                  height: 400
+                  modal: true
+                  focus: true
+                  anchors.centerIn: Overlay.overlay // 居中显示
+                  closePolicy: Popup.NoAutoClose    // 完全禁用自动关闭
+                  AddUavModelOperationWay{
+                            id: addUavModelOperationWayPanel
+                            anchors.fill: parent
+                            onClose: addUavModelOperationWayPopup.close() // 连接关闭信号
+                    }
+                }
+
 
            ColumnLayout {
                //@disable-check M16
@@ -329,8 +400,8 @@ Rectangle {
                        property color scrollBarColor: "#E5E5E5"
                        property int scrollBarWidth: 7
                        //列宽
-                       property variant columnWidthArr: [50,50, 140, 140, 140, 140,
-                           120, 120, 120, 120,120,160,240, 300]
+                       property variant columnWidthArr: [50,50, 120, 100, 100, 140,
+                           120, 120, 120, 120,80,120,220, 220]
                        // 显示10个字段
                        property var horHeader: ["","序号", "无人机机型", "无人机名称", "无人机编号", "挂载内容",
                            "操控方式", "投弹方式", "回收方式", "载荷类型","是否隐身","型号记录编号","创建时间", "操作"]
@@ -581,7 +652,7 @@ Rectangle {
                                             verticalAlignment: Text.AlignVCenter
                                             horizontalAlignment: Text.AlignHCenter
                                             text: display
-                                            font.pointSize: 16
+                                            font.pointSize: 12
                                             color: "#000000"
                                             elide: Text.ElideRight
                                         }
@@ -682,7 +753,7 @@ Rectangle {
                                        Text {
                                            anchors.centerIn: parent
                                            text: control.horHeader[index]
-                                           font.pointSize: 18
+                                           font.pointSize: 12
                                            color: fontColor
                                            elide: Text.ElideRight
                                        }
@@ -767,14 +838,11 @@ Rectangle {
                        id: uavBombingmethodManagement
                        text: "投弹方式管理"
                        onClicked: {
-                           payloadTypeManagementPopup.open()
+                           processInfo.uavComponentType = "bombingMethod"
                            uavManagementroot.managementType = "bombingMethod"
+                           addUavModelBombingMethodPopup.open()
                            uavManagementroot.enabled = false
                            //uavManagementroot.visible = false
-
-
-
-                       //     onSelectCheckBoxClicked(checkBox.checked)
                        }
                    }
                    Item { Layout.fillWidth: true }
@@ -783,12 +851,9 @@ Rectangle {
                        id: uavRecoverymodeManagement
                        text: "回收方式管理"
                        onClicked: {
-
-                           payloadTypeManagementPopup.open()
-                           uavManagementroot.managementType = "recoveryMode"
+                           addUavModelRecoveryModePopup.open()
+                           //uavManagementroot.managementType = "recoveryMode"
                            uavManagementroot.enabled = false
-                           //uavManagementroot.visible = false
-                           customSignal("按钮被点击")
                        }
                    }
                    Item { Layout.fillWidth: true }
@@ -809,11 +874,9 @@ Rectangle {
                        id: payloadTypeManagement
                        text: "载荷类型管理"
                        onClicked: {
-                          // onModifyButtonClicked();
-                           payloadTypeManagementPopup.open()
+                           addUavModelLoadTypePopup.open()
                            uavManagementroot.managementType = "loadType"
                            uavManagementroot.enabled = false
-                           //uavManagementroot.visible = false
                        }
                    }
                    Item { Layout.fillWidth: true }
@@ -821,11 +884,9 @@ Rectangle {
                        id: opreationTypeManagement
                        text: "操控方式管理"
                        onClicked: {
-                          // onModifyButtonClicked();
-                           payloadTypeManagementPopup.open()
-                           uavManagementroot.managementType = "operationType"
+                           addUavModelOperationWayPopup.open()
+                           //uavManagementroot.managementType = "operationType"
                            uavManagementroot.enabled = false
-                           //uavManagementroot.visible = false
                        }
                    }
                    Item { Layout.fillWidth: true }
@@ -1016,6 +1077,7 @@ Rectangle {
                processInfo.uavType = ""
                processInfo.uavName = ""
                processInfo.uavId = ""
+               processInfo.uavComponentType = "" //对应里面下拉列表中管理界面
                processInfo.loadViewType = ""//加载界面类型，主要是区分查看与编辑
                console.log("loadRecord()"+JSON.stringify(processInfo))
            }

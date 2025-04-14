@@ -5,7 +5,7 @@
 //#include <QDateTime>
 #include <odb/core.hxx> // ODB核心头文件
 #pragma once
-#pragma db object schema("public") table("uav_model_mount_location") // 指定表名
+#pragma db object schema("uav_type_man") table("uav_model_mount_location") // 指定表名
 class UavModelMountLocationEntity
 {
 

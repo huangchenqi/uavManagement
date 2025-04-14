@@ -30,9 +30,9 @@ QDateTime covert(unsigned long long i){
 UavModelDao::UavModelDao(QObject* parent) : QObject(parent){ //::UavModelDao() {
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
     dbConn_.reset(new DatabaseConnection(
-        "postgres",
-        "FreeXGIS_Server2025",
-        "uav_management",
+        "uav_type_man",
+        "uav_type_man",
+        "db_aux_prac_sys",
         "192.168.0.101",
         5432
         ));

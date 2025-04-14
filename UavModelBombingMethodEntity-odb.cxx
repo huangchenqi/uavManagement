@@ -4,7 +4,7 @@
 
 #include <odb/pre.hxx>
 
-#include "UavModelLoadTypeEntity-odb.hxx"
+#include "UavModelBombingMethodEntity-odb.hxx"
 
 #include <cassert>
 #include <cstring>  // std::memcpy
@@ -24,41 +24,41 @@
 
 namespace odb
 {
-  // UavModelLoadTypeEntity
+  // UavModelBombingMethodEntity
   //
 
-  const char access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
-  persist_statement_name[] = "persist_UavModelLoadTypeEntity";
+  const char access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
+  persist_statement_name[] = "persist_UavModelBombingMethodEntity";
 
-  const char access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
-  find_statement_name[] = "find_UavModelLoadTypeEntity";
+  const char access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
+  find_statement_name[] = "find_UavModelBombingMethodEntity";
 
-  const char access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
-  update_statement_name[] = "update_UavModelLoadTypeEntity";
+  const char access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
+  update_statement_name[] = "update_UavModelBombingMethodEntity";
 
-  const char access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
-  erase_statement_name[] = "erase_UavModelLoadTypeEntity";
+  const char access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
+  erase_statement_name[] = "erase_UavModelBombingMethodEntity";
 
-  const char access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
-  query_statement_name[] = "query_UavModelLoadTypeEntity";
+  const char access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
+  query_statement_name[] = "query_UavModelBombingMethodEntity";
 
-  const char access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
-  erase_query_statement_name[] = "erase_query_UavModelLoadTypeEntity";
+  const char access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
+  erase_query_statement_name[] = "erase_query_UavModelBombingMethodEntity";
 
-  const unsigned int access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  const unsigned int access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   persist_statement_types[] =
   {
     pgsql::text_oid,
     pgsql::text_oid
   };
 
-  const unsigned int access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  const unsigned int access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   find_statement_types[] =
   {
     pgsql::int8_oid
   };
 
-  const unsigned int access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  const unsigned int access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   update_statement_types[] =
   {
     pgsql::text_oid,
@@ -66,7 +66,7 @@ namespace odb
     pgsql::int8_oid
   };
 
-  struct access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::extra_statement_cache_type
+  struct access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::extra_statement_cache_type
   {
     extra_statement_cache_type (
       pgsql::connection&,
@@ -80,8 +80,8 @@ namespace odb
     }
   };
 
-  access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::id_type
-  access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::id_type
+  access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   id (const id_image_type& i)
   {
     pgsql::database* db (0);
@@ -100,8 +100,8 @@ namespace odb
     return id;
   }
 
-  access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::id_type
-  access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::id_type
+  access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   id (const image_type& i)
   {
     pgsql::database* db (0);
@@ -120,7 +120,7 @@ namespace odb
     return id;
   }
 
-  bool access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  bool access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   grow (image_type& i,
         bool* t)
   {
@@ -133,26 +133,26 @@ namespace odb
     //
     t[0UL] = 0;
 
-    // loadTypeCode_
+    // bombingMethodCode_
     //
     if (t[1UL])
     {
-      i.loadTypeCode_value.capacity (i.loadTypeCode_size);
+      i.bombingMethodCode_value.capacity (i.bombingMethodCode_size);
       grew = true;
     }
 
-    // loadTypeName_
+    // bombingMethodName_
     //
     if (t[2UL])
     {
-      i.loadTypeName_value.capacity (i.loadTypeName_size);
+      i.bombingMethodName_value.capacity (i.bombingMethodName_size);
       grew = true;
     }
 
     return grew;
   }
 
-  void access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  void access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   bind (pgsql::bind* b,
         image_type& i,
         pgsql::statement_kind sk)
@@ -173,26 +173,26 @@ namespace odb
       n++;
     }
 
-    // loadTypeCode_
+    // bombingMethodCode_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.loadTypeCode_value.data ();
-    b[n].capacity = i.loadTypeCode_value.capacity ();
-    b[n].size = &i.loadTypeCode_size;
-    b[n].is_null = &i.loadTypeCode_null;
+    b[n].buffer = i.bombingMethodCode_value.data ();
+    b[n].capacity = i.bombingMethodCode_value.capacity ();
+    b[n].size = &i.bombingMethodCode_size;
+    b[n].is_null = &i.bombingMethodCode_null;
     n++;
 
-    // loadTypeName_
+    // bombingMethodName_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.loadTypeName_value.data ();
-    b[n].capacity = i.loadTypeName_value.capacity ();
-    b[n].size = &i.loadTypeName_size;
-    b[n].is_null = &i.loadTypeName_null;
+    b[n].buffer = i.bombingMethodName_value.data ();
+    b[n].capacity = i.bombingMethodName_value.capacity ();
+    b[n].size = &i.bombingMethodName_size;
+    b[n].is_null = &i.bombingMethodName_null;
     n++;
   }
 
-  void access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  void access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   bind (pgsql::bind* b, id_image_type& i)
   {
     std::size_t n (0);
@@ -201,7 +201,7 @@ namespace odb
     b[n].is_null = &i.id_null;
   }
 
-  bool access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  bool access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   init (image_type& i,
         const object_type& o,
         pgsql::statement_kind sk)
@@ -214,52 +214,52 @@ namespace odb
 
     bool grew (false);
 
-    // loadTypeCode_
+    // bombingMethodCode_
     //
     {
       ::std::string const& v =
-        o.loadTypeCode_;
+        o.bombingMethodCode_;
 
       bool is_null (false);
       std::size_t size (0);
-      std::size_t cap (i.loadTypeCode_value.capacity ());
+      std::size_t cap (i.bombingMethodCode_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.loadTypeCode_value,
+        i.bombingMethodCode_value,
         size,
         is_null,
         v);
-      i.loadTypeCode_null = is_null;
-      i.loadTypeCode_size = size;
-      grew = grew || (cap != i.loadTypeCode_value.capacity ());
+      i.bombingMethodCode_null = is_null;
+      i.bombingMethodCode_size = size;
+      grew = grew || (cap != i.bombingMethodCode_value.capacity ());
     }
 
-    // loadTypeName_
+    // bombingMethodName_
     //
     {
       ::std::string const& v =
-        o.loadTypeName_;
+        o.bombingMethodName_;
 
       bool is_null (false);
       std::size_t size (0);
-      std::size_t cap (i.loadTypeName_value.capacity ());
+      std::size_t cap (i.bombingMethodName_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.loadTypeName_value,
+        i.bombingMethodName_value,
         size,
         is_null,
         v);
-      i.loadTypeName_null = is_null;
-      i.loadTypeName_size = size;
-      grew = grew || (cap != i.loadTypeName_value.capacity ());
+      i.bombingMethodName_null = is_null;
+      i.bombingMethodName_size = size;
+      grew = grew || (cap != i.bombingMethodName_value.capacity ());
     }
 
     return grew;
   }
 
-  void access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  void access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   init (object_type& o,
         const image_type& i,
         database* db)
@@ -282,38 +282,38 @@ namespace odb
         i.id_null);
     }
 
-    // loadTypeCode_
+    // bombingMethodCode_
     //
     {
       ::std::string& v =
-        o.loadTypeCode_;
+        o.bombingMethodCode_;
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.loadTypeCode_value,
-        i.loadTypeCode_size,
-        i.loadTypeCode_null);
+        i.bombingMethodCode_value,
+        i.bombingMethodCode_size,
+        i.bombingMethodCode_null);
     }
 
-    // loadTypeName_
+    // bombingMethodName_
     //
     {
       ::std::string& v =
-        o.loadTypeName_;
+        o.bombingMethodName_;
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.loadTypeName_value,
-        i.loadTypeName_size,
-        i.loadTypeName_null);
+        i.bombingMethodName_value,
+        i.bombingMethodName_size,
+        i.bombingMethodName_null);
     }
   }
 
-  void access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  void access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   init (id_image_type& i, const id_type& id)
   {
     {
@@ -326,48 +326,48 @@ namespace odb
     }
   }
 
-  const char access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::persist_statement[] =
-  "INSERT INTO \"uav_type_man\".\"uav_model_load_type\" "
+  const char access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::persist_statement[] =
+  "INSERT INTO \"uav_type_man\".\"uav_model_bombing_way\" "
   "(\"id\", "
-  "\"loadtype_code\", "
-  "\"loadtype_name\") "
+  "\"bombingway_code\", "
+  "\"bombingway_name\") "
   "VALUES "
   "(DEFAULT, $1, $2) "
   "RETURNING \"id\"";
 
-  const char access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::find_statement[] =
+  const char access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::find_statement[] =
   "SELECT "
-  "\"uav_type_man\".\"uav_model_load_type\".\"id\", "
-  "\"uav_type_man\".\"uav_model_load_type\".\"loadtype_code\", "
-  "\"uav_type_man\".\"uav_model_load_type\".\"loadtype_name\" "
-  "FROM \"uav_type_man\".\"uav_model_load_type\" "
-  "WHERE \"uav_type_man\".\"uav_model_load_type\".\"id\"=$1";
+  "\"uav_type_man\".\"uav_model_bombing_way\".\"id\", "
+  "\"uav_type_man\".\"uav_model_bombing_way\".\"bombingway_code\", "
+  "\"uav_type_man\".\"uav_model_bombing_way\".\"bombingway_name\" "
+  "FROM \"uav_type_man\".\"uav_model_bombing_way\" "
+  "WHERE \"uav_type_man\".\"uav_model_bombing_way\".\"id\"=$1";
 
-  const char access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::update_statement[] =
-  "UPDATE \"uav_type_man\".\"uav_model_load_type\" "
+  const char access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::update_statement[] =
+  "UPDATE \"uav_type_man\".\"uav_model_bombing_way\" "
   "SET "
-  "\"loadtype_code\"=$1, "
-  "\"loadtype_name\"=$2 "
+  "\"bombingway_code\"=$1, "
+  "\"bombingway_name\"=$2 "
   "WHERE \"id\"=$3";
 
-  const char access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::erase_statement[] =
-  "DELETE FROM \"uav_type_man\".\"uav_model_load_type\" "
+  const char access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::erase_statement[] =
+  "DELETE FROM \"uav_type_man\".\"uav_model_bombing_way\" "
   "WHERE \"id\"=$1";
 
-  const char access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::query_statement[] =
+  const char access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::query_statement[] =
   "SELECT "
-  "\"uav_type_man\".\"uav_model_load_type\".\"id\", "
-  "\"uav_type_man\".\"uav_model_load_type\".\"loadtype_code\", "
-  "\"uav_type_man\".\"uav_model_load_type\".\"loadtype_name\" "
-  "FROM \"uav_type_man\".\"uav_model_load_type\"";
+  "\"uav_type_man\".\"uav_model_bombing_way\".\"id\", "
+  "\"uav_type_man\".\"uav_model_bombing_way\".\"bombingway_code\", "
+  "\"uav_type_man\".\"uav_model_bombing_way\".\"bombingway_name\" "
+  "FROM \"uav_type_man\".\"uav_model_bombing_way\"";
 
-  const char access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::erase_query_statement[] =
-  "DELETE FROM \"uav_type_man\".\"uav_model_load_type\"";
+  const char access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::erase_query_statement[] =
+  "DELETE FROM \"uav_type_man\".\"uav_model_bombing_way\"";
 
-  const char access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::table_name[] =
-  "\"uav_type_man\".\"uav_model_load_type\"";
+  const char access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::table_name[] =
+  "\"uav_type_man\".\"uav_model_bombing_way\"";
 
-  void access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  void access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   persist (database& db, object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -419,7 +419,7 @@ namespace odb
               callback_event::post_persist);
   }
 
-  void access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  void access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   update (database& db, const object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -480,7 +480,7 @@ namespace odb
     pointer_cache_traits::update (db, obj);
   }
 
-  void access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  void access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   erase (database& db, const id_type& id)
   {
     using namespace pgsql;
@@ -509,8 +509,8 @@ namespace odb
     pointer_cache_traits::erase (db, id);
   }
 
-  access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::pointer_type
-  access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::pointer_type
+  access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   find (database& db, const id_type& id)
   {
     using namespace pgsql;
@@ -565,7 +565,7 @@ namespace odb
     return p;
   }
 
-  bool access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  bool access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   find (database& db, const id_type& id, object_type& obj)
   {
     using namespace pgsql;
@@ -598,7 +598,7 @@ namespace odb
     return true;
   }
 
-  bool access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  bool access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   reload (database& db, object_type& obj)
   {
     using namespace pgsql;
@@ -628,7 +628,7 @@ namespace odb
     return true;
   }
 
-  bool access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  bool access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   find_ (statements_type& sts,
          const id_type* id)
   {
@@ -679,8 +679,8 @@ namespace odb
     return r != select_statement::no_data;
   }
 
-  result< access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::object_type >
-  access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  result< access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::object_type >
+  access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   query (database&, const query_base_type& q)
   {
     using namespace pgsql;
@@ -734,7 +734,7 @@ namespace odb
     return result<object_type> (r);
   }
 
-  unsigned long long access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >::
+  unsigned long long access::object_traits_impl< ::UavModelBombingMethodEntity, id_pgsql >::
   erase_query (database&, const query_base_type& q)
   {
     using namespace pgsql;
@@ -781,7 +781,7 @@ namespace odb
         }
         case 2:
         {
-          db.execute ("DROP TABLE IF EXISTS \"uav_type_man\".\"uav_model_load_type\" CASCADE");
+          db.execute ("DROP TABLE IF EXISTS \"uav_type_man\".\"uav_model_bombing_way\" CASCADE");
           return false;
         }
       }
@@ -792,10 +792,10 @@ namespace odb
       {
         case 1:
         {
-          db.execute ("CREATE TABLE \"uav_type_man\".\"uav_model_load_type\" (\n"
+          db.execute ("CREATE TABLE \"uav_type_man\".\"uav_model_bombing_way\" (\n"
                       "  \"id\" BIGSERIAL NOT NULL PRIMARY KEY,\n"
-                      "  \"loadtype_code\" TEXT NOT NULL,\n"
-                      "  \"loadtype_name\" TEXT NOT NULL)");
+                      "  \"bombingway_code\" TEXT NOT NULL,\n"
+                      "  \"bombingway_name\" TEXT NOT NULL)");
           return false;
         }
       }

@@ -327,7 +327,7 @@ namespace odb
   }
 
   const char access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::persist_statement[] =
-  "INSERT INTO \"public\".\"uav_model_mount_location\" "
+  "INSERT INTO \"uav_type_man\".\"uav_model_mount_location\" "
   "(\"id\", "
   "\"mountlocation_code\", "
   "\"mountlocation_name\") "
@@ -337,35 +337,35 @@ namespace odb
 
   const char access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::find_statement[] =
   "SELECT "
-  "\"public\".\"uav_model_mount_location\".\"id\", "
-  "\"public\".\"uav_model_mount_location\".\"mountlocation_code\", "
-  "\"public\".\"uav_model_mount_location\".\"mountlocation_name\" "
-  "FROM \"public\".\"uav_model_mount_location\" "
-  "WHERE \"public\".\"uav_model_mount_location\".\"id\"=$1";
+  "\"uav_type_man\".\"uav_model_mount_location\".\"id\", "
+  "\"uav_type_man\".\"uav_model_mount_location\".\"mountlocation_code\", "
+  "\"uav_type_man\".\"uav_model_mount_location\".\"mountlocation_name\" "
+  "FROM \"uav_type_man\".\"uav_model_mount_location\" "
+  "WHERE \"uav_type_man\".\"uav_model_mount_location\".\"id\"=$1";
 
   const char access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::update_statement[] =
-  "UPDATE \"public\".\"uav_model_mount_location\" "
+  "UPDATE \"uav_type_man\".\"uav_model_mount_location\" "
   "SET "
   "\"mountlocation_code\"=$1, "
   "\"mountlocation_name\"=$2 "
   "WHERE \"id\"=$3";
 
   const char access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::erase_statement[] =
-  "DELETE FROM \"public\".\"uav_model_mount_location\" "
+  "DELETE FROM \"uav_type_man\".\"uav_model_mount_location\" "
   "WHERE \"id\"=$1";
 
   const char access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::query_statement[] =
   "SELECT "
-  "\"public\".\"uav_model_mount_location\".\"id\", "
-  "\"public\".\"uav_model_mount_location\".\"mountlocation_code\", "
-  "\"public\".\"uav_model_mount_location\".\"mountlocation_name\" "
-  "FROM \"public\".\"uav_model_mount_location\"";
+  "\"uav_type_man\".\"uav_model_mount_location\".\"id\", "
+  "\"uav_type_man\".\"uav_model_mount_location\".\"mountlocation_code\", "
+  "\"uav_type_man\".\"uav_model_mount_location\".\"mountlocation_name\" "
+  "FROM \"uav_type_man\".\"uav_model_mount_location\"";
 
   const char access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::erase_query_statement[] =
-  "DELETE FROM \"public\".\"uav_model_mount_location\"";
+  "DELETE FROM \"uav_type_man\".\"uav_model_mount_location\"";
 
   const char access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::table_name[] =
-  "\"public\".\"uav_model_mount_location\"";
+  "\"uav_type_man\".\"uav_model_mount_location\"";
 
   void access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::
   persist (database& db, object_type& obj)
@@ -781,7 +781,7 @@ namespace odb
         }
         case 2:
         {
-          db.execute ("DROP TABLE IF EXISTS \"public\".\"uav_model_mount_location\" CASCADE");
+          db.execute ("DROP TABLE IF EXISTS \"uav_type_man\".\"uav_model_mount_location\" CASCADE");
           return false;
         }
       }
@@ -792,7 +792,7 @@ namespace odb
       {
         case 1:
         {
-          db.execute ("CREATE TABLE \"public\".\"uav_model_mount_location\" (\n"
+          db.execute ("CREATE TABLE \"uav_type_man\".\"uav_model_mount_location\" (\n"
                       "  \"id\" BIGSERIAL NOT NULL PRIMARY KEY,\n"
                       "  \"mountlocation_code\" TEXT NOT NULL,\n"
                       "  \"mountlocation_name\" TEXT NOT NULL)");

@@ -2,9 +2,9 @@
  * compiler for C++.
  */
 
-DROP TABLE IF EXISTS "public"."uav_models_data" CASCADE;
+DROP TABLE IF EXISTS "uav_type_man"."uav_models_data" CASCADE;
 
-CREATE TABLE "public"."uav_models_data" (
+CREATE TABLE "uav_type_man"."uav_models_data" (
   "id" BIGSERIAL NOT NULL PRIMARY KEY,
   "uav_type" varchar(32) NOT NULL,
   "uav_name" varchar(32) NOT NULL,

@@ -6,7 +6,11 @@ import QtQuick.Dialogs 1.2
 
 import "qrc:/"
 import UavDaoModel 1.0
-
+import UavModelLoadTypeDaoModel 1.0
+import UavBombingMethodDaoModel 1.0
+import UavModelRecoveryModeDaoModel 1.0
+import UavModelOperationWayDaoModel 1.0
+import UavMountLocationDaoModel 1.0
 Window{//Rectangle{
     id:addUavModelData
     visible: true
@@ -15,20 +19,25 @@ Window{//Rectangle{
     //title: qsTr("QML TableView example")
     // 获取当前时间并转换为字符串
     property var currentTime: new Date().toLocaleString()
-
+    property var mountContent: []
     //侦察载荷
+    property var payloadType: []
     property var uavInvestigationPayloadTypeResult: ""
     //投弹方式
+    property var bombWay: []
     property var uavBombingmethodResult: ""
     //回收方式
+    property var recoveryWay: []
     property var uavRecoveryModeResult: ""
     //操控方式
+    property var operationWay: []
     property var uavOperatioanalModeResult: ""
     //挂载位置
     property var uavPayloadTypeResult: ""
     // 组件加载完成后生成测试数据
     Component.onCompleted:{
-        //loadUavModelData()
+        loadUavComponentData()
+        loadMountLocationContent()
         loadView()
         generateTestData()
     }
@@ -68,7 +77,7 @@ Window{//Rectangle{
         // 定义警告对话框
 
         Popup {
-            id: payloadTypeManagementPopup
+            id: mountLocationManagementPopup
             width: 600  // 需明确设置宽度，否则可能无法显示完整内容
             height: 400
             modal: true
@@ -83,17 +92,37 @@ Window{//Rectangle{
 
               //       onClose: payloadTypeManagementPopup.close() // 连接关闭信号
               //   }
-                MultiTextDispay {
-                     id: multiTextDispay
-                     anchors.fill: parent
-                     onClose: payloadTypeManagementPopup.close() // 连接关闭信号
-                }
+            MultiTextOfCombox{
+                id:uavMountContent
+                anchors.fill: parent
+                loadData:mountContent
+                onClose: mountLocationManagementPopup.close() // 连接关闭信号
+            }
+            // MultiTextDispay {
+            //      id: multiTextDispay
+            //      anchors.fill: parent
+            //      onClose: payloadTypeManagementPopup.close() // 连接关闭信号
+            // }
 
         }
         UavModelDaoTableModel{
             id:uavModelDao
         }
-
+        UavBombingMethodDaoTableModel{
+           id:uavBombingMethodDaoModel
+        }
+        UavModelLoadTypeDaoTableModel{
+           id:uavModelLoadTypeDaoModel
+        }
+        UavModelRecoveryModeDaoTableModel{
+           id:uavModelRecoveryModeDaoModel
+        }
+        UavModelOperationWayDaoTableModel{
+           id:uavModelOperationWayDaoModel
+        }
+        UavMountLocationDaoTableModel{
+            id:uavMountLocationDaoTableModel
+        }
         ColumnLayout {
                     anchors.fill: parent
                     //Layout.fillWidth: true
@@ -430,7 +459,7 @@ Window{//Rectangle{
                                 //     }
                                 MultiCombox{
                                     id:uavInvestigationPayloadTypeMultiComBox
-                                    items: ["无载荷","电子侦察","图像侦察","气象侦察","激光引导"]
+                                    items: addUavModelData.payloadType//["无载荷","电子侦察","图像侦察","气象侦察","激光引导"]
                                     // Component.onCompleted: {
                                     //             // 关键：创建新数组触发更新
                                     //             //selectedItems = ["电子侦察", "图像侦察", "气象侦察", "激光引导"].slice();
@@ -493,7 +522,7 @@ Window{//Rectangle{
                                 }
                                 MultiCombox{
                                     id:uavRecoverymodeMultiComBox
-                                    items: ["不可回收","伞降","滑跑着陆","垂直着陆"]
+                                    items: addUavModelData.recoveryWay//["不可回收","伞降","滑跑着陆","垂直着陆"]
                                     onSelectionChanged: {
                                         var value = selectedItems
                                         uavRecoveryModeResult = value
@@ -509,7 +538,7 @@ Window{//Rectangle{
                                 }
                                 MultiCombox{
                                     id:operationModeMultiComBox
-                                    items: ["指令模式","修正模式","自主控制模式","遥控指令模式"]
+                                    items: addUavModelData.operationWay//["指令模式","修正模式","自主控制模式","遥控指令模式"]
                                     onSelectionChanged: {
                                         //var selectedLabels = operationModeMultiComBox.selectedItems.map(item => item.label)
                                         // = selectedLabels.join(", ")
@@ -549,32 +578,34 @@ Window{//Rectangle{
                                     height: 50
                                     width:100
                                 }
-                                TextField{
-                                    id: uavHangingLocationValue
-                                    Layout.preferredWidth: 50
-                                }
+                                // TextField{
+                                //     id: uavHangingLocationValue
+                                //     Layout.preferredWidth: 50
+                                // }
+
+
                                 // 下拉箭头
-                                // Text {
-                                //     id: dropdownIcon
-                                //     anchors.right: parent.right
-                                //     anchors.verticalCenter: parent.verticalCenter
-                                //     rightPadding: 10
-                                //     text: "▼"
-                                //     font.pixelSize: 12
-                                // }
-                                // Text {
-                                //     id: uavHangingLocationText
-                                //     text: qsTr("请选择")
-                                // }
-                                // 点击区域
-                                // MouseArea {
-                                //     anchors.fill: parent
-                                //     onClicked: { //uavHangingLocationText.visible = !uavHangingLocationText.visible
-                                //             payloadTypeManagementPopup.open()
-                                //             uavManagementroot.managementType = "bombingMethod"
-                                //             //uavManagementroot.enabled = false
-                                //         }
-                                // }
+                                Text {
+                                    id: dropdownIcon
+                                    anchors.right: parent.right
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    //rightPadding: 10
+                                    text: "▼"
+                                    font.pixelSize: 12
+                                }
+                                // // Text {
+                                // //     id: uavHangingLocationText
+                                // //     text: qsTr("请选择")
+                                // // }
+                                //点击区域
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: { //uavHangingLocationText.visible = !uavHangingLocationText.visible
+                                            mountLocationManagementPopup.open()
+                                            //uavManagementroot.managementType = "bombingMethod"
+                                            uavManagementroot.enabled = false
+                                        }
+                                }
 
 
                                 // 直接调用组件的获取选中数据方法
@@ -809,7 +840,7 @@ Window{//Rectangle{
                                         spacing: 5
                                         MultiCombox{
                                             id:uavBombingmethodMultiComBox
-                                            items: ["非精确制导","精确制导","自由落体","水平轰炸反俯冲轰炸","俯冲轰炸"]
+                                            items: addUavModelData.bombWay//["非精确制导","精确制导","自由落体","水平轰炸反俯冲轰炸","俯冲轰炸"]
                                             onSelectionChanged: {
                                                 // var selectedLabels = selectedItems.map(item => item.label)
                                                 // uavBombingmethodResult = selectedLabels.join(", ")
@@ -978,6 +1009,46 @@ Window{//Rectangle{
             console.log("processInfo.loadViewType Unknown")
         }
     }
+    function loadUavComponentData(){
+        var uavBombWay = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
+        var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()
+        var uavRecoveryWay = uavModelRecoveryModeDaoModel.selectModelRecoveryModeAllData()
+        var uavOperationWay = uavModelOperationWayDaoModel.selectModelOperationWayAllData()
+        console.log("uavBombWay"+JSON.stringify(uavBombWay))
+        var bombWaynames = extractNames(uavBombWay);
+        addUavModelData.bombWay = bombWaynames
+        var payloadTypeNames = extractNames(uavPayloadType)
+        var recoveryWayNames = extractNames(uavRecoveryWay)
+        var operationWayNames = extractNames(uavOperationWay)
+        //console.log("提取的名称数组:", names +"addUavModelData.bombWay"+addUavModelData.bombWay);
+        addUavModelData.payloadType = payloadTypeNames
+        addUavModelData.recoveryWay = recoveryWayNames
+        addUavModelData.operationWay = operationWayNames
+    }
+    // 提取 uavComponeName 并封装成数组
+    function extractNames(data) {
+        return data.map(item => item.uavComponeName);
+    }
+    function loadMountLocationContent(){
+        if(processInfo.loadViewType === "addUavData"){
+           var receiveData = uavMountLocationDaoTableModel.selectUavMountLocationAllData()
+           console.log("MultiTextOfCombox+:", JSON.stringify(receiveData, null, 2));
+            addUavModelData.mountContent = receiveData
+           // 打印当前函数的名称
+            console.log("当前函数名称:", arguments.callee.name);
+            console.log("addUavDataView"+processInfo.loadViewType)
+
+        }else if(processInfo.loadViewType === "query"){
+
+            console.log("addUavDataView"+processInfo.loadViewType)
+        }else if(processInfo.loadViewType === "update"){
+
+            console.log("addUavDataView"+processInfo.loadViewType)
+        }else{
+            console.log("processInfo.loadViewType Unknown")
+        }
+    }
+
     function loadUavModelData(){
         var uavAllData = processInfo.uavModelJsonStr
         var uavDataStr = JSON.stringify(uavAllData)
@@ -1646,7 +1717,7 @@ Window{//Rectangle{
                                checked: false
                            }
         ]
-         multiTextDispay.loadData = testData
+         //multiTextDispay.loadData = testData
     }
 
 }

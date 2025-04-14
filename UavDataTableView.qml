@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
-import Macai.App 1.0
+//import Macai.App 1.0
 import QtQuick.Layouts 1.14
 import "."//import "qrc:/"
 Window {

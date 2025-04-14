@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef UAV_MODEL_LOAD_TYPE_ENTITY_ODB_HXX
-#define UAV_MODEL_LOAD_TYPE_ENTITY_ODB_HXX
+#ifndef UAV_MODEL_OPERATION_WAY_ENTITY_ODB_HXX
+#define UAV_MODEL_OPERATION_WAY_ENTITY_ODB_HXX
 
 #include <odb/version.hxx>
 
@@ -13,7 +13,7 @@
 
 #include <odb/pre.hxx>
 
-#include "UavModelLoadTypeEntity.h"
+#include "UavModelOperationWayEntity.h"
 
 #include <memory>
 #include <cstddef>
@@ -34,20 +34,20 @@
 
 namespace odb
 {
-  // UavModelLoadTypeEntity
+  // UavModelOpreationWayEntity
   //
   template <>
-  struct class_traits< ::UavModelLoadTypeEntity >
+  struct class_traits< ::UavModelOpreationWayEntity >
   {
     static const class_kind kind = class_object;
   };
 
   template <>
-  class access::object_traits< ::UavModelLoadTypeEntity >
+  class access::object_traits< ::UavModelOpreationWayEntity >
   {
     public:
-    typedef ::UavModelLoadTypeEntity object_type;
-    typedef ::UavModelLoadTypeEntity* pointer_type;
+    typedef ::UavModelOpreationWayEntity object_type;
+    typedef ::UavModelOpreationWayEntity* pointer_type;
     typedef odb::pointer_traits<pointer_type> pointer_traits;
 
     static const bool polymorphic = false;
@@ -91,10 +91,10 @@ namespace odb
 
 namespace odb
 {
-  // UavModelLoadTypeEntity
+  // UavModelOpreationWayEntity
   //
   template <typename A>
-  struct query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >
+  struct query_columns< ::UavModelOpreationWayEntity, id_pgsql, A >
   {
     // id
     //
@@ -108,7 +108,7 @@ namespace odb
 
     static const id_type_ id;
 
-    // loadTypeCode
+    // operationWayCode
     //
     typedef
     pgsql::query_column<
@@ -116,11 +116,11 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    loadTypeCode_type_;
+    operationWayCode_type_;
 
-    static const loadTypeCode_type_ loadTypeCode;
+    static const operationWayCode_type_ operationWayCode;
 
-    // loadTypeName
+    // operationWayName
     //
     typedef
     pgsql::query_column<
@@ -128,35 +128,35 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    loadTypeName_type_;
+    operationWayName_type_;
 
-    static const loadTypeName_type_ loadTypeName;
+    static const operationWayName_type_ operationWayName;
   };
 
   template <typename A>
-  const typename query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >::id_type_
-  query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >::
+  const typename query_columns< ::UavModelOpreationWayEntity, id_pgsql, A >::id_type_
+  query_columns< ::UavModelOpreationWayEntity, id_pgsql, A >::
   id (A::table_name, "\"id\"", 0);
 
   template <typename A>
-  const typename query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >::loadTypeCode_type_
-  query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >::
-  loadTypeCode (A::table_name, "\"loadtype_code\"", 0);
+  const typename query_columns< ::UavModelOpreationWayEntity, id_pgsql, A >::operationWayCode_type_
+  query_columns< ::UavModelOpreationWayEntity, id_pgsql, A >::
+  operationWayCode (A::table_name, "\"operationway_code\"", 0);
 
   template <typename A>
-  const typename query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >::loadTypeName_type_
-  query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >::
-  loadTypeName (A::table_name, "\"loadtype_name\"", 0);
+  const typename query_columns< ::UavModelOpreationWayEntity, id_pgsql, A >::operationWayName_type_
+  query_columns< ::UavModelOpreationWayEntity, id_pgsql, A >::
+  operationWayName (A::table_name, "\"operationway_name\"", 0);
 
   template <typename A>
-  struct pointer_query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >:
-    query_columns< ::UavModelLoadTypeEntity, id_pgsql, A >
+  struct pointer_query_columns< ::UavModelOpreationWayEntity, id_pgsql, A >:
+    query_columns< ::UavModelOpreationWayEntity, id_pgsql, A >
   {
   };
 
   template <>
-  class access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >:
-    public access::object_traits< ::UavModelLoadTypeEntity >
+  class access::object_traits_impl< ::UavModelOpreationWayEntity, id_pgsql >:
+    public access::object_traits< ::UavModelOpreationWayEntity >
   {
     public:
     struct id_image_type
@@ -174,17 +174,17 @@ namespace odb
       long long id_value;
       bool id_null;
 
-      // loadTypeCode_
+      // operationWayCode_
       //
-      details::buffer loadTypeCode_value;
-      std::size_t loadTypeCode_size;
-      bool loadTypeCode_null;
+      details::buffer operationWayCode_value;
+      std::size_t operationWayCode_size;
+      bool operationWayCode_null;
 
-      // loadTypeName_
+      // operationWayName_
       //
-      details::buffer loadTypeName_value;
-      std::size_t loadTypeName_size;
-      bool loadTypeName_null;
+      details::buffer operationWayName_value;
+      std::size_t operationWayName_size;
+      bool operationWayName_null;
 
       std::size_t version;
     };
@@ -298,17 +298,17 @@ namespace odb
   };
 
   template <>
-  class access::object_traits_impl< ::UavModelLoadTypeEntity, id_common >:
-    public access::object_traits_impl< ::UavModelLoadTypeEntity, id_pgsql >
+  class access::object_traits_impl< ::UavModelOpreationWayEntity, id_common >:
+    public access::object_traits_impl< ::UavModelOpreationWayEntity, id_pgsql >
   {
   };
 
-  // UavModelLoadTypeEntity
+  // UavModelOpreationWayEntity
   //
 }
 
-#include "UavModelLoadTypeEntity-odb.ixx"
+#include "UavModelOperationWayEntity-odb.ixx"
 
 #include <odb/post.hxx>
 
-#endif // UAV_MODEL_LOAD_TYPE_ENTITY_ODB_HXX
+#endif // UAV_MODEL_OPERATION_WAY_ENTITY_ODB_HXX

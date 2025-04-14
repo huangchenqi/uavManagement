@@ -1,0 +1,7 @@
+[Database]
+Type=postgres
+Username=12345678
+Password=your_password
+DatabaseName=uav_management
+Host=192.168.0.101
+Port=5432
