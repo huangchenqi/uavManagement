@@ -214,7 +214,7 @@ QJsonArray UavModelDao::selectUavModelAllData()
             dateTime = entity.uavCreatModelTime_;
             qDebug() <<"uavCreatModelTime_"<< entity.uavCreatModelTime_;
             obj["uavCreatModelTime"] = entity.uavCreatModelTime_.toString(Qt::ISODate);
-
+            obj["imageUrl"] = QString::fromStdString(entity.uavImgUrl_);
 
             obj["operation"] = "";
             obj["checked"] = checked;
@@ -1058,13 +1058,13 @@ bool UavModelDao::insertModelDate(const QJsonObject& objectData)
     qDebug() << "Starting database insertion...";
     QJsonObject checkResult;
     QJsonObject object;
-    //checkResult = checkUavDataObject(object);
+    //checkResult = checkUavDataObject(object); 
     // 转换为格式化的JSON字符串
     QJsonDocument doc(objectData);
     QString jsonString = doc.toJson(QJsonDocument::Indented);
-
+    qDebug() << "图片的数据:" << jsonString;
     // 解析 JSON 数据
-    QJsonDocument trDoc = QJsonDocument::fromJson(jsonString.toUtf8());
+    QJsonDocument trDoc(objectData); //QJsonDocument::fromJson(jsonString.toUtf8());
     if (!trDoc.isNull() && trDoc.isObject()) {
                 QJsonObject uavData = trDoc.object();
 
@@ -1195,7 +1195,7 @@ bool UavModelDao::insertModelDate(const QJsonObject& objectData)
                 // if (entity.getUavType().empty()) {
                 //     throw std::invalid_argument("Missing required field: uav_type");
                 // }
-
+                qDebug()<<"file:///C:/Users/12738/Desktop/齿轮.jpg"<<object["image_url"].toString();
                 // 6. 持久化到数据库
                 qDebug() << "Persisting entity...";
                 auto id = db.persist(entity);

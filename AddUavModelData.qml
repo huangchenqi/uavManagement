@@ -18,6 +18,9 @@ Window{//Rectangle{
     width: 1200
     height: 600
     //title: qsTr("QML TableView example")
+    //图片的地址
+    property var imagUrl: ""
+    property var imgName: ""
     // 获取当前时间并转换为字符串
     property var currentTime: new Date().toLocaleString()
     property var mountContent: []
@@ -1175,30 +1178,30 @@ Window{//Rectangle{
                             //Layout.fillWidth: true
                             Layout.fillHeight: true
                             spacing: 10
-                            Button{
-                                id:imageSelect
-                                width:100
-                                height:50
-                                anchors.right: parent.right
-                                anchors.rightMargin: 2
-                                anchors.top: parent.top
-                                anchors.topMargin: 8
-                                // anchors.bottom: parent.bottom
-                                // anchors.bottomMargin: 10
-                                text: "选择图片"
-                                onClicked: {
-                                    fileDialog.open()
-                                }
-                            }
+                            // Button{
+                            //     id:imageSelect
+                            //     width:100
+                            //     height:50
+                            //     anchors.right: parent.right
+                            //     anchors.rightMargin: 2
+                            //     anchors.top: parent.top
+                            //     anchors.topMargin: 8
+                            //     // anchors.bottom: parent.bottom
+                            //     // anchors.bottomMargin: 10
+                            //     text: "选择图片"
+                            //     onClicked: {
+                            //         fileDialog.open()
+                            //     }
+                            // }
                             Rectangle {
                                 id: aroot
                                 visible: true
                                 width:500
                                 height: 600
-                                // anchors.top: parent.top
-                                // anchors.topMargin: 40
-                                // anchors.right: parent.right
-                                // anchors.rightMargin: 2
+                                anchors.top: parent.top
+                                anchors.topMargin: 10
+                                anchors.right: parent.right
+                                anchors.rightMargin: 2
                                 Layout.alignment:Qt.AlignRight
                                 color: "#ECF2FE"
                                 border.color: "#BDBDBD"
@@ -1207,6 +1210,20 @@ Window{//Rectangle{
                                     id: uavImg
                                     //source: "qrc:/resource/1.jpg"
                                     anchors.fill: parent
+                                    source: {
+                                        if(processInfo.loadViewType === "addUavData"){
+                                            return ""
+                                        }else{
+                                            return processInfo.imagUrl
+                                        }
+                                    }
+                                }
+                                // 点击区域
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: {
+                                        fileDialog.open()
+                                    }
                                 }
                                 Column {
                                     anchors.centerIn: parent
@@ -1273,6 +1290,7 @@ Window{//Rectangle{
                         nameFilters: ["图片文件 (*.png *.jpg *.jpeg)"]
                         onAccepted: {
                             uavImg.source = fileUrls[0]
+                            addUavModelData.imagUrl = uavImg.source.toString()
                             var currentModel = navBar.currentIndex === 0 ? droneModel : schemeModel
                             for(var i = 0; i < currentModel.count; i++){
                                 if(currentModel.get(i).expanded){
@@ -1284,6 +1302,14 @@ Window{//Rectangle{
                                 }
                             }
                         }
+                        // onAccepted: {
+                        //             // 获取选中的文件路径
+                        //             var filePath = fileDialog.fileUrl.toString()
+                        //             // 去掉 "file://" 前缀
+                        //             filePath = filePath.replace("file://", "")
+                        //             // 加载图片
+                        //             uavImg.source = filePath
+                        //         }
                     }
         }
 
@@ -1921,7 +1947,7 @@ Window{//Rectangle{
         uavData.full_external_cruise_alt = textToFloat(cruiseAltitudeFullExternalConfigurationValue.text)
 
         uavData.image_name = "aaaaaaaaaaa"
-        uavData.image_url = "aaaaaaaaaa"
+        uavData.image_url = addUavModelData.imagUrl//uavData.image_url = JSON.stringify(addUavModelData.imagUrl)
         uavData.recordcreation_time = addUavModelData.currentTime
         //var uavTransFormToData = transformArrayToStrData(uavData)
         var jsonString = JSON.stringify(uavData);
@@ -2127,7 +2153,7 @@ Window{//Rectangle{
         uavData.full_external_cruise_alt = textToFloat(cruiseAltitudeFullExternalConfigurationValue.text)
 
         uavData.image_name = "hhhhhh"
-        uavData.image_url = "hhhhhhhh"
+        uavData.image_url = addUavModelData.imagUrl
         uavData.recordcreation_time = addUavModelData.currentTime
         var jsonString = JSON.stringify(uavData);
         console.log("updataUavModelDatajsonString"+jsonString);

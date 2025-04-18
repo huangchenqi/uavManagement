@@ -602,7 +602,7 @@ Rectangle {
                                                height: 30
                                                onClicked: {
                                                    var rowData = tableModel.getRow(row) //.rows[row]
-                                                   //console.log("查看行数据:", JSON.stringify(rowData, null, 2))
+                                                   console.log("查看行数据:", JSON.stringify(rowData, null, 2))
                                                    // 转换数据
                                                    var transformedData = transformData(rowData)
                                                    console.log("转换后的数据:", JSON.stringify(transformedData, null, 2))
@@ -1135,7 +1135,8 @@ Rectangle {
                    "uavId": data.uavId,
                    "uavName": data.uavName,
                    "uavType": data.uavType,
-                   "uavLoadAmmoType":data.uavLoadAmmoType
+                   "uavLoadAmmoType":data.uavLoadAmmoType,
+                   "imageUrl":data.imageUrl
                };
            }
            // 提取数组中冒号后面的数字
@@ -1265,6 +1266,7 @@ Rectangle {
            }
            //行数值赋予下界面跳转
            function assignmentEncapsulation(data){
+
                var transformData = convertStringFieldsToArray(data)
                processInfo.recordId = transformData.recordId
                processInfo.uavType = transformData.uavType
@@ -1297,6 +1299,7 @@ Rectangle {
                processInfo.bombWay = transformData.bombMethod
                processInfo.investagationPayLoadType = transformData.payloadType
                processInfo.loadAmmoType = transformData.uavLoadAmmoType
+               processInfo.imagUrl = transformData.imageUrl
                console.log("assignmentEncapsulation JSON.stringify"+JSON.stringify(processInfo))
 
            }
