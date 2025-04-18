@@ -9,7 +9,6 @@
 #include <cassert>
 #include <cstring>  // std::memcpy
 
-#include <odb/schema-catalog-impl.hxx>
 
 #include <odb/pgsql/traits.hxx>
 #include <odb/pgsql/database.hxx>
@@ -48,7 +47,7 @@ namespace odb
   const unsigned int access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::
   persist_statement_types[] =
   {
-    pgsql::text_oid,
+    pgsql::int4_oid,
     pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::float4_oid
@@ -63,7 +62,7 @@ namespace odb
   const unsigned int access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::
   update_statement_types[] =
   {
-    pgsql::text_oid,
+    pgsql::int4_oid,
     pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
@@ -139,11 +138,7 @@ namespace odb
 
     // mountLocationId_
     //
-    if (t[1UL])
-    {
-      i.mountLocationId_value.capacity (i.mountLocationId_size);
-      grew = true;
-    }
+    t[1UL] = 0;
 
     // mountLocationName_
     //
@@ -187,10 +182,8 @@ namespace odb
 
     // mountLocationId_
     //
-    b[n].type = pgsql::bind::text;
-    b[n].buffer = i.mountLocationId_value.data ();
-    b[n].capacity = i.mountLocationId_value.capacity ();
-    b[n].size = &i.mountLocationId_size;
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.mountLocationId_value;
     b[n].is_null = &i.mountLocationId_null;
     n++;
 
@@ -243,22 +236,15 @@ namespace odb
     // mountLocationId_
     //
     {
-      ::std::string const& v =
+      int const& v =
         o.mountLocationId_;
 
       bool is_null (false);
-      std::size_t size (0);
-      std::size_t cap (i.mountLocationId_value.capacity ());
       pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_image (
-        i.mountLocationId_value,
-        size,
-        is_null,
-        v);
+          int,
+          pgsql::id_integer >::set_image (
+        i.mountLocationId_value, is_null, v);
       i.mountLocationId_null = is_null;
-      i.mountLocationId_size = size;
-      grew = grew || (cap != i.mountLocationId_value.capacity ());
     }
 
     // mountLocationName_
@@ -339,15 +325,14 @@ namespace odb
     // mountLocationId_
     //
     {
-      ::std::string& v =
+      int& v =
         o.mountLocationId_;
 
       pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_value (
+          int,
+          pgsql::id_integer >::set_value (
         v,
         i.mountLocationId_value,
-        i.mountLocationId_size,
         i.mountLocationId_null);
     }
 
@@ -850,57 +835,6 @@ namespace odb
 
     return st.execute ();
   }
-}
-
-namespace odb
-{
-  static bool
-  create_schema (database& db, unsigned short pass, bool drop)
-  {
-    ODB_POTENTIALLY_UNUSED (db);
-    ODB_POTENTIALLY_UNUSED (pass);
-    ODB_POTENTIALLY_UNUSED (drop);
-
-    if (drop)
-    {
-      switch (pass)
-      {
-        case 1:
-        {
-          return true;
-        }
-        case 2:
-        {
-          db.execute ("DROP TABLE IF EXISTS \"uav_type_man\".\"uav_model_mount_location\" CASCADE");
-          return false;
-        }
-      }
-    }
-    else
-    {
-      switch (pass)
-      {
-        case 1:
-        {
-          db.execute ("CREATE TABLE \"uav_type_man\".\"uav_model_mount_location\" (\n"
-                      "  \"id\" BIGSERIAL NOT NULL PRIMARY KEY,\n"
-                      "  \"mountlocation_code\" TEXT NOT NULL,\n"
-                      "  \"mountlocation_name\" TEXT NOT NULL,\n"
-                      "  \"mountlocation_quantity\" REAL NOT NULL,\n"
-                      "  \"mountlocation_capacity\" REAL NOT NULL)");
-          return false;
-        }
-      }
-    }
-
-    return false;
-  }
-
-  static const schema_catalog_create_entry
-  create_schema_entry_ (
-    id_pgsql,
-    "",
-    &create_schema);
 }
 
 #include <odb/post.hxx>

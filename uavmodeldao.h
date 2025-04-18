@@ -6,6 +6,7 @@
 #include <QQmlParserStatus>
 #include <QObject>
 #include <QHash>
+#include <QJSValue>
 #include "databaseconnection.h"
 class UavModelDao: public QObject
 {
@@ -13,6 +14,7 @@ class UavModelDao: public QObject
 public:
     UavModelDao(QObject* parent = nullptr);//UavModelDao();//explicit UavModelDao(QObject *parent = 0);
     Q_INVOKABLE QJsonArray selectUavModelAllData();//查询全部数据
+    Q_INVOKABLE QJsonArray queryUavModelData(const QString &jsonStr);//查询条件数据
     Q_INVOKABLE QJsonArray transformQueryAllData();
     QHash<QString,QString>createIdMap(const QJsonArray &bArray);
     QJsonArray ProcessUavComponentWay(const QString &uavComponent,const QHash<QString,QString> &idMap);

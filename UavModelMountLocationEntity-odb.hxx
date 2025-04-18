@@ -17,6 +17,7 @@
 
 #include <memory>
 #include <cstddef>
+#include <utility>
 
 #include <odb/core.hxx>
 #include <odb/traits.hxx>
@@ -113,9 +114,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        ::std::string,
-        pgsql::id_string >::query_type,
-      pgsql::id_string >
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
     mountLocationId_type_;
 
     static const mountLocationId_type_ mountLocationId;
@@ -210,8 +211,7 @@ namespace odb
 
       // mountLocationId_
       //
-      details::buffer mountLocationId_value;
-      std::size_t mountLocationId_size;
+      int mountLocationId_value;
       bool mountLocationId_null;
 
       // mountLocationName_

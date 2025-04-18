@@ -2,10 +2,12 @@
  * compiler for C++.
  */
 
-DROP TABLE IF EXISTS "public"."uav_model_mount_location" CASCADE;
+DROP TABLE IF EXISTS "uav_type_man"."uav_model_mount_location" CASCADE;
 
-CREATE TABLE "public"."uav_model_mount_location" (
+CREATE TABLE "uav_type_man"."uav_model_mount_location" (
   "id" BIGSERIAL NOT NULL PRIMARY KEY,
-  "mount_location_id" TEXT NOT NULL,
-  "mountlocation_name" TEXT NOT NULL);
+  "mountlocation_code" INTEGER NOT NULL,
+  "mountlocation_name" TEXT NOT NULL,
+  "mountlocation_quantity" REAL NOT NULL,
+  "mountlocation_capacity" REAL NOT NULL);
 

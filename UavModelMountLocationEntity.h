@@ -24,7 +24,7 @@ public:
     long id_;
 
 #pragma db column("mountlocation_code")                        // 挂载位置编号
-    std::string mountLocationId_;
+    int mountLocationId_;
 #pragma db not_null column("mountlocation_name")                      // 挂载位置名称
     std::string mountLocationName_;
 #pragma db column("mountlocation_quantity") //type(float)

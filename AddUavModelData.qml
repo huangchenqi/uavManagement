@@ -57,7 +57,7 @@ Window{//Rectangle{
     Component.onCompleted:{
         loadUavComponentData()
         loadAmmoType()
-        loadMountLocationContent()
+        //loadMountLocationContent()
         loadView()
         //generateTestData()
     }
@@ -1299,15 +1299,15 @@ Window{//Rectangle{
 
         }else if(processInfo.loadViewType === "query"){
             loadUavModelData()
-            writeControl(false)
-            saveButton.enabled = false
-            cancleButton.enabled = false
+            // writeControl(false)
+            // saveButton.enabled = false
+            // cancleButton.enabled = false
             console.log("addUavDataView"+processInfo.loadViewType)
         }else if(processInfo.loadViewType === "update"){
             loadUavModelData()
-            writeControl(true)
+            // writeControl(true)
             saveButton.text = "编辑"
-            console.log("addUavDataView"+processInfo.loadViewType)
+            // console.log("addUavDataView"+processInfo.loadViewType)
         }else{
             console.log("processInfo.loadViewType Unknown")
         }
@@ -1378,15 +1378,14 @@ Window{//Rectangle{
     function loadUavModelData(){
         var uavAllData = processInfo.uavModelJsonStr
         var uavDataStr = JSON.stringify(uavAllData)
-        ///console.log("loadUavModelData"+ uavDataStr)
-        var selectUavData = uavModelDao.selectSomeUavModelDate(uavDataStr)
+        console.log("loadUavModelData"+uavDataStr)
+        var  selectUavData = uavModelDao.selectSomeUavModelDate(uavDataStr)
         console.log("selectUavData"+JSON.stringify(selectUavData))
         // if (selectUavData && selectUavData.payload_type) {
         //         var payloadTypes = selectUavData.payload_type.split(",");
         //         console.log("uavInvestigationPayloadTypeMultiComBox: "+payloadTypes)
         //         uavInvestigationPayloadTypeMultiComBox.selectedItems = payloadTypes.slice();
         //     }
-
         //对于Combox组件加载数据
         const uavTypeSelecttargetIndex = uavTypeSelect.model.indexOf(selectUavData.uavType);
         console.log("索引值:", uavTypeSelecttargetIndex); // 输出 0

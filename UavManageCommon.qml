@@ -5,7 +5,6 @@ import QtQuick.Window 2.12
 import Qt.labs.qmlmodels 1.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.12
 import UavDaoModel 1.0
 import UavModelLoadTypeDaoModel 1.0
 import UavBombingMethodDaoModel 1.0
@@ -328,14 +327,14 @@ Rectangle {
                            width: 160
                            height: 40
                            font.pointSize: 12
-                           model: ["全部","侦察无人机","攻击无人机","查打一体无人机"]
+                           model: ["全部","侦察型无人机","攻击型无人机","查打一体无人机"]
                        }
                        Label{
                            id:inputUavIdData
                            width:100
                            height:50
                            font.pointSize: 12
-                           text: "飞机编号:"
+                           text: "飞机型号:"
                        }
                        TextField{
                            id:uavIdSelect
@@ -352,7 +351,7 @@ Rectangle {
                        }
 
                        TextField{
-                           id:inputUavNameSelect
+                           id:uavNameSelect
                            width: 100
                            height:50
                            font.pointSize: 12
@@ -366,6 +365,7 @@ Rectangle {
                            Layout.leftMargin: 30
                            onClicked: {
                                inputValidator()
+                               queryConditionUavModelData()
 
                            }
                        }
@@ -379,7 +379,7 @@ Rectangle {
                            onClicked: {
                                modelSelector.currentIndex = 0
                                uavIdSelect.text = ""
-                               inputUavNameSelect.text = ""
+                               uavNameSelect.text = ""
                            }
                        }
 
@@ -602,13 +602,13 @@ Rectangle {
                                                height: 30
                                                onClicked: {
                                                    var rowData = tableModel.getRow(row) //.rows[row]
-                                                   console.log("查看行数据:", JSON.stringify(rowData, null, 2))
+                                                   //console.log("查看行数据:", JSON.stringify(rowData, null, 2))
                                                    // 转换数据
                                                    var transformedData = transformData(rowData)
                                                    console.log("转换后的数据:", JSON.stringify(transformedData, null, 2))
 
                                                    // 将转换后的数据转换为 JSON 字符串
-                                                   var jsonStr = JSON.stringify(transformedData)
+                                                   //var jsonStr = JSON.stringify(transformedData)
                                                    // processInfo.recordId = transformedData.recordId
                                                    // processInfo.uavType = transformedData.uavType
                                                    // processInfo.uavName = transformedData.uavName
@@ -616,7 +616,7 @@ Rectangle {
                                                    processInfo.loadViewType = "query"
                                                    //processInfo.jsonStr = transformedData
                                                    assignmentEncapsulation(transformedData)
-                                                   console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
+                                                   //console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
                                                    pageUavModelLoader.setSource("qrc:./AddUavModelData.qml",
                                                                         {processInfo: processInfo,
                                                                             backUi: "qrc:/UavManageCommon.qml"})
@@ -636,7 +636,7 @@ Rectangle {
                                                    console.log("转换后的数据:", JSON.stringify(transformedData, null, 2))
 
                                                    // 将转换后的数据转换为 JSON 字符串
-                                                   var jsonStr = JSON.stringify(transformedData)
+                                                   //var jsonStr = JSON.stringify(transformedData)
 
                                                    console.log("编辑行数据:", JSON.stringify(transformedData, null, 2))
 
@@ -996,6 +996,31 @@ Rectangle {
            function dpH(h) {
                return h
            }
+           function queryConditionUavModelData(){
+               var uavData ={
+                   uavName:"",
+                   uavType:"",
+                   uavId:""
+               }
+               uavData.uavType = modelSelector.currentText
+               uavData.uavId  = uavIdSelect.text
+               uavData.uavName = uavNameSelect.text
+               var uavDataStr = JSON.stringify(uavData)
+               var queryUavData = uavModelDaoTable.queryUavModelData(uavDataStr)
+               console.log("queryConditionModelData!"+JSON.stringify(queryUavData))
+               const modifiedData = convertMultiFields(queryUavData);
+                console.log("receiveData"+JSON.stringify(modifiedData, null, 2));
+                // 清空旧数据
+               tableModel.clear()
+               rowsModel.length = 0;
+
+               tableModel.rows = modifiedData;
+               rowsModel = tableModel.rows;
+               // 自动刷新表格
+               tableModel.layoutChanged()
+
+           }
+
            //只提取弹药中的id与弹药
            function extractAmmoInfo(ammoArray) {
                return ammoArray.map(item => ({
@@ -1007,6 +1032,7 @@ Rectangle {
                // 需要处理的字段列表
                const targetFields = [
                    "operationMethod",
+                    "hangingCapacity",
                    "uavLoadAmmoType",
                    "payloadType",
                    "recoveryMode",
@@ -1046,15 +1072,15 @@ Rectangle {
                const modifiedData = convertMultiFields(receiveData);
                 console.log("receiveData"+JSON.stringify(modifiedData, null, 2));
                //var test = extractBombNumbers(receiveData,"bombMethod")//operationMethod\payloadType\recoveryMode\uavLoadAmmoType
-               console.log("loadUaz洒下vAllData+:", JSON.stringify(receiveData, null, 2));
-               var ammoType = ammoDaoModel.selectAmmoAllData()
+               //console.log("loadUaz洒下vAllData+:", JSON.stringify(receiveData, null, 2));
+               //var ammoType = ammoDaoModel.selectAmmoAllData()
                //var ammoTypeArray = extractAmmoInfo(ammoType)
-               var uavBombWay = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
-               var uavtransformUavAllData = uavModelDaoTable.transformQueryAllData()
-               console.log("uavBombWay"+JSON.stringify(uavBombWay))
-               var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()
-               var uavRecoveryWay = uavModelRecoveryModeDaoModel.selectModelRecoveryModeAllData()
-               var uavOperationWay = uavModelOperationWayDaoModel.selectModelOperationWayAllData()
+               //var uavBombWay = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
+               // var uavtransformUavAllData = uavModelDaoTable.transformQueryAllData()
+               // console.log("uavBombWay"+JSON.stringify(uavBombWay))
+               // var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()
+               // var uavRecoveryWay = uavModelRecoveryModeDaoModel.selectModelRecoveryModeAllData()
+               // var uavOperationWay = uavModelOperationWayDaoModel.selectModelOperationWayAllData()
 
                 // 清空旧数据
                tableModel.clear()
@@ -1096,10 +1122,6 @@ Rectangle {
 
                // 自动刷新表格
                tableModel.layoutChanged()
-           }
-           function queryUavModelData(data){
-
-
            }
            // 转换函数
            function transformData(data) {
@@ -1197,32 +1219,84 @@ Rectangle {
                        targetIds.includes(ammo.recordId)
                    ).map(ammo => ammo.ammoName);
             }
+           //将其选中的数据重新封装
+           function convertStringFieldsToArray(originalObj) {
+               // 需要转换的字段列表
+               const targetFields = [
+                   "bombMethod",
+                   "hangingCapacity",
+                   "operationMethod",
+                   "payloadType",
+                   "recoveryMode",
+                   "uavLoadAmmoType"
+               ];
+
+               // 深拷贝原始对象
+               let newObj = JSON.parse(JSON.stringify(originalObj));
+
+               targetFields.forEach(field => {
+                   if (newObj.hasOwnProperty(field)) {
+                       const value = newObj[field];
+
+                       // 仅处理字符串类型字段
+                       if (typeof value === 'string') {
+                           // 特殊处理空字符串
+                           if (value === "") {
+                               newObj[field] = [];
+                           }
+                           // 处理非空字符串
+                           else {
+                               newObj[field] = value.split(',')
+                                   .map(item => item.trim())  // 去除前后空格
+                                   .filter(item => item !== '');  // 过滤空项
+                           }
+                       }
+                       // 非字符串类型保持原样
+                       else if (Array.isArray(value)) {
+                           console.log(`${field} is already an array`);
+                       }
+                       else {
+                           console.warn(`${field} has unexpected type: ${typeof value}`);
+                       }
+                   }
+               });
+
+               return newObj;
+           }
            //行数值赋予下界面跳转
            function assignmentEncapsulation(data){
-               processInfo.recordId = data.recordId
-               processInfo.uavType = data.uavType
-               processInfo.uavName = data.uavName
-               processInfo.uavId = data.uavId
-               processInfo.uavModelJsonStr = data
+               var transformData = convertStringFieldsToArray(data)
+               processInfo.recordId = transformData.recordId
+               processInfo.uavType = transformData.uavType
+               processInfo.uavName = transformData.uavName
+               processInfo.uavId = transformData.uavId
+               processInfo.uavModelJsonStr = transformData
                //console.log("assignmentEncapsulation"+JSON.stringify(data))
-               var ammoType = ammoDaoModel.selectAmmoAllData()
-               var uavBombWay = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
-               var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()
-               var uavRecoveryWay = uavModelRecoveryModeDaoModel.selectModelRecoveryModeAllData()
-               var uavOperationWay = uavModelOperationWayDaoModel.selectModelOperationWayAllData()
-               var operationWayArray = extractAmmoIds(data,"operationMethod")
-               var recoveryWayArray = extractAmmoIds(data,"recoveryMode")
-               var bombWayArray = extractAmmoIds(data,"bombMethod")
-               var investagationArray = extractAmmoIds(data,"payloadType")
-               var loadAmmoTypeArray = extractAmmoIds(data,"uavLoadAmmoType")
+               // var ammoType = ammoDaoModel.selectAmmoAllData()
+               // var uavBombWay = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
+               // var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()
+               // var uavRecoveryWay = uavModelRecoveryModeDaoModel.selectModelRecoveryModeAllData()
+               // var uavOperationWay = uavModelOperationWayDaoModel.selectModelOperationWayAllData()
+               // var operationWayArray = extractAmmoIds(data,"operationMethod")
+               // var recoveryWayArray = extractAmmoIds(data,"recoveryMode")
+               // var bombWayArray = extractAmmoIds(data,"bombMethod")
+               // var investagationArray = extractAmmoIds(data,"payloadType")
+               // var loadAmmoTypeArray = extractAmmoIds(data,"uavLoadAmmoType")
 
-               processInfo.operationWay = getUavComponentNamesByIds(uavOperationWay,operationWayArray)
-               console.log("{},{},{}",processInfo.operationWay,JSON.stringify(processInfo.operationWay),operationWayArray)
-               processInfo.recoveryWay =getUavComponentNamesByIds(uavRecoveryWay,recoveryWayArray)
-               processInfo.bombWay =getUavComponentNamesByIds(uavBombWay,bombWayArray)
-               processInfo.investagationPayLoadType =getUavComponentNamesByIds(uavPayloadType,investagationArray)
-               processInfo.loadAmmoType =getAmmoNamesByIds(ammoType,loadAmmoTypeArray)
+               // processInfo.operationWay = getUavComponentNamesByIds(uavOperationWay,operationWayArray)
+               // console.log("{},{},{}",processInfo.operationWay,JSON.stringify(processInfo.operationWay),operationWayArray)
+               // processInfo.recoveryWay =getUavComponentNamesByIds(uavRecoveryWay,recoveryWayArray)
+               // processInfo.bombWay =getUavComponentNamesByIds(uavBombWay,bombWayArray)
+               // processInfo.investagationPayLoadType =getUavComponentNamesByIds(uavPayloadType,investagationArray)
+               // processInfo.loadAmmoType =getAmmoNamesByIds(ammoType,loadAmmoTypeArray)
                //console.log("ammoType="+JSON.stringify(ammoType))
+               //console.log("aaaaaas"+JSON.stringify(data))
+               processInfo.hangingCapacity = transformData.hangingCapacity
+               processInfo.operationWay = transformData.operationMethod
+               processInfo.recoveryWay = transformData.recoveryMode
+               processInfo.bombWay = transformData.bombMethod
+               processInfo.investagationPayLoadType = transformData.payloadType
+               processInfo.loadAmmoType = transformData.uavLoadAmmoType
                console.log("assignmentEncapsulation JSON.stringify"+JSON.stringify(processInfo))
 
            }
@@ -1271,7 +1345,7 @@ Rectangle {
            }
            //对于uav搜索框的控制
            function inputValidator() {
-               if (modelSelector.currentIndex === 0 && uavIdSelect.text === "" && inputUavNameSelect.text ==="") {
+               if (modelSelector.currentIndex === 0 && uavIdSelect.text === "" && uavNameSelect.text ==="") {
                    warningPopup.open()
                    // 2秒后自动关闭
                    warningItem.text = "您查询的是全部数据！"

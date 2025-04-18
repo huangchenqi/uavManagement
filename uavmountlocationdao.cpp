@@ -50,7 +50,7 @@ QJsonArray UavMountLocationDao::selectUavMountLocationAllData()
             // 手动转换实体到 JSON（需要根据实际字段补充）
             obj["index"] = sum;
             obj["recordId"] = QString::number(entity.id_);
-            obj["uavmountLocationId"] = QString::fromStdString(entity.mountLocationId_);
+            obj["uavmountLocationId"] = QString::number(entity.mountLocationId_);
             obj["uavmountLocationName"] = QString::fromStdString(entity.mountLocationName_);
             obj["uavmountLocationQuantity"] = QString::number(entity.mountlocationQuantity_);
             obj["uavmountLocationCapacity"] = QString::number(entity.mountlocationCapacity_);
@@ -99,7 +99,7 @@ bool UavMountLocationDao::updateUavMountLocationDate(const QJSValue &selectedDat
             float  uavmountLocationCapacityStr = dataMap["uavmountLocationCapacity"].toString().toDouble();
             db.load(recordId, entity);
             entity.mountLocationName_ = mountLocationNameStr.toStdString();
-            entity.mountLocationId_ = mountLocationIdStr.toStdString();
+            entity.mountLocationId_ = mountLocationIdStr.toInt();
             entity.mountlocationQuantity_ = mountlocationQuantityStr;
             entity.mountlocationCapacity_ = uavmountLocationCapacityStr;
             qDebug() << "before update";
@@ -149,7 +149,7 @@ bool UavMountLocationDao::deleteUavMountLocationDate(const QJSValue &selectedDat
             auto rst = db.erase_query<UavModelMountLocationEntity>(//db.erase_query<UavModelEntity>
             query::id == recordId
             && query::mountLocationName == mountLocationNameStr.toStdString().c_str()
-            && query::mountLocationId == mountLocationIdStr.toStdString().c_str()
+                //&& query::mountLocationId == mountLocationIdStr.toInt()//.c_str()
             ); // 替换 condition1、condition2 为实际的字段名，value1、value2 为实际的值
             qDebug() << "recordId:" << dataMap["recordId"].toInt();
             qDebug() << "uavmountLocationName:" << dataMap["uavmountLocationName"].toString();
@@ -185,7 +185,7 @@ bool UavMountLocationDao::insertUavMountLocationDate(const QJsonObject &object)
 
         // 4. 映射JSON字段到实体属性
         // 基础字段
-        entity.mountLocationId_ = object["uavmountLocationId"].toString().toStdString();
+        entity.mountLocationId_ = object["uavmountLocationId"].toInt();
         entity.mountLocationName_ = object["uavmountLocationName"].toString().toStdString();
         entity.mountlocationQuantity_ = object["uavmountLocationQuantity"].toDouble();
         entity.mountlocationCapacity_ = object["uavmountLocationCapacity"].toDouble();

@@ -56,6 +56,40 @@ UavModelDao::UavModelDao(QObject* parent) : QObject(parent){ //::UavModelDao() {
     //     );
 } //UavModelDao::UavModelDao(QObject *parent) : QObject(parent){}
 
+// struct load{
+// private:
+//     odb::pgsql::database& db_;
+// public:
+//     load(odb::pgsql::database& db):db_{db}{}
+
+//     template<typename T>
+//     QVector<T> from(QString fileds){
+//         QVector<T> rst;
+//         for(auto&& id_ : fileds.split(",")){
+//             auto id{id_.toLong()};
+//             auto pload{db_.load<T>(id)};
+//             if(pload) rst.push_back(*pload);
+//         }
+//         return rst;
+//     }
+// };
+
+template<typename T>
+struct traits{
+    static T* load(odb::pgsql::database& db,typename odb::object_traits<T>::id_type id){
+        return db.load<T>(id);
+    }
+};
+
+template<>
+struct traits<UavModelMountLocationEntity>{
+    template<typename I>
+    static UavModelMountLocationEntity* load(odb::pgsql::database& db,I&& id){
+        using query_t = odb::query<UavModelMountLocationEntity>;
+        return db.query_one<UavModelMountLocationEntity>(query_t::mountLocationId == id);
+    }
+};
+
 struct load{
 private:
     odb::pgsql::database& db_;
@@ -67,14 +101,13 @@ public:
         QVector<T> rst;
         for(auto&& id_ : fileds.split(",")){
             auto id{id_.toLong()};
-            auto pload{db_.load<T>(id)};
+            // auto pload{db_.load<T>(id)};
+            auto pload{traits<T>::load(db_,id)};
             if(pload) rst.push_back(*pload);
         }
         return rst;
     }
-
 };
-
 QJsonArray UavModelDao::selectUavModelAllData()
 {
     QJsonArray uavModelData;
@@ -117,7 +150,15 @@ QJsonArray UavModelDao::selectUavModelAllData()
             obj["uavName"] = QString::fromStdString(entity.uavName_);
             obj["uavType"] = QString::fromStdString(entity.uavType_);
 
-            obj["hangingCapacity"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
+            obj["hangingCapacity"] = [&db,&entity](){//QString::fromStdString(entity.uavHangingLoctionCapacity_);
+                    auto loaded{load{db}.from<UavModelMountLocationEntity>(QString::fromStdString(entity.uavHangingLoctionCapacity_))};
+                    QJsonArray arr;
+                    for(auto load: loaded){
+                        //qDebug() << "loaded: " << load.ammoName_.c_str();
+                        arr.append(QString::fromStdString(load.mountLocationName_));
+                    }
+                    return QJsonValue{arr};
+                }();
             obj["uavLoadAmmoType"] = [&db,&entity](){
                 auto loaded{load{db}.from<AmmunitionEntity>(QString::fromStdString(entity.uavLoadAmmoType_))};
                 QJsonArray arr;
@@ -192,6 +233,180 @@ QJsonArray UavModelDao::selectUavModelAllData()
     qDebug().noquote() << doc.toJson(QJsonDocument::Indented);
     return uavModelData;
 
+}
+
+QJsonArray UavModelDao::queryUavModelData(const QString &jsonStr)
+{
+    QJsonArray queryUavModelArray;
+    QJsonObject uavModelData,object;
+    // 将 JSON 字符串转换为 QJsonObject
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonStr.toUtf8());
+    if (jsonDoc.isObject()) {
+        object = jsonDoc.object();
+        qDebug() << "Received JSON object:" << object;
+
+    } else {
+        qDebug() << "Invalid JSON format";
+    }
+
+    using query_t = odb::query<UavModelEntity>;
+    // 1. 建立数据库连接
+    qDebug() << "Connecting to database...";
+
+    auto& db = dbConn_->getDatabase(); // 使用成员变量获取数据库
+
+    // 2. 创建事务
+    odb::transaction trans(db.begin());
+    qDebug() << "Transaction started";
+    try {
+
+        // 3. 从JSON创建实体对象
+        UavModelEntity entity;
+
+        query_t q(query_t::true_expr); // 初始化为无条件
+        // if (object.contains("recordId") && object["recordId"].isString()) {
+        //     auto uav_recordId = object["recordId"].toString();
+        //     q = q && (query_t::id == uav_recordId.toInt());
+        // }
+
+
+        // 执行查询
+        // auto r(db.query_one<UavModelEntity>(q));
+        // if(r){
+        //     auto val{r};
+        //     // uavModelData = val;
+        //     nl::json json{*val};
+        //     qDebug() << QString::fromStdString(json.dump());
+        // }
+        // 执行查询
+        //auto result = db.query_one<UavModelEntity>(q);
+        // 关键修正1：使用 query<UavModelEntity> 获取结果集
+        using query_t = odb::query<UavModelEntity>;
+        if (object["uavType"] == "全部"){
+            qDebug()<<"查询全部无人机类型";
+        }else{
+            if (object.contains("uavType") && object["uavType"].isString()) {
+                auto uav_type = object["uavType"].toString();
+                q = q && (query_t::uavType == uav_type.toStdString());
+            }
+        }
+        if (object["uavName"] == ""){
+            qDebug()<<"查询全部无人机名称";
+        }else{
+            // 处理 name 字段（使用 == 条件）
+            if (object.contains("uavName") && object["uavName"].isString()) {
+                QString uav_name = object["uavName"].toString();
+                if (!uav_name.isEmpty()) {
+                    q = q && (query_t::uavName == uav_name.toStdString());
+                }
+            }
+        }
+        if (object["uavId"] == ""){
+            qDebug()<<"查询全部无人机型号";
+        }else{
+            if (object.contains("uavId") && object["uavId"].isString()) {
+                QString uav_id = object["uavId"].toString();
+                if (!uav_id.isEmpty()) {
+                    q = q && (query_t::uavId == uav_id.toStdString());
+                }
+            }
+        }
+        odb::result<UavModelEntity> result = db.query<UavModelEntity>(q);
+        qDebug() << "Query returned" << result.size() << "records";  // 添加此行
+        // 关键修正2：遍历所有结果
+        int sum = 0;
+        bool checked = false;
+        if(result.size()==0){
+            return queryUavModelArray;
+        }
+
+        for (UavModelEntity entity : result) { //auto&& entity : result) {
+            QJsonObject obj;
+            qDebug() << "Processing record ID:" << entity.id_;  // 输出当前记录ID
+            // 手动转换实体到 JSON（需要根据实际字段补充）
+            obj["index"] = sum;
+            obj["recordId"] = QString::number(entity.id_);
+            obj["uavId"] = QString::fromStdString(entity.uavId_);
+            obj["uavName"] = QString::fromStdString(entity.uavName_);
+            obj["uavType"] = QString::fromStdString(entity.uavType_);
+            //obj["hangingCapacity"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
+            obj["hangingCapacity"] = [&db,&entity](){//QString::fromStdString(entity.uavHangingLoctionCapacity_);
+                auto loaded{load{db}.from<UavModelMountLocationEntity>(QString::fromStdString(entity.uavHangingLoctionCapacity_))};
+                QJsonArray arr;
+                for(auto load: loaded){
+
+                    arr.append(QString::fromStdString(load.mountLocationName_));
+                }
+                return QJsonValue{arr};
+            }();
+            obj["uavLoadAmmoType"] = [&db,&entity](){
+                auto loaded{load{db}.from<AmmunitionEntity>(QString::fromStdString(entity.uavLoadAmmoType_))};
+                QJsonArray arr;
+                for(auto load: loaded){
+                    //qDebug() << "loaded: " << load.ammoName_.c_str();
+                    arr.append(QString::fromStdString(load.ammoName_));
+                }
+                return QJsonValue{arr};
+            }();
+            obj["payloadType"] = [&db,&entity](){//QString::fromStdString(entity.uavInvestigationPayloadType_);
+
+                auto loaded{load{db}.from<UavModelLoadTypeEntity>(QString::fromStdString(entity.uavInvestigationPayloadType_))};
+                QJsonArray arr;
+                for(auto load: loaded){
+                    //qDebug() << "loaded: " << load.ammoName_.c_str();
+                    arr.append(QString::fromStdString(load.loadTypeName_));
+                }
+                return QJsonValue{arr};
+            }();
+            obj["bombMethod"] = //QString::fromStdString(entity.uavBombingway_);
+                [&db,&entity](){//
+                    auto loaded{load{db}.from<UavModelBombingMethodEntity>(QString::fromStdString(entity.uavBombingway_))};
+                    QJsonArray arr;
+                    for(auto load: loaded){
+                        //qDebug() << "loaded: " << load.ammoName_.c_str();
+                        arr.append(QString::fromStdString(load.bombingMethodName_));
+                    }
+                    return QJsonValue{arr};
+                }();
+            obj["recoveryMode"] = //QString::fromStdString(entity.uavRecoveryway_);
+                [&db,&entity](){
+                    auto loaded{load{db}.from<UavModelRecoveryModeEntity>(QString::fromStdString(entity.uavRecoveryway_))};
+                    QJsonArray arr;
+                    for(auto load: loaded){
+                        //qDebug() << "loaded: " << load.ammoName_.c_str();
+                        arr.append(QString::fromStdString(load.recoveryWayName_));
+                    }
+                    return QJsonValue{arr};
+                }();
+            obj["operationMethod"] = //QString::fromStdString(entity.uavOperationWay_);
+                [&db,&entity](){
+                    auto loaded{load{db}.from<UavModelOpreationWayEntity>(QString::fromStdString(entity.uavOperationWay_))};
+                    QJsonArray arr;
+                    for(auto load: loaded){
+                        //qDebug() << "loaded: " << load.ammoName_.c_str();
+                        arr.append(QString::fromStdString(load.operationWayName_));
+                    }
+                    return QJsonValue{arr};
+                }();
+            // 使用 QDateTime 转换 std::time_t 到 QString
+
+            QDateTime dateTime;
+            dateTime = entity.uavCreatModelTime_;
+            qDebug() <<"uavCreatModelTime_"<< entity.uavCreatModelTime_;
+            obj["uavCreatModelTime"] = entity.uavCreatModelTime_.toString(Qt::ISODate);
+            obj["operation"] = "";
+            obj["checked"] = checked;
+            sum++;
+            qDebug()<<"uavModelAllDatauavcreat:";
+            queryUavModelArray.append(obj);
+        }
+        trans.commit();
+    } catch (const odb::exception& e) {
+        qCritical() << "Database error:" << e.what();
+        trans.rollback(); // 显式回滚事务（可选）
+        throw; // 重新抛出异常或返回空结果
+    }
+    return queryUavModelArray;
 }
 
 QJsonArray UavModelDao::transformQueryAllData()
@@ -344,56 +559,58 @@ QJsonObject UavModelDao::selectSomeUavModelDate(const QString &jsonStr)
         UavModelEntity entity;
 
         query_t q(query_t::true_expr); // 初始化为无条件
+        if (object.contains("recordId") && object["recordId"].isString()) {
+            auto uav_recordId = object["recordId"].toString();
+            q = q && (query_t::id == uav_recordId.toInt());
+        }
+        // if (object.contains("uavType") && object["uavType"].isString()) {
+        //     auto uav_type = object["uavType"].toString();
+        //     q = q && (query_t::uavType == uav_type.toStdString());
+        // }
 
-        // 处理 age 字段（使用 > 条件，与原始代码一致）
-        if (object.contains("uavType") && object["uavType"].isString()) {
-            auto uav_type = object["uavType"].toString();
-            q = q && (query_t::uavType == uav_type.toStdString());
-        }
-
-        // 处理 name 字段（使用 == 条件）
-        if (object.contains("uavName") && object["uavName"].isString()) {
-            QString uav_name = object["uavName"].toString();
-            if (!uav_name.isEmpty()) {
-                q = q && (query_t::uavName == uav_name.toStdString());
-            }
-        }
-        if (object.contains("uavId") && object["uavId"].isString()) {
-            QString uav_id = object["uavId"].toString();
-            if (!uav_id.isEmpty()) {
-                q = q && (query_t::uavId == uav_id.toStdString());
-            }
-        }
-        if (object.contains("hangingCapacity") && object["hangingCapacity"].isString()) {
-            QString hanging_capacity = object["hangingCapacity"].toString();
-            if (!hanging_capacity.isEmpty()) {
-                q = q && (query_t::uavHangingLoctionCapacity == hanging_capacity.toStdString());
-            }
-        }
-        if (object.contains("operationMethod") && object["operationMethod"].isString()) {
-            QString operation_method = object["operationMethod"].toString();
-            if (!operation_method.isEmpty()) {
-                q = q && (query_t::uavOperationWay == operation_method.toStdString());
-            }
-        }
-        if (object.contains("bombMethod") && object["bombMethod"].isString()) {
-            QString bomb_method = object["bombMethod"].toString();
-            if (!bomb_method.isEmpty()) {
-                q = q && (query_t::uavBombingway == bomb_method.toStdString());
-            }
-        }
-        if (object.contains("recoveryMode") && object["recoveryMode"].isString()) {
-            QString recovery_mode = object["recoveryMode"].toString();
-            if (!recovery_mode.isEmpty()) {
-                q = q && (query_t::uavRecoveryway == recovery_mode.toStdString());
-            }
-        }
-        if (object.contains("payloadType") && object["payloadType"].isString()) {
-            QString payload_type = object["payloadType"].toString();
-            if (!payload_type.isEmpty()) {
-                q = q && (query_t::uavInvestigationPayloadType == payload_type.toStdString());
-            }
-        }
+        // // 处理 name 字段（使用 == 条件）
+        // if (object.contains("uavName") && object["uavName"].isString()) {
+        //     QString uav_name = object["uavName"].toString();
+        //     if (!uav_name.isEmpty()) {
+        //         q = q && (query_t::uavName == uav_name.toStdString());
+        //     }
+        // }
+        // if (object.contains("uavId") && object["uavId"].isString()) {
+        //     QString uav_id = object["uavId"].toString();
+        //     if (!uav_id.isEmpty()) {
+        //         q = q && (query_t::uavId == uav_id.toStdString());
+        //     }
+        // }
+        // if (object.contains("hangingCapacity") && object["hangingCapacity"].isString()) {
+        //     QString hanging_capacity = object["hangingCapacity"].toString();
+        //     if (!hanging_capacity.isEmpty()) {
+        //         q = q && (query_t::uavHangingLoctionCapacity == hanging_capacity.toStdString());
+        //     }
+        // }
+        // if (object.contains("operationMethod") && object["operationMethod"].isString()) {
+        //     QString operation_method = object["operationMethod"].toString();
+        //     if (!operation_method.isEmpty()) {
+        //         q = q && (query_t::uavOperationWay == operation_method.toStdString());
+        //     }
+        // }
+        // if (object.contains("bombMethod") && object["bombMethod"].isString()) {
+        //     QString bomb_method = object["bombMethod"].toString();
+        //     if (!bomb_method.isEmpty()) {
+        //         q = q && (query_t::uavBombingway == bomb_method.toStdString());
+        //     }
+        // }
+        // if (object.contains("recoveryMode") && object["recoveryMode"].isString()) {
+        //     QString recovery_mode = object["recoveryMode"].toString();
+        //     if (!recovery_mode.isEmpty()) {
+        //         q = q && (query_t::uavRecoveryway == recovery_mode.toStdString());
+        //     }
+        // }
+        // if (object.contains("payloadType") && object["payloadType"].isString()) {
+        //     QString payload_type = object["payloadType"].toString();
+        //     if (!payload_type.isEmpty()) {
+        //         q = q && (query_t::uavInvestigationPayloadType == payload_type.toStdString());
+        //     }
+        // }
 
         // 执行查询
         // auto r(db.query_one<UavModelEntity>(q));
