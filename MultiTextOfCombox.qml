@@ -78,6 +78,8 @@ Rectangle {
               TableModelColumn { display: "index"   }        // 序号
               TableModelColumn { display: "uavmountLocationName" }   // 挂载位置
               TableModelColumn { display: "uavmountLocationId" }    // 位置编号
+              TableModelColumn { display: "uavmountLocationQuantity" }   // 挂载数量
+              TableModelColumn { display: "uavmountLocationCapacity" }    // 载弹量
             }
 
                    ColumnLayout {
@@ -107,9 +109,9 @@ Rectangle {
                                property color scrollBarColor: "#E5E5E5"
                                property int scrollBarWidth: 7
                                //列宽
-                               property variant columnWidthArr: [50,130, 200, 180]
+                               property variant columnWidthArr: [50,100, 100, 100,100,100]
                                // 显示10个字段
-                               property var horHeader: ["","序号", "挂载位置", "位置编号"]
+                               property var horHeader: ["","序号", "挂载位置", "位置编号","挂载数量","载弹量"]
                                property int selected: -1
                                //数据展示
                                TableView {

@@ -79,6 +79,8 @@ Rectangle {
               TableModelColumn { display: "index"   }        // 序号
               TableModelColumn { display: "uavmountLocationName" }   // 挂载位置
               TableModelColumn { display: "uavmountLocationId" }    // 位置编号
+              TableModelColumn { display: "uavmountLocationQuantity" }   // 挂载数量
+              TableModelColumn { display: "uavmountLocationCapacity" }    // 载弹量
             }
 
                    ColumnLayout {
@@ -163,9 +165,9 @@ Rectangle {
                                property color scrollBarColor: "#E5E5E5"
                                property int scrollBarWidth: 7
                                //列宽
-                               property variant columnWidthArr: [50,130, 200, 180]
+                               property variant columnWidthArr: [50,50, 120, 120,100,100]
                                // 显示10个字段
-                               property var horHeader: ["","序号", "挂载位置", "位置编号"]
+                               property var horHeader: ["","序号", "挂载位置", "位置编号","挂载数量","载弹量"]
                                property int selected: -1
                                //数据展示
                                TableView {
@@ -324,7 +326,7 @@ Rectangle {
                                                         const rowIndex = model.row    // 获取当前行索引
                                                         const colIndex = column      // 当前列索引
 
-                                                         resultData[rowIndex].uavmountLocationId = text
+                                                        resultData[rowIndex].uavmountLocationId = text
                                                         updateUavAllData()
                                                     }
                                                 }
@@ -343,6 +345,100 @@ Rectangle {
                                                 }
                                             }
                                         }
+                                        DelegateChoice {
+                                            column:4
+                                            delegate: Rectangle {
+                                                color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
+                                                width: control.columnWidthArr[column]
+                                                height: control.rowHeight
+
+                                                TextField {
+                                                    anchors.fill: parent
+                                                    verticalAlignment: Text.AlignVCenter
+                                                    horizontalAlignment: Text.AlignHCenter
+                                                    text: display
+                                                    font.pointSize: 12
+                                                    //color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
+                                                    color: "#000000"
+                                                    //elide: Text.ElideRight
+                                                    // 限制输入为数字和小数
+                                                    inputMethodHints: Qt.ImhFormattedNumbersOnly
+                                                    // 当文本变化时更新模型数据
+                                                    onEditingFinished: {
+                                                        // 方法1：通过模型索引修改（推荐）
+                                                        const rowIndex = model.row    // 获取当前行索引
+                                                        const colIndex = column      // 当前列索引
+                                                        // 允许数字和小数点，但不允许连续的小数点
+                                                                var regex = /^[0-9]*\.?[0-9]*$/;
+                                                        var lastValidText = 0.0
+                                                                if (!regex.test(text)) {
+                                                                    // 如果输入不符合要求，恢复到上一次有效的值
+                                                                    text = lastValidText;
+                                                                } else {
+                                                                    // 保存当前有效的值
+                                                                    lastValidText = text;
+                                                                }
+                                                         resultData[rowIndex].uavmountLocationQuantity = lastValidText
+                                                        updateUavAllData()
+                                                    }
+                                                }
+
+                                                Rectangle {
+                                                    color: borderColor
+                                                    width: parent.width
+                                                    height: 1
+                                                    anchors.bottom: parent.bottom
+                                                }
+                                                Rectangle {
+                                                    height: parent.height
+                                                    width: 1
+                                                    anchors.right: parent.right
+                                                    color: borderColor
+                                                }
+                                            }
+                                        }
+                                        DelegateChoice {
+                                            column:5
+                                            delegate: Rectangle {
+                                                color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
+                                                width: control.columnWidthArr[column]
+                                                height: control.rowHeight
+
+                                                TextField {
+                                                    anchors.fill: parent
+                                                    verticalAlignment: Text.AlignVCenter
+                                                    horizontalAlignment: Text.AlignHCenter
+                                                    text: display
+                                                    font.pointSize: 12
+                                                    //color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
+                                                    color: "#000000"
+                                                    //elide: Text.ElideRight
+                                                    // 当文本变化时更新模型数据
+                                                    onEditingFinished: {
+                                                        // 方法1：通过模型索引修改（推荐）
+                                                        const rowIndex = model.row    // 获取当前行索引
+                                                        const colIndex = column      // 当前列索引
+
+                                                        resultData[rowIndex].uavmountLocationCapacity = text
+                                                        updateUavAllData()
+                                                    }
+                                                }
+
+                                                Rectangle {
+                                                    color: borderColor
+                                                    width: parent.width
+                                                    height: 1
+                                                    anchors.bottom: parent.bottom
+                                                }
+                                                Rectangle {
+                                                    height: parent.height
+                                                    width: 1
+                                                    anchors.right: parent.right
+                                                    color: borderColor
+                                                }
+                                            }
+                                        }
+
                                        DelegateChoice {
                                             //column:1
                                             delegate: Rectangle {
@@ -493,10 +589,14 @@ Rectangle {
            function saveUavMountLoactionData(){
                var uavMountLoactionData = {
                    uavmountLocationId:"",
-                   uavmountLocationName:""
+                   uavmountLocationName:"",
+                   uavmountLocationQuantity:0.0,
+                   uavmountLocationCapacity:0.0
                }
                uavMountLoactionData.uavmountLocationId = addMountLocationIdText.text
                uavMountLoactionData.uavmountLocationName = addMountLocationText.text
+               uavMountLoactionData.uavmountLocationQuantity = 0.0
+               uavMountLoactionData.uavmountLocationCapacity = 0.0
                // 打印当前函数的名称
                 console.log("当前函数名称:", arguments.callee.name);
                if(uavMountLoactionData.uavmountLocationName.length  === 0){
@@ -576,7 +676,7 @@ Rectangle {
            function updateMountLocationData(){
                // 打印当前函数的名称
                 console.log("当前函数名称:", arguments.callee.name);
-                //console.log("resultData"+JSON.stringify(resultData))       
+                //console.log("resultData"+JSON.stringify(resultData))
                let result = uavMountLocationDaoTableModel.updateUavMountLocationDate(resultData)
                loadUavMountLocationAllData()
                if(result === true){

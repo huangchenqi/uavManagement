@@ -181,7 +181,7 @@ namespace odb
 
     static const uavHeight_type_ uavHeight;
 
-    // uavInvisibility
+    // uavLoadAmmoType
     //
     typedef
     pgsql::query_column<
@@ -189,9 +189,9 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    uavInvisibility_type_;
+    uavLoadAmmoType_type_;
 
-    static const uavInvisibility_type_ uavInvisibility;
+    static const uavLoadAmmoType_type_ uavLoadAmmoType;
 
     // uavFlightHeightRangeMin
     //
@@ -746,9 +746,9 @@ namespace odb
   uavHeight (A::table_name, "\"height\"", 0);
 
   template <typename A>
-  const typename query_columns< ::UavModelEntity, id_pgsql, A >::uavInvisibility_type_
+  const typename query_columns< ::UavModelEntity, id_pgsql, A >::uavLoadAmmoType_type_
   query_columns< ::UavModelEntity, id_pgsql, A >::
-  uavInvisibility (A::table_name, "\"have_invisibility\"", 0);
+  uavLoadAmmoType (A::table_name, "\"load_ammo_type\"", 0);
 
   template <typename A>
   const typename query_columns< ::UavModelEntity, id_pgsql, A >::uavFlightHeightRangeMin_type_
@@ -1024,11 +1024,11 @@ namespace odb
       float uavHeight_value;
       bool uavHeight_null;
 
-      // uavInvisibility_
+      // uavLoadAmmoType_
       //
-      details::buffer uavInvisibility_value;
-      std::size_t uavInvisibility_size;
-      bool uavInvisibility_null;
+      details::buffer uavLoadAmmoType_value;
+      std::size_t uavLoadAmmoType_size;
+      bool uavLoadAmmoType_null;
 
       // uavFlightHeightRangeMin_
       //
@@ -1237,7 +1237,7 @@ namespace odb
 
       // uavCreatModelTime_
       //
-     unsigned long long uavCreatModelTime_value;
+      unsigned long long uavCreatModelTime_value;
       bool uavCreatModelTime_null;
 
       // uavImgName_

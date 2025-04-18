@@ -27,6 +27,11 @@ public:
     std::string mountLocationId_;
 #pragma db not_null column("mountlocation_name")                      // 挂载位置名称
     std::string mountLocationName_;
+#pragma db column("mountlocation_quantity") //type(float)
+    float mountlocationQuantity_;
+
+#pragma db column("mountlocation_capacity") //type(float4(24))
+    float mountlocationCapacity_;
 
 private:
     //friend class odb::access; // 允许ODB访问私有成员

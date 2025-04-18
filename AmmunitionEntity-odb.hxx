@@ -17,6 +17,7 @@
 
 #include <memory>
 #include <cstddef>
+#include <utility>
 
 #include <odb/core.hxx>
 #include <odb/traits.hxx>
@@ -108,7 +109,7 @@ namespace odb
 
     static const id_type_ id;
 
-    // ammunitionType
+    // ammoType
     //
     typedef
     pgsql::query_column<
@@ -116,11 +117,11 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    ammunitionType_type_;
+    ammoType_type_;
 
-    static const ammunitionType_type_ ammunitionType;
+    static const ammoType_type_ ammoType;
 
-    // ammunitionName
+    // ammoName
     //
     typedef
     pgsql::query_column<
@@ -128,11 +129,11 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    ammunitionName_type_;
+    ammoName_type_;
 
-    static const ammunitionName_type_ ammunitionName;
+    static const ammoName_type_ ammoName;
 
-    // ammunitionId
+    // ammoId
     //
     typedef
     pgsql::query_column<
@@ -140,11 +141,23 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    ammunitionId_type_;
+    ammoId_type_;
 
-    static const ammunitionId_type_ ammunitionId;
+    static const ammoId_type_ ammoId;
 
-    // ammunitionLength
+    // ammoToUavModel
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    ammoToUavModel_type_;
+
+    static const ammoToUavModel_type_ ammoToUavModel;
+
+    // ammoLength
     //
     typedef
     pgsql::query_column<
@@ -152,11 +165,11 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    ammunitionLength_type_;
+    ammoLength_type_;
 
-    static const ammunitionLength_type_ ammunitionLength;
+    static const ammoLength_type_ ammoLength;
 
-    // ammunitionWidth
+    // ammoWidth
     //
     typedef
     pgsql::query_column<
@@ -164,11 +177,11 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    ammunitionWidth_type_;
+    ammoWidth_type_;
 
-    static const ammunitionWidth_type_ ammunitionWidth;
+    static const ammoWidth_type_ ammoWidth;
 
-    // ammunitionWeight
+    // ammoWeight
     //
     typedef
     pgsql::query_column<
@@ -176,9 +189,9 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    ammunitionWeight_type_;
+    ammoWeight_type_;
 
-    static const ammunitionWeight_type_ ammunitionWeight;
+    static const ammoWeight_type_ ammoWeight;
 
     // guidanceType
     //
@@ -192,7 +205,7 @@ namespace odb
 
     static const guidanceType_type_ guidanceType;
 
-    // placementHeightMin
+    // launchHeightMin
     //
     typedef
     pgsql::query_column<
@@ -200,11 +213,11 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    placementHeightMin_type_;
+    launchHeightMin_type_;
 
-    static const placementHeightMin_type_ placementHeightMin;
+    static const launchHeightMin_type_ launchHeightMin;
 
-    // placementHeightMax
+    // launchHeightMax
     //
     typedef
     pgsql::query_column<
@@ -212,11 +225,11 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    placementHeightMax_type_;
+    launchHeightMax_type_;
 
-    static const placementHeightMax_type_ placementHeightMax;
+    static const launchHeightMax_type_ launchHeightMax;
 
-    // placementDistanceMin
+    // launchDistanceMin
     //
     typedef
     pgsql::query_column<
@@ -224,11 +237,11 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    placementDistanceMin_type_;
+    launchDistanceMin_type_;
 
-    static const placementDistanceMin_type_ placementDistanceMin;
+    static const launchDistanceMin_type_ launchDistanceMin;
 
-    // placementDistanceMax
+    // launchDistanceMax
     //
     typedef
     pgsql::query_column<
@@ -236,11 +249,11 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    placementDistanceMax_type_;
+    launchDistanceMax_type_;
 
-    static const placementDistanceMax_type_ placementDistanceMax;
+    static const launchDistanceMax_type_ launchDistanceMax;
 
-    // projectionAngle
+    // launchAngle
     //
     typedef
     pgsql::query_column<
@@ -248,11 +261,35 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    projectionAngle_type_;
+    launchAngle_type_;
 
-    static const projectionAngle_type_ projectionAngle;
+    static const launchAngle_type_ launchAngle;
 
-    // deliveryMethod
+    // launchWay
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    launchWay_type_;
+
+    static const launchWay_type_ launchWay;
+
+    // approveAttackTargetType
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    approveAttackTargetType_type_;
+
+    static const approveAttackTargetType_type_ approveAttackTargetType;
+
+    // killingDose
     //
     typedef
     pgsql::query_column<
@@ -260,47 +297,23 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    deliveryMethod_type_;
+    killingDose_type_;
 
-    static const deliveryMethod_type_ deliveryMethod;
-
-    // attackTargetType
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        float,
-        pgsql::id_real >::query_type,
-      pgsql::id_real >
-    attackTargetType_type_;
-
-    static const attackTargetType_type_ attackTargetType;
-
-    // lethalDose
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        float,
-        pgsql::id_real >::query_type,
-      pgsql::id_real >
-    lethalDose_type_;
-
-    static const lethalDose_type_ lethalDose;
+    static const killingDose_type_ killingDose;
 
     // killingMethod
     //
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        float,
-        pgsql::id_real >::query_type,
-      pgsql::id_real >
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
     killingMethod_type_;
 
     static const killingMethod_type_ killingMethod;
 
-    // damageDepth
+    // killingDepth
     //
     typedef
     pgsql::query_column<
@@ -308,9 +321,9 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    damageDepth_type_;
+    killingDepth_type_;
 
-    static const damageDepth_type_ damageDepth;
+    static const killingDepth_type_ killingDepth;
 
     // killingRangeMin
     //
@@ -336,7 +349,19 @@ namespace odb
 
     static const killingRangeMax_type_ killingRangeMax;
 
-    // ammunitionCreatModelTime
+    // recordCreationTime
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::QDateTime,
+        pgsql::id_timestamp >::query_type,
+      pgsql::id_timestamp >
+    recordCreationTime_type_;
+
+    static const recordCreationTime_type_ recordCreationTime;
+
+    // ammoImgUrl
     //
     typedef
     pgsql::query_column<
@@ -344,23 +369,11 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    ammunitionCreatModelTime_type_;
+    ammoImgUrl_type_;
 
-    static const ammunitionCreatModelTime_type_ ammunitionCreatModelTime;
+    static const ammoImgUrl_type_ ammoImgUrl;
 
-    // uavImgUrl
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        ::std::string,
-        pgsql::id_string >::query_type,
-      pgsql::id_string >
-    uavImgUrl_type_;
-
-    static const uavImgUrl_type_ uavImgUrl;
-
-    // imageName
+    // ammoImageName
     //
     typedef
     pgsql::query_column<
@@ -368,9 +381,9 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    imageName_type_;
+    ammoImageName_type_;
 
-    static const imageName_type_ imageName;
+    static const ammoImageName_type_ ammoImageName;
   };
 
   template <typename A>
@@ -379,34 +392,39 @@ namespace odb
   id (A::table_name, "\"id\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammunitionType_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoType_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  ammunitionType (A::table_name, "\"ammunition_type\"", 0);
+  ammoType (A::table_name, "\"ammo_type\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammunitionName_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoName_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  ammunitionName (A::table_name, "\"ammunition_name\"", 0);
+  ammoName (A::table_name, "\"ammo_name\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammunitionId_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoId_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  ammunitionId (A::table_name, "\"ammunition_id\"", 0);
+  ammoId (A::table_name, "\"ammo_id\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammunitionLength_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoToUavModel_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  ammunitionLength (A::table_name, "\"length\"", 0);
+  ammoToUavModel (A::table_name, "\"ammo_to_uavmodel\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammunitionWidth_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoLength_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  ammunitionWidth (A::table_name, "\"width\"", 0);
+  ammoLength (A::table_name, "\"length\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammunitionWeight_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoWidth_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  ammunitionWeight (A::table_name, "\"weight\"", 0);
+  ammoWidth (A::table_name, "\"width\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoWeight_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  ammoWeight (A::table_name, "\"weight\"", 0);
 
   template <typename A>
   const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::guidanceType_type_
@@ -414,44 +432,44 @@ namespace odb
   guidanceType (A::table_name, "\"guidance_type\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::placementHeightMin_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launchHeightMin_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  placementHeightMin (A::table_name, "\"placement_height_min\"", 0);
+  launchHeightMin (A::table_name, "\"launch_height_min\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::placementHeightMax_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launchHeightMax_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  placementHeightMax (A::table_name, "\"placement_height_max\"", 0);
+  launchHeightMax (A::table_name, "\"launch_height_max\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::placementDistanceMin_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launchDistanceMin_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  placementDistanceMin (A::table_name, "\"placement_distance_min\"", 0);
+  launchDistanceMin (A::table_name, "\"launch_distance_min\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::placementDistanceMax_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launchDistanceMax_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  placementDistanceMax (A::table_name, "\"placement_distance_max\"", 0);
+  launchDistanceMax (A::table_name, "\"launch_distance_max\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::projectionAngle_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launchAngle_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  projectionAngle (A::table_name, "\"projection_angle\"", 0);
+  launchAngle (A::table_name, "\"launch_angle\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::deliveryMethod_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launchWay_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  deliveryMethod (A::table_name, "\"delivery_method\"", 0);
+  launchWay (A::table_name, "\"launch_method\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::attackTargetType_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::approveAttackTargetType_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  attackTargetType (A::table_name, "\"attack_target_type\"", 0);
+  approveAttackTargetType (A::table_name, "\"approve_attack_target_type\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::lethalDose_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::killingDose_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  lethalDose (A::table_name, "\"lethal_dose\"", 0);
+  killingDose (A::table_name, "\"killing_dose\"", 0);
 
   template <typename A>
   const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::killingMethod_type_
@@ -459,9 +477,9 @@ namespace odb
   killingMethod (A::table_name, "\"killing_method\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::damageDepth_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::killingDepth_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  damageDepth (A::table_name, "\"damage_depth\"", 0);
+  killingDepth (A::table_name, "\"killing_depth\"", 0);
 
   template <typename A>
   const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::killingRangeMin_type_
@@ -474,19 +492,19 @@ namespace odb
   killingRangeMax (A::table_name, "\"killing_range_max\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammunitionCreatModelTime_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::recordCreationTime_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  ammunitionCreatModelTime (A::table_name, "\"create_time\"", 0);
+  recordCreationTime (A::table_name, "\"recordcreation_time\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::uavImgUrl_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoImgUrl_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  uavImgUrl (A::table_name, "\"image_url\"", 0);
+  ammoImgUrl (A::table_name, "\"image_url\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::imageName_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoImageName_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  imageName (A::table_name, "\"image_name\"", 0);
+  ammoImageName (A::table_name, "\"image_name\"", 0);
 
   template <typename A>
   struct pointer_query_columns< ::AmmunitionEntity, id_pgsql, A >:
@@ -514,38 +532,44 @@ namespace odb
       long long id_value;
       bool id_null;
 
-      // ammunitionType_
+      // ammoType_
       //
-      details::buffer ammunitionType_value;
-      std::size_t ammunitionType_size;
-      bool ammunitionType_null;
+      details::buffer ammoType_value;
+      std::size_t ammoType_size;
+      bool ammoType_null;
 
-      // ammunitionName_
+      // ammoName_
       //
-      details::buffer ammunitionName_value;
-      std::size_t ammunitionName_size;
-      bool ammunitionName_null;
+      details::buffer ammoName_value;
+      std::size_t ammoName_size;
+      bool ammoName_null;
 
-      // ammunitionId_
+      // ammoId_
       //
-      details::buffer ammunitionId_value;
-      std::size_t ammunitionId_size;
-      bool ammunitionId_null;
+      details::buffer ammoId_value;
+      std::size_t ammoId_size;
+      bool ammoId_null;
 
-      // ammunitionLength_
+      // ammoToUavModel_
       //
-      float ammunitionLength_value;
-      bool ammunitionLength_null;
+      details::buffer ammoToUavModel_value;
+      std::size_t ammoToUavModel_size;
+      bool ammoToUavModel_null;
 
-      // ammunitionWidth_
+      // ammoLength_
       //
-      float ammunitionWidth_value;
-      bool ammunitionWidth_null;
+      float ammoLength_value;
+      bool ammoLength_null;
 
-      // ammunitionWeight_
+      // ammoWidth_
       //
-      float ammunitionWeight_value;
-      bool ammunitionWeight_null;
+      float ammoWidth_value;
+      bool ammoWidth_null;
+
+      // ammoWeight_
+      //
+      float ammoWeight_value;
+      bool ammoWeight_null;
 
       // guidanceType_
       //
@@ -553,55 +577,58 @@ namespace odb
       std::size_t guidanceType_size;
       bool guidanceType_null;
 
-      // placementHeightMin_
+      // launchHeightMin_
       //
-      float placementHeightMin_value;
-      bool placementHeightMin_null;
+      float launchHeightMin_value;
+      bool launchHeightMin_null;
 
-      // placementHeightMax_
+      // launchHeightMax_
       //
-      float placementHeightMax_value;
-      bool placementHeightMax_null;
+      float launchHeightMax_value;
+      bool launchHeightMax_null;
 
-      // placementDistanceMin_
+      // launchDistanceMin_
       //
-      float placementDistanceMin_value;
-      bool placementDistanceMin_null;
+      float launchDistanceMin_value;
+      bool launchDistanceMin_null;
 
-      // placementDistanceMax_
+      // launchDistanceMax_
       //
-      float placementDistanceMax_value;
-      bool placementDistanceMax_null;
+      float launchDistanceMax_value;
+      bool launchDistanceMax_null;
 
-      // projectionAngle_
+      // launchAngle_
       //
-      float projectionAngle_value;
-      bool projectionAngle_null;
+      float launchAngle_value;
+      bool launchAngle_null;
 
-      // deliveryMethod_
+      // launchWay_
       //
-      float deliveryMethod_value;
-      bool deliveryMethod_null;
+      details::buffer launchWay_value;
+      std::size_t launchWay_size;
+      bool launchWay_null;
 
-      // attackTargetType_
+      // approveAttackTargetType_
       //
-      float attackTargetType_value;
-      bool attackTargetType_null;
+      details::buffer approveAttackTargetType_value;
+      std::size_t approveAttackTargetType_size;
+      bool approveAttackTargetType_null;
 
-      // lethalDose_
+      // killingDose_
       //
-      float lethalDose_value;
-      bool lethalDose_null;
+      float killingDose_value;
+      bool killingDose_null;
 
       // killingMethod_
       //
-      float killingMethod_value;
+      details::buffer killingMethod_value;
+      std::size_t killingMethod_size;
       bool killingMethod_null;
 
-      // damageDepth_
+      // killingDepth_
       //
-      float damageDepth_value;
-      bool damageDepth_null;
+      float killingDepth_value;
+      bool killingDepth_null;
 
       // killingRangeMin_
       //
@@ -613,22 +640,21 @@ namespace odb
       float killingRangeMax_value;
       bool killingRangeMax_null;
 
-      // ammunitionCreatModelTime_
+      // recordCreationTime_
       //
-      details::buffer ammunitionCreatModelTime_value;
-      std::size_t ammunitionCreatModelTime_size;
-      bool ammunitionCreatModelTime_null;
+      unsigned long long recordCreationTime_value;
+      bool recordCreationTime_null;
 
-      // uavImgUrl_
+      // ammoImgUrl_
       //
-      details::buffer uavImgUrl_value;
-      std::size_t uavImgUrl_size;
-      bool uavImgUrl_null;
+      details::buffer ammoImgUrl_value;
+      std::size_t ammoImgUrl_size;
+      bool ammoImgUrl_null;
 
-      // imageName_
+      // ammoImageName_
       //
-      float imageName_value;
-      bool imageName_null;
+      float ammoImageName_value;
+      bool ammoImageName_null;
 
       std::size_t version;
     };
@@ -672,7 +698,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 23UL;
+    static const std::size_t column_count = 24UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;

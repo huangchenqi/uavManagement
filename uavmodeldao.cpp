@@ -1,11 +1,13 @@
 #include "uavmodeldao.h"
-#include "odb/database.hxx"
+#include "uavmodelbombingmethoddao.h"
+#include "uavmodelloadtypedao.h"
+#include "uavmodelrecoverymodedao.h"
+#include "uavmodeloperationwaydao.h"
+#include "uavmountlocationdao.h"
 #include "odb/pgsql/database.hxx"
-#include "UavModelEntity-odb.hxx"
-#include "uavmodelentity.h"
+
 #include <stdexcept>
-#include <odb/database.hxx>
-#include <odb/transaction.hxx>
+
 // ODB 头文件
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
@@ -19,6 +21,14 @@
 #include <QDebug>
 #include "json.hpp"
 
+#include "AmmunitionEntity-odb.hxx"
+#include "UavModelEntity-odb.hxx"
+#include "uavmodelentity-odb.hxx"
+#include "UavModelLoadTypeEntity-odb.hxx"
+#include "UavModelBombingMethodEntity-odb.hxx"
+#include "UavModelMountLocationEntity-odb.hxx"
+#include "UavModelRecoveryModeEntity-odb.hxx"
+#include "UavModelOperationWayEntity-odb.hxx"
 namespace nl = nlohmann;
 
 QDateTime covert(unsigned long long i){
@@ -45,6 +55,25 @@ UavModelDao::UavModelDao(QObject* parent) : QObject(parent){ //::UavModelDao() {
     //     5432
     //     );
 } //UavModelDao::UavModelDao(QObject *parent) : QObject(parent){}
+
+struct load{
+private:
+    odb::pgsql::database& db_;
+public:
+    load(odb::pgsql::database& db):db_{db}{}
+
+    template<typename T>
+    QVector<T> from(QString fileds){
+        QVector<T> rst;
+        for(auto&& id_ : fileds.split(",")){
+            auto id{id_.toLong()};
+            auto pload{db_.load<T>(id)};
+            if(pload) rst.push_back(*pload);
+        }
+        return rst;
+    }
+
+};
 
 QJsonArray UavModelDao::selectUavModelAllData()
 {
@@ -87,13 +116,57 @@ QJsonArray UavModelDao::selectUavModelAllData()
             obj["uavId"] = QString::fromStdString(entity.uavId_);
             obj["uavName"] = QString::fromStdString(entity.uavName_);
             obj["uavType"] = QString::fromStdString(entity.uavType_);
-            obj["payloadType"] = QString::fromStdString(entity.uavInvestigationPayloadType_);
-            obj["bombMethod"] = QString::fromStdString(entity.uavBombingway_);
-            obj["recoveryMode"] = QString::fromStdString(entity.uavRecoveryway_);
-            obj["operationMethod"] = QString::fromStdString(entity.uavOperationWay_);
-            obj["hangingCapacity"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
-            obj["uavInvisibility"] = QString::fromStdString(entity.uavInvisibility_);
 
+            obj["hangingCapacity"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
+            obj["uavLoadAmmoType"] = [&db,&entity](){
+                auto loaded{load{db}.from<AmmunitionEntity>(QString::fromStdString(entity.uavLoadAmmoType_))};
+                QJsonArray arr;
+                for(auto load: loaded){
+                    //qDebug() << "loaded: " << load.ammoName_.c_str();
+                    arr.append(QString::fromStdString(load.ammoName_));
+                }
+                return QJsonValue{arr};
+            }();
+            obj["payloadType"] = [&db,&entity](){//QString::fromStdString(entity.uavInvestigationPayloadType_);
+
+                auto loaded{load{db}.from<UavModelLoadTypeEntity>(QString::fromStdString(entity.uavInvestigationPayloadType_))};
+                QJsonArray arr;
+                for(auto load: loaded){
+                    //qDebug() << "loaded: " << load.ammoName_.c_str();
+                    arr.append(QString::fromStdString(load.loadTypeName_));
+                }
+                return QJsonValue{arr};
+            }();
+            obj["bombMethod"] = //QString::fromStdString(entity.uavBombingway_);
+                [&db,&entity](){//
+                auto loaded{load{db}.from<UavModelBombingMethodEntity>(QString::fromStdString(entity.uavBombingway_))};
+                QJsonArray arr;
+                for(auto load: loaded){
+                    //qDebug() << "loaded: " << load.ammoName_.c_str();
+                    arr.append(QString::fromStdString(load.bombingMethodName_));
+                }
+                return QJsonValue{arr};
+            }();
+            obj["recoveryMode"] = //QString::fromStdString(entity.uavRecoveryway_);
+                [&db,&entity](){
+                auto loaded{load{db}.from<UavModelRecoveryModeEntity>(QString::fromStdString(entity.uavRecoveryway_))};
+                QJsonArray arr;
+                for(auto load: loaded){
+                    //qDebug() << "loaded: " << load.ammoName_.c_str();
+                    arr.append(QString::fromStdString(load.recoveryWayName_));
+                }
+                return QJsonValue{arr};
+            }();
+            obj["operationMethod"] = //QString::fromStdString(entity.uavOperationWay_);
+                [&db,&entity](){
+                auto loaded{load{db}.from<UavModelOpreationWayEntity>(QString::fromStdString(entity.uavOperationWay_))};
+                QJsonArray arr;
+                for(auto load: loaded){
+                    //qDebug() << "loaded: " << load.ammoName_.c_str();
+                    arr.append(QString::fromStdString(load.operationWayName_));
+                }
+                return QJsonValue{arr};
+            }();
             // 使用 QDateTime 转换 std::time_t 到 QString
 
             QDateTime dateTime;
@@ -115,10 +188,132 @@ QJsonArray UavModelDao::selectUavModelAllData()
         throw; // 或返回包含错误信息的 JSON
     }
     QJsonDocument doc(uavModelData);
-    qDebug()<<"当前函数名称:" << __FUNCTION__<<":";
+    qDebug()<<"当前函数名称bbbbbbbbbbbbb:" << __FUNCTION__<<":";
     qDebug().noquote() << doc.toJson(QJsonDocument::Indented);
     return uavModelData;
 
+}
+
+QJsonArray UavModelDao::transformQueryAllData()
+{
+    QJsonArray transformUavData;
+    QJsonArray queryUavAllData = selectUavModelAllData();
+    UavModelBombingMethodDao uavModelBombWayDao;
+    UavModelLoadTypeDao uavModelLoadTypeDao;
+    UavModelRecoveryModeDao uavModelRecovery;
+    UavModelOperationWayDao uavModelOpreation;
+    UavMountLocationDao uavMountLocationDao;
+    QJsonArray queryUavBombAllData = uavModelBombWayDao.selectUavModelBombingMethodAllData();
+    QJsonArray queryUavLoadTypeAllData = uavModelBombWayDao.selectUavModelBombingMethodAllData();
+    QJsonArray queryUavRecoveryAllData = uavModelRecovery.selectModelRecoveryModeAllData();
+    QJsonArray queryUavOperationAllData = uavModelOpreation.selectModelOperationWayAllData();
+    QJsonArray queryUavMountAllData = uavMountLocationDao.selectUavMountLocationAllData();
+    QJsonDocument doc(queryUavAllData);
+    QJsonDocument bdoc(queryUavBombAllData);
+    qDebug()<<"当前函数名称:" << __FUNCTION__<<":";
+    qDebug().noquote() << doc.toJson(QJsonDocument::Indented);
+    qDebug()<<"当前函数名称:" << __FUNCTION__<<":";
+    qDebug().noquote() << bdoc.toJson(QJsonDocument::Indented);
+    return transformUavData;
+}
+
+QHash<QString, QString> UavModelDao::createIdMap(const QJsonArray &bArray)
+{
+    QHash<QString, QString> idMap;
+    for (const QJsonValue &val : bArray) {
+        QJsonObject obj = val.toObject();
+        QString id = obj["recordId"].toString();
+        QString name = obj["uavComponeName"].toString();
+        if (!id.isEmpty() && !name.isEmpty()) {
+            idMap.insert(id, name);
+        }
+    }
+    return idMap;
+}
+
+QJsonArray UavModelDao::ProcessUavComponentWay(const QString &uavComponent, const QHash<QString, QString> &idMap)
+{
+    QJsonArray newArray;
+    QJsonParseError parseError;
+
+    QJsonDocument doc = QJsonDocument::fromJson(uavComponent.toUtf8(), &parseError);
+    if (parseError.error != QJsonParseError::NoError || !doc.isArray()) {
+        qWarning() << "Invalid JSON array format:" << uavComponent;
+        return newArray;
+    }
+
+    QJsonArray originalArray = doc.array();
+    for (const QJsonValue &item : originalArray) {
+        QString element = item.toString();
+
+        // 直接匹配完整ID
+        if (idMap.contains(element)) {
+            newArray.append(idMap[element]);
+            continue;
+        }
+
+        // 处理带冒号的格式
+        if (element.contains(":")) {
+            QStringList parts = element.split(":");
+            if (parts.size() >= 2) {
+                QString id = parts[1].trimmed();
+                if (idMap.contains(id)) {
+                    newArray.append(QString("%1:%2").arg(parts[0].trimmed()).arg(idMap[id]));
+                }
+            }
+        }
+    }
+
+    return newArray;
+}
+
+QJsonArray UavModelDao::processData(const QJsonArray &aArray, const QHash<QString, QString> &idMap)
+{
+    QJsonArray cArray;
+    const QStringList targetFields = {
+        "bombMethod",
+        "operationMethod",
+        "payloadType",
+        "recoveryMode"
+    };
+
+    for (const QJsonValue &val : aArray) {
+        QJsonObject originalObj = val.toObject();
+        QJsonObject newObj;
+        bool hasValidData = false;
+
+        // 复制非目标字段
+        for (auto it = originalObj.begin(); it != originalObj.end(); ++it) {
+            if (!targetFields.contains(it.key())) {
+                newObj[it.key()] = it.value();
+            }
+        }
+
+        // 处理所有目标字段
+        foreach (const QString &field, targetFields) {
+            if (!originalObj.contains(field)) continue;
+
+            QJsonArray processed = ProcessUavComponentWay(
+                originalObj[field].toString(),
+                idMap
+                );
+
+            if (!processed.isEmpty()) {
+                // 将 QJsonArray 转换为 JSON 字符串
+                QJsonDocument doc(processed);
+                QByteArray jsonBytes = doc.toJson(QJsonDocument::Compact);
+                // 将 QByteArray 转换为 QString
+                newObj[field] = QString::fromUtf8(jsonBytes);
+                hasValidData = true;
+            }
+        }
+
+        if (hasValidData) {
+            cArray.append(newObj);
+        }
+    }
+
+    return cArray;
 }
 
 QJsonObject UavModelDao::selectSomeUavModelDate(const QString &jsonStr)
@@ -222,7 +417,7 @@ QJsonObject UavModelDao::selectSomeUavModelDate(const QString &jsonStr)
             uavModelData["uavLength"] = QString::number(entity.uavLength_); // 假设返回float// 使用 QString::number 方法转换 float
             uavModelData["uavWidth"] = QString::number(entity.uavWidth_);
             uavModelData["uavHeight"] = QString::number(entity.uavHeight_);
-            uavModelData["invisibility"] = QString::fromStdString(entity.uavInvisibility_);
+            uavModelData["load_ammo_type"] = QString::fromStdString(entity.uavLoadAmmoType_);
             // 格式化为字符串（保留5位小数）
             // QString formattedValue = QString::number(entity.uavLength_, 'f', 5);
             // uavModelData["uavLengthhangingCapacityStr"] = formattedValue;
@@ -258,7 +453,7 @@ QJsonObject UavModelDao::selectSomeUavModelDate(const QString &jsonStr)
             uavModelData["low_alt_speed"] = QString::number(entity.uavLowAltitudeBreakthroughSpeed_);
 
             /******************** 挂载能力 ********************/
-            uavModelData["hardpoint_loc"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
+            //uavModelData["hardpoint_loc"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
             // entity.uavHangingpoints_ = uavModelData["hardpoint_num"].toInt();
             // entity.uavPayloadcapacity_ = uavModelData["payload_capacity"].toInt();
             uavModelData["attack_accuracy"] = QString::number(entity.uavAttackaccuracy_);
@@ -351,6 +546,37 @@ bool UavModelDao::updateModelDate(const QString &jsonStr)
         typedef odb::query<UavModelEntity> query;
         // 3. 加载要修改的实体
         //std::shared_ptr<Person> person(db->load<Person>(1));  // 加载ID为1的记录
+        // 获取要更新的记录ID
+        // 从 QJsonObject 中提取 "id" 字段
+        QJsonValue idValue = uavModelData.value("id");
+
+        // 检查字段是否存在
+        if (idValue.isUndefined()) {
+            qCritical() << "Error: JSON 中缺少 'id' 字段";
+            return false;
+        }
+
+        // 将字段值转为 QString（无论原始类型是字符串还是数字）
+        QString idStr = idValue.toVariant().toString();
+
+        // 转换为整型并校验格式
+        bool ok;
+        int rid = idStr.toInt(&ok);
+        if (!ok) {
+            qCritical() << "Error: 'id' 值无效，无法转换为整数：" << idStr;
+            return false;
+        }
+
+        // 检查 ID 是否为正数（根据业务需求）
+        if (rid <= 0) {
+            qCritical() << "Error: ID 必须为正整数，当前值：" << rid;
+            return false;
+        }
+
+        // 此时 id 变量已包含正确的整数值
+        qDebug() << "成功获取 ID:" << rid;
+        db.load(rid, entity);
+
         // 基础字段
         entity.uavType_ = uavModelData["uav_type"].toString().toStdString();
         entity.uavName_ = uavModelData["uav_name"].toString().toStdString();
@@ -360,7 +586,7 @@ bool UavModelDao::updateModelDate(const QString &jsonStr)
         entity.uavLength_ = uavModelData["length"].toDouble();
         entity.uavWidth_ = uavModelData["width"].toDouble();
         entity.uavHeight_ = uavModelData["height"].toDouble();
-        entity.uavInvisibility_ = uavModelData["invisibility"].toString().toStdString();
+        entity.uavLoadAmmoType_ = uavModelData["load_ammo_type"].toString().toStdString();
 
         /******************** 飞行性能 ********************/
         entity.uavFlightHeightRangeMin_ = uavModelData["flight_height_min"].toDouble();
@@ -394,7 +620,7 @@ bool UavModelDao::updateModelDate(const QString &jsonStr)
         entity.uavLowAltitudeBreakthroughSpeed_ = uavModelData["low_alt_speed"].toDouble();
 
         /******************** 挂载能力 ********************/
-        entity.uavHangingLoctionCapacity_ = uavModelData["hardpoint_loc"].toString().toStdString();
+        entity.uavHangingLoctionCapacity_ = uavModelData["hanging_capacity"].toString().toStdString();
         // entity.uavHangingpoints_ = uavModelData["hardpoint_num"].toInt();
         // entity.uavPayloadcapacity_ = uavModelData["payload_capacity"].toInt();
         entity.uavAttackaccuracy_ = uavModelData["attack_accuracy"].toDouble();
@@ -435,36 +661,6 @@ bool UavModelDao::updateModelDate(const QString &jsonStr)
 
         // auto id = db.persist(entity);
         // qDebug() << "Persisting entity..."<<id;
-        // 获取要更新的记录ID
-        // 从 QJsonObject 中提取 "id" 字段
-        QJsonValue idValue = uavModelData.value("id");
-
-        // 检查字段是否存在
-        if (idValue.isUndefined()) {
-            qCritical() << "Error: JSON 中缺少 'id' 字段";
-            return false;
-        }
-
-        // 将字段值转为 QString（无论原始类型是字符串还是数字）
-        QString idStr = idValue.toVariant().toString();
-
-        // 转换为整型并校验格式
-        bool ok;
-        int rid = idStr.toInt(&ok);
-        if (!ok) {
-            qCritical() << "Error: 'id' 值无效，无法转换为整数：" << idStr;
-            return false;
-        }
-
-        // 检查 ID 是否为正数（根据业务需求）
-        if (rid <= 0) {
-            qCritical() << "Error: ID 必须为正整数，当前值：" << rid;
-            return false;
-        }
-
-        // 此时 id 变量已包含正确的整数值
-        qDebug() << "成功获取 ID:" << rid;
-        db.load(rid, entity);
 
         //entity.uavName_("James");
         //entity.age("Newland");
@@ -569,7 +765,7 @@ QJsonObject UavModelDao::checkUavDataObject(const QJsonObject &object)
         "uav_type", "uav_name", "uav_id",
 
         // 尺寸参数
-        "length", "width", "height", "invisibility",
+        "length", "width", "height", "load_ammo_type",
 
         // 飞行性能
         "flight_height_min", "flight_height_max",
@@ -644,7 +840,12 @@ bool UavModelDao::insertModelDate(const QJsonObject& object)
 {
     qDebug() << "Starting database insertion...";
     QJsonObject checkResult;
-    checkResult = checkUavDataObject(object);
+    //checkResult = checkUavDataObject(object);
+    // 转换为格式化的JSON字符串
+    QJsonDocument doc(object);
+    QString jsonString = doc.toJson(QJsonDocument::Indented);
+    // 打印到控制台
+    qDebug()<<"Qt function UavModelDao insertModelDat JSON内容：\n" << jsonString;
     try {
         // 1. 建立数据库连接
         qDebug() << "Connecting to database...";
@@ -667,86 +868,85 @@ bool UavModelDao::insertModelDate(const QJsonObject& object)
 
         // 4. 映射JSON字段到实体属性
         // 基础字段
-        entity.uavType_ = checkResult["uav_type"].toString().toStdString();
-        entity.uavName_ = checkResult["uav_name"].toString().toStdString();
-        entity.uavId_ = checkResult["uav_id"].toString().toStdString();
+        entity.uavType_ = object["uav_type"].toString().toStdString();
+        entity.uavName_ = object["uav_name"].toString().toStdString();
+        entity.uavId_ = object["uav_id"].toString().toStdString();
 
         /******************** 尺寸参数 ********************/
-        entity.uavLength_ = checkResult["length"].toDouble();
-        entity.uavWidth_ = checkResult["width"].toDouble();
-        entity.uavHeight_ = checkResult["height"].toDouble();
-        entity.uavInvisibility_ = checkResult["invisibility"].toString().toStdString();
+        entity.uavLength_ = object["length"].toDouble();
+        entity.uavWidth_ = object["width"].toDouble();
+        entity.uavHeight_ = object["height"].toDouble();
+        entity.uavLoadAmmoType_ = object["load_ammo_type"].toString().toStdString();
 
         /******************** 飞行性能 ********************/
-        entity.uavFlightHeightRangeMin_ = checkResult["flight_height_min"].toDouble();
-        entity.uavFlightHeightRangeMax_ = checkResult["flight_height_max"].toDouble();
-        entity.uavFlightSpeedRangeMin_ = checkResult["flight_speed_min"].toDouble();
-        entity.uavFlightSpeedRangeMax_ = checkResult["flight_speed_max"].toDouble();
-        entity.uavFlightDistanceRangeMin_ = checkResult["flight_distance_min"].toDouble();
-        entity.uavFlightDistanceRangeMax_ = checkResult["flight_distance_max"].toDouble();
-        entity.uavFlightTimeRangeMin_ = checkResult["flight_time_min"].toDouble();
-        entity.uavFlightTimeRangeMax_ = checkResult["flight_time_max"].toDouble();
+        entity.uavFlightHeightRangeMin_ = object["flight_height_min"].toDouble();
+        entity.uavFlightHeightRangeMax_ = object["flight_height_max"].toDouble();
+        entity.uavFlightSpeedRangeMin_ = object["flight_speed_min"].toDouble();
+        entity.uavFlightSpeedRangeMax_ = object["flight_speed_max"].toDouble();
+        entity.uavFlightDistanceRangeMin_ = object["flight_distance_min"].toDouble();
+        entity.uavFlightDistanceRangeMax_ = object["flight_distance_max"].toDouble();
+        entity.uavFlightTimeRangeMin_ = object["flight_time_min"].toDouble();
+        entity.uavFlightTimeRangeMax_ = object["flight_time_max"].toDouble();
 
         /******************** 起降参数 ********************/
-        entity.uavTakeoffDistance_ = checkResult["takeoff_distance"].toDouble();
-        entity.uavLandDistance_ = checkResult["landing_distance"].toDouble();
+        entity.uavTakeoffDistance_ = object["takeoff_distance"].toDouble();
+        entity.uavLandDistance_ = object["landing_distance"].toDouble();
 
         /******************** 机动性能 ********************/
-        entity.uavTurningRadiusRangeMin_ = checkResult["turn_radius_min"].toDouble();
-        entity.uavTurningRadiusRangeMax_ = checkResult["turn_radius_max"].toDouble();
-        entity.uavOperatioanalRadius_ = checkResult["combat_radius"].toDouble();
+        entity.uavTurningRadiusRangeMin_ = object["turn_radius_min"].toDouble();
+        entity.uavTurningRadiusRangeMax_ = object["turn_radius_max"].toDouble();
+        entity.uavOperatioanalRadius_ = object["combat_radius"].toDouble();
 
         /******************** 载荷配置 ********************/
-        entity.uavInvestigationPayloadType_ = checkResult["payload_type"].toString().toStdString();
-        entity.uavBombingway_ = checkResult["bomb_method"].toString().toStdString();
-        entity.uavOperationWay_ = checkResult["operation_method"].toString().toStdString();
-        entity.uavLoadReconnaissanceRangeMin_ = checkResult["recon_range_min"].toDouble();
-        entity.uavLoadReconnaissanceRangeMax_ = checkResult["recon_range_max"].toDouble();
-        entity.uavLoadReconnaissanceAccuracy_ = checkResult["recon_accuracy"].toDouble();
+        entity.uavInvestigationPayloadType_ = object["payload_type"].toString().toStdString();
+        entity.uavBombingway_ = object["bomb_method"].toString().toStdString();
+        entity.uavOperationWay_ = object["operation_method"].toString().toStdString();
+        entity.uavLoadReconnaissanceRangeMin_ = object["recon_range_min"].toDouble();
+        entity.uavLoadReconnaissanceRangeMax_ = object["recon_range_max"].toDouble();
+        entity.uavLoadReconnaissanceAccuracy_ = object["recon_accuracy"].toDouble();
 
         /******************** 回收与突防 ********************/
-        entity.uavRecoveryway_ = checkResult["recovery_mode"].toString().toStdString();
-        entity.uavLowAltitudeBreakthroughSpeed_ = checkResult["low_alt_speed"].toDouble();
+        entity.uavRecoveryway_ = object["recovery_mode"].toString().toStdString();
+        entity.uavLowAltitudeBreakthroughSpeed_ = object["low_alt_speed"].toDouble();
 
         /******************** 挂载能力 ********************/
-        entity.uavHangingLoctionCapacity_ = checkResult["hardpoint_loc"].toString().toStdString();
-        // entity.uavHangingpoints_ = checkResult["hardpoint_num"].toInt();
-        // entity.uavPayloadcapacity_ = checkResult["payload_capacity"].toInt();
-        entity.uavAttackaccuracy_ = checkResult["attack_accuracy"].toDouble();
+        entity.uavHangingLoctionCapacity_ = object["hanging_capacity"].toString().toStdString();
+        // entity.uavPayloadcapacity_ = object["payload_capacity"].toInt();
+        entity.uavAttackaccuracy_ = object["attack_accuracy"].toDouble();
 
         /******************** 雷达特征 ********************/
-        entity.uavRadarCrossSection_ = checkResult["rcs"].toDouble();
+        entity.uavRadarCrossSection_ = object["rcs"].toDouble();
 
         /******************** 重量与平衡 ********************/
-        entity.uavCenterOfGravityFrontLimit_ = checkResult["cg_front_limit"].toDouble();
-        entity.uavCenterOfGravityAfterwardLimit_ = checkResult["cg_rear_limit"].toDouble();
-        entity.uavMaximumTakeoffWeight_ = checkResult["max_takeoff_weight"].toDouble();
-        entity.uavEmptyWeight_ = checkResult["empty_weight"].toDouble();
+        entity.uavCenterOfGravityFrontLimit_ = object["cg_front_limit"].toDouble();
+        entity.uavCenterOfGravityAfterwardLimit_ = object["cg_rear_limit"].toDouble();
+        entity.uavMaximumTakeoffWeight_ = object["max_takeoff_weight"].toDouble();
+        entity.uavEmptyWeight_ = object["empty_weight"].toDouble();
 
         /******************** 燃油与载重 ********************/
-        entity.uavMaximumFuelCapacity_ = checkResult["max_fuel"].toDouble();
-        entity.uavMaximumExternalWeight_ = checkResult["max_external_weight"].toDouble();
+        entity.uavMaximumFuelCapacity_ = object["max_fuel"].toDouble();
+        entity.uavMaximumExternalWeight_ = object["max_external_weight"].toDouble();
 
         /******************** 高度性能 ********************/
-        entity.uavCeiling_ = checkResult["ceiling"].toDouble();
-        entity.uavMaximumGroundStartingHeight_ = checkResult["ground_start_alt"].toDouble();
-        entity.uavMaximumAirStartingAltitude_ = checkResult["air_start_alt"].toDouble();
+        entity.uavCeiling_ = object["ceiling"].toDouble();
+        entity.uavMaximumGroundStartingHeight_ = object["ground_start_alt"].toDouble();
+        entity.uavMaximumAirStartingAltitude_ = object["air_start_alt"].toDouble();
 
         /******************** 续航性能 ********************/
-        entity.uavMaximumEndurance_ = checkResult["endurance"].toDouble();
-        entity.uavMaximumFlightVacuumSpeed_ = checkResult["max_vacuum_speed"].toDouble();
-        entity.uavMinimumFlightMeterSpeed_ = checkResult["min_meter_speed"].toDouble();
+        entity.uavMaximumEndurance_ = object["endurance"].toDouble();
+        entity.uavMaximumFlightVacuumSpeed_ = object["max_vacuum_speed"].toDouble();
+        entity.uavMinimumFlightMeterSpeed_ = object["min_meter_speed"].toDouble();
 
         /******************** 特殊场景性能 ********************/
-        entity.sealLevelTakeoffAndRollDistance_ = checkResult["sea_takeoff_roll"].toDouble();
-        entity.sealLevelLandingAndRollDistance_ = checkResult["sea_landing_roll"].toDouble();
-        entity.cruiseAltitudeReconnaissanceConfiguration_ = checkResult["recon_cruise_alt"].toDouble();
-        entity.cruiseAltitudeFullExternalConfiguration_ = checkResult["full_external_cruise_alt"].toDouble();
+        entity.sealLevelTakeoffAndRollDistance_ = object["sea_takeoff_roll"].toDouble();
+        entity.sealLevelLandingAndRollDistance_ = object["sea_landing_roll"].toDouble();
+        entity.cruiseAltitudeReconnaissanceConfiguration_ = object["recon_cruise_alt"].toDouble();
+        entity.cruiseAltitudeFullExternalConfiguration_ = object["full_external_cruise_alt"].toDouble();
 
         /******************** 系统记录 ********************/
         //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
-        entity.uavImgName_ = checkResult["image_name"].toString().toStdString();
-        entity.uavImgUrl_ = checkResult["image_url"].toString().toStdString();
+        entity.uavImgName_ = object["image_name"].toString().toStdString();
+        entity.uavImgUrl_ = object["image_url"].toString().toStdString();
 
         // 5. 数据验证
         // if (entity.getUavType().empty()) {

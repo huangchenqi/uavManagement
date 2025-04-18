@@ -131,6 +131,30 @@ namespace odb
     mountLocationName_type_;
 
     static const mountLocationName_type_ mountLocationName;
+
+    // mountlocationQuantity
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    mountlocationQuantity_type_;
+
+    static const mountlocationQuantity_type_ mountlocationQuantity;
+
+    // mountlocationCapacity
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    mountlocationCapacity_type_;
+
+    static const mountlocationCapacity_type_ mountlocationCapacity;
   };
 
   template <typename A>
@@ -147,6 +171,16 @@ namespace odb
   const typename query_columns< ::UavModelMountLocationEntity, id_pgsql, A >::mountLocationName_type_
   query_columns< ::UavModelMountLocationEntity, id_pgsql, A >::
   mountLocationName (A::table_name, "\"mountlocation_name\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::UavModelMountLocationEntity, id_pgsql, A >::mountlocationQuantity_type_
+  query_columns< ::UavModelMountLocationEntity, id_pgsql, A >::
+  mountlocationQuantity (A::table_name, "\"mountlocation_quantity\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::UavModelMountLocationEntity, id_pgsql, A >::mountlocationCapacity_type_
+  query_columns< ::UavModelMountLocationEntity, id_pgsql, A >::
+  mountlocationCapacity (A::table_name, "\"mountlocation_capacity\"", 0);
 
   template <typename A>
   struct pointer_query_columns< ::UavModelMountLocationEntity, id_pgsql, A >:
@@ -185,6 +219,16 @@ namespace odb
       details::buffer mountLocationName_value;
       std::size_t mountLocationName_size;
       bool mountLocationName_null;
+
+      // mountlocationQuantity_
+      //
+      float mountlocationQuantity_value;
+      bool mountlocationQuantity_null;
+
+      // mountlocationCapacity_
+      //
+      float mountlocationCapacity_value;
+      bool mountlocationCapacity_null;
 
       std::size_t version;
     };
@@ -228,7 +272,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 3UL;
+    static const std::size_t column_count = 5UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;

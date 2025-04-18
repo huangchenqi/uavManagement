@@ -49,7 +49,9 @@ namespace odb
   persist_statement_types[] =
   {
     pgsql::text_oid,
-    pgsql::text_oid
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid
   };
 
   const unsigned int access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::
@@ -63,6 +65,8 @@ namespace odb
   {
     pgsql::text_oid,
     pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
     pgsql::int8_oid
   };
 
@@ -149,6 +153,14 @@ namespace odb
       grew = true;
     }
 
+    // mountlocationQuantity_
+    //
+    t[3UL] = 0;
+
+    // mountlocationCapacity_
+    //
+    t[4UL] = 0;
+
     return grew;
   }
 
@@ -189,6 +201,20 @@ namespace odb
     b[n].capacity = i.mountLocationName_value.capacity ();
     b[n].size = &i.mountLocationName_size;
     b[n].is_null = &i.mountLocationName_null;
+    n++;
+
+    // mountlocationQuantity_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.mountlocationQuantity_value;
+    b[n].is_null = &i.mountlocationQuantity_null;
+    n++;
+
+    // mountlocationCapacity_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.mountlocationCapacity_value;
+    b[n].is_null = &i.mountlocationCapacity_null;
     n++;
   }
 
@@ -256,6 +282,34 @@ namespace odb
       grew = grew || (cap != i.mountLocationName_value.capacity ());
     }
 
+    // mountlocationQuantity_
+    //
+    {
+      float const& v =
+        o.mountlocationQuantity_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.mountlocationQuantity_value, is_null, v);
+      i.mountlocationQuantity_null = is_null;
+    }
+
+    // mountlocationCapacity_
+    //
+    {
+      float const& v =
+        o.mountlocationCapacity_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.mountlocationCapacity_value, is_null, v);
+      i.mountlocationCapacity_null = is_null;
+    }
+
     return grew;
   }
 
@@ -311,6 +365,34 @@ namespace odb
         i.mountLocationName_size,
         i.mountLocationName_null);
     }
+
+    // mountlocationQuantity_
+    //
+    {
+      float& v =
+        o.mountlocationQuantity_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.mountlocationQuantity_value,
+        i.mountlocationQuantity_null);
+    }
+
+    // mountlocationCapacity_
+    //
+    {
+      float& v =
+        o.mountlocationCapacity_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.mountlocationCapacity_value,
+        i.mountlocationCapacity_null);
+    }
   }
 
   void access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::
@@ -330,16 +412,20 @@ namespace odb
   "INSERT INTO \"uav_type_man\".\"uav_model_mount_location\" "
   "(\"id\", "
   "\"mountlocation_code\", "
-  "\"mountlocation_name\") "
+  "\"mountlocation_name\", "
+  "\"mountlocation_quantity\", "
+  "\"mountlocation_capacity\") "
   "VALUES "
-  "(DEFAULT, $1, $2) "
+  "(DEFAULT, $1, $2, $3, $4) "
   "RETURNING \"id\"";
 
   const char access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::find_statement[] =
   "SELECT "
   "\"uav_type_man\".\"uav_model_mount_location\".\"id\", "
   "\"uav_type_man\".\"uav_model_mount_location\".\"mountlocation_code\", "
-  "\"uav_type_man\".\"uav_model_mount_location\".\"mountlocation_name\" "
+  "\"uav_type_man\".\"uav_model_mount_location\".\"mountlocation_name\", "
+  "\"uav_type_man\".\"uav_model_mount_location\".\"mountlocation_quantity\", "
+  "\"uav_type_man\".\"uav_model_mount_location\".\"mountlocation_capacity\" "
   "FROM \"uav_type_man\".\"uav_model_mount_location\" "
   "WHERE \"uav_type_man\".\"uav_model_mount_location\".\"id\"=$1";
 
@@ -347,8 +433,10 @@ namespace odb
   "UPDATE \"uav_type_man\".\"uav_model_mount_location\" "
   "SET "
   "\"mountlocation_code\"=$1, "
-  "\"mountlocation_name\"=$2 "
-  "WHERE \"id\"=$3";
+  "\"mountlocation_name\"=$2, "
+  "\"mountlocation_quantity\"=$3, "
+  "\"mountlocation_capacity\"=$4 "
+  "WHERE \"id\"=$5";
 
   const char access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::erase_statement[] =
   "DELETE FROM \"uav_type_man\".\"uav_model_mount_location\" "
@@ -358,7 +446,9 @@ namespace odb
   "SELECT "
   "\"uav_type_man\".\"uav_model_mount_location\".\"id\", "
   "\"uav_type_man\".\"uav_model_mount_location\".\"mountlocation_code\", "
-  "\"uav_type_man\".\"uav_model_mount_location\".\"mountlocation_name\" "
+  "\"uav_type_man\".\"uav_model_mount_location\".\"mountlocation_name\", "
+  "\"uav_type_man\".\"uav_model_mount_location\".\"mountlocation_quantity\", "
+  "\"uav_type_man\".\"uav_model_mount_location\".\"mountlocation_capacity\" "
   "FROM \"uav_type_man\".\"uav_model_mount_location\"";
 
   const char access::object_traits_impl< ::UavModelMountLocationEntity, id_pgsql >::erase_query_statement[] =
@@ -795,7 +885,9 @@ namespace odb
           db.execute ("CREATE TABLE \"uav_type_man\".\"uav_model_mount_location\" (\n"
                       "  \"id\" BIGSERIAL NOT NULL PRIMARY KEY,\n"
                       "  \"mountlocation_code\" TEXT NOT NULL,\n"
-                      "  \"mountlocation_name\" TEXT NOT NULL)");
+                      "  \"mountlocation_name\" TEXT NOT NULL,\n"
+                      "  \"mountlocation_quantity\" REAL NOT NULL,\n"
+                      "  \"mountlocation_capacity\" REAL NOT NULL)");
           return false;
         }
       }

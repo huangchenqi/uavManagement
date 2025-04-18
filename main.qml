@@ -12,4 +12,5 @@ Window {
     UavMainManagement{
         id:uavMain
     }
+
 }

@@ -52,6 +52,8 @@ QJsonArray UavMountLocationDao::selectUavMountLocationAllData()
             obj["recordId"] = QString::number(entity.id_);
             obj["uavmountLocationId"] = QString::fromStdString(entity.mountLocationId_);
             obj["uavmountLocationName"] = QString::fromStdString(entity.mountLocationName_);
+            obj["uavmountLocationQuantity"] = QString::number(entity.mountlocationQuantity_);
+            obj["uavmountLocationCapacity"] = QString::number(entity.mountlocationCapacity_);
             obj["checked"] = checked;
             sum++;
             qDebug()<<"uavModelAllDatauavcreat:";
@@ -88,18 +90,27 @@ bool UavMountLocationDao::updateUavMountLocationDate(const QJSValue &selectedDat
         // 处理数据遍历
         for (const QVariant &item : dataList) {
             QVariantMap dataMap = item.toMap();
+            qDebug() << "uavmountLocationQuantity:" << dataMap["uavmountLocationName"].toString().toStdString().c_str();
+            qDebug() << "uavmountLocationCapacity:" << dataMap["uavmountLocationId"].toString().toStdString().c_str();
             int  recordId = dataMap["recordId"].toInt();
             QString mountLocationNameStr = dataMap["uavmountLocationName"].toString();
             QString mountLocationIdStr = dataMap["uavmountLocationId"].toString();
+            float  mountlocationQuantityStr = dataMap["uavmountLocationQuantity"].toString().toDouble();
+            float  uavmountLocationCapacityStr = dataMap["uavmountLocationCapacity"].toString().toDouble();
             db.load(recordId, entity);
             entity.mountLocationName_ = mountLocationNameStr.toStdString();
             entity.mountLocationId_ = mountLocationIdStr.toStdString();
-
+            entity.mountlocationQuantity_ = mountlocationQuantityStr;
+            entity.mountlocationCapacity_ = uavmountLocationCapacityStr;
+            qDebug() << "before update";
             // 4. 修改数据
             db.update(entity);
+            qDebug() << "after update";
             qDebug() << "recordId:" << dataMap["recordId"].toInt();
             qDebug() << "uavmountLocationName:" << dataMap["uavmountLocationName"].toString();
             qDebug() << "uavmountLocationId:" << dataMap["uavmountLocationId"].toString();
+            qDebug() << "uavmountLocationQuantity:" << dataMap["uavmountLocationQuantity"].toFloat();
+            qDebug() << "uavmountLocationCapacity:" << dataMap["uavmountLocationCapacity"].toFloat();
             //qDebug() << "<<<<>>>>" << rst.size();
         }
 
@@ -176,6 +187,8 @@ bool UavMountLocationDao::insertUavMountLocationDate(const QJsonObject &object)
         // 基础字段
         entity.mountLocationId_ = object["uavmountLocationId"].toString().toStdString();
         entity.mountLocationName_ = object["uavmountLocationName"].toString().toStdString();
+        entity.mountlocationQuantity_ = object["uavmountLocationQuantity"].toDouble();
+        entity.mountlocationCapacity_ = object["uavmountLocationCapacity"].toDouble();
 
         // 6. 持久化到数据库
         qDebug() << "Persisting entity...";

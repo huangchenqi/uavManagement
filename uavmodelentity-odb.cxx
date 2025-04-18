@@ -264,11 +264,11 @@ namespace odb
     //
     t[6UL] = 0;
 
-    // uavInvisibility_
+    // uavLoadAmmoType_
     //
     if (t[7UL])
     {
-      i.uavInvisibility_value.capacity (i.uavInvisibility_size);
+      i.uavLoadAmmoType_value.capacity (i.uavLoadAmmoType_size);
       grew = true;
     }
 
@@ -544,13 +544,13 @@ namespace odb
     b[n].is_null = &i.uavHeight_null;
     n++;
 
-    // uavInvisibility_
+    // uavLoadAmmoType_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.uavInvisibility_value.data ();
-    b[n].capacity = i.uavInvisibility_value.capacity ();
-    b[n].size = &i.uavInvisibility_size;
-    b[n].is_null = &i.uavInvisibility_null;
+    b[n].buffer = i.uavLoadAmmoType_value.data ();
+    b[n].capacity = i.uavLoadAmmoType_value.capacity ();
+    b[n].size = &i.uavLoadAmmoType_size;
+    b[n].is_null = &i.uavLoadAmmoType_null;
     n++;
 
     // uavFlightHeightRangeMin_
@@ -996,25 +996,25 @@ namespace odb
       i.uavHeight_null = is_null;
     }
 
-    // uavInvisibility_
+    // uavLoadAmmoType_
     //
     {
       ::std::string const& v =
-        o.uavInvisibility_;
+        o.uavLoadAmmoType_;
 
       bool is_null (false);
       std::size_t size (0);
-      std::size_t cap (i.uavInvisibility_value.capacity ());
+      std::size_t cap (i.uavLoadAmmoType_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.uavInvisibility_value,
+        i.uavLoadAmmoType_value,
         size,
         is_null,
         v);
-      i.uavInvisibility_null = is_null;
-      i.uavInvisibility_size = size;
-      grew = grew || (cap != i.uavInvisibility_value.capacity ());
+      i.uavLoadAmmoType_null = is_null;
+      i.uavLoadAmmoType_size = size;
+      grew = grew || (cap != i.uavLoadAmmoType_value.capacity ());
     }
 
     // uavFlightHeightRangeMin_
@@ -1781,19 +1781,19 @@ namespace odb
         i.uavHeight_null);
     }
 
-    // uavInvisibility_
+    // uavLoadAmmoType_
     //
     {
       ::std::string& v =
-        o.uavInvisibility_;
+        o.uavLoadAmmoType_;
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.uavInvisibility_value,
-        i.uavInvisibility_size,
-        i.uavInvisibility_null);
+        i.uavLoadAmmoType_value,
+        i.uavLoadAmmoType_size,
+        i.uavLoadAmmoType_null);
     }
 
     // uavFlightHeightRangeMin_
@@ -2428,7 +2428,7 @@ namespace odb
   "\"length\", "
   "\"width\", "
   "\"height\", "
-  "\"have_invisibility\", "
+  "\"load_ammo_type\", "
   "\"flight_height_min\", "
   "\"flight_height_max\", "
   "\"flight_speed_min\", "
@@ -2485,7 +2485,7 @@ namespace odb
   "\"uav_type_man\".\"uav_models_data\".\"length\", "
   "\"uav_type_man\".\"uav_models_data\".\"width\", "
   "\"uav_type_man\".\"uav_models_data\".\"height\", "
-  "\"uav_type_man\".\"uav_models_data\".\"have_invisibility\", "
+  "\"uav_type_man\".\"uav_models_data\".\"load_ammo_type\", "
   "\"uav_type_man\".\"uav_models_data\".\"flight_height_min\", "
   "\"uav_type_man\".\"uav_models_data\".\"flight_height_max\", "
   "\"uav_type_man\".\"uav_models_data\".\"flight_speed_min\", "
@@ -2541,7 +2541,7 @@ namespace odb
   "\"length\"=$4, "
   "\"width\"=$5, "
   "\"height\"=$6, "
-  "\"have_invisibility\"=$7, "
+  "\"load_ammo_type\"=$7, "
   "\"flight_height_min\"=$8, "
   "\"flight_height_max\"=$9, "
   "\"flight_speed_min\"=$10, "
@@ -2600,7 +2600,7 @@ namespace odb
   "\"uav_type_man\".\"uav_models_data\".\"length\", "
   "\"uav_type_man\".\"uav_models_data\".\"width\", "
   "\"uav_type_man\".\"uav_models_data\".\"height\", "
-  "\"uav_type_man\".\"uav_models_data\".\"have_invisibility\", "
+  "\"uav_type_man\".\"uav_models_data\".\"load_ammo_type\", "
   "\"uav_type_man\".\"uav_models_data\".\"flight_height_min\", "
   "\"uav_type_man\".\"uav_models_data\".\"flight_height_max\", "
   "\"uav_type_man\".\"uav_models_data\".\"flight_speed_min\", "

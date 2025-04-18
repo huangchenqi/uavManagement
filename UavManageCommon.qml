@@ -7,6 +7,12 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.12
 import UavDaoModel 1.0
+import UavModelLoadTypeDaoModel 1.0
+import UavBombingMethodDaoModel 1.0
+import UavModelRecoveryModeDaoModel 1.0
+import UavModelOperationWayDaoModel 1.0
+import UavMountLocationDaoModel 1.0
+import AmmoDaoModel 1.0
 /**
 https://blog.csdn.net/qq_24890953/article/details/104640454
   */
@@ -32,7 +38,6 @@ Rectangle {
            // 组件加载完成后生成测试数据
            Component.onCompleted:{
                loadUavAllData()
-               //generateTestData()
                loadRecord()
            }
            Loader {
@@ -43,6 +48,25 @@ Rectangle {
 
            UavModelDaoTableModel{
                id:uavModelDaoTable
+           }
+
+           UavBombingMethodDaoTableModel{
+              id:uavBombingMethodDaoModel
+           }
+           UavModelLoadTypeDaoTableModel{
+              id:uavModelLoadTypeDaoModel
+           }
+           UavModelRecoveryModeDaoTableModel{
+              id:uavModelRecoveryModeDaoModel
+           }
+           UavModelOperationWayDaoTableModel{
+              id:uavModelOperationWayDaoModel
+           }
+           UavMountLocationDaoTableModel{
+               id:uavMountLocationDaoTableModel
+           }
+           AmmoDaoTableModel{
+               id:ammoDaoModel
            }
 
            // 数据模型
@@ -59,7 +83,7 @@ Rectangle {
                   TableModelColumn { display: "bombMethod" }  // 投弹方式
                   TableModelColumn { display: "recoveryMode" }  // 回收方式
                   TableModelColumn { display: "payloadType" }   // 载荷类型
-                  TableModelColumn { display: "uavInvisibility" }//是否隐身
+                  TableModelColumn { display: "uavLoadAmmoType" }//载弹类型
                   TableModelColumn { display: "recordId" }//型号记录编号
                   TableModelColumn { display: "uavCreatModelTime" }//创建时间
                   TableModelColumn { display: "operation" } // 操作(查看/编辑)
@@ -404,7 +428,7 @@ Rectangle {
                            120, 120, 120, 120,80,120,220, 220]
                        // 显示10个字段
                        property var horHeader: ["","序号", "无人机机型", "无人机名称", "无人机编号", "挂载内容",
-                           "操控方式", "投弹方式", "回收方式", "载荷类型","是否隐身","型号记录编号","创建时间", "操作"]
+                           "操控方式", "投弹方式", "回收方式", "载荷类型","载弹类型","型号记录编号","创建时间", "操作"]
                        property int selected: -1
                        //数据展示
                        TableView {
@@ -972,16 +996,71 @@ Rectangle {
            function dpH(h) {
                return h
            }
+           //只提取弹药中的id与弹药
+           function extractAmmoInfo(ammoArray) {
+               return ammoArray.map(item => ({
+                   ammoName: item.ammoName,
+                   recordId: item.recordId
+               }));
+           }
+           function convertMultiFields(originalArray) {
+               // 需要处理的字段列表
+               const targetFields = [
+                   "operationMethod",
+                   "uavLoadAmmoType",
+                   "payloadType",
+                   "recoveryMode",
+                   "bombMethod"
+               ];
 
+               return originalArray.map(item => {
+                   // 深拷贝对象
+                   const newItem = JSON.parse(JSON.stringify(item));
+
+                   targetFields.forEach(field => {
+                       if (newItem.hasOwnProperty(field)) {
+                           const value = newItem[field];
+
+                           // 处理不同数据类型
+                           if (Array.isArray(value)) {
+                               // 数组转字符串
+                               newItem[field] = value.join(',');
+                           } else if (typeof value === 'string') {
+                               // 字符串直接保留（如果已经是逗号分隔格式）
+                               // 如果需要强制转换可以添加正则验证：
+                               // if (!/,/.test(value)) { ... }
+                           } else {
+                               // 处理意外类型（如数字/布尔值）
+                               console.warn(`Unexpected type for ${field}:`, typeof value);
+                           }
+                       }
+                   });
+
+                   return newItem;
+               });
+           }
+           //提取原数据的属性
            function loadUavAllData(){
 
                var receiveData = uavModelDaoTable.selectUavModelAllData()
-               console.log("+:", JSON.stringify(receiveData, null, 2));
+               const modifiedData = convertMultiFields(receiveData);
+                console.log("receiveData"+JSON.stringify(modifiedData, null, 2));
+               //var test = extractBombNumbers(receiveData,"bombMethod")//operationMethod\payloadType\recoveryMode\uavLoadAmmoType
+               console.log("loadUaz洒下vAllData+:", JSON.stringify(receiveData, null, 2));
+               var ammoType = ammoDaoModel.selectAmmoAllData()
+               //var ammoTypeArray = extractAmmoInfo(ammoType)
+               var uavBombWay = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
+               var uavtransformUavAllData = uavModelDaoTable.transformQueryAllData()
+               console.log("uavBombWay"+JSON.stringify(uavBombWay))
+               var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()
+               var uavRecoveryWay = uavModelRecoveryModeDaoModel.selectModelRecoveryModeAllData()
+               var uavOperationWay = uavModelOperationWayDaoModel.selectModelOperationWayAllData()
+
                 // 清空旧数据
                tableModel.clear()
                rowsModel.length = 0;
 
-               tableModel.rows = receiveData;
+               tableModel.rows = modifiedData;
                rowsModel = tableModel.rows;
                //console.log("UAV Model Data:", JSON.stringify(tableModel))
                // try {
@@ -1033,10 +1112,91 @@ Rectangle {
                    "recoveryMode": data.recoveryMode,
                    "uavId": data.uavId,
                    "uavName": data.uavName,
-                   "uavType": data.uavType
+                   "uavType": data.uavType,
+                   "uavLoadAmmoType":data.uavLoadAmmoType
                };
            }
+           // 提取数组中冒号后面的数字
+           function extractAmmoIds(data, extraName) {
+                   try {
+                       // 修正3：使用方括号访问对象属性
+                       var loadAmmoType = JSON.parse(data[extraName])//由于传入的是Json字符串，需要parse转化成数组
+                       console.log("loadAmmoTypeArray"+JSON.stringify(loadAmmoType))
 
+                       if (!Array.isArray(loadAmmoType)) {
+                           console.log(extraName + "不是数组格式")
+                           return []
+                       }
+
+                       return loadAmmoType.map(item => {
+                           let parts = item.split(":")
+                           if (parts.length !== 2) {
+                               console.log("格式错误的项:", item)
+                               return null
+                           }
+                           return parseInt(parts[1].trim())
+                       }).filter(num => !isNaN(num))
+
+                   } catch (e) {
+                       console.log("处理" + extraName + "时发生错误:", e)
+                       return []
+                   }
+               }
+           // 在QML中定义函数使用Id查找uavComponentName名称
+           function getUavComponentNamesByIds(ammoArray, idArray) {
+
+               // 先将 idArray 转为字符串数组（因为 recordId 是字符串类型）
+                   const targetIds = idArray.map(id => id.toString());
+                   // 先过滤出符合条件的元素，再映射提取名称
+                   return ammoArray.filter(ammo =>
+                       targetIds.includes(ammo.recordId)
+                   ).map(ammo => ammo.uavComponeName);
+               // return ammoArray.map(ammo=>{
+               //                          console.log("inmap : " + JSON.stringify(ammo))
+               //                          if(idArray.some(id=> id == ammo.recordId))
+               //                              return ammo.uavComponeName
+               //                      })
+
+               // // 创建哈希表加速查找（recordId作为key）
+               // const ammoMap = {}
+               // ammoArray.forEach(ammo => {
+               //     // 统一转换为数字类型进行比较
+               //     const id = parseInt(ammo.recordId)
+               //     ammoMap[id] = ammo.ammoName
+               // })
+
+               // // 过滤并返回有效弹药名称
+               // return idArray.map(id => {
+               //     return ammoMap[id] || null
+               // }).filter(name => name !== null)
+           }
+           // function getAmmoNamesByIds(ammoData, bArray) {
+           //     var result = [];
+           //     // 遍历目标数组中的每个元素
+           //     for (var i = 0; i < bArray.length; i++) {
+           //         // 将数字转换为字符串以匹配 recordId 的类型
+           //         var targetId = bArray[i].toString();
+           //         // 在弹药数据中查找匹配的 recordId
+           //         for (var j = 0; j < ammoData.length; j++) {
+           //             if (ammoData[j].recordId === targetId) {
+           //                 result.push(ammoData[j].ammoName);
+           //                 break; // 找到后跳出内层循环
+           //             }
+           //         }
+           //     }
+           //     return result;
+           // }
+
+           //使用Id查找ammoType的名称
+           function getAmmoNamesByIds(ammoArray, idArray) {
+
+               // 先将 idArray 转为字符串数组（因为 recordId 是字符串类型）
+                   const targetIds = idArray.map(id => id.toString());
+                   // 先过滤出符合条件的元素，再映射提取名称
+                   return ammoArray.filter(ammo =>
+                       targetIds.includes(ammo.recordId)
+                   ).map(ammo => ammo.ammoName);
+            }
            //行数值赋予下界面跳转
            function assignmentEncapsulation(data){
                processInfo.recordId = data.recordId
@@ -1044,6 +1204,27 @@ Rectangle {
                processInfo.uavName = data.uavName
                processInfo.uavId = data.uavId
                processInfo.uavModelJsonStr = data
+               //console.log("assignmentEncapsulation"+JSON.stringify(data))
+               var ammoType = ammoDaoModel.selectAmmoAllData()
+               var uavBombWay = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
+               var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()
+               var uavRecoveryWay = uavModelRecoveryModeDaoModel.selectModelRecoveryModeAllData()
+               var uavOperationWay = uavModelOperationWayDaoModel.selectModelOperationWayAllData()
+               var operationWayArray = extractAmmoIds(data,"operationMethod")
+               var recoveryWayArray = extractAmmoIds(data,"recoveryMode")
+               var bombWayArray = extractAmmoIds(data,"bombMethod")
+               var investagationArray = extractAmmoIds(data,"payloadType")
+               var loadAmmoTypeArray = extractAmmoIds(data,"uavLoadAmmoType")
+
+               processInfo.operationWay = getUavComponentNamesByIds(uavOperationWay,operationWayArray)
+               console.log("{},{},{}",processInfo.operationWay,JSON.stringify(processInfo.operationWay),operationWayArray)
+               processInfo.recoveryWay =getUavComponentNamesByIds(uavRecoveryWay,recoveryWayArray)
+               processInfo.bombWay =getUavComponentNamesByIds(uavBombWay,bombWayArray)
+               processInfo.investagationPayLoadType =getUavComponentNamesByIds(uavPayloadType,investagationArray)
+               processInfo.loadAmmoType =getAmmoNamesByIds(ammoType,loadAmmoTypeArray)
+               //console.log("ammoType="+JSON.stringify(ammoType))
+               console.log("assignmentEncapsulation JSON.stringify"+JSON.stringify(processInfo))
+
            }
 
            // 生成测试数据函数
@@ -1095,8 +1276,13 @@ Rectangle {
                    // 2秒后自动关闭
                    warningItem.text = "您查询的是全部数据！"
                     autoCloseTimer.start()
+                   loadUavAllData()
+                   loadRecord()
                    return false
+               }else{
+                   console.log("搜索")
                }
+
                return true
            }
 

@@ -41,6 +41,7 @@ SOURCES += \
     UavModelMountLocationEntity-odb.cxx \
     UavModelOperationWayEntity-odb.cxx \
     UavModelRecoveryModeEntity-odb.cxx \
+    ammodao.cpp \
     databaseconnection.cpp \
         main.cpp \
 #        migration.cpp \
@@ -97,6 +98,7 @@ HEADERS += \
     UavModelOperationWayEntity.h \
     UavModelRecoveryModeEntity-odb.hxx \
     UavModelRecoveryModeEntity.h \
+    ammodao.h \
     databaseconnection.h \
     datetime-traits.hxx \
     json.hpp \

@@ -9,7 +9,6 @@
 #include <cassert>
 #include <cstring>  // std::memcpy
 
-#include <odb/schema-catalog-impl.hxx>
 
 #include <odb/pgsql/traits.hxx>
 #include <odb/pgsql/database.hxx>
@@ -51,6 +50,7 @@ namespace odb
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
+    pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
@@ -60,14 +60,14 @@ namespace odb
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
-    pgsql::float4_oid,
-    pgsql::float4_oid,
-    pgsql::float4_oid,
-    pgsql::float4_oid,
-    pgsql::float4_oid,
-    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::timestamp_oid,
     pgsql::text_oid,
     pgsql::float4_oid
   };
@@ -84,6 +84,7 @@ namespace odb
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
+    pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
@@ -93,14 +94,14 @@ namespace odb
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
-    pgsql::float4_oid,
-    pgsql::float4_oid,
-    pgsql::float4_oid,
-    pgsql::float4_oid,
-    pgsql::float4_oid,
-    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::timestamp_oid,
     pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::int8_oid
@@ -173,117 +174,133 @@ namespace odb
     //
     t[0UL] = 0;
 
-    // ammunitionType_
+    // ammoType_
     //
     if (t[1UL])
     {
-      i.ammunitionType_value.capacity (i.ammunitionType_size);
+      i.ammoType_value.capacity (i.ammoType_size);
       grew = true;
     }
 
-    // ammunitionName_
+    // ammoName_
     //
     if (t[2UL])
     {
-      i.ammunitionName_value.capacity (i.ammunitionName_size);
+      i.ammoName_value.capacity (i.ammoName_size);
       grew = true;
     }
 
-    // ammunitionId_
+    // ammoId_
     //
     if (t[3UL])
     {
-      i.ammunitionId_value.capacity (i.ammunitionId_size);
+      i.ammoId_value.capacity (i.ammoId_size);
       grew = true;
     }
 
-    // ammunitionLength_
+    // ammoToUavModel_
     //
-    t[4UL] = 0;
+    if (t[4UL])
+    {
+      i.ammoToUavModel_value.capacity (i.ammoToUavModel_size);
+      grew = true;
+    }
 
-    // ammunitionWidth_
+    // ammoLength_
     //
     t[5UL] = 0;
 
-    // ammunitionWeight_
+    // ammoWidth_
     //
     t[6UL] = 0;
 
+    // ammoWeight_
+    //
+    t[7UL] = 0;
+
     // guidanceType_
     //
-    if (t[7UL])
+    if (t[8UL])
     {
       i.guidanceType_value.capacity (i.guidanceType_size);
       grew = true;
     }
 
-    // placementHeightMin_
-    //
-    t[8UL] = 0;
-
-    // placementHeightMax_
+    // launchHeightMin_
     //
     t[9UL] = 0;
 
-    // placementDistanceMin_
+    // launchHeightMax_
     //
     t[10UL] = 0;
 
-    // placementDistanceMax_
+    // launchDistanceMin_
     //
     t[11UL] = 0;
 
-    // projectionAngle_
+    // launchDistanceMax_
     //
     t[12UL] = 0;
 
-    // deliveryMethod_
+    // launchAngle_
     //
     t[13UL] = 0;
 
-    // attackTargetType_
+    // launchWay_
     //
-    t[14UL] = 0;
+    if (t[14UL])
+    {
+      i.launchWay_value.capacity (i.launchWay_size);
+      grew = true;
+    }
 
-    // lethalDose_
+    // approveAttackTargetType_
     //
-    t[15UL] = 0;
+    if (t[15UL])
+    {
+      i.approveAttackTargetType_value.capacity (i.approveAttackTargetType_size);
+      grew = true;
+    }
 
-    // killingMethod_
+    // killingDose_
     //
     t[16UL] = 0;
 
-    // damageDepth_
+    // killingMethod_
     //
-    t[17UL] = 0;
+    if (t[17UL])
+    {
+      i.killingMethod_value.capacity (i.killingMethod_size);
+      grew = true;
+    }
 
-    // killingRangeMin_
+    // killingDepth_
     //
     t[18UL] = 0;
 
-    // killingRangeMax_
+    // killingRangeMin_
     //
     t[19UL] = 0;
 
-    // ammunitionCreatModelTime_
+    // killingRangeMax_
     //
-    if (t[20UL])
+    t[20UL] = 0;
+
+    // recordCreationTime_
+    //
+    t[21UL] = 0;
+
+    // ammoImgUrl_
+    //
+    if (t[22UL])
     {
-      i.ammunitionCreatModelTime_value.capacity (i.ammunitionCreatModelTime_size);
+      i.ammoImgUrl_value.capacity (i.ammoImgUrl_size);
       grew = true;
     }
 
-    // uavImgUrl_
+    // ammoImageName_
     //
-    if (t[21UL])
-    {
-      i.uavImgUrl_value.capacity (i.uavImgUrl_size);
-      grew = true;
-    }
-
-    // imageName_
-    //
-    t[22UL] = 0;
+    t[23UL] = 0;
 
     return grew;
   }
@@ -309,52 +326,61 @@ namespace odb
       n++;
     }
 
-    // ammunitionType_
+    // ammoType_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.ammunitionType_value.data ();
-    b[n].capacity = i.ammunitionType_value.capacity ();
-    b[n].size = &i.ammunitionType_size;
-    b[n].is_null = &i.ammunitionType_null;
+    b[n].buffer = i.ammoType_value.data ();
+    b[n].capacity = i.ammoType_value.capacity ();
+    b[n].size = &i.ammoType_size;
+    b[n].is_null = &i.ammoType_null;
     n++;
 
-    // ammunitionName_
+    // ammoName_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.ammunitionName_value.data ();
-    b[n].capacity = i.ammunitionName_value.capacity ();
-    b[n].size = &i.ammunitionName_size;
-    b[n].is_null = &i.ammunitionName_null;
+    b[n].buffer = i.ammoName_value.data ();
+    b[n].capacity = i.ammoName_value.capacity ();
+    b[n].size = &i.ammoName_size;
+    b[n].is_null = &i.ammoName_null;
     n++;
 
-    // ammunitionId_
+    // ammoId_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.ammunitionId_value.data ();
-    b[n].capacity = i.ammunitionId_value.capacity ();
-    b[n].size = &i.ammunitionId_size;
-    b[n].is_null = &i.ammunitionId_null;
+    b[n].buffer = i.ammoId_value.data ();
+    b[n].capacity = i.ammoId_value.capacity ();
+    b[n].size = &i.ammoId_size;
+    b[n].is_null = &i.ammoId_null;
     n++;
 
-    // ammunitionLength_
+    // ammoToUavModel_
     //
-    b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.ammunitionLength_value;
-    b[n].is_null = &i.ammunitionLength_null;
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.ammoToUavModel_value.data ();
+    b[n].capacity = i.ammoToUavModel_value.capacity ();
+    b[n].size = &i.ammoToUavModel_size;
+    b[n].is_null = &i.ammoToUavModel_null;
     n++;
 
-    // ammunitionWidth_
+    // ammoLength_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.ammunitionWidth_value;
-    b[n].is_null = &i.ammunitionWidth_null;
+    b[n].buffer = &i.ammoLength_value;
+    b[n].is_null = &i.ammoLength_null;
     n++;
 
-    // ammunitionWeight_
+    // ammoWidth_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.ammunitionWeight_value;
-    b[n].is_null = &i.ammunitionWeight_null;
+    b[n].buffer = &i.ammoWidth_value;
+    b[n].is_null = &i.ammoWidth_null;
+    n++;
+
+    // ammoWeight_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoWeight_value;
+    b[n].is_null = &i.ammoWeight_null;
     n++;
 
     // guidanceType_
@@ -366,74 +392,80 @@ namespace odb
     b[n].is_null = &i.guidanceType_null;
     n++;
 
-    // placementHeightMin_
+    // launchHeightMin_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.placementHeightMin_value;
-    b[n].is_null = &i.placementHeightMin_null;
+    b[n].buffer = &i.launchHeightMin_value;
+    b[n].is_null = &i.launchHeightMin_null;
     n++;
 
-    // placementHeightMax_
+    // launchHeightMax_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.placementHeightMax_value;
-    b[n].is_null = &i.placementHeightMax_null;
+    b[n].buffer = &i.launchHeightMax_value;
+    b[n].is_null = &i.launchHeightMax_null;
     n++;
 
-    // placementDistanceMin_
+    // launchDistanceMin_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.placementDistanceMin_value;
-    b[n].is_null = &i.placementDistanceMin_null;
+    b[n].buffer = &i.launchDistanceMin_value;
+    b[n].is_null = &i.launchDistanceMin_null;
     n++;
 
-    // placementDistanceMax_
+    // launchDistanceMax_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.placementDistanceMax_value;
-    b[n].is_null = &i.placementDistanceMax_null;
+    b[n].buffer = &i.launchDistanceMax_value;
+    b[n].is_null = &i.launchDistanceMax_null;
     n++;
 
-    // projectionAngle_
+    // launchAngle_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.projectionAngle_value;
-    b[n].is_null = &i.projectionAngle_null;
+    b[n].buffer = &i.launchAngle_value;
+    b[n].is_null = &i.launchAngle_null;
     n++;
 
-    // deliveryMethod_
+    // launchWay_
     //
-    b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.deliveryMethod_value;
-    b[n].is_null = &i.deliveryMethod_null;
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.launchWay_value.data ();
+    b[n].capacity = i.launchWay_value.capacity ();
+    b[n].size = &i.launchWay_size;
+    b[n].is_null = &i.launchWay_null;
     n++;
 
-    // attackTargetType_
+    // approveAttackTargetType_
     //
-    b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.attackTargetType_value;
-    b[n].is_null = &i.attackTargetType_null;
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.approveAttackTargetType_value.data ();
+    b[n].capacity = i.approveAttackTargetType_value.capacity ();
+    b[n].size = &i.approveAttackTargetType_size;
+    b[n].is_null = &i.approveAttackTargetType_null;
     n++;
 
-    // lethalDose_
+    // killingDose_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.lethalDose_value;
-    b[n].is_null = &i.lethalDose_null;
+    b[n].buffer = &i.killingDose_value;
+    b[n].is_null = &i.killingDose_null;
     n++;
 
     // killingMethod_
     //
-    b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.killingMethod_value;
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.killingMethod_value.data ();
+    b[n].capacity = i.killingMethod_value.capacity ();
+    b[n].size = &i.killingMethod_size;
     b[n].is_null = &i.killingMethod_null;
     n++;
 
-    // damageDepth_
+    // killingDepth_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.damageDepth_value;
-    b[n].is_null = &i.damageDepth_null;
+    b[n].buffer = &i.killingDepth_value;
+    b[n].is_null = &i.killingDepth_null;
     n++;
 
     // killingRangeMin_
@@ -450,29 +482,27 @@ namespace odb
     b[n].is_null = &i.killingRangeMax_null;
     n++;
 
-    // ammunitionCreatModelTime_
+    // recordCreationTime_
     //
-    b[n].type = pgsql::bind::text;
-    b[n].buffer = i.ammunitionCreatModelTime_value.data ();
-    b[n].capacity = i.ammunitionCreatModelTime_value.capacity ();
-    b[n].size = &i.ammunitionCreatModelTime_size;
-    b[n].is_null = &i.ammunitionCreatModelTime_null;
+    b[n].type = pgsql::bind::timestamp;
+    b[n].buffer = &i.recordCreationTime_value;
+    b[n].is_null = &i.recordCreationTime_null;
     n++;
 
-    // uavImgUrl_
+    // ammoImgUrl_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.uavImgUrl_value.data ();
-    b[n].capacity = i.uavImgUrl_value.capacity ();
-    b[n].size = &i.uavImgUrl_size;
-    b[n].is_null = &i.uavImgUrl_null;
+    b[n].buffer = i.ammoImgUrl_value.data ();
+    b[n].capacity = i.ammoImgUrl_value.capacity ();
+    b[n].size = &i.ammoImgUrl_size;
+    b[n].is_null = &i.ammoImgUrl_null;
     n++;
 
-    // imageName_
+    // ammoImageName_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.imageName_value;
-    b[n].is_null = &i.imageName_null;
+    b[n].buffer = &i.ammoImageName_value;
+    b[n].is_null = &i.ammoImageName_null;
     n++;
   }
 
@@ -498,109 +528,130 @@ namespace odb
 
     bool grew (false);
 
-    // ammunitionType_
+    // ammoType_
     //
     {
       ::std::string const& v =
-        o.ammunitionType_;
+        o.ammoType_;
 
       bool is_null (false);
       std::size_t size (0);
-      std::size_t cap (i.ammunitionType_value.capacity ());
+      std::size_t cap (i.ammoType_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.ammunitionType_value,
+        i.ammoType_value,
         size,
         is_null,
         v);
-      i.ammunitionType_null = is_null;
-      i.ammunitionType_size = size;
-      grew = grew || (cap != i.ammunitionType_value.capacity ());
+      i.ammoType_null = is_null;
+      i.ammoType_size = size;
+      grew = grew || (cap != i.ammoType_value.capacity ());
     }
 
-    // ammunitionName_
+    // ammoName_
     //
     {
       ::std::string const& v =
-        o.ammunitionName_;
+        o.ammoName_;
 
       bool is_null (false);
       std::size_t size (0);
-      std::size_t cap (i.ammunitionName_value.capacity ());
+      std::size_t cap (i.ammoName_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.ammunitionName_value,
+        i.ammoName_value,
         size,
         is_null,
         v);
-      i.ammunitionName_null = is_null;
-      i.ammunitionName_size = size;
-      grew = grew || (cap != i.ammunitionName_value.capacity ());
+      i.ammoName_null = is_null;
+      i.ammoName_size = size;
+      grew = grew || (cap != i.ammoName_value.capacity ());
     }
 
-    // ammunitionId_
+    // ammoId_
     //
     {
       ::std::string const& v =
-        o.ammunitionId_;
+        o.ammoId_;
 
       bool is_null (false);
       std::size_t size (0);
-      std::size_t cap (i.ammunitionId_value.capacity ());
+      std::size_t cap (i.ammoId_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.ammunitionId_value,
+        i.ammoId_value,
         size,
         is_null,
         v);
-      i.ammunitionId_null = is_null;
-      i.ammunitionId_size = size;
-      grew = grew || (cap != i.ammunitionId_value.capacity ());
+      i.ammoId_null = is_null;
+      i.ammoId_size = size;
+      grew = grew || (cap != i.ammoId_value.capacity ());
     }
 
-    // ammunitionLength_
+    // ammoToUavModel_
+    //
+    {
+      ::std::string const& v =
+        o.ammoToUavModel_;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.ammoToUavModel_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.ammoToUavModel_value,
+        size,
+        is_null,
+        v);
+      i.ammoToUavModel_null = is_null;
+      i.ammoToUavModel_size = size;
+      grew = grew || (cap != i.ammoToUavModel_value.capacity ());
+    }
+
+    // ammoLength_
     //
     {
       float const& v =
-        o.ammunitionLength_;
+        o.ammoLength_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.ammunitionLength_value, is_null, v);
-      i.ammunitionLength_null = is_null;
+        i.ammoLength_value, is_null, v);
+      i.ammoLength_null = is_null;
     }
 
-    // ammunitionWidth_
+    // ammoWidth_
     //
     {
       float const& v =
-        o.ammunitionWidth_;
+        o.ammoWidth_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.ammunitionWidth_value, is_null, v);
-      i.ammunitionWidth_null = is_null;
+        i.ammoWidth_value, is_null, v);
+      i.ammoWidth_null = is_null;
     }
 
-    // ammunitionWeight_
+    // ammoWeight_
     //
     {
       float const& v =
-        o.ammunitionWeight_;
+        o.ammoWeight_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.ammunitionWeight_value, is_null, v);
-      i.ammunitionWeight_null = is_null;
+        i.ammoWeight_value, is_null, v);
+      i.ammoWeight_null = is_null;
     }
 
     // guidanceType_
@@ -624,144 +675,165 @@ namespace odb
       grew = grew || (cap != i.guidanceType_value.capacity ());
     }
 
-    // placementHeightMin_
+    // launchHeightMin_
     //
     {
       float const& v =
-        o.placementHeightMin_;
+        o.launchHeightMin_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.placementHeightMin_value, is_null, v);
-      i.placementHeightMin_null = is_null;
+        i.launchHeightMin_value, is_null, v);
+      i.launchHeightMin_null = is_null;
     }
 
-    // placementHeightMax_
+    // launchHeightMax_
     //
     {
       float const& v =
-        o.placementHeightMax_;
+        o.launchHeightMax_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.placementHeightMax_value, is_null, v);
-      i.placementHeightMax_null = is_null;
+        i.launchHeightMax_value, is_null, v);
+      i.launchHeightMax_null = is_null;
     }
 
-    // placementDistanceMin_
+    // launchDistanceMin_
     //
     {
       float const& v =
-        o.placementDistanceMin_;
+        o.launchDistanceMin_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.placementDistanceMin_value, is_null, v);
-      i.placementDistanceMin_null = is_null;
+        i.launchDistanceMin_value, is_null, v);
+      i.launchDistanceMin_null = is_null;
     }
 
-    // placementDistanceMax_
+    // launchDistanceMax_
     //
     {
       float const& v =
-        o.placementDistanceMax_;
+        o.launchDistanceMax_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.placementDistanceMax_value, is_null, v);
-      i.placementDistanceMax_null = is_null;
+        i.launchDistanceMax_value, is_null, v);
+      i.launchDistanceMax_null = is_null;
     }
 
-    // projectionAngle_
+    // launchAngle_
     //
     {
       float const& v =
-        o.projectionAngle_;
+        o.launchAngle_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.projectionAngle_value, is_null, v);
-      i.projectionAngle_null = is_null;
+        i.launchAngle_value, is_null, v);
+      i.launchAngle_null = is_null;
     }
 
-    // deliveryMethod_
+    // launchWay_
     //
     {
-      float const& v =
-        o.deliveryMethod_;
+      ::std::string const& v =
+        o.launchWay_;
 
       bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.launchWay_value.capacity ());
       pgsql::value_traits<
-          float,
-          pgsql::id_real >::set_image (
-        i.deliveryMethod_value, is_null, v);
-      i.deliveryMethod_null = is_null;
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.launchWay_value,
+        size,
+        is_null,
+        v);
+      i.launchWay_null = is_null;
+      i.launchWay_size = size;
+      grew = grew || (cap != i.launchWay_value.capacity ());
     }
 
-    // attackTargetType_
+    // approveAttackTargetType_
     //
     {
-      float const& v =
-        o.attackTargetType_;
+      ::std::string const& v =
+        o.approveAttackTargetType_;
 
       bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.approveAttackTargetType_value.capacity ());
       pgsql::value_traits<
-          float,
-          pgsql::id_real >::set_image (
-        i.attackTargetType_value, is_null, v);
-      i.attackTargetType_null = is_null;
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.approveAttackTargetType_value,
+        size,
+        is_null,
+        v);
+      i.approveAttackTargetType_null = is_null;
+      i.approveAttackTargetType_size = size;
+      grew = grew || (cap != i.approveAttackTargetType_value.capacity ());
     }
 
-    // lethalDose_
+    // killingDose_
     //
     {
       float const& v =
-        o.lethalDose_;
+        o.killingDose_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.lethalDose_value, is_null, v);
-      i.lethalDose_null = is_null;
+        i.killingDose_value, is_null, v);
+      i.killingDose_null = is_null;
     }
 
     // killingMethod_
     //
     {
-      float const& v =
+      ::std::string const& v =
         o.killingMethod_;
 
       bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.killingMethod_value.capacity ());
       pgsql::value_traits<
-          float,
-          pgsql::id_real >::set_image (
-        i.killingMethod_value, is_null, v);
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.killingMethod_value,
+        size,
+        is_null,
+        v);
       i.killingMethod_null = is_null;
+      i.killingMethod_size = size;
+      grew = grew || (cap != i.killingMethod_value.capacity ());
     }
 
-    // damageDepth_
+    // killingDepth_
     //
     {
       float const& v =
-        o.damageDepth_;
+        o.killingDepth_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.damageDepth_value, is_null, v);
-      i.damageDepth_null = is_null;
+        i.killingDepth_value, is_null, v);
+      i.killingDepth_null = is_null;
     }
 
     // killingRangeMin_
@@ -792,60 +864,53 @@ namespace odb
       i.killingRangeMax_null = is_null;
     }
 
-    // ammunitionCreatModelTime_
+    // recordCreationTime_
+    //
+    {
+      ::QDateTime const& v =
+        o.recordCreationTime_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          ::QDateTime,
+          pgsql::id_timestamp >::set_image (
+        i.recordCreationTime_value, is_null, v);
+      i.recordCreationTime_null = is_null;
+    }
+
+    // ammoImgUrl_
     //
     {
       ::std::string const& v =
-        o.ammunitionCreatModelTime_;
+        o.ammoImgUrl_;
 
       bool is_null (false);
       std::size_t size (0);
-      std::size_t cap (i.ammunitionCreatModelTime_value.capacity ());
+      std::size_t cap (i.ammoImgUrl_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.ammunitionCreatModelTime_value,
+        i.ammoImgUrl_value,
         size,
         is_null,
         v);
-      i.ammunitionCreatModelTime_null = is_null;
-      i.ammunitionCreatModelTime_size = size;
-      grew = grew || (cap != i.ammunitionCreatModelTime_value.capacity ());
+      i.ammoImgUrl_null = is_null;
+      i.ammoImgUrl_size = size;
+      grew = grew || (cap != i.ammoImgUrl_value.capacity ());
     }
 
-    // uavImgUrl_
-    //
-    {
-      ::std::string const& v =
-        o.uavImgUrl_;
-
-      bool is_null (false);
-      std::size_t size (0);
-      std::size_t cap (i.uavImgUrl_value.capacity ());
-      pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_image (
-        i.uavImgUrl_value,
-        size,
-        is_null,
-        v);
-      i.uavImgUrl_null = is_null;
-      i.uavImgUrl_size = size;
-      grew = grew || (cap != i.uavImgUrl_value.capacity ());
-    }
-
-    // imageName_
+    // ammoImageName_
     //
     {
       float const& v =
-        o.imageName_;
+        o.ammoImageName_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.imageName_value, is_null, v);
-      i.imageName_null = is_null;
+        i.ammoImageName_value, is_null, v);
+      i.ammoImageName_null = is_null;
     }
 
     return grew;
@@ -874,91 +939,106 @@ namespace odb
         i.id_null);
     }
 
-    // ammunitionType_
+    // ammoType_
     //
     {
       ::std::string& v =
-        o.ammunitionType_;
+        o.ammoType_;
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.ammunitionType_value,
-        i.ammunitionType_size,
-        i.ammunitionType_null);
+        i.ammoType_value,
+        i.ammoType_size,
+        i.ammoType_null);
     }
 
-    // ammunitionName_
+    // ammoName_
     //
     {
       ::std::string& v =
-        o.ammunitionName_;
+        o.ammoName_;
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.ammunitionName_value,
-        i.ammunitionName_size,
-        i.ammunitionName_null);
+        i.ammoName_value,
+        i.ammoName_size,
+        i.ammoName_null);
     }
 
-    // ammunitionId_
+    // ammoId_
     //
     {
       ::std::string& v =
-        o.ammunitionId_;
+        o.ammoId_;
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.ammunitionId_value,
-        i.ammunitionId_size,
-        i.ammunitionId_null);
+        i.ammoId_value,
+        i.ammoId_size,
+        i.ammoId_null);
     }
 
-    // ammunitionLength_
+    // ammoToUavModel_
+    //
+    {
+      ::std::string& v =
+        o.ammoToUavModel_;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.ammoToUavModel_value,
+        i.ammoToUavModel_size,
+        i.ammoToUavModel_null);
+    }
+
+    // ammoLength_
     //
     {
       float& v =
-        o.ammunitionLength_;
+        o.ammoLength_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.ammunitionLength_value,
-        i.ammunitionLength_null);
+        i.ammoLength_value,
+        i.ammoLength_null);
     }
 
-    // ammunitionWidth_
+    // ammoWidth_
     //
     {
       float& v =
-        o.ammunitionWidth_;
+        o.ammoWidth_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.ammunitionWidth_value,
-        i.ammunitionWidth_null);
+        i.ammoWidth_value,
+        i.ammoWidth_null);
     }
 
-    // ammunitionWeight_
+    // ammoWeight_
     //
     {
       float& v =
-        o.ammunitionWeight_;
+        o.ammoWeight_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.ammunitionWeight_value,
-        i.ammunitionWeight_null);
+        i.ammoWeight_value,
+        i.ammoWeight_null);
     }
 
     // guidanceType_
@@ -976,144 +1056,147 @@ namespace odb
         i.guidanceType_null);
     }
 
-    // placementHeightMin_
+    // launchHeightMin_
     //
     {
       float& v =
-        o.placementHeightMin_;
+        o.launchHeightMin_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.placementHeightMin_value,
-        i.placementHeightMin_null);
+        i.launchHeightMin_value,
+        i.launchHeightMin_null);
     }
 
-    // placementHeightMax_
+    // launchHeightMax_
     //
     {
       float& v =
-        o.placementHeightMax_;
+        o.launchHeightMax_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.placementHeightMax_value,
-        i.placementHeightMax_null);
+        i.launchHeightMax_value,
+        i.launchHeightMax_null);
     }
 
-    // placementDistanceMin_
+    // launchDistanceMin_
     //
     {
       float& v =
-        o.placementDistanceMin_;
+        o.launchDistanceMin_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.placementDistanceMin_value,
-        i.placementDistanceMin_null);
+        i.launchDistanceMin_value,
+        i.launchDistanceMin_null);
     }
 
-    // placementDistanceMax_
+    // launchDistanceMax_
     //
     {
       float& v =
-        o.placementDistanceMax_;
+        o.launchDistanceMax_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.placementDistanceMax_value,
-        i.placementDistanceMax_null);
+        i.launchDistanceMax_value,
+        i.launchDistanceMax_null);
     }
 
-    // projectionAngle_
+    // launchAngle_
     //
     {
       float& v =
-        o.projectionAngle_;
+        o.launchAngle_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.projectionAngle_value,
-        i.projectionAngle_null);
+        i.launchAngle_value,
+        i.launchAngle_null);
     }
 
-    // deliveryMethod_
+    // launchWay_
     //
     {
-      float& v =
-        o.deliveryMethod_;
+      ::std::string& v =
+        o.launchWay_;
 
       pgsql::value_traits<
-          float,
-          pgsql::id_real >::set_value (
+          ::std::string,
+          pgsql::id_string >::set_value (
         v,
-        i.deliveryMethod_value,
-        i.deliveryMethod_null);
+        i.launchWay_value,
+        i.launchWay_size,
+        i.launchWay_null);
     }
 
-    // attackTargetType_
+    // approveAttackTargetType_
     //
     {
-      float& v =
-        o.attackTargetType_;
+      ::std::string& v =
+        o.approveAttackTargetType_;
 
       pgsql::value_traits<
-          float,
-          pgsql::id_real >::set_value (
+          ::std::string,
+          pgsql::id_string >::set_value (
         v,
-        i.attackTargetType_value,
-        i.attackTargetType_null);
+        i.approveAttackTargetType_value,
+        i.approveAttackTargetType_size,
+        i.approveAttackTargetType_null);
     }
 
-    // lethalDose_
+    // killingDose_
     //
     {
       float& v =
-        o.lethalDose_;
+        o.killingDose_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.lethalDose_value,
-        i.lethalDose_null);
+        i.killingDose_value,
+        i.killingDose_null);
     }
 
     // killingMethod_
     //
     {
-      float& v =
+      ::std::string& v =
         o.killingMethod_;
 
       pgsql::value_traits<
-          float,
-          pgsql::id_real >::set_value (
+          ::std::string,
+          pgsql::id_string >::set_value (
         v,
         i.killingMethod_value,
+        i.killingMethod_size,
         i.killingMethod_null);
     }
 
-    // damageDepth_
+    // killingDepth_
     //
     {
       float& v =
-        o.damageDepth_;
+        o.killingDepth_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.damageDepth_value,
-        i.damageDepth_null);
+        i.killingDepth_value,
+        i.killingDepth_null);
     }
 
     // killingRangeMin_
@@ -1144,48 +1227,47 @@ namespace odb
         i.killingRangeMax_null);
     }
 
-    // ammunitionCreatModelTime_
+    // recordCreationTime_
+    //
+    {
+      ::QDateTime& v =
+        o.recordCreationTime_;
+
+      pgsql::value_traits<
+          ::QDateTime,
+          pgsql::id_timestamp >::set_value (
+        v,
+        i.recordCreationTime_value,
+        i.recordCreationTime_null);
+    }
+
+    // ammoImgUrl_
     //
     {
       ::std::string& v =
-        o.ammunitionCreatModelTime_;
+        o.ammoImgUrl_;
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.ammunitionCreatModelTime_value,
-        i.ammunitionCreatModelTime_size,
-        i.ammunitionCreatModelTime_null);
+        i.ammoImgUrl_value,
+        i.ammoImgUrl_size,
+        i.ammoImgUrl_null);
     }
 
-    // uavImgUrl_
-    //
-    {
-      ::std::string& v =
-        o.uavImgUrl_;
-
-      pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_value (
-        v,
-        i.uavImgUrl_value,
-        i.uavImgUrl_size,
-        i.uavImgUrl_null);
-    }
-
-    // imageName_
+    // ammoImageName_
     //
     {
       float& v =
-        o.imageName_;
+        o.ammoImageName_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.imageName_value,
-        i.imageName_null);
+        i.ammoImageName_value,
+        i.ammoImageName_null);
     }
   }
 
@@ -1203,125 +1285,129 @@ namespace odb
   }
 
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::persist_statement[] =
-  "INSERT INTO \"public\".\"ammunition_data\" "
+  "INSERT INTO \"uav_type_man\".\"ammo_parameters\" "
   "(\"id\", "
-  "\"ammunition_type\", "
-  "\"ammunition_name\", "
-  "\"ammunition_id\", "
+  "\"ammo_type\", "
+  "\"ammo_name\", "
+  "\"ammo_id\", "
+  "\"ammo_to_uavmodel\", "
   "\"length\", "
   "\"width\", "
   "\"weight\", "
   "\"guidance_type\", "
-  "\"placement_height_min\", "
-  "\"placement_height_max\", "
-  "\"placement_distance_min\", "
-  "\"placement_distance_max\", "
-  "\"projection_angle\", "
-  "\"delivery_method\", "
-  "\"attack_target_type\", "
-  "\"lethal_dose\", "
+  "\"launch_height_min\", "
+  "\"launch_height_max\", "
+  "\"launch_distance_min\", "
+  "\"launch_distance_max\", "
+  "\"launch_angle\", "
+  "\"launch_method\", "
+  "\"approve_attack_target_type\", "
+  "\"killing_dose\", "
   "\"killing_method\", "
-  "\"damage_depth\", "
+  "\"killing_depth\", "
   "\"killing_range_min\", "
   "\"killing_range_max\", "
-  "\"create_time\", "
+  "\"recordcreation_time\", "
   "\"image_url\", "
   "\"image_name\") "
   "VALUES "
-  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22) "
+  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23) "
   "RETURNING \"id\"";
 
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::find_statement[] =
   "SELECT "
-  "\"public\".\"ammunition_data\".\"id\", "
-  "\"public\".\"ammunition_data\".\"ammunition_type\", "
-  "\"public\".\"ammunition_data\".\"ammunition_name\", "
-  "\"public\".\"ammunition_data\".\"ammunition_id\", "
-  "\"public\".\"ammunition_data\".\"length\", "
-  "\"public\".\"ammunition_data\".\"width\", "
-  "\"public\".\"ammunition_data\".\"weight\", "
-  "\"public\".\"ammunition_data\".\"guidance_type\", "
-  "\"public\".\"ammunition_data\".\"placement_height_min\", "
-  "\"public\".\"ammunition_data\".\"placement_height_max\", "
-  "\"public\".\"ammunition_data\".\"placement_distance_min\", "
-  "\"public\".\"ammunition_data\".\"placement_distance_max\", "
-  "\"public\".\"ammunition_data\".\"projection_angle\", "
-  "\"public\".\"ammunition_data\".\"delivery_method\", "
-  "\"public\".\"ammunition_data\".\"attack_target_type\", "
-  "\"public\".\"ammunition_data\".\"lethal_dose\", "
-  "\"public\".\"ammunition_data\".\"killing_method\", "
-  "\"public\".\"ammunition_data\".\"damage_depth\", "
-  "\"public\".\"ammunition_data\".\"killing_range_min\", "
-  "\"public\".\"ammunition_data\".\"killing_range_max\", "
-  "\"public\".\"ammunition_data\".\"create_time\", "
-  "\"public\".\"ammunition_data\".\"image_url\", "
-  "\"public\".\"ammunition_data\".\"image_name\" "
-  "FROM \"public\".\"ammunition_data\" "
-  "WHERE \"public\".\"ammunition_data\".\"id\"=$1";
+  "\"uav_type_man\".\"ammo_parameters\".\"id\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"ammo_type\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"ammo_name\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"ammo_id\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"ammo_to_uavmodel\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"length\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"width\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"weight\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_type\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_height_min\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_height_max\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_distance_min\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_distance_max\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_angle\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_method\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"approve_attack_target_type\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"killing_dose\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"killing_method\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"killing_depth\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"killing_range_min\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"killing_range_max\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"recordcreation_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"image_url\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"image_name\" "
+  "FROM \"uav_type_man\".\"ammo_parameters\" "
+  "WHERE \"uav_type_man\".\"ammo_parameters\".\"id\"=$1";
 
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::update_statement[] =
-  "UPDATE \"public\".\"ammunition_data\" "
+  "UPDATE \"uav_type_man\".\"ammo_parameters\" "
   "SET "
-  "\"ammunition_type\"=$1, "
-  "\"ammunition_name\"=$2, "
-  "\"ammunition_id\"=$3, "
-  "\"length\"=$4, "
-  "\"width\"=$5, "
-  "\"weight\"=$6, "
-  "\"guidance_type\"=$7, "
-  "\"placement_height_min\"=$8, "
-  "\"placement_height_max\"=$9, "
-  "\"placement_distance_min\"=$10, "
-  "\"placement_distance_max\"=$11, "
-  "\"projection_angle\"=$12, "
-  "\"delivery_method\"=$13, "
-  "\"attack_target_type\"=$14, "
-  "\"lethal_dose\"=$15, "
-  "\"killing_method\"=$16, "
-  "\"damage_depth\"=$17, "
-  "\"killing_range_min\"=$18, "
-  "\"killing_range_max\"=$19, "
-  "\"create_time\"=$20, "
-  "\"image_url\"=$21, "
-  "\"image_name\"=$22 "
-  "WHERE \"id\"=$23";
+  "\"ammo_type\"=$1, "
+  "\"ammo_name\"=$2, "
+  "\"ammo_id\"=$3, "
+  "\"ammo_to_uavmodel\"=$4, "
+  "\"length\"=$5, "
+  "\"width\"=$6, "
+  "\"weight\"=$7, "
+  "\"guidance_type\"=$8, "
+  "\"launch_height_min\"=$9, "
+  "\"launch_height_max\"=$10, "
+  "\"launch_distance_min\"=$11, "
+  "\"launch_distance_max\"=$12, "
+  "\"launch_angle\"=$13, "
+  "\"launch_method\"=$14, "
+  "\"approve_attack_target_type\"=$15, "
+  "\"killing_dose\"=$16, "
+  "\"killing_method\"=$17, "
+  "\"killing_depth\"=$18, "
+  "\"killing_range_min\"=$19, "
+  "\"killing_range_max\"=$20, "
+  "\"recordcreation_time\"=$21, "
+  "\"image_url\"=$22, "
+  "\"image_name\"=$23 "
+  "WHERE \"id\"=$24";
 
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::erase_statement[] =
-  "DELETE FROM \"public\".\"ammunition_data\" "
+  "DELETE FROM \"uav_type_man\".\"ammo_parameters\" "
   "WHERE \"id\"=$1";
 
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::query_statement[] =
   "SELECT "
-  "\"public\".\"ammunition_data\".\"id\", "
-  "\"public\".\"ammunition_data\".\"ammunition_type\", "
-  "\"public\".\"ammunition_data\".\"ammunition_name\", "
-  "\"public\".\"ammunition_data\".\"ammunition_id\", "
-  "\"public\".\"ammunition_data\".\"length\", "
-  "\"public\".\"ammunition_data\".\"width\", "
-  "\"public\".\"ammunition_data\".\"weight\", "
-  "\"public\".\"ammunition_data\".\"guidance_type\", "
-  "\"public\".\"ammunition_data\".\"placement_height_min\", "
-  "\"public\".\"ammunition_data\".\"placement_height_max\", "
-  "\"public\".\"ammunition_data\".\"placement_distance_min\", "
-  "\"public\".\"ammunition_data\".\"placement_distance_max\", "
-  "\"public\".\"ammunition_data\".\"projection_angle\", "
-  "\"public\".\"ammunition_data\".\"delivery_method\", "
-  "\"public\".\"ammunition_data\".\"attack_target_type\", "
-  "\"public\".\"ammunition_data\".\"lethal_dose\", "
-  "\"public\".\"ammunition_data\".\"killing_method\", "
-  "\"public\".\"ammunition_data\".\"damage_depth\", "
-  "\"public\".\"ammunition_data\".\"killing_range_min\", "
-  "\"public\".\"ammunition_data\".\"killing_range_max\", "
-  "\"public\".\"ammunition_data\".\"create_time\", "
-  "\"public\".\"ammunition_data\".\"image_url\", "
-  "\"public\".\"ammunition_data\".\"image_name\" "
-  "FROM \"public\".\"ammunition_data\"";
+  "\"uav_type_man\".\"ammo_parameters\".\"id\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"ammo_type\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"ammo_name\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"ammo_id\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"ammo_to_uavmodel\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"length\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"width\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"weight\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_type\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_height_min\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_height_max\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_distance_min\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_distance_max\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_angle\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_method\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"approve_attack_target_type\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"killing_dose\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"killing_method\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"killing_depth\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"killing_range_min\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"killing_range_max\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"recordcreation_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"image_url\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"image_name\" "
+  "FROM \"uav_type_man\".\"ammo_parameters\"";
 
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::erase_query_statement[] =
-  "DELETE FROM \"public\".\"ammunition_data\"";
+  "DELETE FROM \"uav_type_man\".\"ammo_parameters\"";
 
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::table_name[] =
-  "\"public\".\"ammunition_data\"";
+  "\"uav_type_man\".\"ammo_parameters\"";
 
   void access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::
   persist (database& db, object_type& obj)
@@ -1716,75 +1802,6 @@ namespace odb
 
     return st.execute ();
   }
-}
-
-namespace odb
-{
-  static bool
-  create_schema (database& db, unsigned short pass, bool drop)
-  {
-    ODB_POTENTIALLY_UNUSED (db);
-    ODB_POTENTIALLY_UNUSED (pass);
-    ODB_POTENTIALLY_UNUSED (drop);
-
-    if (drop)
-    {
-      switch (pass)
-      {
-        case 1:
-        {
-          return true;
-        }
-        case 2:
-        {
-          db.execute ("DROP TABLE IF EXISTS \"public\".\"ammunition_data\" CASCADE");
-          return false;
-        }
-      }
-    }
-    else
-    {
-      switch (pass)
-      {
-        case 1:
-        {
-          db.execute ("CREATE TABLE \"public\".\"ammunition_data\" (\n"
-                      "  \"id\" BIGSERIAL NOT NULL PRIMARY KEY,\n"
-                      "  \"ammunition_type\" TEXT NOT NULL,\n"
-                      "  \"ammunition_name\" TEXT NOT NULL,\n"
-                      "  \"ammunition_id\" TEXT NOT NULL,\n"
-                      "  \"length\" REAL NOT NULL,\n"
-                      "  \"width\" REAL NOT NULL,\n"
-                      "  \"weight\" REAL NOT NULL,\n"
-                      "  \"guidance_type\" TEXT NOT NULL,\n"
-                      "  \"placement_height_min\" REAL NOT NULL,\n"
-                      "  \"placement_height_max\" REAL NOT NULL,\n"
-                      "  \"placement_distance_min\" REAL NOT NULL,\n"
-                      "  \"placement_distance_max\" REAL NOT NULL,\n"
-                      "  \"projection_angle\" REAL NOT NULL,\n"
-                      "  \"delivery_method\" REAL NOT NULL,\n"
-                      "  \"attack_target_type\" REAL NOT NULL,\n"
-                      "  \"lethal_dose\" REAL NOT NULL,\n"
-                      "  \"killing_method\" REAL NOT NULL,\n"
-                      "  \"damage_depth\" REAL NOT NULL,\n"
-                      "  \"killing_range_min\" REAL NOT NULL,\n"
-                      "  \"killing_range_max\" REAL NOT NULL,\n"
-                      "  \"create_time\" TEXT NOT NULL,\n"
-                      "  \"image_url\" TEXT NOT NULL,\n"
-                      "  \"image_name\" REAL NOT NULL)");
-          return false;
-        }
-      }
-    }
-
-    return false;
-  }
-
-  static const schema_catalog_create_entry
-  create_schema_entry_ (
-    id_pgsql,
-    "",
-    &create_schema);
 }
 
 #include <odb/post.hxx>

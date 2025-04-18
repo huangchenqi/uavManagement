@@ -61,8 +61,8 @@ class UavModelEntity
     #pragma db column("height")  //type(float4(24))                      // 机高(m)
         float uavHeight_;
 
-    #pragma db column("have_invisibility")  type("varchar(10)")                // 隐身能力
-        std::string uavInvisibility_;
+    #pragma db column("load_ammo_type")  type("varchar(100)")                // 隐身能力
+        std::string uavLoadAmmoType_;
 
 
     /******************** 飞行性能 ********************/
@@ -111,10 +111,10 @@ class UavModelEntity
 
 
     /******************** 载荷配置 ********************/
-    #pragma db column("payload_type")  type("varchar(120)")                // 侦察载荷类型
+    #pragma db column("payload_type")  type("varchar(50)")                // 侦察载荷类型
         std::string uavInvestigationPayloadType_;
 
-    #pragma db column("bomb_way")  type("varchar(120)")                 // 投弹方式
+    #pragma db column("bomb_way")  type("varchar(50)")                 // 投弹方式
         std::string uavBombingway_;
 
     #pragma db column("recon_range_min")  //type("float4(24)")             // 载荷侦察范围最小值(km)
@@ -136,7 +136,7 @@ class UavModelEntity
 
 
     /******************** 挂载能力 ********************/
-    #pragma db column("hanging_capacity")  type("varchar(200)")               // 挂点位置
+    #pragma db column("hanging_capacity")  type("varchar(160)")               // 挂点位置
         std::string uavHangingLoctionCapacity_;
 
     // #pragma db column("hardpoint_num")                 // 挂点数量
@@ -217,7 +217,7 @@ class UavModelEntity
 
     /******************** 系统记录 ********************/
     #pragma db column("recordcreation_time") type("timestamp(0)") options("DEFAULT CURRENT_TIMESTAMP")               // 创建时间
-       QDateTime  uavCreatModelTime_;//std::time_t
+    QDateTime  uavCreatModelTime_{QDateTime::currentDateTime()};//std::time_t
     #pragma db column("image_name") type("varchar(30)")                    // 模型图片名称
         std::string uavImgName_;
     #pragma db column("image_url") type("varchar(30)")                  // 模型图片路径
