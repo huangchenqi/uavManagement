@@ -23,8 +23,9 @@ public:
     Q_INVOKABLE bool updateModelDate(const QString &jsonStr);//更新数据
     Q_INVOKABLE bool deleteModelDate(const QJsonArray& object);//删除数据
     QJsonObject checkUavDataObject(const QJsonObject& object);//检查QML界面的数据是否匹配
-    Q_INVOKABLE bool insertModelDate(const QJsonObject& object);//插入数据
-    void test();
+    Q_INVOKABLE bool insertModelDate(const QJsonObject& objectData);//插入数据
+    QJsonObject transformArrayToStr(const QJsonObject &input,const QStringList &fields);
+    //void test();
 private:
     std::unique_ptr<DatabaseConnection> dbConn_;
 

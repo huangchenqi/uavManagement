@@ -1420,6 +1420,7 @@ Window{//Rectangle{
         uavCenterOfGravityFrontLimitValue.text = selectUavData.cg_front_limit
         uavCenterOfGravityAfterwardLimitValue.text = selectUavData.cg_rear_limit
         uavMaximumTakeoffWeightValue.text = selectUavData.max_takeoff_weight
+        uavEmptyWeightValue.text = selectUavData.empty_weight
         uavMaximumFuelCapacityValue.text = selectUavData.max_fuel
         uavMaximumExternalWeightValue.text = selectUavData.max_external_weight
         uavCeilingValue.text = selectUavData.ceiling
@@ -1652,7 +1653,7 @@ Window{//Rectangle{
     function extractAmmoNameRecord(a, b) {
         return b.map(name => {
             const found = a.find(item => item.ammoName === name);
-            return found ? `${found.recordId}` : null;//found ? `${name}:${found.recordId}` : null;
+            return found ? found.recordId.toString():null//found ? `${found.recordId}` : null;//found ? `${name}:${found.recordId}` : null;
         }).filter(result => result !== null);
     }
     //提取uavCompoentName与recordId
@@ -1663,6 +1664,28 @@ Window{//Rectangle{
             return found ? `${found.recordId}` : null;//found ? `${found.uavComponeName}:${found.recordId}` : null;
         }).filter(result => result !== null);
     }
+    // 转换数据格式
+        function transformArrayToStrData(data) {
+            // 深拷贝原始数据
+            var transformed = JSON.parse(JSON.stringify(data));
+
+            // 转换指定字段
+            transformed.load_ammo_type = transformField(data.load_ammo_type);
+            transformed.payload_type = transformField(data.payload_type);
+            transformed.bomb_method = transformField(data.bomb_method);
+            transformed.recovery_mode = transformField(data.recovery_mode);
+            transformed.operation_method = transformField(data.operation_method);
+
+            return transformed;
+        }
+
+        // 转换单个字段的函数
+        function transformField(field) {
+            if (Array.isArray(field)) {
+                return field.join(",");
+            }
+            return field;
+        }
     function saveUavData(){
         console.log("uavTypeSelevtContent"+uavTypeSelect.currentText+"-"+"testValue"+uavTypeSelect.currentValue)
 
@@ -1784,8 +1807,8 @@ Window{//Rectangle{
         var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()
         var uavRecoveryWay = uavModelRecoveryModeDaoModel.selectModelRecoveryModeAllData()
         var uavOperationWay = uavModelOperationWayDaoModel.selectModelOperationWayAllData()
-        console.log("aaaaaaaaaaaaaaaaaaaaaaa"+JSON.stringify(uavPayloadType)+"<>"+JSON.stringify(uavInvestigationPayloadTypeResult))
-        console.log("ammoTypeResult"+ammoTypeResult)
+        //console.log("aaaaaaaaaaaaaaaaaaaaaaa"+JSON.stringify(uavPayloadType)+"<>"+JSON.stringify(uavInvestigationPayloadTypeResult))
+        //console.log("ammoTypeResult"+ammoTypeResult)
         //挂载弹药类型
         if(isEmpty(ammoTypeResult)){
             warningPopup.open()
@@ -1900,6 +1923,7 @@ Window{//Rectangle{
         uavData.image_name = "aaaaaaaaaaa"
         uavData.image_url = "aaaaaaaaaa"
         uavData.recordcreation_time = addUavModelData.currentTime
+        //var uavTransFormToData = transformArrayToStrData(uavData)
         var jsonString = JSON.stringify(uavData);
         console.log("QML saveUavModelData jsonString"+jsonString);
 
