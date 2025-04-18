@@ -616,6 +616,7 @@ Rectangle {
                                                    processInfo.loadViewType = "query"
                                                    //processInfo.jsonStr = transformedData
                                                    assignmentEncapsulation(transformedData)
+                                                   processInfo.hangingCapacity = rowData.origHangingCapacity
                                                    //console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
                                                    pageUavModelLoader.setSource("qrc:./AddUavModelData.qml",
                                                                         {processInfo: processInfo,
@@ -642,6 +643,8 @@ Rectangle {
 
                                                    processInfo.loadViewType = "update"
                                                    assignmentEncapsulation(transformedData)
+                                                   processInfo.hangingCapacity = rowData.origHangingCapacity
+                                                   console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
                                                    pageUavModelLoader.setSource("qrc:./AddUavModelData.qml",
                                                                         {processInfo: processInfo,
                                                                             backUi: "qrc:/UavManageCommon.qml"})
@@ -885,7 +888,6 @@ Rectangle {
                        id: uavHangingLoctionManagement
                        text: "挂载位置管理"
                        onClicked: {
-                           //onCopyButtonClicked();
                            addMountLocationManagementPopup.open()
                            //uavManagementroot.managementType = "uavHanging"
                            uavManagementroot.enabled = false
@@ -1065,6 +1067,7 @@ Rectangle {
                    return newItem;
                });
            }
+
            //提取原数据的属性
            function loadUavAllData(){
 
@@ -1225,7 +1228,7 @@ Rectangle {
                // 需要转换的字段列表
                const targetFields = [
                    "bombMethod",
-                   "hangingCapacity",
+                   //"hangingCapacity",
                    "operationMethod",
                    "payloadType",
                    "recoveryMode",
@@ -1293,7 +1296,7 @@ Rectangle {
                // processInfo.loadAmmoType =getAmmoNamesByIds(ammoType,loadAmmoTypeArray)
                //console.log("ammoType="+JSON.stringify(ammoType))
                //console.log("aaaaaas"+JSON.stringify(data))
-               processInfo.hangingCapacity = transformData.hangingCapacity
+
                processInfo.operationWay = transformData.operationMethod
                processInfo.recoveryWay = transformData.recoveryMode
                processInfo.bombWay = transformData.bombMethod

@@ -9,7 +9,7 @@ import UavMountLocationDaoModel 1.0
 /**
 https://blog.csdn.net/qq_24890953/article/details/104640454
   */
-//Window {
+//Window {这是挂载位置显示界面
 Rectangle {
            id: addMountLocationroot
            visible: true
@@ -24,7 +24,7 @@ Rectangle {
            property color fontColor: "#3E3E3E"
            property var rowsModel: []
            property string managementType: "";
-           property string queryedit: ""
+           property string queryToData: ""
            property int fontpixelSize: 16   // 设置字体大小为 20 像素: value
            width: 500;
            height: 60//width: screenWidth; height: screenHeight
@@ -76,10 +76,11 @@ Rectangle {
               id: tableModel
               TableModelColumn { display: "checked" }//复选框
               TableModelColumn { display: "index"   }        // 序号
+              TableModelColumn { display: "uavModelName" }   // 挂载数量
               TableModelColumn { display: "uavmountLocationName" }   // 挂载位置
-              TableModelColumn { display: "uavmountLocationId" }    // 位置编号
-              TableModelColumn { display: "uavmountLocationQuantity" }   // 挂载数量
+              TableModelColumn { display: "uavmountLocationId" }    // 位置编号            
               TableModelColumn { display: "uavmountLocationCapacity" }    // 载弹量
+              //TableModelColumn { display: "recordId" }    // 载弹量
             }
 
                    ColumnLayout {
@@ -87,6 +88,46 @@ Rectangle {
                        anchors.fill: parent
                        Layout.fillWidth: true
                        Layout.fillHeight: true
+                       RowLayout {
+                           Layout.minimumWidth: addMountLocationroot.width
+                           Layout.minimumHeight: addMountLocationroot.height-320
+                           Layout.fillHeight: true
+                           Layout.fillWidth: true
+
+
+                           Label {
+                               id:queryUavModelNameShow
+                               Layout.leftMargin: 12
+                               text: "飞机名称:"
+                               font.pointSize: 12
+                               Layout.preferredWidth:30// width:80
+                               height:50
+                           }
+                           TextField{
+                               id:uavModelNameText
+                               font.pointSize: 12
+                               Layout.leftMargin: 0
+                               Layout.preferredWidth: 130   // 指定宽度为 60 像素
+                               height: 50
+                           }
+                           //Item { Layout.fillWidth: true }
+
+                           Button {
+                               id: queryMountData
+                               Layout.leftMargin:20//Layout.rightMargin: 0
+                               //Layout.bottomMargin: 2
+                               height: 50
+                               width: 80
+                               // Layout.preferredWidth: 100
+                               // Layout.preferredHeight: 50
+                               text: "查询"
+                               font.pixelSize: fontpixelSize   // 设置字体大小为 20 像素
+                               onClicked: {
+                                   queryUavToMount()
+                                   uavModelNameText.text = ""
+                               }
+                            }
+                        }
 
                        RowLayout {
                            Layout.minimumWidth: addMountLocationroot.width
@@ -310,6 +351,8 @@ Rectangle {
                                    mountLocationManagementPopup.close()// 或myPopup.visible = false
                                    //addUavModelData.enabled = true
                                    addUavModelData.visible = true
+                                   queryToData = saveClicked()
+                                   //console.log("queryToData!"+queryToData)
                                }
                             }
 
@@ -341,15 +384,32 @@ Rectangle {
            function dpH(h) {
                return h
            }
+           function queryUavToMount(){
+             var  uavData = {
+                   uavModelName:""
+               }
+               uavData.uavModelName = uavModelNameText.text
+                var queryData = uavMountLocationDaoTableModel.queryUavToMountData(uavData)
+               console.log("当前函数名称:", arguments.callee.name);
+               //清空旧数据
+              tableModel.clear()
+              rowsModel.length = 0;
+              tableModel.rows = queryData;
+
+              rowsModel = tableModel.rows;
+              tableModel.layoutChanged()
+
+           }
+
            function loadUavMountLocationAllData(){ //加载挂载位置数据
-               //  var receiveData = uavMountLocationDaoTableModel.selectUavMountLocationAllData()
+                var receiveData = uavMountLocationDaoTableModel.selectUavMountLocationAllData()
                // console.log("MultiTextOfCombox+:", JSON.stringify(receiveData, null, 2));
                // 打印当前函数的名称
                 console.log("当前函数名称:", arguments.callee.name);
                 //清空旧数据
                tableModel.clear()
                rowsModel.length = 0;
-               tableModel.rows = loadData;
+               tableModel.rows = receiveData;
 
                rowsModel = tableModel.rows;
                tableModel.layoutChanged()
@@ -395,18 +455,26 @@ Rectangle {
            }
            // 修正后的保存方法
            function saveClicked() {
-               const selectedData = []
-               for (let i = 0; i < tableModel.rowCount; ++i) {
-                   const row = tableModel.getRow(i)
-                   if (row.checked) {
-                       selectedData.push({
-                           position: row.mountingPosition,
-                           number: row.positionNumber,
-                           count: row.mountCount,
-                           capacity: row.payloadCapacity
-                       })
+               //const selectedData = []
+               // for (let i = 0; i < tableModel.rowCount; ++i) {
+               //     const row = tableModel.getRow(i)
+               //     if (row.checked) {
+               //         selectedData.push({
+               //             position: row.mountingPosition,
+               //             number: row.positionNumber,
+               //             count: row.mountCount,
+               //             capacity: row.payloadCapacity
+               //         })
+               //     }
+               // }
+               // saveRequested(selectedData)  // 触发信号
+                   const ids = []
+                   for (let i = 0; i < tableModel.rowCount; ++i) {
+                       const row = tableModel.rows[i]
+                       if (row.checked && row.recordId) {
+                           ids.push(row.recordId.toString())
+                       }
                    }
-               }
-               saveRequested(selectedData)  // 触发信号
+                   return ids.join(',')
            }
 }

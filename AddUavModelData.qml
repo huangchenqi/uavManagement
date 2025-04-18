@@ -676,55 +676,55 @@ Window{//Rectangle{
                                                 height: 50
                                                 width:100
                                             }
-                                            TextField{
-                                                id: uavHangingLocationValue
-                                                Layout.preferredWidth: 50
-                                            }
-                                        //     Rectangle {
-                                        //         id: uavMountRectangle
-                                        //         height: 40  // 设置默认高度
-                                        //         width: 200  // 设置默认宽度
-                                        //         border.width: 1
-                                        //         border.color: "#CCCCCC"
-                                        //         radius: 4
-                                        //     RowLayout {
-                                        //         // anchors.fill: parent
-                                        //         Layout.fillWidth: true
-                                        //         // Layout.fillHeight: true
-                                        //         spacing: 10
-                                        //         Text {
-                                        //             id: uavHangingLocationText
-                                        //             text: qsTr("请选择")
-                                        //             Layout.leftMargin: 20
-                                        //             anchors.right: parent.right
-                                        //             anchors.verticalCenter: parent.verticalCenter
-                                        //             anchors.left: parent.left
-                                        //             leftPadding: 10
-                                        //             elide: Text.ElideRight
-                                        //             verticalAlignment: Text.AlignVCenter
-                                        //         }
-                                        //         // 下拉箭头
-                                        //         Text {
-                                        //             id: dropdownIcon
-                                        //             anchors.right: parent.right
-                                        //             anchors.verticalCenter: parent.verticalCenter
-                                        //             Layout.leftMargin: 20
-                                        //             //rightPadding: 10
-                                        //             text: "▼"
-                                        //             font.pixelSize: 12
-                                        //         }
+                                            // TextField{
+                                            //     id: uavHangingLocationValue
+                                            //     Layout.preferredWidth: 50
+                                            // }
+                                            Rectangle {
+                                                id: uavMountRectangle
+                                                height: 40  // 设置默认高度
+                                                width: 200  // 设置默认宽度
+                                                border.width: 1
+                                                border.color: "#CCCCCC"
+                                                radius: 4
+                                            RowLayout {
+                                                // anchors.fill: parent
+                                                Layout.fillWidth: true
+                                                // Layout.fillHeight: true
+                                                spacing: 10
+                                                Text {
+                                                    id: uavHangingLocationText
+                                                    text: qsTr("请选择")
+                                                    Layout.leftMargin: 20
+                                                    anchors.right: parent.right
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    anchors.left: parent.left
+                                                    leftPadding: 10
+                                                    elide: Text.ElideRight
+                                                    verticalAlignment: Text.AlignVCenter
+                                                }
+                                                // 下拉箭头
+                                                Text {
+                                                    id: dropdownIcon
+                                                    anchors.right: parent.right
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    Layout.leftMargin: 20
+                                                    //rightPadding: 10
+                                                    text: "▼"
+                                                    font.pixelSize: 12
+                                                }
 
-                                        //         //点击区域
-                                        //         MouseArea {
-                                        //             anchors.fill: parent
-                                        //             onClicked: { //uavHangingLocationText.visible = !uavHangingLocationText.visible
-                                        //                     mountLocationManagementPopup.open()
-                                        //                     //uavManagementroot.managementType = "bombingMethod"
-                                        //                     uavManagementroot.enabled = false
-                                        //                 }
-                                        //         }
-                                        //     }
-                                        // }
+                                                //点击区域
+                                                MouseArea {
+                                                    anchors.fill: parent
+                                                    onClicked: { //uavHangingLocationText.visible = !uavHangingLocationText.visible
+                                                            mountLocationManagementPopup.open()
+                                                            //uavManagementroot.managementType = "bombingMethod"
+                                                            uavManagementroot.enabled = false
+                                                        }
+                                                }
+                                            }
+                                        }
 
                                 // 直接调用组件的获取选中数据方法
                                 // const selectedData = multiTextDispay.getSelectedData()
@@ -1213,13 +1213,20 @@ Window{//Rectangle{
                                     source: {
                                         if(processInfo.loadViewType === "addUavData"){
                                             return ""
-                                        }else{
+                                        }else if(processInfo.loadViewType === "query"){
+                                            uavImagSelect.enabled = false
                                             return processInfo.imagUrl
+                                        }else if(processInfo.loadViewType === "update"){
+                                            return processInfo.imagUrl
+                                            //console.log("addUavDataView"+processInfo.loadViewType)
+                                        }else{
+                                            console.log("uav Image processInfo.loadViewType Unknown")
                                         }
                                     }
                                 }
                                 // 点击区域
                                 MouseArea {
+                                    id:uavImagSelect
                                     anchors.fill: parent
                                     onClicked: {
                                         fileDialog.open()
@@ -1913,7 +1920,7 @@ Window{//Rectangle{
             //uavData.operation_method = JSON.stringify(uavOperatioanalModeResult.join(",")).replace(/^"|"$/g, "");//uavInvestigationPayloadTypeJsonStrresult
 
         }
-        uavData.hanging_capacity = uavHangingLocationValue.text
+        uavData.hanging_capacity = uavMountContent.queryToData//uavHangingLocationValue.text
         //uavData.operation_method = JSON.stringify(uavOperatioanalModeResult.join(",")).replace(/^"|"$/g, "");//uavOperatioanalmodeGroupJsonStrresult
         //uavData.recovery_mode = JSON.stringify(uavRecoveryModeResult.join(",")).replace(/^"|"$/g, "");//uavRecoverymodeGroupJsonStrresult
 

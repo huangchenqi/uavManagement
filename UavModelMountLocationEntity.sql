@@ -9,5 +9,6 @@ CREATE TABLE "uav_type_man"."uav_model_mount_location" (
   "mountlocation_code" INTEGER NOT NULL,
   "mountlocation_name" TEXT NOT NULL,
   "mountlocation_quantity" REAL NOT NULL,
-  "mountlocation_capacity" REAL NOT NULL);
+  "mountlocation_capacity" REAL NOT NULL,
+  "uavmodel_name" TEXT NOT NULL);
 

@@ -149,8 +149,8 @@ QJsonArray UavModelDao::selectUavModelAllData()
             obj["uavId"] = QString::fromStdString(entity.uavId_);
             obj["uavName"] = QString::fromStdString(entity.uavName_);
             obj["uavType"] = QString::fromStdString(entity.uavType_);
-
-            obj["hangingCapacity"] = [&db,&entity](){//QString::fromStdString(entity.uavHangingLoctionCapacity_);
+            obj["origHangingCapacity"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
+            obj["hangingCapacity"] = [&db,&entity](){
                     auto loaded{load{db}.from<UavModelMountLocationEntity>(QString::fromStdString(entity.uavHangingLoctionCapacity_))};
                     QJsonArray arr;
                     for(auto load: loaded){
@@ -329,7 +329,7 @@ QJsonArray UavModelDao::queryUavModelData(const QString &jsonStr)
             obj["uavId"] = QString::fromStdString(entity.uavId_);
             obj["uavName"] = QString::fromStdString(entity.uavName_);
             obj["uavType"] = QString::fromStdString(entity.uavType_);
-            //obj["hangingCapacity"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
+            obj["origHangingCapacity"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
             obj["hangingCapacity"] = [&db,&entity](){//QString::fromStdString(entity.uavHangingLoctionCapacity_);
                 auto loaded{load{db}.from<UavModelMountLocationEntity>(QString::fromStdString(entity.uavHangingLoctionCapacity_))};
                 QJsonArray arr;

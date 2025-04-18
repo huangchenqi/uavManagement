@@ -32,7 +32,8 @@ public:
 
 #pragma db column("mountlocation_capacity") //type(float4(24))
     float mountlocationCapacity_;
-
+#pragma db column("uavmodel_name") //type(float4(24))
+    std::string uavModelName_;
 private:
     //friend class odb::access; // 允许ODB访问私有成员
 

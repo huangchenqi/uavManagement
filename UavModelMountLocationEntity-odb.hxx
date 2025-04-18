@@ -156,6 +156,18 @@ namespace odb
     mountlocationCapacity_type_;
 
     static const mountlocationCapacity_type_ mountlocationCapacity;
+
+    // uavModelName
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    uavModelName_type_;
+
+    static const uavModelName_type_ uavModelName;
   };
 
   template <typename A>
@@ -182,6 +194,11 @@ namespace odb
   const typename query_columns< ::UavModelMountLocationEntity, id_pgsql, A >::mountlocationCapacity_type_
   query_columns< ::UavModelMountLocationEntity, id_pgsql, A >::
   mountlocationCapacity (A::table_name, "\"mountlocation_capacity\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::UavModelMountLocationEntity, id_pgsql, A >::uavModelName_type_
+  query_columns< ::UavModelMountLocationEntity, id_pgsql, A >::
+  uavModelName (A::table_name, "\"uavmodel_name\"", 0);
 
   template <typename A>
   struct pointer_query_columns< ::UavModelMountLocationEntity, id_pgsql, A >:
@@ -230,6 +247,12 @@ namespace odb
       float mountlocationCapacity_value;
       bool mountlocationCapacity_null;
 
+      // uavModelName_
+      //
+      details::buffer uavModelName_value;
+      std::size_t uavModelName_size;
+      bool uavModelName_null;
+
       std::size_t version;
     };
 
@@ -272,7 +295,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 5UL;
+    static const std::size_t column_count = 6UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
