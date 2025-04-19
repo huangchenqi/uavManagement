@@ -87,6 +87,26 @@ Rectangle {
                   TableModelColumn { display: "uavCreatModelTime" }//创建时间
                   TableModelColumn { display: "operation" } // 操作(查看/编辑)
               }
+              // 新增悬浮提示框
+              Popup {
+                  id: tooltip
+                  //width: 200
+                  //height: 50
+                  padding: 10
+                  closePolicy: Popup.NoAutoClose
+                  background: Rectangle {
+                      color: "#F0F8FF"
+                      border.color: "#4682B4"
+                      radius: 4
+                  }
+                  contentItem: Text {
+                      id: tooltipText
+                      width: 300
+                      wrapMode: Text.Wrap
+                      font.pixelSize: 12
+                      color: "#2F4F4F"
+                  }
+              }
               // 定义警告对话框
               Popup {
                       id: warningPopup
@@ -425,7 +445,7 @@ Rectangle {
                        property int scrollBarWidth: 7
                        //列宽
                        property variant columnWidthArr: [50,50, 120, 100, 100, 140,
-                           120, 120, 120, 120,80,120,220, 220]
+                           120, 120, 120, 120,120,120,220, 220]
                        // 显示10个字段
                        property var horHeader: ["","序号", "无人机机型", "无人机名称", "无人机编号", "挂载内容",
                            "操控方式", "投弹方式", "回收方式", "载荷类型","载弹类型","型号记录编号","创建时间", "操作"]
@@ -683,6 +703,18 @@ Rectangle {
                                             color: "#000000"
                                             elide: Text.ElideRight
                                         }
+                                        MouseArea {
+                                                    anchors.fill: parent
+                                                    hoverEnabled: true
+                                                    onEntered: {
+                                                        var pos = mapToGlobal(0, 0)
+                                                        tooltip.x = pos.x //+ width + 10
+                                                        tooltip.y = pos.y -10
+                                                        tooltipText.text = display
+                                                        tooltip.open()
+                                                    }
+                                                    onExited: tooltip.close()
+                                                }
 
                                         Rectangle {
                                             color: borderColor
@@ -997,6 +1029,13 @@ Rectangle {
 
            function dpH(h) {
                return h
+           }
+           function mapToGlobal(x, y) {
+               var globalPoint = tableView.mapToItem(null, x, y)
+               return Qt.point(
+                   globalPoint.x + tableView.contentX,
+                   globalPoint.y + tableView.contentY
+               )
            }
            function queryConditionUavModelData(){
                var uavData ={
