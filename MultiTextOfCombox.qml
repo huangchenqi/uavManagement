@@ -65,6 +65,7 @@ Rectangle {
            // 组件加载完成后生成测试数据
            Component.onCompleted:{
                loadUavMountLocationAllData()
+               loadMountSelectedData()
            }
            UavMountLocationDaoTableModel{
                id:uavMountLocationDaoTableModel
@@ -414,7 +415,71 @@ Rectangle {
                rowsModel = tableModel.rows;
                tableModel.layoutChanged()
            }
+           //将数字字符串转化为
+           function stringToIntArray(str) {
+               var arr = [];
+               var parts = str.split(',');
+               for (var i = 0; i < parts.length; ++i) {
+                   var num = parseInt(parts[i], 10); // 十进制解析
+                   if (!isNaN(num)) {                // 过滤无效数字
+                       arr.push(num);
+                   }
+               }
+               return arr;
+           }
+           function loadMountSelectedData(){
+               var viewType = processInfo.loadViewType
+               var selectedMount = processInfo.hangingCapacity
+               // var str = "1,2";
+               //var array = selectedMount.split(',');      // 得到 ["1", "2"]
+               var intArray = selectedMount.split(',').map(num => parseInt(num)); // 得到 [1, 2]
+               //var selectedArray = stringToIntArray(selectedMount)
+               console.log("loadmount:"+selectedMount)
+               console.log("selected:"+intArray)
 
+               if(processInfo.loadViewType === "addUavData"){
+
+                   console.log("addUavDataView"+processInfo.loadViewType)
+
+               }else if(processInfo.loadViewType === "query"){
+                   setSelectedRecordIds(intArray)
+                   // writeControl(false)
+                   // saveButton.enabled = false
+                   // cancleButton.enabled = false
+                   console.log("addUavDataView"+processInfo.loadViewType)
+               }else if(processInfo.loadViewType === "update"){
+                   setSelectedRecordIds(intArray)
+                   // writeControl(true)
+                   //saveButton.text = "编辑"
+                   // console.log("addUavDataView"+processInfo.loadViewType)
+               }else{
+                   console.log("processInfo.loadViewType Unknown")
+               }
+           }
+
+           // 新增函数：根据recordId数组设置选中行
+           function setSelectedRecordIds(recordIds) {
+               // 创建快速查找的Map
+               var idMap = {};
+               for (var i = 0; i < recordIds.length; i++) {
+                   idMap[recordIds[i]] = true;
+               }
+
+               // 遍历所有行数据
+               for (var j = 0; j < rowsModel.length; j++) {
+                   var row = rowsModel[j];
+                   // 如果该行的recordId在目标数组中，则勾选
+                   if (idMap[row.recordId]) {
+                       row.checked = true;
+                   } else {
+                       row.checked = false;
+                   }
+               }
+
+               // 更新表格数据并刷新界面
+               tableModel.rows = rowsModel;
+               tableModel.layoutChanged();
+           }
            function getSelectedData() {
                // let selected = []
                // for (let i = 0; i < tableModel.rowCount; ++i) {
