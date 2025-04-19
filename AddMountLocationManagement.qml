@@ -108,6 +108,22 @@ Rectangle {
                                font.pointSize: 12
                                Layout.preferredWidth: 100   // 指定宽度为 60 像素
                                height: 50
+                               onTextChanged: {
+                                   // 使用正则表达式移除首尾的空白字符（包括空格、tab、换行）
+                                   var newText = text.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')
+
+                                   // 判断是否需要更新（避免无限循环）
+                                   if (newText !== text) {
+                                       // 保存当前光标位置
+                                       var cursorPos = cursorPosition
+
+                                       // 更新文本
+                                       text = newText
+
+                                       // 恢复光标位置（考虑文本缩短的情况）
+                                       cursorPosition = Math.min(cursorPos, newText.length)
+                                   }
+                               }
                            }
                            Label{
                                id:addMountLocationId
@@ -122,6 +138,30 @@ Rectangle {
                                font.pointSize: 12
                                Layout.preferredWidth: 100   // 指定宽度为 60 像素
                                height:50
+                               // // 方案一：使用正则表达式验证器（推荐）
+                               //     validator: RegExpValidator {
+                               //         regExp: /^\d+$/  // 只允许数字输入
+                               //     }
+                               validator: IntValidator {
+                                   bottom: 0
+                                   top: 1000
+                               }
+                               onTextChanged: {
+                                   // 使用正则表达式移除首尾的空白字符（包括空格、tab、换行）
+                                   var newText = text.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')
+
+                                   // 判断是否需要更新（避免无限循环）
+                                   if (newText !== text) {
+                                       // 保存当前光标位置
+                                       var cursorPos = cursorPosition
+
+                                       // 更新文本
+                                       text = newText
+
+                                       // 恢复光标位置（考虑文本缩短的情况）
+                                       cursorPosition = Math.min(cursorPos, newText.length)
+                                   }
+                               }
                            }
                            Item { Layout.fillWidth: true }
 
@@ -596,38 +636,54 @@ Rectangle {
            //添加挂载位置
            function saveUavMountLoactionData(){
                var uavMountLoactionData = {
-                   uavmountLocationId:"",
+                   uavmountLocationId:0,
                    uavmountLocationName:"",
                    uavModelName:"",
                    uavmountLocationQuantity:0.0,
                    uavmountLocationCapacity:0.0
                }
-               uavMountLoactionData.uavmountLocationId = addMountLocationIdText.text
-               uavMountLoactionData.uavmountLocationName = addMountLocationText.text
-               uavMountLoactionData.uavModelName  = ""
-                uavMountLoactionData.uavmountLocationQuantity= 0.0
-               uavMountLoactionData.uavmountLocationCapacity = 0.0
-               // 打印当前函数的名称
-                console.log("当前函数名称:", arguments.callee.name);
-               if(uavMountLoactionData.uavmountLocationName.length  === 0){
-                   warningItem.text = "挂载位置数据不能为空!"
+               if(addMountLocationText.length != 0 && addMountLocationIdText.length != 0){
+                   //将字符串转换为数字常用的方法有`parseInt()`、`parseFloat()`和`Number()`构造函数。
+                   // 推荐方案：带错误处理的转换
+                   // uavMountLoactionData.uavmountLocationId = {
+                   //     let num = parseInt(addMountLocationIdText.text, 10);
+                   //     return isNaN(num) ? 0 : num; // 如果转换失败则返回默认值0
+                   // }()
+
+                   // 或简写为：
+                   uavMountLoactionData.uavmountLocationId = parseInt(addMountLocationIdText.text) || 0
+                   uavMountLoactionData.uavmountLocationName = addMountLocationText.text
+                   uavMountLoactionData.uavModelName  = ""
+                    uavMountLoactionData.uavmountLocationQuantity= 0.0
+                   uavMountLoactionData.uavmountLocationCapacity = 0.0
+                   // 打印当前函数的名称
+                    console.log("当前函数名称:", arguments.callee.name);
+                   if(uavMountLoactionData.uavmountLocationName.length  === 0){
+                       warningItem.text = "挂载位置数据不能为空!"
+                       warningPopup.open()
+                       // 2秒后自动关闭
+                       autoCloseTimer.start()
+                       return false
+                   }else if(uavMountLoactionData.uavmountLocationName.length > 0){
+                       let insertResult = uavMountLocationDaoTableModel.insertUavMountLocationDate(uavMountLoactionData)
+                       console.log("addMountLocationText"+insertResult)
+                       if(insertResult === true){
+                           warningItem.text = "挂载位置数据添加成功!"
+                           warningPopup.open()
+                       }else{
+                           warningItem.text = "挂载位置数据添加失败!"
+                           warningPopup.open()
+                       }
+                   }else{
+                       console.log(" unknown saveUavMountLoactionData")
+                   }
+               }else{
+                   warningItem.text = "挂载位置与编号不能为空!"
                    warningPopup.open()
                    // 2秒后自动关闭
                    autoCloseTimer.start()
-                   return false
-               }else if(uavMountLoactionData.uavmountLocationName.length > 0){
-                   let insertResult = uavMountLocationDaoTableModel.insertUavMountLocationDate(uavMountLoactionData)
-                   console.log("addMountLocationText"+insertResult)
-                   if(insertResult === true){
-                       warningItem.text = "挂载位置数据添加成功!"
-                       warningPopup.open()
-                   }else{
-                       warningItem.text = "挂载位置数据添加失败!"
-                       warningPopup.open()
-                   }
-               }else{
-                   console.log(" unknown saveUavMountLoactionData")
                }
+
            }
            function loadUavMountLocationAllData(){ //加载挂载位置数据
                 var receiveData = uavMountLocationDaoTableModel.selectUavMountLocationAllData()

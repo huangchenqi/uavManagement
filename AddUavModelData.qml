@@ -1426,7 +1426,7 @@ Window{//Rectangle{
             uavTypeSelect.currentIndex = uavTypeSelecttargetIndex;
         }
         //加载文本数据
-        uavHangingLocationValue.text = selectUavData.hangingCapacity
+        //uavHangingLocationValue.text = selectUavData.hangingCapacity
         uavNameText.text = selectUavData.uavName
         uavIdText.text = selectUavData.uavId
         uavLengthText.text = selectUavData.uavLength

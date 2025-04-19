@@ -110,6 +110,23 @@ Rectangle {
                                Layout.leftMargin: 0
                                Layout.preferredWidth: 130   // 指定宽度为 60 像素
                                height: 50
+                               // 自动去除首尾空白字符
+                               onTextChanged: {
+                                   // 使用正则表达式移除首尾的空白字符（包括空格、tab、换行）
+                                   var newText = text.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')
+
+                                   // 判断是否需要更新（避免无限循环）
+                                   if (newText !== text) {
+                                       // 保存当前光标位置
+                                       var cursorPos = cursorPosition
+
+                                       // 更新文本
+                                       text = newText
+
+                                       // 恢复光标位置（考虑文本缩短的情况）
+                                       cursorPosition = Math.min(cursorPos, newText.length)
+                                   }
+                               }
                            }
                            //Item { Layout.fillWidth: true }
 
