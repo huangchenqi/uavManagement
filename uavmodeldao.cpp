@@ -76,19 +76,20 @@ UavModelDao::UavModelDao(QObject* parent) : QObject(parent){ //::UavModelDao() {
 
 template<typename T>
 struct traits{
+    using query_t = odb::query<T>;
     static T* load(odb::pgsql::database& db,typename odb::object_traits<T>::id_type id){
-        return db.load<T>(id);
+        return db.query_one<T>(query_t::id == id);
     }
 };
 
-template<>
-struct traits<UavModelMountLocationEntity>{
-    template<typename I>
-    static UavModelMountLocationEntity* load(odb::pgsql::database& db,I&& id){
-        using query_t = odb::query<UavModelMountLocationEntity>;
-        return db.query_one<UavModelMountLocationEntity>(query_t::mountLocationId == id);
-    }
-};
+// template<>
+// struct traits<UavModelMountLocationEntity>{
+//     template<typename I>
+//     static UavModelMountLocationEntity* load(odb::pgsql::database& db,I&& id){
+//         using query_t = odb::query<UavModelMountLocationEntity>;
+//         return db.query_one<UavModelMountLocationEntity>(query_t::mountLocationId == id);
+//     }
+// };
 
 struct load{
 private:
