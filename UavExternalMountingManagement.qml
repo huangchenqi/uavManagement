@@ -118,7 +118,7 @@ Item {
                     padding: 0
                     Loader {
                                id: ammunitionLoadManagementLoader
-                               source: "./UavAmmunitionLoadManagement.qml" // 这里指定你想要加载的QML文件的路径
+                               source: "./AmmoRecordManagement.qml" // 这里指定你想要加载的QML文件的路径
                            }
 
                            // 如果需要，你可以在Loader加载完成后访问其项（item）并进行操作

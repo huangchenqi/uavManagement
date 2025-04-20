@@ -239,7 +239,7 @@ Rectangle{
                 Page{
 
                     padding: 10
-                    MountComponentManagement{
+                    UavExternalMountingManagement{
                         id:uavLoadMountComponent
                     }
 

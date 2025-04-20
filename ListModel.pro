@@ -35,13 +35,23 @@ LIBS += -lpq           # PostgreSQL客户端库
 SOURCES += \
 #        EasyTableModel.cpp \
 #        TableModel.cpp \
+    AmmoLaunchWayEntity-odb.cxx \
+    AmmunitionAttackTargetTypeEntity-odb.cxx \
     AmmunitionEntity-odb.cxx \
+    AmmunitionGuidanceTypeEntity-odb.cxx \
+    AmmunitionKillingMethodEntity-odb.cxx \
+    AmmunitionTypeEntity-odb.cxx \
     UavModelBombingMethodEntity-odb.cxx \
     UavModelLoadTypeEntity-odb.cxx \
     UavModelMountLocationEntity-odb.cxx \
     UavModelOperationWayEntity-odb.cxx \
     UavModelRecoveryModeEntity-odb.cxx \
+    ammoattacktargetdao.cpp \
     ammodao.cpp \
+    ammoguidancetypedao.cpp \
+    ammokillingwaydao.cpp \
+    ammolaunchwaydao.cpp \
+    ammotypedao.cpp \
     databaseconnection.cpp \
         main.cpp \
 #        migration.cpp \
@@ -75,12 +85,17 @@ HEADERS += \
 #    TableModel.h \
 #    migration.h \
 #    uavdataoperationmodel.h \
+    AmmoLaunchWayEntity-odb.hxx \
+    AmmoLaunchWayEntity.h \
+    AmmunitionAttackTargetTypeEntity-odb.hxx \
     AmmunitionAttackTargetTypeEntity.h \
-    AmmunitionDeliveryMethodEntity.h \
     AmmunitionEntity-odb.hxx \
     AmmunitionEntity.h \
+    AmmunitionGuidanceTypeEntity-odb.hxx \
     AmmunitionGuidanceTypeEntity.h \
+    AmmunitionKillingMethodEntity-odb.hxx \
     AmmunitionKillingMethodEntity.h \
+    AmmunitionTypeEntity-odb.hxx \
     AmmunitionTypeEntity.h \
     MountingSchemeLoadConfigurationEntity.h \
     MountingSchemeMountingConfiguration.h \
@@ -98,7 +113,12 @@ HEADERS += \
     UavModelOperationWayEntity.h \
     UavModelRecoveryModeEntity-odb.hxx \
     UavModelRecoveryModeEntity.h \
+    ammoattacktargetdao.h \
     ammodao.h \
+    ammoguidancetypedao.h \
+    ammokillingwaydao.h \
+    ammolaunchwaydao.h \
+    ammotypedao.h \
     databaseconnection.h \
     datetime-traits.hxx \
     json.hpp \

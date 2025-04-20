@@ -98,23 +98,23 @@ QJsonArray AmmoDao::selectAmmoAllData()
 
 }
 
-QJsonObject AmmoDao::selectSomeAmmoDate(const QJSValue &selectedData)
+QJsonObject AmmoDao::selectSomeAmmoData(const QJSValue &selectedData)
 {
     QJsonObject object;
     return object;
 }
 
-bool AmmoDao::updateAmmoDate(const QJSValue &selectedData)
+bool AmmoDao::updateAmmoData(const QJSValue &selectedData)
 {
     return true;
 }
 
-bool AmmoDao::deleteAmmoDate(const QJSValue &selectedData)
+bool AmmoDao::deleteAmmoData(const QJSValue &selectedData)
 {
     return true;
 }
 
-bool AmmoDao::insertAmmoDate(const QJSValue &selectedData)
+bool AmmoDao::insertAmmoData(const QJSValue &selectedData)
 {
     return true;
 }

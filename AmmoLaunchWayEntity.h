@@ -1,11 +1,11 @@
-#ifndef AMMUNITIONTYPEENTITY_H
-#define AMMUNITIONTYPEENTITY_H
-//弹药类型建立实体类对应建表
+#ifndef AMMOLAUNCHWAYENTITY_H
+#define AMMOLAUNCHWAYENTITY_H
+//投放方式建立实体类对应建表
 #include <string>
 #include <odb/core.hxx> // ODB核心头文件
 #pragma once
-#pragma db object schema("uav_type_man") table("ammo_type") // 指定表名
-class AmmoTypeEntity
+#pragma db object schema("uav_type_man") table("ammo_launch_way") // 指定表名
+class AmmoLaunchWayEntity
 {
 public:
 //     // 构造函数
@@ -24,11 +24,12 @@ public:
 #pragma db id auto column("id")                    // 自增主键
     long id_;
 
-#pragma db not_null column("ammo_type_code")                        // 载荷编号
-    std::string ammotypeCode_;
-#pragma db column("ammo_type_name")                      // 载荷名称
-    std::string ammoTypeName_;
+#pragma db not_null column("ammo_launch_code")                        // 载荷编号
+    std::string ammoLaunchCode_;
+#pragma db column("ammo_launch_name")                      // 载荷名称
+    std::string ammoLaunchName_;
 #pragma db  column("status")                        // 载荷编号
-    bool ammoTypeStatus_;
+    bool ammoLaunchStatus_;
+
 };
-#endif // AMMUNITIONTYPEENTITY_H
+#endif // AMMUNITIONDELIVERYMETHODENTITY_H

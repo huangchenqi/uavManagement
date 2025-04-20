@@ -11,6 +11,11 @@
 #include "uavmodelrecoverymodedao.h"
 #include "uavmodelloadtypedao.h"
 #include "ammodao.h"
+#include "ammokillingwaydao.h"
+#include "ammolaunchwaydao.h"
+#include "ammoattacktargetdao.h"
+#include "ammoguidancetypedao.h"
+#include "ammotypedao.h"
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -36,6 +41,11 @@ int main(int argc, char *argv[])
     qmlRegisterType<UavModelRecoveryModeDao>("UavModelRecoveryModeDaoModel",1,0,"UavModelRecoveryModeDaoTableModel");
     qmlRegisterType<UavModelLoadTypeDao>("UavModelLoadTypeDaoModel",1,0,"UavModelLoadTypeDaoTableModel");
     qmlRegisterType<AmmoDao>("AmmoDaoModel",1,0,"AmmoDaoTableModel");
+    qmlRegisterType<AmmoKillingWayDao>("AmmoKillingWayDaoModel",1,0,"AmmoKillingWayDaoTableModel");
+    qmlRegisterType<AmmoLaunchWayDao>("AmmoLaunchWayDaoModel",1,0,"AmmoLaunchWayDaoTableModel");
+    qmlRegisterType<AmmoAttackTargetDao>("AmmoAttackTargetDaoModel",1,0,"AmmoAttackTargetDaoTableModel");
+    qmlRegisterType<AmmoGuidanceTypeDao>("AmmoGuidanceTypeDaoModel",1,0,"AmmoGuidanceTypeDaoTableModel");
+    qmlRegisterType<AmmoTypeDao>("AmmoTypeDaoModel",1,0,"AmmoTypeDaoTableModel");
     //qmlRegisterType<TableModel>("Macai.App", 1, 0, "SqlTableModel");
     const QUrl url(QStringLiteral("qrc:/main.qml"));//mainUavDataTableView.qmlUavManageCommon
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

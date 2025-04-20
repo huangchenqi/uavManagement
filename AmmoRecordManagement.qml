@@ -12,7 +12,7 @@ https://blog.csdn.net/qq_24890953/article/details/104640454
   */
 //Window {
 Rectangle {
-           id: uavManagementroot
+           id: uavAmmoManagementroot
            visible: true
            color: "#ECF2FE"
            signal customSignal(string message)
@@ -51,7 +51,10 @@ Rectangle {
 
               }
               // 组件加载完成后生成测试数据
-              Component.onCompleted: generateTestData()
+              Component.onCompleted:// generateTestData()
+                {
+                  //loadSkip()
+                }
               // 生成测试数据函数
               function generateTestData() {
                   const testData = [
@@ -108,23 +111,32 @@ Rectangle {
                       onTriggered: warningPopup.close()
                   }
               Popup {
-                  id: payloadTypeManagementPopup
-                  width: 600  // 需明确设置宽度，否则可能无法显示完整内容
+                  id: addAmmoComponentManagementPopup
+                  width: 456  // 需明确设置宽度，否则可能无法显示完整内容
                   height: 400
                   modal: true
                   focus: true
                   anchors.centerIn: Overlay.overlay // 居中显示
                   closePolicy: Popup.NoAutoClose    // 完全禁用自动关闭
-                  // 直接引用 admin.qml
-                    GetTypeManagement{  // 假设 admin.qml 的根元素是 Admin 类型
-                          id: adminPanel
-                          anchors.fill: parent
-                          managementType:uavManagementroot.managementType
 
-                          onClose: payloadTypeManagementPopup.close() // 连接关闭信号
+                  // 直接引用 admin.qml
+                    AddAmmoComponentManagement{  // 假设 admin.qml 的根元素是 Admin 类型
+                          id: addAmmoComponentManagementPanel
+                          anchors.fill: parent
+                          //managementType:uavManagementroot.managementType
+
+                          onClose: addAmmoComponentManagementPopup.close() // 连接关闭信号
 
 
                       }
+
+                    function setup(name){
+                        addAmmoComponentManagementPanel.title = name
+                    }
+
+                    function setUpAmmoCompType(name){
+                        addAmmoComponentManagementPanel.managementType = name
+                    }
 
                   // 你的内容
                   // Item {
@@ -641,11 +653,11 @@ Rectangle {
                        id: killingMethodManagement
                        text: "杀伤方式管理"
                        onClicked: {
-                          // onModifyButtonClicked();
-                           payloadTypeManagementPopup.open()
-                           uavManagementroot.managementType = "killingMethod"
-                           uavManagementroot.enabled = false
-                           //uavManagementroot.visible = false
+
+                           addAmmoComponentManagementPopup.setup("杀伤方式")
+                           addAmmoComponentManagementPopup.setUpAmmoCompType("killingMethod")
+                           addAmmoComponentManagementPopup.open()
+
                        }
                    }
                    Item { Layout.fillWidth: true }
@@ -653,23 +665,21 @@ Rectangle {
                        id: attackTargetTypeManagement
                        text: "打击目标类型管理"
                        onClicked: {
-                          // onModifyButtonClicked();
-                           payloadTypeManagementPopup.open()
-                           uavManagementroot.managementType = "attackTargetType"
-                           uavManagementroot.enabled = false
-                           //uavManagementroot.visible = false
+                          addAmmoComponentManagementPopup.setup("打击目标类型")
+                           addAmmoComponentManagementPanel.managementType = "attackTargetType"//addAmmoComponentManagementPopup.setUpAmmoCompType("attackTargetType")
+                           addAmmoComponentManagementPopup.open()
+
                        }
                    }
                    Item { Layout.fillWidth: true }
                    Button {
                        id: deliveryMethodManagement
-                       text: "投放方式管理"
+                       text: "发射方式管理"
                        onClicked: {
-                          // onModifyButtonClicked();
-                           payloadTypeManagementPopup.open()
-                           uavManagementroot.managementType = "deliveryMethod"
-                           uavManagementroot.enabled = false
-                           //uavManagementroot.visible = false
+                           addAmmoComponentManagementPopup.setup("发射方式")
+                           addAmmoComponentManagementPopup.setUpAmmoCompType("deliveryMethod")
+                           addAmmoComponentManagementPopup.open()
+                           //addAmmoComponentManagementPanel.managementType = "deliveryMethod"
                        }
                    }
                    Item { Layout.fillWidth: true }
@@ -677,11 +687,10 @@ Rectangle {
                        id: guidanceTypeManagement
                        text: "制导类型管理"
                        onClicked: {
-                          // onModifyButtonClicked();
-                           payloadTypeManagementPopup.open()
-                           uavManagementroot.managementType = "guidanceType"
-                           uavManagementroot.enabled = false
-                           //uavManagementroot.visible = false
+                          addAmmoComponentManagementPopup.setup("制导类型")
+                           addAmmoComponentManagementPopup.setUpAmmoCompType("guidanceType")
+                           addAmmoComponentManagementPopup.open()
+                           //addAmmoComponentManagementPanel.managementType = "guidanceType"
                        }
                    }
                    Item { Layout.fillWidth: true }
@@ -689,13 +698,23 @@ Rectangle {
                        id: payloadTypeManagement
                        text: "弹药类型管理"
                        onClicked: {
-                          // onModifyButtonClicked();
-                           payloadTypeManagementPopup.open()
-                           uavManagementroot.managementType = "ammunitionType"
-                           uavManagementroot.enabled = false
-                           //uavManagementroot.visible = false
+                           addAmmoComponentManagementPopup.setup("弹药类型")
+                           addAmmoComponentManagementPopup.setUpAmmoCompType("ammunitionType")
+                           addAmmoComponentManagementPopup.open()
+                           //addAmmoComponentManagementPanel.managementType = "ammunitionType"
                        }
                    }
+                   Item { Layout.fillWidth: true }
+                   // Button {
+                   //     id: combatTypeManagement
+                   //     text: "战斗部类型"
+                   //     onClicked: {
+                   //         addAmmoComponentManagementPopup.setup("战斗部类型")
+                   //         addAmmoComponentManagementPopup.setUpAmmoCompType("combatType")
+                   //         addAmmoComponentManagementPopup.open()
+                   //         //addAmmoComponentManagementPanel.managementType = "combatType"
+                   //     }
+                   // }
                    Item { Layout.leftMargin: 50 }//Item { Layout.fillWidth: true }
                    Button {
                        id: delUavManagement
@@ -835,7 +854,9 @@ Rectangle {
                return value
            }
 
-
+           function loadSkip(){
+              processInfo.ammoSkipType = ""
+           }
 
            function loadDeliveryBatchModel() {
                // 获取机型信息
