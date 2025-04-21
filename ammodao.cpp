@@ -53,29 +53,29 @@ QJsonArray AmmoDao::selectAmmoAllData()
             obj["ammoName"] = QString::fromStdString(entity.ammoName_);
             obj["ammoType"] = QString::fromStdString(entity.ammoType_);
             obj["ammoToUavModel"] = QString::fromStdString(entity.ammoToUavModel_);
-            obj["length"] = QString::number(entity.ammoLength_);
-            obj["width"] = QString::number(entity.ammoWidth_);
-            obj["weight"] = QString::number(entity.ammoWeight_);
-            obj["guidangce_type"] = QString::fromStdString(entity.guidanceType_);
-            obj["launch_height_min"] = QString::number(entity.launchHeightMin_);
-            obj["launch_height_max"] = QString::number(entity.launchHeightMax_);
-            obj["launch_distance_min"] = QString::number(entity.launchDistanceMin_);
-            obj["launch_distance_max"] = QString::number(entity.launchDistanceMax_);
-            obj["launch_angle"] = QString::number(entity.launchAngle_);
-            obj["launch_method"] = QString::fromStdString(entity.launchWay_);
-            obj["approve_attack_target_type"] = QString::fromStdString(entity.approveAttackTargetType_);
-            obj["killing_dose"] = QString::number(entity.killingDose_);
-            obj["killing_method"] = QString::fromStdString(entity.killingMethod_);
-            obj["killing_depth"] = QString::number(entity.killingDepth_);
-            obj["killing_range_min"] = QString::number(entity.killingRangeMin_);
-            obj["killing_range_max"] = QString::number(entity.killingRangeMax_);
-            // 使用 QDateTime 转换 std::time_t 到 QString
-            obj["image_url"] = QString::fromStdString(entity.ammoImgUrl_);
-            obj["image_name"] = QString::fromStdString(entity.ammoName_);
-            QDateTime dateTime;
-            dateTime = entity.recordCreationTime_;
-            qDebug() <<"recordcreation_time"<< entity.recordCreationTime_;
-            obj["recordcreation_time"] = entity.recordCreationTime_.toString(Qt::ISODate);
+            obj["length"] = QString::number(entity.ammoLenth_);
+            obj["width"] = QString::number(entity.ammoWingspan_);
+            obj["weight"] = QString::number(entity.ammoMass_);
+            obj["guidangce_type"] = QString::fromStdString(entity.guidance_way);
+            obj["launch_height_min"] = QString::number(entity.minimum_relative_height_launch);
+            obj["launch_height_max"] = QString::number(entity.maximum_launch_relative_height);
+            obj["launch_speed_min"] = QString::number(entity.ammoMinReleaseSpeed_);
+            obj["launch_speed_max"] = QString::number(entity.ammoMaxReleaseSpeed_);
+            // obj["launch_angle"] = QString::number(entity.launchAngle_);
+            // obj["launch_method"] = QString::fromStdString(entity.launchWay_);
+            // obj["approve_attack_target_type"] = QString::fromStdString(entity.approveAttackTargetType_);
+            // obj["killing_dose"] = QString::number(entity.killingDose_);
+            // obj["killing_method"] = QString::fromStdString(entity.killingMethod_);
+            // obj["killing_depth"] = QString::number(entity.killingDepth_);
+            // obj["killing_range_min"] = QString::number(entity.killingRangeMin_);
+            // obj["killing_range_max"] = QString::number(entity.killingRangeMax_);
+            // // 使用 QDateTime 转换 std::time_t 到 QString
+            // obj["image_url"] = QString::fromStdString(entity.ammoImgUrl_);
+            // obj["image_name"] = QString::fromStdString(entity.ammoName_);
+            // QDateTime dateTime;
+            // dateTime = entity.recordCreationTime_;
+            // qDebug() <<"recordcreation_time"<< entity.recordCreationTime_;
+            // obj["recordcreation_time"] = entity.recordCreationTime_.toString(Qt::ISODate);
 
 
             obj["operation"] = "";

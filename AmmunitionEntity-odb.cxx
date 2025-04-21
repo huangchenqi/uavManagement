@@ -51,6 +51,44 @@ namespace odb
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
+    pgsql::text_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::int4_oid,
+    pgsql::text_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::int4_oid,
+    pgsql::float4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
@@ -61,14 +99,86 @@ namespace odb
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::text_oid,
+    pgsql::int4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
     pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::int4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::int4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::text_oid,
     pgsql::timestamp_oid,
-    pgsql::text_oid,
     pgsql::float4_oid
   };
 
@@ -85,6 +195,44 @@ namespace odb
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
+    pgsql::text_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::int4_oid,
+    pgsql::text_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::int4_oid,
+    pgsql::float4_oid,
+    pgsql::int4_oid,
+    pgsql::int4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
@@ -95,14 +243,86 @@ namespace odb
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::text_oid,
+    pgsql::int4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
     pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::int4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::int4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::text_oid,
+    pgsql::text_oid,
     pgsql::timestamp_oid,
-    pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::int8_oid
   };
@@ -174,25 +394,33 @@ namespace odb
     //
     t[0UL] = 0;
 
-    // ammoType_
-    //
-    if (t[1UL])
-    {
-      i.ammoType_value.capacity (i.ammoType_size);
-      grew = true;
-    }
-
     // ammoName_
     //
-    if (t[2UL])
+    if (t[1UL])
     {
       i.ammoName_value.capacity (i.ammoName_size);
       grew = true;
     }
 
-    // ammoId_
+    // shortName_
+    //
+    if (t[2UL])
+    {
+      i.shortName_value.capacity (i.shortName_size);
+      grew = true;
+    }
+
+    // ammoType_
     //
     if (t[3UL])
+    {
+      i.ammoType_value.capacity (i.ammoType_size);
+      grew = true;
+    }
+
+    // ammoId_
+    //
+    if (t[4UL])
     {
       i.ammoId_value.capacity (i.ammoId_size);
       grew = true;
@@ -200,107 +428,611 @@ namespace odb
 
     // ammoToUavModel_
     //
-    if (t[4UL])
+    if (t[5UL])
     {
       i.ammoToUavModel_value.capacity (i.ammoToUavModel_size);
       grew = true;
     }
 
-    // ammoLength_
+    // ammoDescription_
     //
-    t[5UL] = 0;
+    if (t[6UL])
+    {
+      i.ammoDescription_value.capacity (i.ammoDescription_size);
+      grew = true;
+    }
 
-    // ammoWidth_
-    //
-    t[6UL] = 0;
-
-    // ammoWeight_
+    // ammoLenth_
     //
     t[7UL] = 0;
 
-    // guidanceType_
+    // ammoMass_
     //
-    if (t[8UL])
-    {
-      i.guidanceType_value.capacity (i.guidanceType_size);
-      grew = true;
-    }
+    t[8UL] = 0;
 
-    // launchHeightMin_
+    // ammoDiameter_
     //
     t[9UL] = 0;
 
-    // launchHeightMax_
+    // ammoWingspan_
     //
     t[10UL] = 0;
 
-    // launchDistanceMin_
+    // ammoWarheadCgDistance_
     //
     t[11UL] = 0;
 
-    // launchDistanceMax_
+    // ammoChargeMass_
     //
     t[12UL] = 0;
 
-    // launchAngle_
+    // ammoChargeCoefficient_
     //
     t[13UL] = 0;
 
-    // launchWay_
+    // ammoMaxReleaseHeight_
     //
-    if (t[14UL])
-    {
-      i.launchWay_value.capacity (i.launchWay_size);
-      grew = true;
-    }
+    t[14UL] = 0;
 
-    // approveAttackTargetType_
+    // ammoMinReleaseHeight
     //
-    if (t[15UL])
-    {
-      i.approveAttackTargetType_value.capacity (i.approveAttackTargetType_size);
-      grew = true;
-    }
+    t[15UL] = 0;
 
-    // killingDose_
+    // ammoMinReleaseSpeed_
     //
     t[16UL] = 0;
 
-    // killingMethod_
+    // ammoMaxReleaseSpeed_
     //
-    if (t[17UL])
-    {
-      i.killingMethod_value.capacity (i.killingMethod_size);
-      grew = true;
-    }
+    t[17UL] = 0;
 
-    // killingDepth_
+    // ammoTailLength_
     //
     t[18UL] = 0;
 
-    // killingRangeMin_
+    // ammoLugSpacing_
     //
     t[19UL] = 0;
 
-    // killingRangeMax_
+    // ammoKillingWway_
     //
-    t[20UL] = 0;
-
-    // recordCreationTime_
-    //
-    t[21UL] = 0;
-
-    // ammoImgUrl_
-    //
-    if (t[22UL])
+    if (t[20UL])
     {
-      i.ammoImgUrl_value.capacity (i.ammoImgUrl_size);
+      i.ammoKillingWway_value.capacity (i.ammoKillingWway_size);
       grew = true;
     }
 
-    // ammoImageName_
+    // ammoPenetrationDepth_
+    //
+    t[21UL] = 0;
+
+    // ammoQuantitySoilThrown_
+    //
+    t[22UL] = 0;
+
+    // ammoCraterDiameter_
     //
     t[23UL] = 0;
+
+    // ammoCraterDepth_
+    //
+    t[24UL] = 0;
+
+    // ammoDamagedArea_
+    //
+    t[25UL] = 0;
+
+    // ammoDenseKillingRadius_
+    //
+    t[26UL] = 0;
+
+    // ammoInitialVelocityFragments_
+    //
+    t[27UL] = 0;
+
+    // ammoNumberFragments_
+    //
+    t[28UL] = 0;
+
+    // ammoArmorBreakingAbility_
+    //
+    if (t[29UL])
+    {
+      i.ammoArmorBreakingAbility_value.capacity (i.ammoArmorBreakingAbility_size);
+      grew = true;
+    }
+
+    // bullet_density_range_minimum
+    //
+    t[30UL] = 0;
+
+    // bullet_density_range_maximum
+    //
+    t[31UL] = 0;
+
+    // ground_ignition_rate
+    //
+    t[32UL] = 0;
+
+    // combustion_temperature
+    //
+    t[33UL] = 0;
+
+    // combustion_time
+    //
+    t[34UL] = 0;
+
+    // combustion_agent_spread_range
+    //
+    t[35UL] = 0;
+
+    // number_of_fragments
+    //
+    t[36UL] = 0;
+
+    // breakdown_distance
+    //
+    t[37UL] = 0;
+
+    // maximum_inclusive_coverage_quantity
+    //
+    t[38UL] = 0;
+
+    // number_of_spread
+    //
+    t[39UL] = 0;
+
+    // surface_dc_resistivity
+    //
+    t[40UL] = 0;
+
+    // probability_of_arc_discharge
+    //
+    t[41UL] = 0;
+
+    // fuel_dispersion_radius
+    //
+    t[42UL] = 0;
+
+    // distance_from_center_explosion
+    //
+    t[43UL] = 0;
+
+    // shock_wave_overpressure_value
+    //
+    t[44UL] = 0;
+
+    // spread_area
+    //
+    t[45UL] = 0;
+
+    // use_description
+    //
+    if (t[46UL])
+    {
+      i.use_description_value.capacity (i.use_description_size);
+      grew = true;
+    }
+
+    // interference_duration
+    //
+    t[47UL] = 0;
+
+    // interference_length_minimum
+    //
+    t[48UL] = 0;
+
+    // interference_length_maximum
+    //
+    t[49UL] = 0;
+
+    // interference_width_minimum
+    //
+    t[50UL] = 0;
+
+    // interference_width_maximum
+    //
+    t[51UL] = 0;
+
+    // fuze_model
+    //
+    if (t[52UL])
+    {
+      i.fuze_model_value.capacity (i.fuze_model_size);
+      grew = true;
+    }
+
+    // number_of_fuses
+    //
+    t[53UL] = 0;
+
+    // storage_life
+    //
+    t[54UL] = 0;
+
+    // action_time
+    //
+    t[55UL] = 0;
+
+    // available_extension_time
+    //
+    t[56UL] = 0;
+
+    // rudder_width
+    //
+    t[57UL] = 0;
+
+    // aerodynamic_configuration
+    //
+    if (t[58UL])
+    {
+      i.aerodynamic_configuration_value.capacity (i.aerodynamic_configuration_size);
+      grew = true;
+    }
+
+    // working_conditions
+    //
+    if (t[59UL])
+    {
+      i.working_conditions_value.capacity (i.working_conditions_size);
+      grew = true;
+    }
+
+    // working_temperature
+    //
+    t[60UL] = 0;
+
+    // working_altitude
+    //
+    t[61UL] = 0;
+
+    // launch_way
+    //
+    if (t[62UL])
+    {
+      i.launch_way_value.capacity (i.launch_way_size);
+      grew = true;
+    }
+
+    // guidance_rule
+    //
+    if (t[63UL])
+    {
+      i.guidance_rule_value.capacity (i.guidance_rule_size);
+      grew = true;
+    }
+
+    // minimum_visibility_emission
+    //
+    t[64UL] = 0;
+
+    // maximum_launch_altitude
+    //
+    t[65UL] = 0;
+
+    // launch_maximum_target_altitude
+    //
+    t[66UL] = 0;
+
+    // maximum_launch_relative_height
+    //
+    t[67UL] = 0;
+
+    // minimum_relative_height_launch
+    //
+    t[68UL] = 0;
+
+    // launch_speed
+    //
+    t[69UL] = 0;
+
+    // launch_conditions
+    //
+    if (t[70UL])
+    {
+      i.launch_conditions_value.capacity (i.launch_conditions_size);
+      grew = true;
+    }
+
+    // launch_off_axis_angle
+    //
+    t[71UL] = 0;
+
+    // guidance_way
+    //
+    if (t[72UL])
+    {
+      i.guidance_way_value.capacity (i.guidance_way_size);
+      grew = true;
+    }
+
+    // effective_range
+    //
+    t[73UL] = 0;
+
+    // hit_accuracy
+    //
+    t[74UL] = 0;
+
+    // hit_probability
+    //
+    t[75UL] = 0;
+
+    // preparation_time
+    //
+    t[76UL] = 0;
+
+    // allow_continuous_flight_time
+    //
+    t[77UL] = 0;
+
+    // guided_flight_time
+    //
+    t[78UL] = 0;
+
+    // maximum_speed_of_missile
+    //
+    t[79UL] = 0;
+
+    // guiding_head_working_wavelength
+    //
+    t[80UL] = 0;
+
+    // guidance_head_operating_distance
+    //
+    t[81UL] = 0;
+
+    // blind_spot_of_guidance_head
+    //
+    t[82UL] = 0;
+
+    // guidance_head_frame_angle
+    //
+    t[83UL] = 0;
+
+    // guidance_head_field_of_view_angle
+    //
+    t[84UL] = 0;
+
+    // adaptability_of_guidance_head_sunlight
+    //
+    if (t[85UL])
+    {
+      i.adaptability_of_guidance_head_sunlight_value.capacity (i.adaptability_of_guidance_head_sunlight_size);
+      grew = true;
+    }
+
+    // guidance_head_operating_frequency
+    //
+    t[86UL] = 0;
+
+    // fuse_firing_rate
+    //
+    t[87UL] = 0;
+
+    // fuse_type
+    //
+    if (t[88UL])
+    {
+      i.fuse_type_value.capacity (i.fuse_type_size);
+      grew = true;
+    }
+
+    // fuse_length
+    //
+    t[89UL] = 0;
+
+    // fuse_diameter
+    //
+    t[90UL] = 0;
+
+    // fuze_quality
+    //
+    t[91UL] = 0;
+
+    // safe_distance_of_fuse
+    //
+    t[92UL] = 0;
+
+    // time_disarming_fuse
+    //
+    t[93UL] = 0;
+
+    // first_level_release_time_of_fuse
+    //
+    t[94UL] = 0;
+
+    // secondary_release_time_of_fuse
+    //
+    t[95UL] = 0;
+
+    // reliability_rate_of_fuse_action
+    //
+    t[96UL] = 0;
+
+    // fuse_self_destruct_time
+    //
+    t[97UL] = 0;
+
+    // combat_department_quality
+    //
+    t[98UL] = 0;
+
+    // combat_quantity
+    //
+    t[99UL] = 0;
+
+    // combat_unit_type
+    //
+    if (t[100UL])
+    {
+      i.combat_unit_type_value.capacity (i.combat_unit_type_size);
+      grew = true;
+    }
+
+    // combat_length
+    //
+    t[101UL] = 0;
+
+    // combat_diameter
+    //
+    t[102UL] = 0;
+
+    // combat_main_charge_type
+    //
+    if (t[103UL])
+    {
+      i.combat_main_charge_type_value.capacity (i.combat_main_charge_type_size);
+      grew = true;
+    }
+
+    // combat_charge_density
+    //
+    t[104UL] = 0;
+
+    // combat_loading_factor
+    //
+    t[105UL] = 0;
+
+    // combat_explosive
+    //
+    t[106UL] = 0;
+
+    // combat_fragments_number
+    //
+    t[107UL] = 0;
+
+    // combat_unit_invasion_capability
+    //
+    if (t[108UL])
+    {
+      i.combat_unit_invasion_capability_value.capacity (i.combat_unit_invasion_capability_size);
+      grew = true;
+    }
+
+    // combat_effective_killing_radius_vehicles
+    //
+    t[109UL] = 0;
+
+    // combat_effective_killing_radius_personnel
+    //
+    t[110UL] = 0;
+
+    // combat_vertical_static_armor_penetration_depth
+    //
+    t[111UL] = 0;
+
+    // combat_department_quality_add
+    //
+    t[112UL] = 0;
+
+    // combat_quantity_add
+    //
+    t[113UL] = 0;
+
+    // combat_unit_type_add
+    //
+    if (t[114UL])
+    {
+      i.combat_unit_type_add_value.capacity (i.combat_unit_type_add_size);
+      grew = true;
+    }
+
+    // combat_length_add
+    //
+    t[115UL] = 0;
+
+    // combat_diameter_add
+    //
+    t[116UL] = 0;
+
+    // combat_main_charge_type_add
+    //
+    if (t[117UL])
+    {
+      i.combat_main_charge_type_add_value.capacity (i.combat_main_charge_type_add_size);
+      grew = true;
+    }
+
+    // combat_charge_density_add
+    //
+    t[118UL] = 0;
+
+    // combat_loading_factor_add
+    //
+    t[119UL] = 0;
+
+    // combat_explosive_add
+    //
+    t[120UL] = 0;
+
+    // combat_fragments_number_add
+    //
+    t[121UL] = 0;
+
+    // combat_unit_invasion_capability_add
+    //
+    if (t[122UL])
+    {
+      i.combat_unit_invasion_capability_add_value.capacity (i.combat_unit_invasion_capability_add_size);
+      grew = true;
+    }
+
+    // combat_effective_killing_radius_vehicles_add
+    //
+    t[123UL] = 0;
+
+    // combat_effective_killing_radius_personnel_add
+    //
+    t[124UL] = 0;
+
+    // combat_vertical_static_armor_penetration_depth_add
+    //
+    t[125UL] = 0;
+
+    // service_life
+    //
+    t[126UL] = 0;
+
+    // distance_between_center_mass_end
+    //
+    t[127UL] = 0;
+
+    // lifting_lug
+    //
+    if (t[128UL])
+    {
+      i.lifting_lug_value.capacity (i.lifting_lug_size);
+      grew = true;
+    }
+
+    // distance_suspension_lifting_lug
+    //
+    t[129UL] = 0;
+
+    // image_name
+    //
+    if (t[130UL])
+    {
+      i.image_name_value.capacity (i.image_name_size);
+      grew = true;
+    }
+
+    // image_url
+    //
+    if (t[131UL])
+    {
+      i.image_url_value.capacity (i.image_url_size);
+      grew = true;
+    }
+
+    // record_creation_time
+    //
+    t[132UL] = 0;
+
+    // use_status
+    //
+    t[133UL] = 0;
 
     return grew;
   }
@@ -326,15 +1058,6 @@ namespace odb
       n++;
     }
 
-    // ammoType_
-    //
-    b[n].type = pgsql::bind::text;
-    b[n].buffer = i.ammoType_value.data ();
-    b[n].capacity = i.ammoType_value.capacity ();
-    b[n].size = &i.ammoType_size;
-    b[n].is_null = &i.ammoType_null;
-    n++;
-
     // ammoName_
     //
     b[n].type = pgsql::bind::text;
@@ -342,6 +1065,24 @@ namespace odb
     b[n].capacity = i.ammoName_value.capacity ();
     b[n].size = &i.ammoName_size;
     b[n].is_null = &i.ammoName_null;
+    n++;
+
+    // shortName_
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.shortName_value.data ();
+    b[n].capacity = i.shortName_value.capacity ();
+    b[n].size = &i.shortName_size;
+    b[n].is_null = &i.shortName_null;
+    n++;
+
+    // ammoType_
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.ammoType_value.data ();
+    b[n].capacity = i.ammoType_value.capacity ();
+    b[n].size = &i.ammoType_size;
+    b[n].is_null = &i.ammoType_null;
     n++;
 
     // ammoId_
@@ -362,147 +1103,944 @@ namespace odb
     b[n].is_null = &i.ammoToUavModel_null;
     n++;
 
-    // ammoLength_
-    //
-    b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.ammoLength_value;
-    b[n].is_null = &i.ammoLength_null;
-    n++;
-
-    // ammoWidth_
-    //
-    b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.ammoWidth_value;
-    b[n].is_null = &i.ammoWidth_null;
-    n++;
-
-    // ammoWeight_
-    //
-    b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.ammoWeight_value;
-    b[n].is_null = &i.ammoWeight_null;
-    n++;
-
-    // guidanceType_
+    // ammoDescription_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.guidanceType_value.data ();
-    b[n].capacity = i.guidanceType_value.capacity ();
-    b[n].size = &i.guidanceType_size;
-    b[n].is_null = &i.guidanceType_null;
+    b[n].buffer = i.ammoDescription_value.data ();
+    b[n].capacity = i.ammoDescription_value.capacity ();
+    b[n].size = &i.ammoDescription_size;
+    b[n].is_null = &i.ammoDescription_null;
     n++;
 
-    // launchHeightMin_
+    // ammoLenth_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.launchHeightMin_value;
-    b[n].is_null = &i.launchHeightMin_null;
+    b[n].buffer = &i.ammoLenth_value;
+    b[n].is_null = &i.ammoLenth_null;
     n++;
 
-    // launchHeightMax_
+    // ammoMass_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.launchHeightMax_value;
-    b[n].is_null = &i.launchHeightMax_null;
+    b[n].buffer = &i.ammoMass_value;
+    b[n].is_null = &i.ammoMass_null;
     n++;
 
-    // launchDistanceMin_
+    // ammoDiameter_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.launchDistanceMin_value;
-    b[n].is_null = &i.launchDistanceMin_null;
+    b[n].buffer = &i.ammoDiameter_value;
+    b[n].is_null = &i.ammoDiameter_null;
     n++;
 
-    // launchDistanceMax_
+    // ammoWingspan_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.launchDistanceMax_value;
-    b[n].is_null = &i.launchDistanceMax_null;
+    b[n].buffer = &i.ammoWingspan_value;
+    b[n].is_null = &i.ammoWingspan_null;
     n++;
 
-    // launchAngle_
+    // ammoWarheadCgDistance_
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.launchAngle_value;
-    b[n].is_null = &i.launchAngle_null;
+    b[n].buffer = &i.ammoWarheadCgDistance_value;
+    b[n].is_null = &i.ammoWarheadCgDistance_null;
     n++;
 
-    // launchWay_
+    // ammoChargeMass_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoChargeMass_value;
+    b[n].is_null = &i.ammoChargeMass_null;
+    n++;
+
+    // ammoChargeCoefficient_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoChargeCoefficient_value;
+    b[n].is_null = &i.ammoChargeCoefficient_null;
+    n++;
+
+    // ammoMaxReleaseHeight_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoMaxReleaseHeight_value;
+    b[n].is_null = &i.ammoMaxReleaseHeight_null;
+    n++;
+
+    // ammoMinReleaseHeight
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoMinReleaseHeight_value;
+    b[n].is_null = &i.ammoMinReleaseHeight_null;
+    n++;
+
+    // ammoMinReleaseSpeed_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoMinReleaseSpeed_value;
+    b[n].is_null = &i.ammoMinReleaseSpeed_null;
+    n++;
+
+    // ammoMaxReleaseSpeed_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoMaxReleaseSpeed_value;
+    b[n].is_null = &i.ammoMaxReleaseSpeed_null;
+    n++;
+
+    // ammoTailLength_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoTailLength_value;
+    b[n].is_null = &i.ammoTailLength_null;
+    n++;
+
+    // ammoLugSpacing_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoLugSpacing_value;
+    b[n].is_null = &i.ammoLugSpacing_null;
+    n++;
+
+    // ammoKillingWway_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.launchWay_value.data ();
-    b[n].capacity = i.launchWay_value.capacity ();
-    b[n].size = &i.launchWay_size;
-    b[n].is_null = &i.launchWay_null;
+    b[n].buffer = i.ammoKillingWway_value.data ();
+    b[n].capacity = i.ammoKillingWway_value.capacity ();
+    b[n].size = &i.ammoKillingWway_size;
+    b[n].is_null = &i.ammoKillingWway_null;
     n++;
 
-    // approveAttackTargetType_
+    // ammoPenetrationDepth_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoPenetrationDepth_value;
+    b[n].is_null = &i.ammoPenetrationDepth_null;
+    n++;
+
+    // ammoQuantitySoilThrown_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoQuantitySoilThrown_value;
+    b[n].is_null = &i.ammoQuantitySoilThrown_null;
+    n++;
+
+    // ammoCraterDiameter_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoCraterDiameter_value;
+    b[n].is_null = &i.ammoCraterDiameter_null;
+    n++;
+
+    // ammoCraterDepth_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoCraterDepth_value;
+    b[n].is_null = &i.ammoCraterDepth_null;
+    n++;
+
+    // ammoDamagedArea_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoDamagedArea_value;
+    b[n].is_null = &i.ammoDamagedArea_null;
+    n++;
+
+    // ammoDenseKillingRadius_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoDenseKillingRadius_value;
+    b[n].is_null = &i.ammoDenseKillingRadius_null;
+    n++;
+
+    // ammoInitialVelocityFragments_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.ammoInitialVelocityFragments_value;
+    b[n].is_null = &i.ammoInitialVelocityFragments_null;
+    n++;
+
+    // ammoNumberFragments_
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.ammoNumberFragments_value;
+    b[n].is_null = &i.ammoNumberFragments_null;
+    n++;
+
+    // ammoArmorBreakingAbility_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.approveAttackTargetType_value.data ();
-    b[n].capacity = i.approveAttackTargetType_value.capacity ();
-    b[n].size = &i.approveAttackTargetType_size;
-    b[n].is_null = &i.approveAttackTargetType_null;
+    b[n].buffer = i.ammoArmorBreakingAbility_value.data ();
+    b[n].capacity = i.ammoArmorBreakingAbility_value.capacity ();
+    b[n].size = &i.ammoArmorBreakingAbility_size;
+    b[n].is_null = &i.ammoArmorBreakingAbility_null;
     n++;
 
-    // killingDose_
+    // bullet_density_range_minimum
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.bullet_density_range_minimum_value;
+    b[n].is_null = &i.bullet_density_range_minimum_null;
+    n++;
+
+    // bullet_density_range_maximum
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.bullet_density_range_maximum_value;
+    b[n].is_null = &i.bullet_density_range_maximum_null;
+    n++;
+
+    // ground_ignition_rate
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.killingDose_value;
-    b[n].is_null = &i.killingDose_null;
+    b[n].buffer = &i.ground_ignition_rate_value;
+    b[n].is_null = &i.ground_ignition_rate_null;
     n++;
 
-    // killingMethod_
+    // combustion_temperature
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combustion_temperature_value;
+    b[n].is_null = &i.combustion_temperature_null;
+    n++;
+
+    // combustion_time
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combustion_time_value;
+    b[n].is_null = &i.combustion_time_null;
+    n++;
+
+    // combustion_agent_spread_range
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combustion_agent_spread_range_value;
+    b[n].is_null = &i.combustion_agent_spread_range_null;
+    n++;
+
+    // number_of_fragments
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.number_of_fragments_value;
+    b[n].is_null = &i.number_of_fragments_null;
+    n++;
+
+    // breakdown_distance
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.breakdown_distance_value;
+    b[n].is_null = &i.breakdown_distance_null;
+    n++;
+
+    // maximum_inclusive_coverage_quantity
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.maximum_inclusive_coverage_quantity_value;
+    b[n].is_null = &i.maximum_inclusive_coverage_quantity_null;
+    n++;
+
+    // number_of_spread
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.number_of_spread_value;
+    b[n].is_null = &i.number_of_spread_null;
+    n++;
+
+    // surface_dc_resistivity
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.surface_dc_resistivity_value;
+    b[n].is_null = &i.surface_dc_resistivity_null;
+    n++;
+
+    // probability_of_arc_discharge
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.probability_of_arc_discharge_value;
+    b[n].is_null = &i.probability_of_arc_discharge_null;
+    n++;
+
+    // fuel_dispersion_radius
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.fuel_dispersion_radius_value;
+    b[n].is_null = &i.fuel_dispersion_radius_null;
+    n++;
+
+    // distance_from_center_explosion
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.distance_from_center_explosion_value;
+    b[n].is_null = &i.distance_from_center_explosion_null;
+    n++;
+
+    // shock_wave_overpressure_value
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.shock_wave_overpressure_value_value;
+    b[n].is_null = &i.shock_wave_overpressure_value_null;
+    n++;
+
+    // spread_area
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.spread_area_value;
+    b[n].is_null = &i.spread_area_null;
+    n++;
+
+    // use_description
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.killingMethod_value.data ();
-    b[n].capacity = i.killingMethod_value.capacity ();
-    b[n].size = &i.killingMethod_size;
-    b[n].is_null = &i.killingMethod_null;
+    b[n].buffer = i.use_description_value.data ();
+    b[n].capacity = i.use_description_value.capacity ();
+    b[n].size = &i.use_description_size;
+    b[n].is_null = &i.use_description_null;
     n++;
 
-    // killingDepth_
+    // interference_duration
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.killingDepth_value;
-    b[n].is_null = &i.killingDepth_null;
+    b[n].buffer = &i.interference_duration_value;
+    b[n].is_null = &i.interference_duration_null;
     n++;
 
-    // killingRangeMin_
+    // interference_length_minimum
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.killingRangeMin_value;
-    b[n].is_null = &i.killingRangeMin_null;
+    b[n].buffer = &i.interference_length_minimum_value;
+    b[n].is_null = &i.interference_length_minimum_null;
     n++;
 
-    // killingRangeMax_
+    // interference_length_maximum
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.killingRangeMax_value;
-    b[n].is_null = &i.killingRangeMax_null;
+    b[n].buffer = &i.interference_length_maximum_value;
+    b[n].is_null = &i.interference_length_maximum_null;
     n++;
 
-    // recordCreationTime_
+    // interference_width_minimum
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.interference_width_minimum_value;
+    b[n].is_null = &i.interference_width_minimum_null;
+    n++;
+
+    // interference_width_maximum
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.interference_width_maximum_value;
+    b[n].is_null = &i.interference_width_maximum_null;
+    n++;
+
+    // fuze_model
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.fuze_model_value.data ();
+    b[n].capacity = i.fuze_model_value.capacity ();
+    b[n].size = &i.fuze_model_size;
+    b[n].is_null = &i.fuze_model_null;
+    n++;
+
+    // number_of_fuses
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.number_of_fuses_value;
+    b[n].is_null = &i.number_of_fuses_null;
+    n++;
+
+    // storage_life
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.storage_life_value;
+    b[n].is_null = &i.storage_life_null;
+    n++;
+
+    // action_time
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.action_time_value;
+    b[n].is_null = &i.action_time_null;
+    n++;
+
+    // available_extension_time
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.available_extension_time_value;
+    b[n].is_null = &i.available_extension_time_null;
+    n++;
+
+    // rudder_width
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.rudder_width_value;
+    b[n].is_null = &i.rudder_width_null;
+    n++;
+
+    // aerodynamic_configuration
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.aerodynamic_configuration_value.data ();
+    b[n].capacity = i.aerodynamic_configuration_value.capacity ();
+    b[n].size = &i.aerodynamic_configuration_size;
+    b[n].is_null = &i.aerodynamic_configuration_null;
+    n++;
+
+    // working_conditions
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.working_conditions_value.data ();
+    b[n].capacity = i.working_conditions_value.capacity ();
+    b[n].size = &i.working_conditions_size;
+    b[n].is_null = &i.working_conditions_null;
+    n++;
+
+    // working_temperature
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.working_temperature_value;
+    b[n].is_null = &i.working_temperature_null;
+    n++;
+
+    // working_altitude
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.working_altitude_value;
+    b[n].is_null = &i.working_altitude_null;
+    n++;
+
+    // launch_way
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.launch_way_value.data ();
+    b[n].capacity = i.launch_way_value.capacity ();
+    b[n].size = &i.launch_way_size;
+    b[n].is_null = &i.launch_way_null;
+    n++;
+
+    // guidance_rule
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.guidance_rule_value.data ();
+    b[n].capacity = i.guidance_rule_value.capacity ();
+    b[n].size = &i.guidance_rule_size;
+    b[n].is_null = &i.guidance_rule_null;
+    n++;
+
+    // minimum_visibility_emission
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.minimum_visibility_emission_value;
+    b[n].is_null = &i.minimum_visibility_emission_null;
+    n++;
+
+    // maximum_launch_altitude
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.maximum_launch_altitude_value;
+    b[n].is_null = &i.maximum_launch_altitude_null;
+    n++;
+
+    // launch_maximum_target_altitude
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.launch_maximum_target_altitude_value;
+    b[n].is_null = &i.launch_maximum_target_altitude_null;
+    n++;
+
+    // maximum_launch_relative_height
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.maximum_launch_relative_height_value;
+    b[n].is_null = &i.maximum_launch_relative_height_null;
+    n++;
+
+    // minimum_relative_height_launch
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.minimum_relative_height_launch_value;
+    b[n].is_null = &i.minimum_relative_height_launch_null;
+    n++;
+
+    // launch_speed
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.launch_speed_value;
+    b[n].is_null = &i.launch_speed_null;
+    n++;
+
+    // launch_conditions
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.launch_conditions_value.data ();
+    b[n].capacity = i.launch_conditions_value.capacity ();
+    b[n].size = &i.launch_conditions_size;
+    b[n].is_null = &i.launch_conditions_null;
+    n++;
+
+    // launch_off_axis_angle
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.launch_off_axis_angle_value;
+    b[n].is_null = &i.launch_off_axis_angle_null;
+    n++;
+
+    // guidance_way
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.guidance_way_value.data ();
+    b[n].capacity = i.guidance_way_value.capacity ();
+    b[n].size = &i.guidance_way_size;
+    b[n].is_null = &i.guidance_way_null;
+    n++;
+
+    // effective_range
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.effective_range_value;
+    b[n].is_null = &i.effective_range_null;
+    n++;
+
+    // hit_accuracy
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.hit_accuracy_value;
+    b[n].is_null = &i.hit_accuracy_null;
+    n++;
+
+    // hit_probability
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.hit_probability_value;
+    b[n].is_null = &i.hit_probability_null;
+    n++;
+
+    // preparation_time
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.preparation_time_value;
+    b[n].is_null = &i.preparation_time_null;
+    n++;
+
+    // allow_continuous_flight_time
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.allow_continuous_flight_time_value;
+    b[n].is_null = &i.allow_continuous_flight_time_null;
+    n++;
+
+    // guided_flight_time
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.guided_flight_time_value;
+    b[n].is_null = &i.guided_flight_time_null;
+    n++;
+
+    // maximum_speed_of_missile
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.maximum_speed_of_missile_value;
+    b[n].is_null = &i.maximum_speed_of_missile_null;
+    n++;
+
+    // guiding_head_working_wavelength
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.guiding_head_working_wavelength_value;
+    b[n].is_null = &i.guiding_head_working_wavelength_null;
+    n++;
+
+    // guidance_head_operating_distance
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.guidance_head_operating_distance_value;
+    b[n].is_null = &i.guidance_head_operating_distance_null;
+    n++;
+
+    // blind_spot_of_guidance_head
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.blind_spot_of_guidance_head_value;
+    b[n].is_null = &i.blind_spot_of_guidance_head_null;
+    n++;
+
+    // guidance_head_frame_angle
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.guidance_head_frame_angle_value;
+    b[n].is_null = &i.guidance_head_frame_angle_null;
+    n++;
+
+    // guidance_head_field_of_view_angle
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.guidance_head_field_of_view_angle_value;
+    b[n].is_null = &i.guidance_head_field_of_view_angle_null;
+    n++;
+
+    // adaptability_of_guidance_head_sunlight
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.adaptability_of_guidance_head_sunlight_value.data ();
+    b[n].capacity = i.adaptability_of_guidance_head_sunlight_value.capacity ();
+    b[n].size = &i.adaptability_of_guidance_head_sunlight_size;
+    b[n].is_null = &i.adaptability_of_guidance_head_sunlight_null;
+    n++;
+
+    // guidance_head_operating_frequency
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.guidance_head_operating_frequency_value;
+    b[n].is_null = &i.guidance_head_operating_frequency_null;
+    n++;
+
+    // fuse_firing_rate
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.fuse_firing_rate_value;
+    b[n].is_null = &i.fuse_firing_rate_null;
+    n++;
+
+    // fuse_type
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.fuse_type_value.data ();
+    b[n].capacity = i.fuse_type_value.capacity ();
+    b[n].size = &i.fuse_type_size;
+    b[n].is_null = &i.fuse_type_null;
+    n++;
+
+    // fuse_length
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.fuse_length_value;
+    b[n].is_null = &i.fuse_length_null;
+    n++;
+
+    // fuse_diameter
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.fuse_diameter_value;
+    b[n].is_null = &i.fuse_diameter_null;
+    n++;
+
+    // fuze_quality
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.fuze_quality_value;
+    b[n].is_null = &i.fuze_quality_null;
+    n++;
+
+    // safe_distance_of_fuse
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.safe_distance_of_fuse_value;
+    b[n].is_null = &i.safe_distance_of_fuse_null;
+    n++;
+
+    // time_disarming_fuse
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.time_disarming_fuse_value;
+    b[n].is_null = &i.time_disarming_fuse_null;
+    n++;
+
+    // first_level_release_time_of_fuse
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.first_level_release_time_of_fuse_value;
+    b[n].is_null = &i.first_level_release_time_of_fuse_null;
+    n++;
+
+    // secondary_release_time_of_fuse
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.secondary_release_time_of_fuse_value;
+    b[n].is_null = &i.secondary_release_time_of_fuse_null;
+    n++;
+
+    // reliability_rate_of_fuse_action
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.reliability_rate_of_fuse_action_value;
+    b[n].is_null = &i.reliability_rate_of_fuse_action_null;
+    n++;
+
+    // fuse_self_destruct_time
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.fuse_self_destruct_time_value;
+    b[n].is_null = &i.fuse_self_destruct_time_null;
+    n++;
+
+    // combat_department_quality
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_department_quality_value;
+    b[n].is_null = &i.combat_department_quality_null;
+    n++;
+
+    // combat_quantity
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_quantity_value;
+    b[n].is_null = &i.combat_quantity_null;
+    n++;
+
+    // combat_unit_type
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.combat_unit_type_value.data ();
+    b[n].capacity = i.combat_unit_type_value.capacity ();
+    b[n].size = &i.combat_unit_type_size;
+    b[n].is_null = &i.combat_unit_type_null;
+    n++;
+
+    // combat_length
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_length_value;
+    b[n].is_null = &i.combat_length_null;
+    n++;
+
+    // combat_diameter
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_diameter_value;
+    b[n].is_null = &i.combat_diameter_null;
+    n++;
+
+    // combat_main_charge_type
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.combat_main_charge_type_value.data ();
+    b[n].capacity = i.combat_main_charge_type_value.capacity ();
+    b[n].size = &i.combat_main_charge_type_size;
+    b[n].is_null = &i.combat_main_charge_type_null;
+    n++;
+
+    // combat_charge_density
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_charge_density_value;
+    b[n].is_null = &i.combat_charge_density_null;
+    n++;
+
+    // combat_loading_factor
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_loading_factor_value;
+    b[n].is_null = &i.combat_loading_factor_null;
+    n++;
+
+    // combat_explosive
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_explosive_value;
+    b[n].is_null = &i.combat_explosive_null;
+    n++;
+
+    // combat_fragments_number
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.combat_fragments_number_value;
+    b[n].is_null = &i.combat_fragments_number_null;
+    n++;
+
+    // combat_unit_invasion_capability
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.combat_unit_invasion_capability_value.data ();
+    b[n].capacity = i.combat_unit_invasion_capability_value.capacity ();
+    b[n].size = &i.combat_unit_invasion_capability_size;
+    b[n].is_null = &i.combat_unit_invasion_capability_null;
+    n++;
+
+    // combat_effective_killing_radius_vehicles
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_effective_killing_radius_vehicles_value;
+    b[n].is_null = &i.combat_effective_killing_radius_vehicles_null;
+    n++;
+
+    // combat_effective_killing_radius_personnel
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_effective_killing_radius_personnel_value;
+    b[n].is_null = &i.combat_effective_killing_radius_personnel_null;
+    n++;
+
+    // combat_vertical_static_armor_penetration_depth
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_vertical_static_armor_penetration_depth_value;
+    b[n].is_null = &i.combat_vertical_static_armor_penetration_depth_null;
+    n++;
+
+    // combat_department_quality_add
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_department_quality_add_value;
+    b[n].is_null = &i.combat_department_quality_add_null;
+    n++;
+
+    // combat_quantity_add
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_quantity_add_value;
+    b[n].is_null = &i.combat_quantity_add_null;
+    n++;
+
+    // combat_unit_type_add
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.combat_unit_type_add_value.data ();
+    b[n].capacity = i.combat_unit_type_add_value.capacity ();
+    b[n].size = &i.combat_unit_type_add_size;
+    b[n].is_null = &i.combat_unit_type_add_null;
+    n++;
+
+    // combat_length_add
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_length_add_value;
+    b[n].is_null = &i.combat_length_add_null;
+    n++;
+
+    // combat_diameter_add
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_diameter_add_value;
+    b[n].is_null = &i.combat_diameter_add_null;
+    n++;
+
+    // combat_main_charge_type_add
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.combat_main_charge_type_add_value.data ();
+    b[n].capacity = i.combat_main_charge_type_add_value.capacity ();
+    b[n].size = &i.combat_main_charge_type_add_size;
+    b[n].is_null = &i.combat_main_charge_type_add_null;
+    n++;
+
+    // combat_charge_density_add
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_charge_density_add_value;
+    b[n].is_null = &i.combat_charge_density_add_null;
+    n++;
+
+    // combat_loading_factor_add
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_loading_factor_add_value;
+    b[n].is_null = &i.combat_loading_factor_add_null;
+    n++;
+
+    // combat_explosive_add
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_explosive_add_value;
+    b[n].is_null = &i.combat_explosive_add_null;
+    n++;
+
+    // combat_fragments_number_add
+    //
+    b[n].type = pgsql::bind::integer;
+    b[n].buffer = &i.combat_fragments_number_add_value;
+    b[n].is_null = &i.combat_fragments_number_add_null;
+    n++;
+
+    // combat_unit_invasion_capability_add
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.combat_unit_invasion_capability_add_value.data ();
+    b[n].capacity = i.combat_unit_invasion_capability_add_value.capacity ();
+    b[n].size = &i.combat_unit_invasion_capability_add_size;
+    b[n].is_null = &i.combat_unit_invasion_capability_add_null;
+    n++;
+
+    // combat_effective_killing_radius_vehicles_add
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_effective_killing_radius_vehicles_add_value;
+    b[n].is_null = &i.combat_effective_killing_radius_vehicles_add_null;
+    n++;
+
+    // combat_effective_killing_radius_personnel_add
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_effective_killing_radius_personnel_add_value;
+    b[n].is_null = &i.combat_effective_killing_radius_personnel_add_null;
+    n++;
+
+    // combat_vertical_static_armor_penetration_depth_add
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.combat_vertical_static_armor_penetration_depth_add_value;
+    b[n].is_null = &i.combat_vertical_static_armor_penetration_depth_add_null;
+    n++;
+
+    // service_life
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.service_life_value;
+    b[n].is_null = &i.service_life_null;
+    n++;
+
+    // distance_between_center_mass_end
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.distance_between_center_mass_end_value;
+    b[n].is_null = &i.distance_between_center_mass_end_null;
+    n++;
+
+    // lifting_lug
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.lifting_lug_value.data ();
+    b[n].capacity = i.lifting_lug_value.capacity ();
+    b[n].size = &i.lifting_lug_size;
+    b[n].is_null = &i.lifting_lug_null;
+    n++;
+
+    // distance_suspension_lifting_lug
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.distance_suspension_lifting_lug_value;
+    b[n].is_null = &i.distance_suspension_lifting_lug_null;
+    n++;
+
+    // image_name
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.image_name_value.data ();
+    b[n].capacity = i.image_name_value.capacity ();
+    b[n].size = &i.image_name_size;
+    b[n].is_null = &i.image_name_null;
+    n++;
+
+    // image_url
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.image_url_value.data ();
+    b[n].capacity = i.image_url_value.capacity ();
+    b[n].size = &i.image_url_size;
+    b[n].is_null = &i.image_url_null;
+    n++;
+
+    // record_creation_time
     //
     b[n].type = pgsql::bind::timestamp;
-    b[n].buffer = &i.recordCreationTime_value;
-    b[n].is_null = &i.recordCreationTime_null;
+    b[n].buffer = &i.record_creation_time_value;
+    b[n].is_null = &i.record_creation_time_null;
     n++;
 
-    // ammoImgUrl_
-    //
-    b[n].type = pgsql::bind::text;
-    b[n].buffer = i.ammoImgUrl_value.data ();
-    b[n].capacity = i.ammoImgUrl_value.capacity ();
-    b[n].size = &i.ammoImgUrl_size;
-    b[n].is_null = &i.ammoImgUrl_null;
-    n++;
-
-    // ammoImageName_
+    // use_status
     //
     b[n].type = pgsql::bind::real;
-    b[n].buffer = &i.ammoImageName_value;
-    b[n].is_null = &i.ammoImageName_null;
+    b[n].buffer = &i.use_status_value;
+    b[n].is_null = &i.use_status_null;
     n++;
   }
 
@@ -528,27 +2066,6 @@ namespace odb
 
     bool grew (false);
 
-    // ammoType_
-    //
-    {
-      ::std::string const& v =
-        o.ammoType_;
-
-      bool is_null (false);
-      std::size_t size (0);
-      std::size_t cap (i.ammoType_value.capacity ());
-      pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_image (
-        i.ammoType_value,
-        size,
-        is_null,
-        v);
-      i.ammoType_null = is_null;
-      i.ammoType_size = size;
-      grew = grew || (cap != i.ammoType_value.capacity ());
-    }
-
     // ammoName_
     //
     {
@@ -568,6 +2085,48 @@ namespace odb
       i.ammoName_null = is_null;
       i.ammoName_size = size;
       grew = grew || (cap != i.ammoName_value.capacity ());
+    }
+
+    // shortName_
+    //
+    {
+      ::std::string const& v =
+        o.shortName_;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.shortName_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.shortName_value,
+        size,
+        is_null,
+        v);
+      i.shortName_null = is_null;
+      i.shortName_size = size;
+      grew = grew || (cap != i.shortName_value.capacity ());
+    }
+
+    // ammoType_
+    //
+    {
+      ::std::string const& v =
+        o.ammoType_;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.ammoType_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.ammoType_value,
+        size,
+        is_null,
+        v);
+      i.ammoType_null = is_null;
+      i.ammoType_size = size;
+      grew = grew || (cap != i.ammoType_value.capacity ());
     }
 
     // ammoId_
@@ -612,305 +2171,1950 @@ namespace odb
       grew = grew || (cap != i.ammoToUavModel_value.capacity ());
     }
 
-    // ammoLength_
-    //
-    {
-      float const& v =
-        o.ammoLength_;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          float,
-          pgsql::id_real >::set_image (
-        i.ammoLength_value, is_null, v);
-      i.ammoLength_null = is_null;
-    }
-
-    // ammoWidth_
-    //
-    {
-      float const& v =
-        o.ammoWidth_;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          float,
-          pgsql::id_real >::set_image (
-        i.ammoWidth_value, is_null, v);
-      i.ammoWidth_null = is_null;
-    }
-
-    // ammoWeight_
-    //
-    {
-      float const& v =
-        o.ammoWeight_;
-
-      bool is_null (false);
-      pgsql::value_traits<
-          float,
-          pgsql::id_real >::set_image (
-        i.ammoWeight_value, is_null, v);
-      i.ammoWeight_null = is_null;
-    }
-
-    // guidanceType_
+    // ammoDescription_
     //
     {
       ::std::string const& v =
-        o.guidanceType_;
+        o.ammoDescription_;
 
       bool is_null (false);
       std::size_t size (0);
-      std::size_t cap (i.guidanceType_value.capacity ());
+      std::size_t cap (i.ammoDescription_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.guidanceType_value,
+        i.ammoDescription_value,
         size,
         is_null,
         v);
-      i.guidanceType_null = is_null;
-      i.guidanceType_size = size;
-      grew = grew || (cap != i.guidanceType_value.capacity ());
+      i.ammoDescription_null = is_null;
+      i.ammoDescription_size = size;
+      grew = grew || (cap != i.ammoDescription_value.capacity ());
     }
 
-    // launchHeightMin_
+    // ammoLenth_
     //
     {
       float const& v =
-        o.launchHeightMin_;
+        o.ammoLenth_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.launchHeightMin_value, is_null, v);
-      i.launchHeightMin_null = is_null;
+        i.ammoLenth_value, is_null, v);
+      i.ammoLenth_null = is_null;
     }
 
-    // launchHeightMax_
+    // ammoMass_
     //
     {
       float const& v =
-        o.launchHeightMax_;
+        o.ammoMass_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.launchHeightMax_value, is_null, v);
-      i.launchHeightMax_null = is_null;
+        i.ammoMass_value, is_null, v);
+      i.ammoMass_null = is_null;
     }
 
-    // launchDistanceMin_
+    // ammoDiameter_
     //
     {
       float const& v =
-        o.launchDistanceMin_;
+        o.ammoDiameter_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.launchDistanceMin_value, is_null, v);
-      i.launchDistanceMin_null = is_null;
+        i.ammoDiameter_value, is_null, v);
+      i.ammoDiameter_null = is_null;
     }
 
-    // launchDistanceMax_
+    // ammoWingspan_
     //
     {
       float const& v =
-        o.launchDistanceMax_;
+        o.ammoWingspan_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.launchDistanceMax_value, is_null, v);
-      i.launchDistanceMax_null = is_null;
+        i.ammoWingspan_value, is_null, v);
+      i.ammoWingspan_null = is_null;
     }
 
-    // launchAngle_
+    // ammoWarheadCgDistance_
     //
     {
       float const& v =
-        o.launchAngle_;
+        o.ammoWarheadCgDistance_;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.launchAngle_value, is_null, v);
-      i.launchAngle_null = is_null;
+        i.ammoWarheadCgDistance_value, is_null, v);
+      i.ammoWarheadCgDistance_null = is_null;
     }
 
-    // launchWay_
+    // ammoChargeMass_
+    //
+    {
+      float const& v =
+        o.ammoChargeMass_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoChargeMass_value, is_null, v);
+      i.ammoChargeMass_null = is_null;
+    }
+
+    // ammoChargeCoefficient_
+    //
+    {
+      float const& v =
+        o.ammoChargeCoefficient_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoChargeCoefficient_value, is_null, v);
+      i.ammoChargeCoefficient_null = is_null;
+    }
+
+    // ammoMaxReleaseHeight_
+    //
+    {
+      float const& v =
+        o.ammoMaxReleaseHeight_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoMaxReleaseHeight_value, is_null, v);
+      i.ammoMaxReleaseHeight_null = is_null;
+    }
+
+    // ammoMinReleaseHeight
+    //
+    {
+      float const& v =
+        o.ammoMinReleaseHeight;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoMinReleaseHeight_value, is_null, v);
+      i.ammoMinReleaseHeight_null = is_null;
+    }
+
+    // ammoMinReleaseSpeed_
+    //
+    {
+      float const& v =
+        o.ammoMinReleaseSpeed_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoMinReleaseSpeed_value, is_null, v);
+      i.ammoMinReleaseSpeed_null = is_null;
+    }
+
+    // ammoMaxReleaseSpeed_
+    //
+    {
+      float const& v =
+        o.ammoMaxReleaseSpeed_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoMaxReleaseSpeed_value, is_null, v);
+      i.ammoMaxReleaseSpeed_null = is_null;
+    }
+
+    // ammoTailLength_
+    //
+    {
+      float const& v =
+        o.ammoTailLength_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoTailLength_value, is_null, v);
+      i.ammoTailLength_null = is_null;
+    }
+
+    // ammoLugSpacing_
+    //
+    {
+      float const& v =
+        o.ammoLugSpacing_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoLugSpacing_value, is_null, v);
+      i.ammoLugSpacing_null = is_null;
+    }
+
+    // ammoKillingWway_
     //
     {
       ::std::string const& v =
-        o.launchWay_;
+        o.ammoKillingWway_;
 
       bool is_null (false);
       std::size_t size (0);
-      std::size_t cap (i.launchWay_value.capacity ());
+      std::size_t cap (i.ammoKillingWway_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.launchWay_value,
+        i.ammoKillingWway_value,
         size,
         is_null,
         v);
-      i.launchWay_null = is_null;
-      i.launchWay_size = size;
-      grew = grew || (cap != i.launchWay_value.capacity ());
+      i.ammoKillingWway_null = is_null;
+      i.ammoKillingWway_size = size;
+      grew = grew || (cap != i.ammoKillingWway_value.capacity ());
     }
 
-    // approveAttackTargetType_
+    // ammoPenetrationDepth_
+    //
+    {
+      float const& v =
+        o.ammoPenetrationDepth_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoPenetrationDepth_value, is_null, v);
+      i.ammoPenetrationDepth_null = is_null;
+    }
+
+    // ammoQuantitySoilThrown_
+    //
+    {
+      float const& v =
+        o.ammoQuantitySoilThrown_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoQuantitySoilThrown_value, is_null, v);
+      i.ammoQuantitySoilThrown_null = is_null;
+    }
+
+    // ammoCraterDiameter_
+    //
+    {
+      float const& v =
+        o.ammoCraterDiameter_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoCraterDiameter_value, is_null, v);
+      i.ammoCraterDiameter_null = is_null;
+    }
+
+    // ammoCraterDepth_
+    //
+    {
+      float const& v =
+        o.ammoCraterDepth_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoCraterDepth_value, is_null, v);
+      i.ammoCraterDepth_null = is_null;
+    }
+
+    // ammoDamagedArea_
+    //
+    {
+      float const& v =
+        o.ammoDamagedArea_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoDamagedArea_value, is_null, v);
+      i.ammoDamagedArea_null = is_null;
+    }
+
+    // ammoDenseKillingRadius_
+    //
+    {
+      float const& v =
+        o.ammoDenseKillingRadius_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoDenseKillingRadius_value, is_null, v);
+      i.ammoDenseKillingRadius_null = is_null;
+    }
+
+    // ammoInitialVelocityFragments_
+    //
+    {
+      float const& v =
+        o.ammoInitialVelocityFragments_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.ammoInitialVelocityFragments_value, is_null, v);
+      i.ammoInitialVelocityFragments_null = is_null;
+    }
+
+    // ammoNumberFragments_
+    //
+    {
+      int const& v =
+        o.ammoNumberFragments_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.ammoNumberFragments_value, is_null, v);
+      i.ammoNumberFragments_null = is_null;
+    }
+
+    // ammoArmorBreakingAbility_
     //
     {
       ::std::string const& v =
-        o.approveAttackTargetType_;
+        o.ammoArmorBreakingAbility_;
 
       bool is_null (false);
       std::size_t size (0);
-      std::size_t cap (i.approveAttackTargetType_value.capacity ());
+      std::size_t cap (i.ammoArmorBreakingAbility_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.approveAttackTargetType_value,
+        i.ammoArmorBreakingAbility_value,
         size,
         is_null,
         v);
-      i.approveAttackTargetType_null = is_null;
-      i.approveAttackTargetType_size = size;
-      grew = grew || (cap != i.approveAttackTargetType_value.capacity ());
+      i.ammoArmorBreakingAbility_null = is_null;
+      i.ammoArmorBreakingAbility_size = size;
+      grew = grew || (cap != i.ammoArmorBreakingAbility_value.capacity ());
     }
 
-    // killingDose_
+    // bullet_density_range_minimum
+    //
+    {
+      int const& v =
+        o.bullet_density_range_minimum;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.bullet_density_range_minimum_value, is_null, v);
+      i.bullet_density_range_minimum_null = is_null;
+    }
+
+    // bullet_density_range_maximum
+    //
+    {
+      int const& v =
+        o.bullet_density_range_maximum;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.bullet_density_range_maximum_value, is_null, v);
+      i.bullet_density_range_maximum_null = is_null;
+    }
+
+    // ground_ignition_rate
     //
     {
       float const& v =
-        o.killingDose_;
+        o.ground_ignition_rate;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.killingDose_value, is_null, v);
-      i.killingDose_null = is_null;
+        i.ground_ignition_rate_value, is_null, v);
+      i.ground_ignition_rate_null = is_null;
     }
 
-    // killingMethod_
+    // combustion_temperature
+    //
+    {
+      float const& v =
+        o.combustion_temperature;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combustion_temperature_value, is_null, v);
+      i.combustion_temperature_null = is_null;
+    }
+
+    // combustion_time
+    //
+    {
+      float const& v =
+        o.combustion_time;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combustion_time_value, is_null, v);
+      i.combustion_time_null = is_null;
+    }
+
+    // combustion_agent_spread_range
+    //
+    {
+      float const& v =
+        o.combustion_agent_spread_range;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combustion_agent_spread_range_value, is_null, v);
+      i.combustion_agent_spread_range_null = is_null;
+    }
+
+    // number_of_fragments
+    //
+    {
+      int const& v =
+        o.number_of_fragments;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.number_of_fragments_value, is_null, v);
+      i.number_of_fragments_null = is_null;
+    }
+
+    // breakdown_distance
+    //
+    {
+      float const& v =
+        o.breakdown_distance;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.breakdown_distance_value, is_null, v);
+      i.breakdown_distance_null = is_null;
+    }
+
+    // maximum_inclusive_coverage_quantity
+    //
+    {
+      int const& v =
+        o.maximum_inclusive_coverage_quantity;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.maximum_inclusive_coverage_quantity_value, is_null, v);
+      i.maximum_inclusive_coverage_quantity_null = is_null;
+    }
+
+    // number_of_spread
+    //
+    {
+      int const& v =
+        o.number_of_spread;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.number_of_spread_value, is_null, v);
+      i.number_of_spread_null = is_null;
+    }
+
+    // surface_dc_resistivity
+    //
+    {
+      float const& v =
+        o.surface_dc_resistivity;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.surface_dc_resistivity_value, is_null, v);
+      i.surface_dc_resistivity_null = is_null;
+    }
+
+    // probability_of_arc_discharge
+    //
+    {
+      float const& v =
+        o.probability_of_arc_discharge;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.probability_of_arc_discharge_value, is_null, v);
+      i.probability_of_arc_discharge_null = is_null;
+    }
+
+    // fuel_dispersion_radius
+    //
+    {
+      float const& v =
+        o.fuel_dispersion_radius;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.fuel_dispersion_radius_value, is_null, v);
+      i.fuel_dispersion_radius_null = is_null;
+    }
+
+    // distance_from_center_explosion
+    //
+    {
+      float const& v =
+        o.distance_from_center_explosion;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.distance_from_center_explosion_value, is_null, v);
+      i.distance_from_center_explosion_null = is_null;
+    }
+
+    // shock_wave_overpressure_value
+    //
+    {
+      float const& v =
+        o.shock_wave_overpressure_value;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.shock_wave_overpressure_value_value, is_null, v);
+      i.shock_wave_overpressure_value_null = is_null;
+    }
+
+    // spread_area
+    //
+    {
+      float const& v =
+        o.spread_area;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.spread_area_value, is_null, v);
+      i.spread_area_null = is_null;
+    }
+
+    // use_description
     //
     {
       ::std::string const& v =
-        o.killingMethod_;
+        o.use_description;
 
       bool is_null (false);
       std::size_t size (0);
-      std::size_t cap (i.killingMethod_value.capacity ());
+      std::size_t cap (i.use_description_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.killingMethod_value,
+        i.use_description_value,
         size,
         is_null,
         v);
-      i.killingMethod_null = is_null;
-      i.killingMethod_size = size;
-      grew = grew || (cap != i.killingMethod_value.capacity ());
+      i.use_description_null = is_null;
+      i.use_description_size = size;
+      grew = grew || (cap != i.use_description_value.capacity ());
     }
 
-    // killingDepth_
+    // interference_duration
     //
     {
       float const& v =
-        o.killingDepth_;
+        o.interference_duration;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.killingDepth_value, is_null, v);
-      i.killingDepth_null = is_null;
+        i.interference_duration_value, is_null, v);
+      i.interference_duration_null = is_null;
     }
 
-    // killingRangeMin_
+    // interference_length_minimum
     //
     {
       float const& v =
-        o.killingRangeMin_;
+        o.interference_length_minimum;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.killingRangeMin_value, is_null, v);
-      i.killingRangeMin_null = is_null;
+        i.interference_length_minimum_value, is_null, v);
+      i.interference_length_minimum_null = is_null;
     }
 
-    // killingRangeMax_
+    // interference_length_maximum
     //
     {
       float const& v =
-        o.killingRangeMax_;
+        o.interference_length_maximum;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.killingRangeMax_value, is_null, v);
-      i.killingRangeMax_null = is_null;
+        i.interference_length_maximum_value, is_null, v);
+      i.interference_length_maximum_null = is_null;
     }
 
-    // recordCreationTime_
+    // interference_width_minimum
+    //
+    {
+      float const& v =
+        o.interference_width_minimum;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.interference_width_minimum_value, is_null, v);
+      i.interference_width_minimum_null = is_null;
+    }
+
+    // interference_width_maximum
+    //
+    {
+      float const& v =
+        o.interference_width_maximum;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.interference_width_maximum_value, is_null, v);
+      i.interference_width_maximum_null = is_null;
+    }
+
+    // fuze_model
+    //
+    {
+      ::std::string const& v =
+        o.fuze_model;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.fuze_model_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.fuze_model_value,
+        size,
+        is_null,
+        v);
+      i.fuze_model_null = is_null;
+      i.fuze_model_size = size;
+      grew = grew || (cap != i.fuze_model_value.capacity ());
+    }
+
+    // number_of_fuses
+    //
+    {
+      int const& v =
+        o.number_of_fuses;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.number_of_fuses_value, is_null, v);
+      i.number_of_fuses_null = is_null;
+    }
+
+    // storage_life
+    //
+    {
+      float const& v =
+        o.storage_life;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.storage_life_value, is_null, v);
+      i.storage_life_null = is_null;
+    }
+
+    // action_time
+    //
+    {
+      float const& v =
+        o.action_time;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.action_time_value, is_null, v);
+      i.action_time_null = is_null;
+    }
+
+    // available_extension_time
+    //
+    {
+      float const& v =
+        o.available_extension_time;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.available_extension_time_value, is_null, v);
+      i.available_extension_time_null = is_null;
+    }
+
+    // rudder_width
+    //
+    {
+      float const& v =
+        o.rudder_width;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.rudder_width_value, is_null, v);
+      i.rudder_width_null = is_null;
+    }
+
+    // aerodynamic_configuration
+    //
+    {
+      ::std::string const& v =
+        o.aerodynamic_configuration;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.aerodynamic_configuration_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.aerodynamic_configuration_value,
+        size,
+        is_null,
+        v);
+      i.aerodynamic_configuration_null = is_null;
+      i.aerodynamic_configuration_size = size;
+      grew = grew || (cap != i.aerodynamic_configuration_value.capacity ());
+    }
+
+    // working_conditions
+    //
+    {
+      ::std::string const& v =
+        o.working_conditions;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.working_conditions_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.working_conditions_value,
+        size,
+        is_null,
+        v);
+      i.working_conditions_null = is_null;
+      i.working_conditions_size = size;
+      grew = grew || (cap != i.working_conditions_value.capacity ());
+    }
+
+    // working_temperature
+    //
+    {
+      float const& v =
+        o.working_temperature;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.working_temperature_value, is_null, v);
+      i.working_temperature_null = is_null;
+    }
+
+    // working_altitude
+    //
+    {
+      float const& v =
+        o.working_altitude;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.working_altitude_value, is_null, v);
+      i.working_altitude_null = is_null;
+    }
+
+    // launch_way
+    //
+    {
+      ::std::string const& v =
+        o.launch_way;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.launch_way_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.launch_way_value,
+        size,
+        is_null,
+        v);
+      i.launch_way_null = is_null;
+      i.launch_way_size = size;
+      grew = grew || (cap != i.launch_way_value.capacity ());
+    }
+
+    // guidance_rule
+    //
+    {
+      ::std::string const& v =
+        o.guidance_rule;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.guidance_rule_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.guidance_rule_value,
+        size,
+        is_null,
+        v);
+      i.guidance_rule_null = is_null;
+      i.guidance_rule_size = size;
+      grew = grew || (cap != i.guidance_rule_value.capacity ());
+    }
+
+    // minimum_visibility_emission
+    //
+    {
+      float const& v =
+        o.minimum_visibility_emission;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.minimum_visibility_emission_value, is_null, v);
+      i.minimum_visibility_emission_null = is_null;
+    }
+
+    // maximum_launch_altitude
+    //
+    {
+      float const& v =
+        o.maximum_launch_altitude;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.maximum_launch_altitude_value, is_null, v);
+      i.maximum_launch_altitude_null = is_null;
+    }
+
+    // launch_maximum_target_altitude
+    //
+    {
+      float const& v =
+        o.launch_maximum_target_altitude;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.launch_maximum_target_altitude_value, is_null, v);
+      i.launch_maximum_target_altitude_null = is_null;
+    }
+
+    // maximum_launch_relative_height
+    //
+    {
+      float const& v =
+        o.maximum_launch_relative_height;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.maximum_launch_relative_height_value, is_null, v);
+      i.maximum_launch_relative_height_null = is_null;
+    }
+
+    // minimum_relative_height_launch
+    //
+    {
+      float const& v =
+        o.minimum_relative_height_launch;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.minimum_relative_height_launch_value, is_null, v);
+      i.minimum_relative_height_launch_null = is_null;
+    }
+
+    // launch_speed
+    //
+    {
+      float const& v =
+        o.launch_speed;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.launch_speed_value, is_null, v);
+      i.launch_speed_null = is_null;
+    }
+
+    // launch_conditions
+    //
+    {
+      ::std::string const& v =
+        o.launch_conditions;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.launch_conditions_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.launch_conditions_value,
+        size,
+        is_null,
+        v);
+      i.launch_conditions_null = is_null;
+      i.launch_conditions_size = size;
+      grew = grew || (cap != i.launch_conditions_value.capacity ());
+    }
+
+    // launch_off_axis_angle
+    //
+    {
+      float const& v =
+        o.launch_off_axis_angle;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.launch_off_axis_angle_value, is_null, v);
+      i.launch_off_axis_angle_null = is_null;
+    }
+
+    // guidance_way
+    //
+    {
+      ::std::string const& v =
+        o.guidance_way;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.guidance_way_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.guidance_way_value,
+        size,
+        is_null,
+        v);
+      i.guidance_way_null = is_null;
+      i.guidance_way_size = size;
+      grew = grew || (cap != i.guidance_way_value.capacity ());
+    }
+
+    // effective_range
+    //
+    {
+      float const& v =
+        o.effective_range;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.effective_range_value, is_null, v);
+      i.effective_range_null = is_null;
+    }
+
+    // hit_accuracy
+    //
+    {
+      float const& v =
+        o.hit_accuracy;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.hit_accuracy_value, is_null, v);
+      i.hit_accuracy_null = is_null;
+    }
+
+    // hit_probability
+    //
+    {
+      float const& v =
+        o.hit_probability;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.hit_probability_value, is_null, v);
+      i.hit_probability_null = is_null;
+    }
+
+    // preparation_time
+    //
+    {
+      float const& v =
+        o.preparation_time;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.preparation_time_value, is_null, v);
+      i.preparation_time_null = is_null;
+    }
+
+    // allow_continuous_flight_time
+    //
+    {
+      float const& v =
+        o.allow_continuous_flight_time;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.allow_continuous_flight_time_value, is_null, v);
+      i.allow_continuous_flight_time_null = is_null;
+    }
+
+    // guided_flight_time
+    //
+    {
+      float const& v =
+        o.guided_flight_time;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.guided_flight_time_value, is_null, v);
+      i.guided_flight_time_null = is_null;
+    }
+
+    // maximum_speed_of_missile
+    //
+    {
+      float const& v =
+        o.maximum_speed_of_missile;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.maximum_speed_of_missile_value, is_null, v);
+      i.maximum_speed_of_missile_null = is_null;
+    }
+
+    // guiding_head_working_wavelength
+    //
+    {
+      float const& v =
+        o.guiding_head_working_wavelength;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.guiding_head_working_wavelength_value, is_null, v);
+      i.guiding_head_working_wavelength_null = is_null;
+    }
+
+    // guidance_head_operating_distance
+    //
+    {
+      float const& v =
+        o.guidance_head_operating_distance;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.guidance_head_operating_distance_value, is_null, v);
+      i.guidance_head_operating_distance_null = is_null;
+    }
+
+    // blind_spot_of_guidance_head
+    //
+    {
+      float const& v =
+        o.blind_spot_of_guidance_head;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.blind_spot_of_guidance_head_value, is_null, v);
+      i.blind_spot_of_guidance_head_null = is_null;
+    }
+
+    // guidance_head_frame_angle
+    //
+    {
+      float const& v =
+        o.guidance_head_frame_angle;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.guidance_head_frame_angle_value, is_null, v);
+      i.guidance_head_frame_angle_null = is_null;
+    }
+
+    // guidance_head_field_of_view_angle
+    //
+    {
+      float const& v =
+        o.guidance_head_field_of_view_angle;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.guidance_head_field_of_view_angle_value, is_null, v);
+      i.guidance_head_field_of_view_angle_null = is_null;
+    }
+
+    // adaptability_of_guidance_head_sunlight
+    //
+    {
+      ::std::string const& v =
+        o.adaptability_of_guidance_head_sunlight;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.adaptability_of_guidance_head_sunlight_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.adaptability_of_guidance_head_sunlight_value,
+        size,
+        is_null,
+        v);
+      i.adaptability_of_guidance_head_sunlight_null = is_null;
+      i.adaptability_of_guidance_head_sunlight_size = size;
+      grew = grew || (cap != i.adaptability_of_guidance_head_sunlight_value.capacity ());
+    }
+
+    // guidance_head_operating_frequency
+    //
+    {
+      float const& v =
+        o.guidance_head_operating_frequency;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.guidance_head_operating_frequency_value, is_null, v);
+      i.guidance_head_operating_frequency_null = is_null;
+    }
+
+    // fuse_firing_rate
+    //
+    {
+      float const& v =
+        o.fuse_firing_rate;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.fuse_firing_rate_value, is_null, v);
+      i.fuse_firing_rate_null = is_null;
+    }
+
+    // fuse_type
+    //
+    {
+      ::std::string const& v =
+        o.fuse_type;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.fuse_type_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.fuse_type_value,
+        size,
+        is_null,
+        v);
+      i.fuse_type_null = is_null;
+      i.fuse_type_size = size;
+      grew = grew || (cap != i.fuse_type_value.capacity ());
+    }
+
+    // fuse_length
+    //
+    {
+      float const& v =
+        o.fuse_length;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.fuse_length_value, is_null, v);
+      i.fuse_length_null = is_null;
+    }
+
+    // fuse_diameter
+    //
+    {
+      float const& v =
+        o.fuse_diameter;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.fuse_diameter_value, is_null, v);
+      i.fuse_diameter_null = is_null;
+    }
+
+    // fuze_quality
+    //
+    {
+      float const& v =
+        o.fuze_quality;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.fuze_quality_value, is_null, v);
+      i.fuze_quality_null = is_null;
+    }
+
+    // safe_distance_of_fuse
+    //
+    {
+      float const& v =
+        o.safe_distance_of_fuse;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.safe_distance_of_fuse_value, is_null, v);
+      i.safe_distance_of_fuse_null = is_null;
+    }
+
+    // time_disarming_fuse
+    //
+    {
+      float const& v =
+        o.time_disarming_fuse;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.time_disarming_fuse_value, is_null, v);
+      i.time_disarming_fuse_null = is_null;
+    }
+
+    // first_level_release_time_of_fuse
+    //
+    {
+      float const& v =
+        o.first_level_release_time_of_fuse;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.first_level_release_time_of_fuse_value, is_null, v);
+      i.first_level_release_time_of_fuse_null = is_null;
+    }
+
+    // secondary_release_time_of_fuse
+    //
+    {
+      float const& v =
+        o.secondary_release_time_of_fuse;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.secondary_release_time_of_fuse_value, is_null, v);
+      i.secondary_release_time_of_fuse_null = is_null;
+    }
+
+    // reliability_rate_of_fuse_action
+    //
+    {
+      float const& v =
+        o.reliability_rate_of_fuse_action;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.reliability_rate_of_fuse_action_value, is_null, v);
+      i.reliability_rate_of_fuse_action_null = is_null;
+    }
+
+    // fuse_self_destruct_time
+    //
+    {
+      float const& v =
+        o.fuse_self_destruct_time;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.fuse_self_destruct_time_value, is_null, v);
+      i.fuse_self_destruct_time_null = is_null;
+    }
+
+    // combat_department_quality
+    //
+    {
+      float const& v =
+        o.combat_department_quality;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_department_quality_value, is_null, v);
+      i.combat_department_quality_null = is_null;
+    }
+
+    // combat_quantity
+    //
+    {
+      float const& v =
+        o.combat_quantity;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_quantity_value, is_null, v);
+      i.combat_quantity_null = is_null;
+    }
+
+    // combat_unit_type
+    //
+    {
+      ::std::string const& v =
+        o.combat_unit_type;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.combat_unit_type_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.combat_unit_type_value,
+        size,
+        is_null,
+        v);
+      i.combat_unit_type_null = is_null;
+      i.combat_unit_type_size = size;
+      grew = grew || (cap != i.combat_unit_type_value.capacity ());
+    }
+
+    // combat_length
+    //
+    {
+      float const& v =
+        o.combat_length;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_length_value, is_null, v);
+      i.combat_length_null = is_null;
+    }
+
+    // combat_diameter
+    //
+    {
+      float const& v =
+        o.combat_diameter;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_diameter_value, is_null, v);
+      i.combat_diameter_null = is_null;
+    }
+
+    // combat_main_charge_type
+    //
+    {
+      ::std::string const& v =
+        o.combat_main_charge_type;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.combat_main_charge_type_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.combat_main_charge_type_value,
+        size,
+        is_null,
+        v);
+      i.combat_main_charge_type_null = is_null;
+      i.combat_main_charge_type_size = size;
+      grew = grew || (cap != i.combat_main_charge_type_value.capacity ());
+    }
+
+    // combat_charge_density
+    //
+    {
+      float const& v =
+        o.combat_charge_density;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_charge_density_value, is_null, v);
+      i.combat_charge_density_null = is_null;
+    }
+
+    // combat_loading_factor
+    //
+    {
+      float const& v =
+        o.combat_loading_factor;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_loading_factor_value, is_null, v);
+      i.combat_loading_factor_null = is_null;
+    }
+
+    // combat_explosive
+    //
+    {
+      float const& v =
+        o.combat_explosive;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_explosive_value, is_null, v);
+      i.combat_explosive_null = is_null;
+    }
+
+    // combat_fragments_number
+    //
+    {
+      int const& v =
+        o.combat_fragments_number;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.combat_fragments_number_value, is_null, v);
+      i.combat_fragments_number_null = is_null;
+    }
+
+    // combat_unit_invasion_capability
+    //
+    {
+      ::std::string const& v =
+        o.combat_unit_invasion_capability;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.combat_unit_invasion_capability_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.combat_unit_invasion_capability_value,
+        size,
+        is_null,
+        v);
+      i.combat_unit_invasion_capability_null = is_null;
+      i.combat_unit_invasion_capability_size = size;
+      grew = grew || (cap != i.combat_unit_invasion_capability_value.capacity ());
+    }
+
+    // combat_effective_killing_radius_vehicles
+    //
+    {
+      float const& v =
+        o.combat_effective_killing_radius_vehicles;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_effective_killing_radius_vehicles_value, is_null, v);
+      i.combat_effective_killing_radius_vehicles_null = is_null;
+    }
+
+    // combat_effective_killing_radius_personnel
+    //
+    {
+      float const& v =
+        o.combat_effective_killing_radius_personnel;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_effective_killing_radius_personnel_value, is_null, v);
+      i.combat_effective_killing_radius_personnel_null = is_null;
+    }
+
+    // combat_vertical_static_armor_penetration_depth
+    //
+    {
+      float const& v =
+        o.combat_vertical_static_armor_penetration_depth;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_vertical_static_armor_penetration_depth_value, is_null, v);
+      i.combat_vertical_static_armor_penetration_depth_null = is_null;
+    }
+
+    // combat_department_quality_add
+    //
+    {
+      float const& v =
+        o.combat_department_quality_add;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_department_quality_add_value, is_null, v);
+      i.combat_department_quality_add_null = is_null;
+    }
+
+    // combat_quantity_add
+    //
+    {
+      float const& v =
+        o.combat_quantity_add;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_quantity_add_value, is_null, v);
+      i.combat_quantity_add_null = is_null;
+    }
+
+    // combat_unit_type_add
+    //
+    {
+      ::std::string const& v =
+        o.combat_unit_type_add;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.combat_unit_type_add_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.combat_unit_type_add_value,
+        size,
+        is_null,
+        v);
+      i.combat_unit_type_add_null = is_null;
+      i.combat_unit_type_add_size = size;
+      grew = grew || (cap != i.combat_unit_type_add_value.capacity ());
+    }
+
+    // combat_length_add
+    //
+    {
+      float const& v =
+        o.combat_length_add;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_length_add_value, is_null, v);
+      i.combat_length_add_null = is_null;
+    }
+
+    // combat_diameter_add
+    //
+    {
+      float const& v =
+        o.combat_diameter_add;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_diameter_add_value, is_null, v);
+      i.combat_diameter_add_null = is_null;
+    }
+
+    // combat_main_charge_type_add
+    //
+    {
+      ::std::string const& v =
+        o.combat_main_charge_type_add;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.combat_main_charge_type_add_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.combat_main_charge_type_add_value,
+        size,
+        is_null,
+        v);
+      i.combat_main_charge_type_add_null = is_null;
+      i.combat_main_charge_type_add_size = size;
+      grew = grew || (cap != i.combat_main_charge_type_add_value.capacity ());
+    }
+
+    // combat_charge_density_add
+    //
+    {
+      float const& v =
+        o.combat_charge_density_add;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_charge_density_add_value, is_null, v);
+      i.combat_charge_density_add_null = is_null;
+    }
+
+    // combat_loading_factor_add
+    //
+    {
+      float const& v =
+        o.combat_loading_factor_add;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_loading_factor_add_value, is_null, v);
+      i.combat_loading_factor_add_null = is_null;
+    }
+
+    // combat_explosive_add
+    //
+    {
+      float const& v =
+        o.combat_explosive_add;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_explosive_add_value, is_null, v);
+      i.combat_explosive_add_null = is_null;
+    }
+
+    // combat_fragments_number_add
+    //
+    {
+      int const& v =
+        o.combat_fragments_number_add;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_image (
+        i.combat_fragments_number_add_value, is_null, v);
+      i.combat_fragments_number_add_null = is_null;
+    }
+
+    // combat_unit_invasion_capability_add
+    //
+    {
+      ::std::string const& v =
+        o.combat_unit_invasion_capability_add;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.combat_unit_invasion_capability_add_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.combat_unit_invasion_capability_add_value,
+        size,
+        is_null,
+        v);
+      i.combat_unit_invasion_capability_add_null = is_null;
+      i.combat_unit_invasion_capability_add_size = size;
+      grew = grew || (cap != i.combat_unit_invasion_capability_add_value.capacity ());
+    }
+
+    // combat_effective_killing_radius_vehicles_add
+    //
+    {
+      float const& v =
+        o.combat_effective_killing_radius_vehicles_add;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_effective_killing_radius_vehicles_add_value, is_null, v);
+      i.combat_effective_killing_radius_vehicles_add_null = is_null;
+    }
+
+    // combat_effective_killing_radius_personnel_add
+    //
+    {
+      float const& v =
+        o.combat_effective_killing_radius_personnel_add;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_effective_killing_radius_personnel_add_value, is_null, v);
+      i.combat_effective_killing_radius_personnel_add_null = is_null;
+    }
+
+    // combat_vertical_static_armor_penetration_depth_add
+    //
+    {
+      float const& v =
+        o.combat_vertical_static_armor_penetration_depth_add;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.combat_vertical_static_armor_penetration_depth_add_value, is_null, v);
+      i.combat_vertical_static_armor_penetration_depth_add_null = is_null;
+    }
+
+    // service_life
+    //
+    {
+      float const& v =
+        o.service_life;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.service_life_value, is_null, v);
+      i.service_life_null = is_null;
+    }
+
+    // distance_between_center_mass_end
+    //
+    {
+      float const& v =
+        o.distance_between_center_mass_end;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.distance_between_center_mass_end_value, is_null, v);
+      i.distance_between_center_mass_end_null = is_null;
+    }
+
+    // lifting_lug
+    //
+    {
+      ::std::string const& v =
+        o.lifting_lug;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.lifting_lug_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.lifting_lug_value,
+        size,
+        is_null,
+        v);
+      i.lifting_lug_null = is_null;
+      i.lifting_lug_size = size;
+      grew = grew || (cap != i.lifting_lug_value.capacity ());
+    }
+
+    // distance_suspension_lifting_lug
+    //
+    {
+      float const& v =
+        o.distance_suspension_lifting_lug;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.distance_suspension_lifting_lug_value, is_null, v);
+      i.distance_suspension_lifting_lug_null = is_null;
+    }
+
+    // image_name
+    //
+    {
+      ::std::string const& v =
+        o.image_name;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.image_name_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.image_name_value,
+        size,
+        is_null,
+        v);
+      i.image_name_null = is_null;
+      i.image_name_size = size;
+      grew = grew || (cap != i.image_name_value.capacity ());
+    }
+
+    // image_url
+    //
+    {
+      ::std::string const& v =
+        o.image_url;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.image_url_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.image_url_value,
+        size,
+        is_null,
+        v);
+      i.image_url_null = is_null;
+      i.image_url_size = size;
+      grew = grew || (cap != i.image_url_value.capacity ());
+    }
+
+    // record_creation_time
     //
     {
       ::QDateTime const& v =
-        o.recordCreationTime_;
+        o.record_creation_time;
 
       bool is_null (false);
       pgsql::value_traits<
           ::QDateTime,
           pgsql::id_timestamp >::set_image (
-        i.recordCreationTime_value, is_null, v);
-      i.recordCreationTime_null = is_null;
+        i.record_creation_time_value, is_null, v);
+      i.record_creation_time_null = is_null;
     }
 
-    // ammoImgUrl_
-    //
-    {
-      ::std::string const& v =
-        o.ammoImgUrl_;
-
-      bool is_null (false);
-      std::size_t size (0);
-      std::size_t cap (i.ammoImgUrl_value.capacity ());
-      pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_image (
-        i.ammoImgUrl_value,
-        size,
-        is_null,
-        v);
-      i.ammoImgUrl_null = is_null;
-      i.ammoImgUrl_size = size;
-      grew = grew || (cap != i.ammoImgUrl_value.capacity ());
-    }
-
-    // ammoImageName_
+    // use_status
     //
     {
       float const& v =
-        o.ammoImageName_;
+        o.use_status;
 
       bool is_null (false);
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_image (
-        i.ammoImageName_value, is_null, v);
-      i.ammoImageName_null = is_null;
+        i.use_status_value, is_null, v);
+      i.use_status_null = is_null;
     }
 
     return grew;
@@ -939,21 +4143,6 @@ namespace odb
         i.id_null);
     }
 
-    // ammoType_
-    //
-    {
-      ::std::string& v =
-        o.ammoType_;
-
-      pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_value (
-        v,
-        i.ammoType_value,
-        i.ammoType_size,
-        i.ammoType_null);
-    }
-
     // ammoName_
     //
     {
@@ -967,6 +4156,36 @@ namespace odb
         i.ammoName_value,
         i.ammoName_size,
         i.ammoName_null);
+    }
+
+    // shortName_
+    //
+    {
+      ::std::string& v =
+        o.shortName_;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.shortName_value,
+        i.shortName_size,
+        i.shortName_null);
+    }
+
+    // ammoType_
+    //
+    {
+      ::std::string& v =
+        o.ammoType_;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.ammoType_value,
+        i.ammoType_size,
+        i.ammoType_null);
     }
 
     // ammoId_
@@ -999,275 +4218,1818 @@ namespace odb
         i.ammoToUavModel_null);
     }
 
-    // ammoLength_
-    //
-    {
-      float& v =
-        o.ammoLength_;
-
-      pgsql::value_traits<
-          float,
-          pgsql::id_real >::set_value (
-        v,
-        i.ammoLength_value,
-        i.ammoLength_null);
-    }
-
-    // ammoWidth_
-    //
-    {
-      float& v =
-        o.ammoWidth_;
-
-      pgsql::value_traits<
-          float,
-          pgsql::id_real >::set_value (
-        v,
-        i.ammoWidth_value,
-        i.ammoWidth_null);
-    }
-
-    // ammoWeight_
-    //
-    {
-      float& v =
-        o.ammoWeight_;
-
-      pgsql::value_traits<
-          float,
-          pgsql::id_real >::set_value (
-        v,
-        i.ammoWeight_value,
-        i.ammoWeight_null);
-    }
-
-    // guidanceType_
+    // ammoDescription_
     //
     {
       ::std::string& v =
-        o.guidanceType_;
+        o.ammoDescription_;
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.guidanceType_value,
-        i.guidanceType_size,
-        i.guidanceType_null);
+        i.ammoDescription_value,
+        i.ammoDescription_size,
+        i.ammoDescription_null);
     }
 
-    // launchHeightMin_
+    // ammoLenth_
     //
     {
       float& v =
-        o.launchHeightMin_;
+        o.ammoLenth_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.launchHeightMin_value,
-        i.launchHeightMin_null);
+        i.ammoLenth_value,
+        i.ammoLenth_null);
     }
 
-    // launchHeightMax_
+    // ammoMass_
     //
     {
       float& v =
-        o.launchHeightMax_;
+        o.ammoMass_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.launchHeightMax_value,
-        i.launchHeightMax_null);
+        i.ammoMass_value,
+        i.ammoMass_null);
     }
 
-    // launchDistanceMin_
+    // ammoDiameter_
     //
     {
       float& v =
-        o.launchDistanceMin_;
+        o.ammoDiameter_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.launchDistanceMin_value,
-        i.launchDistanceMin_null);
+        i.ammoDiameter_value,
+        i.ammoDiameter_null);
     }
 
-    // launchDistanceMax_
+    // ammoWingspan_
     //
     {
       float& v =
-        o.launchDistanceMax_;
+        o.ammoWingspan_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.launchDistanceMax_value,
-        i.launchDistanceMax_null);
+        i.ammoWingspan_value,
+        i.ammoWingspan_null);
     }
 
-    // launchAngle_
+    // ammoWarheadCgDistance_
     //
     {
       float& v =
-        o.launchAngle_;
+        o.ammoWarheadCgDistance_;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.launchAngle_value,
-        i.launchAngle_null);
+        i.ammoWarheadCgDistance_value,
+        i.ammoWarheadCgDistance_null);
     }
 
-    // launchWay_
+    // ammoChargeMass_
+    //
+    {
+      float& v =
+        o.ammoChargeMass_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoChargeMass_value,
+        i.ammoChargeMass_null);
+    }
+
+    // ammoChargeCoefficient_
+    //
+    {
+      float& v =
+        o.ammoChargeCoefficient_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoChargeCoefficient_value,
+        i.ammoChargeCoefficient_null);
+    }
+
+    // ammoMaxReleaseHeight_
+    //
+    {
+      float& v =
+        o.ammoMaxReleaseHeight_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoMaxReleaseHeight_value,
+        i.ammoMaxReleaseHeight_null);
+    }
+
+    // ammoMinReleaseHeight
+    //
+    {
+      float& v =
+        o.ammoMinReleaseHeight;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoMinReleaseHeight_value,
+        i.ammoMinReleaseHeight_null);
+    }
+
+    // ammoMinReleaseSpeed_
+    //
+    {
+      float& v =
+        o.ammoMinReleaseSpeed_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoMinReleaseSpeed_value,
+        i.ammoMinReleaseSpeed_null);
+    }
+
+    // ammoMaxReleaseSpeed_
+    //
+    {
+      float& v =
+        o.ammoMaxReleaseSpeed_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoMaxReleaseSpeed_value,
+        i.ammoMaxReleaseSpeed_null);
+    }
+
+    // ammoTailLength_
+    //
+    {
+      float& v =
+        o.ammoTailLength_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoTailLength_value,
+        i.ammoTailLength_null);
+    }
+
+    // ammoLugSpacing_
+    //
+    {
+      float& v =
+        o.ammoLugSpacing_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoLugSpacing_value,
+        i.ammoLugSpacing_null);
+    }
+
+    // ammoKillingWway_
     //
     {
       ::std::string& v =
-        o.launchWay_;
+        o.ammoKillingWway_;
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.launchWay_value,
-        i.launchWay_size,
-        i.launchWay_null);
+        i.ammoKillingWway_value,
+        i.ammoKillingWway_size,
+        i.ammoKillingWway_null);
     }
 
-    // approveAttackTargetType_
+    // ammoPenetrationDepth_
+    //
+    {
+      float& v =
+        o.ammoPenetrationDepth_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoPenetrationDepth_value,
+        i.ammoPenetrationDepth_null);
+    }
+
+    // ammoQuantitySoilThrown_
+    //
+    {
+      float& v =
+        o.ammoQuantitySoilThrown_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoQuantitySoilThrown_value,
+        i.ammoQuantitySoilThrown_null);
+    }
+
+    // ammoCraterDiameter_
+    //
+    {
+      float& v =
+        o.ammoCraterDiameter_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoCraterDiameter_value,
+        i.ammoCraterDiameter_null);
+    }
+
+    // ammoCraterDepth_
+    //
+    {
+      float& v =
+        o.ammoCraterDepth_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoCraterDepth_value,
+        i.ammoCraterDepth_null);
+    }
+
+    // ammoDamagedArea_
+    //
+    {
+      float& v =
+        o.ammoDamagedArea_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoDamagedArea_value,
+        i.ammoDamagedArea_null);
+    }
+
+    // ammoDenseKillingRadius_
+    //
+    {
+      float& v =
+        o.ammoDenseKillingRadius_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoDenseKillingRadius_value,
+        i.ammoDenseKillingRadius_null);
+    }
+
+    // ammoInitialVelocityFragments_
+    //
+    {
+      float& v =
+        o.ammoInitialVelocityFragments_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.ammoInitialVelocityFragments_value,
+        i.ammoInitialVelocityFragments_null);
+    }
+
+    // ammoNumberFragments_
+    //
+    {
+      int& v =
+        o.ammoNumberFragments_;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.ammoNumberFragments_value,
+        i.ammoNumberFragments_null);
+    }
+
+    // ammoArmorBreakingAbility_
     //
     {
       ::std::string& v =
-        o.approveAttackTargetType_;
+        o.ammoArmorBreakingAbility_;
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.approveAttackTargetType_value,
-        i.approveAttackTargetType_size,
-        i.approveAttackTargetType_null);
+        i.ammoArmorBreakingAbility_value,
+        i.ammoArmorBreakingAbility_size,
+        i.ammoArmorBreakingAbility_null);
     }
 
-    // killingDose_
+    // bullet_density_range_minimum
+    //
+    {
+      int& v =
+        o.bullet_density_range_minimum;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.bullet_density_range_minimum_value,
+        i.bullet_density_range_minimum_null);
+    }
+
+    // bullet_density_range_maximum
+    //
+    {
+      int& v =
+        o.bullet_density_range_maximum;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.bullet_density_range_maximum_value,
+        i.bullet_density_range_maximum_null);
+    }
+
+    // ground_ignition_rate
     //
     {
       float& v =
-        o.killingDose_;
+        o.ground_ignition_rate;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.killingDose_value,
-        i.killingDose_null);
+        i.ground_ignition_rate_value,
+        i.ground_ignition_rate_null);
     }
 
-    // killingMethod_
+    // combustion_temperature
+    //
+    {
+      float& v =
+        o.combustion_temperature;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combustion_temperature_value,
+        i.combustion_temperature_null);
+    }
+
+    // combustion_time
+    //
+    {
+      float& v =
+        o.combustion_time;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combustion_time_value,
+        i.combustion_time_null);
+    }
+
+    // combustion_agent_spread_range
+    //
+    {
+      float& v =
+        o.combustion_agent_spread_range;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combustion_agent_spread_range_value,
+        i.combustion_agent_spread_range_null);
+    }
+
+    // number_of_fragments
+    //
+    {
+      int& v =
+        o.number_of_fragments;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.number_of_fragments_value,
+        i.number_of_fragments_null);
+    }
+
+    // breakdown_distance
+    //
+    {
+      float& v =
+        o.breakdown_distance;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.breakdown_distance_value,
+        i.breakdown_distance_null);
+    }
+
+    // maximum_inclusive_coverage_quantity
+    //
+    {
+      int& v =
+        o.maximum_inclusive_coverage_quantity;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.maximum_inclusive_coverage_quantity_value,
+        i.maximum_inclusive_coverage_quantity_null);
+    }
+
+    // number_of_spread
+    //
+    {
+      int& v =
+        o.number_of_spread;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.number_of_spread_value,
+        i.number_of_spread_null);
+    }
+
+    // surface_dc_resistivity
+    //
+    {
+      float& v =
+        o.surface_dc_resistivity;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.surface_dc_resistivity_value,
+        i.surface_dc_resistivity_null);
+    }
+
+    // probability_of_arc_discharge
+    //
+    {
+      float& v =
+        o.probability_of_arc_discharge;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.probability_of_arc_discharge_value,
+        i.probability_of_arc_discharge_null);
+    }
+
+    // fuel_dispersion_radius
+    //
+    {
+      float& v =
+        o.fuel_dispersion_radius;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.fuel_dispersion_radius_value,
+        i.fuel_dispersion_radius_null);
+    }
+
+    // distance_from_center_explosion
+    //
+    {
+      float& v =
+        o.distance_from_center_explosion;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.distance_from_center_explosion_value,
+        i.distance_from_center_explosion_null);
+    }
+
+    // shock_wave_overpressure_value
+    //
+    {
+      float& v =
+        o.shock_wave_overpressure_value;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.shock_wave_overpressure_value_value,
+        i.shock_wave_overpressure_value_null);
+    }
+
+    // spread_area
+    //
+    {
+      float& v =
+        o.spread_area;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.spread_area_value,
+        i.spread_area_null);
+    }
+
+    // use_description
     //
     {
       ::std::string& v =
-        o.killingMethod_;
+        o.use_description;
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.killingMethod_value,
-        i.killingMethod_size,
-        i.killingMethod_null);
+        i.use_description_value,
+        i.use_description_size,
+        i.use_description_null);
     }
 
-    // killingDepth_
+    // interference_duration
     //
     {
       float& v =
-        o.killingDepth_;
+        o.interference_duration;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.killingDepth_value,
-        i.killingDepth_null);
+        i.interference_duration_value,
+        i.interference_duration_null);
     }
 
-    // killingRangeMin_
+    // interference_length_minimum
     //
     {
       float& v =
-        o.killingRangeMin_;
+        o.interference_length_minimum;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.killingRangeMin_value,
-        i.killingRangeMin_null);
+        i.interference_length_minimum_value,
+        i.interference_length_minimum_null);
     }
 
-    // killingRangeMax_
+    // interference_length_maximum
     //
     {
       float& v =
-        o.killingRangeMax_;
+        o.interference_length_maximum;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.killingRangeMax_value,
-        i.killingRangeMax_null);
+        i.interference_length_maximum_value,
+        i.interference_length_maximum_null);
     }
 
-    // recordCreationTime_
+    // interference_width_minimum
+    //
+    {
+      float& v =
+        o.interference_width_minimum;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.interference_width_minimum_value,
+        i.interference_width_minimum_null);
+    }
+
+    // interference_width_maximum
+    //
+    {
+      float& v =
+        o.interference_width_maximum;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.interference_width_maximum_value,
+        i.interference_width_maximum_null);
+    }
+
+    // fuze_model
+    //
+    {
+      ::std::string& v =
+        o.fuze_model;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.fuze_model_value,
+        i.fuze_model_size,
+        i.fuze_model_null);
+    }
+
+    // number_of_fuses
+    //
+    {
+      int& v =
+        o.number_of_fuses;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.number_of_fuses_value,
+        i.number_of_fuses_null);
+    }
+
+    // storage_life
+    //
+    {
+      float& v =
+        o.storage_life;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.storage_life_value,
+        i.storage_life_null);
+    }
+
+    // action_time
+    //
+    {
+      float& v =
+        o.action_time;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.action_time_value,
+        i.action_time_null);
+    }
+
+    // available_extension_time
+    //
+    {
+      float& v =
+        o.available_extension_time;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.available_extension_time_value,
+        i.available_extension_time_null);
+    }
+
+    // rudder_width
+    //
+    {
+      float& v =
+        o.rudder_width;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.rudder_width_value,
+        i.rudder_width_null);
+    }
+
+    // aerodynamic_configuration
+    //
+    {
+      ::std::string& v =
+        o.aerodynamic_configuration;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.aerodynamic_configuration_value,
+        i.aerodynamic_configuration_size,
+        i.aerodynamic_configuration_null);
+    }
+
+    // working_conditions
+    //
+    {
+      ::std::string& v =
+        o.working_conditions;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.working_conditions_value,
+        i.working_conditions_size,
+        i.working_conditions_null);
+    }
+
+    // working_temperature
+    //
+    {
+      float& v =
+        o.working_temperature;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.working_temperature_value,
+        i.working_temperature_null);
+    }
+
+    // working_altitude
+    //
+    {
+      float& v =
+        o.working_altitude;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.working_altitude_value,
+        i.working_altitude_null);
+    }
+
+    // launch_way
+    //
+    {
+      ::std::string& v =
+        o.launch_way;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.launch_way_value,
+        i.launch_way_size,
+        i.launch_way_null);
+    }
+
+    // guidance_rule
+    //
+    {
+      ::std::string& v =
+        o.guidance_rule;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.guidance_rule_value,
+        i.guidance_rule_size,
+        i.guidance_rule_null);
+    }
+
+    // minimum_visibility_emission
+    //
+    {
+      float& v =
+        o.minimum_visibility_emission;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.minimum_visibility_emission_value,
+        i.minimum_visibility_emission_null);
+    }
+
+    // maximum_launch_altitude
+    //
+    {
+      float& v =
+        o.maximum_launch_altitude;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.maximum_launch_altitude_value,
+        i.maximum_launch_altitude_null);
+    }
+
+    // launch_maximum_target_altitude
+    //
+    {
+      float& v =
+        o.launch_maximum_target_altitude;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.launch_maximum_target_altitude_value,
+        i.launch_maximum_target_altitude_null);
+    }
+
+    // maximum_launch_relative_height
+    //
+    {
+      float& v =
+        o.maximum_launch_relative_height;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.maximum_launch_relative_height_value,
+        i.maximum_launch_relative_height_null);
+    }
+
+    // minimum_relative_height_launch
+    //
+    {
+      float& v =
+        o.minimum_relative_height_launch;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.minimum_relative_height_launch_value,
+        i.minimum_relative_height_launch_null);
+    }
+
+    // launch_speed
+    //
+    {
+      float& v =
+        o.launch_speed;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.launch_speed_value,
+        i.launch_speed_null);
+    }
+
+    // launch_conditions
+    //
+    {
+      ::std::string& v =
+        o.launch_conditions;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.launch_conditions_value,
+        i.launch_conditions_size,
+        i.launch_conditions_null);
+    }
+
+    // launch_off_axis_angle
+    //
+    {
+      float& v =
+        o.launch_off_axis_angle;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.launch_off_axis_angle_value,
+        i.launch_off_axis_angle_null);
+    }
+
+    // guidance_way
+    //
+    {
+      ::std::string& v =
+        o.guidance_way;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.guidance_way_value,
+        i.guidance_way_size,
+        i.guidance_way_null);
+    }
+
+    // effective_range
+    //
+    {
+      float& v =
+        o.effective_range;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.effective_range_value,
+        i.effective_range_null);
+    }
+
+    // hit_accuracy
+    //
+    {
+      float& v =
+        o.hit_accuracy;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.hit_accuracy_value,
+        i.hit_accuracy_null);
+    }
+
+    // hit_probability
+    //
+    {
+      float& v =
+        o.hit_probability;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.hit_probability_value,
+        i.hit_probability_null);
+    }
+
+    // preparation_time
+    //
+    {
+      float& v =
+        o.preparation_time;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.preparation_time_value,
+        i.preparation_time_null);
+    }
+
+    // allow_continuous_flight_time
+    //
+    {
+      float& v =
+        o.allow_continuous_flight_time;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.allow_continuous_flight_time_value,
+        i.allow_continuous_flight_time_null);
+    }
+
+    // guided_flight_time
+    //
+    {
+      float& v =
+        o.guided_flight_time;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.guided_flight_time_value,
+        i.guided_flight_time_null);
+    }
+
+    // maximum_speed_of_missile
+    //
+    {
+      float& v =
+        o.maximum_speed_of_missile;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.maximum_speed_of_missile_value,
+        i.maximum_speed_of_missile_null);
+    }
+
+    // guiding_head_working_wavelength
+    //
+    {
+      float& v =
+        o.guiding_head_working_wavelength;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.guiding_head_working_wavelength_value,
+        i.guiding_head_working_wavelength_null);
+    }
+
+    // guidance_head_operating_distance
+    //
+    {
+      float& v =
+        o.guidance_head_operating_distance;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.guidance_head_operating_distance_value,
+        i.guidance_head_operating_distance_null);
+    }
+
+    // blind_spot_of_guidance_head
+    //
+    {
+      float& v =
+        o.blind_spot_of_guidance_head;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.blind_spot_of_guidance_head_value,
+        i.blind_spot_of_guidance_head_null);
+    }
+
+    // guidance_head_frame_angle
+    //
+    {
+      float& v =
+        o.guidance_head_frame_angle;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.guidance_head_frame_angle_value,
+        i.guidance_head_frame_angle_null);
+    }
+
+    // guidance_head_field_of_view_angle
+    //
+    {
+      float& v =
+        o.guidance_head_field_of_view_angle;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.guidance_head_field_of_view_angle_value,
+        i.guidance_head_field_of_view_angle_null);
+    }
+
+    // adaptability_of_guidance_head_sunlight
+    //
+    {
+      ::std::string& v =
+        o.adaptability_of_guidance_head_sunlight;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.adaptability_of_guidance_head_sunlight_value,
+        i.adaptability_of_guidance_head_sunlight_size,
+        i.adaptability_of_guidance_head_sunlight_null);
+    }
+
+    // guidance_head_operating_frequency
+    //
+    {
+      float& v =
+        o.guidance_head_operating_frequency;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.guidance_head_operating_frequency_value,
+        i.guidance_head_operating_frequency_null);
+    }
+
+    // fuse_firing_rate
+    //
+    {
+      float& v =
+        o.fuse_firing_rate;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.fuse_firing_rate_value,
+        i.fuse_firing_rate_null);
+    }
+
+    // fuse_type
+    //
+    {
+      ::std::string& v =
+        o.fuse_type;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.fuse_type_value,
+        i.fuse_type_size,
+        i.fuse_type_null);
+    }
+
+    // fuse_length
+    //
+    {
+      float& v =
+        o.fuse_length;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.fuse_length_value,
+        i.fuse_length_null);
+    }
+
+    // fuse_diameter
+    //
+    {
+      float& v =
+        o.fuse_diameter;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.fuse_diameter_value,
+        i.fuse_diameter_null);
+    }
+
+    // fuze_quality
+    //
+    {
+      float& v =
+        o.fuze_quality;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.fuze_quality_value,
+        i.fuze_quality_null);
+    }
+
+    // safe_distance_of_fuse
+    //
+    {
+      float& v =
+        o.safe_distance_of_fuse;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.safe_distance_of_fuse_value,
+        i.safe_distance_of_fuse_null);
+    }
+
+    // time_disarming_fuse
+    //
+    {
+      float& v =
+        o.time_disarming_fuse;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.time_disarming_fuse_value,
+        i.time_disarming_fuse_null);
+    }
+
+    // first_level_release_time_of_fuse
+    //
+    {
+      float& v =
+        o.first_level_release_time_of_fuse;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.first_level_release_time_of_fuse_value,
+        i.first_level_release_time_of_fuse_null);
+    }
+
+    // secondary_release_time_of_fuse
+    //
+    {
+      float& v =
+        o.secondary_release_time_of_fuse;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.secondary_release_time_of_fuse_value,
+        i.secondary_release_time_of_fuse_null);
+    }
+
+    // reliability_rate_of_fuse_action
+    //
+    {
+      float& v =
+        o.reliability_rate_of_fuse_action;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.reliability_rate_of_fuse_action_value,
+        i.reliability_rate_of_fuse_action_null);
+    }
+
+    // fuse_self_destruct_time
+    //
+    {
+      float& v =
+        o.fuse_self_destruct_time;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.fuse_self_destruct_time_value,
+        i.fuse_self_destruct_time_null);
+    }
+
+    // combat_department_quality
+    //
+    {
+      float& v =
+        o.combat_department_quality;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_department_quality_value,
+        i.combat_department_quality_null);
+    }
+
+    // combat_quantity
+    //
+    {
+      float& v =
+        o.combat_quantity;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_quantity_value,
+        i.combat_quantity_null);
+    }
+
+    // combat_unit_type
+    //
+    {
+      ::std::string& v =
+        o.combat_unit_type;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.combat_unit_type_value,
+        i.combat_unit_type_size,
+        i.combat_unit_type_null);
+    }
+
+    // combat_length
+    //
+    {
+      float& v =
+        o.combat_length;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_length_value,
+        i.combat_length_null);
+    }
+
+    // combat_diameter
+    //
+    {
+      float& v =
+        o.combat_diameter;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_diameter_value,
+        i.combat_diameter_null);
+    }
+
+    // combat_main_charge_type
+    //
+    {
+      ::std::string& v =
+        o.combat_main_charge_type;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.combat_main_charge_type_value,
+        i.combat_main_charge_type_size,
+        i.combat_main_charge_type_null);
+    }
+
+    // combat_charge_density
+    //
+    {
+      float& v =
+        o.combat_charge_density;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_charge_density_value,
+        i.combat_charge_density_null);
+    }
+
+    // combat_loading_factor
+    //
+    {
+      float& v =
+        o.combat_loading_factor;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_loading_factor_value,
+        i.combat_loading_factor_null);
+    }
+
+    // combat_explosive
+    //
+    {
+      float& v =
+        o.combat_explosive;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_explosive_value,
+        i.combat_explosive_null);
+    }
+
+    // combat_fragments_number
+    //
+    {
+      int& v =
+        o.combat_fragments_number;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.combat_fragments_number_value,
+        i.combat_fragments_number_null);
+    }
+
+    // combat_unit_invasion_capability
+    //
+    {
+      ::std::string& v =
+        o.combat_unit_invasion_capability;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.combat_unit_invasion_capability_value,
+        i.combat_unit_invasion_capability_size,
+        i.combat_unit_invasion_capability_null);
+    }
+
+    // combat_effective_killing_radius_vehicles
+    //
+    {
+      float& v =
+        o.combat_effective_killing_radius_vehicles;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_effective_killing_radius_vehicles_value,
+        i.combat_effective_killing_radius_vehicles_null);
+    }
+
+    // combat_effective_killing_radius_personnel
+    //
+    {
+      float& v =
+        o.combat_effective_killing_radius_personnel;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_effective_killing_radius_personnel_value,
+        i.combat_effective_killing_radius_personnel_null);
+    }
+
+    // combat_vertical_static_armor_penetration_depth
+    //
+    {
+      float& v =
+        o.combat_vertical_static_armor_penetration_depth;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_vertical_static_armor_penetration_depth_value,
+        i.combat_vertical_static_armor_penetration_depth_null);
+    }
+
+    // combat_department_quality_add
+    //
+    {
+      float& v =
+        o.combat_department_quality_add;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_department_quality_add_value,
+        i.combat_department_quality_add_null);
+    }
+
+    // combat_quantity_add
+    //
+    {
+      float& v =
+        o.combat_quantity_add;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_quantity_add_value,
+        i.combat_quantity_add_null);
+    }
+
+    // combat_unit_type_add
+    //
+    {
+      ::std::string& v =
+        o.combat_unit_type_add;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.combat_unit_type_add_value,
+        i.combat_unit_type_add_size,
+        i.combat_unit_type_add_null);
+    }
+
+    // combat_length_add
+    //
+    {
+      float& v =
+        o.combat_length_add;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_length_add_value,
+        i.combat_length_add_null);
+    }
+
+    // combat_diameter_add
+    //
+    {
+      float& v =
+        o.combat_diameter_add;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_diameter_add_value,
+        i.combat_diameter_add_null);
+    }
+
+    // combat_main_charge_type_add
+    //
+    {
+      ::std::string& v =
+        o.combat_main_charge_type_add;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.combat_main_charge_type_add_value,
+        i.combat_main_charge_type_add_size,
+        i.combat_main_charge_type_add_null);
+    }
+
+    // combat_charge_density_add
+    //
+    {
+      float& v =
+        o.combat_charge_density_add;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_charge_density_add_value,
+        i.combat_charge_density_add_null);
+    }
+
+    // combat_loading_factor_add
+    //
+    {
+      float& v =
+        o.combat_loading_factor_add;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_loading_factor_add_value,
+        i.combat_loading_factor_add_null);
+    }
+
+    // combat_explosive_add
+    //
+    {
+      float& v =
+        o.combat_explosive_add;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_explosive_add_value,
+        i.combat_explosive_add_null);
+    }
+
+    // combat_fragments_number_add
+    //
+    {
+      int& v =
+        o.combat_fragments_number_add;
+
+      pgsql::value_traits<
+          int,
+          pgsql::id_integer >::set_value (
+        v,
+        i.combat_fragments_number_add_value,
+        i.combat_fragments_number_add_null);
+    }
+
+    // combat_unit_invasion_capability_add
+    //
+    {
+      ::std::string& v =
+        o.combat_unit_invasion_capability_add;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.combat_unit_invasion_capability_add_value,
+        i.combat_unit_invasion_capability_add_size,
+        i.combat_unit_invasion_capability_add_null);
+    }
+
+    // combat_effective_killing_radius_vehicles_add
+    //
+    {
+      float& v =
+        o.combat_effective_killing_radius_vehicles_add;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_effective_killing_radius_vehicles_add_value,
+        i.combat_effective_killing_radius_vehicles_add_null);
+    }
+
+    // combat_effective_killing_radius_personnel_add
+    //
+    {
+      float& v =
+        o.combat_effective_killing_radius_personnel_add;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_effective_killing_radius_personnel_add_value,
+        i.combat_effective_killing_radius_personnel_add_null);
+    }
+
+    // combat_vertical_static_armor_penetration_depth_add
+    //
+    {
+      float& v =
+        o.combat_vertical_static_armor_penetration_depth_add;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.combat_vertical_static_armor_penetration_depth_add_value,
+        i.combat_vertical_static_armor_penetration_depth_add_null);
+    }
+
+    // service_life
+    //
+    {
+      float& v =
+        o.service_life;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.service_life_value,
+        i.service_life_null);
+    }
+
+    // distance_between_center_mass_end
+    //
+    {
+      float& v =
+        o.distance_between_center_mass_end;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.distance_between_center_mass_end_value,
+        i.distance_between_center_mass_end_null);
+    }
+
+    // lifting_lug
+    //
+    {
+      ::std::string& v =
+        o.lifting_lug;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.lifting_lug_value,
+        i.lifting_lug_size,
+        i.lifting_lug_null);
+    }
+
+    // distance_suspension_lifting_lug
+    //
+    {
+      float& v =
+        o.distance_suspension_lifting_lug;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.distance_suspension_lifting_lug_value,
+        i.distance_suspension_lifting_lug_null);
+    }
+
+    // image_name
+    //
+    {
+      ::std::string& v =
+        o.image_name;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.image_name_value,
+        i.image_name_size,
+        i.image_name_null);
+    }
+
+    // image_url
+    //
+    {
+      ::std::string& v =
+        o.image_url;
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.image_url_value,
+        i.image_url_size,
+        i.image_url_null);
+    }
+
+    // record_creation_time
     //
     {
       ::QDateTime& v =
-        o.recordCreationTime_;
+        o.record_creation_time;
 
       pgsql::value_traits<
           ::QDateTime,
           pgsql::id_timestamp >::set_value (
         v,
-        i.recordCreationTime_value,
-        i.recordCreationTime_null);
+        i.record_creation_time_value,
+        i.record_creation_time_null);
     }
 
-    // ammoImgUrl_
-    //
-    {
-      ::std::string& v =
-        o.ammoImgUrl_;
-
-      pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_value (
-        v,
-        i.ammoImgUrl_value,
-        i.ammoImgUrl_size,
-        i.ammoImgUrl_null);
-    }
-
-    // ammoImageName_
+    // use_status
     //
     {
       float& v =
-        o.ammoImageName_;
+        o.use_status;
 
       pgsql::value_traits<
           float,
           pgsql::id_real >::set_value (
         v,
-        i.ammoImageName_value,
-        i.ammoImageName_null);
+        i.use_status_value,
+        i.use_status_null);
     }
   }
 
@@ -1287,89 +6049,419 @@ namespace odb
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::persist_statement[] =
   "INSERT INTO \"uav_type_man\".\"ammo_parameters\" "
   "(\"id\", "
-  "\"ammo_type\", "
   "\"ammo_name\", "
+  "\"short_name\", "
+  "\"ammo_type\", "
   "\"ammo_id\", "
   "\"ammo_to_uavmodel\", "
+  "\"description\", "
   "\"length\", "
-  "\"width\", "
-  "\"weight\", "
-  "\"guidance_type\", "
-  "\"launch_height_min\", "
-  "\"launch_height_max\", "
-  "\"launch_distance_min\", "
-  "\"launch_distance_max\", "
-  "\"launch_angle\", "
-  "\"launch_method\", "
-  "\"approve_attack_target_type\", "
-  "\"killing_dose\", "
-  "\"killing_method\", "
-  "\"killing_depth\", "
-  "\"killing_range_min\", "
-  "\"killing_range_max\", "
-  "\"recordcreation_time\", "
+  "\"mass\", "
+  "\"diameter\", "
+  "\"wingspan\", "
+  "\"warhead_cg_distance\", "
+  "\"charge_mass\", "
+  "\"charge_coefficient\", "
+  "\"max_release_height\", "
+  "\"min_release_height\", "
+  "\"min_release_speed\", "
+  "\"max_release_speed\", "
+  "\"tail_length\", "
+  "\"lug_spacing\", "
+  "\"killing_way\", "
+  "\"penetration_depth\", "
+  "\"quantity_soil_thrown\", "
+  "\"crater_diameter\", "
+  "\"crater_depth\", "
+  "\"damaged_area\", "
+  "\"dense_killing_radius\", "
+  "\"initial_velocity_fragments\", "
+  "\"number_fragments\", "
+  "\"armor_breaking_ability\", "
+  "\"bullet_density_range_minimum\", "
+  "\"bullet_density_range_maximum\", "
+  "\"ground_ignition_rate\", "
+  "\"combustion_temperature\", "
+  "\"combustion_time\", "
+  "\"combustion_agent_spread_range\", "
+  "\"number_of_fragments\", "
+  "\"breakdown_distance\", "
+  "\"maximum_inclusive_coverage_quantity\", "
+  "\"number_of_spread\", "
+  "\"surface_dc_resistivity\", "
+  "\"probability_of_arc_discharge\", "
+  "\"fuel_dispersion_radius\", "
+  "\"distance_from_center_explosion\", "
+  "\"shock_wave_overpressure_value\", "
+  "\"spread_area\", "
+  "\"use_description\", "
+  "\"interference_duration\", "
+  "\"interference_length_minimum\", "
+  "\"interference_length_maximum\", "
+  "\"interference_width_minimum\", "
+  "\"interference_width_maximum\", "
+  "\"fuze_model\", "
+  "\"number_of_fuses\", "
+  "\"storage_life\", "
+  "\"action_time\", "
+  "\"available_extension_time\", "
+  "\"rudder_width\", "
+  "\"aerodynamic_configuration\", "
+  "\"working_conditions\", "
+  "\"working_temperature\", "
+  "\"working_altitude\", "
+  "\"launch_way\", "
+  "\"guidance_rule\", "
+  "\"minimum_visibility_emission\", "
+  "\"maximum_launch_altitude\", "
+  "\"launch_maximum_target_altitude\", "
+  "\"maximum_launch_relative_height\", "
+  "\"minimum_relative_height_launch\", "
+  "\"launch_speed\", "
+  "\"launch_conditions\", "
+  "\"launch_off_axis_angle\", "
+  "\"guidance_way\", "
+  "\"effective_range\", "
+  "\"hit_accuracy\", "
+  "\"hit_probability\", "
+  "\"preparation_time\", "
+  "\"allow_continuous_flight_time\", "
+  "\"guided_flight_time\", "
+  "\"maximum_speed_of_missile\", "
+  "\"guiding_head_working_wavelength\", "
+  "\"guidance_head_operating_distance\", "
+  "\"blind_spot_of_guidance_head\", "
+  "\"guidance_head_frame_angle\", "
+  "\"guidance_head_field_of_view_angle\", "
+  "\"adaptability_of_guidance_head_sunlight\", "
+  "\"guidance_head_operating_frequency\", "
+  "\"fuse_firing_rate\", "
+  "\"fuse_type\", "
+  "\"fuse_length\", "
+  "\"fuse_diameter\", "
+  "\"fuze_quality\", "
+  "\"safe_distance_of_fuse\", "
+  "\"time_disarming_fuse\", "
+  "\"first_level_release_time_of_fuse\", "
+  "\"secondary_release_time_of_fuse\", "
+  "\"reliability_rate_of_fuse_action\", "
+  "\"fuse_self_destruct_time\", "
+  "\"combat_department_quality\", "
+  "\"combat_quantity\", "
+  "\"combat_unit_type\", "
+  "\"combat_length\", "
+  "\"combat_diameter\", "
+  "\"combat_main_charge_type\", "
+  "\"combat_charge_density\", "
+  "\"combat_loading_factor\", "
+  "\"combat_explosive\", "
+  "\"combat_fragments_number\", "
+  "\"combat_unit_invasion_capability\", "
+  "\"combat_effective_killing_radius_vehicles\", "
+  "\"combat_effective_killing_radius_personnel\", "
+  "\"combat_vertical_static_armor_penetration_depth\", "
+  "\"combat_department_quality_add\", "
+  "\"combat_quantity_add\", "
+  "\"combat_unit_type_add\", "
+  "\"combat_length_add\", "
+  "\"combat_diameter_add\", "
+  "\"combat_main_charge_type_add\", "
+  "\"combat_charge_density_add\", "
+  "\"combat_loading_factor_add\", "
+  "\"combat_explosive_add\", "
+  "\"combat_fragments_number_add\", "
+  "\"combat_unit_invasion_capability_add\", "
+  "\"combat_effective_killing_radius_vehicles_add\", "
+  "\"combat_effective_killing_radius_personnel_add\", "
+  "\"combat_vertical_static_armor_penetration_depth_add\", "
+  "\"service_life\", "
+  "\"distance_between_center_mass_end\", "
+  "\"lifting_lug\", "
+  "\"distance_suspension_lifting_lug\", "
+  "\"image_name\", "
   "\"image_url\", "
-  "\"image_name\") "
+  "\"record_creation_time\", "
+  "\"use_status\") "
   "VALUES "
-  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23) "
+  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, $70, $71, $72, $73, $74, $75, $76, $77, $78, $79, $80, $81, $82, $83, $84, $85, $86, $87, $88, $89, $90, $91, $92, $93, $94, $95, $96, $97, $98, $99, $100, $101, $102, $103, $104, $105, $106, $107, $108, $109, $110, $111, $112, $113, $114, $115, $116, $117, $118, $119, $120, $121, $122, $123, $124, $125, $126, $127, $128, $129, $130, $131, $132, $133) "
   "RETURNING \"id\"";
 
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::find_statement[] =
   "SELECT "
   "\"uav_type_man\".\"ammo_parameters\".\"id\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"ammo_type\", "
   "\"uav_type_man\".\"ammo_parameters\".\"ammo_name\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"short_name\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"ammo_type\", "
   "\"uav_type_man\".\"ammo_parameters\".\"ammo_id\", "
   "\"uav_type_man\".\"ammo_parameters\".\"ammo_to_uavmodel\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"description\", "
   "\"uav_type_man\".\"ammo_parameters\".\"length\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"width\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"weight\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"guidance_type\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"launch_height_min\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"launch_height_max\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"launch_distance_min\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"launch_distance_max\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"launch_angle\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"launch_method\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"approve_attack_target_type\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"killing_dose\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"killing_method\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"killing_depth\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"killing_range_min\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"killing_range_max\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"recordcreation_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"mass\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"diameter\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"wingspan\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"warhead_cg_distance\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"charge_mass\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"charge_coefficient\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"max_release_height\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"min_release_height\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"min_release_speed\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"max_release_speed\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"tail_length\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"lug_spacing\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"killing_way\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"penetration_depth\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"quantity_soil_thrown\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"crater_diameter\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"crater_depth\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"damaged_area\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"dense_killing_radius\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"initial_velocity_fragments\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"number_fragments\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"armor_breaking_ability\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"bullet_density_range_minimum\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"bullet_density_range_maximum\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"ground_ignition_rate\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combustion_temperature\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combustion_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combustion_agent_spread_range\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"number_of_fragments\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"breakdown_distance\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"maximum_inclusive_coverage_quantity\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"number_of_spread\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"surface_dc_resistivity\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"probability_of_arc_discharge\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuel_dispersion_radius\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"distance_from_center_explosion\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"shock_wave_overpressure_value\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"spread_area\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"use_description\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"interference_duration\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"interference_length_minimum\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"interference_length_maximum\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"interference_width_minimum\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"interference_width_maximum\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuze_model\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"number_of_fuses\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"storage_life\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"action_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"available_extension_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"rudder_width\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"aerodynamic_configuration\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"working_conditions\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"working_temperature\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"working_altitude\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_way\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_rule\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"minimum_visibility_emission\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"maximum_launch_altitude\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_maximum_target_altitude\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"maximum_launch_relative_height\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"minimum_relative_height_launch\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_speed\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_conditions\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_off_axis_angle\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_way\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"effective_range\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"hit_accuracy\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"hit_probability\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"preparation_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"allow_continuous_flight_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guided_flight_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"maximum_speed_of_missile\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guiding_head_working_wavelength\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_operating_distance\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"blind_spot_of_guidance_head\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_frame_angle\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_field_of_view_angle\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"adaptability_of_guidance_head_sunlight\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_operating_frequency\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuse_firing_rate\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuse_type\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuse_length\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuse_diameter\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuze_quality\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"safe_distance_of_fuse\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"time_disarming_fuse\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"first_level_release_time_of_fuse\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"secondary_release_time_of_fuse\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"reliability_rate_of_fuse_action\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuse_self_destruct_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_department_quality\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_quantity\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_unit_type\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_length\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_diameter\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_main_charge_type\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_charge_density\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_loading_factor\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_explosive\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_fragments_number\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_unit_invasion_capability\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_effective_killing_radius_vehicles\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_effective_killing_radius_personnel\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_vertical_static_armor_penetration_depth\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_department_quality_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_quantity_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_unit_type_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_length_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_diameter_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_main_charge_type_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_charge_density_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_loading_factor_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_explosive_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_fragments_number_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_unit_invasion_capability_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_effective_killing_radius_vehicles_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_effective_killing_radius_personnel_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_vertical_static_armor_penetration_depth_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"service_life\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"distance_between_center_mass_end\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"lifting_lug\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"distance_suspension_lifting_lug\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"image_name\", "
   "\"uav_type_man\".\"ammo_parameters\".\"image_url\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"image_name\" "
+  "\"uav_type_man\".\"ammo_parameters\".\"record_creation_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"use_status\" "
   "FROM \"uav_type_man\".\"ammo_parameters\" "
   "WHERE \"uav_type_man\".\"ammo_parameters\".\"id\"=$1";
 
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::update_statement[] =
   "UPDATE \"uav_type_man\".\"ammo_parameters\" "
   "SET "
-  "\"ammo_type\"=$1, "
-  "\"ammo_name\"=$2, "
-  "\"ammo_id\"=$3, "
-  "\"ammo_to_uavmodel\"=$4, "
-  "\"length\"=$5, "
-  "\"width\"=$6, "
-  "\"weight\"=$7, "
-  "\"guidance_type\"=$8, "
-  "\"launch_height_min\"=$9, "
-  "\"launch_height_max\"=$10, "
-  "\"launch_distance_min\"=$11, "
-  "\"launch_distance_max\"=$12, "
-  "\"launch_angle\"=$13, "
-  "\"launch_method\"=$14, "
-  "\"approve_attack_target_type\"=$15, "
-  "\"killing_dose\"=$16, "
-  "\"killing_method\"=$17, "
-  "\"killing_depth\"=$18, "
-  "\"killing_range_min\"=$19, "
-  "\"killing_range_max\"=$20, "
-  "\"recordcreation_time\"=$21, "
-  "\"image_url\"=$22, "
-  "\"image_name\"=$23 "
-  "WHERE \"id\"=$24";
+  "\"ammo_name\"=$1, "
+  "\"short_name\"=$2, "
+  "\"ammo_type\"=$3, "
+  "\"ammo_id\"=$4, "
+  "\"ammo_to_uavmodel\"=$5, "
+  "\"description\"=$6, "
+  "\"length\"=$7, "
+  "\"mass\"=$8, "
+  "\"diameter\"=$9, "
+  "\"wingspan\"=$10, "
+  "\"warhead_cg_distance\"=$11, "
+  "\"charge_mass\"=$12, "
+  "\"charge_coefficient\"=$13, "
+  "\"max_release_height\"=$14, "
+  "\"min_release_height\"=$15, "
+  "\"min_release_speed\"=$16, "
+  "\"max_release_speed\"=$17, "
+  "\"tail_length\"=$18, "
+  "\"lug_spacing\"=$19, "
+  "\"killing_way\"=$20, "
+  "\"penetration_depth\"=$21, "
+  "\"quantity_soil_thrown\"=$22, "
+  "\"crater_diameter\"=$23, "
+  "\"crater_depth\"=$24, "
+  "\"damaged_area\"=$25, "
+  "\"dense_killing_radius\"=$26, "
+  "\"initial_velocity_fragments\"=$27, "
+  "\"number_fragments\"=$28, "
+  "\"armor_breaking_ability\"=$29, "
+  "\"bullet_density_range_minimum\"=$30, "
+  "\"bullet_density_range_maximum\"=$31, "
+  "\"ground_ignition_rate\"=$32, "
+  "\"combustion_temperature\"=$33, "
+  "\"combustion_time\"=$34, "
+  "\"combustion_agent_spread_range\"=$35, "
+  "\"number_of_fragments\"=$36, "
+  "\"breakdown_distance\"=$37, "
+  "\"maximum_inclusive_coverage_quantity\"=$38, "
+  "\"number_of_spread\"=$39, "
+  "\"surface_dc_resistivity\"=$40, "
+  "\"probability_of_arc_discharge\"=$41, "
+  "\"fuel_dispersion_radius\"=$42, "
+  "\"distance_from_center_explosion\"=$43, "
+  "\"shock_wave_overpressure_value\"=$44, "
+  "\"spread_area\"=$45, "
+  "\"use_description\"=$46, "
+  "\"interference_duration\"=$47, "
+  "\"interference_length_minimum\"=$48, "
+  "\"interference_length_maximum\"=$49, "
+  "\"interference_width_minimum\"=$50, "
+  "\"interference_width_maximum\"=$51, "
+  "\"fuze_model\"=$52, "
+  "\"number_of_fuses\"=$53, "
+  "\"storage_life\"=$54, "
+  "\"action_time\"=$55, "
+  "\"available_extension_time\"=$56, "
+  "\"rudder_width\"=$57, "
+  "\"aerodynamic_configuration\"=$58, "
+  "\"working_conditions\"=$59, "
+  "\"working_temperature\"=$60, "
+  "\"working_altitude\"=$61, "
+  "\"launch_way\"=$62, "
+  "\"guidance_rule\"=$63, "
+  "\"minimum_visibility_emission\"=$64, "
+  "\"maximum_launch_altitude\"=$65, "
+  "\"launch_maximum_target_altitude\"=$66, "
+  "\"maximum_launch_relative_height\"=$67, "
+  "\"minimum_relative_height_launch\"=$68, "
+  "\"launch_speed\"=$69, "
+  "\"launch_conditions\"=$70, "
+  "\"launch_off_axis_angle\"=$71, "
+  "\"guidance_way\"=$72, "
+  "\"effective_range\"=$73, "
+  "\"hit_accuracy\"=$74, "
+  "\"hit_probability\"=$75, "
+  "\"preparation_time\"=$76, "
+  "\"allow_continuous_flight_time\"=$77, "
+  "\"guided_flight_time\"=$78, "
+  "\"maximum_speed_of_missile\"=$79, "
+  "\"guiding_head_working_wavelength\"=$80, "
+  "\"guidance_head_operating_distance\"=$81, "
+  "\"blind_spot_of_guidance_head\"=$82, "
+  "\"guidance_head_frame_angle\"=$83, "
+  "\"guidance_head_field_of_view_angle\"=$84, "
+  "\"adaptability_of_guidance_head_sunlight\"=$85, "
+  "\"guidance_head_operating_frequency\"=$86, "
+  "\"fuse_firing_rate\"=$87, "
+  "\"fuse_type\"=$88, "
+  "\"fuse_length\"=$89, "
+  "\"fuse_diameter\"=$90, "
+  "\"fuze_quality\"=$91, "
+  "\"safe_distance_of_fuse\"=$92, "
+  "\"time_disarming_fuse\"=$93, "
+  "\"first_level_release_time_of_fuse\"=$94, "
+  "\"secondary_release_time_of_fuse\"=$95, "
+  "\"reliability_rate_of_fuse_action\"=$96, "
+  "\"fuse_self_destruct_time\"=$97, "
+  "\"combat_department_quality\"=$98, "
+  "\"combat_quantity\"=$99, "
+  "\"combat_unit_type\"=$100, "
+  "\"combat_length\"=$101, "
+  "\"combat_diameter\"=$102, "
+  "\"combat_main_charge_type\"=$103, "
+  "\"combat_charge_density\"=$104, "
+  "\"combat_loading_factor\"=$105, "
+  "\"combat_explosive\"=$106, "
+  "\"combat_fragments_number\"=$107, "
+  "\"combat_unit_invasion_capability\"=$108, "
+  "\"combat_effective_killing_radius_vehicles\"=$109, "
+  "\"combat_effective_killing_radius_personnel\"=$110, "
+  "\"combat_vertical_static_armor_penetration_depth\"=$111, "
+  "\"combat_department_quality_add\"=$112, "
+  "\"combat_quantity_add\"=$113, "
+  "\"combat_unit_type_add\"=$114, "
+  "\"combat_length_add\"=$115, "
+  "\"combat_diameter_add\"=$116, "
+  "\"combat_main_charge_type_add\"=$117, "
+  "\"combat_charge_density_add\"=$118, "
+  "\"combat_loading_factor_add\"=$119, "
+  "\"combat_explosive_add\"=$120, "
+  "\"combat_fragments_number_add\"=$121, "
+  "\"combat_unit_invasion_capability_add\"=$122, "
+  "\"combat_effective_killing_radius_vehicles_add\"=$123, "
+  "\"combat_effective_killing_radius_personnel_add\"=$124, "
+  "\"combat_vertical_static_armor_penetration_depth_add\"=$125, "
+  "\"service_life\"=$126, "
+  "\"distance_between_center_mass_end\"=$127, "
+  "\"lifting_lug\"=$128, "
+  "\"distance_suspension_lifting_lug\"=$129, "
+  "\"image_name\"=$130, "
+  "\"image_url\"=$131, "
+  "\"record_creation_time\"=$132, "
+  "\"use_status\"=$133 "
+  "WHERE \"id\"=$134";
 
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::erase_statement[] =
   "DELETE FROM \"uav_type_man\".\"ammo_parameters\" "
@@ -1378,29 +6470,139 @@ namespace odb
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::query_statement[] =
   "SELECT "
   "\"uav_type_man\".\"ammo_parameters\".\"id\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"ammo_type\", "
   "\"uav_type_man\".\"ammo_parameters\".\"ammo_name\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"short_name\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"ammo_type\", "
   "\"uav_type_man\".\"ammo_parameters\".\"ammo_id\", "
   "\"uav_type_man\".\"ammo_parameters\".\"ammo_to_uavmodel\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"description\", "
   "\"uav_type_man\".\"ammo_parameters\".\"length\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"width\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"weight\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"guidance_type\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"launch_height_min\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"launch_height_max\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"launch_distance_min\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"launch_distance_max\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"launch_angle\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"launch_method\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"approve_attack_target_type\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"killing_dose\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"killing_method\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"killing_depth\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"killing_range_min\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"killing_range_max\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"recordcreation_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"mass\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"diameter\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"wingspan\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"warhead_cg_distance\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"charge_mass\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"charge_coefficient\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"max_release_height\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"min_release_height\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"min_release_speed\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"max_release_speed\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"tail_length\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"lug_spacing\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"killing_way\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"penetration_depth\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"quantity_soil_thrown\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"crater_diameter\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"crater_depth\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"damaged_area\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"dense_killing_radius\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"initial_velocity_fragments\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"number_fragments\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"armor_breaking_ability\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"bullet_density_range_minimum\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"bullet_density_range_maximum\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"ground_ignition_rate\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combustion_temperature\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combustion_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combustion_agent_spread_range\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"number_of_fragments\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"breakdown_distance\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"maximum_inclusive_coverage_quantity\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"number_of_spread\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"surface_dc_resistivity\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"probability_of_arc_discharge\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuel_dispersion_radius\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"distance_from_center_explosion\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"shock_wave_overpressure_value\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"spread_area\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"use_description\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"interference_duration\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"interference_length_minimum\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"interference_length_maximum\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"interference_width_minimum\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"interference_width_maximum\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuze_model\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"number_of_fuses\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"storage_life\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"action_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"available_extension_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"rudder_width\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"aerodynamic_configuration\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"working_conditions\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"working_temperature\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"working_altitude\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_way\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_rule\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"minimum_visibility_emission\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"maximum_launch_altitude\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_maximum_target_altitude\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"maximum_launch_relative_height\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"minimum_relative_height_launch\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_speed\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_conditions\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"launch_off_axis_angle\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_way\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"effective_range\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"hit_accuracy\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"hit_probability\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"preparation_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"allow_continuous_flight_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guided_flight_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"maximum_speed_of_missile\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guiding_head_working_wavelength\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_operating_distance\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"blind_spot_of_guidance_head\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_frame_angle\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_field_of_view_angle\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"adaptability_of_guidance_head_sunlight\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_operating_frequency\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuse_firing_rate\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuse_type\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuse_length\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuse_diameter\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuze_quality\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"safe_distance_of_fuse\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"time_disarming_fuse\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"first_level_release_time_of_fuse\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"secondary_release_time_of_fuse\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"reliability_rate_of_fuse_action\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"fuse_self_destruct_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_department_quality\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_quantity\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_unit_type\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_length\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_diameter\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_main_charge_type\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_charge_density\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_loading_factor\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_explosive\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_fragments_number\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_unit_invasion_capability\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_effective_killing_radius_vehicles\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_effective_killing_radius_personnel\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_vertical_static_armor_penetration_depth\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_department_quality_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_quantity_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_unit_type_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_length_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_diameter_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_main_charge_type_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_charge_density_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_loading_factor_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_explosive_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_fragments_number_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_unit_invasion_capability_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_effective_killing_radius_vehicles_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_effective_killing_radius_personnel_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"combat_vertical_static_armor_penetration_depth_add\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"service_life\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"distance_between_center_mass_end\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"lifting_lug\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"distance_suspension_lifting_lug\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"image_name\", "
   "\"uav_type_man\".\"ammo_parameters\".\"image_url\", "
-  "\"uav_type_man\".\"ammo_parameters\".\"image_name\" "
+  "\"uav_type_man\".\"ammo_parameters\".\"record_creation_time\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"use_status\" "
   "FROM \"uav_type_man\".\"ammo_parameters\"";
 
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::erase_query_statement[] =

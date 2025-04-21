@@ -109,18 +109,6 @@ namespace odb
 
     static const id_type_ id;
 
-    // ammoType
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        ::std::string,
-        pgsql::id_string >::query_type,
-      pgsql::id_string >
-    ammoType_type_;
-
-    static const ammoType_type_ ammoType;
-
     // ammoName
     //
     typedef
@@ -132,6 +120,30 @@ namespace odb
     ammoName_type_;
 
     static const ammoName_type_ ammoName;
+
+    // shortName
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    shortName_type_;
+
+    static const shortName_type_ shortName;
+
+    // ammoType
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    ammoType_type_;
+
+    static const ammoType_type_ ammoType;
 
     // ammoId
     //
@@ -157,43 +169,7 @@ namespace odb
 
     static const ammoToUavModel_type_ ammoToUavModel;
 
-    // ammoLength
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        float,
-        pgsql::id_real >::query_type,
-      pgsql::id_real >
-    ammoLength_type_;
-
-    static const ammoLength_type_ ammoLength;
-
-    // ammoWidth
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        float,
-        pgsql::id_real >::query_type,
-      pgsql::id_real >
-    ammoWidth_type_;
-
-    static const ammoWidth_type_ ammoWidth;
-
-    // ammoWeight
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        float,
-        pgsql::id_real >::query_type,
-      pgsql::id_real >
-    ammoWeight_type_;
-
-    static const ammoWeight_type_ ammoWeight;
-
-    // guidanceType
+    // ammoDescription
     //
     typedef
     pgsql::query_column<
@@ -201,11 +177,11 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    guidanceType_type_;
+    ammoDescription_type_;
 
-    static const guidanceType_type_ guidanceType;
+    static const ammoDescription_type_ ammoDescription;
 
-    // launchHeightMin
+    // ammoLenth
     //
     typedef
     pgsql::query_column<
@@ -213,11 +189,11 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    launchHeightMin_type_;
+    ammoLenth_type_;
 
-    static const launchHeightMin_type_ launchHeightMin;
+    static const ammoLenth_type_ ammoLenth;
 
-    // launchHeightMax
+    // ammoMass
     //
     typedef
     pgsql::query_column<
@@ -225,11 +201,11 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    launchHeightMax_type_;
+    ammoMass_type_;
 
-    static const launchHeightMax_type_ launchHeightMax;
+    static const ammoMass_type_ ammoMass;
 
-    // launchDistanceMin
+    // ammoDiameter
     //
     typedef
     pgsql::query_column<
@@ -237,11 +213,11 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    launchDistanceMin_type_;
+    ammoDiameter_type_;
 
-    static const launchDistanceMin_type_ launchDistanceMin;
+    static const ammoDiameter_type_ ammoDiameter;
 
-    // launchDistanceMax
+    // ammoWingspan
     //
     typedef
     pgsql::query_column<
@@ -249,11 +225,11 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    launchDistanceMax_type_;
+    ammoWingspan_type_;
 
-    static const launchDistanceMax_type_ launchDistanceMax;
+    static const ammoWingspan_type_ ammoWingspan;
 
-    // launchAngle
+    // ammoWarheadCgDistance
     //
     typedef
     pgsql::query_column<
@@ -261,11 +237,107 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    launchAngle_type_;
+    ammoWarheadCgDistance_type_;
 
-    static const launchAngle_type_ launchAngle;
+    static const ammoWarheadCgDistance_type_ ammoWarheadCgDistance;
 
-    // launchWay
+    // ammoChargeMass
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoChargeMass_type_;
+
+    static const ammoChargeMass_type_ ammoChargeMass;
+
+    // ammoChargeCoefficient
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoChargeCoefficient_type_;
+
+    static const ammoChargeCoefficient_type_ ammoChargeCoefficient;
+
+    // ammoMaxReleaseHeight
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoMaxReleaseHeight_type_;
+
+    static const ammoMaxReleaseHeight_type_ ammoMaxReleaseHeight;
+
+    // ammoMinReleaseHeight
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoMinReleaseHeight_type_;
+
+    static const ammoMinReleaseHeight_type_ ammoMinReleaseHeight;
+
+    // ammoMinReleaseSpeed
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoMinReleaseSpeed_type_;
+
+    static const ammoMinReleaseSpeed_type_ ammoMinReleaseSpeed;
+
+    // ammoMaxReleaseSpeed
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoMaxReleaseSpeed_type_;
+
+    static const ammoMaxReleaseSpeed_type_ ammoMaxReleaseSpeed;
+
+    // ammoTailLength
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoTailLength_type_;
+
+    static const ammoTailLength_type_ ammoTailLength;
+
+    // ammoLugSpacing
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoLugSpacing_type_;
+
+    static const ammoLugSpacing_type_ ammoLugSpacing;
+
+    // ammoKillingWway
     //
     typedef
     pgsql::query_column<
@@ -273,11 +345,107 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    launchWay_type_;
+    ammoKillingWway_type_;
 
-    static const launchWay_type_ launchWay;
+    static const ammoKillingWway_type_ ammoKillingWway;
 
-    // approveAttackTargetType
+    // ammoPenetrationDepth
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoPenetrationDepth_type_;
+
+    static const ammoPenetrationDepth_type_ ammoPenetrationDepth;
+
+    // ammoQuantitySoilThrown
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoQuantitySoilThrown_type_;
+
+    static const ammoQuantitySoilThrown_type_ ammoQuantitySoilThrown;
+
+    // ammoCraterDiameter
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoCraterDiameter_type_;
+
+    static const ammoCraterDiameter_type_ ammoCraterDiameter;
+
+    // ammoCraterDepth
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoCraterDepth_type_;
+
+    static const ammoCraterDepth_type_ ammoCraterDepth;
+
+    // ammoDamagedArea
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoDamagedArea_type_;
+
+    static const ammoDamagedArea_type_ ammoDamagedArea;
+
+    // ammoDenseKillingRadius
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoDenseKillingRadius_type_;
+
+    static const ammoDenseKillingRadius_type_ ammoDenseKillingRadius;
+
+    // ammoInitialVelocityFragments
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    ammoInitialVelocityFragments_type_;
+
+    static const ammoInitialVelocityFragments_type_ ammoInitialVelocityFragments;
+
+    // ammoNumberFragments
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    ammoNumberFragments_type_;
+
+    static const ammoNumberFragments_type_ ammoNumberFragments;
+
+    // ammoArmorBreakingAbility
     //
     typedef
     pgsql::query_column<
@@ -285,11 +453,35 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    approveAttackTargetType_type_;
+    ammoArmorBreakingAbility_type_;
 
-    static const approveAttackTargetType_type_ approveAttackTargetType;
+    static const ammoArmorBreakingAbility_type_ ammoArmorBreakingAbility;
 
-    // killingDose
+    // bullet_density_range_minimum
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    bullet_density_range_minimum_type_;
+
+    static const bullet_density_range_minimum_type_ bullet_density_range_minimum;
+
+    // bullet_density_range_maximum
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    bullet_density_range_maximum_type_;
+
+    static const bullet_density_range_maximum_type_ bullet_density_range_maximum;
+
+    // ground_ignition_rate
     //
     typedef
     pgsql::query_column<
@@ -297,11 +489,167 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    killingDose_type_;
+    ground_ignition_rate_type_;
 
-    static const killingDose_type_ killingDose;
+    static const ground_ignition_rate_type_ ground_ignition_rate;
 
-    // killingMethod
+    // combustion_temperature
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combustion_temperature_type_;
+
+    static const combustion_temperature_type_ combustion_temperature;
+
+    // combustion_time
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combustion_time_type_;
+
+    static const combustion_time_type_ combustion_time;
+
+    // combustion_agent_spread_range
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combustion_agent_spread_range_type_;
+
+    static const combustion_agent_spread_range_type_ combustion_agent_spread_range;
+
+    // number_of_fragments
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    number_of_fragments_type_;
+
+    static const number_of_fragments_type_ number_of_fragments;
+
+    // breakdown_distance
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    breakdown_distance_type_;
+
+    static const breakdown_distance_type_ breakdown_distance;
+
+    // maximum_inclusive_coverage_quantity
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    maximum_inclusive_coverage_quantity_type_;
+
+    static const maximum_inclusive_coverage_quantity_type_ maximum_inclusive_coverage_quantity;
+
+    // number_of_spread
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    number_of_spread_type_;
+
+    static const number_of_spread_type_ number_of_spread;
+
+    // surface_dc_resistivity
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    surface_dc_resistivity_type_;
+
+    static const surface_dc_resistivity_type_ surface_dc_resistivity;
+
+    // probability_of_arc_discharge
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    probability_of_arc_discharge_type_;
+
+    static const probability_of_arc_discharge_type_ probability_of_arc_discharge;
+
+    // fuel_dispersion_radius
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    fuel_dispersion_radius_type_;
+
+    static const fuel_dispersion_radius_type_ fuel_dispersion_radius;
+
+    // distance_from_center_explosion
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    distance_from_center_explosion_type_;
+
+    static const distance_from_center_explosion_type_ distance_from_center_explosion;
+
+    // shock_wave_overpressure_value
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    shock_wave_overpressure_value_type_;
+
+    static const shock_wave_overpressure_value_type_ shock_wave_overpressure_value;
+
+    // spread_area
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    spread_area_type_;
+
+    static const spread_area_type_ spread_area;
+
+    // use_description
     //
     typedef
     pgsql::query_column<
@@ -309,11 +657,11 @@ namespace odb
         ::std::string,
         pgsql::id_string >::query_type,
       pgsql::id_string >
-    killingMethod_type_;
+    use_description_type_;
 
-    static const killingMethod_type_ killingMethod;
+    static const use_description_type_ use_description;
 
-    // killingDepth
+    // interference_duration
     //
     typedef
     pgsql::query_column<
@@ -321,11 +669,11 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    killingDepth_type_;
+    interference_duration_type_;
 
-    static const killingDepth_type_ killingDepth;
+    static const interference_duration_type_ interference_duration;
 
-    // killingRangeMin
+    // interference_length_minimum
     //
     typedef
     pgsql::query_column<
@@ -333,11 +681,11 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    killingRangeMin_type_;
+    interference_length_minimum_type_;
 
-    static const killingRangeMin_type_ killingRangeMin;
+    static const interference_length_minimum_type_ interference_length_minimum;
 
-    // killingRangeMax
+    // interference_length_maximum
     //
     typedef
     pgsql::query_column<
@@ -345,11 +693,995 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    killingRangeMax_type_;
+    interference_length_maximum_type_;
 
-    static const killingRangeMax_type_ killingRangeMax;
+    static const interference_length_maximum_type_ interference_length_maximum;
 
-    // recordCreationTime
+    // interference_width_minimum
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    interference_width_minimum_type_;
+
+    static const interference_width_minimum_type_ interference_width_minimum;
+
+    // interference_width_maximum
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    interference_width_maximum_type_;
+
+    static const interference_width_maximum_type_ interference_width_maximum;
+
+    // fuze_model
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    fuze_model_type_;
+
+    static const fuze_model_type_ fuze_model;
+
+    // number_of_fuses
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    number_of_fuses_type_;
+
+    static const number_of_fuses_type_ number_of_fuses;
+
+    // storage_life
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    storage_life_type_;
+
+    static const storage_life_type_ storage_life;
+
+    // action_time
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    action_time_type_;
+
+    static const action_time_type_ action_time;
+
+    // available_extension_time
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    available_extension_time_type_;
+
+    static const available_extension_time_type_ available_extension_time;
+
+    // rudder_width
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    rudder_width_type_;
+
+    static const rudder_width_type_ rudder_width;
+
+    // aerodynamic_configuration
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    aerodynamic_configuration_type_;
+
+    static const aerodynamic_configuration_type_ aerodynamic_configuration;
+
+    // working_conditions
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    working_conditions_type_;
+
+    static const working_conditions_type_ working_conditions;
+
+    // working_temperature
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    working_temperature_type_;
+
+    static const working_temperature_type_ working_temperature;
+
+    // working_altitude
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    working_altitude_type_;
+
+    static const working_altitude_type_ working_altitude;
+
+    // launch_way
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    launch_way_type_;
+
+    static const launch_way_type_ launch_way;
+
+    // guidance_rule
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    guidance_rule_type_;
+
+    static const guidance_rule_type_ guidance_rule;
+
+    // minimum_visibility_emission
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    minimum_visibility_emission_type_;
+
+    static const minimum_visibility_emission_type_ minimum_visibility_emission;
+
+    // maximum_launch_altitude
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    maximum_launch_altitude_type_;
+
+    static const maximum_launch_altitude_type_ maximum_launch_altitude;
+
+    // launch_maximum_target_altitude
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    launch_maximum_target_altitude_type_;
+
+    static const launch_maximum_target_altitude_type_ launch_maximum_target_altitude;
+
+    // maximum_launch_relative_height
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    maximum_launch_relative_height_type_;
+
+    static const maximum_launch_relative_height_type_ maximum_launch_relative_height;
+
+    // minimum_relative_height_launch
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    minimum_relative_height_launch_type_;
+
+    static const minimum_relative_height_launch_type_ minimum_relative_height_launch;
+
+    // launch_speed
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    launch_speed_type_;
+
+    static const launch_speed_type_ launch_speed;
+
+    // launch_conditions
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    launch_conditions_type_;
+
+    static const launch_conditions_type_ launch_conditions;
+
+    // launch_off_axis_angle
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    launch_off_axis_angle_type_;
+
+    static const launch_off_axis_angle_type_ launch_off_axis_angle;
+
+    // guidance_way
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    guidance_way_type_;
+
+    static const guidance_way_type_ guidance_way;
+
+    // effective_range
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    effective_range_type_;
+
+    static const effective_range_type_ effective_range;
+
+    // hit_accuracy
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    hit_accuracy_type_;
+
+    static const hit_accuracy_type_ hit_accuracy;
+
+    // hit_probability
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    hit_probability_type_;
+
+    static const hit_probability_type_ hit_probability;
+
+    // preparation_time
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    preparation_time_type_;
+
+    static const preparation_time_type_ preparation_time;
+
+    // allow_continuous_flight_time
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    allow_continuous_flight_time_type_;
+
+    static const allow_continuous_flight_time_type_ allow_continuous_flight_time;
+
+    // guided_flight_time
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    guided_flight_time_type_;
+
+    static const guided_flight_time_type_ guided_flight_time;
+
+    // maximum_speed_of_missile
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    maximum_speed_of_missile_type_;
+
+    static const maximum_speed_of_missile_type_ maximum_speed_of_missile;
+
+    // guiding_head_working_wavelength
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    guiding_head_working_wavelength_type_;
+
+    static const guiding_head_working_wavelength_type_ guiding_head_working_wavelength;
+
+    // guidance_head_operating_distance
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    guidance_head_operating_distance_type_;
+
+    static const guidance_head_operating_distance_type_ guidance_head_operating_distance;
+
+    // blind_spot_of_guidance_head
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    blind_spot_of_guidance_head_type_;
+
+    static const blind_spot_of_guidance_head_type_ blind_spot_of_guidance_head;
+
+    // guidance_head_frame_angle
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    guidance_head_frame_angle_type_;
+
+    static const guidance_head_frame_angle_type_ guidance_head_frame_angle;
+
+    // guidance_head_field_of_view_angle
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    guidance_head_field_of_view_angle_type_;
+
+    static const guidance_head_field_of_view_angle_type_ guidance_head_field_of_view_angle;
+
+    // adaptability_of_guidance_head_sunlight
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    adaptability_of_guidance_head_sunlight_type_;
+
+    static const adaptability_of_guidance_head_sunlight_type_ adaptability_of_guidance_head_sunlight;
+
+    // guidance_head_operating_frequency
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    guidance_head_operating_frequency_type_;
+
+    static const guidance_head_operating_frequency_type_ guidance_head_operating_frequency;
+
+    // fuse_firing_rate
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    fuse_firing_rate_type_;
+
+    static const fuse_firing_rate_type_ fuse_firing_rate;
+
+    // fuse_type
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    fuse_type_type_;
+
+    static const fuse_type_type_ fuse_type;
+
+    // fuse_length
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    fuse_length_type_;
+
+    static const fuse_length_type_ fuse_length;
+
+    // fuse_diameter
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    fuse_diameter_type_;
+
+    static const fuse_diameter_type_ fuse_diameter;
+
+    // fuze_quality
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    fuze_quality_type_;
+
+    static const fuze_quality_type_ fuze_quality;
+
+    // safe_distance_of_fuse
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    safe_distance_of_fuse_type_;
+
+    static const safe_distance_of_fuse_type_ safe_distance_of_fuse;
+
+    // time_disarming_fuse
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    time_disarming_fuse_type_;
+
+    static const time_disarming_fuse_type_ time_disarming_fuse;
+
+    // first_level_release_time_of_fuse
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    first_level_release_time_of_fuse_type_;
+
+    static const first_level_release_time_of_fuse_type_ first_level_release_time_of_fuse;
+
+    // secondary_release_time_of_fuse
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    secondary_release_time_of_fuse_type_;
+
+    static const secondary_release_time_of_fuse_type_ secondary_release_time_of_fuse;
+
+    // reliability_rate_of_fuse_action
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    reliability_rate_of_fuse_action_type_;
+
+    static const reliability_rate_of_fuse_action_type_ reliability_rate_of_fuse_action;
+
+    // fuse_self_destruct_time
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    fuse_self_destruct_time_type_;
+
+    static const fuse_self_destruct_time_type_ fuse_self_destruct_time;
+
+    // combat_department_quality
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_department_quality_type_;
+
+    static const combat_department_quality_type_ combat_department_quality;
+
+    // combat_quantity
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_quantity_type_;
+
+    static const combat_quantity_type_ combat_quantity;
+
+    // combat_unit_type
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    combat_unit_type_type_;
+
+    static const combat_unit_type_type_ combat_unit_type;
+
+    // combat_length
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_length_type_;
+
+    static const combat_length_type_ combat_length;
+
+    // combat_diameter
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_diameter_type_;
+
+    static const combat_diameter_type_ combat_diameter;
+
+    // combat_main_charge_type
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    combat_main_charge_type_type_;
+
+    static const combat_main_charge_type_type_ combat_main_charge_type;
+
+    // combat_charge_density
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_charge_density_type_;
+
+    static const combat_charge_density_type_ combat_charge_density;
+
+    // combat_loading_factor
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_loading_factor_type_;
+
+    static const combat_loading_factor_type_ combat_loading_factor;
+
+    // combat_explosive
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_explosive_type_;
+
+    static const combat_explosive_type_ combat_explosive;
+
+    // combat_fragments_number
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    combat_fragments_number_type_;
+
+    static const combat_fragments_number_type_ combat_fragments_number;
+
+    // combat_unit_invasion_capability
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    combat_unit_invasion_capability_type_;
+
+    static const combat_unit_invasion_capability_type_ combat_unit_invasion_capability;
+
+    // combat_effective_killing_radius_vehicles
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_effective_killing_radius_vehicles_type_;
+
+    static const combat_effective_killing_radius_vehicles_type_ combat_effective_killing_radius_vehicles;
+
+    // combat_effective_killing_radius_personnel
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_effective_killing_radius_personnel_type_;
+
+    static const combat_effective_killing_radius_personnel_type_ combat_effective_killing_radius_personnel;
+
+    // combat_vertical_static_armor_penetration_depth
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_vertical_static_armor_penetration_depth_type_;
+
+    static const combat_vertical_static_armor_penetration_depth_type_ combat_vertical_static_armor_penetration_depth;
+
+    // combat_department_quality_add
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_department_quality_add_type_;
+
+    static const combat_department_quality_add_type_ combat_department_quality_add;
+
+    // combat_quantity_add
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_quantity_add_type_;
+
+    static const combat_quantity_add_type_ combat_quantity_add;
+
+    // combat_unit_type_add
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    combat_unit_type_add_type_;
+
+    static const combat_unit_type_add_type_ combat_unit_type_add;
+
+    // combat_length_add
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_length_add_type_;
+
+    static const combat_length_add_type_ combat_length_add;
+
+    // combat_diameter_add
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_diameter_add_type_;
+
+    static const combat_diameter_add_type_ combat_diameter_add;
+
+    // combat_main_charge_type_add
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    combat_main_charge_type_add_type_;
+
+    static const combat_main_charge_type_add_type_ combat_main_charge_type_add;
+
+    // combat_charge_density_add
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_charge_density_add_type_;
+
+    static const combat_charge_density_add_type_ combat_charge_density_add;
+
+    // combat_loading_factor_add
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_loading_factor_add_type_;
+
+    static const combat_loading_factor_add_type_ combat_loading_factor_add;
+
+    // combat_explosive_add
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_explosive_add_type_;
+
+    static const combat_explosive_add_type_ combat_explosive_add;
+
+    // combat_fragments_number_add
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        int,
+        pgsql::id_integer >::query_type,
+      pgsql::id_integer >
+    combat_fragments_number_add_type_;
+
+    static const combat_fragments_number_add_type_ combat_fragments_number_add;
+
+    // combat_unit_invasion_capability_add
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    combat_unit_invasion_capability_add_type_;
+
+    static const combat_unit_invasion_capability_add_type_ combat_unit_invasion_capability_add;
+
+    // combat_effective_killing_radius_vehicles_add
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_effective_killing_radius_vehicles_add_type_;
+
+    static const combat_effective_killing_radius_vehicles_add_type_ combat_effective_killing_radius_vehicles_add;
+
+    // combat_effective_killing_radius_personnel_add
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_effective_killing_radius_personnel_add_type_;
+
+    static const combat_effective_killing_radius_personnel_add_type_ combat_effective_killing_radius_personnel_add;
+
+    // combat_vertical_static_armor_penetration_depth_add
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    combat_vertical_static_armor_penetration_depth_add_type_;
+
+    static const combat_vertical_static_armor_penetration_depth_add_type_ combat_vertical_static_armor_penetration_depth_add;
+
+    // service_life
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    service_life_type_;
+
+    static const service_life_type_ service_life;
+
+    // distance_between_center_mass_end
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    distance_between_center_mass_end_type_;
+
+    static const distance_between_center_mass_end_type_ distance_between_center_mass_end;
+
+    // lifting_lug
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    lifting_lug_type_;
+
+    static const lifting_lug_type_ lifting_lug;
+
+    // distance_suspension_lifting_lug
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    distance_suspension_lifting_lug_type_;
+
+    static const distance_suspension_lifting_lug_type_ distance_suspension_lifting_lug;
+
+    // image_name
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    image_name_type_;
+
+    static const image_name_type_ image_name;
+
+    // image_url
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    image_url_type_;
+
+    static const image_url_type_ image_url;
+
+    // record_creation_time
     //
     typedef
     pgsql::query_column<
@@ -357,23 +1689,11 @@ namespace odb
         ::QDateTime,
         pgsql::id_timestamp >::query_type,
       pgsql::id_timestamp >
-    recordCreationTime_type_;
+    record_creation_time_type_;
 
-    static const recordCreationTime_type_ recordCreationTime;
+    static const record_creation_time_type_ record_creation_time;
 
-    // ammoImgUrl
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        ::std::string,
-        pgsql::id_string >::query_type,
-      pgsql::id_string >
-    ammoImgUrl_type_;
-
-    static const ammoImgUrl_type_ ammoImgUrl;
-
-    // ammoImageName
+    // use_status
     //
     typedef
     pgsql::query_column<
@@ -381,9 +1701,9 @@ namespace odb
         float,
         pgsql::id_real >::query_type,
       pgsql::id_real >
-    ammoImageName_type_;
+    use_status_type_;
 
-    static const ammoImageName_type_ ammoImageName;
+    static const use_status_type_ use_status;
   };
 
   template <typename A>
@@ -392,14 +1712,19 @@ namespace odb
   id (A::table_name, "\"id\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoType_type_
-  query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  ammoType (A::table_name, "\"ammo_type\"", 0);
-
-  template <typename A>
   const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoName_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
   ammoName (A::table_name, "\"ammo_name\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::shortName_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  shortName (A::table_name, "\"short_name\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoType_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  ammoType (A::table_name, "\"ammo_type\"", 0);
 
   template <typename A>
   const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoId_type_
@@ -412,99 +1737,644 @@ namespace odb
   ammoToUavModel (A::table_name, "\"ammo_to_uavmodel\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoLength_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoDescription_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  ammoLength (A::table_name, "\"length\"", 0);
+  ammoDescription (A::table_name, "\"description\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoWidth_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoLenth_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  ammoWidth (A::table_name, "\"width\"", 0);
+  ammoLenth (A::table_name, "\"length\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoWeight_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoMass_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  ammoWeight (A::table_name, "\"weight\"", 0);
+  ammoMass (A::table_name, "\"mass\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::guidanceType_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoDiameter_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  guidanceType (A::table_name, "\"guidance_type\"", 0);
+  ammoDiameter (A::table_name, "\"diameter\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launchHeightMin_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoWingspan_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  launchHeightMin (A::table_name, "\"launch_height_min\"", 0);
+  ammoWingspan (A::table_name, "\"wingspan\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launchHeightMax_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoWarheadCgDistance_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  launchHeightMax (A::table_name, "\"launch_height_max\"", 0);
+  ammoWarheadCgDistance (A::table_name, "\"warhead_cg_distance\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launchDistanceMin_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoChargeMass_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  launchDistanceMin (A::table_name, "\"launch_distance_min\"", 0);
+  ammoChargeMass (A::table_name, "\"charge_mass\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launchDistanceMax_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoChargeCoefficient_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  launchDistanceMax (A::table_name, "\"launch_distance_max\"", 0);
+  ammoChargeCoefficient (A::table_name, "\"charge_coefficient\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launchAngle_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoMaxReleaseHeight_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  launchAngle (A::table_name, "\"launch_angle\"", 0);
+  ammoMaxReleaseHeight (A::table_name, "\"max_release_height\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launchWay_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoMinReleaseHeight_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  launchWay (A::table_name, "\"launch_method\"", 0);
+  ammoMinReleaseHeight (A::table_name, "\"min_release_height\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::approveAttackTargetType_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoMinReleaseSpeed_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  approveAttackTargetType (A::table_name, "\"approve_attack_target_type\"", 0);
+  ammoMinReleaseSpeed (A::table_name, "\"min_release_speed\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::killingDose_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoMaxReleaseSpeed_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  killingDose (A::table_name, "\"killing_dose\"", 0);
+  ammoMaxReleaseSpeed (A::table_name, "\"max_release_speed\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::killingMethod_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoTailLength_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  killingMethod (A::table_name, "\"killing_method\"", 0);
+  ammoTailLength (A::table_name, "\"tail_length\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::killingDepth_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoLugSpacing_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  killingDepth (A::table_name, "\"killing_depth\"", 0);
+  ammoLugSpacing (A::table_name, "\"lug_spacing\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::killingRangeMin_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoKillingWway_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  killingRangeMin (A::table_name, "\"killing_range_min\"", 0);
+  ammoKillingWway (A::table_name, "\"killing_way\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::killingRangeMax_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoPenetrationDepth_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  killingRangeMax (A::table_name, "\"killing_range_max\"", 0);
+  ammoPenetrationDepth (A::table_name, "\"penetration_depth\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::recordCreationTime_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoQuantitySoilThrown_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  recordCreationTime (A::table_name, "\"recordcreation_time\"", 0);
+  ammoQuantitySoilThrown (A::table_name, "\"quantity_soil_thrown\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoImgUrl_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoCraterDiameter_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  ammoImgUrl (A::table_name, "\"image_url\"", 0);
+  ammoCraterDiameter (A::table_name, "\"crater_diameter\"", 0);
 
   template <typename A>
-  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoImageName_type_
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoCraterDepth_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  ammoImageName (A::table_name, "\"image_name\"", 0);
+  ammoCraterDepth (A::table_name, "\"crater_depth\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoDamagedArea_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  ammoDamagedArea (A::table_name, "\"damaged_area\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoDenseKillingRadius_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  ammoDenseKillingRadius (A::table_name, "\"dense_killing_radius\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoInitialVelocityFragments_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  ammoInitialVelocityFragments (A::table_name, "\"initial_velocity_fragments\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoNumberFragments_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  ammoNumberFragments (A::table_name, "\"number_fragments\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoArmorBreakingAbility_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  ammoArmorBreakingAbility (A::table_name, "\"armor_breaking_ability\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::bullet_density_range_minimum_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  bullet_density_range_minimum (A::table_name, "\"bullet_density_range_minimum\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::bullet_density_range_maximum_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  bullet_density_range_maximum (A::table_name, "\"bullet_density_range_maximum\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ground_ignition_rate_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  ground_ignition_rate (A::table_name, "\"ground_ignition_rate\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combustion_temperature_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combustion_temperature (A::table_name, "\"combustion_temperature\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combustion_time_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combustion_time (A::table_name, "\"combustion_time\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combustion_agent_spread_range_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combustion_agent_spread_range (A::table_name, "\"combustion_agent_spread_range\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::number_of_fragments_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  number_of_fragments (A::table_name, "\"number_of_fragments\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::breakdown_distance_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  breakdown_distance (A::table_name, "\"breakdown_distance\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::maximum_inclusive_coverage_quantity_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  maximum_inclusive_coverage_quantity (A::table_name, "\"maximum_inclusive_coverage_quantity\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::number_of_spread_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  number_of_spread (A::table_name, "\"number_of_spread\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::surface_dc_resistivity_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  surface_dc_resistivity (A::table_name, "\"surface_dc_resistivity\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::probability_of_arc_discharge_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  probability_of_arc_discharge (A::table_name, "\"probability_of_arc_discharge\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::fuel_dispersion_radius_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  fuel_dispersion_radius (A::table_name, "\"fuel_dispersion_radius\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::distance_from_center_explosion_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  distance_from_center_explosion (A::table_name, "\"distance_from_center_explosion\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::shock_wave_overpressure_value_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  shock_wave_overpressure_value (A::table_name, "\"shock_wave_overpressure_value\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::spread_area_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  spread_area (A::table_name, "\"spread_area\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::use_description_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  use_description (A::table_name, "\"use_description\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::interference_duration_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  interference_duration (A::table_name, "\"interference_duration\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::interference_length_minimum_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  interference_length_minimum (A::table_name, "\"interference_length_minimum\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::interference_length_maximum_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  interference_length_maximum (A::table_name, "\"interference_length_maximum\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::interference_width_minimum_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  interference_width_minimum (A::table_name, "\"interference_width_minimum\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::interference_width_maximum_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  interference_width_maximum (A::table_name, "\"interference_width_maximum\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::fuze_model_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  fuze_model (A::table_name, "\"fuze_model\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::number_of_fuses_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  number_of_fuses (A::table_name, "\"number_of_fuses\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::storage_life_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  storage_life (A::table_name, "\"storage_life\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::action_time_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  action_time (A::table_name, "\"action_time\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::available_extension_time_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  available_extension_time (A::table_name, "\"available_extension_time\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::rudder_width_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  rudder_width (A::table_name, "\"rudder_width\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::aerodynamic_configuration_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  aerodynamic_configuration (A::table_name, "\"aerodynamic_configuration\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::working_conditions_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  working_conditions (A::table_name, "\"working_conditions\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::working_temperature_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  working_temperature (A::table_name, "\"working_temperature\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::working_altitude_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  working_altitude (A::table_name, "\"working_altitude\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launch_way_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  launch_way (A::table_name, "\"launch_way\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::guidance_rule_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  guidance_rule (A::table_name, "\"guidance_rule\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::minimum_visibility_emission_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  minimum_visibility_emission (A::table_name, "\"minimum_visibility_emission\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::maximum_launch_altitude_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  maximum_launch_altitude (A::table_name, "\"maximum_launch_altitude\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launch_maximum_target_altitude_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  launch_maximum_target_altitude (A::table_name, "\"launch_maximum_target_altitude\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::maximum_launch_relative_height_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  maximum_launch_relative_height (A::table_name, "\"maximum_launch_relative_height\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::minimum_relative_height_launch_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  minimum_relative_height_launch (A::table_name, "\"minimum_relative_height_launch\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launch_speed_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  launch_speed (A::table_name, "\"launch_speed\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launch_conditions_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  launch_conditions (A::table_name, "\"launch_conditions\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::launch_off_axis_angle_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  launch_off_axis_angle (A::table_name, "\"launch_off_axis_angle\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::guidance_way_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  guidance_way (A::table_name, "\"guidance_way\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::effective_range_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  effective_range (A::table_name, "\"effective_range\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::hit_accuracy_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  hit_accuracy (A::table_name, "\"hit_accuracy\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::hit_probability_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  hit_probability (A::table_name, "\"hit_probability\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::preparation_time_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  preparation_time (A::table_name, "\"preparation_time\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::allow_continuous_flight_time_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  allow_continuous_flight_time (A::table_name, "\"allow_continuous_flight_time\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::guided_flight_time_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  guided_flight_time (A::table_name, "\"guided_flight_time\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::maximum_speed_of_missile_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  maximum_speed_of_missile (A::table_name, "\"maximum_speed_of_missile\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::guiding_head_working_wavelength_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  guiding_head_working_wavelength (A::table_name, "\"guiding_head_working_wavelength\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::guidance_head_operating_distance_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  guidance_head_operating_distance (A::table_name, "\"guidance_head_operating_distance\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::blind_spot_of_guidance_head_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  blind_spot_of_guidance_head (A::table_name, "\"blind_spot_of_guidance_head\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::guidance_head_frame_angle_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  guidance_head_frame_angle (A::table_name, "\"guidance_head_frame_angle\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::guidance_head_field_of_view_angle_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  guidance_head_field_of_view_angle (A::table_name, "\"guidance_head_field_of_view_angle\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::adaptability_of_guidance_head_sunlight_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  adaptability_of_guidance_head_sunlight (A::table_name, "\"adaptability_of_guidance_head_sunlight\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::guidance_head_operating_frequency_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  guidance_head_operating_frequency (A::table_name, "\"guidance_head_operating_frequency\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::fuse_firing_rate_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  fuse_firing_rate (A::table_name, "\"fuse_firing_rate\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::fuse_type_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  fuse_type (A::table_name, "\"fuse_type\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::fuse_length_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  fuse_length (A::table_name, "\"fuse_length\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::fuse_diameter_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  fuse_diameter (A::table_name, "\"fuse_diameter\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::fuze_quality_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  fuze_quality (A::table_name, "\"fuze_quality\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::safe_distance_of_fuse_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  safe_distance_of_fuse (A::table_name, "\"safe_distance_of_fuse\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::time_disarming_fuse_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  time_disarming_fuse (A::table_name, "\"time_disarming_fuse\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::first_level_release_time_of_fuse_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  first_level_release_time_of_fuse (A::table_name, "\"first_level_release_time_of_fuse\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::secondary_release_time_of_fuse_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  secondary_release_time_of_fuse (A::table_name, "\"secondary_release_time_of_fuse\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::reliability_rate_of_fuse_action_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  reliability_rate_of_fuse_action (A::table_name, "\"reliability_rate_of_fuse_action\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::fuse_self_destruct_time_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  fuse_self_destruct_time (A::table_name, "\"fuse_self_destruct_time\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_department_quality_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_department_quality (A::table_name, "\"combat_department_quality\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_quantity_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_quantity (A::table_name, "\"combat_quantity\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_unit_type_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_unit_type (A::table_name, "\"combat_unit_type\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_length_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_length (A::table_name, "\"combat_length\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_diameter_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_diameter (A::table_name, "\"combat_diameter\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_main_charge_type_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_main_charge_type (A::table_name, "\"combat_main_charge_type\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_charge_density_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_charge_density (A::table_name, "\"combat_charge_density\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_loading_factor_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_loading_factor (A::table_name, "\"combat_loading_factor\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_explosive_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_explosive (A::table_name, "\"combat_explosive\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_fragments_number_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_fragments_number (A::table_name, "\"combat_fragments_number\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_unit_invasion_capability_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_unit_invasion_capability (A::table_name, "\"combat_unit_invasion_capability\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_effective_killing_radius_vehicles_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_effective_killing_radius_vehicles (A::table_name, "\"combat_effective_killing_radius_vehicles\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_effective_killing_radius_personnel_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_effective_killing_radius_personnel (A::table_name, "\"combat_effective_killing_radius_personnel\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_vertical_static_armor_penetration_depth_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_vertical_static_armor_penetration_depth (A::table_name, "\"combat_vertical_static_armor_penetration_depth\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_department_quality_add_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_department_quality_add (A::table_name, "\"combat_department_quality_add\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_quantity_add_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_quantity_add (A::table_name, "\"combat_quantity_add\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_unit_type_add_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_unit_type_add (A::table_name, "\"combat_unit_type_add\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_length_add_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_length_add (A::table_name, "\"combat_length_add\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_diameter_add_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_diameter_add (A::table_name, "\"combat_diameter_add\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_main_charge_type_add_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_main_charge_type_add (A::table_name, "\"combat_main_charge_type_add\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_charge_density_add_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_charge_density_add (A::table_name, "\"combat_charge_density_add\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_loading_factor_add_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_loading_factor_add (A::table_name, "\"combat_loading_factor_add\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_explosive_add_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_explosive_add (A::table_name, "\"combat_explosive_add\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_fragments_number_add_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_fragments_number_add (A::table_name, "\"combat_fragments_number_add\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_unit_invasion_capability_add_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_unit_invasion_capability_add (A::table_name, "\"combat_unit_invasion_capability_add\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_effective_killing_radius_vehicles_add_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_effective_killing_radius_vehicles_add (A::table_name, "\"combat_effective_killing_radius_vehicles_add\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_effective_killing_radius_personnel_add_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_effective_killing_radius_personnel_add (A::table_name, "\"combat_effective_killing_radius_personnel_add\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::combat_vertical_static_armor_penetration_depth_add_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  combat_vertical_static_armor_penetration_depth_add (A::table_name, "\"combat_vertical_static_armor_penetration_depth_add\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::service_life_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  service_life (A::table_name, "\"service_life\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::distance_between_center_mass_end_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  distance_between_center_mass_end (A::table_name, "\"distance_between_center_mass_end\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::lifting_lug_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  lifting_lug (A::table_name, "\"lifting_lug\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::distance_suspension_lifting_lug_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  distance_suspension_lifting_lug (A::table_name, "\"distance_suspension_lifting_lug\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::image_name_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  image_name (A::table_name, "\"image_name\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::image_url_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  image_url (A::table_name, "\"image_url\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::record_creation_time_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  record_creation_time (A::table_name, "\"record_creation_time\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::use_status_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  use_status (A::table_name, "\"use_status\"", 0);
 
   template <typename A>
   struct pointer_query_columns< ::AmmunitionEntity, id_pgsql, A >:
@@ -532,17 +2402,23 @@ namespace odb
       long long id_value;
       bool id_null;
 
-      // ammoType_
-      //
-      details::buffer ammoType_value;
-      std::size_t ammoType_size;
-      bool ammoType_null;
-
       // ammoName_
       //
       details::buffer ammoName_value;
       std::size_t ammoName_size;
       bool ammoName_null;
+
+      // shortName_
+      //
+      details::buffer shortName_value;
+      std::size_t shortName_size;
+      bool shortName_null;
+
+      // ammoType_
+      //
+      details::buffer ammoType_value;
+      std::size_t ammoType_size;
+      bool ammoType_null;
 
       // ammoId_
       //
@@ -556,105 +2432,667 @@ namespace odb
       std::size_t ammoToUavModel_size;
       bool ammoToUavModel_null;
 
-      // ammoLength_
+      // ammoDescription_
       //
-      float ammoLength_value;
-      bool ammoLength_null;
+      details::buffer ammoDescription_value;
+      std::size_t ammoDescription_size;
+      bool ammoDescription_null;
 
-      // ammoWidth_
+      // ammoLenth_
       //
-      float ammoWidth_value;
-      bool ammoWidth_null;
+      float ammoLenth_value;
+      bool ammoLenth_null;
 
-      // ammoWeight_
+      // ammoMass_
       //
-      float ammoWeight_value;
-      bool ammoWeight_null;
+      float ammoMass_value;
+      bool ammoMass_null;
 
-      // guidanceType_
+      // ammoDiameter_
       //
-      details::buffer guidanceType_value;
-      std::size_t guidanceType_size;
-      bool guidanceType_null;
+      float ammoDiameter_value;
+      bool ammoDiameter_null;
 
-      // launchHeightMin_
+      // ammoWingspan_
       //
-      float launchHeightMin_value;
-      bool launchHeightMin_null;
+      float ammoWingspan_value;
+      bool ammoWingspan_null;
 
-      // launchHeightMax_
+      // ammoWarheadCgDistance_
       //
-      float launchHeightMax_value;
-      bool launchHeightMax_null;
+      float ammoWarheadCgDistance_value;
+      bool ammoWarheadCgDistance_null;
 
-      // launchDistanceMin_
+      // ammoChargeMass_
       //
-      float launchDistanceMin_value;
-      bool launchDistanceMin_null;
+      float ammoChargeMass_value;
+      bool ammoChargeMass_null;
 
-      // launchDistanceMax_
+      // ammoChargeCoefficient_
       //
-      float launchDistanceMax_value;
-      bool launchDistanceMax_null;
+      float ammoChargeCoefficient_value;
+      bool ammoChargeCoefficient_null;
 
-      // launchAngle_
+      // ammoMaxReleaseHeight_
       //
-      float launchAngle_value;
-      bool launchAngle_null;
+      float ammoMaxReleaseHeight_value;
+      bool ammoMaxReleaseHeight_null;
 
-      // launchWay_
+      // ammoMinReleaseHeight
       //
-      details::buffer launchWay_value;
-      std::size_t launchWay_size;
-      bool launchWay_null;
+      float ammoMinReleaseHeight_value;
+      bool ammoMinReleaseHeight_null;
 
-      // approveAttackTargetType_
+      // ammoMinReleaseSpeed_
       //
-      details::buffer approveAttackTargetType_value;
-      std::size_t approveAttackTargetType_size;
-      bool approveAttackTargetType_null;
+      float ammoMinReleaseSpeed_value;
+      bool ammoMinReleaseSpeed_null;
 
-      // killingDose_
+      // ammoMaxReleaseSpeed_
       //
-      float killingDose_value;
-      bool killingDose_null;
+      float ammoMaxReleaseSpeed_value;
+      bool ammoMaxReleaseSpeed_null;
 
-      // killingMethod_
+      // ammoTailLength_
       //
-      details::buffer killingMethod_value;
-      std::size_t killingMethod_size;
-      bool killingMethod_null;
+      float ammoTailLength_value;
+      bool ammoTailLength_null;
 
-      // killingDepth_
+      // ammoLugSpacing_
       //
-      float killingDepth_value;
-      bool killingDepth_null;
+      float ammoLugSpacing_value;
+      bool ammoLugSpacing_null;
 
-      // killingRangeMin_
+      // ammoKillingWway_
       //
-      float killingRangeMin_value;
-      bool killingRangeMin_null;
+      details::buffer ammoKillingWway_value;
+      std::size_t ammoKillingWway_size;
+      bool ammoKillingWway_null;
 
-      // killingRangeMax_
+      // ammoPenetrationDepth_
       //
-      float killingRangeMax_value;
-      bool killingRangeMax_null;
+      float ammoPenetrationDepth_value;
+      bool ammoPenetrationDepth_null;
 
-      // recordCreationTime_
+      // ammoQuantitySoilThrown_
       //
-      unsigned long long recordCreationTime_value;
-      bool recordCreationTime_null;
+      float ammoQuantitySoilThrown_value;
+      bool ammoQuantitySoilThrown_null;
 
-      // ammoImgUrl_
+      // ammoCraterDiameter_
       //
-      details::buffer ammoImgUrl_value;
-      std::size_t ammoImgUrl_size;
-      bool ammoImgUrl_null;
+      float ammoCraterDiameter_value;
+      bool ammoCraterDiameter_null;
 
-      // ammoImageName_
+      // ammoCraterDepth_
       //
-      float ammoImageName_value;
-      bool ammoImageName_null;
+      float ammoCraterDepth_value;
+      bool ammoCraterDepth_null;
+
+      // ammoDamagedArea_
+      //
+      float ammoDamagedArea_value;
+      bool ammoDamagedArea_null;
+
+      // ammoDenseKillingRadius_
+      //
+      float ammoDenseKillingRadius_value;
+      bool ammoDenseKillingRadius_null;
+
+      // ammoInitialVelocityFragments_
+      //
+      float ammoInitialVelocityFragments_value;
+      bool ammoInitialVelocityFragments_null;
+
+      // ammoNumberFragments_
+      //
+      int ammoNumberFragments_value;
+      bool ammoNumberFragments_null;
+
+      // ammoArmorBreakingAbility_
+      //
+      details::buffer ammoArmorBreakingAbility_value;
+      std::size_t ammoArmorBreakingAbility_size;
+      bool ammoArmorBreakingAbility_null;
+
+      // bullet_density_range_minimum
+      //
+      int bullet_density_range_minimum_value;
+      bool bullet_density_range_minimum_null;
+
+      // bullet_density_range_maximum
+      //
+      int bullet_density_range_maximum_value;
+      bool bullet_density_range_maximum_null;
+
+      // ground_ignition_rate
+      //
+      float ground_ignition_rate_value;
+      bool ground_ignition_rate_null;
+
+      // combustion_temperature
+      //
+      float combustion_temperature_value;
+      bool combustion_temperature_null;
+
+      // combustion_time
+      //
+      float combustion_time_value;
+      bool combustion_time_null;
+
+      // combustion_agent_spread_range
+      //
+      float combustion_agent_spread_range_value;
+      bool combustion_agent_spread_range_null;
+
+      // number_of_fragments
+      //
+      int number_of_fragments_value;
+      bool number_of_fragments_null;
+
+      // breakdown_distance
+      //
+      float breakdown_distance_value;
+      bool breakdown_distance_null;
+
+      // maximum_inclusive_coverage_quantity
+      //
+      int maximum_inclusive_coverage_quantity_value;
+      bool maximum_inclusive_coverage_quantity_null;
+
+      // number_of_spread
+      //
+      int number_of_spread_value;
+      bool number_of_spread_null;
+
+      // surface_dc_resistivity
+      //
+      float surface_dc_resistivity_value;
+      bool surface_dc_resistivity_null;
+
+      // probability_of_arc_discharge
+      //
+      float probability_of_arc_discharge_value;
+      bool probability_of_arc_discharge_null;
+
+      // fuel_dispersion_radius
+      //
+      float fuel_dispersion_radius_value;
+      bool fuel_dispersion_radius_null;
+
+      // distance_from_center_explosion
+      //
+      float distance_from_center_explosion_value;
+      bool distance_from_center_explosion_null;
+
+      // shock_wave_overpressure_value
+      //
+      float shock_wave_overpressure_value_value;
+      bool shock_wave_overpressure_value_null;
+
+      // spread_area
+      //
+      float spread_area_value;
+      bool spread_area_null;
+
+      // use_description
+      //
+      details::buffer use_description_value;
+      std::size_t use_description_size;
+      bool use_description_null;
+
+      // interference_duration
+      //
+      float interference_duration_value;
+      bool interference_duration_null;
+
+      // interference_length_minimum
+      //
+      float interference_length_minimum_value;
+      bool interference_length_minimum_null;
+
+      // interference_length_maximum
+      //
+      float interference_length_maximum_value;
+      bool interference_length_maximum_null;
+
+      // interference_width_minimum
+      //
+      float interference_width_minimum_value;
+      bool interference_width_minimum_null;
+
+      // interference_width_maximum
+      //
+      float interference_width_maximum_value;
+      bool interference_width_maximum_null;
+
+      // fuze_model
+      //
+      details::buffer fuze_model_value;
+      std::size_t fuze_model_size;
+      bool fuze_model_null;
+
+      // number_of_fuses
+      //
+      int number_of_fuses_value;
+      bool number_of_fuses_null;
+
+      // storage_life
+      //
+      float storage_life_value;
+      bool storage_life_null;
+
+      // action_time
+      //
+      float action_time_value;
+      bool action_time_null;
+
+      // available_extension_time
+      //
+      float available_extension_time_value;
+      bool available_extension_time_null;
+
+      // rudder_width
+      //
+      float rudder_width_value;
+      bool rudder_width_null;
+
+      // aerodynamic_configuration
+      //
+      details::buffer aerodynamic_configuration_value;
+      std::size_t aerodynamic_configuration_size;
+      bool aerodynamic_configuration_null;
+
+      // working_conditions
+      //
+      details::buffer working_conditions_value;
+      std::size_t working_conditions_size;
+      bool working_conditions_null;
+
+      // working_temperature
+      //
+      float working_temperature_value;
+      bool working_temperature_null;
+
+      // working_altitude
+      //
+      float working_altitude_value;
+      bool working_altitude_null;
+
+      // launch_way
+      //
+      details::buffer launch_way_value;
+      std::size_t launch_way_size;
+      bool launch_way_null;
+
+      // guidance_rule
+      //
+      details::buffer guidance_rule_value;
+      std::size_t guidance_rule_size;
+      bool guidance_rule_null;
+
+      // minimum_visibility_emission
+      //
+      float minimum_visibility_emission_value;
+      bool minimum_visibility_emission_null;
+
+      // maximum_launch_altitude
+      //
+      float maximum_launch_altitude_value;
+      bool maximum_launch_altitude_null;
+
+      // launch_maximum_target_altitude
+      //
+      float launch_maximum_target_altitude_value;
+      bool launch_maximum_target_altitude_null;
+
+      // maximum_launch_relative_height
+      //
+      float maximum_launch_relative_height_value;
+      bool maximum_launch_relative_height_null;
+
+      // minimum_relative_height_launch
+      //
+      float minimum_relative_height_launch_value;
+      bool minimum_relative_height_launch_null;
+
+      // launch_speed
+      //
+      float launch_speed_value;
+      bool launch_speed_null;
+
+      // launch_conditions
+      //
+      details::buffer launch_conditions_value;
+      std::size_t launch_conditions_size;
+      bool launch_conditions_null;
+
+      // launch_off_axis_angle
+      //
+      float launch_off_axis_angle_value;
+      bool launch_off_axis_angle_null;
+
+      // guidance_way
+      //
+      details::buffer guidance_way_value;
+      std::size_t guidance_way_size;
+      bool guidance_way_null;
+
+      // effective_range
+      //
+      float effective_range_value;
+      bool effective_range_null;
+
+      // hit_accuracy
+      //
+      float hit_accuracy_value;
+      bool hit_accuracy_null;
+
+      // hit_probability
+      //
+      float hit_probability_value;
+      bool hit_probability_null;
+
+      // preparation_time
+      //
+      float preparation_time_value;
+      bool preparation_time_null;
+
+      // allow_continuous_flight_time
+      //
+      float allow_continuous_flight_time_value;
+      bool allow_continuous_flight_time_null;
+
+      // guided_flight_time
+      //
+      float guided_flight_time_value;
+      bool guided_flight_time_null;
+
+      // maximum_speed_of_missile
+      //
+      float maximum_speed_of_missile_value;
+      bool maximum_speed_of_missile_null;
+
+      // guiding_head_working_wavelength
+      //
+      float guiding_head_working_wavelength_value;
+      bool guiding_head_working_wavelength_null;
+
+      // guidance_head_operating_distance
+      //
+      float guidance_head_operating_distance_value;
+      bool guidance_head_operating_distance_null;
+
+      // blind_spot_of_guidance_head
+      //
+      float blind_spot_of_guidance_head_value;
+      bool blind_spot_of_guidance_head_null;
+
+      // guidance_head_frame_angle
+      //
+      float guidance_head_frame_angle_value;
+      bool guidance_head_frame_angle_null;
+
+      // guidance_head_field_of_view_angle
+      //
+      float guidance_head_field_of_view_angle_value;
+      bool guidance_head_field_of_view_angle_null;
+
+      // adaptability_of_guidance_head_sunlight
+      //
+      details::buffer adaptability_of_guidance_head_sunlight_value;
+      std::size_t adaptability_of_guidance_head_sunlight_size;
+      bool adaptability_of_guidance_head_sunlight_null;
+
+      // guidance_head_operating_frequency
+      //
+      float guidance_head_operating_frequency_value;
+      bool guidance_head_operating_frequency_null;
+
+      // fuse_firing_rate
+      //
+      float fuse_firing_rate_value;
+      bool fuse_firing_rate_null;
+
+      // fuse_type
+      //
+      details::buffer fuse_type_value;
+      std::size_t fuse_type_size;
+      bool fuse_type_null;
+
+      // fuse_length
+      //
+      float fuse_length_value;
+      bool fuse_length_null;
+
+      // fuse_diameter
+      //
+      float fuse_diameter_value;
+      bool fuse_diameter_null;
+
+      // fuze_quality
+      //
+      float fuze_quality_value;
+      bool fuze_quality_null;
+
+      // safe_distance_of_fuse
+      //
+      float safe_distance_of_fuse_value;
+      bool safe_distance_of_fuse_null;
+
+      // time_disarming_fuse
+      //
+      float time_disarming_fuse_value;
+      bool time_disarming_fuse_null;
+
+      // first_level_release_time_of_fuse
+      //
+      float first_level_release_time_of_fuse_value;
+      bool first_level_release_time_of_fuse_null;
+
+      // secondary_release_time_of_fuse
+      //
+      float secondary_release_time_of_fuse_value;
+      bool secondary_release_time_of_fuse_null;
+
+      // reliability_rate_of_fuse_action
+      //
+      float reliability_rate_of_fuse_action_value;
+      bool reliability_rate_of_fuse_action_null;
+
+      // fuse_self_destruct_time
+      //
+      float fuse_self_destruct_time_value;
+      bool fuse_self_destruct_time_null;
+
+      // combat_department_quality
+      //
+      float combat_department_quality_value;
+      bool combat_department_quality_null;
+
+      // combat_quantity
+      //
+      float combat_quantity_value;
+      bool combat_quantity_null;
+
+      // combat_unit_type
+      //
+      details::buffer combat_unit_type_value;
+      std::size_t combat_unit_type_size;
+      bool combat_unit_type_null;
+
+      // combat_length
+      //
+      float combat_length_value;
+      bool combat_length_null;
+
+      // combat_diameter
+      //
+      float combat_diameter_value;
+      bool combat_diameter_null;
+
+      // combat_main_charge_type
+      //
+      details::buffer combat_main_charge_type_value;
+      std::size_t combat_main_charge_type_size;
+      bool combat_main_charge_type_null;
+
+      // combat_charge_density
+      //
+      float combat_charge_density_value;
+      bool combat_charge_density_null;
+
+      // combat_loading_factor
+      //
+      float combat_loading_factor_value;
+      bool combat_loading_factor_null;
+
+      // combat_explosive
+      //
+      float combat_explosive_value;
+      bool combat_explosive_null;
+
+      // combat_fragments_number
+      //
+      int combat_fragments_number_value;
+      bool combat_fragments_number_null;
+
+      // combat_unit_invasion_capability
+      //
+      details::buffer combat_unit_invasion_capability_value;
+      std::size_t combat_unit_invasion_capability_size;
+      bool combat_unit_invasion_capability_null;
+
+      // combat_effective_killing_radius_vehicles
+      //
+      float combat_effective_killing_radius_vehicles_value;
+      bool combat_effective_killing_radius_vehicles_null;
+
+      // combat_effective_killing_radius_personnel
+      //
+      float combat_effective_killing_radius_personnel_value;
+      bool combat_effective_killing_radius_personnel_null;
+
+      // combat_vertical_static_armor_penetration_depth
+      //
+      float combat_vertical_static_armor_penetration_depth_value;
+      bool combat_vertical_static_armor_penetration_depth_null;
+
+      // combat_department_quality_add
+      //
+      float combat_department_quality_add_value;
+      bool combat_department_quality_add_null;
+
+      // combat_quantity_add
+      //
+      float combat_quantity_add_value;
+      bool combat_quantity_add_null;
+
+      // combat_unit_type_add
+      //
+      details::buffer combat_unit_type_add_value;
+      std::size_t combat_unit_type_add_size;
+      bool combat_unit_type_add_null;
+
+      // combat_length_add
+      //
+      float combat_length_add_value;
+      bool combat_length_add_null;
+
+      // combat_diameter_add
+      //
+      float combat_diameter_add_value;
+      bool combat_diameter_add_null;
+
+      // combat_main_charge_type_add
+      //
+      details::buffer combat_main_charge_type_add_value;
+      std::size_t combat_main_charge_type_add_size;
+      bool combat_main_charge_type_add_null;
+
+      // combat_charge_density_add
+      //
+      float combat_charge_density_add_value;
+      bool combat_charge_density_add_null;
+
+      // combat_loading_factor_add
+      //
+      float combat_loading_factor_add_value;
+      bool combat_loading_factor_add_null;
+
+      // combat_explosive_add
+      //
+      float combat_explosive_add_value;
+      bool combat_explosive_add_null;
+
+      // combat_fragments_number_add
+      //
+      int combat_fragments_number_add_value;
+      bool combat_fragments_number_add_null;
+
+      // combat_unit_invasion_capability_add
+      //
+      details::buffer combat_unit_invasion_capability_add_value;
+      std::size_t combat_unit_invasion_capability_add_size;
+      bool combat_unit_invasion_capability_add_null;
+
+      // combat_effective_killing_radius_vehicles_add
+      //
+      float combat_effective_killing_radius_vehicles_add_value;
+      bool combat_effective_killing_radius_vehicles_add_null;
+
+      // combat_effective_killing_radius_personnel_add
+      //
+      float combat_effective_killing_radius_personnel_add_value;
+      bool combat_effective_killing_radius_personnel_add_null;
+
+      // combat_vertical_static_armor_penetration_depth_add
+      //
+      float combat_vertical_static_armor_penetration_depth_add_value;
+      bool combat_vertical_static_armor_penetration_depth_add_null;
+
+      // service_life
+      //
+      float service_life_value;
+      bool service_life_null;
+
+      // distance_between_center_mass_end
+      //
+      float distance_between_center_mass_end_value;
+      bool distance_between_center_mass_end_null;
+
+      // lifting_lug
+      //
+      details::buffer lifting_lug_value;
+      std::size_t lifting_lug_size;
+      bool lifting_lug_null;
+
+      // distance_suspension_lifting_lug
+      //
+      float distance_suspension_lifting_lug_value;
+      bool distance_suspension_lifting_lug_null;
+
+      // image_name
+      //
+      details::buffer image_name_value;
+      std::size_t image_name_size;
+      bool image_name_null;
+
+      // image_url
+      //
+      details::buffer image_url_value;
+      std::size_t image_url_size;
+      bool image_url_null;
+
+      // record_creation_time
+      //
+      unsigned long long record_creation_time_value;
+      bool record_creation_time_null;
+
+      // use_status
+      //
+      float use_status_value;
+      bool use_status_null;
 
       std::size_t version;
     };
@@ -698,7 +3136,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 24UL;
+    static const std::size_t column_count = 134UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
