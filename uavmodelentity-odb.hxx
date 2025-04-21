@@ -690,9 +690,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        ::std::string,
-        pgsql::id_string >::query_type,
-      pgsql::id_string >
+        ::std::vector< char >,
+        pgsql::id_bytea >::query_type,
+      pgsql::id_bytea >
     uavImgName_type_;
 
     static const uavImgName_type_ uavImgName;
@@ -958,7 +958,7 @@ namespace odb
   template <typename A>
   const typename query_columns< ::UavModelEntity, id_pgsql, A >::uavImgName_type_
   query_columns< ::UavModelEntity, id_pgsql, A >::
-  uavImgName (A::table_name, "\"image_name\"", 0);
+  uavImgName (A::table_name, "\"image\"", 0);
 
   template <typename A>
   const typename query_columns< ::UavModelEntity, id_pgsql, A >::uavImgUrl_type_

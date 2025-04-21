@@ -10,7 +10,7 @@ CREATE TABLE "uav_type_man"."ammo_parameters" (
   "short_name" TEXT NOT NULL,
   "ammo_type" TEXT NOT NULL,
   "ammo_id" TEXT NOT NULL,
-  "ammo_to_uavmodel" TEXT NOT NULL,
+  "used_uav_models" TEXT NOT NULL,
   "description" TEXT NOT NULL,
   "length" REAL NOT NULL,
   "mass" REAL NOT NULL,

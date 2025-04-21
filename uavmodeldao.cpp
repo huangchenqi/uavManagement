@@ -5,7 +5,7 @@
 #include "uavmodeloperationwaydao.h"
 #include "uavmountlocationdao.h"
 #include "odb/pgsql/database.hxx"
-
+#include <vector>
 #include <stdexcept>
 
 // ODB 头文件
@@ -29,6 +29,7 @@
 #include "UavModelMountLocationEntity-odb.hxx"
 #include "UavModelRecoveryModeEntity-odb.hxx"
 #include "UavModelOperationWayEntity-odb.hxx"
+#include <QFile>
 namespace nl = nlohmann;
 
 QDateTime covert(unsigned long long i){
@@ -711,7 +712,7 @@ QJsonObject UavModelDao::selectSomeUavModelDate(const QString &jsonStr)
 
             /******************** 系统记录 ********************/
             //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
-            uavModelData["image_name"] = QString::fromStdString(entity.uavImgName_);
+            //uavModelData["image_name"] = QString::fromStdString(entity.uavImgName_);
             uavModelData["image_url"] = QString::fromStdString(entity.uavImgUrl_);
             // 转换为格式化的JSON字符串
             QJsonDocument doc(uavModelData);
@@ -874,7 +875,11 @@ bool UavModelDao::updateModelDate(const QString &jsonStr)
 
         /******************** 系统记录 ********************/
         entity.uavCreatModelTime_ = QDateTime::currentDateTime();
-        entity.uavImgName_ = uavModelData["image_name"].toString().toStdString();
+        QFile file(QString::fromStdString(uavModelData["image_name"].toString().toStdString()));
+        file.open(QIODevice::ReadOnly);
+        QByteArray data = file.readAll();
+        //std::vector  imagByteA = std::vector<unsigned char>(data.begin(),data.end());
+        entity.uavImgName_ = std::vector<char>(data.begin(),data.end());//entity.uavImgName_ = uavModelData["image_name"].toString().toStdString();
         entity.uavImgUrl_ = uavModelData["image_url"].toString().toStdString();
 
         // auto id = db.persist(entity);
@@ -1189,7 +1194,12 @@ bool UavModelDao::insertModelDate(const QJsonObject& objectData)
 
                 /******************** 系统记录 ********************/
                 //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
-                entity.uavImgName_ = object["image_name"].toString().toStdString();
+                QFile file(QString::fromStdString(object["image_name"].toString().toStdString()));
+                file.open(QIODevice::ReadOnly);
+                QByteArray data = file.readAll();
+                //std::vector  imagByteA = std::vector<unsigned char>(data.begin(),data.end());
+                entity.uavImgName_ = std::vector<char>(data.begin(),data.end());
+                //entity.uavImgName_ = object["image_name"].toString().toStdString();
                 entity.uavImgUrl_ = object["image_url"].toString().toStdString();
 
                 // 5. 数据验证

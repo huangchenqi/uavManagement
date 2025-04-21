@@ -1734,7 +1734,7 @@ namespace odb
   template <typename A>
   const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoToUavModel_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
-  ammoToUavModel (A::table_name, "\"ammo_to_uavmodel\"", 0);
+  ammoToUavModel (A::table_name, "\"used_uav_models\"", 0);
 
   template <typename A>
   const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::ammoDescription_type_
@@ -3086,7 +3086,7 @@ namespace odb
 
       // record_creation_time
       //
-      unsigned long long record_creation_time_value;
+     unsigned long long record_creation_time_value;
       bool record_creation_time_null;
 
       // use_status

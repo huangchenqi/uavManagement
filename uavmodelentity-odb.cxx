@@ -95,7 +95,7 @@ namespace odb
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::timestamp_oid,
-    pgsql::text_oid,
+    pgsql::bytea_oid,
     pgsql::text_oid
   };
 
@@ -156,7 +156,7 @@ namespace odb
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::timestamp_oid,
-    pgsql::text_oid,
+    pgsql::bytea_oid,
     pgsql::text_oid,
     pgsql::int8_oid
   };
@@ -852,7 +852,7 @@ namespace odb
 
     // uavImgName_
     //
-    b[n].type = pgsql::bind::text;
+    b[n].type = pgsql::bind::bytea;
     b[n].buffer = i.uavImgName_value.data ();
     b[n].capacity = i.uavImgName_value.capacity ();
     b[n].size = &i.uavImgName_size;
@@ -1629,15 +1629,15 @@ namespace odb
     // uavImgName_
     //
     {
-      ::std::string const& v =
+      ::std::vector< char > const& v =
         o.uavImgName_;
 
       bool is_null (false);
       std::size_t size (0);
       std::size_t cap (i.uavImgName_value.capacity ());
       pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_image (
+          ::std::vector< char >,
+          pgsql::id_bytea >::set_image (
         i.uavImgName_value,
         size,
         is_null,
@@ -2378,12 +2378,12 @@ namespace odb
     // uavImgName_
     //
     {
-      ::std::string& v =
+      ::std::vector< char >& v =
         o.uavImgName_;
 
       pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_value (
+          ::std::vector< char >,
+          pgsql::id_bytea >::set_value (
         v,
         i.uavImgName_value,
         i.uavImgName_size,
@@ -2470,7 +2470,7 @@ namespace odb
   "\"recon_cruise_alt\", "
   "\"full_external_cruise_alt\", "
   "\"recordcreation_time\", "
-  "\"image_name\", "
+  "\"image\", "
   "\"image_url\") "
   "VALUES "
   "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50) "
@@ -2527,7 +2527,7 @@ namespace odb
   "\"uav_type_man\".\"uav_models_data\".\"recon_cruise_alt\", "
   "\"uav_type_man\".\"uav_models_data\".\"full_external_cruise_alt\", "
   "\"uav_type_man\".\"uav_models_data\".\"recordcreation_time\", "
-  "\"uav_type_man\".\"uav_models_data\".\"image_name\", "
+  "\"uav_type_man\".\"uav_models_data\".\"image\", "
   "\"uav_type_man\".\"uav_models_data\".\"image_url\" "
   "FROM \"uav_type_man\".\"uav_models_data\" "
   "WHERE \"uav_type_man\".\"uav_models_data\".\"id\"=$1";
@@ -2583,7 +2583,7 @@ namespace odb
   "\"recon_cruise_alt\"=$46, "
   "\"full_external_cruise_alt\"=$47, "
   "\"recordcreation_time\"=$48, "
-  "\"image_name\"=$49, "
+  "\"image\"=$49, "
   "\"image_url\"=$50 "
   "WHERE \"id\"=$51";
 
@@ -2642,7 +2642,7 @@ namespace odb
   "\"uav_type_man\".\"uav_models_data\".\"recon_cruise_alt\", "
   "\"uav_type_man\".\"uav_models_data\".\"full_external_cruise_alt\", "
   "\"uav_type_man\".\"uav_models_data\".\"recordcreation_time\", "
-  "\"uav_type_man\".\"uav_models_data\".\"image_name\", "
+  "\"uav_type_man\".\"uav_models_data\".\"image\", "
   "\"uav_type_man\".\"uav_models_data\".\"image_url\" "
   "FROM \"uav_type_man\".\"uav_models_data\"";
 

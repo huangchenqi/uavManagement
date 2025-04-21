@@ -43,7 +43,7 @@ public:
 #pragma db not_null column("ammo_id")                        // 弹药编号
     std::string ammoId_;
 
-#pragma db not_null column("ammo_to_uavmodel")                        // used_uav_models VARCHAR(200) NOT NULL ,--COMMENT '使用机型'
+#pragma db not_null column("used_uav_models")                        // used_uav_models VARCHAR(200) NOT NULL ,--COMMENT '使用机型'
     std::string ammoToUavModel_;
 
 #pragma db not_null column("description")                        //         description TEXT ,--COMMENT '用途描述',

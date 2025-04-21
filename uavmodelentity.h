@@ -218,8 +218,8 @@ class UavModelEntity
     /******************** 系统记录 ********************/
     #pragma db column("recordcreation_time") type("timestamp(0)") options("DEFAULT CURRENT_TIMESTAMP")               // 创建时间
     QDateTime  uavCreatModelTime_{QDateTime::currentDateTime()};//std::time_t
-    #pragma db column("image_name") type("varchar(30)")                    // 模型图片名称
-        std::string uavImgName_;
+    #pragma db column("image") type("BYTEA")//type("varchar(30)")                    // 模型图片名称
+        std::vector<char> uavImgName_;
     #pragma db column("image_url") type("varchar(30)")                  // 模型图片路径
         std::string uavImgUrl_;
 

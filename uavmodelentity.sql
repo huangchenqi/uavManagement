@@ -54,6 +54,6 @@ CREATE TABLE "uav_type_man"."uav_models_data" (
   "recon_cruise_alt" REAL NOT NULL,
   "full_external_cruise_alt" REAL NOT NULL,
   "recordcreation_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  "image_name" varchar(30) NOT NULL,
+  "image" BYTEA NOT NULL,
   "image_url" varchar(30) NOT NULL);
 
