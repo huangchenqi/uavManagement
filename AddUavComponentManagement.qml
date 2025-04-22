@@ -520,7 +520,8 @@ Rectangle {
            function saveUavComponentData(){
                var uavMountLoactionData = {
                    uavmountLocationId:"",
-                   uavmountLocationName:""
+                   uavmountLocationName:"",
+                   uavComponeStatus:true
                }
                uavMountLoactionData.uavmountLocationId = addMountLocationIdText.text
                uavMountLoactionData.uavmountLocationName = addMountLocationText.text

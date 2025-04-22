@@ -228,7 +228,7 @@ Rectangle {
                           onClose: addMountLocationManagementPopup.close() // 连接关闭信号
                     }
                 }
-              Popup{//其他消息管理
+              Popup{//无人机型号管理
                   id: addUavComponentManagementPopup
                   width: 460  // 需明确设置宽度，否则可能无法显示完整内容
                   height: 400
@@ -236,12 +236,12 @@ Rectangle {
                   focus: true
                   anchors.centerIn: Overlay.overlay // 居中显示
                   closePolicy: Popup.NoAutoClose    // 完全禁用自动关闭
-                  //   AddUavComponentManagement{  // 假设 admin.qml 的根元素是 Admin 类型
-                  //         id: addUavComponentPanel
-                  //         anchors.fill: parent
-                  //         managementType:uavManagementroot.managementType
-                  //         onClose: addUavComponentManagementPopup.close() // 连接关闭信号
-                  //   }
+                    AddUavModelComponentManagement{  // 假设 admin.qml 的根元素是 Admin 类型
+                          id: addUavComponentPanel
+                          anchors.fill: parent
+                          //managementType:uavManagementroot.managementType
+                          onClose: addUavComponentManagementPopup.close() // 连接关闭信号
+                    }
                 }
               Popup{//投弹管理
                   id: addUavModelBombingMethodPopup
@@ -948,6 +948,16 @@ Rectangle {
                        }
                    }
                    Item { Layout.fillWidth: true }
+
+                   Button {
+                       id: addUavComponentManagement
+                       text: "无人机型号管理"
+                       onClicked: {
+                           addUavComponentManagementPopup.open()
+                           //uavManagementroot.managementType = "operationType"
+                           uavManagementroot.enabled = false
+                       }
+                   }
                    Button {
                        id: delUavManagement
                        text: "删除型号"

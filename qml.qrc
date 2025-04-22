@@ -24,5 +24,6 @@
         <file>AddUavModelRecoveryMode.qml</file>
         <file>AddUavModelOperationWay.qml</file>
         <file>AddAmmoComponentManagement.qml</file>
+        <file>AddUavModelComponentManagement.qml</file>
     </qresource>
 </RCC>

@@ -10,6 +10,7 @@
 #include "uavmodeloperationwaydao.h"
 #include "uavmodelrecoverymodedao.h"
 #include "uavmodelloadtypedao.h"
+#include "uavmodeltypedao.h"
 #include "ammodao.h"
 #include "ammokillingwaydao.h"
 #include "ammolaunchwaydao.h"
@@ -40,6 +41,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<UavModelOperationWayDao>("UavModelOperationWayDaoModel",1,0,"UavModelOperationWayDaoTableModel");
     qmlRegisterType<UavModelRecoveryModeDao>("UavModelRecoveryModeDaoModel",1,0,"UavModelRecoveryModeDaoTableModel");
     qmlRegisterType<UavModelLoadTypeDao>("UavModelLoadTypeDaoModel",1,0,"UavModelLoadTypeDaoTableModel");
+    qmlRegisterType<UavModelTypeDao>("UavModelTypeDaoModel",1,0,"UavModelTypeDaoTableModel");
     qmlRegisterType<AmmoDao>("AmmoDaoModel",1,0,"AmmoDaoTableModel");
     qmlRegisterType<AmmoKillingWayDao>("AmmoKillingWayDaoModel",1,0,"AmmoKillingWayDaoTableModel");
     qmlRegisterType<AmmoLaunchWayDao>("AmmoLaunchWayDaoModel",1,0,"AmmoLaunchWayDaoTableModel");

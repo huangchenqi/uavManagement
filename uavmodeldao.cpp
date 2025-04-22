@@ -1200,7 +1200,7 @@ bool UavModelDao::insertModelDate(const QJsonObject& objectData)
                 //std::vector  imagByteA = std::vector<unsigned char>(data.begin(),data.end());
                 entity.uavImgName_ = std::vector<char>(data.begin(),data.end());
                 //entity.uavImgName_ = object["image_name"].toString().toStdString();
-                entity.uavImgUrl_ = object["image_url"].toString().toStdString();
+                //entity.uavImgUrl_ = object["image_url"].toString().toStdString();
 
                 // 5. 数据验证
                 // if (entity.getUavType().empty()) {

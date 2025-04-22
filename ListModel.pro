@@ -46,6 +46,7 @@ SOURCES += \
     UavModelMountLocationEntity-odb.cxx \
     UavModelOperationWayEntity-odb.cxx \
     UavModelRecoveryModeEntity-odb.cxx \
+    UavModelTypeEntity-odb.cxx \
     ammoattacktargetdao.cpp \
     ammodao.cpp \
     ammoguidancetypedao.cpp \
@@ -62,6 +63,7 @@ SOURCES += \
     uavmodelloadtypedao.cpp \
     uavmodeloperationwaydao.cpp \
     uavmodelrecoverymodedao.cpp \
+    uavmodeltypedao.cpp \
     uavmountlocationdao.cpp
 
 
@@ -113,6 +115,8 @@ HEADERS += \
     UavModelOperationWayEntity.h \
     UavModelRecoveryModeEntity-odb.hxx \
     UavModelRecoveryModeEntity.h \
+    UavModelTypeEntity-odb.hxx \
+    UavModelTypeEntity.h \
     ammoattacktargetdao.h \
     ammodao.h \
     ammoguidancetypedao.h \
@@ -129,6 +133,7 @@ HEADERS += \
     uavmodelloadtypedao.h \
     uavmodeloperationwaydao.h \
     uavmodelrecoverymodedao.h \
+    uavmodeltypedao.h \
     uavmountlocationdao.h
 
 DISTFILES += \
