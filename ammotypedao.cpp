@@ -11,6 +11,8 @@
 #include "odb/pgsql/traits.hxx"
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QDebug>
+#include <QDateTime>
 AmmoTypeDao::AmmoTypeDao(QObject* parent) : QObject(parent) {
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
     dbConn_.reset(new DatabaseConnection(
@@ -22,7 +24,7 @@ AmmoTypeDao::AmmoTypeDao(QObject* parent) : QObject(parent) {
         ));
 }
 
-QJsonArray AmmoTypeDao::selectAmmoLaunchWayAllData()
+QJsonArray AmmoTypeDao::selectAmmoTypeAllData()
 {
     QJsonArray uavMountLocationData;
 
@@ -38,7 +40,7 @@ QJsonArray AmmoTypeDao::selectAmmoLaunchWayAllData()
         odb::result<AmmoTypeEntity> result = db.query<AmmoTypeEntity>(query_t::ammoTypeStatus == true);
         qDebug() << "Query returned" << result.size() << "records";  // 添加此行
         // 关键修正2：遍历所有结果
-        int sum = 0;
+        int sum = 1;
         bool checked = false;
         if(result.size()==0){
             return uavMountLocationData;
@@ -69,7 +71,7 @@ QJsonArray AmmoTypeDao::selectAmmoLaunchWayAllData()
     return uavMountLocationData;
 }
 
-QJsonArray AmmoTypeDao::queryAmmoLaunchWayData(const QJsonObject &uavModel)
+QJsonArray AmmoTypeDao::queryAmmoTypeData(const QJsonObject &uavModel)
 {
     QJsonArray uavToMountArray;
 
@@ -130,7 +132,7 @@ QJsonArray AmmoTypeDao::queryAmmoLaunchWayData(const QJsonObject &uavModel)
     return uavToMountArray;
 }
 
-bool AmmoTypeDao::updateAmmoLaunchWayData(const QJSValue &selectedData)
+bool AmmoTypeDao::updateAmmoTypeData(const QJSValue &selectedData)
 {
     try {
         // 1. 建立数据库连接
@@ -182,7 +184,7 @@ bool AmmoTypeDao::updateAmmoLaunchWayData(const QJSValue &selectedData)
     return true;
 }
 
-bool AmmoTypeDao::deleteAmmoLaunchWayData(const QJSValue &selectedData)
+bool AmmoTypeDao::deleteAmmoTypeData(const QJSValue &selectedData)
 {
     try {
         // 1. 建立数据库连接
@@ -234,7 +236,7 @@ bool AmmoTypeDao::deleteAmmoLaunchWayData(const QJSValue &selectedData)
     return true;
 }
 
-bool AmmoTypeDao::insertAmmoLaunchWayData(const QJsonObject &object)
+bool AmmoTypeDao::insertAmmoTypeData(const QJsonObject &object)
 {
     qDebug() << "Starting database insertUavMountLocationDate insertion...";
     try {

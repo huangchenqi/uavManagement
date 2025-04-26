@@ -137,10 +137,6 @@ Item {
         }
 
 
-        function loadData(){
-            //uavManagement.background.col="#87CEEB"
-
-        }
 
     }
 

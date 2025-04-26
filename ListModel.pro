@@ -1,4 +1,4 @@
-QT += quick sql
+QT += quick sql widgets
 
 CONFIG += c++11
 
@@ -35,18 +35,22 @@ LIBS += -lpq           # PostgreSQL客户端库
 SOURCES += \
 #        EasyTableModel.cpp \
 #        TableModel.cpp \
+    AmmoAerodynamicConfiguration-odb.cxx \
     AmmoLaunchWayEntity-odb.cxx \
     AmmunitionAttackTargetTypeEntity-odb.cxx \
     AmmunitionEntity-odb.cxx \
     AmmunitionGuidanceTypeEntity-odb.cxx \
     AmmunitionKillingMethodEntity-odb.cxx \
     AmmunitionTypeEntity-odb.cxx \
+    InterferencePodEntity-odb.cxx \
+    MountingSchemeEntity-odb.cxx \
     UavModelBombingMethodEntity-odb.cxx \
     UavModelLoadTypeEntity-odb.cxx \
     UavModelMountLocationEntity-odb.cxx \
     UavModelOperationWayEntity-odb.cxx \
     UavModelRecoveryModeEntity-odb.cxx \
     UavModelTypeEntity-odb.cxx \
+    ammoaerodynamicconfigurationdao.cpp \
     ammoattacktargetdao.cpp \
     ammodao.cpp \
     ammoguidancetypedao.cpp \
@@ -54,9 +58,11 @@ SOURCES += \
     ammolaunchwaydao.cpp \
     ammotypedao.cpp \
     databaseconnection.cpp \
+    interferencepoddao.cpp \
         main.cpp \
 #        migration.cpp \
 #        uavdataoperationmodel.cpp \
+    mountingschemedao.cpp \
     uavmodelbombingmethoddao.cpp \
         uavmodeldao.cpp \
     uavmodelentity-odb.cxx \
@@ -87,6 +93,8 @@ HEADERS += \
 #    TableModel.h \
 #    migration.h \
 #    uavdataoperationmodel.h \
+    AmmoAerodynamicConfiguration-odb.hxx \
+    AmmoAerodynamicConfiguration.h \
     AmmoLaunchWayEntity-odb.hxx \
     AmmoLaunchWayEntity.h \
     AmmunitionAttackTargetTypeEntity-odb.hxx \
@@ -99,8 +107,10 @@ HEADERS += \
     AmmunitionKillingMethodEntity.h \
     AmmunitionTypeEntity-odb.hxx \
     AmmunitionTypeEntity.h \
-    MountingSchemeLoadConfigurationEntity.h \
-    MountingSchemeMountingConfiguration.h \
+    InterferencePodEntity-odb.hxx \
+    InterferencePodEntity.h \
+    MountingSchemeEntity-odb.hxx \
+    MountingSchemeEntity.h \
     ReconnaissancePayloadEntity.h \
     UavModelBombingMethodEntity-odb.hxx \
     UavModelBombingMethodEntity.h \
@@ -117,6 +127,7 @@ HEADERS += \
     UavModelRecoveryModeEntity.h \
     UavModelTypeEntity-odb.hxx \
     UavModelTypeEntity.h \
+    ammoaerodynamicconfigurationdao.h \
     ammoattacktargetdao.h \
     ammodao.h \
     ammoguidancetypedao.h \
@@ -125,7 +136,9 @@ HEADERS += \
     ammotypedao.h \
     databaseconnection.h \
     datetime-traits.hxx \
+    interferencepoddao.h \
     json.hpp \
+    mountingschemedao.h \
     uavmodelbombingmethoddao.h \
     uavmodeldao.h \
     uavmodelentity-odb.hxx \

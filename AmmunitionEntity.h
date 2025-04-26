@@ -310,7 +310,7 @@ public:
 #pragma db not_null column("record_creation_time") type("timestamp(0)") options("DEFAULT CURRENT_TIMESTAMP") //record_creation_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,--COMMENT '记录创建时间',
     QDateTime record_creation_time{QDateTime::currentDateTime()};
 #pragma db not_null column("use_status")  // use_status bool  --COMMENT '使用状态',
-    float use_status;
+    bool use_status;
 // #pragma db column("recordcreation_time") type("timestamp(0)") options("DEFAULT CURRENT_TIMESTAMP")               // 创建时间
 //     QDateTime recordCreationTime_{QDateTime::currentDateTime()};
 // #pragma db column("image_url")                     // 模型图片路径

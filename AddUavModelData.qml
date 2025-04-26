@@ -12,11 +12,14 @@ import UavModelRecoveryModeDaoModel 1.0
 import UavModelOperationWayDaoModel 1.0
 import UavMountLocationDaoModel 1.0
 import AmmoDaoModel 1.0
-Window{//Rectangle{
+import UavModelTypeDaoModel 1.0
+Rectangle{//Rectangle{
     id:addUavModelData
     visible: true
-    width: 1200
-    height: 600
+    color: "#ffffff"
+//    width: 1200
+//    height: 600
+    z: 100
     //title: qsTr("QML TableView example")
     //图片的地址
     property var imagUrl: ""
@@ -46,6 +49,17 @@ Window{//Rectangle{
     property  var ammoType:[]
     property  var ammoTypeResult:""
     property  var ammoTypeOrigi: []
+
+    property var  uavModelType: []
+    property var uavModelTypeOrigi: []
+
+    signal backUavRecord()
+
+    Loader {
+        id: pageAddUavModelLoader  // 必须的标识符
+        anchors.fill: parent  // 填充父容器
+        visible: true    // 确保可见
+    }
     //获取弹药的类型
     function loadAmmoType(){
         var ammoType = ammoDaoModel.selectAmmoAllData()
@@ -55,11 +69,32 @@ Window{//Rectangle{
         addUavModelData.ammoType = extractAmmoNameData(ammoType)
         console.log("loadAmmoTypeOrigi"+JSON.stringify(addUavModelData.ammoTypeOrigi))
     }
-
+    function loadUavModelType(){
+       var uavModelTypeData =  uavModelTypeDaoTableModel.selectUavModelTypeAllData()
+        addUavModelData.uavModelTypeOrigi = uavModelTypeData
+        console.log("uavModelTypeDaoTableModel"+JSON.stringify(uavModelTypeData))
+        var uavModelTypeArray = extractUavModelTypeComponentNames(uavModelTypeData)
+        console.log(JSON.stringify(uavModelTypeArray));
+        addUavModelData.uavModelType  = uavModelTypeArray
+    }
+    function extractUavModelTypeComponentNames(originalArray) {
+        var resultArray = ["请选择:"];
+        // 遍历原始数组
+        for (var i = 0; i < originalArray.length; ++i) {
+            // 安全获取属性值
+            var componentName = originalArray[i].uavComponeName || "";
+            // 过滤空值并保留原始空格
+            if (componentName.trim().length > 0) {
+                resultArray.push(componentName);
+            }
+        }
+        return resultArray;
+    }
     // 组件加载完成后生成测试数据
     Component.onCompleted:{
         loadUavComponentData()
         loadAmmoType()
+        loadUavModelType()
         //loadMountLocationContent()
         loadView()
         //generateTestData()
@@ -149,6 +184,9 @@ Window{//Rectangle{
         AmmoDaoTableModel{
             id:ammoDaoModel
         }
+        UavModelTypeDaoTableModel{
+            id:uavModelTypeDaoTableModel
+        }
 
         ColumnLayout {
                     anchors.fill: parent
@@ -203,7 +241,6 @@ Window{//Rectangle{
                                     // anchors.left: parent.left //锚点属性与锚点边距一起用。
                                     // anchors.leftMargin: 10
                                     Layout.leftMargin: 20
-
                                 }
 
                                 ComboBox{
@@ -231,10 +268,16 @@ Window{//Rectangle{
                                     height: 50
                                     width:100
                                 }
-                                TextField{
-                                    id: uavIdText
-                                    Layout.preferredWidth: 130//width: 120
+                                ComboBox{
+                                    id:uavIdText
+                                    Layout.preferredWidth: 130//width:100
+                                    height:50
+                                    model:addUavModelData.uavModelType//["侦察型无人机","攻击型无人机","查打一体无人机"]
                                 }
+                                // TextField{
+                                //     id: uavIdText
+                                //     Layout.preferredWidth: 130//width: 120
+                                // }
                             }
 
 
@@ -1215,9 +1258,10 @@ Window{//Rectangle{
                                             return ""
                                         }else if(processInfo.loadViewType === "query"){
                                             uavImagSelect.enabled = false
-                                            return processInfo.imagUrl
+
+                                            //return processInfo.imagUrl
                                         }else if(processInfo.loadViewType === "update"){
-                                            return processInfo.imagUrl
+                                            //return processInfo.imagUrl
                                             //console.log("addUavDataView"+processInfo.loadViewType)
                                         }else{
                                             console.log("uav Image processInfo.loadViewType Unknown")
@@ -1269,6 +1313,7 @@ Window{//Rectangle{
                                     console.log("addUavModelData.currentTime"+addUavModelData.currentTime)
                                     saveUavData()
 
+
                                 }else if(processInfo.loadViewType === "query"){
                                     //writeControl(false)
                                     console.log("addUavDataView"+processInfo.loadViewType)
@@ -1289,6 +1334,16 @@ Window{//Rectangle{
                             width: 100
                             height: 50
                             text: "取消"
+                            onClicked: {
+                               backUavRecord()
+
+                                //                            // 退出并隐藏界面
+                                //                            //uavManagementLoader.setSource = null // 卸载界面
+                               controlUav.visible = false
+
+                            }
+
+
                         }
                     }
                     FileDialog {
@@ -1362,6 +1417,59 @@ Window{//Rectangle{
        function extractAmmoNameData(data) {
            return data.map(item => item.ammoName);
        }
+       //查找飞机型号对应的id并保存
+       function findRecordIdByName(dataArray, targetName) {
+           // 参数有效性校验
+           if (!Array.isArray(dataArray)) {
+               console.error("输入参数必须是数组类型");
+               return "";
+           }
+
+           let foundRecordId = "";
+           let foundCount = 0;
+
+           // 遍历数组（带索引）
+           for (let i = 0; i < dataArray.length; i++) {
+               const item = dataArray[i];
+
+               // 安全检查对象结构
+               if (!item || typeof item !== "object") {
+                   console.warn(`索引 ${i} 的元素不是有效对象`);
+                   continue;
+               }
+
+               // 标准化比较（去除首尾空格）
+               const currentName = (item.uavComponeName || "").toString().trim();
+               const target = targetName.toString().trim();
+
+               // 精确匹配
+               if (currentName === target) {
+                   foundRecordId = item.recordId || "";
+                   foundCount++;
+
+                   // 打印详细信息
+                   console.log(
+                       "匹配项 [索引]", i,
+                       "recordId:", foundRecordId,
+                       "完整对象:", JSON.stringify(item)
+                   );
+               }
+           }
+
+           // 处理匹配结果
+           switch (foundCount) {
+               case 0:
+                   console.warn(`未找到名称匹配'${targetName}'的记录`);
+                   return "";
+               case 1:
+                   console.log("找到唯一匹配 recordId:", foundRecordId);
+                   return foundRecordId;
+               default:
+                   console.error(`发现 ${foundCount} 个重复名称'${targetName}'`);
+                   return foundRecordId + " (存在重复)";
+           }
+       }
+
     function loadUavComponentData(){
         var uavBombWay = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
         var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()
@@ -1425,10 +1533,13 @@ Window{//Rectangle{
         if (uavTypeSelecttargetIndex !== -1) {
             uavTypeSelect.currentIndex = uavTypeSelecttargetIndex;
         }
+        var imageUrlStr = "file:///"+selectUavData.image_url
+        console.log("imageUrlStr"+imageUrlStr)
+        uavImg.source = imageUrlStr
         //加载文本数据
         //uavHangingLocationValue.text = selectUavData.hangingCapacity
         uavNameText.text = selectUavData.uavName
-        uavIdText.text = selectUavData.uavId
+        //uavIdText.text = selectUavData.uavId
         uavLengthText.text = selectUavData.uavLength
         uavWidthText.text = selectUavData.uavWidth
         uavHeightText.text = selectUavData.uavHeight
@@ -1820,7 +1931,11 @@ Window{//Rectangle{
         //checkAllValue()
         uavData.uav_type = uavTypeSelect.currentText
         uavData.uav_name = uavNameText.text
-        uavData.uav_id = uavIdText.text
+        var uavModelType = uavIdText.currentText
+        // JSON.parse(addUavModelData.uavModelTypeOrigi)
+        var uavModelTypeStr =  findRecordIdByName(addUavModelData.uavModelTypeOrigi,uavModelType)
+        console.log("uavModelTypeStr"+uavModelTypeStr)
+        uavData.uav_id = uavModelTypeStr//uavIdText.text
         uavData.length = textToFloat(uavLengthText.text)
         uavData.width = textToFloat(uavWidthText.text)
         uavData.height = textToFloat(uavHeightText.text)
@@ -1965,6 +2080,9 @@ Window{//Rectangle{
             warningPopup.open()
             warningItem.text = "无人机数据新增成功!"
             autoCloseTimer.start()
+            backUavRecord()
+            controlUav.visible = false
+
         }else{
             warningPopup.open()
             warningItem.text = "无人机数据新增失败!"
@@ -2169,6 +2287,8 @@ Window{//Rectangle{
             warningPopup.open()
             warningItem.text = "无人机数据更新成功!"
             autoCloseTimer.start()
+            backUavRecord()
+            controlUav.visible = false
         }else{
             warningPopup.open()
             warningItem.text = "无人机数据更新失败!"

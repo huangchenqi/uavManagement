@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QDebug>
+#include <QTextCodec>
 #include "odb/database.hxx"
 #include "odb/pgsql/database.hxx"
 //#include "UavModelEntity-odb.hxx"
@@ -17,6 +18,9 @@
 #include "ammoattacktargetdao.h"
 #include "ammoguidancetypedao.h"
 #include "ammotypedao.h"
+#include "ammoaerodynamicconfigurationdao.h"
+#include "interferencepoddao.h"
+#include "mountingschemedao.h"
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -32,7 +36,8 @@ int main(int argc, char *argv[])
     //                    << migration.connection().databaseName();
     //     }
     // }
-
+    // 设置默认编码为 UTF-8
+        QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
     QQmlApplicationEngine engine;
 
     qmlRegisterType<UavModelDao>("UavDaoModel",1,0,"UavModelDaoTableModel");
@@ -48,6 +53,9 @@ int main(int argc, char *argv[])
     qmlRegisterType<AmmoAttackTargetDao>("AmmoAttackTargetDaoModel",1,0,"AmmoAttackTargetDaoTableModel");
     qmlRegisterType<AmmoGuidanceTypeDao>("AmmoGuidanceTypeDaoModel",1,0,"AmmoGuidanceTypeDaoTableModel");
     qmlRegisterType<AmmoTypeDao>("AmmoTypeDaoModel",1,0,"AmmoTypeDaoTableModel");
+    qmlRegisterType<AmmoAerodynamicConfigurationDao>("AmmoAerodynamicConfigurationDaoModel",1,0,"AmmoAerodynamicConfigurationDaoTableModel");
+    qmlRegisterType<InterferencePodDao>("InterferencePodDaoModel",1,0,"InterferencePodDaoTableModel");
+    qmlRegisterType<MountingSchemeDao>("MountingSchemeDaoModel",1,0,"MountingSchemeDaoTableModel");
     //qmlRegisterType<TableModel>("Macai.App", 1, 0, "SqlTableModel");
     const QUrl url(QStringLiteral("qrc:/main.qml"));//mainUavDataTableView.qmlUavManageCommon
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

@@ -11,6 +11,8 @@
 #include "odb/pgsql/traits.hxx"
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QDebug>
+#include <QDateTime>
 UavModelTypeDao::UavModelTypeDao(QObject* parent) : QObject(parent) {
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
     dbConn_.reset(new DatabaseConnection(
@@ -38,7 +40,54 @@ QJsonArray UavModelTypeDao::selectUavModelTypeAllData()
         odb::result<UavModelTypeEntity> result = db.query<UavModelTypeEntity>(query_t::uavModelTypeStatus == true );//:true_expr);
         qDebug() << "Query returned uavComponentDatauavModelAllDatauavcreat" << result.size() << "records";  // 添加此行
         // 关键修正2：遍历所有结果
-        int sum = 0;
+        int sum = 1;
+        bool checked = false;
+        if(result.size()==0){
+            return uavComponentData;
+        }
+        for (UavModelTypeEntity entity : result) { //auto&& entity : result) {
+            QJsonObject obj;
+            qDebug() << "ProcessingQuery returned uavComponentDatauavModelAllDatauavcreat record ID:" << entity.id_;  // 输出当前记录ID
+            // 手动转换实体到 JSON（需要根据实际字段补充）
+            obj["index"] = sum;
+            obj["recordId"] = QString::number(entity.id_);
+            obj["uavComponeCode"] = QString::fromStdString(entity.uavModelTypeCode_);
+            obj["uavComponeName"] = QString::fromStdString(entity.uavModelTypeName_);
+            //obj["status"] = QString::number(entity.uavLaunchStatus_);
+            obj["checked"] = checked;
+            sum++;
+            qDebug()<<"uavComponentDatauavModelAllDatauavcreat:";
+            uavComponentData.append(obj);
+        }
+        trans.commit();
+    }
+    catch (const odb::exception& e) {
+        qCritical() << "Database error:" << e.what();
+        throw; // 或返回包含错误信息的 JSON
+    }
+    QJsonDocument doc(uavComponentData);
+    qDebug()<<"当前函数名称:" << __FUNCTION__<<":";
+    qDebug().noquote() << doc.toJson(QJsonDocument::Indented);
+    return uavComponentData;
+}
+
+QJsonArray UavModelTypeDao::selectUavModelTypeData()
+{
+    QJsonArray uavComponentData;
+
+    try{
+
+        auto& db = dbConn_->getDatabase(); // 使用成员变量获取数据库
+        // 2. 创建事务
+        odb::transaction trans(db.begin());
+        qDebug() << "Transaction select all uavMountLocation started";
+        // 关键修正1：使用 query<UavModelEntity> 获取结果集
+        using query_t = odb::query<UavModelTypeEntity>;
+
+        odb::result<UavModelTypeEntity> result = db.query<UavModelTypeEntity>(query_t::true_expr);
+        qDebug() << "Query returned uavComponentDatauavModelAllDatauavcreat" << result.size() << "records";  // 添加此行
+        // 关键修正2：遍历所有结果
+        int sum = 1;
         bool checked = false;
         if(result.size()==0){
             return uavComponentData;

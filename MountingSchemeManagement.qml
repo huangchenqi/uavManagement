@@ -6,62 +6,92 @@ import Qt.labs.qmlmodels 1.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.12
-import UavDaoModel 1.0
+import "."
+import "qrc:/"
+import "qrc:/AddAmmoModules/Component"
+import "qrc:/AddAmmoModules/"
+import MountingSchemeDaoModel 1.0
+import AmmoDaoModel 1.0
+
 /**
 https://blog.csdn.net/qq_24890953/article/details/104640454
   */
 //Window {
 Rectangle {
-           id: uavManagementroot
+           id: mountingSchemeManagementroot
            visible: true
            color: "#ECF2FE"
-           //signal customSignal(string message)
+           signal customSignal(string message)
+           property int screenWidth: Qt.platform.os === "android" ? Screen.width : 975;
+           property int screenHeight: Qt.platform.os === "android" ? Screen.height : 608;
            property color borderColor: "#A5B3C0"
            property color headerColor: "#D3E1FE"
            property color fontColor: "#3E3E3E"
            property var rowsModel: []
+           property var selectRow: []
            property string managementType: "";
-           property string queryedit: ""
+           property var ammoTypeSelect: []
+           property var mountSchemeData:new Object  //创建对象来实现数据的查询
            width: 1400; height: 820//width: screenWidth; height: screenHeight
-           property var rowData : ({test:1})
-           property int bottonHeight: 50
 
-           // 组件加载完成后生成测试数据
-           Component.onCompleted:{
-               loadUavAllData()
-               //generateTestData()
-               loadRecord()
-           }
+           property int bottonHeight: 50
            Loader {
-               id: pageUavModelLoader  // 必须的标识符
+               id: pageMountingSchemeLoader  // 必须的标识符
                anchors.fill: parent  // 填充父容器
                visible: true    // 确保可见
+               // 监听信号并切换界面
+              Connections {
+                  target: pageMountingSchemeLoader.item
+                  onBackMountingScheme: {
+                      console.log("connectuion!!!!!")
+                      mountingSchemeManagementView.visible = true
+                  }
+              }
+
            }
 
-           UavModelDaoTableModel{
-               id:uavModelDaoTable
+           MountingSchemeDaoTableModel{
+               id:mountingSchemeDaoTableModel
            }
-
+//           AmmoDaoTableModel{
+//               id:ammoDaoTableModel
+//           }
            // 数据模型
            // 表格数据模型
               TableModel {
                   id: tableModel
                   TableModelColumn { display: "checked" }//复选框
-                  TableModelColumn { display: "index"   }        // 序号
-                  TableModelColumn { display: "uavType" }   // 机型
-                  TableModelColumn { display: "uavName" }      // 名称
-                  TableModelColumn { display: "uavId" }    // 编号
-                  TableModelColumn { display: "hangingCapacity" }         // 挂载内容
-                  TableModelColumn { display: "operationMethod" } //操控方式
-                  TableModelColumn { display: "bombMethod" }  // 投弹方式
-                  TableModelColumn { display: "recoveryMode" }  // 回收方式
-                  TableModelColumn { display: "payloadType" }   // 载荷类型
-                  TableModelColumn { display: "uavInvisibility" }//是否隐身
-                  TableModelColumn { display: "recordId" }//型号记录编号
-                  TableModelColumn { display: "uavCreatModelTime" }//创建时间
-                  TableModelColumn { display: "operation" } // 操作(查看/编辑)
+                  TableModelColumn { display: "index" }        // 序号
+                  TableModelColumn { display: "mountSchemeName" }   // 挂载方案名称
+                  TableModelColumn { display: "uavName" }      // 无人机名称
+                  TableModelColumn { display: "maxTakeoffWeight" }    // 起飞重量
+                  TableModelColumn { display: "emptyWeight" }         // 空重
+                  TableModelColumn { display: "runningDistance" } //  '滑跑距离(m)'
+                  TableModelColumn { display: "endurance" }  // '航时(h)',
+                  TableModelColumn { display: "fightRadius" }  // 作战半径
+                  //TableModelColumn { display: "proChartNo" }   // 产品图号
+                  TableModelColumn { display: "" } // 产品名称
+
+
               }
-              // 定义警告对话框
+              // 组件加载完成后生成测试数据
+              Component.onCompleted:
+                {
+                      loadMountShemeData()
+                      loadMountShemeRecord(mountingSchemeManagementroot.mountSchemeData)
+
+
+                      // 清空从引导界返回后携带的数据。
+//                      processInfo.processId = "";
+//                      processInfo.stepId = "";
+//                      processInfo.operateId = "";
+//                      processInfo.taskId = "";
+
+
+                }
+
+
+              // 定义查询
               Popup {
                       id: warningPopup
                       width: 200
@@ -79,8 +109,8 @@ Rectangle {
                       }
 
                       contentItem: Text {
-                          id:warningItem
                           //text: "您查询的是全部数据！"
+                          id:warningItem
                           horizontalAlignment: Text.AlignHCenter
                           verticalAlignment: Text.AlignVCenter
                           font.pixelSize: 16
@@ -92,725 +122,786 @@ Rectangle {
                       onTriggered: warningPopup.close()
                   }
               Popup {
-                  id: payloadTypeManagementPopup
-                  width: 600  // 需明确设置宽度，否则可能无法显示完整内容
+                  id: addAmmoComponentManagementPopup
+                  width: 456  // 需明确设置宽度，否则可能无法显示完整内容
                   height: 400
                   modal: true
                   focus: true
                   anchors.centerIn: Overlay.overlay // 居中显示
                   closePolicy: Popup.NoAutoClose    // 完全禁用自动关闭
-                  // 直接引用 admin.qml
-                    GetTypeManagement{  // 假设 admin.qml 的根元素是 Admin 类型
-                          id: adminPanel
-                          anchors.fill: parent
-                          managementType:uavManagementroot.managementType
 
-                          onClose: payloadTypeManagementPopup.close() // 连接关闭信号
+                  // 直接引用 admin.qml
+                    AddAmmoComponentManagement{  // 假设 admin.qml 的根元素是 Admin 类型
+                          id: addAmmoComponentManagementPanel
+                          anchors.fill: parent
+                          //managementType:uavManagementroot.managementType
+
+                          onClose: addAmmoComponentManagementPopup.close() // 连接关闭信号
 
 
                       }
 
-                  // 你的内容
-                  // Item {
-                  //     id: payLoadType
-                  //     anchors.fill: parent // 填充 Popup 区域
+                    function setup(name){
+                        addAmmoComponentManagementPanel.title = name
+                    }
 
-                  //     ColumnLayout {
-                  //         anchors.fill: parent
-                  //         spacing: 10
+                    function setUpAmmoCompType(name){
+                        addAmmoComponentManagementPanel.managementType = name
+                    }
 
-                  //         // 第一行：输入框和按钮
-                  //         RowLayout {
-                  //             Layout.fillWidth: true  // 关键！让 RowLayout 填满宽度
-                  //             spacing: 10
 
-                  //             TextField {
-                  //                 id: payLoadTypeText
-                  //                 Layout.preferredWidth: 100  // 用 Layout 属性替代固定宽高
-                  //                 Layout.preferredHeight: 50
-                  //             }
+              }
+              Popup {
+                  id: addAmmoDataPopup
+                  width: 456  // 需明确设置宽度，否则可能无法显示完整内容
+                  height: 400
+                  modal: true
+                  focus: true
 
-                  //             Button {
-                  //                 id: payLoadTypeAdd
-                  //                 Layout.preferredWidth: 100
-                  //                 Layout.preferredHeight: 50
-                  //                 text: "新增载荷"
-                  //             }
+                  anchors.centerIn: Overlay.overlay // 居中显示
+                  closePolicy: Popup.NoAutoClose    // 完全禁用自动关闭
 
-                  //             Button {
-                  //                 id: payLoadTypeDel
-                  //                 Layout.preferredWidth: 100
-                  //                 Layout.preferredHeight: 50
-                  //                 text: "删除载荷"
-                  //             }
-                  //             Button {
-                  //                 id: payLoadTypeBack
-                  //                 Layout.preferredWidth: 100
-                  //                 Layout.preferredHeight: 50
-                  //                 text: "返回"
-                  //                 onClicked: {
-                  //                     payloadTypeManagementPopup.close()// 或myPopup.visible = false
-                  //                     uavManage.enabled = true
-                  //                     uavManage.visible = true
-                  //                 }
-                  //             }
-                  //         }
+                  Rectangle{
+                      id:addAmmoBackground
+                      width:parent.width
+                      height: parent.height
+                      color: "gray"
+                      property string name: value
 
-                  //         // 下方的蓝色矩形区域
-                  //         Rectangle {
-                  //             id: showPayLoadType
-                  //             Layout.fillWidth: true  // 自动填充宽度
-                  //             Layout.fillHeight: true  // 自动填充剩余高度
-                  //             Layout.alignment: Qt.AlignLeft // 左对齐
-                  //             Layout.leftMargin: 10  // 左侧边距
-                  //             color: "skyblue"
-                  //         }
-                  //     }
-                  // }
+                      Item {
+                          anchors.fill: parent
+                          Image {
+                              id: backGround
+                              anchors.fill: parent
+                              sourceSize: Qt.size(width,height)
+                              source: "file:Resources/Background/bg_MainBackground.png"
+                          }
+
+                      }
+
+                  }
+
               }
 
-           ColumnLayout {
-               //@disable-check M16
-               anchors.fill: parent
-               Layout.fillWidth: true
-               Layout.fillHeight: true
-               RowLayout {
-                   Layout.fillWidth: true
-                   Layout.preferredHeight: 60
-                   Layout.minimumHeight: 60
-                   Layout.alignment: Qt.AlignCenter
-                   Text {
-                       Layout.fillWidth: true
-                       verticalAlignment: Text.AlignVCenter
-                       horizontalAlignment: Text.AlignHCenter
-                       text: qsTr("挂载方案记录");
-                       font.pointSize: 20
-                       color: "black"
-                   }
-                   Item { Layout.fillWidth: true }
-               }
 
-               ColumnLayout {
-                   spacing: 5
-                   Layout.fillWidth: true
-                   Layout.fillHeight: true
-                   Rectangle {
-                       anchors.fill: parent
-                   }
-                   RowLayout {
-                       Layout.topMargin: 2
-                       Layout.fillHeight: true
-                       Layout.minimumHeight: 40
-                       Layout.alignment: Qt.AlignLeft
-                       spacing: 5
-                       Label{
-                           id:inputUavTypeData
-                           width:100
-                           height:50
-                           font.pointSize: 12
-                           text: "吊舱配置:"
-                       }
-                       ComboBox {
-                           id: modelSelector
-                           width: 160
-                           height: 40
-                           font.pointSize: 12
-                           model: ["无吊舱","200kg通侦吊舱","500kg吊舱"]
-                       }
-                       Label{
-                           id:inputUavIdData
-                           width:100
-                           height:50
-                           font.pointSize: 12
-                           text: "弹药类型:"
-                       }
-                       ComboBox {
-                           id: inputUavId
-                           width: 160
-                           height: 40
-                           font.pointSize: 12
-                           model: ["无炸弹","空地炸弹","制导炸弹"]
-                       }
-                       Label{
-                           id:inputUavNameData
-                           width:100
-                           height:50
-                           font.pointSize: 12
-                           text: "挂载数量:"
-                       }
+              Item {
+                  id: mountingSchemeManagementView
+                  height: parent.height
+                  ColumnLayout {
 
-                       TextField{
-                           id:inputUavNameSelect
-                           width: 100
-                           height:50
-                           font.pointSize: 12
-                       }
-                       Button{
-                           id:selectButton
-                           width:100
-                           height:50
-                           font.pointSize: 12
-                           text: "搜索"
-                           Layout.leftMargin: 30
-                           onClicked: {
-                               inputValidator()
+                      anchors.fill: parent
+                      Layout.fillWidth: true
+                      Layout.fillHeight: true
+                      RowLayout {
+                          Layout.fillWidth: true
+                          Layout.preferredHeight: 60
+                          Layout.minimumHeight: 60
+                          Layout.alignment: Qt.AlignCenter
+                          Text {
+                              Layout.fillWidth: true
+                              verticalAlignment: Text.AlignVCenter
+                              horizontalAlignment: Text.AlignHCenter
+                              text: qsTr("挂载方案记录");
+                              font.pointSize: 16
+                              color: "black"
+                          }
+                          Item { Layout.fillWidth: true }
 
-                           }
-                       }
-                       Button{
-                           id:clearButton
-                           width:100
-                           height:50
-                           font.pointSize: 12
-                           Layout.leftMargin: 10
-                           text: "重置"
-                           onClicked: {
-                               modelSelector.currentIndex = 0
-                               uavIdSelect.text = ""
-                               inputUavNameSelect.text = ""
-                           }
-                       }
+                      }
 
-                       Item { Layout.fillWidth: true }
-                   }
-                   RowLayout {
-                       Layout.bottomMargin: 2
-                       Layout.fillHeight: true
-                       Layout.maximumHeight: 40
-                       Layout.alignment: Qt.AlignLeft
-                       spacing: 5
-                       // MxDateInput {
-                       //     id: foundDateCommbox
-                       //     title: "提出日期:"
-                       //     labelWidth: 80
-                       //     width: 240;
-                       //     visible: false;
-                       //     onFinished: {
-                       //         loadDeliveryRecordList(processInfo)
-                       //     }
-                       // }
+                      ColumnLayout {
+                          spacing: 5
+                          Layout.fillWidth: true
+                          Layout.fillHeight: true
 
-                   }
-               }
-               RowLayout {
-                   Layout.minimumWidth: uavManagementroot.width
-                   Layout.minimumHeight: uavManagementroot.height-280
-                   Layout.fillHeight: true
-                   Layout.fillWidth: true
-                   Item {
-                       id: control
-                       implicitHeight: uavManagementroot.width
-                       implicitWidth: uavManagementroot.height-280
-                       Layout.fillWidth: true
-                       Layout.fillHeight: true
-                       //表头行高
-                       property int headerHeight: dpH(48)
-                       //行高
-                       property int rowHeight: dpH(48)
-                       property int tableLeft: dpH(60)
-                       //滚动条
-                       property color scrollBarColor: "#E5E5E5"
-                       property int scrollBarWidth: 7
-                       //列宽
-                       property variant columnWidthArr: [50,50, 140, 140, 140, 140,
-                           120, 120, 120, 120,120,160,240, 300]
-                       // 显示10个字段
-                       property var horHeader: ["","序号", "无人机机型", "无人机名称", "无人机编号", "挂载内容",
-                           "操控方式", "投弹方式", "回收方式", "载荷类型","是否隐身","型号记录编号","创建时间", "操作"]
-                       property int selected: -1
-                       //数据展示
-                       TableView {
-                           id: tableView
-                           implicitHeight: uavManagementroot.width
-                           implicitWidth: uavManagementroot.height-280
-                           Layout.fillWidth: true
-                           Layout.fillHeight: true
-                           anchors {
-                               fill: parent
-                               topMargin: control.rowHeight
-                               leftMargin: 2//control.tableLeft
-                           }
+                          z:10
+                          Rectangle {
+                              anchors.fill: parent
+                          }
+                          RowLayout {
+                              Layout.topMargin: 2
+                              Layout.fillHeight: true
+                              Layout.minimumHeight: 40
+                              Layout.alignment: Qt.AlignLeft
 
-                           clip: true
-                           boundsBehavior: Flickable.StopAtBounds
-                           columnSpacing: 0
-                           rowSpacing: 0
+                              spacing: 5
+//                              Label{
+//                                  id:ammoType
+//                                  width:100
+//                                  height:50
+//                                  font.pointSize: 12
+//                                  text: "类型:"
+//                              }
+//                              ComboBox {
+//                                  id: ammoTypeModelSelector
+//                                  //width: 200
+//                                  Layout.preferredWidth: 200
+//                                  height: 40
+//                                  font.pointSize: 12
+//                                  model:mountingSchemeManagementroot.ammoTypeSelect// ["全部","侦察无人机","攻击无人机","查打一体无人机"]
+//                              }
+                              Label{
+                                  id:mountSchemeName
+                                  width:100
+                                  height:50
+                                  font.pointSize: 12
+                                  text: "挂载方案名称:"
+                              }
 
-                           //内容行高
-                           rowHeightProvider: function (row) {
-                               return control.headerHeight
-                           }
-                           //内容列的列宽
-                           columnWidthProvider: function (column) {
-                               return control.columnWidthArr[column]
-                           }
-                           ScrollBar.vertical: ScrollBar {
-                               id: scroll_vertical
-                               anchors.right: parent.right
-                               anchors.rightMargin: 0
-                               contentItem: Rectangle {
-                                   visible: (scroll_vertical.size < 1.0)
-                                   implicitWidth: control.scrollBarWidth
-                                   color: control.scrollBarColor
-                               }
-                           }
+                              TextField{
+                                  id:mountSchemeText
+                                  width: 100
+                                  height:50
+                                  font.pointSize: 12
+                                  onTextChanged: {
+                                      // 使用正则表达式移除首尾的空白字符（包括空格、tab、换行）
+                                      var newText = text.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')
 
-                           ScrollBar.horizontal: ScrollBar {
-                               id: scroll_horizontal
-                               anchors.bottom: parent.bottom
-                               anchors.bottomMargin: 0
-                               anchors.left: parent.left
-                               anchors.leftMargin: -control.tableLeft
-                               contentItem: Rectangle {
-                                   visible: (scroll_horizontal.size < 1.0)
-                                   implicitHeight: control.scrollBarWidth
-                                   color: control.scrollBarColor
-                               }
+                                      // 判断是否需要更新（避免无限循环）
+                                      if (newText !== text) {
+                                          // 保存当前光标位置
+                                          var cursorPos = cursorPosition
+
+                                          // 更新文本
+                                          text = newText
+
+                                          // 恢复光标位置（考虑文本缩短的情况）
+                                          cursorPosition = Math.min(cursorPos, newText.length)
+                                      }
+                                  }
+                              }
+                              Label{
+                                  id:uavName
+                                  width:100
+                                  height:50
+                                  font.pointSize: 12
+                                  text: "无人机名称:"
+                              }//显示区域
+
+                              Rectangle{
+                                  id:showSelect
+                                  color: "transparent"
+                                  width: 200
+                                  height: 36
+                                  border.width: 0
+
+                                  CButton{
+                                      id:comp_DamageFactorType
+                                      width: 200
+                                      height: 36
+                                      color:"#ffddaa00"
+                                      borderColor: "#ffddaa00"
+                                      borderHigtColor: "#ffeebb22"
+                                      anchors.left: uavName.right
+                                      anchors.leftMargin: 5
+                                      anchors.verticalCenter: uavName.verticalCenter
+            //                          anchors.bottom: confirmAddAmmoData.bottom
+            //                          anchors.bottomMargin: confirmAddAmmoData.bottom +50
+            //                          anchors.verticalCenter: parent.verticalCenter
+                                      pixelSize: 20
+                                      text:"请选择:"
+                                      onClicked: {
+                                          view_List_TypeSelect.visible = !view_List_TypeSelect.visible
+                                      }
+                                  }
+
+                                  ListView{
+                                      id:view_List_TypeSelect
+                                      width: comp_DamageFactorType.width
+                                      height: comp_DamageFactorType.height * 5
+                                      anchors.left: comp_DamageFactorType.left
+                                      anchors.leftMargin: comp_DamageFactorType.width/2 - width/2
+                                      anchors.top: comp_DamageFactorType.bottom
+                                      anchors.topMargin: 2
+                                      visible: false
+                                      clip: true
+                                      model:ListModel{
+                                          id:listmodel_Box
+                                      }
+                                      delegate:Component{
+                                          Item{
+                                              id:item_Delegate
+                                              width: view_List_TypeSelect.width
+                                              height: 36
+                                              CButton{
+                                                  id:comp_TypeBtn
+                                                  anchors.fill: parent
+                                                  text:m_TypeName
+                                                  color:"#ffddaa00"
+                                                  borderColor: "#ffddaa00"
+                                                  pixelSize: 18
+                                                  onClicked: {
+                                                      console.log("#include <QTextCodec>"+m_PlanNumber)
+                                                       var viewType = m_TypeName
+            //                                          view_List_TypeSelect.visible = false
+            //                                          selectType = index
+            //                                          m_SelectState = !m_SelectState
+            //                                          isSelect = m_SelectState
+
+                                                  }
+                                              }
+                                          }
+                                      }
+                                      Component.onCompleted: {
+    //                                       var ammoType = mountingSchemeDaoTableModel.selectMountingSchemeData()
+    //                                       console.log("testammoType"+JSON.stringify(ammoType))
+    //                                      var result = [];
+    //                                      for (var i = 0; i < ammoType.length; i++) {
+    //                                          result.push({
+    //                                              m_PlanNumber: ammoType[i].recordId,
+    //                                              m_SelectState:false,// ammoType[i].checked,
+    //                                              m_TypeName: ammoType[i].ammoComponeName
+    //                                          });
+    //                                      }
+                                          listmodel_Box.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"侦察无人机"})
+                                          listmodel_Box.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"攻击无人机"})
+                                          listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
+                                      }
+                                  }
 
 
-                           }
+                              }
 
-                           model: tableModel
-                            // 使用 DelegateChooser 为不同的列指定不同的委托
-                           delegate:DelegateChooser{
-                                   // 默认委托（用于非最后一列）
-                               // 最后一列（操作列，索引12）使用按钮委托
-                                role: "column" // 根据列索引选择不同的委托
-                                // 其他列使用默认文本显示委托
-                                DelegateChoice {
-                                     column:0
-                                     delegate: Rectangle {
-                                         color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
-                                         width: control.columnWidthArr[column]
-                                         height: control.rowHeight
-                                         CheckBox { //自定义多选框组件
-                                             checked: tableView.model.rows.length > 0 ? tableView.model.rows[index].checked : false
-                                             anchors.centerIn: parent
-                                             onClicked: {
-                                                 //Qt.unchecked：适合用于需要明确表示复选框状态的场景，特别是在处理 CheckState 类型的属性时。
-                                                 //false：适合用于布尔类型的属性，表示未选中状态。
-                                                 //
-                                                 rowsModel[index].checked = !rowsModel[index].checked
-                                                 tableModel.rows = rowsModel;
+//                              TextField{
+//                                  id:uavNameText
+//                                  width: 100
+//                                  height:50
+//                                  font.pointSize: 12
+//                                  onTextChanged: {
+//                                      // 使用正则表达式移除首尾的空白字符（包括空格、tab、换行）
+//                                      var newText = text.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')
+
+//                                      // 判断是否需要更新（避免无限循环）
+//                                      if (newText !== text) {
+//                                          // 保存当前光标位置
+//                                          var cursorPos = cursorPosition
+
+//                                          // 更新文本
+//                                          text = newText
+
+//                                          // 恢复光标位置（考虑文本缩短的情况）
+//                                          cursorPosition = Math.min(cursorPos, newText.length)
+//                                      }
+//                                  }
+//                              }
+                              //Item { Layout.fillWidth: true }
+                              Item {
+                                  id: item
+                                  width:100
+                                  height:50
+                              }
+//                              Label{
+//                                  id:guidanceWay
+//                                  width:100
+//                                  height:50
+//                                  font.pointSize: 12
+//                                  text: "制导方式:"
+//                              }
+
+//                              TextField{
+//                                  id:guidanceWaySelect
+//                                  width: 100
+//                                  height:50
+//                                  font.pointSize: 12
+//                              }
+//                              Label{
+//                                  id:launchWay
+//                                  width:100
+//                                  height:50
+//                                  font.pointSize: 12
+//                                  text: "发射方式:"
+//                              }
+
+//                              TextField{
+//                                  id:launchWaySelect
+//                                  width: 100
+//                                  height:50
+//                                  font.pointSize: 12
+//                              }
+                              Button{
+                                  id:selectButton
+                                  width:100
+                                  height:50
+                                  font.pointSize: 12
+                                  text: "搜索"
+                                  Layout.leftMargin: 30
+                                  onClicked: {
+                                      //inputValidator()
+                                      if(mountSchemeText.length === 0 && uavNameText.length === 0 ){
+                                          warningItem.text = "查询全部数据!"
+                                          warningPopup.open()
+                                          // 2秒后自动关闭
+                                          autoCloseTimer.start()
+                                      }
+                                     mountSchemeData.mountSchemeName = mountSchemeText.text
+                                     mountSchemeData.uavName = uavNameText.text
+
+                                      loadMountShemeRecord(mountSchemeData)
+
+                                  }
+                              }
+                              Button{
+                                  id:clearButton
+                                  width:100
+                                  height:50
+                                  font.pointSize: 12
+                                  Layout.leftMargin: 10
+                                  text: "重置"
+                                  onClicked: {
+                                      ammoTypeModelSelector.currentIndex = 0
+                                      mountSchemeText.text = ""
+                                  }
+                              }
+
+                              Item { Layout.fillWidth: true }
+                          }
+//                          RowLayout {
+//                              Layout.bottomMargin: 2
+//                              Layout.fillHeight: true
+//                              Layout.maximumHeight: 40
+//                              Layout.alignment: Qt.AlignLeft
+//                              spacing: 5
 
 
-                                             }
-                                         }
-                                         Rectangle {
-                                             height: 1
-                                             width: parent.width
-                                             anchors.bottom: parent.bottom
-                                             color: borderColor
-                                         }
-                                         Rectangle {
-                                             height: parent.height
-                                             width: 1
-                                             anchors.right: parent.right
-                                             color: borderColor
-                                         }
-                                     }
-                                 }
-                                // DelegateChoice {
-                                //     column:0
-                                //     delegate: Rectangle {
-                                //         color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
-                                //         width: control.columnWidthArr[column]
-                                //         height: control.rowHeight
+//                          }
+                      }
 
-                                //         Text {
-                                //             anchors.fill: parent
-                                //             verticalAlignment: Text.AlignVCenter
-                                //             horizontalAlignment: Text.AlignHCenter
-                                //             text: display
-                                //             font.pointSize: 16
-                                //             color: "#000000"
-                                //             elide: Text.ElideRight
-                                //         }
+                      RowLayout {
+                          Layout.minimumWidth: mountingSchemeManagementroot.width
+                          Layout.minimumHeight: mountingSchemeManagementroot.height-280
+                          Layout.fillHeight: true
+                          Layout.fillWidth: true
 
-                                //         Rectangle {
-                                //             color: borderColor
-                                //             width: parent.width
-                                //             height: 1
-                                //             anchors.bottom: parent.bottom
-                                //         }
-                                //         Rectangle {
-                                //             height: parent.height
-                                //             width: 1
-                                //             anchors.right: parent.right
-                                //             color: borderColor
-                                //         }
-                                //     }
-                                // }
-                               DelegateChoice {
-                                   column:13
-                                   // delegate: Row {
-                                   //         width: tableView.width // 确保宽度占满单元格
-                                   //         spacing: 5 // 按钮之间的间距
+                          Item {
+                              id: control
+                              implicitHeight: mountingSchemeManagementroot.width
+                              implicitWidth: mountingSchemeManagementroot.height-280
+                              Layout.fillWidth: true
+                              Layout.fillHeight: true
 
-                                   //         MouseArea {
-                                   //             width: parent.width / 2 - spacing / 2
-                                   //             height: 30
-                                   //             onClicked: {
-                                   //                 console.log("操作1点击，行索引:", index)
-                                   //                 // 执行操作1的逻辑
-                                   //             }
+                              //表头行高
+                              property int headerHeight: dpH(48)
+                              //行高
+                              property int rowHeight: dpH(48)
+                              property int tableLeft: dpH(0)//表距离左边的距离
+                              //滚动条
+                              property color scrollBarColor: "#E5E5E5"
+                              property int scrollBarWidth: 7
+                              //列宽
+                              property variant columnWidthArr: [50,50, 180, 180, 120, 120,
+                                  120, 120, 200,300 ]
 
-                                   //             Text {
-                                   //                 text: "操作1"
-                                   //                 anchors.centerIn: parent
-                                   //             }
-                                   //         }
+                              // 显示10个字段
+                              property var horHeader: ["","序号", "挂载方案名称", "无人机名", "起飞重量", "空重",
+                                  "滑跑距离", "航时", "作战半径",  "操作"]
+                              property int selected: -1
+                              //数据展示
+                              TableView {
+                                  id: tableView
+                                  implicitHeight: mountingSchemeManagementroot.width
+                                  implicitWidth: mountingSchemeManagementroot.height-280
+                                  Layout.fillWidth: true
+                                  Layout.fillHeight: true
+                                  anchors {
+                                      fill: parent
+                                      topMargin: control.rowHeight
+                                      leftMargin: control.tableLeft
+                                  }
 
-                                   //         MouseArea {
-                                   //             width: parent.width / 2 - spacing / 2
-                                   //             height: 30
-                                   //             onClicked: {
-                                   //                 console.log("操作2点击，行索引:", index)
-                                   //                 // 执行操作2的逻辑
-                                   //             }
+                                  clip: true
+                                  boundsBehavior: Flickable.StopAtBounds
+                                  columnSpacing: 0
+                                  rowSpacing: 0
 
-                                   //             Text {
-                                   //                 text: "操作2"
-                                   //                 anchors.centerIn: parent
-                                   //             }
-                                   //         }
-                                   //     }
-                                   delegate: Rectangle {
-                                       color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
-                                       width: control.columnWidthArr[column]
-                                       height: control.rowHeight
+                                  //内容行高
+                                  rowHeightProvider: function (row) {
+                                      return control.headerHeight
+                                  }
+                                  //内容列的列宽
+                                  columnWidthProvider: function (column) {
+                                      return control.columnWidthArr[column]
+                                  }
+                                  ScrollBar.vertical: ScrollBar {
+                                      id: scroll_vertical
+                                      anchors.right: parent.right
+                                      anchors.rightMargin: 0
+                                      contentItem: Rectangle {
+                                          visible: (scroll_vertical.size < 1.0)
+                                          implicitWidth: control.scrollBarWidth
+                                          color: control.scrollBarColor
+                                      }
+                                  }
 
-                                       Row {
-                                           spacing: 5
-                                           anchors.centerIn: parent
+                                  ScrollBar.horizontal: ScrollBar {
+                                      id: scroll_horizontal
+                                      anchors.bottom: parent.bottom
+                                      anchors.bottomMargin: 0
+                                      anchors.left: parent.left
+                                      anchors.leftMargin: -control.tableLeft
 
-                                           Button {
-                                               text: "查看"
-                                               width: 60
-                                               height: 30
-                                               onClicked: {
-                                                   var rowData = tableModel.rows[row]
-                                                   console.log("查看行数据:", JSON.stringify(rowData, null, 2))
-                                                   processInfo.loadViewType = "query"
-                                                   pageUavModelLoader.setSource("qrc:./UavManagement.qml",
-                                                                        {processInfo: processInfo,
-                                                                            backUi: "qrc:/UavManageCommon.qml"})
+                                      contentItem: Rectangle {
+                                          visible: (scroll_horizontal.size < 1.0)
+                                          implicitHeight: control.scrollBarWidth
+                                          color: control.scrollBarColor
+                                      }
+                                  }
+
+                                  model: tableModel
+                                  delegate:DelegateChooser{
+                                          // 默认委托（用于非最后一列）
+                                      // 最后一列（操作列，索引12）使用按钮委托
+                                       role: "column" // 根据列索引选择不同的委托
+                                       // 其他列使用默认文本显示委托
+                                       DelegateChoice {
+                                            column:0
+                                            delegate: Rectangle {
+                                                color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
+                                                width: control.columnWidthArr[column]
+                                                height: control.rowHeight
+                                                CheckBox { //自定义多选框组件
+                                                    checked: tableView.model.rows.length > 0 ? tableView.model.rows[index].checked : false
+                                                    anchors.centerIn: parent
+                                                    onClicked: {
+                                                        //Qt.unchecked：适合用于需要明确表示复选框状态的场景，特别是在处理 CheckState 类型的属性时。
+                                                        //false：适合用于布尔类型的属性，表示未选中状态。
+                                                        //
+                                                        rowsModel[index].checked = !rowsModel[index].checked
+                                                        tableModel.rows = rowsModel;
+
+
+                                                    }
+                                                }
+                                                Rectangle {
+                                                    height: 1
+                                                    width: parent.width
+                                                    anchors.bottom: parent.bottom
+                                                    color: borderColor
+                                                }
+                                                Rectangle {
+                                                    height: parent.height
+                                                    width: 1
+                                                    anchors.right: parent.right
+                                                    color: borderColor
+                                                }
+                                            }
+                                        }
+
+                                      DelegateChoice {
+                                          column:9
+                                          delegate: Rectangle {
+                                              color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
+                                              width: control.columnWidthArr[column]
+                                              height: control.rowHeight
+
+                                              Row {
+                                                  spacing: 5
+                                                  anchors.centerIn: parent
+
+                                                  Button {
+                                                      text: "查看"
+                                                      width: 60
+                                                      height: 30
+                                                      onClicked: {
+                                                          var rowData = tableModel.getRow(row) //.rows[row]
+                                                          console.log("查看行数据:", JSON.stringify(rowData, null, 2))
+                                                          // 转换数据
+                                                          var transformedData = transformData(rowData)
+                                                          console.log("转换后的数据:", JSON.stringify(transformedData, null, 2))
+
+                                                          // 将转换后的数据转换为 JSON 字符串
+                                                          //var jsonStr = JSON.stringify(transformedData)
+                                                          // processInfo.recordId = transformedData.recordId
+                                                          // processInfo.uavType = transformedData.uavType
+                                                          // processInfo.uavName = transformedData.uavName
+                                                          // processInfo.uavId = transformedData.uavId
+                                                          processInfo.loadViewType = "query"
+                                                          //processInfo.jsonStr = transformedData
+                                                          assignmentEncapsulation(transformedData)
+                                                          processInfo.hangingCapacity = rowData.origHangingCapacity
+                                                          //console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
+                                                          pageMountingSchemeLoader.setSource("qrc:./AddMountingSchemeData.qml",
+                                                                               {processInfo: processInfo,
+                                                                                   backUi: "qrc:/UavManageCommon.qml"})
+                                                          mountingSchemeManagementView.visible = false
+                                                      }
+                                                  }
+
+                                                  Button {
+                                                      text: "编辑"
+                                                      width: 60
+                                                      height: 30
+                                                      onClicked: {
+
+                                                          var rowData = tableModel.rows[row]
+                                                          console.log("查看行数据:", JSON.stringify(rowData, null, 2))
+                                                          // 转换数据
+                                                          var transformedData = transformData(rowData)
+                                                          console.log("转换后的数据:", JSON.stringify(transformedData, null, 2))
+
+                                                          // 将转换后的数据转换为 JSON 字符串
+                                                          //var jsonStr = JSON.stringify(transformedData)
+
+                                                          console.log("编辑行数据:", JSON.stringify(transformedData, null, 2))
+
+                                                          processInfo.loadViewType = "update"
+                                                          assignmentEncapsulation(transformedData)
+                                                          processInfo.hangingCapacity = rowData.origHangingCapacity
+                                                          console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
+                                                          pageMountingSchemeLoader.setSource("qrc:./AddMountingSchemeData.qml",
+                                                                               {processInfo: processInfo,
+                                                                                   backUi: "qrc:/UavManageCommon.qml"})
+                                                          mountingSchemeManagementView.visible = false
+                                                      }
+                                                  }
+                                              }
+
+                                              Rectangle {
+                                                  color: borderColor
+                                                  width: parent.width
+                                                  height: 1
+                                                  anchors.bottom: parent.bottom
+                                              }
+                                              Rectangle {
+                                                  height: parent.height
+                                                  width: 1
+                                                  anchors.right: parent.right
+                                                  color: borderColor
+                                              }
+                                          }
+                                      }
+
+                                      DelegateChoice {
+                                           //column:1
+                                           delegate: Rectangle {
+                                               color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
+                                               width: control.columnWidthArr[column]
+                                               height: control.rowHeight
+
+                                               Text {
+                                                   anchors.fill: parent
+                                                   verticalAlignment: Text.AlignVCenter
+                                                   horizontalAlignment: Text.AlignHCenter
+                                                   text: display
+                                                   font.pointSize: 12
+                                                   color: "#000000"
+                                                   elide: Text.ElideRight
+                                               }
+                                               MouseArea {
+                                                           anchors.fill: parent
+                                                           hoverEnabled: true
+//                                                           onEntered: {
+//                                                               var pos = mapToGlobal(0, 0)
+//                                                               tooltip.x = pos.x //+ width + 10
+//                                                               tooltip.y = pos.y -10
+//                                                               tooltipText.text = display
+//                                                               tooltip.open()
+//                                                           }
+//                                                           onExited: tooltip.close()
+                                                       }
+
+                                               Rectangle {
+                                                   color: borderColor
+                                                   width: parent.width
+                                                   height: 1
+                                                   anchors.bottom: parent.bottom
+                                               }
+                                               Rectangle {
+                                                   height: parent.height
+                                                   width: 1
+                                                   anchors.right: parent.right
+                                                   color: borderColor
                                                }
                                            }
-
-                                           Button {
-                                               text: "编辑"
-                                               width: 60
-                                               height: 30
-                                               onClicked: {
-                                                   var rowData = tableModel.rows[row]
-                                                   console.log("编辑行数据:", JSON.stringify(rowData, null, 2))
-                                                   processInfo.loadViewType = "update"
-                                                   pageUavModelLoader.setSource("qrc:./UavManagement.qml",
-                                                                        {processInfo: processInfo,
-                                                                            backUi: "qrc:/UavManageCommon.qml"})
-                                               }
-                                           }
-                                       }
-
-                                       Rectangle {
-                                           color: borderColor
-                                           width: parent.width
-                                           height: 1
-                                           anchors.bottom: parent.bottom
-                                       }
-                                       Rectangle {
-                                           height: parent.height
-                                           width: 1
-                                           anchors.right: parent.right
-                                           color: borderColor
                                        }
                                    }
-                               }
 
-                               DelegateChoice {
-                                    //column:1
-                                    delegate: Rectangle {
-                                        color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
-                                        width: control.columnWidthArr[column]
-                                        height: control.rowHeight
+                              }
+                              //全选按钮
+//                              Rectangle {
+//                                  width: control.tableLeft
+//                                  height: control.rowHeight
+//                                  color: "#F8F8F8"
+//                                  anchors {
+//                                      top: parent.top
+//                                      left: parent.left
+//                                  }
+//                                  CheckBox {
+//                                      checked: false
+//                                      id: checkBox
+//                                      anchors {
+//                                          verticalCenter: parent.verticalCenter
+//                                          horizontalCenter: parent.horizontalCenter
+//                                      }
+//                                      onClicked: {
 
-                                        Text {
-                                            anchors.fill: parent
-                                            verticalAlignment: Text.AlignVCenter
-                                            horizontalAlignment: Text.AlignHCenter
-                                            text: display
-                                            font.pointSize: 16
-                                            color: "#000000"
-                                            elide: Text.ElideRight
-                                        }
+//                                          onSelectCheckBoxClicked(checkBox.checked)
+//                                      }
+//                                  }
+//                                  Rectangle {
+//                                      height: 1
+//                                      width: parent.width
+//                                      anchors.bottom: parent.bottom
+//                                      color: borderColor
+//                                  }
+//                                  Rectangle {
+//                                      height: 1
+//                                      width: parent.width
+//                                      anchors.top: parent.top
+//                                      color: borderColor
+//                                  }
+//                                  Rectangle {
+//                                      height: parent.height
+//                                      width: 1
+//                                      anchors.right: parent.right
+//                                      color: borderColor
+//                                  }
+//                              }
+                              //表头
+                              Item {
+                                  anchors {
+                                      left: parent.left
+                                      right: parent.right
+                                      leftMargin: control.tableLeft
+                                  }
+                                  height: control.rowHeight
+                                  z: 2
 
-                                        Rectangle {
-                                            color: borderColor
-                                            width: parent.width
-                                            height: 1
-                                            anchors.bottom: parent.bottom
-                                        }
-                                        Rectangle {
-                                            height: parent.height
-                                            width: 1
-                                            anchors.right: parent.right
-                                            color: borderColor
-                                        }
-                                    }
-                                }
-                            }
-                       }
-                       //全选按钮
-                       // Rectangle {
-                       //     width: control.tableLeft
-                       //     height: control.rowHeight
-                       //     color: "#F8F8F8"
-                       //     anchors {
-                       //         top: parent.top
-                       //         left: parent.left
-                       //     }
-                       //     CheckBox {
-                       //         checked: false
-                       //         id: checkBox
-                       //         anchors {
-                       //             verticalCenter: parent.verticalCenter
-                       //             horizontalCenter: parent.horizontalCenter
-                       //         }
-                       //         onClicked: {
+                                  Row {
+                                      anchors.fill: parent
+                                      leftPadding: -tableView.contentX
+                                      clip: true
+                                      spacing: 0
+                                      Repeater {
+                                          model: tableView.columns > 0 ? tableView.columns : 0
+                                          Rectangle {
+                                              width: tableView.columnWidthProvider(
+                                                         index) + tableView.columnSpacing
+                                              height: control.rowHeight
+                                              color: headerColor
+                                              Text {
+                                                  anchors.centerIn: parent
+                                                  text: control.horHeader[index]
+                                                  font.pointSize: 12
+                                                  color: fontColor
+                                                  elide: Text.ElideRight
+                                              }
+                                              Rectangle {
+                                                  height: 1
+                                                  width: parent.width
+                                                  anchors.bottom: parent.bottom
+                                                  color: borderColor
+                                              }
+                                              Rectangle {
+                                                  height: 1
+                                                  width: parent.width
+                                                  anchors.top: parent.top
+                                                  color: borderColor
+                                              }
+                                              Rectangle {
+                                                  height: parent.height
+                                                  width: 1
+                                                  anchors.right: parent.right
+                                                  color: borderColor
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
 
-                       //             //onSelectCheckBoxClicked(checkBox.checked)
-                       //             // if (checkBox.checked) {
-                       //             //     checkBox.checked = Qt.Unchecked;
-                       //             // }
-                       //             // else {
-                       //             //     checkBox.checked = Qt.Checked;
-                       //             // }
-                       //             if (checkBox.checked === false) {
-                       //                 onAllSelectCheckBoxClicked("allSelectCancel");
-                       //             }
-                       //             else if(checkBox.checked === true) {
-                       //                 onAllSelectCheckBoxClicked("allSelect");
-                       //             }else{
-                       //                 console.log("复选框未知")
-                       //             }
+                          }
+                      }
 
-                       //         }
-                       //     }
-                       //     Rectangle {
-                       //         height: 1
-                       //         width: parent.width
-                       //         anchors.bottom: parent.bottom
-                       //         color: borderColor
-                       //     }
-                       //     Rectangle {
-                       //         height: 1
-                       //         width: parent.width
-                       //         anchors.top: parent.top
-                       //         color: borderColor
-                       //     }
-                       //     Rectangle {
-                       //         height: parent.height
-                       //         width: 1
-                       //         anchors.right: parent.right
-                       //         color: borderColor
-                       //     }
-                       // }
-                       //表头
-                       Item {
-                           anchors {
-                               left: parent.left
-                               right: parent.right
-                               leftMargin:2// control.tableLeft
-                           }
-                           height: control.rowHeight
-                           z: 2
+                      RowLayout {
+                          Layout.preferredHeight: 60
 
-                           Row {
-                               anchors.fill: parent
-                               leftPadding: -tableView.contentX
-                               clip: true
-                               spacing: 0
-                               Repeater {
-                                   model: tableView.columns > 0 ? tableView.columns : 0
-                                   Rectangle {
-                                       width: tableView.columnWidthProvider(
-                                                  index) + tableView.columnSpacing
-                                       height: control.rowHeight
-                                       color: headerColor
-                                       Text {
-                                           anchors.centerIn: parent
-                                           text: control.horHeader[index]
-                                           font.pointSize: 18
-                                           color: fontColor
-                                           elide: Text.ElideRight
-                                       }
-                                       Rectangle {
-                                           height: 1
-                                           width: parent.width
-                                           anchors.bottom: parent.bottom
-                                           color: borderColor
-                                       }
-                                       Rectangle {
-                                           height: 1
-                                           width: parent.width
-                                           anchors.top: parent.top
-                                           color: borderColor
-                                       }
-                                       Rectangle {
-                                           height: parent.height
-                                           width: 1
-                                           anchors.right: parent.right
-                                           color: borderColor
-                                       }
-                                   }
-                               }
-                           }
-                       }
-                       //每一行前面加多选框
-                       // Column {
-                       //     anchors {
-                       //         top: parent.top
-                       //         bottom: parent.bottom
-                       //         topMargin: control.headerHeight
-                       //     }
-                       //     //topPadding: -tableView.contentY
-                       //     z: 2
-                       //     clip: true
-                       //     spacing: 0
-                       //     Repeater {
-                       //         model: tableView.rows > 0 ? tableView.rows : 0
-                       //         Rectangle {
-                       //             width: control.tableLeft
-                       //             height: control.rowHeight
-                       //             color: "white"
-                       //             CheckBox { //自定义多选框组件
-                       //                 checked: tableView.model.rows.length > 0 ? tableView.model.rows[index].checked : false
-                       //                 anchors.centerIn: parent
-                       //                 onClicked: {
-                       //                     //Qt.unchecked：适合用于需要明确表示复选框状态的场景，特别是在处理 CheckState 类型的属性时。
-                       //                     //false：适合用于布尔类型的属性，表示未选中状态。
-                       //                     //
-                       //                     rowsModel[index].checked = !rowsModel[index].checked
-                       //                     tableModel.rows = rowsModel;
+                          Rectangle {
+                              anchors.fill: parent
+                          }
 
+                          //Item { Layout.leftMargin: 20 }
+                          Item { Layout.fillWidth: true }
+//                          Button {
+//                              id: killingMethodManagement
+//                              text: "杀伤方式管理"
+//                              onClicked: {
 
-                       //                 }
-                       //             }
-                       //             Rectangle {
-                       //                 height: 1
-                       //                 width: parent.width
-                       //                 anchors.bottom: parent.bottom
-                       //                 color: borderColor
-                       //             }
-                       //             Rectangle {
-                       //                 height: parent.height
-                       //                 width: 1
-                       //                 anchors.right: parent.right
-                       //                 color: borderColor
-                       //             }
-                       //         }
-                       //     }
-                       // }
-                   }
-               }
-               RowLayout {
-                   Layout.preferredHeight: 60
+//                                  addAmmoComponentManagementPopup.setup("杀伤方式")
+//                                  addAmmoComponentManagementPopup.setUpAmmoCompType("killingMethod")
+//                                  addAmmoComponentManagementPopup.open()
 
-                   Rectangle {
-                       anchors.fill: parent
-                   }
+//                              }
+//                          }
+                          Item { Layout.fillWidth: true }
+//                          Button {
+//                              id: attackTargetTypeManagement
+//                              text: "打击目标类型管理"
+//                              onClicked: {
+//                                 addAmmoComponentManagementPopup.setup("打击目标类型")
+//                                  addAmmoComponentManagementPanel.managementType = "attackTargetType"//addAmmoComponentManagementPopup.setUpAmmoCompType("attackTargetType")
+//                                  addAmmoComponentManagementPopup.open()
 
-                   Item { Layout.leftMargin: 20 }
-                   Button {
-                       id: uavBombingmethodManagement
-                       text: "投弹方式管理"
-                       onClicked: {
-                           payloadTypeManagementPopup.open()
-                           uavManagementroot.managementType = "bombingMethod"
-                           uavManagementroot.enabled = false
-                           //uavManagementroot.visible = false
+//                              }
+//                          }
+                          Item { Layout.fillWidth: true }
+//                          Button {
+//                              id: deliveryMethodManagement
+//                              text: "发射方式管理"
+//                              onClicked: {
+//                                  addAmmoComponentManagementPopup.setup("发射方式")
+//                                  addAmmoComponentManagementPopup.setUpAmmoCompType("deliveryMethod")
+//                                  addAmmoComponentManagementPopup.open()
+//                                  //addAmmoComponentManagementPanel.managementType = "deliveryMethod"
+//                              }
+//                          }
+                          Item { Layout.fillWidth: true }
+//                          Button {
+//                              id: guidanceTypeManagement
+//                              text: "制导类型管理"
+//                              onClicked: {
+//                                 addAmmoComponentManagementPopup.setup("制导类型")
+//                                  addAmmoComponentManagementPopup.setUpAmmoCompType("guidanceType")
+//                                  addAmmoComponentManagementPopup.open()
+//                                  //addAmmoComponentManagementPanel.managementType = "guidanceType"
+//                              }
+//                          }
+                          Item { Layout.fillWidth: true }
+//                          Button {
+//                              id: payloadTypeManagement
+//                              text: "弹药类型管理"
+//                              onClicked: {
+//                                  addAmmoComponentManagementPopup.setup("弹药类型")
+//                                  addAmmoComponentManagementPopup.setUpAmmoCompType("ammunitionType")
+//                                  addAmmoComponentManagementPopup.open()
+//                                  //addAmmoComponentManagementPanel.managementType = "ammunitionType"
+//                              }
+//                          }
+                          Item { Layout.fillWidth: true }
+
+                          Item { Layout.leftMargin: 50 }//Item { Layout.fillWidth: true }
+                          Button {
+                              id: delMountSchemeManagement
+                              text: "删除挂载方案"
+                              onClicked: {
+                                  deleteMountShemeData();
+                              }
+                          }
+                          Item { Layout.leftMargin: 20 }
+                          Button {
+                              id: addMountSchemeManagement
+                              text: "新增挂载方案"
+                              onClicked: {
+                                  //addAmmoDataPopup.open()
+                                  pageMountingSchemeLoader.setSource("qrc:./AddMountingSchemeData.qml")
+                                  mountingSchemeManagementView.visible = false
+                              }
+                          }
+                          Item { Layout.rightMargin: 20 }
+                      }
+                  }
 
 
+              }
 
-                       //     onSelectCheckBoxClicked(checkBox.checked)
-                       }
-                   }
-                   Item { Layout.fillWidth: true }
-                   //底部提出问题按钮
-                   Button {
-                       id: uavRecoverymodeManagement
-                       text: "回收方式管理"
-                       onClicked: {
-
-                           payloadTypeManagementPopup.open()
-                           uavManagementroot.managementType = "recoveryMode"
-                           uavManagementroot.enabled = false
-                           //uavManagementroot.visible = false
-                           customSignal("按钮被点击")
-                       }
-                   }
-                   Item { Layout.fillWidth: true }
-                   Button {
-                       id: uavHangingLoctionManagement
-                       text: "挂载位置管理"
-                       onClicked: {
-                           //onCopyButtonClicked();
-                           payloadTypeManagementPopup.open()
-                           uavManagementroot.managementType = "uavHanging"
-                           uavManagementroot.enabled = false
-                           //uavManagementroot.visible = false
-                       }
-                   }
-                   Item { Layout.fillWidth: true }
-
-                   Button {
-                       id: payloadTypeManagement
-                       text: "载荷类型管理"
-                       onClicked: {
-                          // onModifyButtonClicked();
-                           payloadTypeManagementPopup.open()
-                           uavManagementroot.managementType = "loadType"
-                           uavManagementroot.enabled = false
-                           //uavManagementroot.visible = false
-                       }
-                   }
-                   Item { Layout.fillWidth: true }
-                   Button {
-                       id: opreationTypeManagement
-                       text: "操控方式管理"
-                       onClicked: {
-                          // onModifyButtonClicked();
-                           payloadTypeManagementPopup.open()
-                           uavManagementroot.managementType = "operationType"
-                           uavManagementroot.enabled = false
-                           //uavManagementroot.visible = false
-                       }
-                   }
-                   Item { Layout.fillWidth: true }
-                   Button {
-                       id: delUavManagement
-                       text: "删除方案"
-                       onClicked: {
-                           onDelButtonClicked();
-                       }
-                   }
-                   Item { Layout.leftMargin: 20 }
-                   Button {
-                       id: addUavManagement
-                       text: "新增方案"
-                       onClicked: {
-                           processInfo.loadViewType = "addUavData"
-                           pageUavModelLoader.setSource("qrc:./AddMountingSchemeData.qml",
-                                                {processInfo: processInfo,
-                                                    backUi: "qrc:/MountingSchemeManagement.qml"})
-                           // 退出并隐藏界面
-                           //uavManagementLoader.setSource = null // 卸载界面
-                       }
-                   }
-                   Item { Layout.rightMargin: 20 }
-               }
-           }
 
            Component {
                id: rowDelegate
@@ -863,188 +954,100 @@ Rectangle {
                    }
                }
            }
-
            function dpH(h) {
                return h
            }
+           function loadMountShemeData(){
+             mountingSchemeManagementroot.mountSchemeData.mountSchemeName = ""
+             mountingSchemeManagementroot.mountSchemeData.uavName = ""
+           }
 
-           function loadUavAllData(){
-
-               var receiveData = uavModelDaoTable.selectUavModelAllData()
-               console.log("+:", JSON.stringify(receiveData, null, 2));
-                // 清空旧数据
+           function loadMountShemeRecord(data){
+            var result = mountingSchemeDaoTableModel.selectMountingSchemeData(data)
+               console.log("datadata+"+JSON.stringify(result))
                tableModel.clear()
                rowsModel.length = 0;
 
-               tableModel.rows = receiveData;
+               tableModel.rows = result;
                rowsModel = tableModel.rows;
-               //console.log("UAV Model Data:", JSON.stringify(tableModel))
-               // try {
-               //         var receiveData = uavModelDaoTable.selectUavModelAllData();
-               //         console.log("UAV Model Data:", JSON.stringify(receiveData, null, 2));
-
-               //         // 清空旧数据
-               //         tableModel.clear();
-
-               //         // 填充新数据
-               //         for (var i = 0; i < receiveData.length; i++) {
-               //             tableModel.append(receiveData[i]);
-               //         }
-               //     } catch (error) {
-               //         console.error("Error loading UAV data:", error);
-               //     }
-
-               // 填充新数据（带序号）
-               // receiveData.forEach((item, index) => {
-               //     tableModel.appendRow({
-               //         "index": index + 1,
-               //         "uavType": item.uavType || "--",
-               //         "uavName": item.uavName || "--",
-               //         "uavId": item.uavId || "N/A",
-               //         "hangingCapacity": item.hangingCapacity || "无",
-               //         "operationMethod": item.opreationMethod || "未知",
-               //         "bombMethod": item.bombMethod || "未指定",
-               //         "recoveryMode": item.recoveryMode || "默认",
-               //         "payloadType": item.payloadType || "通用",
-               //         "operation": "操作"
-               //     })
-               // })
 
                // 自动刷新表格
                tableModel.layoutChanged()
-           }
-           // 生成测试数据函数
-           function generateTestData() {
-               const testData = [
-                   // 序号 | 机型       | 批次 | 架次 | 接装部队       | 部队专业     | 提出者 | 观察项内容      | 产品图号   | 产品名称
-                   ["1",  "RQ-4",     "A1", "001", "第1航空旅",   "战略侦察",  "张伟",  "发动机过热",    "DWG-001", "主引擎组件"],
-                   ["2",  "MQ-9",     "B2", "003", "第3无人机团", "战术打击",  "王芳",  "摄像头偏移",    "DWG-002", "光电吊舱"],
-                   ["3",  "CH-5",     "C3", "005", "东部战区",    "电子对抗",  "李明",  "通信延迟",      "DWG-003", "数据链模块"],
-                   ["4",  "TB-2",     "D4", "007", "海军陆战队",  "海上侦察",  "陈强",  "燃油效率低",    "DWG-004", "燃油系统"],
-                   ["5",  "Wing Loong", "E5","009", "西部战区",    "边境巡逻",  "周涛",  "起落架异常",    "DWG-005", "起落架总成"]
-               ]
 
-               testData.forEach(row => {
-                   tableModel.appendRow({
-                       index: row[0],
-                       planeShape: row[1],
-                       batchNo: row[2],
-                       sortiesNo: row[3],
-                       unit: row[4],
-                       professionId: row[5],
-                       presenterId: row[6],
-                       problemDesc: row[7],
-                       proChartNo: row[8],
-                       proChartName: row[9]
-                   })
-               })
-            }
-           function loadRecord(){
-               processInfo.recordId = 0
-               processInfo.uavType = ""
-               processInfo.uavName = ""
-               processInfo.uavId = ""
-               processInfo.loadViewType = ""//加载界面类型，主要是区分查看与编辑
-               console.log("loadRecord()"+JSON.stringify(processInfo))
+           }
+           function deleteMountShemeData(){
+
+                   var selectedRowsData = [];
+                   for (var i = 0; i < tableModel.rowCount; i++) {
+
+                       //console.log("tableModel.rows[i].checked Rows JSON:", JSON.stringify(tableModel.rows[i]));
+                       //console.log("tablemodel",JSON.stringify(tableModel.rows))
+                       if (tableModel.rows[i].checked) {
+                           var rowData = {
+                               recordId: tableModel.rows[i].recordId,
+                               ammoName: tableModel.rows[i].ammoName,
+                               //uavmountLocationId: tableModel.rows[i].uavmountLocationId
+                           };
+
+                           selectedRowsData.push(rowData);
+                       }
+                   }
+                   // 打印当前函数的名称
+                    console.log("当前函数名称:", arguments.callee.name);
+                   console.log("tableModel.rows[i] ammo Rows JSON:"+JSON.stringify(selectedRowsData));
+                   if (selectedRowsData.length === 0) {
+                       warningItem.text = "数据删除不能为空!"
+                       warningPopup.open()
+                       // 2秒后自动关闭
+                       autoCloseTimer.start()
+                   }else{
+                    let result = mountingSchemeDaoTableModel.deleteMountingSchemeData(selectedRowsData)
+                    loadMountShemeData()
+                    loadMountShemeRecord(mountingSchemeManagementroot.mountSchemeData)
+                       if(result === true){
+                           warningItem.text = "数据删除成功!"
+                           warningPopup.open()
+                           // 2秒后自动关闭
+                           autoCloseTimer.start()
+                       }else if(result === false){
+                           warningItem.text = "数据删除失败!"
+                           warningPopup.open()
+                           // 2秒后自动关闭
+                           autoCloseTimer.start()
+                        }else{
+                           console.log("unknown deleteMountLocation")
+                       }
+
+                     }
+
+                   // 将选中的行的数据转换为 JSONArray 格式
+//                   var selectedRowsJson = JSON.stringify(selectedRowsData);
+//                   console.log("Selected deleteMountLocationDataRows JSON:", selectedRowsJson);
+//                   return selectedRowsData
+
            }
 
            function loadProcessInfo(model, row) {
                processInfo.recordId = model.rows[row].recordId
-               processInfo.uavType = model.rows[row].uavType
-               processInfo.uavName = model.rows[row].uavName
-               processInfo.uavId = model.rows[row].uavId
+               processInfo.planeShape = model.rows[row].planeShape //机型
+               processInfo.batchNo = model.rows[row].batchNo   //批次
+               processInfo.sortiesNo = model.rows[row].sortiesNo //架次
+               processInfo.deliveryArmy = model.rows[row].deliverArmy // 接装部队
+               processInfo.professionId = model.rows[row].professionId // 部队专业
+               processInfo.presenterId = tableModel.rows[row].presenterId	// 提出者
+               processInfo.presenterName = tableModel.rows[row].presenterName	// 提出者
            }
-           //对于uav搜索框的控制
+
            function inputValidator() {
                if (modelSelector.currentIndex === 0 && uavIdSelect.text === "" && inputUavNameSelect.text ==="") {
                    warningPopup.open()
                    // 2秒后自动关闭
-                   warningItem.text = "您查询的是全部数据！"
                     autoCloseTimer.start()
                    return false
                }
                return true
            }
 
-           function onSelectCheckBoxClicked(checked) {
-               for (let i = 0; i < tableModel.rowCount; i++) {
-                  rowsModel[i].checked = checked ? Qt.Checked : Qt.Unchecked
-               }
-               tableModel.rows = rowsModel
-           }
-           function onAllSelectCheckBoxClicked(selectStr){
-               //var check = false; // 使用 var 声明变量
-               if(selectStr === "allSelect"){
-                   for (var i = 0; i < tableModel.rowCount; i++) {
-                      //rowsModel[i].checked = true//Qt.Checked
-                       console.log("qqqqqqqqqqqqqqqallSelect"+i+"as"+tableModel.rowCount)
-                       // rowsModel[i].checked = true
-                       // tableModel.rows = rowsModel
-                        tableModel.rows[i].checked = true;
-                       tableView.model = tableModel
-                       // tableModel.layoutChanged(); // 通知表格刷新
-                   }
-               }else if(selectStr === "allSelectCancel"){
-                   for (var j = 0; j < tableModel.rowCount; j++) {
-                      //rowsModel[j].checked = false// Qt.Unchecked
-                       tableModel.rows[i].checked = false;
-                        tableView.model = tableModel
-                       console.log("qqqqqqqqqqqqqqqallSelectCalcel"+j+"as"+tableModel.rowCount)
-                       //tableModel.layoutChanged(); // 通知表格刷新
-                   }
-               }else{
-                   console.log("未知选择")
-               }
 
-           }
 
-           function onRecordListViewDoubleClicked(model, row) {
-               print(model.rows[row].occurChance) //机型
-
-               pageLoader.setSource("qrc:/ui/delivery/DeliveryProblemRecord.qml",
-                                    {recordEntity: model.rows[row], windowModel: 1,
-                                        backUi: "qrc:/ui/delivery/DeliveryRecordListView.qml"})
-           }
-
-           function onModifyButtonClicked() {
-           }
-           function onDelButtonClicked() {
-               var selectedRowsData = [];
-                   for (var i = 0; i < tableModel.rowCount; i++) {
-
-                       //console.log("tableModel.rows[i].checked Rows JSON:", JSON.stringify(tableModel.rows[i]));
-                       //console.log("",JSON.stringify(tableModel.rows))
-                       if (tableModel.rows[i].checked) {
-                           var rowData = {
-                               uav_type: tableModel.rows[i].uavType,
-                               uav_name: tableModel.rows[i].uavName,
-                               uav_id: tableModel.rows[i].uavId,
-                               payload_type: tableModel.rows[i].payloadType,
-                               bomb_method: tableModel.rows[i].bombMethod,
-                               recovery_mode: tableModel.rows[i].recoveryMode,
-                               hanging_capacity: tableModel.rows[i].hangingCapacity,
-                               operation_method: tableModel.rows[i].operationMethod,
-                               create_time: tableModel.rows[i].uavCreatModelTime
-                           };
-                           //console.log("tableModel.rows[i].uavType Rows JSON:", tableModel.rows[i].uavType);
-                           selectedRowsData.push(rowData);
-                       }
-                   }
-
-                   // 将选中的行的数据转换为 JSONArray 格式
-                   var selectedRowsJson = JSON.stringify(selectedRowsData);
-                   //console.log("Selected Rows JSON:", selectedRowsJson);
-                    if (selectedRowsData.length === 0) {
-                        warningPopup.open()
-                        warningItem.text = "请选择复选框删除数据"
-                        // 2秒后自动关闭
-                        autoCloseTimer.start()
-                        return false;
-                    }else{
-                        //console.log("DeleteUavData"+selectedRowsJson)
-                        uavModelDaoTable.deleteModelDate(selectedRowsData)
-
-                    }
-                loadUavAllData()
-    }
 }

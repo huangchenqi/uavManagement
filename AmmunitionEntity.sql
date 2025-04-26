@@ -138,5 +138,5 @@ CREATE TABLE "uav_type_man"."ammo_parameters" (
   "image_name" TEXT NOT NULL,
   "image_url" TEXT NOT NULL,
   "record_creation_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  "use_status" REAL NOT NULL);
+  "use_status" BOOLEAN NOT NULL);
 

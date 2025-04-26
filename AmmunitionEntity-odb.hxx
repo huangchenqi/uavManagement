@@ -1698,9 +1698,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        float,
-        pgsql::id_real >::query_type,
-      pgsql::id_real >
+        bool,
+        pgsql::id_boolean >::query_type,
+      pgsql::id_boolean >
     use_status_type_;
 
     static const use_status_type_ use_status;
@@ -3086,12 +3086,12 @@ namespace odb
 
       // record_creation_time
       //
-     unsigned long long record_creation_time_value;
+      unsigned long long record_creation_time_value;
       bool record_creation_time_null;
 
       // use_status
       //
-      float use_status_value;
+      bool use_status_value;
       bool use_status_null;
 
       std::size_t version;

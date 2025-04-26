@@ -7,6 +7,7 @@
 #include "odb/pgsql/database.hxx"
 #include <vector>
 #include <stdexcept>
+#include <iostream>
 
 // ODB 头文件
 #include <odb/database.hxx>
@@ -20,7 +21,8 @@
 #include <QStringList>
 #include <QDebug>
 #include "json.hpp"
-
+#include <QUrl>
+#include <QTemporaryFile>
 #include "AmmunitionEntity-odb.hxx"
 #include "UavModelEntity-odb.hxx"
 #include "uavmodelentity-odb.hxx"
@@ -30,6 +32,8 @@
 #include "UavModelRecoveryModeEntity-odb.hxx"
 #include "UavModelOperationWayEntity-odb.hxx"
 #include <QFile>
+#include <QDebug>
+#include <QImage>
 namespace nl = nlohmann;
 
 QDateTime covert(unsigned long long i){
@@ -136,7 +140,7 @@ QJsonArray UavModelDao::selectUavModelAllData()
         odb::result<UavModelEntity> result = db.query<UavModelEntity>(query_t::true_expr);
         qDebug() << "Query returned" << result.size() << "records";  // 添加此行
         // 关键修正2：遍历所有结果
-        int sum = 0;
+        int sum = 1;
         bool checked = false;
         if(result.size()==0){
             return uavModelData;
@@ -713,7 +717,59 @@ QJsonObject UavModelDao::selectSomeUavModelDate(const QString &jsonStr)
             /******************** 系统记录 ********************/
             //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
             //uavModelData["image_name"] = QString::fromStdString(entity.uavImgName_);
-            uavModelData["image_url"] = QString::fromStdString(entity.uavImgUrl_);
+
+            QByteArray imageData(entity.uavImgName_.data(), entity.uavImgName_.size());
+            //建立临时文件名
+
+            QString tempFileName = "Uav" + QDateTime::currentDateTime().toString("yyyyMMddHHmmss") + "Image";
+            // 创建一个临时文件
+            QTemporaryFile tempFile(tempFileName);
+            //tempFile.setAutoRemove(false); // 禁用自动删除
+            if (!tempFile.open()) {
+                qDebug() << "Failed to create temporary file:" << tempFile.errorString();
+                //return QString();
+            }
+
+            // 写入图片数据
+            tempFile.write(imageData);
+            tempFile.close();
+
+            // 返回临时文件的路径
+            QUrl imageUrl;
+             QString tempFilePath =tempFile.fileName();
+             if (!tempFilePath.isEmpty()) {
+                 imageUrl = QUrl::fromLocalFile(tempFilePath);
+             }
+
+             QString filePath = imageUrl.toString();
+             // 去掉文件路径中的 "file:///"
+                filePath = filePath.mid(8);
+
+                // 检查文件是否存在
+                QFile file(filePath);
+                if (!file.exists()) {
+                    qDebug()<< "错误, 文件不存在！";
+
+                }
+
+                // 加载图片
+                QImage image(filePath);
+//                if (image.isNull()) {
+//                    qDebug()<<"错误, 无法加载图片！";
+//                    return -1;
+//                }
+                QString fileType = ".png";
+
+                // 修改文件扩展名
+                QString newFilePath = filePath.section('.', 0, -2) + fileType;
+
+                // 保存为PNG格式
+                if (!image.save(newFilePath, "PNG")) {
+                    qDebug()<<"错误, 保存失败！";
+                }
+                qDebug()<<"QTemporaryFile"<<newFilePath;
+
+            uavModelData["image_url"] = newFilePath;
             // 转换为格式化的JSON字符串
             QJsonDocument doc(uavModelData);
             QString jsonString = doc.toJson(QJsonDocument::Indented);
@@ -875,13 +931,19 @@ bool UavModelDao::updateModelDate(const QString &jsonStr)
 
         /******************** 系统记录 ********************/
         entity.uavCreatModelTime_ = QDateTime::currentDateTime();
-        QFile file(QString::fromStdString(uavModelData["image_name"].toString().toStdString()));
+        QString image_url = uavModelData["image_url"].toString();
+        QUrl url(image_url);
+        QString localFilePath = url.toLocalFile();
+        QFile file(localFilePath);
+
+        qDebug()<<"image_url:"<<uavModelData["image_url"].toString();
         file.open(QIODevice::ReadOnly);
         QByteArray data = file.readAll();
+        file.close();
         //std::vector  imagByteA = std::vector<unsigned char>(data.begin(),data.end());
-        entity.uavImgName_ = std::vector<char>(data.begin(),data.end());//entity.uavImgName_ = uavModelData["image_name"].toString().toStdString();
-        entity.uavImgUrl_ = uavModelData["image_url"].toString().toStdString();
-
+        entity.uavImgName_ = std::vector<char>(data.begin(),data.end());
+        std::vector<char> imagByteA(data.begin(), data.end());
+        std::cout << "imagByteA: "<<imagByteA.size()<<"Data size" << entity.uavImgName_.size() << std::endl;
         // auto id = db.persist(entity);
         // qDebug() << "Persisting entity..."<<id;
 
@@ -903,6 +965,7 @@ bool UavModelDao::deleteModelDate(const QJsonArray &object)
 {
     qDebug() << "Starting database Rows Delete...";
     QJsonObject checkResult;
+    int recordId;
     QString uavType,uavId,uavName;
     QString uavInvestigationPayloadType,uavBombingmethod,
             uavRecoverymode,uavHangingLoctionCapacity,uavOperationMethod;
@@ -935,6 +998,7 @@ bool UavModelDao::deleteModelDate(const QJsonArray &object)
         // 遍历 QJsonArray
         for (int i = 0; i < object.size(); ++i) {
             QJsonObject uavData = object.at(i).toObject();
+             recordId = uavData["recordId"].toInt();
              uavType = uavData["uav_type"].toString();
              uavName = uavData["uav_type"].toString();
              uavId  = uavData["uav_id"].toString();
@@ -945,6 +1009,7 @@ bool UavModelDao::deleteModelDate(const QJsonArray &object)
              uavOperationMethod = uavData["operation_method"].toString();
              uavCreatModelTime = uavData["create_time"].toString();
             // 打印每一行的数据
+             qDebug() << "recordId:" << uavData["recordId"].toInt();
             qDebug() << "UAV Type:" << uavData["uav_type"].toString();
             qDebug() << "UAV Name:" << uavData["uav_name"].toString();
             qDebug() << "UAV ID:" << uavData["uav_id"].toString();
@@ -955,10 +1020,10 @@ bool UavModelDao::deleteModelDate(const QJsonArray &object)
             qDebug() << "Operation Method:" << uavData["operation_method"].toString();
             qDebug() << "Create Time:" << uavData["create_time"].toString();
             qDebug() << "-----------------------------";
-            auto rst = db.query<UavModelEntity>(//db.erase_query<UavModelEntity>
-                query::uavType == uavType.toStdString().c_str()
-                && query::uavName == uavName.toStdString().c_str()
-                && query::uavId == uavId.toStdString().c_str()
+            auto rst = db.erase_query<UavModelEntity>(//db.query<UavModelEntity>
+                //query::uavType == uavType.toStdString().c_str()
+                //&&query::uavName == uavName.toStdString().c_str()
+                 query::id == recordId
                 // && query::uavInvestigationPayloadType == uavInvestigationPayloadType.toStdString()
                 // && query::uavBombingmethod == uavBombingmethod.toStdString()
                 // && query::uavRecoverymode == uavRecoverymode.toStdString()
@@ -967,7 +1032,7 @@ bool UavModelDao::deleteModelDate(const QJsonArray &object)
                 //&& query::uavCreatModelTime == uavCreatModelTime.toStdString().c_str()
 
                 ); // 替换 condition1、condition2 为实际的字段名，value1、value2 为实际的值
-            qDebug() << "===============================" << rst.size();
+            qDebug() << "===============================" ;//<< rst.size()
         }
 
         // 提交事务
@@ -975,6 +1040,7 @@ bool UavModelDao::deleteModelDate(const QJsonArray &object)
         qDebug() <<"当前函数名称:" << __FUNCTION__<<":"<< "Transaction committed, 删除成功";
     } catch (const std::exception& e) {
         qCritical() << "Error:" << "删除操作出错: " << e.what();
+        return false;
     }
 
     return true;
@@ -1194,11 +1260,39 @@ bool UavModelDao::insertModelDate(const QJsonObject& objectData)
 
                 /******************** 系统记录 ********************/
                 //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
-                QFile file(QString::fromStdString(object["image_name"].toString().toStdString()));
+                // 使用 QUrl 解析 URL 并提取本地路径
+                QString image_url = object["image_url"].toString();
+                QUrl url(image_url);
+                QString localFilePath = url.toLocalFile();
+                QFile file(localFilePath);
+
+                qDebug()<<"image_url:"<<object["image_url"].toString();
                 file.open(QIODevice::ReadOnly);
                 QByteArray data = file.readAll();
+                file.close();
                 //std::vector  imagByteA = std::vector<unsigned char>(data.begin(),data.end());
                 entity.uavImgName_ = std::vector<char>(data.begin(),data.end());
+                std::vector<char> imagByteA(data.begin(), data.end());
+                std::cout << "imagByteA: "<<imagByteA.size()<<"Data size" << entity.uavImgName_.size() << std::endl;
+
+
+                // std::vector<unsigned char> content;
+
+                // // 文件写入方法
+                // bool save_to_file(const std::string& path) {
+                //     QFile file(QString::fromStdString(path));
+                //     if (!file.open(QIODevice::WriteOnly)) return false;
+                //     file.write(reinterpret_cast<const char*>(content.data()), content.size());
+                //     return file.flush();
+                // }
+
+                // // 文件加载方法
+                // static BinaryData load_from_file(const std::string& path) {
+                //     QFile file(QString::fromStdString(path));
+                //     file.open(QIODevice::ReadOnly);
+                //     QByteArray data = file.readAll();
+                //     return {std::vector<unsigned char>(data.begin(), data.end())};
+                // }
                 //entity.uavImgName_ = object["image_name"].toString().toStdString();
                 //entity.uavImgUrl_ = object["image_url"].toString().toStdString();
 
@@ -1206,7 +1300,6 @@ bool UavModelDao::insertModelDate(const QJsonObject& objectData)
                 // if (entity.getUavType().empty()) {
                 //     throw std::invalid_argument("Missing required field: uav_type");
                 // }
-                qDebug()<<"file:///C:/Users/12738/Desktop/齿轮.jpg"<<object["image_url"].toString();
                 // 6. 持久化到数据库
                 qDebug() << "Persisting entity...";
                 auto id = db.persist(entity);

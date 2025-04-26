@@ -179,7 +179,7 @@ namespace odb
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::timestamp_oid,
-    pgsql::float4_oid
+    pgsql::bool_oid
   };
 
   const unsigned int access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::
@@ -323,7 +323,7 @@ namespace odb
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::timestamp_oid,
-    pgsql::float4_oid,
+    pgsql::bool_oid,
     pgsql::int8_oid
   };
 
@@ -2038,7 +2038,7 @@ namespace odb
 
     // use_status
     //
-    b[n].type = pgsql::bind::real;
+    b[n].type = pgsql::bind::boolean_;
     b[n].buffer = &i.use_status_value;
     b[n].is_null = &i.use_status_null;
     n++;
@@ -4106,13 +4106,13 @@ namespace odb
     // use_status
     //
     {
-      float const& v =
+      bool const& v =
         o.use_status;
 
       bool is_null (false);
       pgsql::value_traits<
-          float,
-          pgsql::id_real >::set_image (
+          bool,
+          pgsql::id_boolean >::set_image (
         i.use_status_value, is_null, v);
       i.use_status_null = is_null;
     }
@@ -6021,12 +6021,12 @@ namespace odb
     // use_status
     //
     {
-      float& v =
+      bool& v =
         o.use_status;
 
       pgsql::value_traits<
-          float,
-          pgsql::id_real >::set_value (
+          bool,
+          pgsql::id_boolean >::set_value (
         v,
         i.use_status_value,
         i.use_status_null);

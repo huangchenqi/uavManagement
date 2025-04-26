@@ -11,6 +11,8 @@
 #include "odb/pgsql/traits.hxx"
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QDebug>
+#include <QDateTime>
 AmmoAttackTargetDao::AmmoAttackTargetDao(QObject* parent) : QObject(parent) {
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
     dbConn_.reset(new DatabaseConnection(
@@ -38,7 +40,7 @@ QJsonArray AmmoAttackTargetDao::selectAmmoAttackTargetAllData()
         odb::result<AmmoAttackTargetTypeEntity> result = db.query<AmmoAttackTargetTypeEntity>(query_t::ammoAttackTargetStatus == true);
         qDebug() << "Query returned" << result.size() << "records";  // 添加此行
         // 关键修正2：遍历所有结果
-        int sum = 0;
+        int sum = 1;
         bool checked = false;
         if(result.size()==0){
             return uavMountLocationData;

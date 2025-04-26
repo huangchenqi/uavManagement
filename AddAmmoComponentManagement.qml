@@ -12,6 +12,7 @@ import AmmoLaunchWayDaoModel 1.0
 import AmmoAttackTargetDaoModel 1.0
 import AmmoGuidanceTypeDaoModel 1.0
 import AmmoTypeDaoModel 1.0
+import AmmoAerodynamicConfigurationDaoModel 1.0
 /**
 https://blog.csdn.net/qq_24890953/article/details/104640454
   */
@@ -100,6 +101,9 @@ Rectangle {
            AmmoTypeDaoTableModel{
                id:ammoTypeDaoTableModel
            }
+           AmmoAerodynamicConfigurationDaoTableModel{
+               id:ammoAerodynamicConfigurationDaoTableModel
+           }
 
            // 数据模型
            // 表格数据模型
@@ -129,8 +133,12 @@ Rectangle {
                                text:
                                if(addAmmoComponentManagementroot.managementType === "killingMethod"){
                                   return "杀伤方式:"
-                               }else if(addAmmoComponentManagementroot.managementType === "attackTargetType"){
-                                  return "打击目标类型:"
+//                               }else if(addAmmoComponentManagementroot.managementType === "attackTargetType"){
+//                                  return "打击目标类型:"
+
+                               }else if(addAmmoComponentManagementroot.managementType === "aerodynamicConfigurationType"){
+                                  return "气动布局:"
+
                                }else if(addAmmoComponentManagementroot.managementType === "deliveryMethod"){
                                   return "发射方式:"
                                }else if(addAmmoComponentManagementroot.managementType === "guidanceType"){
@@ -558,8 +566,8 @@ Rectangle {
                        console.log(" unknown saveuavComponeData")
                    }
                   return "杀伤方式:"
-               }else if(addAmmoComponentManagementroot.managementType === "attackTargetType"){
-                   addAmmoComponentManagementroot.horHeaderContext = "打击目标类型"
+               }else if(addAmmoComponentManagementroot.managementType === "aerodynamicConfigurationType"){//"attackTargetType"){
+                   //addAmmoComponentManagementroot.horHeaderContext = "打击目标类型"
                    if(ammoComponeData.ammoComponeName.length  === 0){
                        warningItem.text = "数据不能为空!"
                        warningPopup.open()
@@ -567,7 +575,7 @@ Rectangle {
                        autoCloseTimer.start()
                        return false
                    }else if(ammoComponeData.ammoComponeName.length > 0){
-                       let insertResult = ammoAttackTargetDaoTableModel.insertAmmoAttackTargetData(ammoComponeData)
+                       let insertResult = ammoAerodynamicConfigurationDaoTableModel.insertAmmoAerodynamicConfigurationData(ammoComponeData)//ammoAttackTargetDaoTableModel.insertAmmoAttackTargetData(ammoComponeData)
                        console.log("addMountLocationText"+insertResult)
                        if(insertResult === true){
                            warningItem.text = "数据添加成功!"
@@ -579,7 +587,7 @@ Rectangle {
                    }else{
                        console.log(" unknown saveuavComponeData")
                    }
-                  return "打击目标类型:"
+                  //return "打击目标类型:"
                }else if(addAmmoComponentManagementroot.managementType === "deliveryMethod"){
                    addAmmoComponentManagementroot.horHeaderContext = "发射方式"
                    if(ammoComponeData.ammoComponeName.length  === 0){
@@ -633,7 +641,7 @@ Rectangle {
                        autoCloseTimer.start()
                        return false
                    }else if(ammoComponeData.ammoComponeName.length > 0){
-                       let insertResult = ammoTypeDaoTableModel.insertAmmoLaunchWayData(ammoComponeData)
+                       let insertResult = ammoTypeDaoTableModel.insertAmmoTypeData(ammoComponeData)
                        console.log("addMountLocationText"+insertResult)
                        if(insertResult === true){
                            warningItem.text = "数据添加成功!"
@@ -680,9 +688,9 @@ Rectangle {
                    //addAmmoComponentManagementroot.horHeaderContext = "杀伤方式"
                  receiveData = ammoKillingWayDaoTableModel.selectAmmoKillingWayAllData()
                     console.log("杀伤方式:+:", JSON.stringify(receiveData, null, 2));
-               }else if(addAmmoComponentManagementroot.managementType === "attackTargetType"){
+               }else if(addAmmoComponentManagementroot.managementType === "aerodynamicConfigurationType"){//"attackTargetType"){
                     //addAmmoComponentManagementroot.horHeaderContext = "打击目标类型"
-                   receiveData = ammoAttackTargetDaoTableModel.selectAmmoAttackTargetAllData()
+                   receiveData = ammoAerodynamicConfigurationDaoTableModel.selectAmmoAerodynamicConfigurationAllData()// ammoAttackTargetDaoTableModel.selectAmmoAttackTargetAllData()
 
                }else if(addAmmoComponentManagementroot.managementType === "deliveryMethod"){
                    addAmmoComponentManagementroot.horHeaderContext = "发射方式"
@@ -694,7 +702,7 @@ Rectangle {
 
                }else if(addAmmoComponentManagementroot.managementType === "ammunitionType"){
                    addAmmoComponentManagementroot.horHeaderContext = "弹药类型"
-                   receiveData = ammoTypeDaoTableModel.selectAmmoLaunchWayAllData()
+                   receiveData = ammoTypeDaoTableModel.selectAmmoTypeAllData()
 
                 }else if(addAmmoComponentManagementroot.managementType === "combatType"){
                    addAmmoComponentManagementroot.horHeaderContext = "战斗部类型"
@@ -753,9 +761,9 @@ Rectangle {
                        console.log("unknown deleteMountLocation")
                    }
                     console.log("杀伤方式:+:", JSON.stringify(receiveData, null, 2));
-               }else if(addAmmoComponentManagementroot.managementType === "attackTargetType"){
-                   addAmmoComponentManagementroot.horHeaderContext = "打击目标类型"
-                   let result = ammoAttackTargetDaoTableModel.deleteAmmoAttackTargetData(selectedRowsData)
+               }else if(addAmmoComponentManagementroot.managementType === "aerodynamicConfigurationType"){//"attackTargetType"){
+                   //addAmmoComponentManagementroot.horHeaderContext = "打击目标类型"
+                   let result = ammoAerodynamicConfigurationDaoTableModel.deleteAmmoAerodynamicConfigurationData(selectedRowsData) //ammoAttackTargetDaoTableModel.deleteAmmoAttackTargetData(selectedRowsData)
                    recieveAmmoComponentAllData()
                    if(result === true){
                        warningItem.text = "数据删除成功!"
@@ -809,7 +817,7 @@ Rectangle {
                     console.log("杀伤方式:+:", JSON.stringify(receiveData, null, 2));
                }else if(addAmmoComponentManagementroot.managementType === "ammunitionType"){
                    addAmmoComponentManagementroot.horHeaderContext = "弹药类型"
-                   let result = ammoTypeDaoTableModel.deleteAmmoLaunchWayData(selectedRowsData)
+                   let result = ammoTypeDaoTableModel.deleteAmmoTypeData(selectedRowsData)
                    recieveAmmoComponentAllData()
                    if(result === true){
                        warningItem.text = "数据删除成功!"
@@ -860,9 +868,9 @@ Rectangle {
                        console.log("unknown deleteMountLocation")
                    }
 
-               }else if(addAmmoComponentManagementroot.managementType === "attackTargetType"){
-                   addAmmoComponentManagementroot.horHeaderContext = "打击目标类型"
-                   let result = ammoAttackTargetDaoTableModel.updateAmmoAttackTargetData(resultData)
+               }else if(addAmmoComponentManagementroot.managementType === "aerodynamicConfigurationType"){//"attackTargetType"){
+                   //addAmmoComponentManagementroot.horHeaderContext = "打击目标类型"
+                   let result = ammoAerodynamicConfigurationDaoTableModel.updateAmmoAerodynamicConfigurationData(resultData) //ammoAttackTargetDaoTableModel.updateAmmoAttackTargetData(resultData)
                    recieveAmmoComponentAllData()
                    if(result === true){
                        warningItem.text = "数据更新成功!"
@@ -913,7 +921,7 @@ Rectangle {
                    }
                }else if(addAmmoComponentManagementroot.managementType === "ammunitionType"){
                    addAmmoComponentManagementroot.horHeaderContext = "弹药类型"
-                   let result = ammoTypeDaoTableModel.updateAmmoLaunchWayData(resultData)
+                   let result = ammoTypeDaoTableModel.updateAmmoTypeData(resultData)
                    recieveAmmoComponentAllData()
                    if(result === true){
                        warningItem.text = "数据更新成功!"

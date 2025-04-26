@@ -12,13 +12,13 @@ class AmmoDao: public QObject
     Q_OBJECT
 public:
     AmmoDao(QObject* parent = nullptr);//UavModelDao();//explicit UavModelDao(QObject *parent = 0);
-    Q_INVOKABLE QJsonArray selectAmmoAllData();//查询全部数据
-    Q_INVOKABLE QJsonObject selectSomeAmmoData(const QJSValue &selectedData);//查询某个条件的数据
+    Q_INVOKABLE QJsonArray selectAmmoAllData(const QJsonObject &selectedData);//查询全部数据
+    Q_INVOKABLE QJsonObject selectSomeAmmoData(const QJsonObject &selectedData);//查询某个条件的数据
     Q_INVOKABLE bool updateAmmoData(const QJSValue &selectedData);//更新数据
     Q_INVOKABLE bool deleteAmmoData(const QJSValue &selectedData);//删除数据
     //QJsonObject checkAmmoDataObject(const QJsonObject& object);//检查QML界面的数据是否匹配
-    Q_INVOKABLE bool insertAmmoData(const QJSValue &selectedData);//插入数据
-    void test();
+    Q_INVOKABLE bool insertAmmoData(const QJsonObject &object);//插入数据
+
 private:
     std::unique_ptr<DatabaseConnection> dbConn_;
 };

@@ -13,9 +13,8 @@
         <file>UavReconnaissancePayloadManagement.qml</file>
         <file>AmmoRecordManagement.qml</file>
         <file>AddUavReconnaissancePayloadData.qml</file>
-        <file>AddAmmunitionLoadData.qml</file>
+        <file>AddAmmoAllData.qml</file>
         <file>MountingSchemeManagement.qml</file>
-        <file>AddMountingSchemeData.qml</file>
         <file>MultiTextDispay.qml</file>
         <file>AddMountLocationManagement.qml</file>
         <file>AddUavComponentManagement.qml</file>
@@ -25,5 +24,32 @@
         <file>AddUavModelOperationWay.qml</file>
         <file>AddAmmoComponentManagement.qml</file>
         <file>AddUavModelComponentManagement.qml</file>
+        <file>AddAmmoModules/FanTanKeZiMu.qml</file>
+        <file>AddAmmoModules/FuelAirBomb.qml</file>
+        <file>AddAmmoModules/HalfarmorPiercingBullet.qml</file>
+        <file>AddAmmoModules/J6Missile.qml</file>
+        <file>AddAmmoModules/PassiveInterferencePod.qml</file>
+        <file>AddAmmoModules/QuYuFengSuoZiMu.qml</file>
+        <file>AddAmmoModules/RanShaoDan.qml</file>
+        <file>AddAmmoModules/ShaShangBaoPo.qml</file>
+        <file>AddAmmoModules/TanQianWeiBomb.qml</file>
+        <file>AddAmmoModules/XuanChuanBomb.qml</file>
+        <file>AddAmmoModules/Component/CButton.qml</file>
+        <file>AddAmmoModules/Component/CSliderData.qml</file>
+        <file>AddAmmoModules/Component/CText.qml</file>
+        <file>AddAmmoModules/Component/CTextInput.qml</file>
+        <file>AddAmmoCommonData.qml</file>
+        <file>Resources/Background/bg_MainBackground.png</file>
+        <file>AddAmmoAviationAllData.qml</file>
+        <file>NewMissileBaseData.qml</file>
+        <file>NewMissileLaunchData.qml</file>
+        <file>NewMissileWorkData.qml</file>
+        <file>AddAmmoComponentFuse.qml</file>
+        <file>AddAmmoComponentLaunchconditions.qml</file>
+        <file>AddAmmoComponentSeeker.qml</file>
+        <file>AddAmmoComponentWarhead.qml</file>
+        <file>AddMountingSchemeData.qml</file>
+        <file>AddInterferencePodData.qml</file>
+        <file>AddUavModelAllData.qml</file>
     </qresource>
 </RCC>

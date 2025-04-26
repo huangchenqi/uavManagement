@@ -1,741 +1,1136 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.12
-import QtQuick.Window 2.12
-import QtQuick.Dialogs 1.2
-
 import "qrc:/"
-import UavDaoModel 1.0
+import "qrc:/AddAmmoModules/Component"
 
-Window{//Rectangle{
-    id:addUavModelData
-    visible: true
-    width: 1200
-    height: 600
-    //title: qsTr("QML TableView example")
-    // 获取当前时间并转换为字符串
-    property var currentTime: new Date().toLocaleString()
+Item {
+    id:addMountSchemeData
 
-    //侦察载荷
-    property var uavInvestigationPayloadTypeResult: ""
-    //投弹方式
-    property var uavBombingmethodResult: ""
-    //回收方式
-    property var uavRecoveryModeResult: ""
-    //操控方式
-    property var uavOperatioanalModeResult: ""
-    //挂载位置
-    property var uavPayloadTypeResult: ""
-    // 组件加载完成后生成测试数据
-    Component.onCompleted:{
-        //loadUavAllData()
-        loadView()
+    width: 800
+    height: 700
+    signal backMountingScheme()
+    //1号挂点位置
+    property var sMountNum1Place: "位置1"
+    //2号挂点位置
+    property var sMountNum2Place: "位置1"
+    //3号挂点位置
+    property var sMountNum3Place: "位置1"
+    //4号挂点位置
+    property var sMountNum4Place: "位置1"
+    //5号挂点位置
+    property var sMountNum5Place: "位置1"
+    //6号挂点位置
+    property var sMountNum6Place: "位置1"
+    //7号挂点位置
+    property var sMountNum7Place: "位置1"
+    //8号挂点位置
+    property var sMountNum8Place: "位置1"
+    //9号挂点位置
+    property var sMountNum9Place: "位置1"
+    //10号挂点位置
+    property var sMountNum10Place: "位置1"
+
+    //挂点是否选择
+    property bool isMount1Select: false
+    property bool isMount2Select: false
+    property bool isMount3Select: false
+    property bool isMount4Select: false
+    property bool isMount5Select: false
+    property bool isMount6Select: false
+    property bool isMount7Select: false
+    property bool isMount8Select: false
+    property bool isMount9Select: false
+    property bool isMount10Select: false
+
+    property var sMountNum1AmmoType: "弹药1"
+    property var sMountNum2AmmoType: "弹药1"
+    property var sMountNum3AmmoType: "弹药1"
+    property var sMountNum4AmmoType: "弹药1"
+    property var sMountNum5AmmoType: "弹药1"
+    property var sMountNum6AmmoType: "弹药1"
+    property var sMountNum7AmmoType: "弹药1"
+    property var sMountNum8AmmoType: "弹药1"
+    property var sMountNum9AmmoType: "弹药1"
+    property var sMountNum10AmmoType: "弹药1"
+
+    property int currentMountPlaceSelect: 0
+    function openMountPlace(id){
+        switch(id)
+        {
+        case 1:
+            view_List_MountPlace.anchors.horizontalCenter = btn_MountNum1Place.horizontalCenter
+//            view_List_MountPlace.x = btn_MountNum1Place.x + btn_MountNum1Place.width
+            view_List_MountPlace.y = btn_MountNum1Place.y + btn_MountNum1Place.height
+            view_List_MountPlace.visible = !view_List_MountPlace.visible
+            break;
+        case 2:
+            view_List_MountPlace.anchors.horizontalCenter = btn_MountNum2Place.horizontalCenter
+            view_List_MountPlace.y = btn_MountNum2Place.y + btn_MountNum2Place.height
+            view_List_MountPlace.visible = !view_List_MountPlace.visible
+            break;
+        case 3:
+            view_List_MountPlace.anchors.horizontalCenter = btn_MountNum3Place.horizontalCenter
+            view_List_MountPlace.y = btn_MountNum3Place.y + btn_MountNum3Place.height
+            view_List_MountPlace.visible = !view_List_MountPlace.visible
+            break;
+        case 4:
+            view_List_MountPlace.anchors.horizontalCenter = btn_MountNum4Place.horizontalCenter
+            view_List_MountPlace.y = btn_MountNum4Place.y + btn_MountNum4Place.height
+            view_List_MountPlace.visible = !view_List_MountPlace.visible
+            break;
+        case 5:
+            view_List_MountPlace.anchors.horizontalCenter = btn_MountNum5Place.horizontalCenter
+            view_List_MountPlace.y = btn_MountNum5Place.y + btn_MountNum5Place.height
+            view_List_MountPlace.visible = !view_List_MountPlace.visible
+            break;
+        case 6:
+            view_List_MountPlace.anchors.horizontalCenter = btn_MountNum6Place.horizontalCenter
+            view_List_MountPlace.y = btn_MountNum6Place.y + btn_MountNum6Place.height
+            view_List_MountPlace.visible = !view_List_MountPlace.visible
+            break;
+        case 7:
+            view_List_MountPlace.anchors.horizontalCenter = btn_MountNum7Place.horizontalCenter
+            view_List_MountPlace.y = btn_MountNum7Place.y + btn_MountNum7Place.height
+            view_List_MountPlace.visible = !view_List_MountPlace.visible
+            break;
+        case 8:
+            view_List_MountPlace.anchors.horizontalCenter = btn_MountNum8Place.horizontalCenter
+            view_List_MountPlace.y = btn_MountNum8Place.y + btn_MountNum8Place.height
+            view_List_MountPlace.visible = !view_List_MountPlace.visible
+            break;
+        case 9:
+            view_List_MountPlace.anchors.horizontalCenter = btn_MountNum9Place.horizontalCenter
+            view_List_MountPlace.y = btn_MountNum9Place.y + btn_MountNum9Place.height
+            view_List_MountPlace.visible = !view_List_MountPlace.visible
+            break;
+        case 10:
+            view_List_MountPlace.anchors.horizontalCenter = btn_MountNum10Place.horizontalCenter
+            view_List_MountPlace.y = btn_MountNum10Place.y + btn_MountNum10Place.height
+            view_List_MountPlace.visible = !view_List_MountPlace.visible
+            break;
+        }
+        currentMountPlaceSelect =id
     }
-    Popup {
-            id: warningPopup
-            width: 300
-            height: 100
-            anchors.centerIn: Overlay.overlay // 居中显示
-            closePolicy: Popup.NoAutoClose    // 完全禁用自动关闭
-            modal: true
-            focus: true
 
-            background: Rectangle {
-                color: "#ffeb3b"
-                border.color: "#fbc02d"
-                radius: 5
-            }
-
-            contentItem: Text {
-                id:warningItem
-                //text: "您查询的是全部数据！"
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                font.pixelSize: 16
-            }
+    property int currentAmmoTypeSelect: 0
+    function openAmmoType(id){
+        switch(id)
+        {
+        case 1:
+            view_List_MountAmmoType.anchors.horizontalCenter = btn_MountNum1AmmoType.horizontalCenter
+            view_List_MountAmmoType.y = btn_MountNum1AmmoType.y + btn_MountNum1AmmoType.height
+            view_List_MountAmmoType.visible = !view_List_MountAmmoType.visible
+            break;
+        case 2:
+            view_List_MountAmmoType.anchors.horizontalCenter = btn_MountNum2AmmoType.horizontalCenter
+            view_List_MountAmmoType.y = btn_MountNum2AmmoType.y + btn_MountNum2AmmoType.height
+            view_List_MountAmmoType.visible = !view_List_MountAmmoType.visible
+            break;
+        case 3:
+            view_List_MountAmmoType.anchors.horizontalCenter = btn_MountNum3AmmoType.horizontalCenter
+            view_List_MountAmmoType.y = btn_MountNum3AmmoType.y + btn_MountNum3AmmoType.height
+            view_List_MountAmmoType.visible = !view_List_MountAmmoType.visible
+            break;
+        case 4:
+            view_List_MountAmmoType.anchors.horizontalCenter = btn_MountNum4AmmoType.horizontalCenter
+            view_List_MountAmmoType.y = btn_MountNum4AmmoType.y + btn_MountNum4AmmoType.height
+            view_List_MountAmmoType.visible = !view_List_MountAmmoType.visible
+            break;
+        case 5:
+            view_List_MountAmmoType.anchors.horizontalCenter = btn_MountNum5AmmoType.horizontalCenter
+            view_List_MountAmmoType.y = btn_MountNum5AmmoType.y + btn_MountNum5AmmoType.height
+            view_List_MountAmmoType.visible = !view_List_MountAmmoType.visible
+            break;
+        case 6:
+            view_List_MountAmmoType.anchors.horizontalCenter = btn_MountNum6AmmoType.horizontalCenter
+            view_List_MountAmmoType.y = btn_MountNum6AmmoType.y + btn_MountNum6AmmoType.height
+            view_List_MountAmmoType.visible = !view_List_MountAmmoType.visible
+            break;
+        case 7:
+            view_List_MountAmmoType.anchors.horizontalCenter = btn_MountNum7AmmoType.horizontalCenter
+            view_List_MountAmmoType.y = btn_MountNum7AmmoType.y + btn_MountNum7AmmoType.height
+            view_List_MountAmmoType.visible = !view_List_MountAmmoType.visible
+            break;
+        case 8:
+            view_List_MountAmmoType.anchors.horizontalCenter = btn_MountNum8AmmoType.horizontalCenter
+            view_List_MountAmmoType.y = btn_MountNum8AmmoType.y + btn_MountNum8AmmoType.height
+            view_List_MountAmmoType.visible = !view_List_MountAmmoType.visible
+            break;
+        case 9:
+            view_List_MountAmmoType.anchors.horizontalCenter = btn_MountNum9AmmoType.horizontalCenter
+            view_List_MountAmmoType.y = btn_MountNum9AmmoType.y + btn_MountNum9AmmoType.height
+            view_List_MountAmmoType.visible = !view_List_MountAmmoType.visible
+            break;
+        case 10:
+            view_List_MountAmmoType.anchors.horizontalCenter = btn_MountNum10AmmoType.horizontalCenter
+            view_List_MountAmmoType.y = btn_MountNum10AmmoType.y + btn_MountNum10AmmoType.height
+            view_List_MountAmmoType.visible = !view_List_MountAmmoType.visible
+            break;
         }
-    Timer {
-            id: autoCloseTimer
-            interval: 500 // 2秒
-            onTriggered: warningPopup.close()
+        currentAmmoTypeSelect =id
+    }
+
+
+    Rectangle{
+        id:rect_Back
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: btn_Cancel.top
+        anchors.bottomMargin: 10
+        color: "#50000000"
+
+        CText {
+            id: top_title
+            text: qsTr("挂载方案设置")
+            pixelSize: 25
+            width: pixelSize * 6
+            color: "#4EC4FF"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: 20
+            horizontalAlignment: Text.AlignLeft
         }
 
-    Item {
-        id:controlUav
-        // width: 1200
-        // height: 600
-        // 定义警告对话框
+        CText{
+            id:text_PlanName
+            text: "挂载方案名称:"
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            anchors.top: top_title.bottom
+            anchors.topMargin: 30
+            pixelSize: 20
+            width: pixelSize * 6.5
+            horizontalAlignment: Text.AlignLeft
+            color: mainColor
+        }
 
-        Popup {
-            id: payloadTypeManagementPopup
-            width: 600  // 需明确设置宽度，否则可能无法显示完整内容
-            height: 400
-            modal: true
-            focus: true
-            anchors.centerIn: Overlay.overlay // 居中显示
-            closePolicy: Popup.NoAutoClose    // 完全禁用自动关闭
-            // 直接引用 admin.qml
-              GetTypeManagement{  // 假设 admin.qml 的根元素是 Admin 类型
-                    id: adminPanel
-                    anchors.fill: parent
-                    managementType:uavManagementroot.managementType
+        Item{
+            id:item_PlanNameInput
+            width: 350 - text_PlanName.width
+            height: 20
+            anchors.left:text_PlanName.right
+            anchors.top: text_PlanName.top
+            anchors.topMargin: -5
+            TextInput{
+                id:planNameText
+                anchors.fill: parent
+                color:"#ffffffff"
+                font.family:text_PlanName.family
+                font.pixelSize:(18)
+                selectByMouse: true
+                selectionColor: "#ffcc8800"
+                onTextChanged: {
+                    if(text != "")
+                    {
 
-                    onClose: payloadTypeManagementPopup.close() // 连接关闭信号
-
-
+                    }
                 }
-        }
-        UavModelDaoTableModel{
-            id:uavModelInsertDao
+                validator: RegExpValidator {
+                    regExp: /[^\s]*/  // 不允许任何空格
+                }
+            }
+            Rectangle{
+                width: parent.width
+                height: (2)
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                color:mainColor
+            }
         }
 
-        ColumnLayout {
+        CText{
+            id:text_UavName
+            text: "无人机名称:"
+            anchors.left: item_PlanNameInput.right
+            anchors.leftMargin: 10
+            anchors.verticalCenter: text_PlanName.verticalCenter
+            pixelSize: 20
+            width: pixelSize * 5.5
+            horizontalAlignment: Text.AlignLeft
+            color: mainColor
+        }
+
+        Item{
+            id:item_UavNameInput
+            width: 350 - text_UavName.width
+            height: 20
+            anchors.left:text_UavName.right
+            anchors.top: text_UavName.top
+            anchors.topMargin: -5
+            TextInput{
+                id:uavNameText
+                anchors.fill: parent
+                color:"#ffffffff"
+                font.family:text_UavName.family
+                font.pixelSize:(18)
+                selectByMouse: true
+                selectionColor: "#ffcc8800"
+                onTextChanged: {
+                    if(text != "")
+                    {
+
+                    }
+                }
+                validator: RegExpValidator {
+                    regExp: /[^\s]*/  // 不允许任何空格
+                }
+            }
+            Rectangle{
+                width: parent.width
+                height: (2)
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                color:mainColor
+            }
+        }
+
+        CTextInput{
+            id:text_MaxTakeOffWeight
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            anchors.top: text_PlanName.bottom
+            anchors.topMargin: 30
+            title: "无人机最大起飞重量(kg):"
+            pixelSize: 18
+            titleWidth: pixelSize * 11.5
+            width: 350
+            height: 30
+        }
+
+        CTextInput{
+            id:text_UavEmptyWeight
+            anchors.left: text_MaxTakeOffWeight.right
+            anchors.leftMargin: 10
+            anchors.top: text_PlanName.bottom
+            anchors.topMargin: 30
+            title: "无人机空机重量(kg):"
+            pixelSize: 18
+            titleWidth: pixelSize * 9.5
+            width: 350
+            height: 30
+        }
+
+        CTextInput{
+            id:text_UavMaxFuelWeight
+            anchors.left: text_MaxTakeOffWeight.left
+            anchors.top: text_MaxTakeOffWeight.bottom
+            anchors.topMargin: 20
+            title: "无人机最大载油量(L):"
+            pixelSize: 18
+            titleWidth: pixelSize * 10
+            width: 350
+            height: 30
+        }
+
+        CTextInput{
+            id:text_UavMaxExternalWeight
+            anchors.left: text_UavMaxFuelWeight.right
+            anchors.leftMargin: 10
+            anchors.top: text_UavMaxFuelWeight.top
+            title: "无人机最大外挂重量(kg):"
+            pixelSize: 18
+            titleWidth: pixelSize * 11.5
+            width: 350
+            height: 30
+        }
+
+        CTextInput{
+            id:text_RunningDistance
+            anchors.left: text_UavMaxFuelWeight.left
+            anchors.top: text_UavMaxFuelWeight.bottom
+            anchors.topMargin: 20
+            title: "滑跑距离:"
+            pixelSize: 18
+            titleWidth: pixelSize * 4.5
+            width: 170
+            height: 30
+        }
+
+        CTextInput{
+            id:text_FlightTime
+            anchors.left: text_RunningDistance.right
+            anchors.leftMargin: 10
+            anchors.top: text_RunningDistance.top
+            title: "航时(h):"
+            pixelSize: 18
+            titleWidth: pixelSize * 4
+            width: 170
+            height: 30
+        }
+
+        CTextInput{
+            id:text_FightRadius
+            anchors.left: text_FlightTime.right
+            anchors.leftMargin: 10
+            anchors.top: text_FlightTime.top
+            title: "作战半径(km):"
+            pixelSize: 18
+            titleWidth: pixelSize * 6.5
+            width: 170
+            height: 30
+        }
+
+        Rectangle{
+            id:rect_mountList
+            anchors.left: text_RunningDistance.left
+            anchors.top: text_RunningDistance.bottom
+            anchors.topMargin: 20
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 10
+            width: parent.width - 20
+            color: "transparent"
+
+            CText{
+                id:text_Mount
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.topMargin: 25
+                pixelSize: 20
+                width: pixelSize * 3.5
+                horizontalAlignment: Text.AlignLeft
+                text: "挂载点："
+            }
+
+            CButton{
+                id:btn_Mount1
+                anchors.left: text_Mount.right
+                anchors.leftMargin: 30
+                anchors.verticalCenter: text_Mount.verticalCenter
+                width: 40
+                height: 40
+                text: "1"
+                radius: width / 2
+                onClicked: {
+                    isSelect = !isSelect
+                    isMount1Select = isSelect
+                    //
+                }
+            }
+
+            CButton{
+                id:btn_Mount2
+                anchors.left: btn_Mount1.right
+                anchors.leftMargin: 30
+                anchors.verticalCenter: text_Mount.verticalCenter
+                width: 40
+                height: 40
+                text: "2"
+                radius: width / 2
+                onClicked: {
+                    isSelect = !isSelect
+                    isMount2Select = isSelect
+                    //
+                }
+            }
+
+            CButton{
+                id:btn_Mount3
+                anchors.left: btn_Mount2.right
+                anchors.leftMargin: 30
+                anchors.verticalCenter: text_Mount.verticalCenter
+                width: 40
+                height: 40
+                text: "3"
+                radius: width / 2
+                onClicked: {
+                    isSelect = !isSelect
+                    isMount3Select = isSelect
+                    //
+                }
+            }
+
+            CButton{
+                id:btn_Mount4
+                anchors.left: btn_Mount3.right
+                anchors.leftMargin: 30
+                anchors.verticalCenter: text_Mount.verticalCenter
+                width: 40
+                height: 40
+                text: "4"
+                radius: width / 2
+                onClicked: {
+                    isSelect = !isSelect
+                    isMount4Select = isSelect
+                    //
+                }
+            }
+
+            CButton{
+                id:btn_Mount5
+                anchors.left: btn_Mount4.right
+                anchors.leftMargin: 30
+                anchors.verticalCenter: text_Mount.verticalCenter
+                width: 40
+                height: 40
+                text: "5"
+                radius: width / 2
+                onClicked: {
+                    isSelect = !isSelect
+                    isMount5Select = isSelect
+                    //
+                }
+            }
+
+            CButton{
+                id:btn_Mount6
+                anchors.left: btn_Mount5.right
+                anchors.leftMargin: 30
+                anchors.verticalCenter: text_Mount.verticalCenter
+                width: 40
+                height: 40
+                text: "6"
+                radius: width / 2
+                onClicked: {
+                    isSelect = !isSelect
+                    isMount6Select = isSelect
+                    //
+                }
+            }
+
+            CButton{
+                id:btn_Mount7
+                anchors.left: btn_Mount6.right
+                anchors.leftMargin: 30
+                anchors.verticalCenter: text_Mount.verticalCenter
+                width: 40
+                height: 40
+                text: "7"
+                radius: width / 2
+                onClicked: {
+                    isSelect = !isSelect
+                    isMount7Select = isSelect
+                    //
+                }
+            }
+
+            CButton{
+                id:btn_Mount8
+                anchors.left: btn_Mount7.right
+                anchors.leftMargin: 30
+                anchors.verticalCenter: text_Mount.verticalCenter
+                width: 40
+                height: 40
+                text: "8"
+                radius: width / 2
+                onClicked: {
+                    isSelect = !isSelect
+                    isMount8Select = isSelect
+                    //
+                }
+            }
+
+            CButton{
+                id:btn_Mount9
+                anchors.left: btn_Mount8.right
+                anchors.leftMargin: 30
+                anchors.verticalCenter: text_Mount.verticalCenter
+                width: 40
+                height: 40
+                text: "9"
+                radius: width / 2
+                onClicked: {
+                    isSelect = !isSelect
+                    isMount9Select = isSelect
+                    //
+                }
+            }
+
+            CButton{
+                id:btn_Mount10
+                anchors.left: btn_Mount9.right
+                anchors.leftMargin: 30
+                anchors.verticalCenter: text_Mount.verticalCenter
+                width: 40
+                height: 40
+                text: "10"
+                radius: width / 2
+                onClicked: {
+                    isSelect = !isSelect
+                    isMount10Select = isSelect
+                    //
+                }
+            }
+
+
+            CText{
+                id:text_MountPlace
+                anchors.left: parent.left
+                anchors.top: text_Mount.bottom
+                anchors.topMargin: 70
+                pixelSize: 20
+                width: pixelSize * 4.5
+                horizontalAlignment: Text.AlignHCenter
+//                color: "#4EC4FF"
+                text: "挂点位置:"
+            }
+
+
+            Text{
+                id:btn_MountNum1Place
+                anchors.top: text_MountPlace.top
+                anchors.horizontalCenter: btn_Mount1.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum1Place
+                visible: isMount1Select
+                MouseArea{
                     anchors.fill: parent
-                    //Layout.fillWidth: true
-                    //Layout.fillHeight: true
-                    spacing: 10
-                    RowLayout {
-                        //anchors.fill: parent
-                        Layout.fillWidth: true
-                        //Layout.fillHeight: true
-                        Label {
-                            Layout.fillWidth: true
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                            text: qsTr("挂载方案管理");
-                            font.pointSize: 28
-                            color: "black"
-                        }
+                    onClicked: {
+                        openMountPlace(1)
                     }
-                    RowLayout {
-                        //anchors.fill: parent
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        // Rectangle {
-                        //     id: root
-                        //     visible: true
-                        //     width:900
-                        //     height: 500
-                        //     color: "#ECF2FE"
-                        //     // ColumnLayout{
+                }
+            }
+
+            Text{
+                id:btn_MountNum2Place
+                anchors.top: text_MountPlace.top
+                anchors.horizontalCenter: btn_Mount2.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum2Place
+                visible: isMount2Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openMountPlace(2)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum3Place
+                anchors.top: text_MountPlace.top
+                anchors.horizontalCenter: btn_Mount3.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum3Place
+                visible: isMount3Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openMountPlace(3)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum4Place
+                anchors.top: text_MountPlace.top
+                anchors.horizontalCenter: btn_Mount4.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum4Place
+                visible: isMount4Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openMountPlace(4)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum5Place
+                anchors.top: text_MountPlace.top
+                anchors.horizontalCenter: btn_Mount5.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum5Place
+                visible: isMount5Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openMountPlace(5)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum6Place
+                anchors.top: text_MountPlace.top
+                anchors.horizontalCenter: btn_Mount6.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum6Place
+                visible: isMount6Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openMountPlace(6)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum7Place
+                anchors.top: text_MountPlace.top
+                anchors.horizontalCenter: btn_Mount7.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum7Place
+                visible: isMount7Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openMountPlace(7)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum8Place
+                anchors.top: text_MountPlace.top
+                anchors.horizontalCenter: btn_Mount8.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum8Place
+                visible: isMount8Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openMountPlace(8)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum9Place
+                anchors.top: text_MountPlace.top
+                anchors.horizontalCenter: btn_Mount9.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum9Place
+                visible: isMount9Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openMountPlace(9)
+                    }
+                }
+            }
 
 
-                        //     // }
-                        // }
-                        ColumnLayout {
+            Text{
+                id:btn_MountNum10Place
+                anchors.top: text_MountPlace.top
+                anchors.horizontalCenter: btn_Mount10.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum10Place
+                visible: isMount10Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openMountPlace(10)
+                    }
+                }
+            }
+
+            CText{
+                id:text_MountLoadingAmmo
+                anchors.left: parent.left
+                anchors.top: text_MountPlace.bottom
+                anchors.topMargin: 100
+                pixelSize: 20
+                width: pixelSize * 4.5
+                horizontalAlignment: Text.AlignHCenter
+//                color: "#4EC4FF"
+                text: "挂载弹药:"
+            }
+
+            Text{
+                id:btn_MountNum1AmmoType
+                anchors.top: text_MountLoadingAmmo.top
+                anchors.horizontalCenter: btn_Mount1.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum1AmmoType
+                visible: isMount1Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openAmmoType(1)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum2AmmoType
+                anchors.top: text_MountLoadingAmmo.top
+                anchors.horizontalCenter: btn_Mount2.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum2AmmoType
+                visible: isMount2Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openAmmoType(2)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum3AmmoType
+                anchors.top: text_MountLoadingAmmo.top
+                anchors.horizontalCenter: btn_Mount3.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum3AmmoType
+                visible: isMount3Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openAmmoType(3)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum4AmmoType
+                anchors.top: text_MountLoadingAmmo.top
+                anchors.horizontalCenter: btn_Mount4.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum4AmmoType
+                visible: isMount4Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openAmmoType(4)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum5AmmoType
+                anchors.top: text_MountLoadingAmmo.top
+                anchors.horizontalCenter: btn_Mount5.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum5AmmoType
+                visible: isMount5Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openAmmoType(5)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum6AmmoType
+                anchors.top: text_MountLoadingAmmo.top
+                anchors.horizontalCenter: btn_Mount6.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum6AmmoType
+                visible: isMount6Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openAmmoType(6)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum7AmmoType
+                anchors.top: text_MountLoadingAmmo.top
+                anchors.horizontalCenter: btn_Mount7.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum7AmmoType
+                visible: isMount7Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openAmmoType(7)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum8AmmoType
+                anchors.top: text_MountLoadingAmmo.top
+                anchors.horizontalCenter: btn_Mount8.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum8AmmoType
+                visible: isMount8Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openAmmoType(8)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum9AmmoType
+                anchors.top: text_MountLoadingAmmo.top
+                anchors.horizontalCenter: btn_Mount9.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum9AmmoType
+                visible: isMount9Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openAmmoType(9)
+                    }
+                }
+            }
+
+            Text{
+                id:btn_MountNum10AmmoType
+                anchors.top: text_MountLoadingAmmo.top
+                anchors.horizontalCenter: btn_Mount10.horizontalCenter
+                width: font.pixelSize
+                color: mainColor
+                font.pixelSize: 18
+                font.family: "黑体"
+                wrapMode: Text.WrapAnywhere
+                horizontalAlignment: Text.AlignHCenter
+                text:sMountNum10AmmoType
+                visible: isMount10Select
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        openAmmoType(10)
+                    }
+                }
+            }
+
+            ListView{
+                //挂点位置 单选
+                id:view_List_MountPlace
+                width: 140
+                height: 36 * 5
+                x:btn_MountNum1Place.x + btn_MountNum1Place.width + 2
+                visible: false
+                clip: true
+                model:ListModel{
+                    id:listmodel_MountPlace
+                }
+                delegate:Component{
+                    Item{
+                        id:item_Delegate
+                        width: view_List_MountPlace.width
+                        height: 36
+                        CButton{
+                            id:comp_TypeBtn
                             anchors.fill: parent
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-
-
-
-                            RowLayout {
-                                //anchors.fill: parent
-                                Layout.fillWidth: true  // 占满列布局宽度
-                                // Layout.fillHeight: true
-                                spacing: 10
-                                Label{
-                                    id:podType
-                                    text: "吊舱类型:"
-                                    height: 50
-                                    width:100
-                                    // anchors.left: parent.left //锚点属性与锚点边距一起用。
-                                    // anchors.leftMargin: 10
-                                    Layout.leftMargin: 10
-
-                                }
-
-                                ComboBox{
-                                    id:podTypeSelect
-                                    width:100
-                                    height:50
-                                    model:["无吊舱","200kg通侦吊舱","500kg吊舱"]
-                                    onActivated: {
-                                        refreshProblemDesc()
-                                    }
-                                }
-
-                                Label{
-                                    id:uavMaximumTakeoffWeight
-                                    text: "最大起飞重量(Kg):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavMaximumTakeoffWeightValue
-                                    Layout.preferredWidth: 50
-                                    onTextChanged: {
-                                        refreshProblemDesc()
-                                    }
-                                }
-                                Label{
-                                    id:uavEmptyWeight
-                                    text: "空机重量(Kg):"
-                                    height: 50
-                                    width:100
-
-                                }
-                                TextField{
-                                    id: uavEmptyWeightValue
-                                    Layout.preferredWidth: 50
+                            text:m_TypeName
+                            color:"#ffddaa00"
+                            borderColor: "#ffddaa00"
+                            pixelSize: 17
+                            onClicked: {
+                                view_List_MountPlace.visible = false
+                                m_SelectState = !m_SelectState
+                                switch(currentMountPlaceSelect)
+                                {
+                                case 1: sMountNum1Place = text
+                                    break
+                                case 2: sMountNum2Place = text
+                                    break
+                                case 3: sMountNum3Place = text
+                                    break
+                                case 4: sMountNum4Place = text
+                                    break
+                                case 5: sMountNum5Place = text
+                                    break
+                                case 6: sMountNum6Place = text
+                                    break
+                                case 7: sMountNum7Place = text
+                                    break
+                                case 8: sMountNum8Place = text
+                                    break
+                                case 9: sMountNum9Place = text
+                                    break
+                                case 10: sMountNum10Place = text
+                                    break
                                 }
                             }
-                            RowLayout {
-                                //anchors.fill: parent
-                                Layout.fillWidth: true  // 占满列布局宽度
-                                // Layout.fillHeight: true
-                                spacing: 10
-
-                                Label{
-                                    id:uavMaximumFuelCapacity
-                                    text: "最大载油量(Kg):"
-                                    height: 50
-                                    width:100
-                                    Layout.leftMargin: 10
-                                }
-                                TextField{
-                                    id: uavMaximumFuelCapacityValue
-                                    Layout.preferredWidth: 50
-                                }
-                                Label{
-                                    id:uavMaximumExternalWeight
-                                    text: "最大外挂重量(Kg):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: uavMaximumExternalWeightValue
-                                    Layout.preferredWidth: 50
-                                }
-                            }
-
-                            RowLayout {
-                                // anchors.fill: parent
-                                Layout.fillWidth: true
-                                // Layout.fillHeight: true
-                                spacing: 10
-                                Label{
-                                    id:mountingWeight
-                                    text: "已挂载重量(kg):"
-                                    height: 50
-                                    width:100
-                                    // anchors.left: parent.left //锚点属性与锚点边距一起用。
-                                    // anchors.leftMargin: 10
-                                    Layout.leftMargin: 10
-
-                                }
-
-                                TextField{
-                                    id: mountingWeightText
-                                    Layout.preferredWidth: 80
-                                    //width: 50
-                                }
-
-                                Label{
-                                    id:remainingLoadCapacity
-                                    text: "剩余载重(kg):"
-                                    height: 50
-                                    width:100
-                                }
-                                TextField{
-                                    id: remainingLoadCapacityText
-                                    //width: 120
-                                    Layout.preferredWidth: 80
-                                }
-                            }
-
-
-                            RowLayout {
-                                // anchors.fill: parent
-                                Layout.fillWidth: true
-                                // Layout.fillHeight: true
-                                spacing: 10
-                                Label{
-                                    id:uavLowAltitudeBreakthroughSpeed
-                                    text: "挂载配置:"
-                                    height: 50
-                                    width:100
-                                    // anchors.left: parent.left //锚点属性与锚点边距一起用。
-                                    // anchors.leftMargin: 10
-                                    Layout.leftMargin: 10
-
-                                }
-                                Text {
-                                    id: uavHangingLocationText
-                                    text: qsTr("请选择")
-                                }
-                                // 点击区域
-                                MouseArea {
-                                    anchors.fill: parent
-                                    onClicked: { //uavHangingLocationText.visible = !uavHangingLocationText.visible
-                                        payloadTypeManagementPopup.open()
-                                        uavManagementroot.managementType = "bombingMethod"
-                                        //uavManagementroot.enabled = false
-                                    }
-                                }
-                            }
-                        }
-                        ColumnLayout{
-                            //anchors.fill: parent
-                            //Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            spacing: 10
-                            Rectangle {
-                                id: aroot
-                                visible: true
-                                width:500
-                                height: 600
-                                // anchors.top: parent.top
-                                // anchors.topMargin: 40
-                                // anchors.right: parent.right
-                                // anchors.rightMargin: 2
-                                Layout.alignment:Qt.AlignRight
-                                color: "#ECF2FE"
-                                border.color: "#BDBDBD"
-                                TextField{
-                                    id: describeTextArea
-                                    //width: 120
-                                    width:500
-                                    height: 600
-                                    // 对齐设置
-                                    verticalAlignment: Text.AlignTop      // 垂直顶部对齐
-                                    horizontalAlignment: Text.AlignLeft   // 水平左对齐
-                                    // 边距设置
-                                    leftPadding: 6       // 左侧零边距
-                                    topPadding: 10        // 顶部零边距
-                                    rightPadding: 6      // 右侧保留2像素防止滚动条遮挡
-                                    bottomPadding: 6     // 底部保留2像素
-                                    echoMode: TextField.Normal
-                                    inputMethodHints: Qt.ImhMultiLine
-                                    wrapMode: TextField.WrapAtWordBoundaryOrAnywhere
-                                    Layout.preferredWidth: 80
-                                    // 可选样式调整（根据实际需要）
-                                    background: Rectangle {
-                                        //color: "#D3E1FE"
-                                        //border.color: "gray"
-                                        border.width: 1
-                                        color: "#e0f0ff" // 淡蓝色
-                                        border.color: "#cccccc" // 边框颜色
-                                        radius: 4 // 圆角
-                                    }
-                                    // 设置字体颜色为黑色
-                                    color: "#000000"
-
-                                    // 设置字体大小为 12 点
-                                    font.pointSize: 12
-                                }
-                            }
-                        }
-
-                    }
-
-                // 下部行布局（底部对齐）
-                    RowLayout {
-                        Layout.fillWidth: true
-                        Layout.alignment: Qt.AlignBottom  // 底部对齐
-                        spacing: 10
-                        Item { Layout.fillWidth: true }  // 占位空格元素
-                        Button {
-                            id:saveButton
-                            anchors.right: parent.right
-                            anchors.rightMargin: 200
-                            width: 100
-                            height: 50
-                            text: "保存"
-                            onClicked:{
-                                addUavModelData.currentTime = new Date().toLocaleString()
-                                console.log("addUavModelData.currentTime"+addUavModelData.currentTime)
-                                saveUavData()
-                            }
-                        }
-
-                        Button {
-                            id:cancleButton
-                            anchors.right: parent.right
-                            anchors.rightMargin: 10
-                            width: 100
-                            height: 50
-                            text: "取消"
                         }
                     }
+                }
 
-
-
-
-        }
-
-
-
-    }
-    //判断是否加载新增、查看、编辑
-    function loadView(){
-        var viewType = processInfo.loadViewType
-        if(processInfo.loadViewType === "addUavData"){
-            console.log("addUavDataView"+processInfo.loadViewType)
-        }else if(processInfo.loadViewType === "query"){
-            writeControl(false)
-            console.log("addUavDataView"+processInfo.loadViewType)
-        }else if(processInfo.loadViewType === "update"){
-            writeControl(true)
-            console.log("addUavDataView"+processInfo.loadViewType)
-        }else{
-            console.log("processInfo.loadViewType Unknown")
-        }
-    }
-    function writeControl(isEditable) {
-        // 遍历输入容器的所有子元素
-        for (var i = 0; i < controlUav.children.length; i++) {
-            var child = controlUav.children[i];
-            // 检查是否是输入框或下拉框
-            if (child.hasOwnProperty("enabled")) {
-                child.enabled = isEditable;
-            }
-        }
-    }
-
-    // 检查变量是否为空的函数
-    function isEmpty(value) {
-        if (typeof value === "string") {
-            return value.length === 0;
-        } else if (typeof value === "object" && value !== null) {
-            return Object.keys(value).length === 0;
-        } else {
-            return value === null || value === undefined;
-        }
-    }
-    // 定义一个通用的验证函数
-   function validateInput(field, message) {
-       if (field === "" || (field.length !== undefined && field.length === 0)) {
-           warningPopup.open();
-           warningItem.text = message;
-           autoCloseTimer.start()
-           return false;
-       }
-       return true;
-   }
-
-    function checkAllValue(){
-        var isValid = true;
-        // 检查每个字段
-        isValid = validateInput(uavTypeSelect.currentText, "无人机类型未选择!") && isValid;
-        isValid = validateInput(uavNameText.text, "无人机名称未填写!") && isValid;
-        isValid = validateInput(uavIdText.text, "无人机编号未填写!") && isValid;
-        isValid = validateInput(uavLengthText.text, "无人机长度未填写!") && isValid;
-        isValid = validateInput(uavWidthText.text, "无人机翼宽未填写!") && isValid;
-        isValid = validateInput(uavHeightText.text, "无人机高度未填写!") && isValid;
-        isValid = validateInput(uavInvisibilitySelect.currentText, "无人机隐身性未选择!") && isValid;
-        isValid = validateInput(uavFlightHeightMin.text, "无人机飞行高度最小值未填写!") && isValid;
-        isValid = validateInput(uavFlightHeightMax.text, "无人机飞行高度最大值未填写!") && isValid;
-        isValid = validateInput(uavFlightSpeedMin.text, "无人机飞行速度最小值未填写!") && isValid;
-        isValid = validateInput(uavFlightSpeedMax.text, "无人机飞行速度最大值未填写!") && isValid;
-        isValid = validateInput(uavTurningRadiusMin.text, "无人机转弯半径最小值未填写!") && isValid;
-        isValid = validateInput(uavTurningRadiusMax.text, "无人机转弯半径最大值未填写!") && isValid;
-        isValid = validateInput(uavFlightDistance.text, "无人机飞行航程值未填写!") && isValid;
-        isValid = validateInput(uavRecoveryModeResult, "回收方式未选择!") && isValid;
-        isValid = validateInput(uavFlightTime.text, "无人机航时值未填写!") && isValid;
-        isValid = validateInput(uavTakeoffDistanceValue.text, "无人机起飞滑跑距离未填写!") && isValid;
-        isValid = validateInput(uavLandDistanceValue.text, "无人机着陆滑跑距离未填写!") && isValid;
-        isValid = validateInput(uavOperatioanalRadius.text, "无人机作战距离未填写!") && isValid;
-        isValid = validateInput(uavLoadReconnaissanceRangeValue.text, "无人机侦察范围未填写!") && isValid;
-        isValid = validateInput(uavLoadReconnaissanceAccuracyValue.text, "无人机侦察精度未填写!") && isValid;
-        isValid = validateInput(uavLowAltitudeBreakthroughSpeedValue.text, "无人机低空突防速度未填写!") && isValid;
-        isValid = validateInput(uavAttackaccuracyValue.text, "无人机攻击精度未填写!") && isValid;
-        isValid = validateInput(uavRadarCrossSectionValue.text, "无人机的雷达反射面积未填写!") && isValid;
-        isValid = validateInput(uavCenterOfGravityFrontLimitValue.text, "无人机重心前向未填写!") && isValid;
-        isValid = validateInput(uavCenterOfGravityAfterwardLimitValue.text, "无人机重心后向未填写!") && isValid;
-        isValid = validateInput(uavMaximumTakeoffWeightValue.text, "无人机最大起飞重量未填写!") && isValid;
-        isValid = validateInput(uavMaximumFuelCapacityValue.text, "无人机最大载油重量未填写!") && isValid;
-        isValid = validateInput(uavMaximumExternalWeightValue.text, "无人机最大外挂重量未填写!") && isValid;
-        isValid = validateInput(uavCeilingValue.text, "无人机最大升限未填写!") && isValid;
-        isValid = validateInput(uavMaximumAirStartingAltitudeValue.text, "无人机空中最大起动高度未填写!") && isValid;
-        isValid = validateInput(uavMaximumGroundStartingHeightValue.text, "无人机地面最大起动高度未填写!") && isValid;
-        isValid = validateInput(uavMaximumEnduranceValue.text, "无人机最大续航时间未填写!") && isValid;
-        isValid = validateInput(uavMaximumFlightVacuumSpeedValue.text, "无人机最大飞行真空速未填写!") && isValid;
-        isValid = validateInput(uavMinimumFlightMeterSpeedValue.text, "无人机最小飞行表速未填写!") && isValid;
-        isValid = validateInput(sealLevelTakeoffAndRollDistanceValue.text, "无人机海平面起飞滑跑距离未填写!") && isValid;
-        isValid = validateInput(sealLevelLandingAndRollDistanceValue.text, "无人机海平面着陆滑跑距离未填写!") && isValid;
-        isValid = validateInput(cruiseAltitudeReconnaissanceConfigurationValue.text, "无人机侦察构型巡航高度未填写!") && isValid;
-        isValid = validateInput(cruiseAltitudeFullExternalConfigurationValue.text, "无人机满外挂构型巡航高度未填写!") && isValid;
-        return isValid;
-
-    }
-
-
-    function saveUavData(){
-        console.log("uavTypeSelevtContent"+uavTypeSelect.currentText+"-"+"testValue"+uavTypeSelect.currentValue)
-
-        var uavData = {
-            //-- 基础信息
-            // uav_type VARCHAR(255) NOT NULL,
-            // uav_name VARCHAR(255),
-            // uav_id VARCHAR(255) NOT NULL,
-            uav_type:"",
-            uav_name:"",
-            uav_id:"",
-            //-- 尺寸参数
-            // length REAL,
-            // width REAL,
-            // height REAL,
-            // invisibility VARCHAR(255),
-            length:0.0, // 浮点数
-            width:0.0, // 浮点数
-            height:0.0, // 浮点数
-            invisibility:0.0, // 浮点数
-            //-- 飞行性能
-            // flight_height_min REAL,
-            // flight_height_max REAL,
-            // flight_speed_min REAL,
-            // flight_speed_max REAL,
-            // flight_distance_min REAL,
-            // flight_distance_max REAL,
-            // flight_time_min REAL,
-            // flight_time_max REAL,
-            flight_height_min:0.0, // 浮点数
-            flight_height_max:0.0, // 浮点数
-            flight_speed_min:0.0, // 浮点数
-            flight_speed_max:0.0, // 浮点数
-            flight_distance_min:0.0, // 浮点数
-            flight_distance_max:0.0, // 浮点数
-            flight_time_min:0.0, // 浮点数
-            flight_time_max:0.0, // 浮点数
-            //-- 起降参数
-            //takeoff_distance REAL,
-            //landing_distance REAL,
-
-            //-- 机动性能
-            //turn_radius_min REAL,
-            // turn_radius_max REAL,
-            //combat_radius REAL,
-            takeoff_distance:0.0, // 浮点数
-            landing_distance:0.0, // 浮点数
-            turn_radius_min:0.0, // 浮点数
-            turn_radius_max:0.0, // 浮点数
-            combat_radius:0.0, // 浮点数
-
-            //-- 载荷配置
-            // payload_type VARCHAR(255),
-            // bomb_method VARCHAR(255),
-            // recon_range_min REAL,
-            // recon_range_max REAL,
-            // recon_accuracy REAL,
-
-            payload_type:"",
-            bomb_method:"",
-            recon_range_min:0.0, // 浮点数
-            recon_range_max:0.0, // 浮点数
-            recon_accuracy:0.0, // 浮点数
-            //-- 回收与突防
-            // recovery_mode VARCHAR(255),
-            // low_alt_speed REAL,
-
-            //-- 挂载能力
-            //hanging_capacity VARCHAR(255),
-
-            //-- 操控与攻击
-            // operation_method VARCHAR(255),  -- 注意：建议修正拼写为
-            // attack_accuracy REAL,
-
-            //-- 雷达特征
-            //rcs REAL,
-            recovery_mode:"",
-            low_alt_speed:0.0, // 浮点数
-            hanging_capacity:"",
-            operation_method:"",
-            attack_accuracy:0.0, // 浮点数
-            rcs:0.0, // 浮点数
-            //-- 重量与平衡
-            // cg_front_limit REAL,
-            // cg_rear_limit REAL,
-            // max_takeoff_weight REAL,
-            // empty_weight REAL,
-
-            //-- 燃油与载重
-            // max_fuel REAL,
-            // max_external_weight REAL,
-
-            //-- 高度性能
-            // ceiling REAL,
-            // ground_start_alt REAL,
-            // air_start_alt REAL,
-
-            //-- 续航性能
-            // endurance REAL,
-            // max_vacuum_speed REAL,
-            // min_meter_speed REAL,
-            cg_front_limit:0.0, // 浮点数
-            cg_rear_limit:0.0, // 浮点数
-            max_takeoff_weight:0.0, // 浮点数
-            empty_weight:0.0, // 浮点数
-            max_fuel:0.0, // 浮点数
-            max_external_weight:0.0, // 浮点数
-            ceiling:0.0, // 浮点数
-            ground_start_alt:0.0, // 浮点数
-            air_start_alt:0.0, // 浮点数
-            endurance:0.0, // 浮点数
-            max_vacuum_speed:0.0, // 浮点数
-            min_meter_speed:0.0, // 浮点数
-            //-- 特殊场景性能
-            // sea_takeoff_roll REAL,
-            // sea_landing_roll REAL,
-            // recon_cruise_alt REAL,
-            // full_external_cruise_alt REAL,
-
-            //-- 系统记录
-            // create_time VARCHAR(255),  -- 建议改为 TIMESTAMP
-            // image_name VARCHAR(255),
-            // image_url VARCHAR(255)
-
-            sea_takeoff_roll:0.0, // 浮点数
-            sea_landing_roll:0.0, // 浮点数
-            recon_cruise_alt:0.0, // 浮点数
-            full_external_cruise_alt:0.0, // 浮点数
-            image_name:"",
-            image_url:"",
-            create_time:""
-
-        };
-        //ButtonGroup的接收值转化方法
-        // var uavInvestigationPayloadTypeJson = getSelectedPayloads(uavInvestigationPayloadTypeMultiComBox.buttons)
-        // console.log("有效载荷选择:", JSON.stringify(uavInvestigationPayloadTypeJson))
-        // var uavInvestigationPayloadTypeJsonStr = JSON.stringify(uavInvestigationPayloadTypeJson)
-        // var uavInvestigationPayloadTypeJsonStrresult = convertToJsonArray(uavInvestigationPayloadTypeJson);
-        // console.log(uavInvestigationPayloadTypeJsonStrresult);
-
-        // var uavBombingmethodGroupJson = getSelectedPayloads(uavBombingmethodMultiComBox.buttons)
-        // console.log("投弹方式:", JSON.stringify(uavBombingmethodGroupJson))
-        // var uavBombingmethodGroupStr = JSON.stringify(uavInvestigationPayloadTypeJson)
-        // var uavBombingmethodGroupJsonStrresult = convertToJsonArray(uavBombingmethodGroupJson);
-        // console.log(uavBombingmethodGroupJsonStrresult);
-
-        // var uavRecoverymodeGroupJson = getSelectedPayloads(uavRecoverymodeMultiComBox.buttons)
-        // console.log("回收方式:", JSON.stringify(uavRecoverymodeGroupJson))
-        // var uavRecoverymodeGroupJsonStr = JSON.stringify(uavRecoverymodeGroupJson)
-        // var uavRecoverymodeGroupJsonStrresult = convertToJsonArray(uavRecoverymodeGroupJson);
-        // console.log(uavRecoverymodeGroupJsonStrresult);
-
-        // var uavOperatioanalmodeGroupJson = getSelectedPayloads(operationModeMultiComBox.buttons)
-        // console.log("操控方式:", JSON.stringify(uavOperatioanalmodeGroupJson))
-        // var uavOperatioanalmodeGroupJsonStr = JSON.stringify(uavOperatioanalmodeGroupJson)
-        // var uavOperatioanalmodeGroupJsonStrresult = convertToJsonArray(uavOperatioanalmodeGroupJson);
-        // console.log(uavOperatioanalmodeGroupJsonStrresult);
-        uavData.uav_type = uavTypeSelect.currentText
-        uavData.uav_name = uavNameText.text
-        uavData.uav_id = uavIdText.text
-        uavData.length = uavLengthText.text
-        uavData.width = uavWidthText.text
-        uavData.height = uavHeightText.text
-        uavData.invisibility = uavInvisibilitySelect.currentText
-
-        uavData.flight_height_min = uavFlightHeightMin.text
-        uavData.flight_height_max = uavFlightHeightMax.text
-        uavData.flight_speed_min = uavFlightSpeedMin.text
-        uavData.flight_speed_max = uavFlightSpeedMax.text
-        uavData.turn_radius_min = uavTurningRadiusMin.text
-        uavData.turn_radius_max = uavTurningRadiusMax.text
-
-        uavData.flight_distance_max = uavFlightDistance.text
-        //uavData.hanging_capacity = ""//uavRadarCrossSectionText.text
-        //检查是否填写完全
-        checkAllValue()
-        if(isEmpty(uavInvestigationPayloadTypeResult)){
-            warningPopup.open()
-            warningItem.text = "侦察载荷类型未选择!"
-            autoCloseTimer.start()
-        }else{
-            uavData.payload_type = JSON.stringify(uavInvestigationPayloadTypeResult.join(",")).replace(/^"|"$/g, "");//uavInvestigationPayloadTypeJsonStrresult
-
-        }
-        console.log("uavBombingmethodResult"+uavBombingmethodResult)
-        if(isEmpty(uavBombingmethodResult)){
-            if(uavTypeSelect.currentText === "侦察无人机"){
-                    uavData.bomb_method = ""
-            }else{
-                    warningPopup.open()
-                    warningItem.text = "投弹方式未选择!"
-                    autoCloseTimer.start()
+                Component.onCompleted: {
+                    listmodel_MountPlace.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"位置1"})
+                    listmodel_MountPlace.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"位置2"})
+                    listmodel_MountPlace.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"位置3"})
+                }
             }
 
-        }else{
-            uavData.bomb_method = JSON.stringify(uavBombingmethodResult.join(",")).replace(/^"|"$/g, "");//uavBombingmethodGroupJsonStrresult
+            ListView{
+                //弹药设置 单选
+                id:view_List_MountAmmoType
+                width: 140
+                height: 36 * 5
+                x:btn_MountNum1AmmoType.x + btn_MountNum1AmmoType.width + 2
+                visible: false
+                clip: true
+                model:ListModel{
+                    id:listmodel_MountAmmoType
+                }
+                delegate:Component{
+                    Item{
+                        id:item_Delegate
+                        width: view_List_MountAmmoType.width
+                        height: 36
+                        CButton{
+                            id:comp_TypeBtn
+                            anchors.fill: parent
+                            text:m_TypeName
+                            color:"#ffddaa00"
+                            borderColor: "#ffddaa00"
+                            pixelSize: 17
+                            onClicked: {
+                                view_List_MountAmmoType.visible = false
+                                m_SelectState = !m_SelectState
+
+                                switch(currentAmmoTypeSelect)
+                                {
+                                case 1: sMountNum1AmmoType = text
+                                    break
+                                case 2: sMountNum2AmmoType = text
+                                    break
+                                case 3: sMountNum3AmmoType = text
+                                    break
+                                case 4: sMountNum4AmmoType = text
+                                    break
+                                case 5: sMountNum5AmmoType = text
+                                    break
+                                case 6: sMountNum6AmmoType = text
+                                    break
+                                case 7: sMountNum7AmmoType = text
+                                    break
+                                case 8: sMountNum8AmmoType = text
+                                    break
+                                case 9: sMountNum9AmmoType = text
+                                    break
+                                case 10: sMountNum10AmmoType = text
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Component.onCompleted: {
+                    listmodel_MountAmmoType.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"弹药1"})
+                    listmodel_MountAmmoType.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"弹药2"})
+                    listmodel_MountAmmoType.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"弹药3"})
+                }
+            }
         }
-        if(isEmpty(uavRecoveryModeResult)){
-            warningPopup.open()
-            warningItem.text = "回收方式未选择!"
-            autoCloseTimer.start()
-        }else{
-            uavData.bomb_method = JSON.stringify(uavRecoveryModeResult.join(",")).replace(/^"|"$/g, "");//uavBombingmethodGroupJsonStrresult
-        }
-        if(isEmpty(uavOperatioanalModeResult)){
-            warningPopup.open()
-            warningItem.text = "操作方式未选择!"
-            autoCloseTimer.start()
-        }else{
-            uavData.payload_type = JSON.stringify(uavOperatioanalModeResult.join(",")).replace(/^"|"$/g, "");//uavInvestigationPayloadTypeJsonStrresult
-
-        }
-        uavData.hanging_capacity = ""//uavRadarCrossSectionText.text
-        uavData.operation_method = JSON.stringify(uavOperatioanalModeResult.join(",")).replace(/^"|"$/g, "");//uavOperatioanalmodeGroupJsonStrresult
-        uavData.recovery_mode = JSON.stringify(uavRecoveryModeResult.join(",")).replace(/^"|"$/g, "");//uavRecoverymodeGroupJsonStrresult
-
-        uavData.flight_time_max =  uavFlightTime.text
-        uavData.takeoff_distance = uavTakeoffDistanceValue.text
-        uavData.landing_distance = uavLandDistanceValue.text
-        uavData.combat_radius = uavOperatioanalRadius.text
-        //uavData.recon_range_min = uavLoadReconnaissanceAccuracyText.text
-        uavData.recon_range_max = uavLoadReconnaissanceRangeValue.text
-        uavData.recon_accuracy = uavLoadReconnaissanceAccuracyValue.text
-
-        uavData.low_alt_speed = uavLowAltitudeBreakthroughSpeedValue.text
-        uavData.combat_radius = uavOperatioanalRadius.text
-        uavData.attack_accuracy = uavAttackaccuracyValue.text
-        uavData.rcs = uavRadarCrossSectionValue.text
-        uavData.cg_front_limit = uavCenterOfGravityFrontLimitValue.text
-        uavData.cg_rear_limit = uavCenterOfGravityAfterwardLimitValue.text
-        uavData.max_takeoff_weight = uavMaximumTakeoffWeightValue.text
-        uavData.empty_weight = uavEmptyWeightValue.text
-        uavData.max_fuel = uavMaximumFuelCapacityValue.text
-        uavData.max_external_weight = uavMaximumExternalWeightValue.text
-        uavData.ceiling = uavCeilingValue.text
-        uavData.ground_start_alt = uavMaximumGroundStartingHeightValue.text
-        uavData.air_start_alt = uavMaximumAirStartingAltitudeValue.text
-        uavData.endurance = uavMaximumEnduranceValue.text
-        uavData.max_vacuum_speed = uavMaximumFlightVacuumSpeedValue.text
-        uavData.min_meter_speed = uavMinimumFlightMeterSpeedValue.text
-        uavData.sea_takeoff_roll = sealLevelTakeoffAndRollDistanceValue.text
-        uavData.sea_landing_roll = sealLevelLandingAndRollDistanceValue.text
-        uavData.recon_cruise_alt = cruiseAltitudeReconnaissanceConfigurationValue.text
-        uavData.full_external_cruise_alt = cruiseAltitudeFullExternalConfigurationValue.text
-
-        uavData.image_name = ""
-        uavData.image_url = ""
-        uavData.create_time = addUavModelData.currentTime
-        var jsonString = JSON.stringify(uavData);
-        console.log("jsonString"+jsonString);
-
-        // uavModelInsertDao.insertModelDate(uavData)
-        //"^_^记录更新成功^_^" ^_^记录更新失败^_^
-
 
     }
-    function refreshProblemDesc() {
-        let css1 = "   " //""<strong><div style=\"font-size:18px;\">"
-        let css2 = "" //"</div></strong>"
 
-        // 某方案总共8个挂载位置(左上、右上)可挂载600kg的外挂配置，现在挂载配置包含左上(1号位置)挂载1个制导炸弹(炸弹参数),共计1个制导炸弹挂载在左上(1号位置),其余位置未挂载配置,总计重量200kg,剩余载重500kg。
-        //let presentDate = proposedDate.content.split(" ")
-        let descContent = css1 + "某方案总共"+"8"+"个挂载位置("+"左上、右上"+")可挂载"+uavMaximumExternalWeightValue.text+"kg的外挂配置" + "，" + css2
-        descContent += "现在挂载配置包含"+"中心位置(7号)"
-        if (uavTypeSelect.currentText === "无吊舱") {
-            descContent += "不挂载吊舱" + css1
-        } else {
-            descContent += "挂载"+uavTypeSelect.currentText+","
+
+    CButton{
+        id:btn_Cancel
+        anchors.right: parent.right
+        anchors.rightMargin: 10
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
+        width: 90
+        height: 36
+        text: "取消"
+        onClicked: {
+           backMountingScheme()
+           addMountSchemeData.visible = false
         }
-        describeTextArea.text = descContent;
     }
-    function convertToJsonArray(jsonData) {
-            return jsonData.map(function(item) {
-                return item.name;
-            });
+    CButton{
+        id:btn_Confir
+        anchors.right: btn_Cancel.left
+        anchors.rightMargin: 10
+        anchors.top: btn_Cancel.top
+        width: 90
+        height: 36
+        text: "确定"
+        onClicked: {
+            backMountingScheme()
+            addMountSchemeData.visible = false
+        }
     }
-
 }

@@ -12,5 +12,20 @@ Window {
     UavMainManagement{
         id:uavMain
     }
+//    Component.objectName: {
+//        addAmmoData()
+//    }
+
+//    function addAmmoData(){
+//        processInfo.qqqid = "a"
+//        processInfo.sum  = 0.0
+//    console.log("processInfo"+processInfo+"<>"+JSON.stringify(processInfo))
+//        processInfo.qqqid = "ab"
+//        processInfo.sum  = 10.0
+//    console.log("processInfo"+processInfo+"<>"+JSON.stringify(processInfo))
+//        var ammoData={ qqqid:"ab",
+//                    sum:0.0 }
+//        console.log("ammoData"+ammoData+"<>"+JSON.stringify(ammoData))
+//    }
 
 }

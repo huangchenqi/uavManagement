@@ -1,0 +1,316 @@
+﻿import QtQuick 2.12
+import QtQuick.Controls 2.12
+import "qrc:/AddAmmoModules/Component"
+
+
+Item {
+    id:item_Missile
+    width: 550
+    height: 100
+    //——————对外参数接口——————
+    //发射方式
+    property int launchedType: 0
+    //导引规律
+    property int guidRule: 0
+    //制导方式
+    property int guidType: 0
+
+    Rectangle{
+        anchors.fill: parent
+        color:"#50000000"
+
+        CText{
+            id:text_Title
+            text: "发射参数:"
+            pixelSize: 25
+            color: "#4EC4FF"
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            anchors.top: parent.top
+            anchors.topMargin: 20
+            horizontalAlignment: Text.AlignLeft
+        }
+
+        Rectangle{
+            id:rect_data
+            anchors.left: text_Title.left
+            anchors.top: text_Title.bottom
+            anchors.topMargin: 15
+            anchors.right: parent.right
+            anchors.rightMargin: 10
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 15
+            border.width: 0
+            border.color: mainColor
+            color: "transparent"
+
+            Rectangle {
+                id: rect_LaunchedData
+                height: 20
+                color: "transparent"
+                anchors.left: parent.left
+                anchors.leftMargin: 5
+                anchors.top: parent.top
+                anchors.topMargin: 15
+                width:(( parent.width ) / 3) - 10
+
+                CText{
+                    id:text_LaunchedDataTitle
+                    width: pixelSize * 4.5
+                    height: parent.height
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    pixelSize: 20
+                    horizontalAlignment: Text.AlignLeft
+                    color:mainColor
+                    text:"发射方式: "
+                }
+
+                ListView{
+                    id:view_List_LaunchedData
+                    width: comp_LaunchedDataType.width
+                    height: comp_LaunchedDataType.height * 5
+                    anchors.left: comp_LaunchedDataType.left
+                    anchors.leftMargin: comp_LaunchedDataType.width/2 - width/2
+                    anchors.top: comp_LaunchedDataType.bottom
+                    anchors.topMargin: 2
+                    visible: false
+                    clip: true
+                    model:ListModel{
+                        id:listmodel_Box
+                    }
+                    delegate:Component{
+                        Item{
+                            id:item_Delegate
+                            width: view_List_LaunchedData.width
+                            height: 36
+                            CButton{
+                                id:comp_TypeBtn
+                                anchors.fill: parent
+                                text:m_TypeName
+                                color:"#ffddaa00"
+                                borderColor: "#ffddaa00"
+                                borderHigtColor: "#ffeebb22"
+                                pixelSize: 18
+                                onClicked: {
+                                    view_List_LaunchedData.visible = false
+                                    launchedType = index
+                                    m_SelectState = !m_SelectState
+                                }
+                            }
+                        }
+                    }
+                    Component.onCompleted: {
+                        listmodel_Box.append({m_Number:0,m_SelectState:false,m_TypeName:"白天"})
+                        listmodel_Box.append({m_Number:1,m_SelectState:false,m_TypeName:"夜晚"})
+                    }
+                }
+                //显示区域
+                CButton{
+                    id:comp_LaunchedDataType
+                    width: parent.width - text_LaunchedDataTitle.width
+                    height: 36
+                    color:"#ffddaa00"
+                    borderColor: "#ffddaa00"
+                    borderHigtColor: "#ffeebb22"
+                    anchors.left: text_LaunchedDataTitle.right
+                    anchors.verticalCenter: text_LaunchedDataTitle.verticalCenter
+                    pixelSize: 20
+                    text:{
+                        if(launchedType < 0)
+                        {
+                            return "白天"
+                        }
+                        else
+                        {
+                            if(listmodel_Box.count > 0)
+                                listmodel_Box.get(launchedType).m_TypeName
+                        }
+                    }
+                    onClicked: {
+                        view_List_LaunchedData.visible = !view_List_LaunchedData.visible
+                    }
+                }
+            }
+
+            Rectangle {
+                id: rect_GuidRuleData
+                height: 20
+                color: "transparent"
+                anchors.left: rect_LaunchedData.right
+                anchors.leftMargin: 10
+                anchors.top: parent.top
+                anchors.topMargin: 15
+                width:(( parent.width ) / 3) - 10
+
+                CText{
+                    id:text_GuidRuleDataTitle
+                    width: pixelSize * 4.5
+                    height: parent.height
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    pixelSize: 20
+                    horizontalAlignment: Text.AlignLeft
+                    color:mainColor
+                    text:"发射方式: "
+                }
+
+                ListView{
+                    id:view_List_GuidRuleData
+                    width: comp_GuidRuleType.width
+                    height: comp_GuidRuleType.height * 5
+                    anchors.left: comp_GuidRuleType.left
+                    anchors.leftMargin: comp_GuidRuleType.width/2 - width/2
+                    anchors.top: comp_GuidRuleType.bottom
+                    anchors.topMargin: 2
+                    visible: false
+                    clip: true
+                    model:ListModel{
+                        id:listmodel_Box_GuidRule
+                    }
+                    delegate:Component{
+                        Item{
+                            id:item_Delegate
+                            width: view_List_GuidRuleData.width
+                            height: 36
+                            CButton{
+                                id:comp_TypeBtn
+                                anchors.fill: parent
+                                text:m_TypeName
+                                color:"#ffddaa00"
+                                borderColor: "#ffddaa00"
+                                borderHigtColor: "#ffeebb22"
+                                pixelSize: 18
+                                onClicked: {
+                                    view_List_GuidRuleData.visible = false
+                                    guidRule = index
+                                    m_SelectState = !m_SelectState
+                                }
+                            }
+                        }
+                    }
+                    Component.onCompleted: {
+                        listmodel_Box_GuidRule.append({m_Number:0,m_SelectState:false,m_TypeName:"中制导"})
+                        listmodel_Box_GuidRule.append({m_Number:1,m_SelectState:false,m_TypeName:"末制导"})
+                    }
+                }
+                //显示区域
+                CButton{
+                    id:comp_GuidRuleType
+                    width: parent.width - text_GuidRuleDataTitle.width
+                    height: 36
+                    color:"#ffddaa00"
+                    borderColor: "#ffddaa00"
+                    borderHigtColor: "#ffeebb22"
+                    anchors.left: text_GuidRuleDataTitle.right
+                    anchors.verticalCenter: text_GuidRuleDataTitle.verticalCenter
+                    pixelSize: 20
+                    text:{
+                        if(guidRule < 0)
+                        {
+                            return "白天"
+                        }
+                        else
+                        {
+                            if(listmodel_Box_GuidRule.count > 0)
+                                listmodel_Box_GuidRule.get(guidRule).m_TypeName
+                        }
+                    }
+                    onClicked: {
+                        view_List_GuidRuleData.visible = !view_List_GuidRuleData.visible
+                    }
+                }
+            }
+
+            Rectangle {
+                id: rect_GuidTypeData
+                height: 20
+                color: "transparent"
+                anchors.left: rect_GuidRuleData.right
+                anchors.leftMargin: 10
+                anchors.top: parent.top
+                anchors.topMargin: 15
+                width:(( parent.width ) / 3) - 10
+
+                CText{
+                    id:text_GuidTypeDataTitle
+                    width: pixelSize * 4.5
+                    height: parent.height
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    pixelSize: 20
+                    horizontalAlignment: Text.AlignLeft
+                    color:mainColor
+                    text:"制导方式: "
+                }
+
+                ListView{
+                    id:view_List_GuidTypeData
+                    width: comp_GuidType.width
+                    height: comp_GuidType.height * 5
+                    anchors.left: comp_GuidType.left
+                    anchors.leftMargin: comp_GuidType.width/2 - width/2
+                    anchors.top: comp_GuidType.bottom
+                    anchors.topMargin: 2
+                    visible: false
+                    clip: true
+                    model:ListModel{
+                        id:listmodel_Box_GuidType
+                    }
+                    delegate:Component{
+                        Item{
+                            id:item_Delegate
+                            width: view_List_GuidTypeData.width
+                            height: 36
+                            CButton{
+                                id:comp_TypeBtn
+                                anchors.fill: parent
+                                text:m_TypeName
+                                color:"#ffddaa00"
+                                borderColor: "#ffddaa00"
+                                borderHigtColor: "#ffeebb22"
+                                pixelSize: 18
+                                onClicked: {
+                                    view_List_GuidTypeData.visible = false
+                                    guidType = index
+                                    m_SelectState = !m_SelectState
+                                }
+                            }
+                        }
+                    }
+                    Component.onCompleted: {
+                        listmodel_Box_GuidType.append({m_Number:0,m_SelectState:false,m_TypeName:"白天"})
+                        listmodel_Box_GuidType.append({m_Number:1,m_SelectState:false,m_TypeName:"夜晚"})
+                    }
+                }
+                //显示区域
+                CButton{
+                    id:comp_GuidType
+                    width: parent.width - text_GuidTypeDataTitle.width
+                    height: 36
+                    color:"#ffddaa00"
+                    borderColor: "#ffddaa00"
+                    borderHigtColor: "#ffeebb22"
+                    anchors.left: text_GuidTypeDataTitle.right
+                    anchors.verticalCenter: text_GuidTypeDataTitle.verticalCenter
+                    pixelSize: 20
+                    text:{
+                        if(guidType < 0)
+                        {
+                            return "白天"
+                        }
+                        else
+                        {
+                            if(listmodel_Box_GuidType.count > 0)
+                                listmodel_Box_GuidType.get(guidType).m_TypeName
+                        }
+                    }
+                    onClicked: {
+                        view_List_GuidTypeData.visible = !view_List_GuidTypeData.visible
+                    }
+                }
+            }
+
+        }
+    }
+}
