@@ -13,7 +13,8 @@ Item {
     height: 1080
     z: 100
     property string mainColor:"#fff0cc55"
-    signal backAvAmmoRecord()
+    property var ammoData: new Object//保存、查看、修改数据
+    signal backAmmoRecord()
     readonly property string mainBackgroundSource: "file:Resources/Background/bg_MainBackground.png"
     //弹药类型
     property int missileType: -1
@@ -128,7 +129,7 @@ Item {
             width: pixelSize * 4
             text: "取消"
             onClicked: {
-                backAvAmmoRecord()
+                backAmmoRecord()
                 newAmmoData.visible = false
             }
         }
@@ -142,6 +143,10 @@ Item {
             height: pixelSize * 2
             width: pixelSize * 4
             text: "保存"
+            onClicked: {
+                backAmmoRecord()
+                newAmmoData.visible = false
+            }
         }
 
     }
@@ -238,7 +243,7 @@ Item {
           AddAmmoComponentFuse{  // 假设 admin.qml 的根元素是 Admin 类型
                 id: addAmmoComponentFusePanel
                 anchors.centerIn: parent
-                onClose: addAmmoComponentFusePopup.close() // 连接关闭信号
+                //onClose: addAmmoComponentFusePopup.close() // 连接关闭信号
             }
 
     }
@@ -255,7 +260,7 @@ Item {
           AddAmmoComponentLaunchconditions{  // 假设 admin.qml 的根元素是 Admin 类型
                 id: addAmmoComponentLaunchconditionsPanel
                 anchors.centerIn: parent
-                onClose: addAmmoComponentLaunchconditionsPopup.close() // 连接关闭信号
+                //onClose: addAmmoComponentLaunchconditionsPopup.close() // 连接关闭信号
             }
 
     }
@@ -272,7 +277,7 @@ Item {
           AddAmmoComponentSeeker{  // 假设 admin.qml 的根元素是 Admin 类型
                 id: addAmmoComponentSeekerPanel
                 anchors.centerIn: parent
-                onClose: addAmmoComponentSeekerPopup.close() // 连接关闭信号
+                //onClose: addAmmoComponentSeekerPopup.close() // 连接关闭信号
             }
 
     }
@@ -289,7 +294,7 @@ Item {
           AddAmmoComponentWarhead{  // 假设 admin.qml 的根元素是 Admin 类型
                 id: addAmmoComponentWarheadPanel
                 anchors.centerIn: parent
-                onClose: addAmmoComponentWarheadPopup.close() // 连接关闭信号
+                //onClose: addAmmoComponentWarheadPopup.close() // 连接关闭信号
             }
 
     }

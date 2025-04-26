@@ -61,6 +61,10 @@ Rectangle{//航空弹药的组件导引头
                 titleWidth: pixelSize * 6.5
                 width: parent.width/2 - 20
                 height: 30
+                onTextChanged: {
+                    ammoData.guiding_head_working_wavelength =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
             CTextInput{
@@ -73,6 +77,10 @@ Rectangle{//航空弹药的组件导引头
                 titleWidth: pixelSize * 6.5
                 width: parent.width/2 - 20
                 height: 30
+                onTextChanged: {
+                    ammoData.guidance_head_operating_distance =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
             CTextInput{
@@ -85,6 +93,10 @@ Rectangle{//航空弹药的组件导引头
                 titleWidth: pixelSize * 5.5
                 width: parent.width/2 - 20
                 height: 30
+                onTextChanged: {
+                    ammoData.guidance_head_frame_angle =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
             CTextInput{
@@ -97,6 +109,10 @@ Rectangle{//航空弹药的组件导引头
                 titleWidth: pixelSize * 9.5
                 width: parent.width/2 - 20
                 height: 30
+                onTextChanged: {
+                    ammoData.guidance_head_field_of_view_angle_linearregion =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
             CTextInput{
@@ -109,6 +125,10 @@ Rectangle{//航空弹药的组件导引头
                 titleWidth: pixelSize * 6.5
                 width: parent.width/2 - 10
                 height: 30
+                onTextChanged: {
+                    ammoData.guidance_head_operating_frequency =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
             CTextInput{
@@ -121,6 +141,10 @@ Rectangle{//航空弹药的组件导引头
                 titleWidth: pixelSize * 4
                 width: parent.width/2 - 10
                 height: 30
+                onTextChanged: {
+                    ammoData.blind_spot_of_guidance_head =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
             CTextInput{
@@ -133,6 +157,10 @@ Rectangle{//航空弹药的组件导引头
                 titleWidth: pixelSize * 9.5
                 width: parent.width/2 - 10
                 height: 30
+                onTextChanged: {
+                    ammoData.adaptability_of_guidance_head_sunlight =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
             CTextInput{
@@ -145,6 +173,10 @@ Rectangle{//航空弹药的组件导引头
                 titleWidth: pixelSize * 10.5
                 width: parent.width/2 - 10
                 height: 30
+                onTextChanged: {
+                    ammoData.guidance_head_field_of_view_angle_instantaneous =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
         }
@@ -161,6 +193,7 @@ Rectangle{//航空弹药的组件导引头
             onClicked:{
 //                                saveammunitionData()
                 addAmmoComponentSeekerRoot.visible = false
+                addAmmoComponentSeekerPopup.close()
             }
         }
 
@@ -175,130 +208,18 @@ Rectangle{//航空弹药的组件导引头
             text: "返回"
             onClicked: {
                 addAmmoComponentSeekerRoot.visible = false
+                addAmmoComponentSeekerPopup.close()
             }
         }
     }
 
 
     function saveammunitionData(){
-//        console.log("ammunitionTypeSelevtContent"+ammunitionTypeSelect.currentText+"-"+"testValue"+ammunitionTypeSelect.currentValue)
 
-        var ammunitionData = {
-            ammunitionTypeSelectContent:"",
-            ammunitionNameTextContent:"",
-            ammunitionIdTextContent:"",
-            ammunitionLengthTextContent:"",
-            ammunitionWidthTextContent:"",
-            ammunitionHeightTextContent:"",
-            ammunitionInvisibilitySelectContent:"",
-            ammunitionFlightHeightTextContent:"",
-            ammunitionFlightSpeedTextContent:"",
-            ammunitionFlightDistanceRangeTextContent:"",
-            ammunitionFlightTimeRangeTextContent:"",
-            ammunitionTakeoffDistanceTextContent:"",
-            ammunitionLandDistanceTextContent:"",
-            ammunitionTurningRadiusRangeTextContent:"",
-            ammunitionOperatioanalRadiusTextContent:"",
-            ammunitionInvestigationPayloadTypeGroupContent:"",
-            ammunitionBombingmethodGroupContent:"",
-            ammunitionLoadReconnaissanceRangeTextContent:"",
-            ammunitionLoadReconnaissanceAccuracyTextContent:"",
-            ammunitionRecoverymodeGroupContent:"",
-            ammunitionLowAltitudeBreakthroughSpeedTextContent:"",
-            ammunitionHangingpointsTextContent:"",
-            ammunitionPayloadcapacityTextContent:"",
-            ammunitionRadarCrossSectionTextContent:""
-        };
-
-
-        var ammunitionInvestigationPayloadTypeJson = getSelectedPayloads(ammunitionInvestigationPayloadTypeGroup.buttons)
-        console.log("有效载荷选择:", JSON.stringify(ammunitionInvestigationPayloadTypeJson))
-        var ammunitionInvestigationPayloadTypeJsonStr = JSON.stringify(ammunitionInvestigationPayloadTypeJson)
-        var ammunitionInvestigationPayloadTypeJsonStrresult = convertToJsonArray(ammunitionInvestigationPayloadTypeJson);
-        console.log(ammunitionInvestigationPayloadTypeJsonStrresult);
-
-        var ammunitionBombingmethodGroupJson = getSelectedPayloads(ammunitionBombingmethodGroup.buttons)
-        console.log("投弹方式:", JSON.stringify(ammunitionBombingmethodGroupJson))
-        var ammunitionBombingmethodGroupStr = JSON.stringify(ammunitionInvestigationPayloadTypeJson)
-        var ammunitionBombingmethodGroupJsonStrresult = convertToJsonArray(ammunitionBombingmethodGroupJson);
-        console.log(ammunitionBombingmethodGroupJsonStrresult);
-
-        var ammunitionRecoverymodeGroupJson = getSelectedPayloads(ammunitionRecoverymodeGroup.buttons)
-        console.log("回收方式:", JSON.stringify(ammunitionRecoverymodeGroupJson))
-        var ammunitionRecoverymodeGroupJsonStr = JSON.stringify(ammunitionRecoverymodeGroupJson)
-        var ammunitionRecoverymodeGroupJsonStrresult = convertToJsonArray(ammunitionRecoverymodeGroupJson);
-        console.log(ammunitionRecoverymodeGroupJsonStrresult);
-
-        var ammunitionTypeSelectContent = ammunitionTypeSelect.currentText
-        var ammunitionNameTextContent = ammunitionNameText.text
-        var ammunitionIdTextContent = ammunitionIdText.text
-        var ammunitionLengthTextContent = ammunitionLengthText.text
-        var ammunitionWidthTextContent = ammunitionWidthText.text
-        var ammunitionHeightTextContent = ammunitionHeightText.text
-        var ammunitionInvisibilitySelectContent = ammunitionInvisibilitySelect.currentText
-        var ammunitionFlightHeightTextContent = ammunitionFlightHeightText.text
-        var ammunitionFlightSpeedTextContent = ammunitionFlightSpeedText.text
-        var ammunitionFlightDistanceRangeTextContent = ammunitionFlightDistanceRangeText.text
-        var ammunitionFlightTimeRangeTextContent = ammunitionFlightTimeRangeText.text
-        var ammunitionTakeoffDistanceTextContent = ammunitionTakeoffDistanceText.text
-        var ammunitionLandDistanceTextContent = ammunitionLandDistanceText.text
-        var ammunitionTurningRadiusRangeTextContent = ammunitionTurningRadiusRangeText.text
-        var ammunitionOperatioanalRadiusTextContent = ammunitionOperatioanalRadiusText.text
-        var ammunitionInvestigationPayloadTypeGroupContent = ammunitionInvestigationPayloadTypeJsonStrresult
-        var ammunitionBombingmethodGroupContent = ammunitionBombingmethodGroupJsonStrresult
-        var ammunitionLoadReconnaissanceRangeTextContent = ammunitionLoadReconnaissanceRangeText.text
-        var ammunitionLoadReconnaissanceAccuracyTextContent = ammunitionLoadReconnaissanceAccuracyText.text
-        var ammunitionRecoverymodeGroupContent = ammunitionRecoverymodeGroupJsonStrresult
-        var ammunitionLowAltitudeBreakthroughSpeedTextContent = ammunitionLowAltitudeBreakthroughSpeedText.text
-        var ammunitionHangingpointsTextContent = ammunitionHangingpointsText.text
-        var ammunitionPayloadcapacityTextContent = ammunitionPayloadcapacityText.text
-        var ammunitionRadarCrossSectionTextContent = ammunitionRadarCrossSectionText.text
-
-        ammunitionData.ammunitionTypeSelectContent = ammunitionTypeSelectContent
-        ammunitionData.ammunitionNameTextContent = ammunitionNameTextContent
-        ammunitionData.ammunitionIdTextContent = ammunitionIdTextContent
-        ammunitionData.ammunitionLengthTextContent = ammunitionLengthTextContent
-        ammunitionData.ammunitionWidthTextContent = ammunitionWidthTextContent
-        ammunitionData.ammunitionHeightTextContent = ammunitionHeightTextContent
-        ammunitionData.ammunitionInvisibilitySelectContent = ammunitionInvisibilitySelectContent
-        ammunitionData.ammunitionFlightHeightTextContent = ammunitionFlightHeightTextContent
-        ammunitionData.ammunitionFlightSpeedTextContent = ammunitionFlightSpeedTextContent
-        ammunitionData.ammunitionFlightDistanceRangeTextContent = ammunitionFlightDistanceRangeTextContent
-        ammunitionData.ammunitionFlightTimeRangeTextContent = ammunitionFlightTimeRangeTextContent
-        ammunitionData.ammunitionTakeoffDistanceTextContent = ammunitionTakeoffDistanceTextContent
-        ammunitionData.ammunitionLandDistanceTextContent = ammunitionLandDistanceTextContent
-        ammunitionData.ammunitionTurningRadiusRangeTextContent = ammunitionTurningRadiusRangeTextContent
-        ammunitionData.ammunitionOperatioanalRadiusTextContent = ammunitionOperatioanalRadiusTextContent
-        ammunitionData.ammunitionInvestigationPayloadTypeGroupContent = ammunitionInvestigationPayloadTypeGroupContent
-        ammunitionData.ammunitionBombingmethodGroupContent = ammunitionBombingmethodGroupContent
-        ammunitionData.ammunitionLoadReconnaissanceRangeTextContent = ammunitionLoadReconnaissanceRangeTextContent
-        ammunitionData.ammunitionLoadReconnaissanceAccuracyTextContent = ammunitionLoadReconnaissanceAccuracyTextContent
-        ammunitionData.ammunitionRecoverymodeGroupContent = ammunitionRecoverymodeGroupContent
-        ammunitionData.ammunitionLowAltitudeBreakthroughSpeedTextContent = ammunitionLowAltitudeBreakthroughSpeedTextContent
-        ammunitionData.ammunitionHangingpointsTextContent = ammunitionHangingpointsTextContent
-        ammunitionData.ammunitionPayloadcapacityTextContent = ammunitionPayloadcapacityTextContent
-        ammunitionData.ammunitionRadarCrossSectionTextContent = ammunitionRadarCrossSectionTextContent
-
-        var jsonString = JSON.stringify(ammunitionData);
-                console.log("jsonString"+jsonString);
-
-
-
-
-    }
-    function convertToJsonArray(jsonData) {
-            return jsonData.map(function(item) {
-                return item.name;
-            });
     }
 
     function getSelectedPayloads(buttons) {
-            return Array.from(buttons)
-                .filter(btn => btn.checked)
-                .map(btn => ({
-                    name: btn.text,
-                    code: btn.payloadCode
-                }))
+
     }
     function saveDeliveryRecord() {
 

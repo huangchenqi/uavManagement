@@ -90,6 +90,8 @@ CREATE TABLE "uav_type_man"."ammo_parameters" (
   "blind_spot_of_guidance_head" REAL NOT NULL,
   "guidance_head_frame_angle" REAL NOT NULL,
   "guidance_head_field_of_view_angle" REAL NOT NULL,
+  "guidance_head_field_of_view_angle_linearregion" REAL NOT NULL,
+  "guidance_head_field_of_view_angle_instantaneous" REAL NOT NULL,
   "adaptability_of_guidance_head_sunlight" TEXT NOT NULL,
   "guidance_head_operating_frequency" REAL NOT NULL,
   "fuse_firing_rate" REAL NOT NULL,

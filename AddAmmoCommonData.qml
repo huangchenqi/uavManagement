@@ -8,10 +8,10 @@ Item{//航空导弹与航空炸弹
     width: 1000
     height: 300
 
-    property int selectType:0
+    property int selectType:0 //0 代表新增，1代表查看，2代表修改。
     property string text: ""
     onSelectTypeChanged: {
-
+      input_name.text = ammoData.idi
     }
     Rectangle {
         id:controlAmmunition
@@ -29,6 +29,8 @@ Item{//航空导弹与航空炸弹
             anchors.top: parent.top
             anchors.topMargin: 20
             horizontalAlignment: Text.AlignLeft
+
+
         }
 
         Label{
@@ -51,6 +53,7 @@ Item{//航空导弹与航空炸弹
             anchors.verticalCenter: ammoName.verticalCenter
             font.pixelSize: 20
             font.bold: true
+
             onTextChanged: {
                 // 使用正则表达式移除首尾的空白字符（包括空格、tab、换行）
                 var newText = text.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')
@@ -66,6 +69,11 @@ Item{//航空导弹与航空炸弹
                     // 恢复光标位置（考虑文本缩短的情况）
                     cursorPosition = Math.min(cursorPos, newText.length)
                 }
+            }
+
+            onEditingFinished: {
+                ammoData.ammoName =text
+                console.log("Text content changed to: " + text)
             }
         }
 
@@ -150,12 +158,16 @@ Item{//航空导弹与航空炸弹
                                                        top: 9999999
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
-                                                   }
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoLenth =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -195,11 +207,21 @@ Item{//航空导弹与航空炸弹
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoDiameter =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -239,11 +261,21 @@ Item{//航空导弹与航空炸弹
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoMass =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -283,11 +315,21 @@ Item{//航空导弹与航空炸弹
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoChargeMass =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -358,11 +400,21 @@ Item{//航空导弹与航空炸弹
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoWingspan =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -402,11 +454,21 @@ Item{//航空导弹与航空炸弹
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.effective_range =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -446,11 +508,21 @@ Item{//航空导弹与航空炸弹
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoLugSpacing =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -491,11 +563,15 @@ Item{//航空导弹与航空炸弹
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoKillingWay =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -566,11 +642,21 @@ Item{//航空导弹与航空炸弹
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoMinReleaseSpeed =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -610,11 +696,21 @@ Item{//航空导弹与航空炸弹
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoMaxReleaseSpeed =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -656,11 +752,21 @@ Item{//航空导弹与航空炸弹
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoMinReleaseHeight =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -700,11 +806,21 @@ Item{//航空导弹与航空炸弹
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoMaxReleaseHeight =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -756,11 +872,15 @@ Item{//航空导弹与航空炸弹
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.fuze_model =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{
@@ -806,11 +926,21 @@ Item{//航空导弹与航空炸弹
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.number_of_fuses =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{
@@ -856,11 +986,21 @@ Item{//航空导弹与航空炸弹
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.action_time =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{
@@ -906,11 +1046,21 @@ Item{//航空导弹与航空炸弹
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.available_extension_time =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{
@@ -970,6 +1120,8 @@ Item{//航空导弹与航空炸弹
                             selectType = index
                             m_SelectState = !m_SelectState
                             isSelect = m_SelectState
+
+                            //ammoData.ammoType =text
                         }
                     }
                 }

@@ -73,11 +73,21 @@ Item {
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.maximum_inclusive_coverage_quantity =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{
@@ -121,11 +131,21 @@ Item {
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.number_of_spread =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{
@@ -169,11 +189,21 @@ Item {
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.surface_dc_resistivity =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{
@@ -217,11 +247,21 @@ Item {
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.probability_of_arc_discharge =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{

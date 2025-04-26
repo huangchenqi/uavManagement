@@ -73,11 +73,21 @@ Item {
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.fuel_dispersion_radius =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{
@@ -121,11 +131,21 @@ Item {
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.distance_from_center_explosion =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{
@@ -169,11 +189,21 @@ Item {
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.shock_wave_overpressure_value =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{

@@ -11,7 +11,7 @@ Item{
 
     property int selectType:0
     onSelectTypeChanged: {
-
+      ammoData.idi
     }
     Rectangle {
         id:controlAmmunition
@@ -58,10 +58,30 @@ Item{
                 selectByMouse: true
                 selectionColor: "#ffcc8800"
                 onTextChanged: {
-                    if(text != "")
-                    {
+                    // 使用正则表达式移除首尾的空白字符（包括空格、tab、换行）
+                    var newText = text.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')
+                    missileCommonData.text = newText;
+                    // 判断是否需要更新（避免无限循环）
+                    if (newText !== text) {
+                        // 保存当前光标位置
+                        var cursorPos = cursorPosition
 
+                        // 更新文本
+                        text = newText
+
+                        // 恢复光标位置（考虑文本缩短的情况）
+                        cursorPosition = Math.min(cursorPos, newText.length)
                     }
+                }
+                // onTextChanged: {
+                //     if(text != "")
+                //     {
+
+                //     }
+                // }
+                onEditingFinished: {
+                    ammoData.ammoName =text
+                    console.log("Text content changed to: " + text)
                 }
             }
             Rectangle{
@@ -149,11 +169,21 @@ Item{
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoName =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -193,11 +223,21 @@ Item{
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoName =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -237,11 +277,21 @@ Item{
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoName =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -310,11 +360,21 @@ Item{
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoName =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -354,11 +414,21 @@ Item{
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoName =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -398,11 +468,21 @@ Item{
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoName =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -472,11 +552,21 @@ Item{
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoName =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -516,11 +606,21 @@ Item{
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoName =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -562,11 +662,21 @@ Item{
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoName =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -634,11 +744,21 @@ Item{
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoName =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -679,11 +799,21 @@ Item{
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoName =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -724,11 +854,21 @@ Item{
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    onTextChanged: {
-                                        if(text != "")
-                                        {
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
-                                        }
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoName =text
+                                        console.log("Text content changed to: " + text)
                                     }
                                 }
                                 Rectangle{
@@ -790,7 +930,10 @@ Item{
                             view_List_TypeSelect.visible = false
                             selectType = index
                             m_SelectState = !m_SelectState
-                            isSelect = m_SelectState
+                            isSelect = m_SelectState                            
+                                ammoData.ammoName =text
+                                console.log("Text content changed to: " + text)
+
                         }
                     }
                 }

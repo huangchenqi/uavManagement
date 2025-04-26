@@ -27,20 +27,48 @@ Rectangle{//航空弹药的组件发射条件
         id:rect_root
         anchors.fill: parent
         color: "transparent"
+        Rectangle{
+            id:rect_DataTitle
+            anchors.top: rect_root.top
+            anchors.topMargin: 2
+            anchors.left: parent.left
+            anchors.leftMargin: 2
+            anchors.right: parent.right
+            anchors.rightMargin: 10
+            height: 30
+            color: "transparent"
+            radius: 5
+            Label{
+                id:launchCondition
+                text: "发射条件"
+                color: mainColor
+                width: parent.width/2 - 20
+                height: 30
 
-        CText{
-            id:topTitle
-            text: "发射条件"
-            anchors.top: parent.top
-            anchors.topMargin: 15
-            anchors.horizontalCenter: parent.horizontalCenter
-            color: mainColor
-            pixelSize: 28
+            }
+
+            CText{
+                id:topTitle
+
+                anchors.top: parent.top
+                anchors.topMargin: 15
+                anchors.left: launchCondition.right
+                anchors.leftMargin: 2
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: mainColor
+                pixelSize: 28
+                width: parent.width/2 - 20
+                height: 30
+                onTextChanged: {
+                    ammoData.launch_conditions =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
         }
 
         Rectangle{
             id:rect_Data
-            anchors.top: topTitle.bottom
+            anchors.top: rect_DataTitle.bottom
             anchors.topMargin: 20
             anchors.left: parent.left
             anchors.leftMargin: 10
@@ -61,6 +89,10 @@ Rectangle{//航空弹药的组件发射条件
                 titleWidth: pixelSize * 6
                 width: parent.width/2 - 20
                 height: 30
+                onTextChanged: {
+                    ammoData.minimum_visibility_emission =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
             CTextInput{
@@ -73,6 +105,10 @@ Rectangle{//航空弹药的组件发射条件
                 titleWidth: pixelSize * 10.5
                 width: parent.width/2 - 20
                 height: 30
+                onTextChanged: {
+                    ammoData.launch_maximum_target_altitude =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
             CTextInput{
@@ -85,19 +121,27 @@ Rectangle{//航空弹药的组件发射条件
                 titleWidth: pixelSize * 10
                 width: parent.width/2 - 20
                 height: 30
+                onTextChanged: {
+                    ammoData.minimum_relative_height_launch =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
-            CTextInput{
-                id:weatherRestrictionsText
-                anchors.left: launchMinimumRelativeHeightText.left
-                anchors.top: launchMinimumRelativeHeightText.bottom
-                anchors.topMargin: 15
-                title: "天气限制:"
-                pixelSize: 18
-                titleWidth: pixelSize * 4.5
-                width: parent.width/2 - 20
-                height: 30
-            }
+            // CText{
+            //     id:weatherRestrictionsText
+            //     anchors.left: launchMinimumRelativeHeightText.left
+            //     anchors.top: launchMinimumRelativeHeightText.bottom
+            //     anchors.topMargin: 15
+            //     title: "天气限制:"
+            //     pixelSize: 18
+            //     titleWidth: pixelSize * 4.5
+            //     width: parent.width/2 - 20
+            //     height: 30
+            //     onTextChanged: {
+            //         ammoData.fuse_type =text
+            //         console.log("Text content changed to: " + text)
+            //     }
+            // }
 
             CTextInput{
                 id:launchMaximumAltitudeText
@@ -109,6 +153,10 @@ Rectangle{//航空弹药的组件发射条件
                 titleWidth: pixelSize * 10.5
                 width: parent.width/2 - 20
                 height: 30
+                onTextChanged: {
+                    ammoData.maximum_launch_altitude =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
             CTextInput{
@@ -121,6 +169,10 @@ Rectangle{//航空弹药的组件发射条件
                 titleWidth: pixelSize * 10.5
                 width: parent.width/2 - 20
                 height: 30
+                onTextChanged: {
+                    ammoData.maximum_launch_relative_height =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
             CTextInput{
@@ -133,6 +185,10 @@ Rectangle{//航空弹药的组件发射条件
                 titleWidth: pixelSize * 7.5
                 width: parent.width/2 - 20
                 height: 30
+                onTextChanged: {
+                    ammoData.launch_speed =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
             CTextInput{
@@ -145,6 +201,10 @@ Rectangle{//航空弹药的组件发射条件
                 titleWidth: pixelSize * 7
                 width: parent.width/2 - 20
                 height: 30
+                onTextChanged: {
+                    ammoData.launch_off_axis_angle =text
+                    console.log("Text content changed to: " + text)
+                }
             }
 
         }
@@ -161,6 +221,7 @@ Rectangle{//航空弹药的组件发射条件
             onClicked:{
 //                                saveammunitionData()
                 addAmmoComponentLaunchconditionsRoot.visible = false
+                addAmmoComponentLaunchconditionsPopup.close()
             }
         }
 
@@ -175,134 +236,24 @@ Rectangle{//航空弹药的组件发射条件
             text: "返回"
             onClicked: {
                 addAmmoComponentLaunchconditionsRoot.visible = false
+                addAmmoComponentLaunchconditionsPopup.close()
             }
         }
     }
 
 
     function saveammunitionData(){
-//        console.log("ammunitionTypeSelevtContent"+ammunitionTypeSelect.currentText+"-"+"testValue"+ammunitionTypeSelect.currentValue)
-
-        var ammunitionData = {
-            ammunitionTypeSelectContent:"",
-            ammunitionNameTextContent:"",
-            ammunitionIdTextContent:"",
-            ammunitionLengthTextContent:"",
-            ammunitionWidthTextContent:"",
-            ammunitionHeightTextContent:"",
-            ammunitionInvisibilitySelectContent:"",
-            ammunitionFlightHeightTextContent:"",
-            ammunitionFlightSpeedTextContent:"",
-            ammunitionFlightDistanceRangeTextContent:"",
-            ammunitionFlightTimeRangeTextContent:"",
-            ammunitionTakeoffDistanceTextContent:"",
-            ammunitionLandDistanceTextContent:"",
-            ammunitionTurningRadiusRangeTextContent:"",
-            ammunitionOperatioanalRadiusTextContent:"",
-            ammunitionInvestigationPayloadTypeGroupContent:"",
-            ammunitionBombingmethodGroupContent:"",
-            ammunitionLoadReconnaissanceRangeTextContent:"",
-            ammunitionLoadReconnaissanceAccuracyTextContent:"",
-            ammunitionRecoverymodeGroupContent:"",
-            ammunitionLowAltitudeBreakthroughSpeedTextContent:"",
-            ammunitionHangingpointsTextContent:"",
-            ammunitionPayloadcapacityTextContent:"",
-            ammunitionRadarCrossSectionTextContent:""
-        };
-
-
-        var ammunitionInvestigationPayloadTypeJson = getSelectedPayloads(ammunitionInvestigationPayloadTypeGroup.buttons)
-        console.log("有效载荷选择:", JSON.stringify(ammunitionInvestigationPayloadTypeJson))
-        var ammunitionInvestigationPayloadTypeJsonStr = JSON.stringify(ammunitionInvestigationPayloadTypeJson)
-        var ammunitionInvestigationPayloadTypeJsonStrresult = convertToJsonArray(ammunitionInvestigationPayloadTypeJson);
-        console.log(ammunitionInvestigationPayloadTypeJsonStrresult);
-
-        var ammunitionBombingmethodGroupJson = getSelectedPayloads(ammunitionBombingmethodGroup.buttons)
-        console.log("投弹方式:", JSON.stringify(ammunitionBombingmethodGroupJson))
-        var ammunitionBombingmethodGroupStr = JSON.stringify(ammunitionInvestigationPayloadTypeJson)
-        var ammunitionBombingmethodGroupJsonStrresult = convertToJsonArray(ammunitionBombingmethodGroupJson);
-        console.log(ammunitionBombingmethodGroupJsonStrresult);
-
-        var ammunitionRecoverymodeGroupJson = getSelectedPayloads(ammunitionRecoverymodeGroup.buttons)
-        console.log("回收方式:", JSON.stringify(ammunitionRecoverymodeGroupJson))
-        var ammunitionRecoverymodeGroupJsonStr = JSON.stringify(ammunitionRecoverymodeGroupJson)
-        var ammunitionRecoverymodeGroupJsonStrresult = convertToJsonArray(ammunitionRecoverymodeGroupJson);
-        console.log(ammunitionRecoverymodeGroupJsonStrresult);
-
-        var ammunitionTypeSelectContent = ammunitionTypeSelect.currentText
-        var ammunitionNameTextContent = ammunitionNameText.text
-        var ammunitionIdTextContent = ammunitionIdText.text
-        var ammunitionLengthTextContent = ammunitionLengthText.text
-        var ammunitionWidthTextContent = ammunitionWidthText.text
-        var ammunitionHeightTextContent = ammunitionHeightText.text
-        var ammunitionInvisibilitySelectContent = ammunitionInvisibilitySelect.currentText
-        var ammunitionFlightHeightTextContent = ammunitionFlightHeightText.text
-        var ammunitionFlightSpeedTextContent = ammunitionFlightSpeedText.text
-        var ammunitionFlightDistanceRangeTextContent = ammunitionFlightDistanceRangeText.text
-        var ammunitionFlightTimeRangeTextContent = ammunitionFlightTimeRangeText.text
-        var ammunitionTakeoffDistanceTextContent = ammunitionTakeoffDistanceText.text
-        var ammunitionLandDistanceTextContent = ammunitionLandDistanceText.text
-        var ammunitionTurningRadiusRangeTextContent = ammunitionTurningRadiusRangeText.text
-        var ammunitionOperatioanalRadiusTextContent = ammunitionOperatioanalRadiusText.text
-        var ammunitionInvestigationPayloadTypeGroupContent = ammunitionInvestigationPayloadTypeJsonStrresult
-        var ammunitionBombingmethodGroupContent = ammunitionBombingmethodGroupJsonStrresult
-        var ammunitionLoadReconnaissanceRangeTextContent = ammunitionLoadReconnaissanceRangeText.text
-        var ammunitionLoadReconnaissanceAccuracyTextContent = ammunitionLoadReconnaissanceAccuracyText.text
-        var ammunitionRecoverymodeGroupContent = ammunitionRecoverymodeGroupJsonStrresult
-        var ammunitionLowAltitudeBreakthroughSpeedTextContent = ammunitionLowAltitudeBreakthroughSpeedText.text
-        var ammunitionHangingpointsTextContent = ammunitionHangingpointsText.text
-        var ammunitionPayloadcapacityTextContent = ammunitionPayloadcapacityText.text
-        var ammunitionRadarCrossSectionTextContent = ammunitionRadarCrossSectionText.text
-
-        ammunitionData.ammunitionTypeSelectContent = ammunitionTypeSelectContent
-        ammunitionData.ammunitionNameTextContent = ammunitionNameTextContent
-        ammunitionData.ammunitionIdTextContent = ammunitionIdTextContent
-        ammunitionData.ammunitionLengthTextContent = ammunitionLengthTextContent
-        ammunitionData.ammunitionWidthTextContent = ammunitionWidthTextContent
-        ammunitionData.ammunitionHeightTextContent = ammunitionHeightTextContent
-        ammunitionData.ammunitionInvisibilitySelectContent = ammunitionInvisibilitySelectContent
-        ammunitionData.ammunitionFlightHeightTextContent = ammunitionFlightHeightTextContent
-        ammunitionData.ammunitionFlightSpeedTextContent = ammunitionFlightSpeedTextContent
-        ammunitionData.ammunitionFlightDistanceRangeTextContent = ammunitionFlightDistanceRangeTextContent
-        ammunitionData.ammunitionFlightTimeRangeTextContent = ammunitionFlightTimeRangeTextContent
-        ammunitionData.ammunitionTakeoffDistanceTextContent = ammunitionTakeoffDistanceTextContent
-        ammunitionData.ammunitionLandDistanceTextContent = ammunitionLandDistanceTextContent
-        ammunitionData.ammunitionTurningRadiusRangeTextContent = ammunitionTurningRadiusRangeTextContent
-        ammunitionData.ammunitionOperatioanalRadiusTextContent = ammunitionOperatioanalRadiusTextContent
-        ammunitionData.ammunitionInvestigationPayloadTypeGroupContent = ammunitionInvestigationPayloadTypeGroupContent
-        ammunitionData.ammunitionBombingmethodGroupContent = ammunitionBombingmethodGroupContent
-        ammunitionData.ammunitionLoadReconnaissanceRangeTextContent = ammunitionLoadReconnaissanceRangeTextContent
-        ammunitionData.ammunitionLoadReconnaissanceAccuracyTextContent = ammunitionLoadReconnaissanceAccuracyTextContent
-        ammunitionData.ammunitionRecoverymodeGroupContent = ammunitionRecoverymodeGroupContent
-        ammunitionData.ammunitionLowAltitudeBreakthroughSpeedTextContent = ammunitionLowAltitudeBreakthroughSpeedTextContent
-        ammunitionData.ammunitionHangingpointsTextContent = ammunitionHangingpointsTextContent
-        ammunitionData.ammunitionPayloadcapacityTextContent = ammunitionPayloadcapacityTextContent
-        ammunitionData.ammunitionRadarCrossSectionTextContent = ammunitionRadarCrossSectionTextContent
-
-        var jsonString = JSON.stringify(ammunitionData);
-                console.log("jsonString"+jsonString);
-
-
 
 
     }
-    function convertToJsonArray(jsonData) {
-            return jsonData.map(function(item) {
-                return item.name;
-            });
-    }
-
-    function getSelectedPayloads(buttons) {
-            return Array.from(buttons)
-                .filter(btn => btn.checked)
-                .map(btn => ({
-                    name: btn.text,
-                    code: btn.payloadCode
-                }))
-    }
-    function saveDeliveryRecord() {
+    function updateData() {
 
     }
+
+    function loadData() {
+
+    }
+
 
 }
 

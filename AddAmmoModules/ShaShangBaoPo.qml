@@ -73,11 +73,21 @@ Item {
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.ammoDenseKillingRadius =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{
@@ -121,11 +131,21 @@ Item {
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.ammoInitialVelocityFragments =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{
@@ -170,11 +190,21 @@ Item {
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.ammoNumberFragments =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{
@@ -186,6 +216,67 @@ Item {
                     }
                 }
             }
+            Rectangle {
+                id: rect_data4
+                height: 20
+                color: "transparent"
+                anchors.left: rect_data3.left
+                anchors.top: rect_data3.bottom
+                anchors.topMargin: 15
+                width:( parent.width ) - 10
+
+                CText{
+                    id:text_Title4
+                    width: pixelSize * 4.5
+                    height: parent.height
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    pixelSize: 20
+                    horizontalAlignment: Text.AlignLeft
+                    color:mainColor
+                    text:"破片能力: "
+                }
+                Item{
+                    width: parent.width - text_Title4.width - 5
+                    height: parent.height
+                    anchors.left:text_Title4.right
+                    anchors.top: parent.top
+                    TextInput{
+                        anchors.fill: parent
+                        color:"#ffffffff"
+                        font.family:text_Title4.family
+                        font.pixelSize:(18)
+                        selectByMouse: true
+                        selectionColor: "#ffcc8800"
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
+
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.ammoArmorBreakingAbility =text
+                            console.log("Text content changed to: " + text)
+                        }
+                    }
+                    Rectangle{
+                        width: parent.width
+                        height: (2)
+                        anchors.left: parent.left
+                        anchors.bottom: parent.bottom
+                        color:mainColor
+                    }
+                }
+            }
+
+
+
         }
     }
 }

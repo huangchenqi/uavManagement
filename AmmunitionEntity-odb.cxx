@@ -131,6 +131,8 @@ namespace odb
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
     pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
@@ -263,6 +265,8 @@ namespace odb
     pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::text_oid,
+    pgsql::float4_oid,
+    pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
@@ -794,9 +798,17 @@ namespace odb
     //
     t[84UL] = 0;
 
+    // guidance_head_field_of_view_angle_linearregion
+    //
+    t[85UL] = 0;
+
+    // guidance_head_field_of_view_angle_instantaneous
+    //
+    t[86UL] = 0;
+
     // adaptability_of_guidance_head_sunlight
     //
-    if (t[85UL])
+    if (t[87UL])
     {
       i.adaptability_of_guidance_head_sunlight_value.capacity (i.adaptability_of_guidance_head_sunlight_size);
       grew = true;
@@ -804,15 +816,15 @@ namespace odb
 
     // guidance_head_operating_frequency
     //
-    t[86UL] = 0;
+    t[88UL] = 0;
 
     // fuse_firing_rate
     //
-    t[87UL] = 0;
+    t[89UL] = 0;
 
     // fuse_type
     //
-    if (t[88UL])
+    if (t[90UL])
     {
       i.fuse_type_value.capacity (i.fuse_type_size);
       grew = true;
@@ -820,51 +832,51 @@ namespace odb
 
     // fuse_length
     //
-    t[89UL] = 0;
+    t[91UL] = 0;
 
     // fuse_diameter
     //
-    t[90UL] = 0;
+    t[92UL] = 0;
 
     // fuze_quality
     //
-    t[91UL] = 0;
+    t[93UL] = 0;
 
     // safe_distance_of_fuse
     //
-    t[92UL] = 0;
+    t[94UL] = 0;
 
     // time_disarming_fuse
     //
-    t[93UL] = 0;
+    t[95UL] = 0;
 
     // first_level_release_time_of_fuse
     //
-    t[94UL] = 0;
+    t[96UL] = 0;
 
     // secondary_release_time_of_fuse
     //
-    t[95UL] = 0;
+    t[97UL] = 0;
 
     // reliability_rate_of_fuse_action
     //
-    t[96UL] = 0;
+    t[98UL] = 0;
 
     // fuse_self_destruct_time
     //
-    t[97UL] = 0;
+    t[99UL] = 0;
 
     // combat_department_quality
     //
-    t[98UL] = 0;
+    t[100UL] = 0;
 
     // combat_quantity
     //
-    t[99UL] = 0;
+    t[101UL] = 0;
 
     // combat_unit_type
     //
-    if (t[100UL])
+    if (t[102UL])
     {
       i.combat_unit_type_value.capacity (i.combat_unit_type_size);
       grew = true;
@@ -872,15 +884,15 @@ namespace odb
 
     // combat_length
     //
-    t[101UL] = 0;
+    t[103UL] = 0;
 
     // combat_diameter
     //
-    t[102UL] = 0;
+    t[104UL] = 0;
 
     // combat_main_charge_type
     //
-    if (t[103UL])
+    if (t[105UL])
     {
       i.combat_main_charge_type_value.capacity (i.combat_main_charge_type_size);
       grew = true;
@@ -888,23 +900,23 @@ namespace odb
 
     // combat_charge_density
     //
-    t[104UL] = 0;
+    t[106UL] = 0;
 
     // combat_loading_factor
     //
-    t[105UL] = 0;
+    t[107UL] = 0;
 
     // combat_explosive
     //
-    t[106UL] = 0;
+    t[108UL] = 0;
 
     // combat_fragments_number
     //
-    t[107UL] = 0;
+    t[109UL] = 0;
 
     // combat_unit_invasion_capability
     //
-    if (t[108UL])
+    if (t[110UL])
     {
       i.combat_unit_invasion_capability_value.capacity (i.combat_unit_invasion_capability_size);
       grew = true;
@@ -912,27 +924,27 @@ namespace odb
 
     // combat_effective_killing_radius_vehicles
     //
-    t[109UL] = 0;
+    t[111UL] = 0;
 
     // combat_effective_killing_radius_personnel
     //
-    t[110UL] = 0;
+    t[112UL] = 0;
 
     // combat_vertical_static_armor_penetration_depth
     //
-    t[111UL] = 0;
+    t[113UL] = 0;
 
     // combat_department_quality_add
     //
-    t[112UL] = 0;
+    t[114UL] = 0;
 
     // combat_quantity_add
     //
-    t[113UL] = 0;
+    t[115UL] = 0;
 
     // combat_unit_type_add
     //
-    if (t[114UL])
+    if (t[116UL])
     {
       i.combat_unit_type_add_value.capacity (i.combat_unit_type_add_size);
       grew = true;
@@ -940,15 +952,15 @@ namespace odb
 
     // combat_length_add
     //
-    t[115UL] = 0;
+    t[117UL] = 0;
 
     // combat_diameter_add
     //
-    t[116UL] = 0;
+    t[118UL] = 0;
 
     // combat_main_charge_type_add
     //
-    if (t[117UL])
+    if (t[119UL])
     {
       i.combat_main_charge_type_add_value.capacity (i.combat_main_charge_type_add_size);
       grew = true;
@@ -956,23 +968,23 @@ namespace odb
 
     // combat_charge_density_add
     //
-    t[118UL] = 0;
+    t[120UL] = 0;
 
     // combat_loading_factor_add
     //
-    t[119UL] = 0;
+    t[121UL] = 0;
 
     // combat_explosive_add
     //
-    t[120UL] = 0;
+    t[122UL] = 0;
 
     // combat_fragments_number_add
     //
-    t[121UL] = 0;
+    t[123UL] = 0;
 
     // combat_unit_invasion_capability_add
     //
-    if (t[122UL])
+    if (t[124UL])
     {
       i.combat_unit_invasion_capability_add_value.capacity (i.combat_unit_invasion_capability_add_size);
       grew = true;
@@ -980,27 +992,27 @@ namespace odb
 
     // combat_effective_killing_radius_vehicles_add
     //
-    t[123UL] = 0;
+    t[125UL] = 0;
 
     // combat_effective_killing_radius_personnel_add
     //
-    t[124UL] = 0;
+    t[126UL] = 0;
 
     // combat_vertical_static_armor_penetration_depth_add
     //
-    t[125UL] = 0;
+    t[127UL] = 0;
 
     // service_life
     //
-    t[126UL] = 0;
+    t[128UL] = 0;
 
     // distance_between_center_mass_end
     //
-    t[127UL] = 0;
+    t[129UL] = 0;
 
     // lifting_lug
     //
-    if (t[128UL])
+    if (t[130UL])
     {
       i.lifting_lug_value.capacity (i.lifting_lug_size);
       grew = true;
@@ -1008,11 +1020,11 @@ namespace odb
 
     // distance_suspension_lifting_lug
     //
-    t[129UL] = 0;
+    t[131UL] = 0;
 
     // image_name
     //
-    if (t[130UL])
+    if (t[132UL])
     {
       i.image_name_value.capacity (i.image_name_size);
       grew = true;
@@ -1020,7 +1032,7 @@ namespace odb
 
     // image_url
     //
-    if (t[131UL])
+    if (t[133UL])
     {
       i.image_url_value.capacity (i.image_url_size);
       grew = true;
@@ -1028,11 +1040,11 @@ namespace odb
 
     // record_creation_time
     //
-    t[132UL] = 0;
+    t[134UL] = 0;
 
     // use_status
     //
-    t[133UL] = 0;
+    t[135UL] = 0;
 
     return grew;
   }
@@ -1676,6 +1688,20 @@ namespace odb
     b[n].type = pgsql::bind::real;
     b[n].buffer = &i.guidance_head_field_of_view_angle_value;
     b[n].is_null = &i.guidance_head_field_of_view_angle_null;
+    n++;
+
+    // guidance_head_field_of_view_angle_linearregion
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.guidance_head_field_of_view_angle_linearregion_value;
+    b[n].is_null = &i.guidance_head_field_of_view_angle_linearregion_null;
+    n++;
+
+    // guidance_head_field_of_view_angle_instantaneous
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.guidance_head_field_of_view_angle_instantaneous_value;
+    b[n].is_null = &i.guidance_head_field_of_view_angle_instantaneous_null;
     n++;
 
     // adaptability_of_guidance_head_sunlight
@@ -3352,6 +3378,34 @@ namespace odb
           pgsql::id_real >::set_image (
         i.guidance_head_field_of_view_angle_value, is_null, v);
       i.guidance_head_field_of_view_angle_null = is_null;
+    }
+
+    // guidance_head_field_of_view_angle_linearregion
+    //
+    {
+      float const& v =
+        o.guidance_head_field_of_view_angle_linearregion;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.guidance_head_field_of_view_angle_linearregion_value, is_null, v);
+      i.guidance_head_field_of_view_angle_linearregion_null = is_null;
+    }
+
+    // guidance_head_field_of_view_angle_instantaneous
+    //
+    {
+      float const& v =
+        o.guidance_head_field_of_view_angle_instantaneous;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.guidance_head_field_of_view_angle_instantaneous_value, is_null, v);
+      i.guidance_head_field_of_view_angle_instantaneous_null = is_null;
     }
 
     // adaptability_of_guidance_head_sunlight
@@ -5335,6 +5389,34 @@ namespace odb
         i.guidance_head_field_of_view_angle_null);
     }
 
+    // guidance_head_field_of_view_angle_linearregion
+    //
+    {
+      float& v =
+        o.guidance_head_field_of_view_angle_linearregion;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.guidance_head_field_of_view_angle_linearregion_value,
+        i.guidance_head_field_of_view_angle_linearregion_null);
+    }
+
+    // guidance_head_field_of_view_angle_instantaneous
+    //
+    {
+      float& v =
+        o.guidance_head_field_of_view_angle_instantaneous;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.guidance_head_field_of_view_angle_instantaneous_value,
+        i.guidance_head_field_of_view_angle_instantaneous_null);
+    }
+
     // adaptability_of_guidance_head_sunlight
     //
     {
@@ -6133,6 +6215,8 @@ namespace odb
   "\"blind_spot_of_guidance_head\", "
   "\"guidance_head_frame_angle\", "
   "\"guidance_head_field_of_view_angle\", "
+  "\"guidance_head_field_of_view_angle_linearregion\", "
+  "\"guidance_head_field_of_view_angle_instantaneous\", "
   "\"adaptability_of_guidance_head_sunlight\", "
   "\"guidance_head_operating_frequency\", "
   "\"fuse_firing_rate\", "
@@ -6183,7 +6267,7 @@ namespace odb
   "\"record_creation_time\", "
   "\"use_status\") "
   "VALUES "
-  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, $70, $71, $72, $73, $74, $75, $76, $77, $78, $79, $80, $81, $82, $83, $84, $85, $86, $87, $88, $89, $90, $91, $92, $93, $94, $95, $96, $97, $98, $99, $100, $101, $102, $103, $104, $105, $106, $107, $108, $109, $110, $111, $112, $113, $114, $115, $116, $117, $118, $119, $120, $121, $122, $123, $124, $125, $126, $127, $128, $129, $130, $131, $132, $133) "
+  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, $70, $71, $72, $73, $74, $75, $76, $77, $78, $79, $80, $81, $82, $83, $84, $85, $86, $87, $88, $89, $90, $91, $92, $93, $94, $95, $96, $97, $98, $99, $100, $101, $102, $103, $104, $105, $106, $107, $108, $109, $110, $111, $112, $113, $114, $115, $116, $117, $118, $119, $120, $121, $122, $123, $124, $125, $126, $127, $128, $129, $130, $131, $132, $133, $134, $135) "
   "RETURNING \"id\"";
 
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::find_statement[] =
@@ -6273,6 +6357,8 @@ namespace odb
   "\"uav_type_man\".\"ammo_parameters\".\"blind_spot_of_guidance_head\", "
   "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_frame_angle\", "
   "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_field_of_view_angle\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_field_of_view_angle_linearregion\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_field_of_view_angle_instantaneous\", "
   "\"uav_type_man\".\"ammo_parameters\".\"adaptability_of_guidance_head_sunlight\", "
   "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_operating_frequency\", "
   "\"uav_type_man\".\"ammo_parameters\".\"fuse_firing_rate\", "
@@ -6412,56 +6498,58 @@ namespace odb
   "\"blind_spot_of_guidance_head\"=$82, "
   "\"guidance_head_frame_angle\"=$83, "
   "\"guidance_head_field_of_view_angle\"=$84, "
-  "\"adaptability_of_guidance_head_sunlight\"=$85, "
-  "\"guidance_head_operating_frequency\"=$86, "
-  "\"fuse_firing_rate\"=$87, "
-  "\"fuse_type\"=$88, "
-  "\"fuse_length\"=$89, "
-  "\"fuse_diameter\"=$90, "
-  "\"fuze_quality\"=$91, "
-  "\"safe_distance_of_fuse\"=$92, "
-  "\"time_disarming_fuse\"=$93, "
-  "\"first_level_release_time_of_fuse\"=$94, "
-  "\"secondary_release_time_of_fuse\"=$95, "
-  "\"reliability_rate_of_fuse_action\"=$96, "
-  "\"fuse_self_destruct_time\"=$97, "
-  "\"combat_department_quality\"=$98, "
-  "\"combat_quantity\"=$99, "
-  "\"combat_unit_type\"=$100, "
-  "\"combat_length\"=$101, "
-  "\"combat_diameter\"=$102, "
-  "\"combat_main_charge_type\"=$103, "
-  "\"combat_charge_density\"=$104, "
-  "\"combat_loading_factor\"=$105, "
-  "\"combat_explosive\"=$106, "
-  "\"combat_fragments_number\"=$107, "
-  "\"combat_unit_invasion_capability\"=$108, "
-  "\"combat_effective_killing_radius_vehicles\"=$109, "
-  "\"combat_effective_killing_radius_personnel\"=$110, "
-  "\"combat_vertical_static_armor_penetration_depth\"=$111, "
-  "\"combat_department_quality_add\"=$112, "
-  "\"combat_quantity_add\"=$113, "
-  "\"combat_unit_type_add\"=$114, "
-  "\"combat_length_add\"=$115, "
-  "\"combat_diameter_add\"=$116, "
-  "\"combat_main_charge_type_add\"=$117, "
-  "\"combat_charge_density_add\"=$118, "
-  "\"combat_loading_factor_add\"=$119, "
-  "\"combat_explosive_add\"=$120, "
-  "\"combat_fragments_number_add\"=$121, "
-  "\"combat_unit_invasion_capability_add\"=$122, "
-  "\"combat_effective_killing_radius_vehicles_add\"=$123, "
-  "\"combat_effective_killing_radius_personnel_add\"=$124, "
-  "\"combat_vertical_static_armor_penetration_depth_add\"=$125, "
-  "\"service_life\"=$126, "
-  "\"distance_between_center_mass_end\"=$127, "
-  "\"lifting_lug\"=$128, "
-  "\"distance_suspension_lifting_lug\"=$129, "
-  "\"image_name\"=$130, "
-  "\"image_url\"=$131, "
-  "\"record_creation_time\"=$132, "
-  "\"use_status\"=$133 "
-  "WHERE \"id\"=$134";
+  "\"guidance_head_field_of_view_angle_linearregion\"=$85, "
+  "\"guidance_head_field_of_view_angle_instantaneous\"=$86, "
+  "\"adaptability_of_guidance_head_sunlight\"=$87, "
+  "\"guidance_head_operating_frequency\"=$88, "
+  "\"fuse_firing_rate\"=$89, "
+  "\"fuse_type\"=$90, "
+  "\"fuse_length\"=$91, "
+  "\"fuse_diameter\"=$92, "
+  "\"fuze_quality\"=$93, "
+  "\"safe_distance_of_fuse\"=$94, "
+  "\"time_disarming_fuse\"=$95, "
+  "\"first_level_release_time_of_fuse\"=$96, "
+  "\"secondary_release_time_of_fuse\"=$97, "
+  "\"reliability_rate_of_fuse_action\"=$98, "
+  "\"fuse_self_destruct_time\"=$99, "
+  "\"combat_department_quality\"=$100, "
+  "\"combat_quantity\"=$101, "
+  "\"combat_unit_type\"=$102, "
+  "\"combat_length\"=$103, "
+  "\"combat_diameter\"=$104, "
+  "\"combat_main_charge_type\"=$105, "
+  "\"combat_charge_density\"=$106, "
+  "\"combat_loading_factor\"=$107, "
+  "\"combat_explosive\"=$108, "
+  "\"combat_fragments_number\"=$109, "
+  "\"combat_unit_invasion_capability\"=$110, "
+  "\"combat_effective_killing_radius_vehicles\"=$111, "
+  "\"combat_effective_killing_radius_personnel\"=$112, "
+  "\"combat_vertical_static_armor_penetration_depth\"=$113, "
+  "\"combat_department_quality_add\"=$114, "
+  "\"combat_quantity_add\"=$115, "
+  "\"combat_unit_type_add\"=$116, "
+  "\"combat_length_add\"=$117, "
+  "\"combat_diameter_add\"=$118, "
+  "\"combat_main_charge_type_add\"=$119, "
+  "\"combat_charge_density_add\"=$120, "
+  "\"combat_loading_factor_add\"=$121, "
+  "\"combat_explosive_add\"=$122, "
+  "\"combat_fragments_number_add\"=$123, "
+  "\"combat_unit_invasion_capability_add\"=$124, "
+  "\"combat_effective_killing_radius_vehicles_add\"=$125, "
+  "\"combat_effective_killing_radius_personnel_add\"=$126, "
+  "\"combat_vertical_static_armor_penetration_depth_add\"=$127, "
+  "\"service_life\"=$128, "
+  "\"distance_between_center_mass_end\"=$129, "
+  "\"lifting_lug\"=$130, "
+  "\"distance_suspension_lifting_lug\"=$131, "
+  "\"image_name\"=$132, "
+  "\"image_url\"=$133, "
+  "\"record_creation_time\"=$134, "
+  "\"use_status\"=$135 "
+  "WHERE \"id\"=$136";
 
   const char access::object_traits_impl< ::AmmunitionEntity, id_pgsql >::erase_statement[] =
   "DELETE FROM \"uav_type_man\".\"ammo_parameters\" "
@@ -6554,6 +6642,8 @@ namespace odb
   "\"uav_type_man\".\"ammo_parameters\".\"blind_spot_of_guidance_head\", "
   "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_frame_angle\", "
   "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_field_of_view_angle\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_field_of_view_angle_linearregion\", "
+  "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_field_of_view_angle_instantaneous\", "
   "\"uav_type_man\".\"ammo_parameters\".\"adaptability_of_guidance_head_sunlight\", "
   "\"uav_type_man\".\"ammo_parameters\".\"guidance_head_operating_frequency\", "
   "\"uav_type_man\".\"ammo_parameters\".\"fuse_firing_rate\", "

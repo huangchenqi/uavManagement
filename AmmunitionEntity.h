@@ -207,8 +207,10 @@ public:
     float guidance_head_frame_angle;
 #pragma db not_null column("guidance_head_field_of_view_angle")  //guidance_head_field_of_view_angle REAL NOT NULL ,--COMMENT '导引头视场角',
     float guidance_head_field_of_view_angle;
-
-
+#pragma db not_null column("guidance_head_field_of_view_angle_linearregion")  //guidance_head_field_of_view_angle REAL NOT NULL ,--COMMENT '导引头视场角【线性区】',
+    float guidance_head_field_of_view_angle_linearregion;
+#pragma db not_null column("guidance_head_field_of_view_angle_instantaneous")  //guidance_head_field_of_view_angle REAL NOT NULL ,--COMMENT '导引头视场角【瞬时区】',
+    float guidance_head_field_of_view_angle_instantaneous;
 
 #pragma db not_null column("adaptability_of_guidance_head_sunlight")  //adaptability_of_guidance_head_sunlight VARCHAR(50) ,--COMMENT '导引头对太阳光的适应性',
     std::string adaptability_of_guidance_head_sunlight;

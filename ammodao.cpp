@@ -276,7 +276,7 @@ bool AmmoDao::insertAmmoData(const QJsonObject &object)
 
 
 
-        entity.ammoKillingWway_ = object["ammoKillingWway"].toString().toStdString();
+        entity.ammoKillingWway_ = object["ammoKillingWay"].toString().toStdString();
         entity.ammoPenetrationDepth_ = object["ammoPenetrationDepth"].toDouble();//.toInt();
         entity.ammoQuantitySoilThrown_ = object["ammoQuantitySoilThrown"].toDouble();
         entity.ammoCraterDiameter_ = object["ammoCraterDiameter"].toDouble();
@@ -341,6 +341,8 @@ bool AmmoDao::insertAmmoData(const QJsonObject &object)
         entity.blind_spot_of_guidance_head = object["blind_spot_of_guidance_head"].toDouble();//.toInt();
         entity.guidance_head_frame_angle = object["guidance_head_frame_angle"].toDouble();
         entity.guidance_head_field_of_view_angle = object["guidance_head_field_of_view_angle"].toDouble();
+        entity.guidance_head_field_of_view_angle_instantaneous = object["guidance_head_field_of_view_angle_linearregion"].toDouble();
+        entity.guidance_head_field_of_view_angle_instantaneous = object["guidance_head_field_of_view_angle_instantaneous"].toDouble();
 
 
         entity.adaptability_of_guidance_head_sunlight = object["adaptability_of_guidance_head_sunlight"].toString().toStdString();

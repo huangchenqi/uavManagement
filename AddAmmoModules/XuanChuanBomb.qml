@@ -73,11 +73,21 @@ Item {
                         font.pixelSize:(18)
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
-                        onTextChanged: {
-                            if(text != "")
-                            {
+                        validator: DoubleValidator {
+                                           bottom: -9999999
+                                           top: 9999999
+                                           notation: DoubleValidator.StandardNotation
+                                           decimals: 5
+                        }
+                        // onTextChanged: {
+                        //     if(text != "")
+                        //     {
 
-                            }
+                        //     }
+                        // }
+                        onEditingFinished: {
+                            ammoData.spread_area =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{

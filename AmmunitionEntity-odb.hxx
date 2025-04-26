@@ -1117,6 +1117,30 @@ namespace odb
 
     static const guidance_head_field_of_view_angle_type_ guidance_head_field_of_view_angle;
 
+    // guidance_head_field_of_view_angle_linearregion
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    guidance_head_field_of_view_angle_linearregion_type_;
+
+    static const guidance_head_field_of_view_angle_linearregion_type_ guidance_head_field_of_view_angle_linearregion;
+
+    // guidance_head_field_of_view_angle_instantaneous
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    guidance_head_field_of_view_angle_instantaneous_type_;
+
+    static const guidance_head_field_of_view_angle_instantaneous_type_ guidance_head_field_of_view_angle_instantaneous;
+
     // adaptability_of_guidance_head_sunlight
     //
     typedef
@@ -2132,6 +2156,16 @@ namespace odb
   guidance_head_field_of_view_angle (A::table_name, "\"guidance_head_field_of_view_angle\"", 0);
 
   template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::guidance_head_field_of_view_angle_linearregion_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  guidance_head_field_of_view_angle_linearregion (A::table_name, "\"guidance_head_field_of_view_angle_linearregion\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::guidance_head_field_of_view_angle_instantaneous_type_
+  query_columns< ::AmmunitionEntity, id_pgsql, A >::
+  guidance_head_field_of_view_angle_instantaneous (A::table_name, "\"guidance_head_field_of_view_angle_instantaneous\"", 0);
+
+  template <typename A>
   const typename query_columns< ::AmmunitionEntity, id_pgsql, A >::adaptability_of_guidance_head_sunlight_type_
   query_columns< ::AmmunitionEntity, id_pgsql, A >::
   adaptability_of_guidance_head_sunlight (A::table_name, "\"adaptability_of_guidance_head_sunlight\"", 0);
@@ -2838,6 +2872,16 @@ namespace odb
       float guidance_head_field_of_view_angle_value;
       bool guidance_head_field_of_view_angle_null;
 
+      // guidance_head_field_of_view_angle_linearregion
+      //
+      float guidance_head_field_of_view_angle_linearregion_value;
+      bool guidance_head_field_of_view_angle_linearregion_null;
+
+      // guidance_head_field_of_view_angle_instantaneous
+      //
+      float guidance_head_field_of_view_angle_instantaneous_value;
+      bool guidance_head_field_of_view_angle_instantaneous_null;
+
       // adaptability_of_guidance_head_sunlight
       //
       details::buffer adaptability_of_guidance_head_sunlight_value;
@@ -3136,7 +3180,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 134UL;
+    static const std::size_t column_count = 136UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;

@@ -17,6 +17,10 @@ Rectangle {
     property var ammoData: new Object // 记录ammo的数据在保存、修改、加载时候
     readonly property string mainBackgroundSource: "file:Resources/Background/bg_MainBackground.png"
     signal backAmmoRecord()
+    Component.onCompleted: {
+        loadViewType()
+
+    }
 
     Item {
         anchors.fill: parent
@@ -222,8 +226,20 @@ Rectangle {
         width: pixelSize * 4
         text: "保存"
         onClicked: {
-
+            console.log("ammoData.push"+JSON.stringify(ammoData))
             backAmmoRecord()
+            addAmmoAllDatView.visible = false
+        }
+    }
+    function loadViewType(){
+        if(processInfo.loadViewType === "addition"){
+           addAmmo.selectType = 0 //0 代表新增，1代表查看，2代表修改。
+        }else if(processInfo.loadViewType === "query"){
+            addAmmo.selectType = 1
+        }else if(processInfo.loadViewType === "update"){
+            addAmmo.selectType = 2
+        }else{
+            console.log("Unknown processInfo.loadViewType!")
         }
     }
 
@@ -267,7 +283,7 @@ Rectangle {
         //#pragma db not_null column("lug_spacing") //lug_spacing REAL NOT NULL ,--COMMENT '弹耳间距(m)',
          addAmmoAllDatView.ammoData.ammoLugSpacing   = 0.0
         //#pragma db not_null column("killing_way") //-- 结构参数killing_way VARCHAR(50) ,--COMMENT '杀伤方式',
-        addAmmoAllDatView.ammoData.ammoKillingWway   =  ""
+        addAmmoAllDatView.ammoData.ammoKillingWay   =  ""
         addAmmoAllDatView.ammoData.ammoPenetrationDepth   = 0.0//penetration_depth REAL NOT NULL ,--COMMENT '侵彻深度',
         addAmmoAllDatView.ammoData.ammoQuantitySoilThrown   = 0.0//quantity_soil_thrown REAL NOT NULL ,--COMMENT '抛土量',
         addAmmoAllDatView.ammoData.ammoCraterDiameter   = 0.0//  crater_diameter REAL NOT NULL ,--COMMENT '弹坑直径',
@@ -394,7 +410,8 @@ Rectangle {
             addAmmoAllDatView.ammoData.guidance_head_frame_angle   = 0.0
         //#pragma db not_null column("guidance_head_field_of_view_angle")  //guidance_head_field_of_view_angle REAL NOT NULL ,--COMMENT '导引头视场角',
             addAmmoAllDatView.ammoData.guidance_head_field_of_view_angle   = 0.0
-
+            addAmmoAllDatView.ammoData.guidance_head_field_of_view_angle_linearregion   = 0.0 //线性区
+            addAmmoAllDatView.ammoData.guidance_head_field_of_view_angle_instantaneous   = 0.0 //瞬时区
 
 
         //#pragma db not_null column("adaptability_of_guidance_head_sunlight")  //adaptability_of_guidance_head_sunlight VARCHAR(50) ,--COMMENT '导引头对太阳光的适应性',

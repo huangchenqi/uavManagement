@@ -252,6 +252,7 @@ Makefile: ../../ListModel.pro B:/QT/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.co
 		B:/QT/5.15.2/mingw81_64/mkspecs/features/qt_config.prf \
 		B:/QT/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf \
 		B:/QT/5.15.2/mingw81_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		B:/QT/5.15.2/mingw81_64/mkspecs/features/exclusive_builds.prf \
 		B:/QT/5.15.2/mingw81_64/mkspecs/features/toolchain.prf \
 		B:/QT/5.15.2/mingw81_64/mkspecs/features/default_pre.prf \
@@ -267,6 +268,7 @@ Makefile: ../../ListModel.pro B:/QT/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.co
 		B:/QT/5.15.2/mingw81_64/mkspecs/features/resources.prf \
 		B:/QT/5.15.2/mingw81_64/mkspecs/features/moc.prf \
 		B:/QT/5.15.2/mingw81_64/mkspecs/features/win32/opengl.prf \
+		B:/QT/5.15.2/mingw81_64/mkspecs/features/uic.prf \
 		B:/QT/5.15.2/mingw81_64/mkspecs/features/qmake_use.prf \
 		B:/QT/5.15.2/mingw81_64/mkspecs/features/file_copies.prf \
 		B:/QT/5.15.2/mingw81_64/mkspecs/features/win32/windows.prf \
@@ -276,15 +278,17 @@ Makefile: ../../ListModel.pro B:/QT/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.co
 		B:/QT/5.15.2/mingw81_64/mkspecs/features/lex.prf \
 		../../ListModel.pro \
 		B:/QT/5.15.2/mingw81_64/lib/Qt5Quick.prl \
+		B:/QT/5.15.2/mingw81_64/lib/Qt5Widgets.prl \
 		B:/QT/5.15.2/mingw81_64/lib/Qt5Gui.prl \
 		B:/QT/5.15.2/mingw81_64/lib/Qt5QmlModels.prl \
 		B:/QT/5.15.2/mingw81_64/lib/Qt5Qml.prl \
 		B:/QT/5.15.2/mingw81_64/lib/Qt5Network.prl \
+		B:/QT/5.15.2/mingw81_64/lib/Qt5Sql.prl \
 		B:/QT/5.15.2/mingw81_64/lib/Qt5Core.prl \
 		B:/QT/5.15.2/mingw81_64/lib/qtmain.prl \
-		.qmake.stash \
 		B:/QT/5.15.2/mingw81_64/mkspecs/features/build_pass.prf \
-		../../qml.qrc
+		../../qml.qrc \
+		../../res.qrc
 	$(QMAKE) -o Makefile ..\..\ListModel.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 B:/QT/5.15.2/mingw81_64/mkspecs/features/spec_pre.prf:
 B:/QT/5.15.2/mingw81_64/mkspecs/qdevice.pri:
@@ -468,6 +472,7 @@ B:/QT/5.15.2/mingw81_64/mkspecs/features/qt_functions.prf:
 B:/QT/5.15.2/mingw81_64/mkspecs/features/qt_config.prf:
 B:/QT/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf:
 B:/QT/5.15.2/mingw81_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 B:/QT/5.15.2/mingw81_64/mkspecs/features/exclusive_builds.prf:
 B:/QT/5.15.2/mingw81_64/mkspecs/features/toolchain.prf:
 B:/QT/5.15.2/mingw81_64/mkspecs/features/default_pre.prf:
@@ -483,6 +488,7 @@ B:/QT/5.15.2/mingw81_64/mkspecs/features/resources_functions.prf:
 B:/QT/5.15.2/mingw81_64/mkspecs/features/resources.prf:
 B:/QT/5.15.2/mingw81_64/mkspecs/features/moc.prf:
 B:/QT/5.15.2/mingw81_64/mkspecs/features/win32/opengl.prf:
+B:/QT/5.15.2/mingw81_64/mkspecs/features/uic.prf:
 B:/QT/5.15.2/mingw81_64/mkspecs/features/qmake_use.prf:
 B:/QT/5.15.2/mingw81_64/mkspecs/features/file_copies.prf:
 B:/QT/5.15.2/mingw81_64/mkspecs/features/win32/windows.prf:
@@ -492,15 +498,17 @@ B:/QT/5.15.2/mingw81_64/mkspecs/features/yacc.prf:
 B:/QT/5.15.2/mingw81_64/mkspecs/features/lex.prf:
 ../../ListModel.pro:
 B:/QT/5.15.2/mingw81_64/lib/Qt5Quick.prl:
+B:/QT/5.15.2/mingw81_64/lib/Qt5Widgets.prl:
 B:/QT/5.15.2/mingw81_64/lib/Qt5Gui.prl:
 B:/QT/5.15.2/mingw81_64/lib/Qt5QmlModels.prl:
 B:/QT/5.15.2/mingw81_64/lib/Qt5Qml.prl:
 B:/QT/5.15.2/mingw81_64/lib/Qt5Network.prl:
+B:/QT/5.15.2/mingw81_64/lib/Qt5Sql.prl:
 B:/QT/5.15.2/mingw81_64/lib/Qt5Core.prl:
 B:/QT/5.15.2/mingw81_64/lib/qtmain.prl:
-.qmake.stash:
 B:/QT/5.15.2/mingw81_64/mkspecs/features/build_pass.prf:
 ../../qml.qrc:
+../../res.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\..\ListModel.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 

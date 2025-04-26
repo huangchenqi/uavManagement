@@ -247,17 +247,7 @@ Rectangle {
                               }
                           }
                           Component.onCompleted: {
-                               var ammoType = ammoTypeDaoTableModel.selectAmmoTypeAllData()
-                               console.log("testammoType"+JSON.stringify(ammoType))
-                              var result = [];
-                              for (var i = 0; i < ammoType.length; i++) {
-                                  result.push({
-                                      m_PlanNumber: ammoType[i].recordId,
-                                      m_SelectState:false,// ammoType[i].checked,
-                                      m_TypeName: ammoType[i].ammoComponeName
-                                  });
-                              }
-                             listmodel_Box.append(result);
+
                           }
                       }
                       //显示区域
@@ -278,6 +268,18 @@ Rectangle {
                           text:"请选择:"
                           onClicked: {
                               view_List_TypeSelect.visible = !view_List_TypeSelect.visible
+                              listmodel_Box.clear()
+                              var ammoType = ammoTypeDaoTableModel.selectAmmoTypeAllData()
+                              console.log("testammoType"+JSON.stringify(ammoType))
+                             var result = [];
+                             for (var i = 0; i < ammoType.length; i++) {
+                                 result.push({
+                                     m_PlanNumber: ammoType[i].recordId,
+                                     m_SelectState:false,// ammoType[i].checked,
+                                     m_TypeName: ammoType[i].ammoComponeName
+                                 });
+                             }
+                            listmodel_Box.append(result);
                           }
                       }
 
@@ -815,6 +817,7 @@ Rectangle {
                               text: "新增弹药"
                               onClicked: {
                                   addAmmoDataPopup.open()
+                                  processInfo.loadViewType = "addition"
                                   //pageAmmoModelLoader.setSource("qrc:./AddAmmoAllData.qml")
                                   //ammoRecordDataView.visible = false
                               }
