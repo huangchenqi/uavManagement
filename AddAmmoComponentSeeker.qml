@@ -192,7 +192,7 @@ Rectangle{//航空弹药的组件导引头
             text: "保存"
             onClicked:{
 //                                saveammunitionData()
-                addAmmoComponentSeekerRoot.visible = false
+                //addAmmoComponentSeekerRoot.visible = false
                 addAmmoComponentSeekerPopup.close()
             }
         }
@@ -207,7 +207,7 @@ Rectangle{//航空弹药的组件导引头
             height: 40
             text: "返回"
             onClicked: {
-                addAmmoComponentSeekerRoot.visible = false
+                //addAmmoComponentSeekerRoot.visible = false
                 addAmmoComponentSeekerPopup.close()
             }
         }

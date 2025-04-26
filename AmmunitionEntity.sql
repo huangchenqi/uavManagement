@@ -137,7 +137,7 @@ CREATE TABLE "uav_type_man"."ammo_parameters" (
   "distance_between_center_mass_end" REAL NOT NULL,
   "lifting_lug" TEXT NOT NULL,
   "distance_suspension_lifting_lug" REAL NOT NULL,
-  "image_name" TEXT NOT NULL,
+  "image_name" BYTEA NOT NULL,
   "image_url" TEXT NOT NULL,
   "record_creation_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "use_status" BOOLEAN NOT NULL);

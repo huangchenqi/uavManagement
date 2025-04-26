@@ -1308,16 +1308,18 @@ bool UavModelDao::insertModelDate(const QJsonObject& objectData)
                 trans.commit();
                 qDebug() <<"当前函数名称:" << __FUNCTION__<<":"<< "Transaction committed, ID:" << id;
 
-                return id;
+                //return id;
             }
             catch (const odb::exception& e) {
                 qCritical() << "Database error:" << e.what();
-                throw;
+                return false;
+                //throw;
             }
             catch (const std::exception& e) {
                 qCritical() << "Error:" << e.what();
-                throw;
+                return false;//throw;
             }
+            return true;
 
 }
 QJsonObject UavModelDao::transformArrayToStr(const QJsonObject &input, const QStringList &fields)

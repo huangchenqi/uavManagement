@@ -3,6 +3,7 @@
 #include "AmmunitionEntity-odb.hxx"
 #include <QDebug>
 #include <stdexcept>
+#include "iostream"
 // ODB 头文件
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
@@ -14,6 +15,7 @@
 #include <QJsonValue>
 #include <QDebug>
 #include <QDateTime>
+#include <QFile>
 AmmoDao::AmmoDao(QObject* parent) : QObject(parent){ //::UavModelDao() {
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
     dbConn_.reset(new DatabaseConnection(
@@ -308,7 +310,7 @@ bool AmmoDao::insertAmmoData(const QJsonObject &object)
 
         entity.interference_length_maximum = object["interference_length_maximum"].toDouble();
         entity.interference_width_minimum = object["interference_width_minimum"].toDouble();
-        entity.interference_width_minimum = object["interference_width_maximum"].toDouble();//.toInt();
+        entity.interference_width_maximum = object["interference_width_maximum"].toDouble();//.toInt();
         entity.fuze_model = object["fuze_model"].toString().toStdString();
         entity.number_of_fuses = object["number_of_fuses"].toInt();
         entity.storage_life = object["storage_life"].toDouble();
@@ -340,8 +342,9 @@ bool AmmoDao::insertAmmoData(const QJsonObject &object)
         entity.guiding_head_working_wavelength = object["guiding_head_working_wavelength"].toDouble();
         entity.blind_spot_of_guidance_head = object["blind_spot_of_guidance_head"].toDouble();//.toInt();
         entity.guidance_head_frame_angle = object["guidance_head_frame_angle"].toDouble();
+        entity.guidance_head_operating_distance = object["guidance_head_operating_distance"].toDouble();
         entity.guidance_head_field_of_view_angle = object["guidance_head_field_of_view_angle"].toDouble();
-        entity.guidance_head_field_of_view_angle_instantaneous = object["guidance_head_field_of_view_angle_linearregion"].toDouble();
+        entity.guidance_head_field_of_view_angle_linearregion = object["guidance_head_field_of_view_angle_linearregion"].toDouble();
         entity.guidance_head_field_of_view_angle_instantaneous = object["guidance_head_field_of_view_angle_instantaneous"].toDouble();
 
 
@@ -393,11 +396,26 @@ bool AmmoDao::insertAmmoData(const QJsonObject &object)
         entity.distance_between_center_mass_end = object["distance_between_center_mass_end"].toDouble();//.toInt();
         entity.lifting_lug = object["lifting_lug"].toString().toStdString();
         entity.distance_suspension_lifting_lug = object["distance_suspension_lifting_lug"].toDouble();
-        entity.image_name = object["image_name"].toString().toStdString();
+        //entity.image_name = object["image_name"].toString().toStdString();
         entity.image_url = object["image_url"].toString().toStdString();
         entity.record_creation_time = QDateTime::currentDateTime();//object["record_creation_time"].toString().toStdString();//.toInt();
         entity.use_status =  true;//object["use_status"].toBool();
+        /******************** 系统记录 ********************/
+        //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
+        // 使用 QUrl 解析 URL 并提取本地路径
+        QString image_url = object["image_url"].toString();
+        QUrl url(image_url);
+        QString localFilePath = url.toLocalFile();
+        QFile file(localFilePath);
 
+        qDebug()<<"image_url:"<<object["image_url"].toString();
+        file.open(QIODevice::ReadOnly);
+        QByteArray data = file.readAll();
+        file.close();
+        //std::vector  imagByteA = std::vector<unsigned char>(data.begin(),data.end());
+        entity.image_name = std::vector<char>(data.begin(),data.end());
+        std::vector<char> imagByteA(data.begin(), data.end());
+        std::cout << "imagByteA: "<<imagByteA.size()<<"Data size" << entity.image_name.size() << std::endl;
         // 6. 持久化到数据库
         qDebug() << "Persisting entity...";
         auto id = db.persist(entity);
@@ -406,16 +424,213 @@ bool AmmoDao::insertAmmoData(const QJsonObject &object)
         trans.commit();
         qDebug() <<"当前函数名称:" << __FUNCTION__<<":"<< "Transaction committed, ID:" << id;
 
-        return id;
+
     }
     catch (const odb::exception& e) {
         qCritical() << "Database error:" << e.what();
-        throw;
+        return false;//throw;
     }
     catch (const std::exception& e) {
         qCritical() << "Error:" << e.what();
-        throw;
+        return false;//throw;
     }
     return true;
 
 }
+// bool UavModelDao::insertModelDate(const QJsonObject& objectData)
+// {
+//     qDebug() << "Starting database insertion...";
+//     QJsonObject checkResult;
+//     QJsonObject object;
+//     //checkResult = checkUavDataObject(object);
+//     // 转换为格式化的JSON字符串
+//     QJsonDocument doc(objectData);
+//     QString jsonString = doc.toJson(QJsonDocument::Indented);
+//     qDebug() << "图片的数据:" << jsonString;
+//     // 解析 JSON 数据
+//     QJsonDocument trDoc(objectData); //QJsonDocument::fromJson(jsonString.toUtf8());
+//     if (!trDoc.isNull() && trDoc.isObject()) {
+//         QJsonObject uavData = trDoc.object();
+
+//         // 指定需要转换的字段
+//         QStringList fieldsToTransform = {
+//             "load_ammo_type",
+//             "payload_type",
+//             "bomb_method",
+//             "operation_method",
+//             "recovery_mode"
+//         };
+
+//         object  = transformArrayToStr(uavData, fieldsToTransform);
+
+//         // 打印转换后的数据
+//         QJsonDocument transformedDoc(object);
+//         qDebug() << "转换后的数据:" << transformedDoc.toJson(QJsonDocument::Compact);
+//     }        // 打印到控制台
+//     qDebug()<<"Qt function UavModelDao insertModelDat JSON内容：\n" << jsonString;
+//     try {
+//         // 1. 建立数据库连接
+//         qDebug() << "Connecting to database...";
+//         // odb::pgsql::database db(
+//         //     "postgres",       // username
+//         //     "123456",         // password
+//         //     "db_aux_prac_sys",// database
+//         //     "192.168.0.101",  // host
+//         //     5432              // port
+//         //     );
+//         auto& db = dbConn_->getDatabase(); // 使用成员变量获取数据库
+
+//         // 2. 创建事务
+//         odb::transaction trans(db.begin());
+//         qDebug() << "Transaction insert started";
+
+//         // 3. 从JSON创建实体对象
+//         UavModelEntity entity;
+//         QDateTime recordCreationTime;//创建记录时间
+
+//         // 4. 映射JSON字段到实体属性
+//         // 基础字段
+//         entity.uavType_ = object["uav_type"].toString().toStdString();
+//         entity.uavName_ = object["uav_name"].toString().toStdString();
+//         entity.uavId_ = object["uav_id"].toString().toStdString();
+
+//         /******************** 尺寸参数 ********************/
+//         entity.uavLength_ = object["length"].toDouble();
+//         entity.uavWidth_ = object["width"].toDouble();
+//         entity.uavHeight_ = object["height"].toDouble();
+
+
+//         /******************** 飞行性能 ********************/
+//         entity.uavFlightHeightRangeMin_ = object["flight_height_min"].toDouble();
+//         entity.uavFlightHeightRangeMax_ = object["flight_height_max"].toDouble();
+//         entity.uavFlightSpeedRangeMin_ = object["flight_speed_min"].toDouble();
+//         entity.uavFlightSpeedRangeMax_ = object["flight_speed_max"].toDouble();
+//         entity.uavFlightDistanceRangeMin_ = object["flight_distance_min"].toDouble();
+//         entity.uavFlightDistanceRangeMax_ = object["flight_distance_max"].toDouble();
+//         entity.uavFlightTimeRangeMin_ = object["flight_time_min"].toDouble();
+//         entity.uavFlightTimeRangeMax_ = object["flight_time_max"].toDouble();
+
+//         /******************** 起降参数 ********************/
+//         entity.uavTakeoffDistance_ = object["takeoff_distance"].toDouble();
+//         entity.uavLandDistance_ = object["landing_distance"].toDouble();
+
+//         /******************** 机动性能 ********************/
+//         entity.uavTurningRadiusRangeMin_ = object["turn_radius_min"].toDouble();
+//         entity.uavTurningRadiusRangeMax_ = object["turn_radius_max"].toDouble();
+//         entity.uavOperatioanalRadius_ = object["combat_radius"].toDouble();
+
+//         /******************** 载荷配置 ********************/
+//         entity.uavInvestigationPayloadType_ = object["payload_type"].toString().toStdString();
+
+//         entity.uavBombingway_ = object["bomb_method"].toString().toStdString();
+//         entity.uavOperationWay_ = object["operation_method"].toString().toStdString();
+//         entity.uavRecoveryway_ = object["recovery_mode"].toString().toStdString();
+//         entity.uavHangingLoctionCapacity_ = object["hanging_capacity"].toString().toStdString();
+//         entity.uavLoadAmmoType_ = object["load_ammo_type"].toString().toStdString();
+
+//         entity.uavLoadReconnaissanceRangeMin_ = object["recon_range_min"].toDouble();
+//         entity.uavLoadReconnaissanceRangeMax_ = object["recon_range_max"].toDouble();
+//         entity.uavLoadReconnaissanceAccuracy_ = object["recon_accuracy"].toDouble();
+
+//         /******************** 回收与突防 ********************/
+
+//         entity.uavLowAltitudeBreakthroughSpeed_ = object["low_alt_speed"].toDouble();
+
+//         /******************** 挂载能力 ********************/
+
+//         // entity.uavPayloadcapacity_ = object["payload_capacity"].toInt();
+//         entity.uavAttackaccuracy_ = object["attack_accuracy"].toDouble();
+
+//         /******************** 雷达特征 ********************/
+//         entity.uavRadarCrossSection_ = object["rcs"].toDouble();
+
+//         /******************** 重量与平衡 ********************/
+//         entity.uavCenterOfGravityFrontLimit_ = object["cg_front_limit"].toDouble();
+//         entity.uavCenterOfGravityAfterwardLimit_ = object["cg_rear_limit"].toDouble();
+//         entity.uavMaximumTakeoffWeight_ = object["max_takeoff_weight"].toDouble();
+//         entity.uavEmptyWeight_ = object["empty_weight"].toDouble();
+
+//         /******************** 燃油与载重 ********************/
+//         entity.uavMaximumFuelCapacity_ = object["max_fuel"].toDouble();
+//         entity.uavMaximumExternalWeight_ = object["max_external_weight"].toDouble();
+
+//         /******************** 高度性能 ********************/
+//         entity.uavCeiling_ = object["ceiling"].toDouble();
+//         entity.uavMaximumGroundStartingHeight_ = object["ground_start_alt"].toDouble();
+//         entity.uavMaximumAirStartingAltitude_ = object["air_start_alt"].toDouble();
+
+//         /******************** 续航性能 ********************/
+//         entity.uavMaximumEndurance_ = object["endurance"].toDouble();
+//         entity.uavMaximumFlightVacuumSpeed_ = object["max_vacuum_speed"].toDouble();
+//         entity.uavMinimumFlightMeterSpeed_ = object["min_meter_speed"].toDouble();
+
+//         /******************** 特殊场景性能 ********************/
+//         entity.sealLevelTakeoffAndRollDistance_ = object["sea_takeoff_roll"].toDouble();
+//         entity.sealLevelLandingAndRollDistance_ = object["sea_landing_roll"].toDouble();
+//         entity.cruiseAltitudeReconnaissanceConfiguration_ = object["recon_cruise_alt"].toDouble();
+//         entity.cruiseAltitudeFullExternalConfiguration_ = object["full_external_cruise_alt"].toDouble();
+
+//         /******************** 系统记录 ********************/
+//         //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
+//         // 使用 QUrl 解析 URL 并提取本地路径
+//         QString image_url = object["image_url"].toString();
+//         QUrl url(image_url);
+//         QString localFilePath = url.toLocalFile();
+//         QFile file(localFilePath);
+
+//         qDebug()<<"image_url:"<<object["image_url"].toString();
+//         file.open(QIODevice::ReadOnly);
+//         QByteArray data = file.readAll();
+//         file.close();
+//         //std::vector  imagByteA = std::vector<unsigned char>(data.begin(),data.end());
+//         entity.uavImgName_ = std::vector<char>(data.begin(),data.end());
+//         std::vector<char> imagByteA(data.begin(), data.end());
+//         std::cout << "imagByteA: "<<imagByteA.size()<<"Data size" << entity.uavImgName_.size() << std::endl;
+
+
+//         // std::vector<unsigned char> content;
+
+//         // // 文件写入方法
+//         // bool save_to_file(const std::string& path) {
+//         //     QFile file(QString::fromStdString(path));
+//         //     if (!file.open(QIODevice::WriteOnly)) return false;
+//         //     file.write(reinterpret_cast<const char*>(content.data()), content.size());
+//         //     return file.flush();
+//         // }
+
+//         // // 文件加载方法
+//         // static BinaryData load_from_file(const std::string& path) {
+//         //     QFile file(QString::fromStdString(path));
+//         //     file.open(QIODevice::ReadOnly);
+//         //     QByteArray data = file.readAll();
+//         //     return {std::vector<unsigned char>(data.begin(), data.end())};
+//         // }
+//         //entity.uavImgName_ = object["image_name"].toString().toStdString();
+//         //entity.uavImgUrl_ = object["image_url"].toString().toStdString();
+
+//         // 5. 数据验证
+//         // if (entity.getUavType().empty()) {
+//         //     throw std::invalid_argument("Missing required field: uav_type");
+//         // }
+//         // 6. 持久化到数据库
+//         qDebug() << "Persisting entity...";
+//         auto id = db.persist(entity);
+
+//         // 7. 提交事务
+//         trans.commit();
+//         qDebug() <<"当前函数名称:" << __FUNCTION__<<":"<< "Transaction committed, ID:" << id;
+
+//         //return id;
+//     }
+//     catch (const odb::exception& e) {
+//         qCritical() << "Database error:" << e.what();
+//         return false;
+//         //throw;
+//     }
+//     catch (const std::exception& e) {
+//         qCritical() << "Error:" << e.what();
+//         return false;//throw;
+//     }
+//     return true;
+
+// }

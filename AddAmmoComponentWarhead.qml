@@ -81,6 +81,7 @@ Rectangle{//航空弹药的组件战斗部
                 titleWidth: pixelSize * 2.5
                 width: parent.width/2 - 10
                 height: 30
+                onlyNum: false
                 onTextChanged: {
                     if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
                             ammoData.combat_unit_type =text
@@ -168,6 +169,7 @@ Rectangle{//航空弹药的组件战斗部
                 titleWidth: pixelSize * 4.5
                 width: parent.width/2 - 10
                 height: 30
+                onlyNum: false
                 onTextChanged: {
                     if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
                        ammoData.combat_main_charge_type =text
@@ -393,7 +395,7 @@ Rectangle{//航空弹药的组件战斗部
             text: "保存"
             onClicked:{
 //                                saveammunitionData()
-                addAmmoComponentWarheadRoot.visible = false
+                //addAmmoComponentWarheadRoot.visible = false
                 addAmmoComponentWarheadPopup.close()
             }
         }
@@ -408,7 +410,7 @@ Rectangle{//航空弹药的组件战斗部
             height: 40
             text: "返回"
             onClicked: {
-                addAmmoComponentWarheadRoot.visible = false
+                //addAmmoComponentWarheadRoot.visible = false
                 addAmmoComponentWarheadPopup.close()
             }
         }

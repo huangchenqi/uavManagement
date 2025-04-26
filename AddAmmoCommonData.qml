@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 import "qrc:/"
 import "qrc:/AddAmmoModules/Component"
-
+import UavDaoModel 1.0
 Item{//航空导弹与航空炸弹
     id:missileCommonData
     width: 1000
@@ -10,9 +10,17 @@ Item{//航空导弹与航空炸弹
 
     property int selectType:0 //0 代表新增，1代表查看，2代表修改。
     property string text: ""
+
     onSelectTypeChanged: {
-      input_name.text = ammoData.idi
+
     }
+    UavModelDaoTableModel{
+        id:uavModelDao
+    }
+    Component.onCompleted: {
+
+    }
+
     Rectangle {
         id:controlAmmunition
         anchors.fill: parent
@@ -1120,22 +1128,42 @@ Item{//航空导弹与航空炸弹
                             selectType = index
                             m_SelectState = !m_SelectState
                             isSelect = m_SelectState
+                            // 检查数组中是否已经存在该数字
+                                var uavIndex = uavArray.indexOf(m_PlanNumber)
 
-                            //ammoData.ammoType =text
+                                if (uavIndex === -1) {
+                                    // 数字不存在，添加到数组
+                                    uavArray.push(m_PlanNumber)
+                                    console.log("Number added: " + m_PlanNumber)
+                                } else {
+                                    // 数字已存在，从数组中删除
+                                    uavArray.splice(uavIndex, 1)
+                                    console.log("Number removed: " + m_PlanNumber)
+                                }
+                            // 检查数组中是否已经存在该数字
+                            // if (!addAmmoAllDatView.uavArray.includes(m_PlanNumber)) {
+                            //     addAmmoAllDatView.uavArray.push(m_PlanNumber) // 添加数字到数组
+                            //     console.log("Number added: " + m_PlanNumber)
+                            // } else {
+                            //     console.log("Number already exists: " + m_PlanNumber)
+                            // }
+                            console.log("uavArray"+addAmmoAllDatView.uavArray)
                         }
                     }
                 }
             }
             Component.onCompleted: {
-                listmodel_Box.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"侦察无人机"})
-                listmodel_Box.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"攻击无人机"})
-                listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
-                listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
-                listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
-                listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
-                listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
-                listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
-                listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
+                var uavData = uavModelDao.selectUavModelAllData()
+                console.log("uavModelDao"+JSON.stringify(uavData))
+                var result = [];
+                for (var i = 0; i < uavData.length; i++) {
+                    result.push({
+                        m_PlanNumber: uavData[i].recordId,
+                        m_SelectState:false,// ammoType[i].checked,
+                        m_TypeName: uavData[i].uavName
+                    });
+                }
+               listmodel_Box.append(result);
             }
         }
         //显示区域
@@ -1164,6 +1192,9 @@ Item{//航空导弹与航空炸弹
                 view_List_TypeSelect.visible = !view_List_TypeSelect.visible
             }
         }
+    }
+    function loadUavModelType(){
+
     }
 
 }

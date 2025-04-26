@@ -27,43 +27,50 @@ Rectangle{//航空弹药的组件引信
         id:rect_root
         anchors.fill: parent
         color: "transparent"
+
+        CText{
+            id:topTitle
+            text: "引信"
+            anchors.top: parent.top
+            anchors.topMargin: 15
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: mainColor
+            pixelSize: 28
+        }
         Rectangle{
-            id:rect_DataTitle
-            anchors.top: rect_root.top
-            anchors.topMargin: 2
+            id:rect_Data
+            anchors.top: topTitle.bottom
+            anchors.topMargin: 20
             anchors.left: parent.left
-            anchors.leftMargin: 2
+            anchors.leftMargin: 10
             anchors.right: parent.right
             anchors.rightMargin: 10
-            height: 30
+            height: 300
             color: "transparent"
             radius: 5
-            Label{
-                id:fuseTypetion
-                text: "引信类型:"
-                color: mainColor
+
+            CTextInput{
+                id:fuseTypeText
+                anchors.left: parent.left
+                anchors.leftMargin: 5
+                anchors.top: parent.top
+                anchors.topMargin: 5
+                title: "引信类型:"
+                pixelSize: 18
+                onlyNum: false
+                titleWidth: pixelSize * 4.5
                 width: parent.width/2 - 20
                 height: 30
-
-            }
-            CText{
-                id:fuseType
-                anchors.top: parent.top
-                anchors.topMargin: 15
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: mainColor
-                pixelSize: 28
                 onTextChanged: {
-
                     ammoData.fuse_type =text
                     console.log("Text content changed to: " + text)
                 }
             }
-        }
+
             CTextInput{
                 id:fuseLengthText
-                anchors.left: rect_DataTitle.left
-                anchors.top: rect_DataTitle.bottom
+                anchors.left: fuseTypeText.left
+                anchors.top: fuseTypeText.bottom
                 anchors.topMargin: 15
                 title: "长度(m):"
                 pixelSize: 18
@@ -71,13 +78,9 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    // if(text != "")
-                    // {
-                    // }
                     ammoData.fuse_length =text
                     console.log("Text content changed to: " + text)
                 }
-
             }
 
             CTextInput{
@@ -91,9 +94,6 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    // if(text != "")
-                    // {
-                    // }
                     ammoData.fuze_quality =text
                     console.log("Text content changed to: " + text)
                 }
@@ -110,9 +110,6 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    // if(text != "")
-                    // {
-                    // }
                     ammoData.fuse_self_destruct_time =text
                     console.log("Text content changed to: " + text)
                 }
@@ -129,9 +126,6 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    // if(text != "")
-                    // {
-                    // }
                     ammoData.first_level_release_time_of_fuse =text
                     console.log("Text content changed to: " + text)
                 }
@@ -148,9 +142,6 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    // if(text != "")
-                    // {
-                    // }
                     ammoData.reliability_rate_of_fuse_action =text
                     console.log("Text content changed to: " + text)
                 }
@@ -167,9 +158,6 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    // if(text != "")
-                    // {
-                    // }
                     ammoData.fuse_firing_rate =text
                     console.log("Text content changed to: " + text)
                 }
@@ -186,9 +174,6 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    // if(text != "")
-                    // {
-                    // }
                     ammoData.fuse_diameter =text
                     console.log("Text content changed to: " + text)
                 }
@@ -205,9 +190,6 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    // if(text != "")
-                    // {
-                    // }
                     ammoData.safe_distance_of_fuse =text
                     console.log("Text content changed to: " + text)
                 }
@@ -224,9 +206,6 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    // if(text != "")
-                    // {
-                    // }
                     ammoData.time_disarming_fuse =text
                     console.log("Text content changed to: " + text)
                 }
@@ -243,9 +222,6 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    // if(text != "")
-                    // {
-                    // }
                     ammoData.secondary_release_time_of_fuse =text
                     console.log("Text content changed to: " + text)
                 }
@@ -262,9 +238,8 @@ Rectangle{//航空弹药的组件引信
             height: 40
             text: "保存"
             onClicked:{
-//                                saveammunitionData()
-                addAmmoComponentFuseRoot.visible = false
                 addAmmoComponentFusePopup.close()
+                //addAmmoComponentFuseRoot.visible = false
             }
         }
 
@@ -278,19 +253,21 @@ Rectangle{//航空弹药的组件引信
             height: 40
             text: "返回"
             onClicked: {
-                addAmmoComponentFuseRoot.visible = false
-                addAmmoComponentFusePopup.close()
+                addAmmoComponentFusePopup.close()//addAmmoComponentFuseRoot.visible = false
             }
         }
+    }
 
 
+    function saveammunitionData(){
 
 
-    function saveAmmoFuseData(){
+    }
+    function convertToJsonArray(jsonData) {
 
     }
 
-    function updateAmmoFuseData() {
+    function getSelectedPayloads(buttons) {
 
     }
 

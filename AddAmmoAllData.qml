@@ -3,25 +3,63 @@ import QtQuick.Window 2.12
 //import QtCharts 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.5
+import QtQuick.Dialogs 1.3  // 引入 QtQuick.Dialogs 模块
+
 import "qrc:/"
 import "qrc:/AddAmmoModules/Component"
 import "qrc:/AddAmmoModules/"
+import AmmoDaoModel 1.0
 Rectangle {
     id:addAmmoAllDatView
     visible: true
     width: 920
     height: 800
     z: 100
+    //property var ammoSelecttype: ""
+    property string selectedType: ""//判断是否是新增、查看、修改
     property string viewType: ""
     property string mainColor:"#fff0cc55"
+    property var uavArray: []
     property var ammoData: new Object // 记录ammo的数据在保存、修改、加载时候
     readonly property string mainBackgroundSource: "file:Resources/Background/bg_MainBackground.png"
     signal backAmmoRecord()
     Component.onCompleted: {
         loadViewType()
-
+        initAmmoData()
     }
+    AmmoDaoTableModel{
+        id:ammoDaoModel
+    }
+    // 定义警告对话框
+    Popup {
+            id: warningPopup
+            width: 200
+            height: 100
+            x: (parent.width - width) / 2
+            y: (parent.height - height) / 2
+            modal: true
+            focus: true
+            closePolicy: Popup.NoAutoClose // 禁止点击外部关闭
 
+            background: Rectangle {
+                color: "#ffeb3b"
+                border.color: "#fbc02d"
+                radius: 5
+            }
+
+            contentItem: Text {
+                id:warningItem
+                //text: "您查询的是全部数据！"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font.pixelSize: 16
+            }
+        }
+    Timer {
+            id: autoCloseTimer
+            interval: 500 // 2秒
+            onTriggered: warningPopup.close()
+        }
     Item {
         anchors.fill: parent
         Image {
@@ -154,6 +192,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.topMargin: 20
             horizontalAlignment: Text.AlignLeft
+
         }
         TextArea {
             id: usageDescriptionText
@@ -178,6 +217,11 @@ Rectangle {
             inputMethodHints: Qt.ImhMultiLine      // 启用多行输入法支持
             font.family: "黑体"
             font.pixelSize: 20
+            onTextChanged: {
+                ammoData.ammoDescription =text
+                console.log("Text content changed to: " + text)
+
+            }
         }
     }
 
@@ -191,17 +235,68 @@ Rectangle {
         anchors.top: addAmmo.top
         color: "#ECF2FE"
         border.color: "#BDBDBD"
-
+        // 点击区域
+        MouseArea {
+            id:uavImagSelect
+            anchors.fill: parent
+            onClicked: {
+                fileDialog.open()
+            }
+        }
+        FileDialog {
+            id: fileDialog
+            title: "选择图片"
+            nameFilters: ["图片文件 (*.png *.jpg *.jpeg)"]
+            onAccepted: {
+                ammunitionImg.source = fileUrls[0]
+                //addUavModelData.image_name = uavImg.source.toString()
+                ammoData.image_url = ammunitionImg.source.toString()
+                var currentModel = navBar.currentIndex === 0 ? droneModel : schemeModel
+                for(var i = 0; i < currentModel.count; i++){
+                    if(currentModel.get(i).expanded){
+                        currentModel.get(i).items.push({
+                            name: "新条目",
+                            selected: false
+                        });
+                        break;
+                    }
+                }
+            }
+            // onAccepted: {
+            //             // 获取选中的文件路径
+            //             var filePath = fileDialog.fileUrl.toString()
+            //             // 去掉 "file://" 前缀
+            //             filePath = filePath.replace("file://", "")
+            //             // 加载图片
+            //             uavImg.source = filePath
+            //         }
+        }
         Image {
             id: ammunitionImg
             anchors.fill: parent
+            source: {
+                if(processInfo.loadViewType === "addUavData"){
+                    return ""
+                }else if(processInfo.loadViewType === "query"){
+                    rect_ImageShow.enabled = false
+
+                    //return processInfo.imagUrl
+                }else if(processInfo.loadViewType === "update"){
+                    //return processInfo.imagUrl
+                    //console.log("addUavDataView"+processInfo.loadViewType)
+                }else{
+                    console.log("uav Image processInfo.loadViewType Unknown")
+                }
+            }
         }
+
         CText {
             anchors.centerIn: parent
             text: "图片展示区域"
             color: "#9E9E9E"
         }
     }
+
     CButton{
         id:btn_Cancel
         anchors.top: rect_ImageShow.bottom
@@ -226,7 +321,8 @@ Rectangle {
         width: pixelSize * 4
         text: "保存"
         onClicked: {
-            console.log("ammoData.push"+JSON.stringify(ammoData))
+
+            saveAmmoData()
             backAmmoRecord()
             addAmmoAllDatView.visible = false
         }
@@ -243,7 +339,7 @@ Rectangle {
         }
     }
 
-    function saveAmmoData(){
+    function initAmmoData(){
         //#pragma db not_null column("ammo_name")//            VARCHAR(100) NOT NULL ,--COMMENT '名称',
         addAmmoAllDatView.ammoData.ammoName = ""
         //#pragma db not_null column("short_name")//    short_name VARCHAR(50) ,--COMMENT '简称',
@@ -517,6 +613,27 @@ Rectangle {
             addAmmoAllDatView.ammoData.use_status   = true
 
     }
+    function saveAmmoData(){
+
+         ammoData.ammoType = addAmmoAllDatView.viewType
+         ammoData.ammoToUavModel =   addAmmoAllDatView.uavArray.join(",")
+         console.log("ammoSelecttype"+viewType)//console.log("ammoData.push"+JSON.stringify(ammoData))
+          let result = ammoDaoModel.insertAmmoData(ammoData)
+            if(result === true){
+                warningItem.text = "^_^航弹新增数据成功!^_^"
+                warningPopup.open()
+                // 2秒后自动关闭
+                autoCloseTimer.start()
+            }else if(result === false){
+                warningItem.text = "^_^航弹新增数据失败!^_^"
+                warningPopup.open()
+                // 2秒后自动关闭
+                autoCloseTimer.start()
+             }else{
+                console.log("unknown deleteMountLocation")
+            }
+    }
+
     function loadAmmoComponentData(){
         addAmmo.selectType = 0;
        return true

@@ -220,7 +220,7 @@ Rectangle{//航空弹药的组件发射条件
             text: "保存"
             onClicked:{
 //                                saveammunitionData()
-                addAmmoComponentLaunchconditionsRoot.visible = false
+                //addAmmoComponentLaunchconditionsRoot.visible = false
                 addAmmoComponentLaunchconditionsPopup.close()
             }
         }
@@ -235,7 +235,7 @@ Rectangle{//航空弹药的组件发射条件
             height: 40
             text: "返回"
             onClicked: {
-                addAmmoComponentLaunchconditionsRoot.visible = false
+                //addAmmoComponentLaunchconditionsRoot.visible = false
                 addAmmoComponentLaunchconditionsPopup.close()
             }
         }

@@ -5,7 +5,6 @@ import QtQuick.Window 2.12
 import Qt.labs.qmlmodels 1.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.12
 import "."
 import "qrc:/"
 import "qrc:/AddAmmoModules/Component"
@@ -43,13 +42,6 @@ Rectangle {
               Connections {
                   target: pageAmmoModelLoader.item
                   onBackAmmoRecord: {
-                      console.log("connectuion!!!!!")
-                      ammoRecordDataView.visible = true
-                  }
-              }
-              Connections {
-                  target: pageAmmoModelLoader.item
-                  onBackAvAmmoRecord: {
                       console.log("connectuion!!!!!")
                       ammoRecordDataView.visible = true
                   }

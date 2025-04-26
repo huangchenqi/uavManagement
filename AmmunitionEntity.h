@@ -305,8 +305,8 @@ public:
     std::string lifting_lug;
 #pragma db not_null column("distance_suspension_lifting_lug")  //distance_suspension_lifting_lug  REAL NOT NULL ,--COMMENT '吊耳间距',
     float distance_suspension_lifting_lug;
-#pragma db not_null column("image_name")  //image_name VARCHAR(50) ,--COMMENT '图片名称',
-    std::string image_name;
+#pragma db not_null column("image_name") type("BYTEA")//type("varchar(30)") // VARCHAR(50) ,--COMMENT '图片名称',
+    std::vector<char> image_name;
 #pragma db not_null column("image_url")   //image_url VARCHAR(50) ,--COMMENT '图片路径',
     std::string image_url;
 #pragma db not_null column("record_creation_time") type("timestamp(0)") options("DEFAULT CURRENT_TIMESTAMP") //record_creation_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,--COMMENT '记录创建时间',

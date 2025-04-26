@@ -1,4 +1,5 @@
 ﻿import QtQuick 2.0
+import QtQuick.Controls 2.12
 //通用类-自定义TextInput控件
 Item {
     id:item_TextInput
@@ -21,6 +22,18 @@ Item {
     property var  titleWidth: (54)
     //隐藏边框
     property bool borderVisible: true
+
+    property bool onlyNum: true
+
+    Component {
+        id: doubleValidatorComponent
+        DoubleValidator {
+            bottom: -9999999
+            top: 9999999
+            notation: DoubleValidator.StandardNotation
+            decimals: 5
+        }
+    }
     ////控件属性Change信号
     ////自定义属性
     ////自定义函数
@@ -66,12 +79,13 @@ Item {
             selectByMouse: true
             selectedTextColor: "#ffffffff"
             selectionColor: "#ffdddd88"
-            validator: DoubleValidator {
-                    bottom: -9999999
-                    top: 9999999
-                    notation: DoubleValidator.StandardNotation
-                    decimals: 5
+            validator:{
+                if(onlyNum)
+                {
+                    return doubleValidatorComponent.createObject()
                 }
+                else return null
+            }
         }
     }
 }

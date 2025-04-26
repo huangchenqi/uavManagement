@@ -5882,7 +5882,10 @@ debug/ammodao.o: ../../ammodao.cpp ../../ammodao.h \
 		../../pgsqlconnect/include/odb/details/unused.hxx \
 		../../AmmunitionEntity-odb.ixx \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/QDebug \
-		B:/QT/5.15.2/mingw81_64/include/QtCore/QJsonValue
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QJsonValue \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QFile \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qfile.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qfiledevice.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\ammodao.o ..\..\ammodao.cpp
 
 debug/ammoguidancetypedao.o: ../../ammoguidancetypedao.cpp ../../ammoguidancetypedao.h \

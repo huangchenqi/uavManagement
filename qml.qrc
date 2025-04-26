@@ -44,12 +44,12 @@
         <file>NewMissileBaseData.qml</file>
         <file>NewMissileLaunchData.qml</file>
         <file>NewMissileWorkData.qml</file>
-        <file>AddAmmoComponentFuse.qml</file>
         <file>AddAmmoComponentLaunchconditions.qml</file>
         <file>AddAmmoComponentSeeker.qml</file>
         <file>AddAmmoComponentWarhead.qml</file>
         <file>AddMountingSchemeData.qml</file>
         <file>AddInterferencePodData.qml</file>
         <file>AddUavModelAllData.qml</file>
+        <file>AddAmmoComponentFuse.qml</file>
     </qresource>
 </RCC>

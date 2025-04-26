@@ -1686,9 +1686,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        ::std::string,
-        pgsql::id_string >::query_type,
-      pgsql::id_string >
+        ::std::vector< char >,
+        pgsql::id_bytea >::query_type,
+      pgsql::id_bytea >
     image_name_type_;
 
     static const image_name_type_ image_name;
@@ -3130,7 +3130,7 @@ namespace odb
 
       // record_creation_time
       //
-      unsigned long long record_creation_time_value;
+     unsigned long long record_creation_time_value;
       bool record_creation_time_null;
 
       // use_status
