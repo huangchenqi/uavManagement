@@ -181,6 +181,18 @@ namespace odb
 
     static const mainLength_type_ mainLength;
 
+    // interferenceLength
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        float,
+        pgsql::id_real >::query_type,
+      pgsql::id_real >
+    interferenceLength_type_;
+
+    static const interferenceLength_type_ interferenceLength;
+
     // mass
     //
     typedef
@@ -398,6 +410,11 @@ namespace odb
   mainLength (A::table_name, "\"main_length\"", 0);
 
   template <typename A>
+  const typename query_columns< ::InterferencePodEntity, id_pgsql, A >::interferenceLength_type_
+  query_columns< ::InterferencePodEntity, id_pgsql, A >::
+  interferenceLength (A::table_name, "\"interference_length\"", 0);
+
+  template <typename A>
   const typename query_columns< ::InterferencePodEntity, id_pgsql, A >::mass_type_
   query_columns< ::InterferencePodEntity, id_pgsql, A >::
   mass (A::table_name, "\"mass\"", 0);
@@ -533,6 +550,11 @@ namespace odb
       float mainLength_value;
       bool mainLength_null;
 
+      // interferenceLength_
+      //
+      float interferenceLength_value;
+      bool interferenceLength_null;
+
       // mass_
       //
       float mass_value;
@@ -607,7 +629,7 @@ namespace odb
 
       // recordCreationTime_
       //
-     unsigned long long recordCreationTime_value;
+      unsigned  long long recordCreationTime_value;
       bool recordCreationTime_null;
 
       // useStatus_
@@ -657,7 +679,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 22UL;
+    static const std::size_t column_count = 23UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;

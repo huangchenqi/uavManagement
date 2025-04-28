@@ -11,7 +11,7 @@ Rectangle{//航空弹药的组件发射条件
     visible: true
     width: 600
     height: 340
-    color:"cyan"
+    color:"skyblue"
     //title: qsTr("QML TableView example")
     Item {
         anchors.fill: parent
@@ -38,14 +38,6 @@ Rectangle{//航空弹药的组件发射条件
             height: 30
             color: "transparent"
             radius: 5
-            Label{
-                id:launchCondition
-                text: "发射条件"
-                color: mainColor
-                width: parent.width/2 - 20
-                height: 30
-
-            }
 
             CText{
                 id:topTitle
@@ -56,13 +48,10 @@ Rectangle{//航空弹药的组件发射条件
                 anchors.leftMargin: 2
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: mainColor
+                text: "发射条件"
                 pixelSize: 28
                 width: parent.width/2 - 20
                 height: 30
-                onTextChanged: {
-                    ammoData.launch_conditions =text
-                    console.log("Text content changed to: " + text)
-                }
             }
         }
 
@@ -127,21 +116,21 @@ Rectangle{//航空弹药的组件发射条件
                 }
             }
 
-            // CText{
-            //     id:weatherRestrictionsText
-            //     anchors.left: launchMinimumRelativeHeightText.left
-            //     anchors.top: launchMinimumRelativeHeightText.bottom
-            //     anchors.topMargin: 15
-            //     title: "天气限制:"
-            //     pixelSize: 18
-            //     titleWidth: pixelSize * 4.5
-            //     width: parent.width/2 - 20
-            //     height: 30
-            //     onTextChanged: {
-            //         ammoData.fuse_type =text
-            //         console.log("Text content changed to: " + text)
-            //     }
-            // }
+            CTextInput{
+                id:weatherRestrictionsText
+                anchors.left: launchMinimumRelativeHeightText.left
+                anchors.top: launchMinimumRelativeHeightText.bottom
+                anchors.topMargin: 15
+                title: "天气限制:"
+                pixelSize: 18
+                titleWidth: pixelSize * 4.5
+                width: parent.width/2 - 20
+                height: 30
+                onTextChanged: {
+                    ammoData.launch_conditions =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
 
             CTextInput{
                 id:launchMaximumAltitudeText

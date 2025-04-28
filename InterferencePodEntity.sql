@@ -12,6 +12,7 @@ CREATE TABLE "uav_type_man"."interference_pod" (
   "used_uav_models" varchar(200) NOT NULL,
   "description" text NOT NULL,
   "main_length" real NOT NULL,
+  "interference_length" real NOT NULL,
   "mass" real NOT NULL,
   "front_cover_length" real NOT NULL,
   "rear_cover_length" real NOT NULL,

@@ -592,14 +592,13 @@ Rectangle {
                                                           // processInfo.uavName = transformedData.uavName
                                                           // processInfo.uavId = transformedData.uavId
                                                           processInfo.loadViewType = "query"
-                                                          //processInfo.jsonStr = transformedData
-                                                          assignmentEncapsulation(transformedData)
-                                                          processInfo.hangingCapacity = rowData.origHangingCapacity
+                                                          processInfo.podJsonStr = transformedData
+
                                                           //console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
-                                                          pageUavModelLoader.setSource("qrc:./AddInterferencePodData.qml",
+                                                          pagePayloadLoader.setSource("qrc:./AddInterferencePodData.qml",
                                                                                {processInfo: processInfo,
-                                                                                   backUi: "qrc:/UavManageCommon.qml"})
-                                                          uavModelRecordView.visible = false
+                                                                                   backUi: "qrc:/UavReconnaissancePayloadManagement.qml"})
+                                                          payloadRecordView.visible = false
                                                       }
                                                   }
 
@@ -621,13 +620,12 @@ Rectangle {
                                                           console.log("编辑行数据:", JSON.stringify(transformedData, null, 2))
 
                                                           processInfo.loadViewType = "update"
-                                                          assignmentEncapsulation(transformedData)
-                                                          processInfo.hangingCapacity = rowData.origHangingCapacity
-                                                          console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
-                                                          pageUavModelLoader.setSource("qrc:./AddInterferencePodData.qml",
+                                                          processInfo.podJsonStr = transformedData
+
+                                                          pagePayloadLoader.setSource("qrc:./AddInterferencePodData.qml",
                                                                                {processInfo: processInfo,
-                                                                                   backUi: "qrc:/UavManageCommon.qml"})
-                                                          uavModelRecordView.visible = false
+                                                                                   backUi: "qrc:/UavReconnaissancePayloadManagement.qml"})
+                                                          payloadRecordView.visible = false
                                                       }
                                                   }
                                               }
@@ -867,7 +865,10 @@ Rectangle {
                               text: "新增干扰设备"
                               onClicked: {
 
-                                  pagePayloadLoader.setSource("qrc:./AddInterferencePodData.qml")
+                                  processInfo.loadViewType = "addUavData"
+                                  pagePayloadLoader.setSource("qrc:./AddInterferencePodData.qml",
+                                                       {processInfo: processInfo,
+                                                           backUi: "qrc:/UavReconnaissancePayloadManagement.qml"})
                                   payloadRecordView.visible = false
                               }
                           }
@@ -1034,5 +1035,16 @@ Rectangle {
                    return false
                }
                return true
+           }
+
+           function transformData(data){
+               return {
+                   "frontCoverLength":data.frontCoverLength,
+                   "rearCoverLength":data.rearCoverLength,
+                   "recordId":data.recordId,
+                   "length":data.length,
+                   "mass":data.mass,
+                   "mainCabinSectione":data.mainCabinSectione
+               }
            }
 }

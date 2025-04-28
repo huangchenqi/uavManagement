@@ -17,6 +17,7 @@
 #include <QFile>
 #include <QTemporaryFile>
 #include <QImage>
+#include <QUrl>
 InterferencePodDao::InterferencePodDao(QObject* parent) : QObject(parent){
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
     dbConn_.reset(new DatabaseConnection(
@@ -215,7 +216,7 @@ QJsonObject InterferencePodDao::queryInterferencePodData(const QJsonObject &obje
             // 处理数值类型（示例）/******************** 尺寸参数 ********************/
             interferencePodData["mass"] = QString::number(entity.mass_); // 假设返回float// 使用 QString::number 方法转换 float
             interferencePodData["mainLength"] = QString::number(entity.mainLength_);
-            interferencePodData["firstReconnaissanceRange"] = QString::number(entity.frontCoverLength_);
+            interferencePodData["frontCoverLength"] = QString::number(entity.frontCoverLength_);
             interferencePodData["rearCoverLength"] = QString::number(entity.rearCoverLength_);
             interferencePodData["mainCabinSection"] = QString::number(entity.mainCabinSection_);
             interferencePodData["maximumWeightPodFullyLoaded"] = QString::number(entity.maximumWeightPodFullyLoaded_);
@@ -501,18 +502,18 @@ bool InterferencePodDao::insertInterferencePodData(const QJsonObject &object)
         entity.rearCoverLength_ = object["rearCoverLength"].toDouble();
         entity.mainCabinSection_ = object["mainCabinSection"].toDouble();//.toInt();
         entity.maximumWeightPodFullyLoaded_ = object["maximumWeightPodFullyLoaded"].toDouble();
-        entity.interferenceBand_ = object["interferenceBand"].toBool();
-        entity.effectiveReflectionArea_ = object["effectiveReflectionArea"].toDouble();
-        entity.deliveryControlWay_ = object["deliveryControlWay"].toDouble();
-        entity.deliverySpeed_ = object["deliverySpeed"].toDouble();//.toInt();
+        entity.interferenceBand_ = object["interferenceBand"].toString().toStdString();
+        entity.effectiveReflectionArea_ = object["effectiveReflectionArea"].toString().toStdString();
+        entity.deliveryControlWay_ = object["deliveryControlWay"].toString().toStdString();
+        entity.deliverySpeed_ = object["deliverySpeed"].toString().toStdString();//.toInt();
         entity.loadingCapacity_ = object["loadingCapacity"].toDouble();
-        entity.interferenceIntensity_ = object["interferenceIntensity"].toDouble();
+        entity.interferenceIntensity_ = object["interferenceIntensity"].toString().toStdString();
         //entity.imageName_ = object["imageName"].toDouble();
 
 
 
         entity.imageUrl_ = object["imageUrl"].toString().toStdString();
-        entity.recordCreationTime_ = QDateTime::currentDateTime();//object["record_creation_time"].toString().toStdString();//.toInt();
+        //entity.recordCreationTime_ = QDateTime::currentDateTime();//object["record_creation_time"].toString().toStdString();//.toInt();
         entity.useStatus_ =  true;//object["use_status"].toBool();
         /******************** 系统记录 ********************/
         //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();

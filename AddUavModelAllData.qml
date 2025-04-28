@@ -31,84 +31,51 @@ Rectangle{//Window{
     property var mountContent: []
     //侦察载荷
     property var payloadType: []
-    property var uavInvestigationPayloadTypeResult: ""
+    property var uavInvestigationPayloadTypeResult:[]
     property var payloadTypeOrigi: []
     //投弹方式
     property var bombWay: []
-    property var uavBombingmethodResult: ""
+    property var uavBombingmethodResult:[]
     property var bombWayOrigi: []
     //回收方式
     property var recoveryWay: []
-    property var uavRecoveryModeResult: ""
+    property var uavRecoveryModeResult:[]
     property var recoveryWayOrigi: []
     //操控方式
     property var operationWay: []
-    property var uavOperatioanalModeResult: ""
+    property var uavOperatioanalModeResult:[]
     property var opreationWayOrigi: []
     //挂载位置
-    property var uavPayloadTypeResult: ""
+    property var uavPayloadTypeResult:[]
     //弹药类型
     property  var ammoType:[]
-    property  var ammoTypeResult:""
+    property  var ammoTypeResult:[]
     property  var ammoTypeOrigi: []
 
+    //无人机型号
     property var  uavModelType: []
     property var uavModelTypeOrigi: []
+
 
     //无人机类型
     property int iUavType: 0
     //无人机型号
-    property int iUavID: 0
-    //挂载弹药类型
-    property int uavLoadammoSelect: 0
-    //侦察载荷类型
-    property int iuavInvestigationPayloadType: 0
-    //攻击方式
-    property int iuavBombingmethod: 0
-    //回收方式
-    property int iuavRecoverymode: 0
-    //操控方式
-    property int ioperationMode: 0
+    property int iUavModelType: 0
 
-    //获取弹药的类型
-    function loadAmmoType(){
-        var ammoType = ammoDaoModel.selectAmmoAllData()
-        console.log("弹药类型当前函数名称:", arguments.callee.name);
-        console.log("loadAmmoType"+JSON.stringify(ammoType))
-        addUavModelData.ammoTypeOrigi =  extractAmmoData(ammoType)
-        addUavModelData.ammoType = extractAmmoNameData(ammoType)
-        console.log("loadAmmoTypeOrigi"+JSON.stringify(addUavModelData.ammoTypeOrigi))
-    }
-    function loadUavModelType(){
-        var uavModelTypeData =  uavModelTypeDaoTableModel.selectUavModelTypeAllData()
-        addUavModelData.uavModelTypeOrigi = uavModelTypeData
-        console.log("uavModelTypeDaoTableModel"+JSON.stringify(uavModelTypeData))
-        var uavModelTypeArray = extractUavModelTypeComponentNames(uavModelTypeData)
-        console.log(JSON.stringify(uavModelTypeArray));
-        addUavModelData.uavModelType  = uavModelTypeArray
-    }
-    function extractUavModelTypeComponentNames(originalArray) {
-        var resultArray = ["请选择:"];
-        // 遍历原始数组
-        for (var i = 0; i < originalArray.length; ++i) {
-            // 安全获取属性值
-            var componentName = originalArray[i].uavComponeName || "";
-            // 过滤空值并保留原始空格
-            if (componentName.trim().length > 0) {
-                resultArray.push(componentName);
-            }
-        }
-        return resultArray;
-    }
+
     // 组件加载完成后生成测试数据
     Component.onCompleted:{
-        //        loadUavComponentData()
-        //        loadAmmoType()
-        //        loadUavModelType()
+        loadUavComponentData()
+        loadAmmoType()
+        allListViewAppendItem()
+        loadUavModelType()
         //        //loadMountLocationContent()
-        //        loadView()
+        loadView()
         //generateTestData()
+
     }
+
+
     Popup {
         id: warningPopup
         width: 300
@@ -159,17 +126,17 @@ Rectangle{//Window{
 
             //       onClose: payloadTypeManagementPopup.close() // 连接关闭信号
             //   }
-            //            MultiTextOfCombox{
-            //                id:uavMountContent
-            //                anchors.fill: parent
-            //                loadData:mountContent
-            //                onClose: mountLocationManagementPopup.close() // 连接关闭信号
-            //            }
-            // MultiTextDispay {
-            //      id: multiTextDispay
-            //      anchors.fill: parent
-            //      onClose: payloadTypeManagementPopup.close() // 连接关闭信号
-            // }
+                        MultiTextOfCombox{
+                            id:uavMountContent
+                            anchors.fill: parent
+                            loadData:mountContent
+                            onClose: mountLocationManagementPopup.close() // 连接关闭信号
+                        }
+//             MultiTextDispay {
+//                  id: multiTextDispay
+//                  anchors.fill: parent
+//                  onClose: payloadTypeManagementPopup.close() // 连接关闭信号
+//             }
 
         }
 
@@ -205,11 +172,18 @@ Rectangle{//Window{
                 anchors.top: topTitle.bottom
                 anchors.topMargin: 15
                 width: parent.width / 5 * 3
-//                anchors.right: rect_ImageShow.left
                 anchors.rightMargin: 10
                 height: 250
                 color:"#50000000"
                 radius: 5
+                enabled: {
+                    if(processInfo.loadViewType === "query")
+                    {
+                        return false
+                    }
+                    else
+                        return true
+                }
 
                 CText{
                     id:text_UavBaseData
@@ -282,7 +256,7 @@ Rectangle{//Window{
                 }
 
                 CButton{
-                    id:comp_DamageFactorType
+                    id:uavTypeSelect
                     width: 180
                     height: 36
                     color:"#ffddaa00"
@@ -306,11 +280,53 @@ Rectangle{//Window{
                         view_List_TypeSelect.visible = !view_List_TypeSelect.visible
                     }
                 }
+                //显示区域
+                ListView{
+                    id:view_List_TypeSelect
+                    width: uavTypeSelect.width
+                    height: uavTypeSelect.height * 5
+                    anchors.left: uavTypeSelect.left
+                    anchors.leftMargin: uavTypeSelect.width/2 - width/2
+                    anchors.top: uavTypeSelect.bottom
+                    anchors.topMargin: 2
+                    visible: false
+                    clip: true
+                    z:1
+                    model:ListModel{
+                        id:listmodel_Box
+                    }
+                    delegate:Component{
+                        Item{
+                            id:item_Delegate
+                            width: view_List_TypeSelect.width
+                            height: 36
+                            CButton{
+                                id:comp_TypeBtn
+                                anchors.fill: parent
+                                text:m_TypeName
+                                color:"#ffddaa00"
+                                borderColor: "#ffddaa00"
+                                pixelSize: 18
+//                                isSelect: m_SelectState
+                                onClicked: {
+                                    view_List_TypeSelect.visible = false
+                                    iUavType = index
+                                    m_SelectState = !m_SelectState
+                                }
+                            }
+                        }
+                    }
+                    Component.onCompleted: {
+                        listmodel_Box.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"侦察无人机"})
+                        listmodel_Box.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"攻击无人机"})
+                        listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
+                    }
+                }
 
                 Label{
                     id:uavId
                     text: "无人机型号:"
-                    anchors.left: comp_DamageFactorType.right
+                    anchors.left: uavTypeSelect.right
                     anchors.leftMargin: 10
                     anchors.verticalCenter: ammoName.verticalCenter
                     font.pixelSize: 20
@@ -319,7 +335,7 @@ Rectangle{//Window{
                 }
 
                 CButton{
-                    id:comp_uavId
+                    id:uavIdText
                     width: 180
                     height: 36
                     color:"#ffddaa00"
@@ -329,18 +345,68 @@ Rectangle{//Window{
                     anchors.verticalCenter: uavId.verticalCenter
                     pixelSize: 20
                     text:{
-                        if(iUavID < 0)
+                        if(iUavModelType < 0)
                         {
                             return "型号1"
                         }
                         else
                         {
-                            if(listmodel_Box_uavId.count > 0)
-                                listmodel_Box_uavId.get(iUavID).m_TypeName
+                            if(listmodel_Box_UavModelType.count > 0)
+                                listmodel_Box_UavModelType.get(iUavModelType).m_TypeName
                         }
                     }
                     onClicked: {
-                        view_List_uavIdSelect.visible = !view_List_uavIdSelect.visible
+                        view_List_uavModelTypeSelect.visible = !view_List_uavModelTypeSelect.visible
+                    }
+                }
+                //显示区域
+                ListView{
+                    id:view_List_uavModelTypeSelect
+                    width: uavIdText.width
+                    height: uavIdText.height * 5
+                    anchors.left: uavIdText.left
+                    anchors.leftMargin: uavIdText.width/2 - width/2
+                    anchors.top: uavIdText.bottom
+                    anchors.topMargin: 2
+                    visible: false
+                    clip: true
+                    z:2
+                    model:ListModel{
+                        id:listmodel_Box_UavModelType
+                    }
+                    delegate:Component{
+                        Item{
+                            id:item_Delegate
+                            width: view_List_uavModelTypeSelect.width
+                            height: 36
+                            CButton{
+                                id:comp_TypeBtn
+                                anchors.fill: parent
+                                text:m_TypeName
+                                color:"#ffddaa00"
+                                borderColor: "#ffddaa00"
+                                pixelSize: 18
+                                onClicked: {
+                                    view_List_uavModelTypeSelect.visible = false
+                                    iUavModelType = index
+                                }
+                            }
+                        }
+                    }
+                    Component.onCompleted: {
+                        if(uavModelType.length > 0)
+                        {
+                            for(var i = 0; i < uavModelType.length; i++)
+                            {
+                                var RecordId = uavModelTypeOrigi[i]["recordId"]
+                                listmodel_Box_UavModelType.append({
+                                                                      m_PlanNumber:i,
+                                                                      m_SelectState:false,
+                                                                      m_RecordId:RecordId,
+                                                                      m_TypeName:uavModelType[i]
+                                                                 })
+                            }
+                        }
                     }
                 }
 
@@ -539,86 +605,6 @@ Rectangle{//Window{
                     }
 
                 }
-                //显示区域
-                ListView{
-                    id:view_List_TypeSelect
-                    width: comp_DamageFactorType.width
-                    height: comp_DamageFactorType.height * 5
-                    anchors.left: comp_DamageFactorType.left
-                    anchors.leftMargin: comp_DamageFactorType.width/2 - width/2
-                    anchors.top: comp_DamageFactorType.bottom
-                    anchors.topMargin: 2
-                    visible: false
-                    clip: true
-                    model:ListModel{
-                        id:listmodel_Box
-                    }
-                    delegate:Component{
-                        Item{
-                            id:item_Delegate
-                            width: view_List_TypeSelect.width
-                            height: 36
-                            CButton{
-                                id:comp_TypeBtn
-                                anchors.fill: parent
-                                text:m_TypeName
-                                color:"#ffddaa00"
-                                borderColor: "#ffddaa00"
-                                pixelSize: 18
-                                onClicked: {
-                                    view_List_TypeSelect.visible = false
-                                    iUavType = index
-                                    m_SelectState = !m_SelectState
-                                }
-                            }
-                        }
-                    }
-                    Component.onCompleted: {
-                        listmodel_Box.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"侦察无人机"})
-                        listmodel_Box.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"攻击无人机"})
-                        listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
-                    }
-                }
-                //显示区域
-                ListView{
-                    id:view_List_uavIdSelect
-                    width: comp_uavId.width
-                    height: comp_uavId.height * 5
-                    anchors.left: comp_uavId.left
-                    anchors.leftMargin: comp_uavId.width/2 - width/2
-                    anchors.top: comp_uavId.bottom
-                    anchors.topMargin: 2
-                    visible: false
-                    clip: true
-                    model:ListModel{
-                        id:listmodel_Box_uavId
-                    }
-                    delegate:Component{
-                        Item{
-                            id:item_Delegate
-                            width: view_List_uavIdSelect.width
-                            height: 36
-                            CButton{
-                                id:comp_TypeBtn
-                                anchors.fill: parent
-                                text:m_TypeName
-                                color:"#ffddaa00"
-                                borderColor: "#ffddaa00"
-                                pixelSize: 18
-                                onClicked: {
-                                    view_List_uavIdSelect.visible = false
-                                    iUavID = index
-                                    m_SelectState = !m_SelectState
-                                }
-                            }
-                        }
-                    }
-                    Component.onCompleted: {
-                        listmodel_Box_uavId.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"型号1"})
-                        listmodel_Box_uavId.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"型号2"})
-                        listmodel_Box_uavId.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"型号3"})
-                    }
-                }
 
             }
 
@@ -647,7 +633,7 @@ Rectangle{//Window{
 
                 Label{
                     id:uavLoadammo
-                    text: "挂载弹药类型:"
+                    text: "弹药类型:"
                     anchors.left: text_UavHaning.left
                     anchors.top: text_UavHaning.bottom
                     anchors.topMargin: 30
@@ -658,7 +644,7 @@ Rectangle{//Window{
 
                 CButton{
                     id:comp_uavLoadammo
-                    width: 120
+                    width: 160
                     height: 36
                     color:"#ffddaa00"
                     borderColor: "#ffddaa00"
@@ -667,14 +653,13 @@ Rectangle{//Window{
                     anchors.verticalCenter: uavLoadammo.verticalCenter
                     pixelSize: 20
                     text:{
-                        if(uavLoadammoSelect < 0)
+                        if(processInfo.loadViewType === "query")
                         {
-                            return "炸弹"
+                            return "查看"
                         }
                         else
                         {
-                            if(listmodel_Box_uavLoadammo.count > 0)
-                                listmodel_Box_uavLoadammo.get(uavLoadammoSelect).m_TypeName
+                            return "请选择"
                         }
                     }
                     onClicked: {
@@ -682,9 +667,57 @@ Rectangle{//Window{
                     }
                 }
 
+                ListView{
+                    id:view_List_uavLoadammo
+                    width: comp_uavLoadammo.width
+                    height: comp_uavLoadammo.height * 5
+                    anchors.left: comp_uavLoadammo.left
+                    anchors.leftMargin: comp_uavLoadammo.width/2 - width/2
+                    anchors.top: comp_uavLoadammo.bottom
+                    anchors.topMargin: 2
+                    visible: false
+                    clip: true
+                    z:1
+                    model:ListModel{
+                        id:listmodel_Box_uavLoadammo
+                    }
+                    delegate:Component{
+                        Item{
+                            id:item_Delegate
+                            width: view_List_uavLoadammo.width
+                            height: 36
+                            CButton{
+                                id:comp_TypeBtn
+                                anchors.fill: parent
+                                text:m_TypeName
+                                color:"#ffddaa00"
+                                borderColor: "#ffddaa00"
+                                pixelSize: 18
+                                isSelect: m_SelectState
+                                onClicked: {
+                                    if(processInfo.loadViewType === "query")
+                                        return
+                                    view_List_uavLoadammo.visible = false
+                                    m_SelectState = !m_SelectState
+
+                                    ammoTypeResult = []
+                                    for(var i=0; i<listmodel_Box_uavLoadammo.count; i++)
+                                    {
+                                        if(listmodel_Box_uavLoadammo.get(i).m_SelectState)
+                                            ammoTypeResult.push(listmodel_Box_uavLoadammo.get(i).m_RecordId)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    Component.onCompleted: {
+
+                    }
+                }
+
                 Label{
                     id:uavHangingLocation
-                    text: "挂载弹药类型:"
+                    text: "挂载位置:"
                     font.pixelSize: 20
                     anchors.left: uavLoadammo.left
                     anchors.top: uavLoadammo.bottom
@@ -695,7 +728,7 @@ Rectangle{//Window{
 
                 CButton{
                     id:comp_uavHangingLocation
-                    width: 120
+                    width: 160
                     height: 36
                     color:"#ffddaa00"
                     borderColor: "#ffddaa00"
@@ -703,8 +736,9 @@ Rectangle{//Window{
                     anchors.left: uavHangingLocation.right
                     anchors.verticalCenter: uavHangingLocation.verticalCenter
                     pixelSize: 20
-                    text:"请选择"
+                    text:processInfo.loadViewType === "query"?"查看":"请选择"
                     onClicked: {
+                        mountLocationManagementPopup.open()
                         //
                     }
                 }
@@ -731,20 +765,68 @@ Rectangle{//Window{
                     anchors.verticalCenter: uavInvestigationPayloadType.verticalCenter
                     pixelSize: 20
                     text:{
-                        if(iuavInvestigationPayloadType < 0)
+                        if(processInfo.loadViewType === "query")
                         {
-                            return "无载荷"
+                            return "查看"
                         }
                         else
                         {
-                            if(listmodel_Box_InvestigationPayloadType.count > 0)
-                                listmodel_Box_InvestigationPayloadType.get(iuavInvestigationPayloadType).m_TypeName
+                            return "请选择"
                         }
                     }
                     onClicked: {
                         view_List_InvestigationPayloadType.visible = !view_List_InvestigationPayloadType.visible
                     }
                 }
+
+                ListView{
+                    id:view_List_InvestigationPayloadType
+                    width: comp_uavInvestigationPayloadType.width
+                    height: comp_uavInvestigationPayloadType.height * 5
+                    anchors.left: comp_uavInvestigationPayloadType.left
+                    anchors.leftMargin: comp_uavInvestigationPayloadType.width/2 - width/2
+                    anchors.top: comp_uavInvestigationPayloadType.bottom
+                    anchors.topMargin: 2
+                    visible: false
+                    clip: true
+                    z:1
+                    model:ListModel{
+                        id:listmodel_Box_InvestigationPayloadType
+                    }
+                    delegate:Component{
+                        Item{
+                            id:item_Delegate
+                            width: view_List_InvestigationPayloadType.width
+                            height: 36
+                            CButton{
+                                id:comp_TypeBtn
+                                anchors.fill: parent
+                                text:m_TypeName
+                                color:"#ffddaa00"
+                                borderColor: "#ffddaa00"
+                                pixelSize: 18
+                                isSelect: m_SelectState
+                                onClicked: {
+                                    if(processInfo.loadViewType === "query")
+                                        return
+                                    view_List_InvestigationPayloadType.visible = false
+                                    m_SelectState = !m_SelectState
+
+                                    uavInvestigationPayloadTypeResult = []
+                                    for(var i=0; i<listmodel_Box_InvestigationPayloadType.count; i++)
+                                    {
+                                        if(listmodel_Box_InvestigationPayloadType.get(i).m_SelectState)
+                                            uavInvestigationPayloadTypeResult.push(listmodel_Box_InvestigationPayloadType.get(i).m_RecordId)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    Component.onCompleted: {
+
+                    }
+                }
+
 
                 CTextInput{
                     id:uavLoadReconnaissanceRangeValue
@@ -756,6 +838,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 8.5
                     width: 250
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -768,6 +858,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 8
                     width: 250
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
 
@@ -793,112 +891,17 @@ Rectangle{//Window{
                     anchors.verticalCenter: uavBombingmethod.verticalCenter
                     pixelSize: 20
                     text:{
-                        if(iuavBombingmethod < 0)
+                        if(processInfo.loadViewType === "query")
                         {
-                            return "非精确制导"
+                            return "查看"
                         }
                         else
                         {
-                            if(listmodel_Box_uavBombingmethod.count > 0)
-                                listmodel_Box_uavBombingmethod.get(iuavBombingmethod).m_TypeName
+                            return "请选择"
                         }
                     }
                     onClicked: {
                         view_List_uavBombingmethod.visible = !view_List_uavBombingmethod.visible
-                    }
-                }
-
-                CTextInput{
-                    id:uavAttackaccuracyValue
-                    anchors.left: uavBombingmethod.left
-                    anchors.top: uavBombingmethod.bottom
-                    anchors.topMargin: 20
-                    title: "攻击精度(m):"
-                    pixelSize: 18
-                    titleWidth: pixelSize * 6
-                    anchors.right: comp_uavBombingmethod.right
-                    height: 30
-                }
-
-                ListView{
-                    id:view_List_uavLoadammo
-                    width: comp_uavLoadammo.width
-                    height: comp_uavLoadammo.height * 5
-                    anchors.left: comp_uavLoadammo.left
-                    anchors.leftMargin: comp_uavLoadammo.width/2 - width/2
-                    anchors.top: comp_uavLoadammo.bottom
-                    anchors.topMargin: 2
-                    visible: false
-                    clip: true
-                    model:ListModel{
-                        id:listmodel_Box_uavLoadammo
-                    }
-                    delegate:Component{
-                        Item{
-                            id:item_Delegate
-                            width: view_List_uavLoadammo.width
-                            height: 36
-                            CButton{
-                                id:comp_TypeBtn
-                                anchors.fill: parent
-                                text:m_TypeName
-                                color:"#ffddaa00"
-                                borderColor: "#ffddaa00"
-                                pixelSize: 18
-                                onClicked: {
-                                    view_List_uavLoadammo.visible = false
-                                    uavLoadammoSelect = index
-                                    m_SelectState = !m_SelectState
-                                }
-                            }
-                        }
-                    }
-                    Component.onCompleted: {
-                        listmodel_Box_uavLoadammo.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"炸弹"})
-                        listmodel_Box_uavLoadammo.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"制导"})
-                        listmodel_Box_uavLoadammo.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"非制导"})
-                    }
-                }
-
-                ListView{
-                    id:view_List_InvestigationPayloadType
-                    width: comp_uavInvestigationPayloadType.width
-                    height: comp_uavInvestigationPayloadType.height * 5
-                    anchors.left: comp_uavInvestigationPayloadType.left
-                    anchors.leftMargin: comp_uavInvestigationPayloadType.width/2 - width/2
-                    anchors.top: comp_uavInvestigationPayloadType.bottom
-                    anchors.topMargin: 2
-                    visible: false
-                    clip: true
-                    model:ListModel{
-                        id:listmodel_Box_InvestigationPayloadType
-                    }
-                    delegate:Component{
-                        Item{
-                            id:item_Delegate
-                            width: view_List_InvestigationPayloadType.width
-                            height: 36
-                            CButton{
-                                id:comp_TypeBtn
-                                anchors.fill: parent
-                                text:m_TypeName
-                                color:"#ffddaa00"
-                                borderColor: "#ffddaa00"
-                                pixelSize: 18
-                                onClicked: {
-                                    view_List_InvestigationPayloadType.visible = false
-                                    iuavInvestigationPayloadType = index
-                                    m_SelectState = !m_SelectState
-                                }
-                            }
-                        }
-                    }
-                    Component.onCompleted: {
-                        listmodel_Box_InvestigationPayloadType.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"无载荷"})
-                        listmodel_Box_InvestigationPayloadType.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"电子侦察"})
-                        listmodel_Box_InvestigationPayloadType.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"图像侦察"})
-                        listmodel_Box_InvestigationPayloadType.append({m_PlanNumber:3,m_SelectState:false,m_TypeName:"气象侦察"})
-                        listmodel_Box_InvestigationPayloadType.append({m_PlanNumber:4,m_SelectState:false,m_TypeName:"激光引导"})
                     }
                 }
 
@@ -912,6 +915,7 @@ Rectangle{//Window{
                     anchors.topMargin: 2
                     visible: false
                     clip: true
+                    z:1
                     model:ListModel{
                         id:listmodel_Box_uavBombingmethod
                     }
@@ -927,23 +931,47 @@ Rectangle{//Window{
                                 color:"#ffddaa00"
                                 borderColor: "#ffddaa00"
                                 pixelSize: 18
+                                isSelect: m_SelectState
                                 onClicked: {
+                                    if(processInfo.loadViewType === "query")
+                                        return
                                     view_List_uavBombingmethod.visible = false
-                                    iuavBombingmethod = index
                                     m_SelectState = !m_SelectState
+
+                                    uavBombingmethodResult = []
+                                    for(var i=0; i<listmodel_Box_uavBombingmethod.count; i++)
+                                    {
+                                        if(listmodel_Box_uavBombingmethod.get(i).m_SelectState)
+                                            uavBombingmethodResult.push(listmodel_Box_uavBombingmethod.get(i).m_RecordId)
+                                    }
                                 }
                             }
                         }
                     }
                     Component.onCompleted: {
-                        listmodel_Box_uavBombingmethod.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"非精确制导"})
-                        listmodel_Box_uavBombingmethod.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"精确制导"})
-                        listmodel_Box_uavBombingmethod.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"自由落体"})
-                        listmodel_Box_uavBombingmethod.append({m_PlanNumber:3,m_SelectState:false,m_TypeName:"水平轰炸反俯冲轰炸"})
-                        listmodel_Box_uavBombingmethod.append({m_PlanNumber:4,m_SelectState:false,m_TypeName:"俯冲轰炸"})
+
                     }
                 }
 
+                CTextInput{
+                    id:uavAttackaccuracyValue
+                    anchors.left: uavBombingmethod.left
+                    anchors.top: uavBombingmethod.bottom
+                    anchors.topMargin: 20
+                    title: "攻击精度(m):"
+                    pixelSize: 18
+                    titleWidth: pixelSize * 6
+                    anchors.right: comp_uavBombingmethod.right
+                    height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
+                }
             }
 
             Rectangle{
@@ -978,6 +1006,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 8.5
                     width: 250
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -990,6 +1026,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 6.5
                     width: 250
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1002,6 +1046,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 7.5
                     width: 250
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1014,6 +1066,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 8.5
                     width: 250
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1026,6 +1086,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 8.5
                     width: 250
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1038,6 +1106,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 8
                     width: 250
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1050,6 +1126,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 8
                     width: 250
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1062,6 +1146,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 10
                     width: 270
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1074,6 +1166,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 10
                     width: 270
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1086,6 +1186,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 9.5
                     width: 270
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1098,6 +1206,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 10.5
                     width: 270
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1110,6 +1226,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 8
                     width: 270
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1122,6 +1246,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 9.5
                     width: 270
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1134,6 +1266,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 11
                     width: 270
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1146,6 +1286,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 11
                     width: 270
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1158,6 +1306,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 10
                     width: 270
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1170,6 +1326,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 11
                     width: 270
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 CTextInput{
@@ -1182,6 +1346,14 @@ Rectangle{//Window{
                     titleWidth: pixelSize * 7
                     width: 270
                     height: 30
+                    enabled: {
+                        if(processInfo.loadViewType === "query")
+                        {
+                            return false
+                        }
+                        else
+                            return true
+                    }
                 }
 
                 Label{
@@ -1206,14 +1378,13 @@ Rectangle{//Window{
                     anchors.verticalCenter: uavRecoverymode.verticalCenter
                     pixelSize: 20
                     text:{
-                        if(iuavRecoverymode < 0)
+                        if(processInfo.loadViewType === "query")
                         {
-                            return "不可回收"
+                            return "查看"
                         }
                         else
                         {
-                            if(listmodel_Box_uavRecoverymode.count > 0)
-                                listmodel_Box_uavRecoverymode.get(iuavRecoverymode).m_TypeName
+                            return "请选择"
                         }
                     }
                     onClicked: {
@@ -1221,6 +1392,52 @@ Rectangle{//Window{
                     }
                 }
 
+                ListView{
+                    id:view_List_uavRecoverymode
+                    width: comp_uavRecoverymode.width
+                    height: comp_uavRecoverymode.height * 5
+                    anchors.left: comp_uavRecoverymode.left
+                    anchors.leftMargin: comp_uavRecoverymode.width/2 - width/2
+                    anchors.top: comp_uavRecoverymode.bottom
+                    anchors.topMargin: 2
+                    visible: false
+                    clip: true
+                    z:1
+                    model:ListModel{
+                        id:listmodel_Box_uavRecoverymode
+                    }
+                    delegate:Component{
+                        Item{
+                            id:item_Delegate
+                            width: view_List_uavRecoverymode.width
+                            height: 36
+                            CButton{
+                                id:comp_TypeBtn
+                                anchors.fill: parent
+                                text:m_TypeName
+                                color:"#ffddaa00"
+                                borderColor: "#ffddaa00"
+                                pixelSize: 18
+                                isSelect: m_SelectState
+                                onClicked: {
+                                    if(processInfo.loadViewType === "query")
+                                        return
+                                    view_List_uavRecoverymode.visible = false
+                                    m_SelectState = !m_SelectState
+
+                                    uavRecoveryModeResult = []
+                                    for(var i=0; i<listmodel_Box_uavRecoverymode.count; i++)
+                                    {
+                                        if(listmodel_Box_uavRecoverymode.get(i).m_SelectState)
+                                            uavRecoveryModeResult.push(listmodel_Box_uavRecoverymode.get(i).m_RecordId)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    Component.onCompleted: {
+                    }
+                }
 
                 Label{
                     id:operationMode
@@ -1244,14 +1461,13 @@ Rectangle{//Window{
                     anchors.verticalCenter: operationMode.verticalCenter
                     pixelSize: 20
                     text:{
-                        if(ioperationMode < 0)
+                        if(processInfo.loadViewType === "query")
                         {
-                            return "指令模式"
+                            return "查看"
                         }
                         else
                         {
-                            if(listmodel_Box_operationMode.count > 0)
-                                listmodel_Box_operationMode.get(ioperationMode).m_TypeName
+                            return "请选择"
                         }
                     }
                     onClicked: {
@@ -1284,60 +1500,23 @@ Rectangle{//Window{
                                 color:"#ffddaa00"
                                 borderColor: "#ffddaa00"
                                 pixelSize: 18
+                                isSelect: m_SelectState
                                 onClicked: {
                                     view_List_operationMode.visible = false
-                                    ioperationMode = index
-                                    m_SelectState = !m_SelectState
-                                }
-                            }
-                        }
-                    }
-                    Component.onCompleted: {
-                        listmodel_Box_operationMode.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"指令模式"})
-                        listmodel_Box_operationMode.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"修正模式"})
-                        listmodel_Box_operationMode.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"自主控制模式"})
-                        listmodel_Box_operationMode.append({m_PlanNumber:3,m_SelectState:false,m_TypeName:"遥控指令模式"})
-                    }
-                }
 
-                ListView{
-                    id:view_List_uavRecoverymode
-                    width: comp_uavRecoverymode.width
-                    height: comp_uavRecoverymode.height * 5
-                    anchors.left: comp_uavRecoverymode.left
-                    anchors.leftMargin: comp_uavRecoverymode.width/2 - width/2
-                    anchors.top: comp_uavRecoverymode.bottom
-                    anchors.topMargin: 2
-                    visible: false
-                    clip: true
-                    model:ListModel{
-                        id:listmodel_Box_uavRecoverymode
-                    }
-                    delegate:Component{
-                        Item{
-                            id:item_Delegate
-                            width: view_List_uavRecoverymode.width
-                            height: 36
-                            CButton{
-                                id:comp_TypeBtn
-                                anchors.fill: parent
-                                text:m_TypeName
-                                color:"#ffddaa00"
-                                borderColor: "#ffddaa00"
-                                pixelSize: 18
-                                onClicked: {
-                                    view_List_uavRecoverymode.visible = false
-                                    iuavRecoverymode = index
                                     m_SelectState = !m_SelectState
+
+                                    uavOperatioanalModeResult = []
+                                    for(var i=0; i<listmodel_Box_operationMode.count; i++)
+                                    {
+                                        if(listmodel_Box_operationMode.get(i).m_SelectState)
+                                            uavOperatioanalModeResult.push(listmodel_Box_operationMode.get(i).m_RecordId)
+                                    }
                                 }
                             }
                         }
                     }
                     Component.onCompleted: {
-                        listmodel_Box_uavRecoverymode.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"不可回收"})
-                        listmodel_Box_uavRecoverymode.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"伞降"})
-                        listmodel_Box_uavRecoverymode.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"滑跑着陆"})
-                        listmodel_Box_uavRecoverymode.append({m_PlanNumber:3,m_SelectState:false,m_TypeName:"垂直着陆"})
                     }
                 }
 
@@ -1353,25 +1532,55 @@ Rectangle{//Window{
                 anchors.topMargin: 15
                 anchors.right: parent.right
                 anchors.rightMargin: 10
-                color: "#ECF2FE"
-                border.color: "#BDBDBD"
+                anchors.bottom: rect_UavFlightData.bottom
+                color:"#50000000"
+                radius: 5
 
-                Image {
-                    id: ammunitionImg
+                Rectangle{
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: parent.top
-                    width: parent.width - btn_Cancel.width
+                    anchors.bottom: btn_Cancel.top
+                    anchors.bottomMargin: 5
+                    color: "#ECF2FE"
+                    border.color: "#BDBDBD"
+                    Image {
+                        id: uavImg
+                        anchors.fill: parent
+                        source: {
+                            if(processInfo.loadViewType === "addUavData"){
+                                return ""
+                            }else if(processInfo.loadViewType === "query"){
+                                uavImagSelect.enabled = false
+
+                                return processInfo.imagUrl
+                            }else if(processInfo.loadViewType === "update"){
+                                //return processInfo.imagUrl
+                                //console.log("addUavDataView"+processInfo.loadViewType)
+                            }else{
+                                console.log("uav Image processInfo.loadViewType Unknown")
+                            }
+                        }
+                    }
+                    MouseArea {
+                        id:uavImagSelect
+                        anchors.fill: parent
+                        onClicked: {
+                            fileDialog.open()
+                        }
+                    }
+                    CText {
+                        anchors.centerIn: parent
+                        text: "图片展示区域"
+                        color: "#9E9E9E"
+                        visible: uavImg.status == Image.Null
+                    }
                 }
-                CText {
-                    anchors.centerIn: parent
-                    text: "图片展示区域"
-                    color: "#9E9E9E"
-                }
+
                 CButton{
                     id:btn_Cancel
-                    anchors.top: parent.bottom
-                    anchors.topMargin: 5
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 5
                     anchors.right: parent.right
                     anchors.rightMargin: 5
                     height: pixelSize * 2
@@ -1387,15 +1596,17 @@ Rectangle{//Window{
 
                 CButton{
                     id:btn_Save
-                    anchors.top: parent.bottom
-                    anchors.topMargin: 5
+                    anchors.top: btn_Cancel.top
                     anchors.right: btn_Cancel.left
                     anchors.rightMargin: 10
                     height: pixelSize * 2
                     width: pixelSize * 4
                     text: "保存"
                     onClicked: {
-
+                        if((processInfo.loadViewType === "update"))
+                            updataUavModelData()//更新
+                        else if((processInfo.loadViewType === "addUavData"))
+                            saveUavData()//新增
                         backUavRecord()
                         controlUav.visible = false
 
@@ -1405,7 +1616,73 @@ Rectangle{//Window{
             }
         }
 
+        FileDialog {
+            id: fileDialog
+            title: "选择图片"
+            nameFilters: ["图片文件 (*.png *.jpg *.jpeg)"]
+            onAccepted: {
+                uavImg.source = fileUrls[0]
+                addUavModelData.imagUrl = uavImg.source.toString()
+            }
+        }
     }
+
+
+    function allListViewAppendItem()
+    {
+        for(var i = 0; i < payloadType.length; i++)
+        {
+
+            var iRecordId = payloadTypeOrigi[i]["recordId"]
+            listmodel_Box_InvestigationPayloadType.append({m_PlanNumber:i,
+                                                           m_SelectState:false,
+                                                           m_RecordId:iRecordId,
+                                                           m_TypeName:payloadType[i]
+                                                          })
+        }
+        for(var i = 0; i<bombWay.length; i++)
+        {
+
+            var iRecordId = bombWayOrigi[i]["recordId"]
+            listmodel_Box_uavBombingmethod.append({
+                                                      m_PlanNumber:i,
+                                                      m_SelectState:false,
+                                                      m_RecordId:iRecordId,
+                                                      m_TypeName:bombWay[i]
+                                                  })
+        }
+        for(var i = 0; i < recoveryWay.length; i++)
+        {
+
+            var iRecordId = recoveryWayOrigi[i]["recordId"]
+            listmodel_Box_uavRecoverymode.append({
+                                                     m_PlanNumber:i,
+                                                     m_SelectState:false,
+                                                     m_RecordId:iRecordId,
+                                                     m_TypeName:recoveryWay[i]
+                                                 })
+        }
+        for(var i = 0; i < operationWay.length; i++)
+        {
+            var iRecordId = opreationWayOrigi[i]["recordId"]
+            listmodel_Box_operationMode.append({
+                                                  m_PlanNumber:i,
+                                                  m_SelectState:false,
+                                                  m_RecordId:iRecordId,
+                                                  m_TypeName:operationWay[i]
+                                                 })
+        }
+        for(var i = 0; i < addUavModelData.ammoType.length; i++)
+        {
+            var iRecordId = ammoTypeOrigi[i]["recordId"]
+            listmodel_Box_uavLoadammo.append({m_PlanNumber:i,
+                                              m_SelectState:false,
+                                              m_RecordId:iRecordId,
+                                              m_TypeName:addUavModelData.ammoType[i]
+                                                          })
+        }
+    }
+
     //判断是否加载新增、查看、编辑
     function loadView(){
         var viewType = processInfo.loadViewType
@@ -1421,9 +1698,10 @@ Rectangle{//Window{
             console.log("addUavDataView"+processInfo.loadViewType)
         }else if(processInfo.loadViewType === "update"){
             loadUavModelData()
-            // writeControl(true)
-            saveButton.text = "编辑"
+//             writeControl(true)
+//            saveButton.text = "编辑"
             // console.log("addUavDataView"+processInfo.loadViewType)
+            console.log("addUavDataView"+processInfo.loadViewType)
         }else{
             console.log("processInfo.loadViewType Unknown")
         }
@@ -1497,12 +1775,47 @@ Rectangle{//Window{
             return foundRecordId + " (存在重复)";
         }
     }
+    //获取弹药的类型
+    function loadAmmoType(){//弹药类型加载
+
+        var queryStr = {ammoType:"请选择:",ammoName:""}
+        var ammoType = ammoDaoModel.selectAmmoAllData(queryStr)
+//        console.log("弹药类型当前函数名称:", arguments.callee.name);
+        console.log("loadAmmoType"+JSON.stringify(ammoType))
+        addUavModelData.ammoTypeOrigi =  extractAmmoData(ammoType)
+        addUavModelData.ammoType = extractAmmoNameData(ammoType)
+        console.log("loadAmmoTypeOrigi"+JSON.stringify(addUavModelData.ammoTypeOrigi))
+
+    }
+
+    function loadUavModelType(){//无人机型号加载
+        var uavModelTypeData =  uavModelTypeDaoTableModel.selectUavModelTypeAllData()
+        addUavModelData.uavModelTypeOrigi = uavModelTypeData
+        console.log("uavModelTypeDaoTableModel"+JSON.stringify(uavModelTypeData))
+        var uavModelTypeArray = extractUavModelTypeComponentNames(uavModelTypeData)
+        console.log(JSON.stringify(uavModelTypeArray));
+        addUavModelData.uavModelType  = uavModelTypeArray
+    }
+
+    function extractUavModelTypeComponentNames(originalArray) {
+        var resultArray = [];
+        // 遍历原始数组
+        for (var i = 0; i < originalArray.length; ++i) {
+            // 安全获取属性值
+            var componentName = originalArray[i].uavComponeName || "";
+            // 过滤空值并保留原始空格
+            if (componentName.trim().length > 0) {
+                resultArray.push(componentName);
+            }
+        }
+        return resultArray;
+    }
 
     function loadUavComponentData(){
-        var uavBombWay = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
-        var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()
-        var uavRecoveryWay = uavModelRecoveryModeDaoModel.selectModelRecoveryModeAllData()
-        var uavOperationWay = uavModelOperationWayDaoModel.selectModelOperationWayAllData()
+        var uavBombWay = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()//攻击方式
+        var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()//侦察载荷
+        var uavRecoveryWay = uavModelRecoveryModeDaoModel.selectModelRecoveryModeAllData()//回收方式
+        var uavOperationWay = uavModelOperationWayDaoModel.selectModelOperationWayAllData()//操控方式
         addUavModelData.bombWayOrigi = uavBombWay
         addUavModelData.payloadTypeOrigi = uavPayloadType
         addUavModelData.recoveryWayOrigi = uavRecoveryWay
@@ -1518,12 +1831,17 @@ Rectangle{//Window{
         addUavModelData.payloadType = payloadTypeNames
         addUavModelData.recoveryWay = recoveryWayNames
         addUavModelData.operationWay = operationWayNames
+
+
         console.log("testloadUavComponentData")
+
     }
     // 提取 uavComponeName 并封装成数组
+
     function extractNames(data) {
         return data.map(item => item.uavComponeName);
     }
+
     function loadMountLocationContent(){
         if(processInfo.loadViewType === "addUavData"){
             var receiveData = uavMountLocationDaoTableModel.selectUavMountLocationAllData()
@@ -1544,30 +1862,30 @@ Rectangle{//Window{
         }
     }
 
+    //加载数据
     function loadUavModelData(){
         var uavAllData = processInfo.uavModelJsonStr
         var uavDataStr = JSON.stringify(uavAllData)
         console.log("loadUavModelData"+uavDataStr)
-        var  selectUavData = uavModelDao.selectSomeUavModelDate(uavDataStr)
+        var selectUavData = uavModelDaoTable.selectSomeUavModelDate(uavDataStr)
         console.log("selectUavData"+JSON.stringify(selectUavData))
-        // if (selectUavData && selectUavData.payload_type) {
-        //         var payloadTypes = selectUavData.payload_type.split(",");
-        //         console.log("uavInvestigationPayloadTypeMultiComBox: "+payloadTypes)
-        //         uavInvestigationPayloadTypeMultiComBox.selectedItems = payloadTypes.slice();
-        //     }
-        //对于Combox组件加载数据
-        const uavTypeSelecttargetIndex = uavTypeSelect.model.indexOf(selectUavData.uavType);
-        console.log("索引值:", uavTypeSelecttargetIndex); // 输出 0
-        if (uavTypeSelecttargetIndex !== -1) {
-            uavTypeSelect.currentIndex = uavTypeSelecttargetIndex;
-        }
+
         var imageUrlStr = "file:///"+selectUavData.image_url
         console.log("imageUrlStr"+imageUrlStr)
         uavImg.source = imageUrlStr
+        imagUrl = imageUrlStr
         //加载文本数据
         //uavHangingLocationValue.text = selectUavData.hangingCapacity
         uavNameText.text = selectUavData.uavName
-        //uavIdText.text = selectUavData.uavId
+        for(var index = 0; index < listmodel_Box_UavModelType.count; index++)
+        {
+            if(listmodel_Box_UavModelType.get(index).m_RecordId === selectUavData.uavId)
+            {
+                iUavModelType = index
+                uavIdText.text = selectUavData.listmodel_Box_UavModelType.get(index).m_TypeName
+            }
+        }
+
         uavLengthText.text = selectUavData.uavLength
         uavWidthText.text = selectUavData.uavWidth
         uavHeightText.text = selectUavData.uavHeight
@@ -1579,7 +1897,7 @@ Rectangle{//Window{
         uavTurningRadiusMin.text = selectUavData.turn_radius_min
         uavTurningRadiusMax.text = selectUavData.turn_radius_max
         uavFlightDistance.text = selectUavData.flight_distance_max
-        //uavRecoveryModeResult.currentText = selectUavData.recovery_mode
+
         uavFlightTime.text = selectUavData.flight_time_max
         uavTakeoffDistanceValue.text = selectUavData.takeoff_distance
         uavLandDistanceValue.text = selectUavData.landing_distance
@@ -1605,6 +1923,86 @@ Rectangle{//Window{
         sealLevelLandingAndRollDistanceValue.text = selectUavData.sea_landing_roll
         cruiseAltitudeReconnaissanceConfigurationValue.text = selectUavData.recon_cruise_alt
         cruiseAltitudeFullExternalConfigurationValue.text = selectUavData.full_external_cruise_alt
+
+        //下拉框赋值
+        if (selectUavData && selectUavData.load_ammo_type) {
+            //弹药类型
+            var loadAmmoTypeStr = selectUavData.load_ammo_type.split(",")
+
+            for(var i=0; i<loadAmmoTypeStr.length; i++)
+            {
+                for(var index=0; index<listmodel_Box_uavLoadammo.count; index++)
+                {
+                    if(listmodel_Box_uavLoadammo.get(index).m_RecordId === loadAmmoTypeStr[i])
+                    {
+                        listmodel_Box_uavLoadammo.set(index,{m_SelectState:true})
+                        ammoTypeResult.push(index)
+                    }
+                }
+            }
+        }
+
+        if (selectUavData && selectUavData.payload_type) {
+            //载荷类型
+            var payloadTypes = selectUavData.payload_type.split(",")
+            for(var i=0; i<payloadTypes.length; i++)
+            {
+                for(var index=0; index<listmodel_Box_InvestigationPayloadType.count; index++)
+                {
+                    if(listmodel_Box_InvestigationPayloadType.get(index).m_RecordId === payloadTypes[i])
+                    {
+                        listmodel_Box_InvestigationPayloadType.set(index,{m_SelectState:true})
+                        uavInvestigationPayloadTypeResult.push(index)
+                    }
+                }
+            }
+        }
+        if (selectUavData && selectUavData.bomb_method) {
+            //攻击方式
+            var bombMethod = selectUavData.bomb_method.split(",")
+            for(var i=0; i<bombMethod.length; i++)
+            {
+                for(var index=0; index<listmodel_Box_uavBombingmethod.count; index++)
+                {
+                    if(listmodel_Box_uavBombingmethod.get(index).m_RecordId === bombMethod[i])
+                    {
+                        listmodel_Box_uavBombingmethod.set(index,{m_SelectState:true})
+                        uavBombingmethodResult.push(index)
+                    }
+                }
+            }
+        }
+        if (selectUavData && selectUavData.operation_method) {
+            //操控方式
+            var operationMethod = selectUavData.operation_method.split(",")
+            for(var i=0; i<operationMethod.length; i++)
+            {
+                for(var index=0; index<listmodel_Box_operationMode.count; index++)
+                {
+                    if(listmodel_Box_operationMode.get(index).m_RecordId === operationMethod[i])
+                    {
+                        listmodel_Box_operationMode.set(index,{m_SelectState:true})
+                        uavOperatioanalModeResult.push(index)
+                    }
+                }
+            }
+        }
+        if (selectUavData && selectUavData.recovery_mode) {
+            //回收方式
+            var recoveryMode = selectUavData.recovery_mode.split(",");
+            for(var i=0; i<recoveryMode.length; i++)
+            {
+                for(var index=0; index<listmodel_Box_uavRecoverymode.count; index++)
+                {
+                    if(listmodel_Box_uavRecoverymode.get(index).m_RecordId === recoveryMode[i])
+                    {
+                        listmodel_Box_uavRecoverymode.set(index,{m_SelectState:true})
+                        uavRecoveryModeResult.push(index)
+                    }
+                }
+            }
+        }
+
     }
     // 提取 load_ammo_type 并格式化为数组
     function extractLoadAmmoType(data) {
@@ -1662,6 +2060,7 @@ Rectangle{//Window{
                                return ammoMap[id] || null
                            }).filter(name => name !== null)
     }
+
     function loadMultiSelect(selectUavData){
 
         //var selectUavData = uavModelDao.selectSomeUavModelDate(uavDataStr)
@@ -1747,7 +2146,7 @@ Rectangle{//Window{
     function checkAllValue(){
         var isValid = true;
         // 检查每个字段
-        isValid = validateInput(uavTypeSelect.currentText, "无人机类型未选择!") && isValid;
+        isValid = validateInput(uavTypeSelect.text, "无人机类型未选择!") && isValid;
         isValid = validateInput(uavNameText.text, "无人机名称未填写!") && isValid;
         isValid = validateInput(uavIdText.text, "无人机编号未填写!") && isValid;
         isValid = validateInput(uavLengthText.text, "无人机长度未填写!") && isValid;
@@ -1803,12 +2202,12 @@ Rectangle{//Window{
         return data.map(item => item.recordId);
     }
     function textToFloat(data){
-        console.log("textToFloatdata"+data)
+        console.log("textToFloatdata:"+data)
         // 检查是否以小数点结尾
         if (data.endsWith(".")) {
             data = data.slice(0, -1); // 去掉小数点
         }
-        console.log("textToFloatdata"+data)
+        console.log("textToFloatdata:"+data)
         // 将文本转换为浮点数
         var num = parseFloat(data);
         if (!isNaN(num)) {
@@ -1858,8 +2257,8 @@ Rectangle{//Window{
         }
         return field;
     }
+
     function saveUavData(){
-        console.log("uavTypeSelevtContent"+uavTypeSelect.currentText+"-"+"testValue"+uavTypeSelect.currentValue)
 
         var uavData = {
             //-- 基础信息
@@ -1931,39 +2330,12 @@ Rectangle{//Window{
             recordcreation_time:""
 
         };
-        //ButtonGroup的接收值转化方法
-        // var uavInvestigationPayloadTypeJson = getSelectedPayloads(uavInvestigationPayloadTypeMultiComBox.buttons)
-        // console.log("有效载荷选择:", JSON.stringify(uavInvestigationPayloadTypeJson))
-        // var uavInvestigationPayloadTypeJsonStr = JSON.stringify(uavInvestigationPayloadTypeJson)
-        // var uavInvestigationPayloadTypeJsonStrresult = convertToJsonArray(uavInvestigationPayloadTypeJson);
-        // console.log(uavInvestigationPayloadTypeJsonStrresult);
-
-        // var uavBombingmethodGroupJson = getSelectedPayloads(uavBombingmethodMultiComBox.buttons)
-        // console.log("投弹方式:", JSON.stringify(uavBombingmethodGroupJson))
-        // var uavBombingmethodGroupStr = JSON.stringify(uavInvestigationPayloadTypeJson)
-        // var uavBombingmethodGroupJsonStrresult = convertToJsonArray(uavBombingmethodGroupJson);
-        // console.log(uavBombingmethodGroupJsonStrresult);
-
-        // var uavRecoverymodeGroupJson = getSelectedPayloads(uavRecoverymodeMultiComBox.buttons)
-        // console.log("回收方式:", JSON.stringify(uavRecoverymodeGroupJson))
-        // var uavRecoverymodeGroupJsonStr = JSON.stringify(uavRecoverymodeGroupJson)
-        // var uavRecoverymodeGroupJsonStrresult = convertToJsonArray(uavRecoverymodeGroupJson);
-        // console.log(uavRecoverymodeGroupJsonStrresult);
-
-        // var uavOperatioanalmodeGroupJson = getSelectedPayloads(operationModeMultiComBox.buttons)
-        // console.log("操控方式:", JSON.stringify(uavOperatioanalmodeGroupJson))
-        // var uavOperatioanalmodeGroupJsonStr = JSON.stringify(uavOperatioanalmodeGroupJson)
-        // var uavOperatioanalmodeGroupJsonStrresult = convertToJsonArray(uavOperatioanalmodeGroupJson);
-        // console.log(uavOperatioanalmodeGroupJsonStrresult);
         //检查是否填写完全
         //checkAllValue()
-        uavData.uav_type = uavTypeSelect.currentText
+        uavData.uav_type = uavTypeSelect.text//无人机类型
         uavData.uav_name = uavNameText.text
-        var uavModelType = uavIdText.currentText
         // JSON.parse(addUavModelData.uavModelTypeOrigi)
-        var uavModelTypeStr =  findRecordIdByName(addUavModelData.uavModelTypeOrigi,uavModelType)
-        console.log("uavModelTypeStr"+uavModelTypeStr)
-        uavData.uav_id = uavModelTypeStr//uavIdText.text
+        uavData.uav_id = listmodel_Box_UavModelType.get(iUavModelType).m_RecordId//无人机型号
         uavData.length = textToFloat(uavLengthText.text)
         uavData.width = textToFloat(uavWidthText.text)
         uavData.height = textToFloat(uavHeightText.text)
@@ -1977,95 +2349,109 @@ Rectangle{//Window{
         uavData.turn_radius_max = textToFloat(uavTurningRadiusMax.text)
 
         uavData.flight_distance_max = textToFloat(uavFlightDistance.text)
-        //uavData.hanging_capacity = ""//uavRadarCrossSectionText.text
-        //var uavAmmoType = uavAmmoDaoModel.selectAmmoTypeAllData()
+
         var uavBombWay = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
         var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()
         var uavRecoveryWay = uavModelRecoveryModeDaoModel.selectModelRecoveryModeAllData()
         var uavOperationWay = uavModelOperationWayDaoModel.selectModelOperationWayAllData()
-        //console.log("aaaaaaaaaaaaaaaaaaaaaaa"+JSON.stringify(uavPayloadType)+"<>"+JSON.stringify(uavInvestigationPayloadTypeResult))
-        //console.log("ammoTypeResult"+ammoTypeResult)
+
         //挂载弹药类型
-        if(isEmpty(ammoTypeResult)){
+        if(isEmpty(ammoTypeResult))
+        {
             warningPopup.open()
             warningItem.text = "挂载弹药类型未选择!"
             autoCloseTimer.start()
-        }else{
-            // var extractedRecords = extractRecords(uavPayloadType, ammoTypeResult);
-            // console.log("提取的记录:", JSON.stringify(extractedRecords));
-            // var recordIds = extractRecordIds(extractedRecords);
-            // console.log("提取的 recordId 数组:", recordIds);
-            var ammoTypeStr = extractAmmoNameRecord(addUavModelData.ammoTypeOrigi,ammoTypeResult)
-            uavData.load_ammo_type = JSON.stringify(ammoTypeStr)
-            console.log("ammoTypeStr"+ammoTypeStr)
-            //uavData.payload_type = JSON.stringify(ammoTypeResult.join(",")).replace(/^"|"$/g, "");//uavInvestigationPayloadTypeJsonStrresult
-
+        }
+        else
+        {
+            var ammoTypeStr = ""
+            for(var i=0; i<ammoTypeResult.length; i++)
+            {
+                ammoTypeStr += ammoTypeResult[i]
+                ammoTypeStr += ","
+            }
+            ammoTypeStr = ammoTypeStr.slice(0,-1)//去除末尾的','
+            uavData.load_ammo_type = ammoTypeStr
         }
         //挂载侦察载荷
-        if(isEmpty(uavInvestigationPayloadTypeResult)){
+        if(isEmpty(uavInvestigationPayloadTypeResult))
+        {
             warningPopup.open()
             warningItem.text = "侦察载荷类型未选择!"
             autoCloseTimer.start()
-        }else{
-            // var extractedRecords = extractRecords(uavPayloadType, uavInvestigationPayloadTypeResult);
-            // console.log("侦察载荷记录提取的记录:", JSON.stringify(extractedRecords));
-            // var recordIds = extractRecordIds(extractedRecords);
-            // console.log("侦察载荷提取的 recordId 数组:", recordIds);
-            var InvestigationPayloadStr = extractComponentData(payloadTypeOrigi,uavInvestigationPayloadTypeResult)
-            uavData.payload_type = JSON.stringify(InvestigationPayloadStr)
-            //uavData.payload_type = JSON.stringify(uavInvestigationPayloadTypeResult.join(",")).replace(/^"|"$/g, "");//uavInvestigationPayloadTypeJsonStrresult
+        }
+        else
+        {
+            var InvestigationPayloadStr = ""
+            for(var i=0; i<uavInvestigationPayloadTypeResult.length; i++)
+            {
+                InvestigationPayloadStr += uavInvestigationPayloadTypeResult[i]
+                InvestigationPayloadStr += ","
+            }
 
+            InvestigationPayloadStr = InvestigationPayloadStr.slice(0,-1)//去除末尾的','
+            uavData.payload_type = InvestigationPayloadStr
         }
         //挂载攻击方式
-        console.log("uavBombingmethodResult"+uavBombingmethodResult)
-        if(isEmpty(uavBombingmethodResult)){
-            if(uavTypeSelect.currentText === "侦察无人机"){
+
+        if(isEmpty(uavBombingmethodResult))
+        {
+            if(uavTypeSelect.currentText === "侦察无人机")
+            {
                 uavData.bomb_method = ""
-            }else{
+            }
+            else
+            {
                 warningPopup.open()
                 warningItem.text = "投弹方式未选择!"
                 autoCloseTimer.start()
             }
 
-        }else{
-            // var uavBombextractedRecords = extractRecords(uavBombWay, uavBombingmethodResult);
-            // console.log("uavBombingmethodResult提取的记录:", JSON.stringify(uavBombextractedRecords));
-            // var uavBombrecordIds = extractRecordIds(uavBombextractedRecords);
-            // console.log("uavBombingmethodResult提取的 recordId 数组:", uavBombrecordIds);
-            var bombWayStr = extractComponentData(bombWayOrigi,uavBombingmethodResult)
-            uavData.bomb_method = JSON.stringify(bombWayStr)
-            //uavData.bomb_method = JSON.stringify(uavBombingmethodResult.join(",")).replace(/^"|"$/g, "");//uavBombingmethodGroupJsonStrresult
+        }else
+        {
+            var bombWayStr = ""
+            for(var i=0; i<uavBombingmethodResult.length; i++)
+            {
+                bombWayStr += uavBombingmethodResult[i]
+                bombWayStr += ","
+            }
+            bombWayStr = bombWayStr.slice(0,-1)
+            uavData.bomb_method = bombWayStr
+
         }
         if(isEmpty(uavRecoveryModeResult)){
             warningPopup.open()
             warningItem.text = "回收方式未选择!"
             autoCloseTimer.start()
         }else{
-            // var uavRecoveryextractedRecords = extractRecords(uavRecoveryWay, uavRecoveryModeResult);
-            // console.log("uavRecoveryModeResult提取的记录:", JSON.stringify(uavRecoveryextractedRecords));
-            // var uavRecoveryrecordIds = extractRecordIds(uavRecoveryextractedRecords);
-            // console.log("uavRecoveryModeResult提取的 recordId 数组:", uavRecoveryrecordIds);
-            var recovryModeStr = extractComponentData(recoveryWayOrigi,uavRecoveryModeResult)
-            uavData.recovery_mode = JSON.stringify(recovryModeStr)
-            //uavData.recovery_mode = JSON.stringify(uavRecoveryModeResult.join(",")).replace(/^"|"$/g, "");//uavBombingmethodGroupJsonStrresult
+
+            var recovryModeStr = ""
+            for(var i=0; i<uavRecoveryModeResult.length; i++)
+            {
+                recovryModeStr += uavRecoveryModeResult[i]
+                recovryModeStr += ","
+            }
+
+            recovryModeStr = recovryModeStr.slice(0,-1)//去除末尾的','
+            uavData.recovery_mode = recovryModeStr
         }
         if(isEmpty(uavOperatioanalModeResult)){
             warningPopup.open()
             warningItem.text = "操作方式未选择!"
             autoCloseTimer.start()
         }else{
-            // var uavOperatioanalextractedRecords = extractRecords(uavOperationWay, uavOperatioanalModeResult);
-            // console.log("提取的记录:", JSON.stringify(uavOperatioanalextractedRecords));
-            // var uavOperatioanalrecordIds = extractRecordIds(uavOperatioanalextractedRecords);
-            // console.log("提取的 recordId 数组:", uavOperatioanalrecordIds);
-            var operationWayStr = extractComponentData(opreationWayOrigi,uavOperatioanalModeResult)
-            uavData.operation_method = JSON.stringify(operationWayStr)
-            //uavData.operation_method = JSON.stringify(uavOperatioanalModeResult.join(",")).replace(/^"|"$/g, "");//uavInvestigationPayloadTypeJsonStrresult
 
+            var operationWayStr = ""
+            for(var i=0; i<uavOperatioanalModeResult.length; i++)
+            {
+                operationWayStr += uavOperatioanalModeResult[i]
+                operationWayStr += ","
+            }
+            operationWayStr = operationWayStr.slice(0,-1)//去除末尾的','
+            uavData.operation_method = operationWayStr
         }
-        uavData.hanging_capacity = uavMountContent.queryToData//uavHangingLocationValue.text
-        //uavData.operation_method = JSON.stringify(uavOperatioanalModeResult.join(",")).replace(/^"|"$/g, "");//uavOperatioanalmodeGroupJsonStrresult
-        //uavData.recovery_mode = JSON.stringify(uavRecoveryModeResult.join(",")).replace(/^"|"$/g, "");//uavRecoverymodeGroupJsonStrresult
+
+        uavData.hanging_capacity = uavMountContent.queryToData//挂载位置
 
         uavData.flight_time_max =  textToFloat(uavFlightTime.text)
         uavData.takeoff_distance = textToFloat(uavTakeoffDistanceValue.text)
@@ -2103,7 +2489,7 @@ Rectangle{//Window{
         var jsonString = JSON.stringify(uavData);
         console.log("QML saveUavModelData jsonString"+jsonString);
 
-        var insertUavModelDataResult =uavModelDao.insertModelDate(uavData)
+        var insertUavModelDataResult = uavModelDaoTable.insertModelDate(uavData)
         if(insertUavModelDataResult === true){
             warningPopup.open()
             warningItem.text = "无人机数据新增成功!"
@@ -2114,6 +2500,8 @@ Rectangle{//Window{
             autoCloseTimer.start()
         }
     }
+
+    //更新数据
     function updataUavModelData(){
         console.log("updateUavModelData")
         var uavData = {
@@ -2194,16 +2582,21 @@ Rectangle{//Window{
         var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()
         var uavRecoveryWay = uavModelRecoveryModeDaoModel.selectModelRecoveryModeAllData()
         var uavOperationWay = uavModelOperationWayDaoModel.selectModelOperationWayAllData()
-        console.log("aaaaaaaaaaaaaaaaaaaaaaa"+JSON.stringify(uavPayloadType)+"<>"+JSON.stringify(uavInvestigationPayloadTypeResult))
-        console.log("ammoTypeResult"+ammoTypeResult)
+
         //挂载弹药类型
         if(isEmpty(ammoTypeResult)){
             warningPopup.open()
             warningItem.text = "挂载弹药类型未选择!"
             autoCloseTimer.start()
         }else{
-            var ammoTypeStr = extractAmmoNameRecord(addUavModelData.ammoTypeOrigi,ammoTypeResult)
-            uavData.load_ammo_type = JSON.stringify(ammoTypeStr)
+            var ammoTypeStr = ""
+            for(var i=0; i<ammoTypeResult.length; i++)
+            {
+                ammoTypeStr += ammoTypeResult[i]
+                ammoTypeStr += ","
+            }
+            ammoTypeStr = ammoTypeStr.slice(0,-1)//去除末尾的','
+            uavData.load_ammo_type = ammoTypeStr
         }
         //挂载侦察载荷
         if(isEmpty(uavInvestigationPayloadTypeResult)){
@@ -2211,16 +2604,20 @@ Rectangle{//Window{
             warningItem.text = "侦察载荷类型未选择!"
             autoCloseTimer.start()
         }else{
-            console.log("uavInvestigationPayloadTypeResult"+uavInvestigationPayloadTypeResult)
-            var InvestigationPayloadStr = extractComponentData(payloadTypeOrigi,uavInvestigationPayloadTypeResult)
-            uavData.payload_type = JSON.stringify(InvestigationPayloadStr)
-            //uavData.payload_type = JSON.stringify(uavInvestigationPayloadTypeResult.join(",")).replace(/^"|"$/g, "");//uavInvestigationPayloadTypeJsonStrresult
+            var InvestigationPayloadStr = ""
+            for(var i=0; i<uavInvestigationPayloadTypeResult.length; i++)
+            {
+                InvestigationPayloadStr += uavInvestigationPayloadTypeResult[i]
+                InvestigationPayloadStr += ","
+            }
 
+            InvestigationPayloadStr = InvestigationPayloadStr.slice(0,-1)//去除末尾的','
+            uavData.payload_type = InvestigationPayloadStr
         }
-        //攻击方式
+        //挂载攻击方式
         if(isEmpty(uavBombingmethodResult)){
             if(uavTypeSelect.currentText === "侦察无人机"){
-                uavData.bomb_method = "无"
+                uavData.bomb_method = ""
             }else{
                 warningPopup.open()
                 warningItem.text = "投弹方式未选择!"
@@ -2228,41 +2625,59 @@ Rectangle{//Window{
             }
 
         }else{
-            var bombWayStr = extractComponentData(bombWayOrigi,uavBombingmethodResult)
-            uavData.bomb_method = JSON.stringify(bombWayStr)
-            //uavData.bomb_method = JSON.stringify(uavBombingmethodResult.join(",")).replace(/^"|"$/g, "");//uavBombingmethodGroupJsonStrresult
+            var bombWayStr = ""
+            for(var i=0; i<uavBombingmethodResult.length; i++)
+            {
+                bombWayStr += uavBombingmethodResult[i]
+                bombWayStr += ","
+            }
+            bombWayStr = bombWayStr.slice(0,-1)
+            uavData.bomb_method = bombWayStr
+
         }
-        //回收方式
         if(isEmpty(uavRecoveryModeResult)){
             warningPopup.open()
             warningItem.text = "回收方式未选择!"
             autoCloseTimer.start()
         }else{
-            var recovryModeStr = extractComponentData(recoveryWayOrigi,uavRecoveryModeResult)
-            uavData.recovery_mode = JSON.stringify(recovryModeStr)
-            //uavData.recovery_mode = JSON.stringify(uavRecoveryModeResult.join(",")).replace(/^"|"$/g, "");//uavBombingmethodGroupJsonStrresult
+
+            var recovryModeStr = ""
+            for(var i=0; i<uavRecoveryModeResult.length; i++)
+            {
+                recovryModeStr += uavRecoveryModeResult[i]
+                recovryModeStr += ","
+            }
+
+            recovryModeStr = recovryModeStr.slice(0,-1)//去除末尾的','
+            uavData.recovery_mode = recovryModeStr
         }
-        //操作方式
         if(isEmpty(uavOperatioanalModeResult)){
             warningPopup.open()
             warningItem.text = "操作方式未选择!"
             autoCloseTimer.start()
         }else{
-            var operationWayStr = extractComponentData(opreationWayOrigi,uavOperatioanalModeResult)
-            uavData.operation_method = JSON.stringify(operationWayStr)
-            //uavData.operation_method = JSON.stringify(uavOperatioanalModeResult.join(",")).replace(/^"|"$/g, "");//uavInvestigationPayloadTypeJsonStrresult
+
+            var operationWayStr = ""
+            for(var i=0; i<uavOperatioanalModeResult.length; i++)
+            {
+                operationWayStr += uavOperatioanalModeResult[i]
+                operationWayStr += ","
+            }
+            operationWayStr = operationWayStr.slice(0,-1)//去除末尾的','
+            uavData.operation_method = operationWayStr
         }
-        //uavData.operation_method = JSON.stringify(uavOperatioanalModeResult.join(",")).replace(/^"|"$/g, "");//uavOperatioanalmodeGroupJsonStrresult
-        //uavData.recovery_mode = JSON.stringify(uavRecoveryModeResult.join(",")).replace(/^"|"$/g, "");//uavRecoverymodeGroupJsonStrresult
+
         uavData.id = processInfo.recordId
-        console.log("uavData.id  processInfo.recordId"+uavData.id+"<>"+processInfo.recordId)
-        uavData.uav_type = uavTypeSelect.currentText
+
+        uavData.uav_type = uavTypeSelect.text
         uavData.uav_name = uavNameText.text
-        uavData.uav_id = uavIdText.text
-        uavData.hanging_capacity = uavHangingLocationValue.text
+
+        uavData.uav_id = listmodel_Box_UavModelType.get(iUavModelType).m_RecordId
         uavData.length = textToFloat(uavLengthText.text)
         uavData.width = textToFloat(uavWidthText.text)
         uavData.height = textToFloat(uavHeightText.text)
+
+        uavData.hanging_capacity = uavMountContent.queryToData//挂载位置
 
         uavData.flight_height_min = textToFloat(uavFlightHeightMin.text)
         uavData.flight_height_max = textToFloat(uavFlightHeightMax.text)
@@ -2307,7 +2722,7 @@ Rectangle{//Window{
         uavData.recordcreation_time = addUavModelData.currentTime
         var jsonString = JSON.stringify(uavData);
         console.log("updataUavModelDatajsonString"+jsonString);
-        var updataUavModelDataResult = uavModelDao.updateModelDate(jsonString)
+        var updataUavModelDataResult = uavModelDaoTable.updateModelDate(jsonString)
         if(updataUavModelDataResult === true){
             warningPopup.open()
             warningItem.text = "无人机数据更新成功!"
@@ -2324,15 +2739,7 @@ Rectangle{//Window{
             return item.name;
         });
     }
-    //ButtonGroup的接收值方法
-    // function getSelectedPayloads(buttons) {
-    //         return Array.from(buttons)
-    //             .filter(btn => btn.checked)
-    //             .map(btn => ({
-    //                 name: btn.text,
-    //                 code: btn.payloadCode
-    //             }))
-    // }
+
     // 生成测试数据函数修正
     function generateTestData() {
         const testData = [

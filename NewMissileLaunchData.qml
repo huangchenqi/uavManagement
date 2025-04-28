@@ -11,11 +11,31 @@ Item {
     height: 100
     //——————对外参数接口——————
     //发射方式
-    property int launchedType: 0
+    property int launchedType: -1
+    onLaunchedTypeChanged: {
+        if(lastLaunchedType == launchedType)
+            return
+        if(lastLaunchedType > -1)
+        {
+            listmodel_Box.set(lastLaunchedType,{m_SelectState:false})
+        }
+    }
+
+    property int lastLaunchedType: -1
     //导引规律
     property int guidRule: 0
     //制导方式
-    property int guidType: 0
+    property int guidType: -1
+    onGuidTypeChanged: {
+        if(lastGuidType == guidType)
+            return
+        if(lastGuidType > -1)
+        {
+            listmodel_Box_GuidType.set(lastGuidType,{m_SelectState:false})
+        }
+    }
+
+    property int lastGuidType: -1
     // AmmoKillingWayDaoTableModel{
     //     id:ammoKillingWayDaoTableModel
     // }
@@ -76,6 +96,33 @@ Item {
                     text:"发射方式: "
                 }
 
+                //显示区域
+                CButton{
+                    id:comp_LaunchedDataType
+                    width: parent.width - text_LaunchedDataTitle.width
+                    height: 36
+                    color:"#ffddaa00"
+                    borderColor: "#ffddaa00"
+                    borderHigtColor: "#ffeebb22"
+                    anchors.left: text_LaunchedDataTitle.right
+                    anchors.verticalCenter: text_LaunchedDataTitle.verticalCenter
+                    pixelSize: 20
+                    text:{
+                        if(launchedType < 0)
+                        {
+                            return "请选择:"
+                        }
+                        else
+                        {
+                            if(listmodel_Box.count > 0)
+                                listmodel_Box.get(launchedType).m_TypeName
+                        }
+                    }
+                    onClicked: {
+                        view_List_LaunchedData.visible = !view_List_LaunchedData.visible
+                    }
+                }
+
                 ListView{
                     id:view_List_LaunchedData
                     width: comp_LaunchedDataType.width
@@ -102,10 +149,12 @@ Item {
                                 borderColor: "#ffddaa00"
                                 borderHigtColor: "#ffeebb22"
                                 pixelSize: 18
+                                isSelect: m_SelectState
                                 onClicked: {
                                     view_List_LaunchedData.visible = false
+                                    lastLaunchedType = launchedType
                                     launchedType = index
-                                    m_SelectState = !m_SelectState
+                                    m_SelectState = true
 
                                     newAmmoData.ammoData.launch_way =m_PlanNumber
                                     console.log("Text content changed to: " + newAmmoData.ammoData.launch_way)
@@ -128,32 +177,6 @@ Item {
                         console.log("ammoAmmoLaunchWayData"+JSON.stringify(result))
                     }
                 }
-                //显示区域
-                CButton{
-                    id:comp_LaunchedDataType
-                    width: parent.width - text_LaunchedDataTitle.width
-                    height: 36
-                    color:"#ffddaa00"
-                    borderColor: "#ffddaa00"
-                    borderHigtColor: "#ffeebb22"
-                    anchors.left: text_LaunchedDataTitle.right
-                    anchors.verticalCenter: text_LaunchedDataTitle.verticalCenter
-                    pixelSize: 20
-                    text:"请选择:"/*{
-                        if(launchedType < 0)
-                        {
-                            return "白天"
-                        }
-                        else
-                        {
-                            if(listmodel_Box.count > 0)
-                                listmodel_Box.get(launchedType).m_TypeName
-                        }
-                    }*/
-                    onClicked: {
-                        view_List_LaunchedData.visible = !view_List_LaunchedData.visible
-                    }
-                }
             }
 
             Rectangle {
@@ -162,6 +185,7 @@ Item {
                 color: "transparent"
                 anchors.left: rect_LaunchedData.right
                 anchors.leftMargin: 10
+                visible: false
                 anchors.top: parent.top
                 anchors.topMargin: 15
                 width:(( parent.width ) / 3) - 10
@@ -249,7 +273,7 @@ Item {
                 id: rect_GuidTypeData
                 height: 20
                 color: "transparent"
-                anchors.left: rect_GuidRuleData.right
+                anchors.left: rect_LaunchedData.right
                 anchors.leftMargin: 10
                 anchors.top: parent.top
                 anchors.topMargin: 15
@@ -265,6 +289,32 @@ Item {
                     horizontalAlignment: Text.AlignLeft
                     color:mainColor
                     text:"制导方式: "
+                }
+                //显示区域
+                CButton{
+                    id:comp_GuidType
+                    width: parent.width - text_GuidTypeDataTitle.width
+                    height: 36
+                    color:"#ffddaa00"
+                    borderColor: "#ffddaa00"
+                    borderHigtColor: "#ffeebb22"
+                    anchors.left: text_GuidTypeDataTitle.right
+                    anchors.verticalCenter: text_GuidTypeDataTitle.verticalCenter
+                    pixelSize: 20
+                    text:{
+                        if(guidType < 0)
+                        {
+                            return "请选择:"
+                        }
+                        else
+                        {
+                            if(listmodel_Box_GuidType.count > 0)
+                                listmodel_Box_GuidType.get(guidType).m_TypeName
+                        }
+                    }
+                    onClicked: {
+                        view_List_GuidTypeData.visible = !view_List_GuidTypeData.visible
+                    }
                 }
 
                 ListView{
@@ -293,10 +343,12 @@ Item {
                                 borderColor: "#ffddaa00"
                                 borderHigtColor: "#ffeebb22"
                                 pixelSize: 18
+                                isSelect: m_SelectState
                                 onClicked: {
                                     view_List_GuidTypeData.visible = false
+                                    lastGuidType = guidType
                                     guidType = index
-                                    m_SelectState = !m_SelectState
+                                    m_SelectState = true
                                     newAmmoData.ammoData.guidance_way =m_PlanNumber
                                     console.log("Text content changed to: " + newAmmoData.ammoData.guidance_way)
                                 }
@@ -315,34 +367,8 @@ Item {
                                 m_TypeName: ammoGuidanceTypeData[i].ammoComponeName
                             });
                         }
-                       listmodel_Box.append(result);
+                       listmodel_Box_GuidType.append(result);
                         console.log("ammoAmmoLaunchWayData"+JSON.stringify(result))
-                    }
-                }
-                //显示区域
-                CButton{
-                    id:comp_GuidType
-                    width: parent.width - text_GuidTypeDataTitle.width
-                    height: 36
-                    color:"#ffddaa00"
-                    borderColor: "#ffddaa00"
-                    borderHigtColor: "#ffeebb22"
-                    anchors.left: text_GuidTypeDataTitle.right
-                    anchors.verticalCenter: text_GuidTypeDataTitle.verticalCenter
-                    pixelSize: 20
-                    text:"请选择:"/*{
-                        if(guidType < 0)
-                        {
-                            return "中制导"
-                        }
-                        else
-                        {
-                            if(listmodel_Box_GuidType.count > 0)
-                                listmodel_Box_GuidType.get(guidType).m_TypeName
-                        }
-                    }*/
-                    onClicked: {
-                        view_List_GuidTypeData.visible = !view_List_GuidTypeData.visible
                     }
                 }
             }

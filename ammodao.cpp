@@ -16,6 +16,7 @@
 #include <QDebug>
 #include <QDateTime>
 #include <QFile>
+#include <QUrl>
 AmmoDao::AmmoDao(QObject* parent) : QObject(parent){ //::UavModelDao() {
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
     dbConn_.reset(new DatabaseConnection(

@@ -11,7 +11,7 @@ Rectangle{//航空弹药的组件导引头
     visible: true
     width: 540
     height: 380
-    color:"cyan"
+    color:"skyblue"
     //title: qsTr("QML TableView example")
     Item {
         anchors.fill: parent

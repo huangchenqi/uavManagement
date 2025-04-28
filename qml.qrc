@@ -53,5 +53,7 @@
         <file>NewMissileWorkData.qml</file>
         <file>AddReconnaissanceCommunicationData.qml</file>
         <file>ReconnaissanceCommunicationRecordManagement.qml</file>
+        <file>EffectiveReflectionArea.qml</file>
+        <file>InterferencePodDropSpeed.qml</file>
     </qresource>
 </RCC>

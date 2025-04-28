@@ -58,6 +58,7 @@ namespace odb
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
+    pgsql::float4_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
@@ -84,6 +85,7 @@ namespace odb
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
+    pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
     pgsql::float4_oid,
@@ -214,29 +216,33 @@ namespace odb
     //
     t[6UL] = 0;
 
-    // mass_
+    // interferenceLength_
     //
     t[7UL] = 0;
 
-    // frontCoverLength_
+    // mass_
     //
     t[8UL] = 0;
 
-    // rearCoverLength_
+    // frontCoverLength_
     //
     t[9UL] = 0;
 
-    // mainCabinSection_
+    // rearCoverLength_
     //
     t[10UL] = 0;
 
-    // maximumWeightPodFullyLoaded_
+    // mainCabinSection_
     //
     t[11UL] = 0;
 
+    // maximumWeightPodFullyLoaded_
+    //
+    t[12UL] = 0;
+
     // interferenceBand_
     //
-    if (t[12UL])
+    if (t[13UL])
     {
       i.interferenceBand_value.capacity (i.interferenceBand_size);
       grew = true;
@@ -244,7 +250,7 @@ namespace odb
 
     // effectiveReflectionArea_
     //
-    if (t[13UL])
+    if (t[14UL])
     {
       i.effectiveReflectionArea_value.capacity (i.effectiveReflectionArea_size);
       grew = true;
@@ -252,7 +258,7 @@ namespace odb
 
     // deliveryControlWay_
     //
-    if (t[14UL])
+    if (t[15UL])
     {
       i.deliveryControlWay_value.capacity (i.deliveryControlWay_size);
       grew = true;
@@ -260,7 +266,7 @@ namespace odb
 
     // deliverySpeed_
     //
-    if (t[15UL])
+    if (t[16UL])
     {
       i.deliverySpeed_value.capacity (i.deliverySpeed_size);
       grew = true;
@@ -268,11 +274,11 @@ namespace odb
 
     // loadingCapacity_
     //
-    t[16UL] = 0;
+    t[17UL] = 0;
 
     // interferenceIntensity_
     //
-    if (t[17UL])
+    if (t[18UL])
     {
       i.interferenceIntensity_value.capacity (i.interferenceIntensity_size);
       grew = true;
@@ -280,7 +286,7 @@ namespace odb
 
     // imageName_
     //
-    if (t[18UL])
+    if (t[19UL])
     {
       i.imageName_value.capacity (i.imageName_size);
       grew = true;
@@ -288,7 +294,7 @@ namespace odb
 
     // imageUrl_
     //
-    if (t[19UL])
+    if (t[20UL])
     {
       i.imageUrl_value.capacity (i.imageUrl_size);
       grew = true;
@@ -296,11 +302,11 @@ namespace odb
 
     // recordCreationTime_
     //
-    t[20UL] = 0;
+    t[21UL] = 0;
 
     // useStatus_
     //
-    t[21UL] = 0;
+    t[22UL] = 0;
 
     return grew;
   }
@@ -376,6 +382,13 @@ namespace odb
     b[n].type = pgsql::bind::real;
     b[n].buffer = &i.mainLength_value;
     b[n].is_null = &i.mainLength_null;
+    n++;
+
+    // interferenceLength_
+    //
+    b[n].type = pgsql::bind::real;
+    b[n].buffer = &i.interferenceLength_value;
+    b[n].is_null = &i.interferenceLength_null;
     n++;
 
     // mass_
@@ -637,6 +650,20 @@ namespace odb
           pgsql::id_real >::set_image (
         i.mainLength_value, is_null, v);
       i.mainLength_null = is_null;
+    }
+
+    // interferenceLength_
+    //
+    {
+      float const& v =
+        o.interferenceLength_;
+
+      bool is_null (false);
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_image (
+        i.interferenceLength_value, is_null, v);
+      i.interferenceLength_null = is_null;
     }
 
     // mass_
@@ -1013,6 +1040,20 @@ namespace odb
         i.mainLength_null);
     }
 
+    // interferenceLength_
+    //
+    {
+      float& v =
+        o.interferenceLength_;
+
+      pgsql::value_traits<
+          float,
+          pgsql::id_real >::set_value (
+        v,
+        i.interferenceLength_value,
+        i.interferenceLength_null);
+    }
+
     // mass_
     //
     {
@@ -1253,6 +1294,7 @@ namespace odb
   "\"used_uav_models\", "
   "\"description\", "
   "\"main_length\", "
+  "\"interference_length\", "
   "\"mass\", "
   "\"front_cover_length\", "
   "\"rear_cover_length\", "
@@ -1269,7 +1311,7 @@ namespace odb
   "\"record_creation_time\", "
   "\"use_status\") "
   "VALUES "
-  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21) "
+  "(DEFAULT, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22) "
   "RETURNING \"id\"";
 
   const char access::object_traits_impl< ::InterferencePodEntity, id_pgsql >::find_statement[] =
@@ -1281,6 +1323,7 @@ namespace odb
   "\"uav_type_man\".\"interference_pod\".\"used_uav_models\", "
   "\"uav_type_man\".\"interference_pod\".\"description\", "
   "\"uav_type_man\".\"interference_pod\".\"main_length\", "
+  "\"uav_type_man\".\"interference_pod\".\"interference_length\", "
   "\"uav_type_man\".\"interference_pod\".\"mass\", "
   "\"uav_type_man\".\"interference_pod\".\"front_cover_length\", "
   "\"uav_type_man\".\"interference_pod\".\"rear_cover_length\", "
@@ -1308,22 +1351,23 @@ namespace odb
   "\"used_uav_models\"=$4, "
   "\"description\"=$5, "
   "\"main_length\"=$6, "
-  "\"mass\"=$7, "
-  "\"front_cover_length\"=$8, "
-  "\"rear_cover_length\"=$9, "
-  "\"main_cabin_section\"=$10, "
-  "\"maximum_weight_pod_fully_loaded\"=$11, "
-  "\"interference_band\"=$12, "
-  "\"effective_reflection_area\"=$13, "
-  "\"delivery_control_way\"=$14, "
-  "\"delivery_speed\"=$15, "
-  "\"loading_capacity\"=$16, "
-  "\"interference_intensity\"=$17, "
-  "\"image_name\"=$18, "
-  "\"image_url\"=$19, "
-  "\"record_creation_time\"=$20, "
-  "\"use_status\"=$21 "
-  "WHERE \"id\"=$22";
+  "\"interference_length\"=$7, "
+  "\"mass\"=$8, "
+  "\"front_cover_length\"=$9, "
+  "\"rear_cover_length\"=$10, "
+  "\"main_cabin_section\"=$11, "
+  "\"maximum_weight_pod_fully_loaded\"=$12, "
+  "\"interference_band\"=$13, "
+  "\"effective_reflection_area\"=$14, "
+  "\"delivery_control_way\"=$15, "
+  "\"delivery_speed\"=$16, "
+  "\"loading_capacity\"=$17, "
+  "\"interference_intensity\"=$18, "
+  "\"image_name\"=$19, "
+  "\"image_url\"=$20, "
+  "\"record_creation_time\"=$21, "
+  "\"use_status\"=$22 "
+  "WHERE \"id\"=$23";
 
   const char access::object_traits_impl< ::InterferencePodEntity, id_pgsql >::erase_statement[] =
   "DELETE FROM \"uav_type_man\".\"interference_pod\" "
@@ -1338,6 +1382,7 @@ namespace odb
   "\"uav_type_man\".\"interference_pod\".\"used_uav_models\", "
   "\"uav_type_man\".\"interference_pod\".\"description\", "
   "\"uav_type_man\".\"interference_pod\".\"main_length\", "
+  "\"uav_type_man\".\"interference_pod\".\"interference_length\", "
   "\"uav_type_man\".\"interference_pod\".\"mass\", "
   "\"uav_type_man\".\"interference_pod\".\"front_cover_length\", "
   "\"uav_type_man\".\"interference_pod\".\"rear_cover_length\", "

@@ -175,7 +175,7 @@ Rectangle {
                               id: backGround
                               anchors.fill: parent
                               sourceSize: Qt.size(width,height)
-                              source: "file:Resources/Background/bg_MainBackground.png"
+                              source: "qrc:Resources/Background/bg_MainBackground.png"
                           }
 
                       }

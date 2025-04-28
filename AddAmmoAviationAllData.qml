@@ -316,7 +316,65 @@ Item {
             width: (parent.width / 4) - 10
             height: 36
             onClicked: {
-                addAmmoComponentWarheadPopup.open()//custom_Warhead.visible = !custom_Warhead.visible
+                if(newAmmoData.viewType === "航空炸弹"){
+                    addAmmoComponentWarheadPanel.selectedWarhead = "third"
+                    addAmmoComponentWarheadPopup.open()//custom_Warhead.visible = !custom_Warhead.visible
+                }else{
+                    view_List_Warhead.visible = !view_List_Warhead.visible
+                    console.log("newAmmoData.viewType!")
+                }
+
+            }
+        }
+        ListView{
+            id:view_List_Warhead
+            width: btn_Warhead.width
+            height: btn_Warhead.height * 5
+            anchors.left: btn_Warhead.left
+            anchors.leftMargin: btn_Warhead.width/2 - width/2
+            anchors.top: btn_Warhead.bottom
+            anchors.topMargin: 2
+            visible:false
+            clip: true
+            model:ListModel{
+                id:listmodel_Box
+            }
+            delegate:Component{
+                Item{
+                    id:item_Delegate
+                    width: view_List_Warhead.width
+                    height: 36
+                    CButton{
+                        id:comp_TypeBtn
+                        anchors.fill: parent
+                        text:m_TypeName
+                        color:"#ffddaa00"
+                        borderColor: "#ffddaa00"
+                        borderHigtColor: "#ffeebb22"
+                        pixelSize: 18
+                        isSelect: m_SelectState
+                        onClicked: {
+
+                            if(m_TypeName === "增强型杀爆战斗部"){
+
+                                addAmmoComponentWarheadPanel.selectedWarhead = "first"
+                                addAmmoComponentWarheadPopup.open()
+
+                            }else if(m_TypeName === "侵爆战斗部"){
+                                addAmmoComponentWarheadPanel.selectedWarhead = "second"
+                                addAmmoComponentWarheadPopup.open()
+                            }else{
+                                console.log("Unknown m_TypeName!")
+                            }
+                            view_List_Warhead.visible = false
+
+                        }
+                    }
+                }
+            }
+            Component.onCompleted: {
+                listmodel_Box.append({m_Number:0,m_SelectState:false,m_TypeName:"增强型杀爆战斗部"})
+                listmodel_Box.append({m_Number:1,m_SelectState:false,m_TypeName:"侵爆战斗部"})
             }
         }
     }

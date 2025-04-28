@@ -11,13 +11,15 @@ Rectangle{//航空弹药的组件战斗部
     visible: true
     width: 600
     height: 500
-    color:"cyan"
+    color:"skyblue"
     property var selectedWarhead: "first"
     onSelectedWarheadChanged: {
         if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-
+                        topTitle.text = "增强型杀爆战斗部"
         }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-
+                        topTitle.text = "侵爆战斗部"
+        }else if(addAmmoComponentWarheadRoot.selectedWarhead === "third"){
+                        topTitle.text = "战斗部"
         }else{
             console.log("Unkown selectedWarhead!")
         }
@@ -41,18 +43,20 @@ Rectangle{//航空弹药的组件战斗部
 
         CText{
             id:topTitle
-            text: //"战斗部"
-            {    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                          return "增强型杀爆战斗部战斗部"
+            text: "a战斗部"
+            // {    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
+            //               return ""
 
-                  }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                          return "侵爆战斗部"
-                  }else{
-                          return "战斗部"
-                          console.log("Unkown selectedWarhead!")
-                  }
+            //       }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
+            //               return ""
+            //       }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
+            //               return ""
 
-            }
+            //       }else{
+            //              console.log("Unkown selectedWarhead!")
+            //     }
+
+            // }
 
             anchors.top: parent.top
             anchors.topMargin: 15

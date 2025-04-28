@@ -39,7 +39,8 @@ class InterferencePodEntity
     /******************** 基础物理特性 ********************/
     #pragma db column("main_length") type("real") // 主舱长度(m)
     float mainLength_;
-
+     #pragma db column("interference_length") type("real") // 吊舱长度(m)
+     float interferenceLength_;
     #pragma db column("mass") type("real") // 单吊舱质量(kg)
     float mass_;
 

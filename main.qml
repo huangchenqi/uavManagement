@@ -7,6 +7,10 @@ Window {
     width: 1600
     height: 830
     title: qsTr("无人机型号管理软件")
+
+    property string mainColor:"#fff0cc55"
+    readonly property string mainBackgroundSource: "qrc:/Resources/Background/bg_MainBackground.png"
+
     property var processInfo: new Object // global记录对应行对象// 声明全局对象用于记录流程信息（可通过此对象跨组件传递数据）
     //property var processInfo: ({})//new Object() 是一种更传统的创建对象的方式。{} 是一种更简洁的字面量表示法。
     UavMainManagement{

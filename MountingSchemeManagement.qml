@@ -174,7 +174,7 @@ Rectangle {
                               id: backGround
                               anchors.fill: parent
                               sourceSize: Qt.size(width,height)
-                              source: "file:Resources/Background/bg_MainBackground.png"
+                              source: "qrc:Resources/Background/bg_MainBackground.png"
                           }
 
                       }
@@ -292,9 +292,9 @@ Rectangle {
                                       color:"#ffddaa00"
                                       borderColor: "#ffddaa00"
                                       borderHigtColor: "#ffeebb22"
-                                      anchors.left: uavName.right
+                                      anchors.left: parent.left
                                       anchors.leftMargin: 5
-                                      anchors.verticalCenter: uavName.verticalCenter
+                                      anchors.verticalCenter: parent.verticalCenter
             //                          anchors.bottom: confirmAddAmmoData.bottom
             //                          anchors.bottomMargin: confirmAddAmmoData.bottom +50
             //                          anchors.verticalCenter: parent.verticalCenter

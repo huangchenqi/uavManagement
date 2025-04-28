@@ -17,6 +17,7 @@
 #include <QFile>
 #include <QImage>
 #include <QTemporaryFile>
+#include <QUrl>
 ReconnaissanceCommunicationDao::ReconnaissanceCommunicationDao(QObject* parent) : QObject(parent){
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
     dbConn_.reset(new DatabaseConnection(
