@@ -1,7 +1,7 @@
 ﻿import QtQuick 2.12
 import QtQuick.Controls 2.12
 import "qrc:/AddAmmoModules/Component"
-
+import AmmoAerodynamicConfigurationDaoModel 1.0
 
 Item {
     id:item_Missile
@@ -9,9 +9,36 @@ Item {
     height: 250
     //——————对外参数接口——————
     //工作条件
-    property int workCondition: 0
+    property int workCondition: -1
+    onWorkConditionChanged: {
+        console.log("condition:",workCondition)
+        if(lastWorkCondition > -1){
+            listmodel_Box.set(lastWorkCondition,{m_SelectState:false})
+        }
+    }
+
+    property int lastWorkCondition: -1
+
+    //signal workCondition(var indexStr)
+    // Connections {
+    //     target: item_Missile
+    //     onWorkCondition: {
+    //         console.log("connectuion!!!!!")
+    //         comp_WorkFactorType.text = "asa7bdyv"
+    //     }
+    // }
+
     //气动布局
-    property int aerodynamicConfiguration: 0
+    property int aerodynamicConfiguration: -1
+    onAerodynamicConfigurationChanged: {
+        if(lastAerodynamicConfiguration > -1)
+            listmodel_Box_AerodynamicConfiguration.set(lastAerodynamicConfiguration,{m_SelectState:false})
+    }
+
+    property int lastAerodynamicConfiguration: -1
+    AmmoAerodynamicConfigurationDaoTableModel{
+        id:ammoAerodynamicConfigurationDaoTableModel
+    }
     Rectangle{
         anchors.fill: parent
         color:"#50000000"
@@ -77,10 +104,12 @@ Item {
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
                         onTextChanged: {
-                            if(text != "")
-                            {
-                                //取值
-                            }
+                            // if(text != "")
+                            // {
+                            //     //取值
+                            // }
+                            newAmmoData.ammoData.working_temperature =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{
@@ -119,10 +148,12 @@ Item {
                         selectByMouse: true
                         selectionColor: "#ffcc8800"
                         onTextChanged: {
-                            if(text != "")
-                            {
-                                //取值
-                            }
+                            // if(text != "")
+                            // {
+                            //     //取值
+                            // }
+                            newAmmoData.ammoData.working_altitude =text
+                            console.log("Text content changed to: " + text)
                         }
                     }
                     Rectangle{
@@ -170,20 +201,35 @@ Item {
                                 anchors.fill: parent
                                 text:m_TypeName
                                 color:"#ffddaa00"
-                                borderColor: "#ffddaa00"
                                 borderHigtColor: "#ffeebb22"
                                 pixelSize: 18
+                                isSelect :m_SelectState
                                 onClicked: {
                                     view_List_AerodynamicConfiguration.visible = false
+                                    lastAerodynamicConfiguration = aerodynamicConfiguration
                                     aerodynamicConfiguration = index
-                                    m_SelectState = !m_SelectState
+                                    m_SelectState = !m_SelectState                                    
+                                    newAmmoData.ammoData.aerodynamic_configuration = m_PlanNumber
+                                    console.log("Text aerodynamic_configurationcontent changed to: " + newAmmoData.ammoData.aerodynamic_configuration)
+
                                 }
                             }
                         }
                     }
                     Component.onCompleted: {
-                        listmodel_Box_AerodynamicConfiguration.append({m_Number:0,m_SelectState:false,m_TypeName:"白天"})
-                        listmodel_Box_AerodynamicConfiguration.append({m_Number:1,m_SelectState:false,m_TypeName:"夜晚"})
+
+                        var ammoAerodynamicConfigurationData = ammoAerodynamicConfigurationDaoTableModel.selectAmmoAerodynamicConfigurationAllData()
+                        console.log("ammoAerodynamicConfigurationDao"+JSON.stringify(ammoAerodynamicConfigurationData))
+                        var result = [];
+                        for (var i = 0; i < ammoAerodynamicConfigurationData.length; i++) {
+                            result.push({
+                                m_PlanNumber: ammoAerodynamicConfigurationData[i].recordId,
+                                m_SelectState:false,// ammoType[i].checked,
+                                m_TypeName: ammoAerodynamicConfigurationData[i].ammoComponeName
+                            });
+                        }
+                       listmodel_Box_AerodynamicConfiguration.append(result);
+                        //console.log("listmodel_Box_AerodynamicConfiguration"+JSON.stringify(result))
                     }
                 }
                 //显示区域
@@ -200,7 +246,7 @@ Item {
                     text:{
                         if(aerodynamicConfiguration < 0)
                         {
-                            return "白天"
+                            return "请选择:"
                         }
                         else
                         {
@@ -223,6 +269,24 @@ Item {
                     horizontalAlignment: Text.AlignLeft
                     color:mainColor
                     text:"工作条件: "
+                }
+                //显示区域
+                CButton{
+                    id:comp_WorkFactorType
+                    width: parent.width - text_WorkConditionTitle.width
+                    height: 36
+
+                    color:"#ffddaa00"
+                    borderColor: "#ffddaa00"
+                    borderHigtColor: "#ffeebb22"
+                    anchors.left: text_WorkConditionTitle.right
+                    anchors.verticalCenter: text_WorkConditionTitle.verticalCenter
+                    pixelSize: 20
+                    text:"请选择:"
+
+                    onClicked: {
+                        view_List_WorkCondition.visible = !view_List_WorkCondition.visible
+                    }
                 }
 
                 ListView{
@@ -251,10 +315,16 @@ Item {
                                 borderColor: "#ffddaa00"
                                 borderHigtColor: "#ffeebb22"
                                 pixelSize: 18
+                                isSelect: m_SelectState
                                 onClicked: {
                                     view_List_WorkCondition.visible = false
+                                    lastWorkCondition =  workCondition
                                     workCondition = index
+                                    //workCondition(index)
+                                    console.log("current workCondition:",workCondition)
                                     m_SelectState = !m_SelectState
+                                    newAmmoData.ammoData.working_conditions =text
+                                    console.log("工作条件: " + text)
                                 }
                             }
                         }
@@ -262,32 +332,6 @@ Item {
                     Component.onCompleted: {
                         listmodel_Box.append({m_Number:0,m_SelectState:false,m_TypeName:"白天"})
                         listmodel_Box.append({m_Number:1,m_SelectState:false,m_TypeName:"夜晚"})
-                    }
-                }
-                //显示区域
-                CButton{
-                    id:comp_WorkFactorType
-                    width: parent.width - text_WorkConditionTitle.width
-                    height: 36
-                    color:"#ffddaa00"
-                    borderColor: "#ffddaa00"
-                    borderHigtColor: "#ffeebb22"
-                    anchors.left: text_WorkConditionTitle.right
-                    anchors.verticalCenter: text_WorkConditionTitle.verticalCenter
-                    pixelSize: 20
-                    text:{
-                        if(workCondition < 0)
-                        {
-                            return "白天"
-                        }
-                        else
-                        {
-                            if(listmodel_Box.count > 0)
-                                listmodel_Box.get(workCondition).m_TypeName
-                        }
-                    }
-                    onClicked: {
-                        view_List_WorkCondition.visible = !view_List_WorkCondition.visible
                     }
                 }
 

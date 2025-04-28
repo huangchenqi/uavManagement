@@ -23,6 +23,9 @@
 #include "json.hpp"
 #include <QUrl>
 #include <QTemporaryFile>
+#include <QFile>
+#include <QDebug>
+#include <QImage>
 #include "AmmunitionEntity-odb.hxx"
 #include "UavModelEntity-odb.hxx"
 #include "uavmodelentity-odb.hxx"
@@ -31,9 +34,7 @@
 #include "UavModelMountLocationEntity-odb.hxx"
 #include "UavModelRecoveryModeEntity-odb.hxx"
 #include "UavModelOperationWayEntity-odb.hxx"
-#include <QFile>
-#include <QDebug>
-#include <QImage>
+
 namespace nl = nlohmann;
 
 QDateTime covert(unsigned long long i){
@@ -1351,32 +1352,3 @@ QJsonObject UavModelDao::transformArrayToStr(const QJsonObject &input, const QSt
     return output;
 
 }
-// void UavModelDao::test()
-// {
-//     QJsonObject uavJson = {
-//         {"uav_type", "侦察型"},
-//         {"uav_name", "鹰眼-2023"},
-//         {"uav_id", "UAV-001"},
-//         {"length", 8.5},
-//         {"width", 15.2},
-//         // ... 其他字段
-//     };
-//     QJsonObject inputObj;
-//     inputObj["uav_type"] = "侦察型无人机";
-//     inputObj["uav_name"] = "鹰眼-2023";
-//     inputObj["uav_id"] = "UAV-001";
-//     inputObj["flight_height_max"] = 12000.5;
-//     inputObj["custom_field"] = "额外数据";
-//     QJsonObject checkResult;
-//     checkResult = checkUavDataObject(inputObj);
-//     // 验证结果
-//     //qDebug() << QJsonDocument(checkResult).toJson(QJsonDocument::Indented);
-//     try {
-//         bool newId = insertModelDate(uavJson);
-
-//         qDebug() << "Successfully inserted record with ID:" << newId;
-//     }
-//     catch (...) {
-//         qDebug() << "Failed to insert record";
-//     }
-// }

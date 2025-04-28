@@ -5,7 +5,6 @@ import QtQuick.Window 2.12
 import Qt.labs.qmlmodels 1.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.12
 import UavBombingMethodDaoModel 1.0
 /**
 https://blog.csdn.net/qq_24890953/article/details/104640454

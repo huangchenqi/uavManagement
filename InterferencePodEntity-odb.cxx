@@ -64,7 +64,7 @@ namespace odb
     pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::text_oid,
-    pgsql::text_oid,
+    pgsql::bytea_oid,
     pgsql::text_oid,
     pgsql::timestamp_oid,
     pgsql::bool_oid
@@ -96,7 +96,7 @@ namespace odb
     pgsql::text_oid,
     pgsql::float4_oid,
     pgsql::text_oid,
-    pgsql::text_oid,
+    pgsql::bytea_oid,
     pgsql::text_oid,
     pgsql::timestamp_oid,
     pgsql::bool_oid,
@@ -467,7 +467,7 @@ namespace odb
 
     // imageName_
     //
-    b[n].type = pgsql::bind::text;
+    b[n].type = pgsql::bind::bytea;
     b[n].buffer = i.imageName_value.data ();
     b[n].capacity = i.imageName_value.capacity ();
     b[n].size = &i.imageName_size;
@@ -831,15 +831,15 @@ namespace odb
     // imageName_
     //
     {
-      ::std::string const& v =
+      ::std::vector< char > const& v =
         o.imageName_;
 
       bool is_null (false);
       std::size_t size (0);
       std::size_t cap (i.imageName_value.capacity ());
       pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_image (
+          ::std::vector< char >,
+          pgsql::id_bytea >::set_image (
         i.imageName_value,
         size,
         is_null,
@@ -1175,12 +1175,12 @@ namespace odb
     // imageName_
     //
     {
-      ::std::string& v =
+      ::std::vector< char >& v =
         o.imageName_;
 
       pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_value (
+          ::std::vector< char >,
+          pgsql::id_bytea >::set_value (
         v,
         i.imageName_value,
         i.imageName_size,

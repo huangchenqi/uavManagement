@@ -25,7 +25,7 @@ public:
     QJsonObject checkUavDataObject(const QJsonObject& object);//检查QML界面的数据是否匹配
     Q_INVOKABLE bool insertModelDate(const QJsonObject& objectData);//插入数据
     QJsonObject transformArrayToStr(const QJsonObject &input,const QStringList &fields);
-    //void test();
+
 private:
     std::unique_ptr<DatabaseConnection> dbConn_;
 

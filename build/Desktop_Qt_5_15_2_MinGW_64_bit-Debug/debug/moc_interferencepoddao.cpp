@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_InterferencePodDao_t {
-    QByteArrayData data[8];
-    char stringdata0[146];
+    QByteArrayData data[10];
+    char stringdata0[178];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,14 +36,17 @@ QT_MOC_LITERAL(0, 0, 18), // "InterferencePodDao"
 QT_MOC_LITERAL(1, 19, 25), // "selectInterferencePodData"
 QT_MOC_LITERAL(2, 45, 0), // ""
 QT_MOC_LITERAL(3, 46, 12), // "selectedData"
-QT_MOC_LITERAL(4, 59, 25), // "updateInterferencePodData"
-QT_MOC_LITERAL(5, 85, 25), // "deleteInterferencePodData"
-QT_MOC_LITERAL(6, 111, 8), // "QJSValue"
-QT_MOC_LITERAL(7, 120, 25) // "insertInterferencePodData"
+QT_MOC_LITERAL(4, 59, 24), // "queryInterferencePodData"
+QT_MOC_LITERAL(5, 84, 6), // "object"
+QT_MOC_LITERAL(6, 91, 25), // "updateInterferencePodData"
+QT_MOC_LITERAL(7, 117, 25), // "deleteInterferencePodData"
+QT_MOC_LITERAL(8, 143, 8), // "QJSValue"
+QT_MOC_LITERAL(9, 152, 25) // "insertInterferencePodData"
 
     },
     "InterferencePodDao\0selectInterferencePodData\0"
-    "\0selectedData\0updateInterferencePodData\0"
+    "\0selectedData\0queryInterferencePodData\0"
+    "object\0updateInterferencePodData\0"
     "deleteInterferencePodData\0QJSValue\0"
     "insertInterferencePodData"
 };
@@ -55,7 +58,7 @@ static const uint qt_meta_data_InterferencePodDao[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -63,16 +66,18 @@ static const uint qt_meta_data_InterferencePodDao[] = {
        0,       // signalCount
 
  // methods: name, argc, parameters, tag, flags
-       1,    1,   34,    2, 0x02 /* Public */,
-       4,    1,   37,    2, 0x02 /* Public */,
-       5,    1,   40,    2, 0x02 /* Public */,
-       7,    1,   43,    2, 0x02 /* Public */,
+       1,    1,   39,    2, 0x02 /* Public */,
+       4,    1,   42,    2, 0x02 /* Public */,
+       6,    1,   45,    2, 0x02 /* Public */,
+       7,    1,   48,    2, 0x02 /* Public */,
+       9,    1,   51,    2, 0x02 /* Public */,
 
  // methods: parameters
     QMetaType::QJsonArray, QMetaType::QJsonObject,    3,
+    QMetaType::QJsonObject, QMetaType::QJsonObject,    5,
     QMetaType::Bool, QMetaType::QJsonObject,    3,
-    QMetaType::Bool, 0x80000000 | 6,    3,
-    QMetaType::Bool, QMetaType::QJsonObject,    3,
+    QMetaType::Bool, 0x80000000 | 8,    3,
+    QMetaType::Bool, QMetaType::QJsonObject,    5,
 
        0        // eod
 };
@@ -85,18 +90,20 @@ void InterferencePodDao::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         switch (_id) {
         case 0: { QJsonArray _r = _t->selectInterferencePodData((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QJsonArray*>(_a[0]) = std::move(_r); }  break;
-        case 1: { bool _r = _t->updateInterferencePodData((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
+        case 1: { QJsonObject _r = _t->queryInterferencePodData((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QJsonObject*>(_a[0]) = std::move(_r); }  break;
+        case 2: { bool _r = _t->updateInterferencePodData((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 2: { bool _r = _t->deleteInterferencePodData((*reinterpret_cast< const QJSValue(*)>(_a[1])));
+        case 3: { bool _r = _t->deleteInterferencePodData((*reinterpret_cast< const QJSValue(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 3: { bool _r = _t->insertInterferencePodData((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
+        case 4: { bool _r = _t->insertInterferencePodData((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 2:
+        case 3:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -136,13 +143,13 @@ int InterferencePodDao::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

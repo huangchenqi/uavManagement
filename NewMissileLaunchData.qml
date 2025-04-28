@@ -1,7 +1,9 @@
 ﻿import QtQuick 2.12
 import QtQuick.Controls 2.12
 import "qrc:/AddAmmoModules/Component"
-
+//import AmmoKillingWayDaoModel 1.0
+import AmmoGuidanceTypeDaoModel 1.0
+import AmmoLaunchWayDaoModel 1.0
 
 Item {
     id:item_Missile
@@ -14,7 +16,15 @@ Item {
     property int guidRule: 0
     //制导方式
     property int guidType: 0
-
+    // AmmoKillingWayDaoTableModel{
+    //     id:ammoKillingWayDaoTableModel
+    // }
+    AmmoGuidanceTypeDaoTableModel{
+        id:ammoGuidanceTypeDaoTableModel
+    }
+    AmmoLaunchWayDaoTableModel{
+        id:ammoLaunchWayDaoTableModel
+    }
     Rectangle{
         anchors.fill: parent
         color:"#50000000"
@@ -96,13 +106,26 @@ Item {
                                     view_List_LaunchedData.visible = false
                                     launchedType = index
                                     m_SelectState = !m_SelectState
+
+                                    newAmmoData.ammoData.launch_way =m_PlanNumber
+                                    console.log("Text content changed to: " + newAmmoData.ammoData.launch_way)
                                 }
                             }
                         }
                     }
                     Component.onCompleted: {
-                        listmodel_Box.append({m_Number:0,m_SelectState:false,m_TypeName:"白天"})
-                        listmodel_Box.append({m_Number:1,m_SelectState:false,m_TypeName:"夜晚"})
+                        var ammoAmmoLaunchWayData = ammoLaunchWayDaoTableModel.selectAmmoLaunchWayAllData()
+                        console.log("ammoAmmoLaunchWayData"+JSON.stringify(ammoAmmoLaunchWayData))
+                        var result = [];
+                        for (var i = 0; i < ammoAmmoLaunchWayData.length; i++) {
+                            result.push({
+                                m_PlanNumber: ammoAmmoLaunchWayData[i].recordId,
+                                m_SelectState:false,// ammoType[i].checked,
+                                m_TypeName: ammoAmmoLaunchWayData[i].ammoComponeName
+                            });
+                        }
+                       listmodel_Box.append(result);
+                        console.log("ammoAmmoLaunchWayData"+JSON.stringify(result))
                     }
                 }
                 //显示区域
@@ -116,7 +139,7 @@ Item {
                     anchors.left: text_LaunchedDataTitle.right
                     anchors.verticalCenter: text_LaunchedDataTitle.verticalCenter
                     pixelSize: 20
-                    text:{
+                    text:"请选择:"/*{
                         if(launchedType < 0)
                         {
                             return "白天"
@@ -126,7 +149,7 @@ Item {
                             if(listmodel_Box.count > 0)
                                 listmodel_Box.get(launchedType).m_TypeName
                         }
-                    }
+                    }*/
                     onClicked: {
                         view_List_LaunchedData.visible = !view_List_LaunchedData.visible
                     }
@@ -205,7 +228,7 @@ Item {
                     anchors.left: text_GuidRuleDataTitle.right
                     anchors.verticalCenter: text_GuidRuleDataTitle.verticalCenter
                     pixelSize: 20
-                    text:{
+                    text:"请选择:"/*{
                         if(guidRule < 0)
                         {
                             return "方式1"
@@ -215,7 +238,7 @@ Item {
                             if(listmodel_Box_GuidRule.count > 0)
                                 listmodel_Box_GuidRule.get(guidRule).m_TypeName
                         }
-                    }
+                    }*/
                     onClicked: {
                         view_List_GuidRuleData.visible = !view_List_GuidRuleData.visible
                     }
@@ -274,13 +297,26 @@ Item {
                                     view_List_GuidTypeData.visible = false
                                     guidType = index
                                     m_SelectState = !m_SelectState
+                                    newAmmoData.ammoData.guidance_way =m_PlanNumber
+                                    console.log("Text content changed to: " + newAmmoData.ammoData.guidance_way)
                                 }
                             }
                         }
                     }
                     Component.onCompleted: {
-                        listmodel_Box_GuidType.append({m_Number:0,m_SelectState:false,m_TypeName:"中制导"})
-                        listmodel_Box_GuidType.append({m_Number:1,m_SelectState:false,m_TypeName:"末制导"})
+
+                        var ammoGuidanceTypeData = ammoGuidanceTypeDaoTableModel.selectAmmoGuidanceTypeAllData()
+                        console.log("ammoGuidanceTypeData"+JSON.stringify(ammoGuidanceTypeData))
+                        var result = [];
+                        for (var i = 0; i < ammoGuidanceTypeData.length; i++) {
+                            result.push({
+                                m_PlanNumber: ammoGuidanceTypeData[i].recordId,
+                                m_SelectState:false,// ammoType[i].checked,
+                                m_TypeName: ammoGuidanceTypeData[i].ammoComponeName
+                            });
+                        }
+                       listmodel_Box.append(result);
+                        console.log("ammoAmmoLaunchWayData"+JSON.stringify(result))
                     }
                 }
                 //显示区域
@@ -294,7 +330,7 @@ Item {
                     anchors.left: text_GuidTypeDataTitle.right
                     anchors.verticalCenter: text_GuidTypeDataTitle.verticalCenter
                     pixelSize: 20
-                    text:{
+                    text:"请选择:"/*{
                         if(guidType < 0)
                         {
                             return "中制导"
@@ -304,7 +340,7 @@ Item {
                             if(listmodel_Box_GuidType.count > 0)
                                 listmodel_Box_GuidType.get(guidType).m_TypeName
                         }
-                    }
+                    }*/
                     onClicked: {
                         view_List_GuidTypeData.visible = !view_List_GuidTypeData.visible
                     }

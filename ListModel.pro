@@ -44,6 +44,7 @@ SOURCES += \
     AmmunitionTypeEntity-odb.cxx \
     InterferencePodEntity-odb.cxx \
     MountingSchemeEntity-odb.cxx \
+    ReconnaissanceCommunicationEntity-odb.cxx \
     UavModelBombingMethodEntity-odb.cxx \
     UavModelLoadTypeEntity-odb.cxx \
     UavModelMountLocationEntity-odb.cxx \
@@ -63,6 +64,7 @@ SOURCES += \
 #        migration.cpp \
 #        uavdataoperationmodel.cpp \
     mountingschemedao.cpp \
+    reconnaissanceCommunicationdao.cpp \
     uavmodelbombingmethoddao.cpp \
         uavmodeldao.cpp \
     uavmodelentity-odb.cxx \
@@ -111,6 +113,8 @@ HEADERS += \
     InterferencePodEntity.h \
     MountingSchemeEntity-odb.hxx \
     MountingSchemeEntity.h \
+    ReconnaissanceCommunicationEntity-odb.hxx \
+    ReconnaissanceCommunicationEntity.h \
     ReconnaissancePayloadEntity.h \
     UavModelBombingMethodEntity-odb.hxx \
     UavModelBombingMethodEntity.h \
@@ -139,6 +143,7 @@ HEADERS += \
     interferencepoddao.h \
     json.hpp \
     mountingschemedao.h \
+    reconnaissanceCommunicationdao.h \
     uavmodelbombingmethoddao.h \
     uavmodeldao.h \
     uavmodelentity-odb.hxx \

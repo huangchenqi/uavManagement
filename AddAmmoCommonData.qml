@@ -65,18 +65,18 @@ Item{//航空导弹与航空炸弹
             onTextChanged: {
                 // 使用正则表达式移除首尾的空白字符（包括空格、tab、换行）
                 var newText = text.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')
-                missileCommonData.text = newText;
+                input_name.text = newText;
                 // 判断是否需要更新（避免无限循环）
-                if (newText !== text) {
-                    // 保存当前光标位置
-                    var cursorPos = cursorPosition
+                // if (newText !== text) {
+                //     // 保存当前光标位置
+                //     var cursorPos = cursorPosition
 
-                    // 更新文本
-                    text = newText
+                //     // 更新文本
+                //     text = newText
 
-                    // 恢复光标位置（考虑文本缩短的情况）
-                    cursorPosition = Math.min(cursorPos, newText.length)
-                }
+                //     // 恢复光标位置（考虑文本缩短的情况）
+                //     cursorPosition = Math.min(cursorPos, newText.length)
+                // }
             }
 
             onEditingFinished: {
@@ -1177,7 +1177,7 @@ Item{//航空导弹与航空炸弹
             anchors.left: uavType.right
             anchors.verticalCenter: uavType.verticalCenter
             pixelSize: 20
-            text:{
+            text:"请选择:"/*{
                 if(selectType < 0)
                 {
                     return "侦察无人机"
@@ -1187,7 +1187,7 @@ Item{//航空导弹与航空炸弹
                     if(listmodel_Box.count > 0)
                         listmodel_Box.get(selectType).m_TypeName
                 }
-            }
+            }*/
             onClicked: {
                 view_List_TypeSelect.visible = !view_List_TypeSelect.visible
             }

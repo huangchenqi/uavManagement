@@ -55,16 +55,16 @@ class InterferencePodEntity
     #pragma db column("maximum_weight_pod_fully_loaded") type("real") // 单吊舱满载最大重量(kg)
     float maximumWeightPodFullyLoaded_;
 
-    #pragma db column("interference_band") type("varchar(100)") // 干扰波段
+    #pragma db column("interference_band") type("varchar(100)") // 干扰波段  由于是多选设置成字符串
     std::string interferenceBand_;
 
-    #pragma db column("effective_reflection_area") type("varchar(100)") // 有效反射面积(m)
+    #pragma db column("effective_reflection_area") type("varchar(100)") // 有效反射面积(m) 由于是多选设置成字符串
     std::string effectiveReflectionArea_;
 
-    #pragma db column("delivery_control_way") type("varchar(100)") // 投放控制方式
+    #pragma db column("delivery_control_way") type("varchar(100)") // 投放控制方式 由于是多选设置成字符串
     std::string deliveryControlWay_;
 
-    #pragma db column("delivery_speed") type("varchar(100)") // 投放速度(m/s)
+    #pragma db column("delivery_speed") type("varchar(100)") // 投放速度(m/s) 由于是多选设置成字符串
     std::string deliverySpeed_;
 
     #pragma db column("loading_capacity") type("real") // 装载容量(kg)
@@ -73,8 +73,8 @@ class InterferencePodEntity
     #pragma db column("interference_intensity") type("varchar(100)") // 干扰强度
     std::string interferenceIntensity_;
 
-    #pragma db column("image_name") type("varchar(50)") // 图片名称
-    std::string imageName_;
+    #pragma db column("image_name") type("BYTEA")//type("varchar(50)") // 图片名称
+    std::vector<char> imageName_; //std::string
 
     #pragma db column("image_url") type("varchar(50)") // 图片路径
     std::string imageUrl_;

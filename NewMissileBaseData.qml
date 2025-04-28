@@ -2,7 +2,7 @@
 import QtQuick.Controls 2.12
 import "qrc:/"
 import "qrc:/AddAmmoModules/Component"
-
+import UavDaoModel 1.0
 Item{
 
     id:missileCommonData
@@ -12,6 +12,9 @@ Item{
     property int selectType:0
     onSelectTypeChanged: {
       ammoData.idi
+    }
+    UavModelDaoTableModel{
+        id:uavModelDao
     }
     Rectangle {
         id:controlAmmunition
@@ -80,7 +83,7 @@ Item{
                 //     }
                 // }
                 onEditingFinished: {
-                    ammoData.ammoName =text
+                    newAmmoData.ammoData.ammoName =text
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -182,7 +185,7 @@ Item{
                                     //     }
                                     // }
                                     onEditingFinished: {
-                                        ammoData.ammoName =text
+                                        newAmmoData.ammoData.ammoLenth =text
                                         console.log("Text content changed to: " + text)
                                     }
                                 }
@@ -236,7 +239,7 @@ Item{
                                     //     }
                                     // }
                                     onEditingFinished: {
-                                        ammoData.ammoName =text
+                                        newAmmoData.ammoData.ammoDiameter =text
                                         console.log("Text content changed to: " + text)
                                     }
                                 }
@@ -290,7 +293,7 @@ Item{
                                     //     }
                                     // }
                                     onEditingFinished: {
-                                        ammoData.ammoName =text
+                                        newAmmoData.ammoData.ammoMass =text
                                         console.log("Text content changed to: " + text)
                                     }
                                 }
@@ -373,7 +376,7 @@ Item{
                                     //     }
                                     // }
                                     onEditingFinished: {
-                                        ammoData.ammoName =text
+                                        newAmmoData.ammoData.ammoWingspan =text
                                         console.log("Text content changed to: " + text)
                                     }
                                 }
@@ -427,7 +430,7 @@ Item{
                                     //     }
                                     // }
                                     onEditingFinished: {
-                                        ammoData.ammoName =text
+                                        newAmmoData.ammoData.effective_range =text
                                         console.log("Text content changed to: " + text)
                                     }
                                 }
@@ -481,7 +484,7 @@ Item{
                                     //     }
                                     // }
                                     onEditingFinished: {
-                                        ammoData.ammoName =text
+                                        newAmmoData.ammoData.preparation_time =text
                                         console.log("Text content changed to: " + text)
                                     }
                                 }
@@ -565,7 +568,7 @@ Item{
                                     //     }
                                     // }
                                     onEditingFinished: {
-                                        ammoData.ammoName =text
+                                        newAmmoData.ammoData.hit_accuracy =text
                                         console.log("Text content changed to: " + text)
                                     }
                                 }
@@ -619,7 +622,7 @@ Item{
                                     //     }
                                     // }
                                     onEditingFinished: {
-                                        ammoData.ammoName =text
+                                        newAmmoData.ammoData.hit_probability =text
                                         console.log("Text content changed to: " + text)
                                     }
                                 }
@@ -675,7 +678,7 @@ Item{
                                     //     }
                                     // }
                                     onEditingFinished: {
-                                        ammoData.ammoName =text
+                                        newAmmoData.ammoData.rudder_width =text
                                         console.log("Text content changed to: " + text)
                                     }
                                 }
@@ -757,7 +760,7 @@ Item{
                                     //     }
                                     // }
                                     onEditingFinished: {
-                                        ammoData.ammoName =text
+                                        newAmmoData.ammoData.allow_continuous_flight_time =text
                                         console.log("Text content changed to: " + text)
                                     }
                                 }
@@ -812,7 +815,7 @@ Item{
                                     //     }
                                     // }
                                     onEditingFinished: {
-                                        ammoData.ammoName =text
+                                        newAmmoData.ammoData.guided_flight_time =text
                                         console.log("Text content changed to: " + text)
                                     }
                                 }
@@ -867,7 +870,7 @@ Item{
                                     //     }
                                     // }
                                     onEditingFinished: {
-                                        ammoData.ammoName =text
+                                        newAmmoData.ammoData.maximum_speed_of_missile =text
                                         console.log("Text content changed to: " + text)
                                     }
                                 }
@@ -931,23 +934,45 @@ Item{
                             selectType = index
                             m_SelectState = !m_SelectState
                             isSelect = m_SelectState                            
-                                ammoData.ammoName =text
-                                console.log("Text content changed to: " + text)
+                            // 检查数组中是否已经存在该数字
+                                var uavIndex = uavArray.indexOf(m_PlanNumber)
+
+                                if (uavIndex === -1) {
+                                    // 数字不存在，添加到数组
+                                    uavArray.push(m_PlanNumber)
+                                    console.log("Number added: " + m_PlanNumber)
+                                } else {
+                                    // 数字已存在，从数组中删除
+                                    uavArray.splice(uavIndex, 1)
+                                    console.log("Number removed: " + m_PlanNumber)
+                                }
+                            // 检查数组中是否已经存在该数字
+                            // if (!newAmmoData.uavArray.includes(m_PlanNumber)) {
+                            //     newAmmoData.uavArray.push(m_PlanNumber) // 添加数字到数组
+                            //     console.log("Number added: " + m_PlanNumber)
+                            // } else {
+                            //     console.log("Number already exists: " + m_PlanNumber)
+                            // }
+                            console.log("uavArray"+newAmmoData.uavArray)
 
                         }
                     }
                 }
             }
             Component.onCompleted: {
-                listmodel_Box.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"侦察无人机"})
-                listmodel_Box.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"攻击无人机"})
-                listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
-                listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
-                listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
-                listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
-                listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
-                listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
-                listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
+
+                var uavData = uavModelDao.selectUavModelAllData()
+                console.log("uavModelDao"+JSON.stringify(uavData))
+                var result = [];
+                for (var i = 0; i < uavData.length; i++) {
+                    result.push({
+                        m_PlanNumber: uavData[i].recordId,
+                        m_SelectState:false,// ammoType[i].checked,
+                        m_TypeName: uavData[i].uavName
+                    });
+                }
+               listmodel_Box.append(result);
+
             }
         }
         //显示区域
@@ -961,7 +986,7 @@ Item{
             anchors.left: uavType.right
             anchors.verticalCenter: uavType.verticalCenter
             pixelSize: 20
-            text:{
+            text:"请选择:"/*{
                 if(selectType < 0)
                 {
                     return "侦察无人机"
@@ -971,7 +996,7 @@ Item{
                     if(listmodel_Box.count > 0)
                         listmodel_Box.get(selectType).m_TypeName
                 }
-            }
+            }*/
             onClicked: {
                 view_List_TypeSelect.visible = !view_List_TypeSelect.visible
             }

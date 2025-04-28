@@ -23,7 +23,7 @@ CREATE TABLE "uav_type_man"."interference_pod" (
   "delivery_speed" varchar(100) NOT NULL,
   "loading_capacity" real NOT NULL,
   "interference_intensity" varchar(100) NOT NULL,
-  "image_name" varchar(50) NOT NULL,
+  "image_name" BYTEA NOT NULL,
   "image_url" varchar(50) NOT NULL,
   "record_creation_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "use_status" bool NOT NULL);

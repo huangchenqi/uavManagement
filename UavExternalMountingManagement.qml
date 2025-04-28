@@ -54,6 +54,29 @@ Item {
                         }
                     }
                     TabButton{
+                        id:reconnaissanceCommunicationManagement
+                        height: 50
+                        width: 100
+                        //Layout.leftMargin: 2
+                        text: "侦察通信管理"
+                        // 设置字体大小
+                        font.pixelSize: 12  // 可以根据需要调整这个值
+
+                        // 设置Tab的背景颜色
+                        background: Rectangle {
+                            color: parent.checked ? "#87CEEB" : "#D3E1FE"
+                        }
+
+                        onClicked: {
+
+                            stackLayout.currentIndex = 1
+                            // 重置其他按钮的背景颜色
+                            //resetTabColors();
+                            //background.color = "#87CEEB";
+
+                        }
+                    }
+                    TabButton{
                         id:ammunitionLoadManagement
                         height: 50
                         width: 100
@@ -66,7 +89,7 @@ Item {
 
                         onClicked: {
 
-                            stackLayout.currentIndex = 1
+                            stackLayout.currentIndex = 2
 
                             //resetTabColors();
                             //background.color = "#87CEEB";
@@ -102,6 +125,22 @@ Item {
                     Loader {
                                id: uavManagementLoader
                                source: "./UavReconnaissancePayloadManagement.qml" // 这里指定你想要加载的QML文件的路径
+                               onLoaded: {
+
+                               }
+
+                           }
+
+                           // 如果需要，你可以在Loader加载完成后访问其项（item）并进行操作
+                   Component.onCompleted: {
+                       //myLoader.item.someProperty = someValue // 假设OtherFile.qml的根元素有一个名为someProperty的属性
+                   }
+                }
+                Page{
+                    padding: 0
+                    Loader {
+                               id: uavReconnaissanceCommunicationLoader
+                               source: "./ReconnaissanceCommunicationRecordManagement.qml" // 这里指定你想要加载的QML文件的路径
                                onLoaded: {
 
                                }

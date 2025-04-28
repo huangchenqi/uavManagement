@@ -222,7 +222,7 @@ Rectangle {
 
                                           }else{
                                               // 动态加载 QML 文件并设置属性
-                                              pageAmmoModelLoader.setSource("qrc:./AddAmmoAviationAllData.qml")
+                                              pageAmmoModelLoader.setSource("qrc:./AddAmmoAviationAllData.qml", {viewType: viewType})
                                           }
 
                                           // 动态加载 QML 文件并设置属性

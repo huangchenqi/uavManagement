@@ -617,7 +617,7 @@ Rectangle {
 
          ammoData.ammoType = addAmmoAllDatView.viewType
          ammoData.ammoToUavModel =   addAmmoAllDatView.uavArray.join(",")
-         console.log("ammoSelecttype"+viewType)//console.log("ammoData.push"+JSON.stringify(ammoData))
+         console.log("ammoData.push"+JSON.stringify(ammoData))
           let result = ammoDaoModel.insertAmmoData(ammoData)
             if(result === true){
                 warningItem.text = "^_^航弹新增数据成功!^_^"

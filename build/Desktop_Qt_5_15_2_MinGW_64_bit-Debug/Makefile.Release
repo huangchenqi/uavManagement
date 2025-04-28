@@ -59,6 +59,7 @@ SOURCES       = ..\..\AmmoAerodynamicConfiguration-odb.cxx \
 		..\..\AmmunitionTypeEntity-odb.cxx \
 		..\..\InterferencePodEntity-odb.cxx \
 		..\..\MountingSchemeEntity-odb.cxx \
+		..\..\ReconnaissanceCommunicationEntity-odb.cxx \
 		..\..\UavModelBombingMethodEntity-odb.cxx \
 		..\..\UavModelLoadTypeEntity-odb.cxx \
 		..\..\UavModelMountLocationEntity-odb.cxx \
@@ -76,6 +77,7 @@ SOURCES       = ..\..\AmmoAerodynamicConfiguration-odb.cxx \
 		..\..\interferencepoddao.cpp \
 		..\..\main.cpp \
 		..\..\mountingschemedao.cpp \
+		..\..\reconnaissanceCommunicationdao.cpp \
 		..\..\uavmodelbombingmethoddao.cpp \
 		..\..\uavmodeldao.cpp \
 		..\..\uavmodelentity-odb.cxx \
@@ -94,6 +96,7 @@ SOURCES       = ..\..\AmmoAerodynamicConfiguration-odb.cxx \
 		release\moc_ammotypedao.cpp \
 		release\moc_interferencepoddao.cpp \
 		release\moc_mountingschemedao.cpp \
+		release\moc_reconnaissanceCommunicationdao.cpp \
 		release\moc_uavmodelbombingmethoddao.cpp \
 		release\moc_uavmodeldao.cpp \
 		release\moc_uavmodelloadtypedao.cpp \
@@ -110,6 +113,7 @@ OBJECTS       = release/AmmoAerodynamicConfiguration-odb.o \
 		release/AmmunitionTypeEntity-odb.o \
 		release/InterferencePodEntity-odb.o \
 		release/MountingSchemeEntity-odb.o \
+		release/ReconnaissanceCommunicationEntity-odb.o \
 		release/UavModelBombingMethodEntity-odb.o \
 		release/UavModelLoadTypeEntity-odb.o \
 		release/UavModelMountLocationEntity-odb.o \
@@ -127,6 +131,7 @@ OBJECTS       = release/AmmoAerodynamicConfiguration-odb.o \
 		release/interferencepoddao.o \
 		release/main.o \
 		release/mountingschemedao.o \
+		release/reconnaissanceCommunicationdao.o \
 		release/uavmodelbombingmethoddao.o \
 		release/uavmodeldao.o \
 		release/uavmodelentity-odb.o \
@@ -146,6 +151,7 @@ OBJECTS       = release/AmmoAerodynamicConfiguration-odb.o \
 		release/moc_ammotypedao.o \
 		release/moc_interferencepoddao.o \
 		release/moc_mountingschemedao.o \
+		release/moc_reconnaissanceCommunicationdao.o \
 		release/moc_uavmodelbombingmethoddao.o \
 		release/moc_uavmodeldao.o \
 		release/moc_uavmodelloadtypedao.o \
@@ -174,6 +180,8 @@ DIST          = AmmunitionEntity-odb.ixx \
 		..\..\InterferencePodEntity.h \
 		..\..\MountingSchemeEntity-odb.hxx \
 		..\..\MountingSchemeEntity.h \
+		..\..\ReconnaissanceCommunicationEntity-odb.hxx \
+		..\..\ReconnaissanceCommunicationEntity.h \
 		..\..\ReconnaissancePayloadEntity.h \
 		..\..\UavModelBombingMethodEntity-odb.hxx \
 		..\..\UavModelBombingMethodEntity.h \
@@ -202,6 +210,7 @@ DIST          = AmmunitionEntity-odb.ixx \
 		..\..\interferencepoddao.h \
 		..\..\json.hpp \
 		..\..\mountingschemedao.h \
+		..\..\reconnaissanceCommunicationdao.h \
 		..\..\uavmodelbombingmethoddao.h \
 		..\..\uavmodeldao.h \
 		..\..\uavmodelentity-odb.hxx \
@@ -219,6 +228,7 @@ DIST          = AmmunitionEntity-odb.ixx \
 		..\..\AmmunitionTypeEntity-odb.cxx \
 		..\..\InterferencePodEntity-odb.cxx \
 		..\..\MountingSchemeEntity-odb.cxx \
+		..\..\ReconnaissanceCommunicationEntity-odb.cxx \
 		..\..\UavModelBombingMethodEntity-odb.cxx \
 		..\..\UavModelLoadTypeEntity-odb.cxx \
 		..\..\UavModelMountLocationEntity-odb.cxx \
@@ -236,6 +246,7 @@ DIST          = AmmunitionEntity-odb.ixx \
 		..\..\interferencepoddao.cpp \
 		..\..\main.cpp \
 		..\..\mountingschemedao.cpp \
+		..\..\reconnaissanceCommunicationdao.cpp \
 		..\..\uavmodelbombingmethoddao.cpp \
 		..\..\uavmodeldao.cpp \
 		..\..\uavmodelentity-odb.cxx \
@@ -263,10 +274,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) ListModel.zip $(SOURCES) $(DIST) ..\..\ListModel.pro B:\QT\5.15.2\mingw81_64\mkspecs\features\spec_pre.prf B:\QT\5.15.2\mingw81_64\mkspecs\qdevice.pri B:\QT\5.15.2\mingw81_64\mkspecs\features\device_config.prf B:\QT\5.15.2\mingw81_64\mkspecs\common\sanitize.conf B:\QT\5.15.2\mingw81_64\mkspecs\common\gcc-base.conf B:\QT\5.15.2\mingw81_64\mkspecs\common\g++-base.conf B:\QT\5.15.2\mingw81_64\mkspecs\common\angle.conf B:\QT\5.15.2\mingw81_64\mkspecs\features\win32\windows_vulkan_sdk.prf B:\QT\5.15.2\mingw81_64\mkspecs\common\windows-vulkan.conf B:\QT\5.15.2\mingw81_64\mkspecs\common\g++-win32.conf B:\QT\5.15.2\mingw81_64\mkspecs\common\windows-desktop.conf B:\QT\5.15.2\mingw81_64\mkspecs\qconfig.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3danimation.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3danimation_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dcore.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dcore_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dextras.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dextras_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dinput.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dinput_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dlogic.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dlogic_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquick.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquick_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickextras.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickextras_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickinput.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickinput_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickrender.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickrender_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3drender.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3drender_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_accessibility_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axbase.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axbase_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axcontainer.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axcontainer_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axserver.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axserver_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bluetooth.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bluetooth_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bodymovin_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bootstrap_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_charts.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_charts_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_concurrent.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_concurrent_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_core.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_core_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_datavisualization.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_datavisualization_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_dbus.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_dbus_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designer.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designer_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designercomponents_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_edid_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_egl_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_fb_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gamepad.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gamepad_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gui.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gui_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_help.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_help_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_insighttracker.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_insighttracker_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_insighttrackerqml.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_insighttrackerqml_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_location.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_location_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimedia.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimedia_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_network.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_network_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_networkauth.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_networkauth_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_nfc.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_nfc_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_opengl.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_opengl_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_openglextensions.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_openglextensions_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_packetprotocol_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioning.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioning_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioningquick.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioningquick_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_printsupport.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_printsupport_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_purchasing.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_purchasing_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qml.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qml_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmldebug_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmldevtools_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlmodels.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlmodels_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmltest.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmltest_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3d.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3d_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3dassetimport.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3drender.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3drender_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3druntimerender.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3dutils.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3dutils_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickparticles_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickshapes_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickwidgets.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickwidgets_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_remoteobjects.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_remoteobjects_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_repparser.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_repparser_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_script.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_script_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scripttools.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scripttools_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scxml.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scxml_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sensors.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sensors_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialbus.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialbus_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialport.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialport_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sql.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sql_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_svg.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_svg_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_testlib.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_testlib_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_texttospeech.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_texttospeech_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_theme_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uiplugin.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uitools.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uitools_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_virtualkeyboard.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_vulkan_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_webchannel.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_webchannel_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_websockets.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_websockets_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_widgets.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_widgets_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_winextras.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_winextras_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xml.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xml_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_zlib_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\features\qt_functions.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\qt_config.prf B:\QT\5.15.2\mingw81_64\mkspecs\win32-g++\qmake.conf B:\QT\5.15.2\mingw81_64\mkspecs\features\spec_post.prf .qmake.stash B:\QT\5.15.2\mingw81_64\mkspecs\features\exclusive_builds.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\toolchain.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\default_pre.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\win32\default_pre.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\resolve_config.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\exclusive_builds_post.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\default_post.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\build_pass.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\qml_debug.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\precompile_header.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\warn_on.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\qt.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\resources_functions.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\resources.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\moc.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\win32\opengl.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\uic.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\qmake_use.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\file_copies.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\win32\windows.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\testcase_targets.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\exceptions.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\yacc.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\lex.prf ..\..\ListModel.pro ..\..\qml.qrc ..\..\res.qrc B:\QT\5.15.2\mingw81_64\lib\Qt5Quick.prl B:\QT\5.15.2\mingw81_64\lib\Qt5Widgets.prl B:\QT\5.15.2\mingw81_64\lib\Qt5Gui.prl B:\QT\5.15.2\mingw81_64\lib\Qt5QmlModels.prl B:\QT\5.15.2\mingw81_64\lib\Qt5Qml.prl B:\QT\5.15.2\mingw81_64\lib\Qt5Network.prl B:\QT\5.15.2\mingw81_64\lib\Qt5Sql.prl B:\QT\5.15.2\mingw81_64\lib\Qt5Core.prl B:\QT\5.15.2\mingw81_64\lib\qtmain.prl   ..\..\qml.qrc ..\..\res.qrc B:\QT\5.15.2\mingw81_64\mkspecs\features\data\dummy.cpp ..\..\AmmoAerodynamicConfiguration-odb.hxx ..\..\AmmoAerodynamicConfiguration.h ..\..\AmmoLaunchWayEntity-odb.hxx ..\..\AmmoLaunchWayEntity.h ..\..\AmmunitionAttackTargetTypeEntity-odb.hxx ..\..\AmmunitionAttackTargetTypeEntity.h ..\..\AmmunitionEntity-odb.hxx ..\..\AmmunitionEntity.h ..\..\AmmunitionGuidanceTypeEntity-odb.hxx ..\..\AmmunitionGuidanceTypeEntity.h ..\..\AmmunitionKillingMethodEntity-odb.hxx ..\..\AmmunitionKillingMethodEntity.h ..\..\AmmunitionTypeEntity-odb.hxx ..\..\AmmunitionTypeEntity.h ..\..\InterferencePodEntity-odb.hxx ..\..\InterferencePodEntity.h ..\..\MountingSchemeEntity-odb.hxx ..\..\MountingSchemeEntity.h ..\..\ReconnaissancePayloadEntity.h ..\..\UavModelBombingMethodEntity-odb.hxx ..\..\UavModelBombingMethodEntity.h ..\..\UavModelControlMethodEntity.h ..\..\UavModelDataToJson.h ..\..\UavModelHangingCapability.h ..\..\UavModelLoadTypeEntity-odb.hxx ..\..\UavModelLoadTypeEntity.h ..\..\UavModelMountLocationEntity-odb.hxx ..\..\UavModelMountLocationEntity.h ..\..\UavModelOperationWayEntity-odb.hxx ..\..\UavModelOperationWayEntity.h ..\..\UavModelRecoveryModeEntity-odb.hxx ..\..\UavModelRecoveryModeEntity.h ..\..\UavModelTypeEntity-odb.hxx ..\..\UavModelTypeEntity.h ..\..\ammoaerodynamicconfigurationdao.h ..\..\ammoattacktargetdao.h ..\..\ammodao.h ..\..\ammoguidancetypedao.h ..\..\ammokillingwaydao.h ..\..\ammolaunchwaydao.h ..\..\ammotypedao.h ..\..\databaseconnection.h ..\..\datetime-traits.hxx ..\..\interferencepoddao.h ..\..\json.hpp ..\..\mountingschemedao.h ..\..\uavmodelbombingmethoddao.h ..\..\uavmodeldao.h ..\..\uavmodelentity-odb.hxx ..\..\uavmodelentity.h ..\..\uavmodelloadtypedao.h ..\..\uavmodeloperationwaydao.h ..\..\uavmodelrecoverymodedao.h ..\..\uavmodeltypedao.h ..\..\uavmountlocationdao.h  ..\..\AmmoAerodynamicConfiguration-odb.cxx ..\..\AmmoLaunchWayEntity-odb.cxx ..\..\AmmunitionAttackTargetTypeEntity-odb.cxx ..\..\AmmunitionEntity-odb.cxx ..\..\AmmunitionGuidanceTypeEntity-odb.cxx ..\..\AmmunitionKillingMethodEntity-odb.cxx ..\..\AmmunitionTypeEntity-odb.cxx ..\..\InterferencePodEntity-odb.cxx ..\..\MountingSchemeEntity-odb.cxx ..\..\UavModelBombingMethodEntity-odb.cxx ..\..\UavModelLoadTypeEntity-odb.cxx ..\..\UavModelMountLocationEntity-odb.cxx ..\..\UavModelOperationWayEntity-odb.cxx ..\..\UavModelRecoveryModeEntity-odb.cxx ..\..\UavModelTypeEntity-odb.cxx ..\..\ammoaerodynamicconfigurationdao.cpp ..\..\ammoattacktargetdao.cpp ..\..\ammodao.cpp ..\..\ammoguidancetypedao.cpp ..\..\ammokillingwaydao.cpp ..\..\ammolaunchwaydao.cpp ..\..\ammotypedao.cpp ..\..\databaseconnection.cpp ..\..\interferencepoddao.cpp ..\..\main.cpp ..\..\mountingschemedao.cpp ..\..\uavmodelbombingmethoddao.cpp ..\..\uavmodeldao.cpp ..\..\uavmodelentity-odb.cxx ..\..\uavmodelloadtypedao.cpp ..\..\uavmodeloperationwaydao.cpp ..\..\uavmodelrecoverymodedao.cpp ..\..\uavmodeltypedao.cpp ..\..\uavmountlocationdao.cpp     
+	$(ZIP) ListModel.zip $(SOURCES) $(DIST) ..\..\ListModel.pro B:\QT\5.15.2\mingw81_64\mkspecs\features\spec_pre.prf B:\QT\5.15.2\mingw81_64\mkspecs\qdevice.pri B:\QT\5.15.2\mingw81_64\mkspecs\features\device_config.prf B:\QT\5.15.2\mingw81_64\mkspecs\common\sanitize.conf B:\QT\5.15.2\mingw81_64\mkspecs\common\gcc-base.conf B:\QT\5.15.2\mingw81_64\mkspecs\common\g++-base.conf B:\QT\5.15.2\mingw81_64\mkspecs\common\angle.conf B:\QT\5.15.2\mingw81_64\mkspecs\features\win32\windows_vulkan_sdk.prf B:\QT\5.15.2\mingw81_64\mkspecs\common\windows-vulkan.conf B:\QT\5.15.2\mingw81_64\mkspecs\common\g++-win32.conf B:\QT\5.15.2\mingw81_64\mkspecs\common\windows-desktop.conf B:\QT\5.15.2\mingw81_64\mkspecs\qconfig.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3danimation.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3danimation_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dcore.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dcore_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dextras.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dextras_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dinput.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dinput_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dlogic.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dlogic_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquick.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquick_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickextras.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickextras_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickinput.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickinput_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickrender.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickrender_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3drender.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_3drender_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_accessibility_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axbase.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axbase_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axcontainer.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axcontainer_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axserver.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_axserver_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bluetooth.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bluetooth_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bodymovin_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_bootstrap_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_charts.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_charts_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_concurrent.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_concurrent_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_core.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_core_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_datavisualization.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_datavisualization_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_dbus.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_dbus_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designer.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designer_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_designercomponents_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_edid_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_egl_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_fb_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gamepad.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gamepad_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gui.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_gui_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_help.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_help_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_insighttracker.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_insighttracker_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_insighttrackerqml.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_insighttrackerqml_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_location.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_location_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimedia.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimedia_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_network.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_network_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_networkauth.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_networkauth_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_nfc.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_nfc_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_opengl.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_opengl_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_openglextensions.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_openglextensions_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_packetprotocol_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioning.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioning_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioningquick.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_positioningquick_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_printsupport.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_printsupport_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_purchasing.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_purchasing_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qml.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qml_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmldebug_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmldevtools_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlmodels.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlmodels_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmltest.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmltest_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3d.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3d_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3dassetimport.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3drender.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3drender_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3druntimerender.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3dutils.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick3dutils_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quick_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickparticles_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickshapes_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickwidgets.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_quickwidgets_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_remoteobjects.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_remoteobjects_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_repparser.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_repparser_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_script.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_script_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scripttools.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scripttools_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scxml.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_scxml_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sensors.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sensors_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialbus.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialbus_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialport.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_serialport_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sql.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_sql_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_svg.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_svg_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_testlib.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_testlib_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_texttospeech.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_texttospeech_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_theme_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uiplugin.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uitools.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_uitools_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_virtualkeyboard.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_vulkan_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_webchannel.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_webchannel_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_websockets.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_websockets_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_widgets.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_widgets_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_winextras.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_winextras_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xml.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xml_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\modules\qt_lib_zlib_private.pri B:\QT\5.15.2\mingw81_64\mkspecs\features\qt_functions.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\qt_config.prf B:\QT\5.15.2\mingw81_64\mkspecs\win32-g++\qmake.conf B:\QT\5.15.2\mingw81_64\mkspecs\features\spec_post.prf .qmake.stash B:\QT\5.15.2\mingw81_64\mkspecs\features\exclusive_builds.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\toolchain.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\default_pre.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\win32\default_pre.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\resolve_config.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\exclusive_builds_post.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\default_post.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\build_pass.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\qml_debug.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\precompile_header.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\warn_on.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\qt.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\resources_functions.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\resources.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\moc.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\win32\opengl.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\uic.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\qmake_use.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\file_copies.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\win32\windows.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\testcase_targets.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\exceptions.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\yacc.prf B:\QT\5.15.2\mingw81_64\mkspecs\features\lex.prf ..\..\ListModel.pro ..\..\qml.qrc ..\..\res.qrc B:\QT\5.15.2\mingw81_64\lib\Qt5Quick.prl B:\QT\5.15.2\mingw81_64\lib\Qt5Widgets.prl B:\QT\5.15.2\mingw81_64\lib\Qt5Gui.prl B:\QT\5.15.2\mingw81_64\lib\Qt5QmlModels.prl B:\QT\5.15.2\mingw81_64\lib\Qt5Qml.prl B:\QT\5.15.2\mingw81_64\lib\Qt5Network.prl B:\QT\5.15.2\mingw81_64\lib\Qt5Sql.prl B:\QT\5.15.2\mingw81_64\lib\Qt5Core.prl B:\QT\5.15.2\mingw81_64\lib\qtmain.prl   ..\..\qml.qrc ..\..\res.qrc B:\QT\5.15.2\mingw81_64\mkspecs\features\data\dummy.cpp ..\..\AmmoAerodynamicConfiguration-odb.hxx ..\..\AmmoAerodynamicConfiguration.h ..\..\AmmoLaunchWayEntity-odb.hxx ..\..\AmmoLaunchWayEntity.h ..\..\AmmunitionAttackTargetTypeEntity-odb.hxx ..\..\AmmunitionAttackTargetTypeEntity.h ..\..\AmmunitionEntity-odb.hxx ..\..\AmmunitionEntity.h ..\..\AmmunitionGuidanceTypeEntity-odb.hxx ..\..\AmmunitionGuidanceTypeEntity.h ..\..\AmmunitionKillingMethodEntity-odb.hxx ..\..\AmmunitionKillingMethodEntity.h ..\..\AmmunitionTypeEntity-odb.hxx ..\..\AmmunitionTypeEntity.h ..\..\InterferencePodEntity-odb.hxx ..\..\InterferencePodEntity.h ..\..\MountingSchemeEntity-odb.hxx ..\..\MountingSchemeEntity.h ..\..\ReconnaissanceCommunicationEntity-odb.hxx ..\..\ReconnaissanceCommunicationEntity.h ..\..\ReconnaissancePayloadEntity.h ..\..\UavModelBombingMethodEntity-odb.hxx ..\..\UavModelBombingMethodEntity.h ..\..\UavModelControlMethodEntity.h ..\..\UavModelDataToJson.h ..\..\UavModelHangingCapability.h ..\..\UavModelLoadTypeEntity-odb.hxx ..\..\UavModelLoadTypeEntity.h ..\..\UavModelMountLocationEntity-odb.hxx ..\..\UavModelMountLocationEntity.h ..\..\UavModelOperationWayEntity-odb.hxx ..\..\UavModelOperationWayEntity.h ..\..\UavModelRecoveryModeEntity-odb.hxx ..\..\UavModelRecoveryModeEntity.h ..\..\UavModelTypeEntity-odb.hxx ..\..\UavModelTypeEntity.h ..\..\ammoaerodynamicconfigurationdao.h ..\..\ammoattacktargetdao.h ..\..\ammodao.h ..\..\ammoguidancetypedao.h ..\..\ammokillingwaydao.h ..\..\ammolaunchwaydao.h ..\..\ammotypedao.h ..\..\databaseconnection.h ..\..\datetime-traits.hxx ..\..\interferencepoddao.h ..\..\json.hpp ..\..\mountingschemedao.h ..\..\reconnaissanceCommunicationdao.h ..\..\uavmodelbombingmethoddao.h ..\..\uavmodeldao.h ..\..\uavmodelentity-odb.hxx ..\..\uavmodelentity.h ..\..\uavmodelloadtypedao.h ..\..\uavmodeloperationwaydao.h ..\..\uavmodelrecoverymodedao.h ..\..\uavmodeltypedao.h ..\..\uavmountlocationdao.h  ..\..\AmmoAerodynamicConfiguration-odb.cxx ..\..\AmmoLaunchWayEntity-odb.cxx ..\..\AmmunitionAttackTargetTypeEntity-odb.cxx ..\..\AmmunitionEntity-odb.cxx ..\..\AmmunitionGuidanceTypeEntity-odb.cxx ..\..\AmmunitionKillingMethodEntity-odb.cxx ..\..\AmmunitionTypeEntity-odb.cxx ..\..\InterferencePodEntity-odb.cxx ..\..\MountingSchemeEntity-odb.cxx ..\..\ReconnaissanceCommunicationEntity-odb.cxx ..\..\UavModelBombingMethodEntity-odb.cxx ..\..\UavModelLoadTypeEntity-odb.cxx ..\..\UavModelMountLocationEntity-odb.cxx ..\..\UavModelOperationWayEntity-odb.cxx ..\..\UavModelRecoveryModeEntity-odb.cxx ..\..\UavModelTypeEntity-odb.cxx ..\..\ammoaerodynamicconfigurationdao.cpp ..\..\ammoattacktargetdao.cpp ..\..\ammodao.cpp ..\..\ammoguidancetypedao.cpp ..\..\ammokillingwaydao.cpp ..\..\ammolaunchwaydao.cpp ..\..\ammotypedao.cpp ..\..\databaseconnection.cpp ..\..\interferencepoddao.cpp ..\..\main.cpp ..\..\mountingschemedao.cpp ..\..\reconnaissanceCommunicationdao.cpp ..\..\uavmodelbombingmethoddao.cpp ..\..\uavmodeldao.cpp ..\..\uavmodelentity-odb.cxx ..\..\uavmodelloadtypedao.cpp ..\..\uavmodeloperationwaydao.cpp ..\..\uavmodelrecoverymodedao.cpp ..\..\uavmodeltypedao.cpp ..\..\uavmountlocationdao.cpp     
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\AmmoAerodynamicConfiguration-odb.o release\AmmoLaunchWayEntity-odb.o release\AmmunitionAttackTargetTypeEntity-odb.o release\AmmunitionEntity-odb.o release\AmmunitionGuidanceTypeEntity-odb.o release\AmmunitionKillingMethodEntity-odb.o release\AmmunitionTypeEntity-odb.o release\InterferencePodEntity-odb.o release\MountingSchemeEntity-odb.o release\UavModelBombingMethodEntity-odb.o release\UavModelLoadTypeEntity-odb.o release\UavModelMountLocationEntity-odb.o release\UavModelOperationWayEntity-odb.o release\UavModelRecoveryModeEntity-odb.o release\UavModelTypeEntity-odb.o release\ammoaerodynamicconfigurationdao.o release\ammoattacktargetdao.o release\ammodao.o release\ammoguidancetypedao.o release\ammokillingwaydao.o release\ammolaunchwaydao.o release\ammotypedao.o release\databaseconnection.o release\interferencepoddao.o release\main.o release\mountingschemedao.o release\uavmodelbombingmethoddao.o release\uavmodeldao.o release\uavmodelentity-odb.o release\uavmodelloadtypedao.o release\uavmodeloperationwaydao.o release\uavmodelrecoverymodedao.o release\uavmodeltypedao.o release\uavmountlocationdao.o release\qrc_qml.o release\qrc_res.o release\moc_ammoaerodynamicconfigurationdao.o release\moc_ammoattacktargetdao.o release\moc_ammodao.o release\moc_ammoguidancetypedao.o release\moc_ammokillingwaydao.o release\moc_ammolaunchwaydao.o release\moc_ammotypedao.o release\moc_interferencepoddao.o release\moc_mountingschemedao.o release\moc_uavmodelbombingmethoddao.o release\moc_uavmodeldao.o release\moc_uavmodelloadtypedao.o release\moc_uavmodeloperationwaydao.o release\moc_uavmodelrecoverymodedao.o release\moc_uavmodeltypedao.o release\moc_uavmountlocationdao.o
+	-$(DEL_FILE) release\AmmoAerodynamicConfiguration-odb.o release\AmmoLaunchWayEntity-odb.o release\AmmunitionAttackTargetTypeEntity-odb.o release\AmmunitionEntity-odb.o release\AmmunitionGuidanceTypeEntity-odb.o release\AmmunitionKillingMethodEntity-odb.o release\AmmunitionTypeEntity-odb.o release\InterferencePodEntity-odb.o release\MountingSchemeEntity-odb.o release\ReconnaissanceCommunicationEntity-odb.o release\UavModelBombingMethodEntity-odb.o release\UavModelLoadTypeEntity-odb.o release\UavModelMountLocationEntity-odb.o release\UavModelOperationWayEntity-odb.o release\UavModelRecoveryModeEntity-odb.o release\UavModelTypeEntity-odb.o release\ammoaerodynamicconfigurationdao.o release\ammoattacktargetdao.o release\ammodao.o release\ammoguidancetypedao.o release\ammokillingwaydao.o release\ammolaunchwaydao.o release\ammotypedao.o release\databaseconnection.o release\interferencepoddao.o release\main.o release\mountingschemedao.o release\reconnaissanceCommunicationdao.o release\uavmodelbombingmethoddao.o release\uavmodeldao.o release\uavmodelentity-odb.o release\uavmodelloadtypedao.o release\uavmodeloperationwaydao.o release\uavmodelrecoverymodedao.o release\uavmodeltypedao.o release\uavmountlocationdao.o release\qrc_qml.o release\qrc_res.o release\moc_ammoaerodynamicconfigurationdao.o release\moc_ammoattacktargetdao.o release\moc_ammodao.o release\moc_ammoguidancetypedao.o release\moc_ammokillingwaydao.o release\moc_ammolaunchwaydao.o release\moc_ammotypedao.o release\moc_interferencepoddao.o release\moc_mountingschemedao.o release\moc_reconnaissanceCommunicationdao.o release\moc_uavmodelbombingmethoddao.o release\moc_uavmodeldao.o release\moc_uavmodelloadtypedao.o release\moc_uavmodeloperationwaydao.o release\moc_uavmodelrecoverymodedao.o release\moc_uavmodeltypedao.o release\moc_uavmountlocationdao.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -305,6 +316,7 @@ release/qrc_qml.cpp: ../../qml.qrc \
 		../../AmmoRecordManagement.qml \
 		../../AddUavModelAllData.qml \
 		../../AddMountingSchemeData.qml \
+		../../AddReconnaissanceCommunicationData.qml \
 		../../NewMissileBaseData.qml \
 		../../NewMissileLaunchData.qml \
 		../../AddAmmoComponentManagement.qml \
@@ -324,6 +336,7 @@ release/qrc_qml.cpp: ../../qml.qrc \
 		../../AddAmmoComponentFuse.qml \
 		../../AddAmmoComponentWarhead.qml \
 		../../AddAmmoCommonData.qml \
+		../../ReconnaissanceCommunicationRecordManagement.qml \
 		../../Resources/Background/bg_MainBackground.png \
 		../../AddAmmoModules/HalfarmorPiercingBullet.qml \
 		../../AddAmmoModules/FuelAirBomb.qml \
@@ -353,9 +366,9 @@ compiler_moc_predefs_clean:
 release/moc_predefs.h: B:/QT/5.15.2/mingw81_64/mkspecs/features/data/dummy.cpp
 	g++ -fno-keep-inline-dllexport -O2 -std=gnu++11 -Wall -Wextra -Wextra -dM -E -o release\moc_predefs.h B:\QT\5.15.2\mingw81_64\mkspecs\features\data\dummy.cpp
 
-compiler_moc_header_make_all: release/moc_ammoaerodynamicconfigurationdao.cpp release/moc_ammoattacktargetdao.cpp release/moc_ammodao.cpp release/moc_ammoguidancetypedao.cpp release/moc_ammokillingwaydao.cpp release/moc_ammolaunchwaydao.cpp release/moc_ammotypedao.cpp release/moc_interferencepoddao.cpp release/moc_mountingschemedao.cpp release/moc_uavmodelbombingmethoddao.cpp release/moc_uavmodeldao.cpp release/moc_uavmodelloadtypedao.cpp release/moc_uavmodeloperationwaydao.cpp release/moc_uavmodelrecoverymodedao.cpp release/moc_uavmodeltypedao.cpp release/moc_uavmountlocationdao.cpp
+compiler_moc_header_make_all: release/moc_ammoaerodynamicconfigurationdao.cpp release/moc_ammoattacktargetdao.cpp release/moc_ammodao.cpp release/moc_ammoguidancetypedao.cpp release/moc_ammokillingwaydao.cpp release/moc_ammolaunchwaydao.cpp release/moc_ammotypedao.cpp release/moc_interferencepoddao.cpp release/moc_mountingschemedao.cpp release/moc_reconnaissanceCommunicationdao.cpp release/moc_uavmodelbombingmethoddao.cpp release/moc_uavmodeldao.cpp release/moc_uavmodelloadtypedao.cpp release/moc_uavmodeloperationwaydao.cpp release/moc_uavmodelrecoverymodedao.cpp release/moc_uavmodeltypedao.cpp release/moc_uavmountlocationdao.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) release\moc_ammoaerodynamicconfigurationdao.cpp release\moc_ammoattacktargetdao.cpp release\moc_ammodao.cpp release\moc_ammoguidancetypedao.cpp release\moc_ammokillingwaydao.cpp release\moc_ammolaunchwaydao.cpp release\moc_ammotypedao.cpp release\moc_interferencepoddao.cpp release\moc_mountingschemedao.cpp release\moc_uavmodelbombingmethoddao.cpp release\moc_uavmodeldao.cpp release\moc_uavmodelloadtypedao.cpp release\moc_uavmodeloperationwaydao.cpp release\moc_uavmodelrecoverymodedao.cpp release\moc_uavmodeltypedao.cpp release\moc_uavmountlocationdao.cpp
+	-$(DEL_FILE) release\moc_ammoaerodynamicconfigurationdao.cpp release\moc_ammoattacktargetdao.cpp release\moc_ammodao.cpp release\moc_ammoguidancetypedao.cpp release\moc_ammokillingwaydao.cpp release\moc_ammolaunchwaydao.cpp release\moc_ammotypedao.cpp release\moc_interferencepoddao.cpp release\moc_mountingschemedao.cpp release\moc_reconnaissanceCommunicationdao.cpp release\moc_uavmodelbombingmethoddao.cpp release\moc_uavmodeldao.cpp release\moc_uavmodelloadtypedao.cpp release\moc_uavmodeloperationwaydao.cpp release\moc_uavmodelrecoverymodedao.cpp release\moc_uavmodeltypedao.cpp release\moc_uavmountlocationdao.cpp
 release/moc_ammoaerodynamicconfigurationdao.cpp: ../../ammoaerodynamicconfigurationdao.h \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/QObject \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/qobject.h \
@@ -1967,6 +1980,186 @@ release/moc_mountingschemedao.cpp: ../../mountingschemedao.h \
 		release/moc_predefs.h \
 		B:/QT/5.15.2/mingw81_64/bin/moc.exe
 	B:\QT\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/12738/Desktop/testProject/TestTableView/TestTableViewListModel/build/Desktop_Qt_5_15_2_MinGW_64_bit-Debug/release/moc_predefs.h -IB:/QT/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/12738/Desktop/testProject/TestTableView/TestTableViewListModel -IC:/Users/12738/Desktop/testProject/TestTableView/TestTableViewListModel/pgsqlconnect/include -IC:/Users/12738/Desktop/testProject/TestTableView/TestTableViewListModel/pgsqlconnect/include/postgresql -IC:/Users/12738/Desktop/testProject/TestTableView/TestTableViewListModel/generated -IB:/QT/5.15.2/mingw81_64/include -IB:/QT/5.15.2/mingw81_64/include/QtQuick -IB:/QT/5.15.2/mingw81_64/include/QtWidgets -IB:/QT/5.15.2/mingw81_64/include/QtGui -IB:/QT/5.15.2/mingw81_64/include/QtANGLE -IB:/QT/5.15.2/mingw81_64/include/QtQmlModels -IB:/QT/5.15.2/mingw81_64/include/QtQml -IB:/QT/5.15.2/mingw81_64/include/QtNetwork -IB:/QT/5.15.2/mingw81_64/include/QtSql -IB:/QT/5.15.2/mingw81_64/include/QtCore -I. -IB:/QT/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IB:/QT/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IB:/QT/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IB:/QT/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IB:/QT/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IB:/QT/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\mountingschemedao.h -o release\moc_mountingschemedao.cpp
+
+release/moc_reconnaissanceCommunicationdao.cpp: ../../reconnaissanceCommunicationdao.h \
+		../../databaseconnection.h \
+		../../pgsqlconnect/include/odb/pgsql/database.hxx \
+		../../pgsqlconnect/include/odb/pre.hxx \
+		../../pgsqlconnect/include/odb/compilers/vc/pre.hxx \
+		../../pgsqlconnect/include/odb/database.hxx \
+		../../pgsqlconnect/include/odb/details/config.hxx \
+		../../pgsqlconnect/include/odb/details/config.h \
+		../../pgsqlconnect/include/odb/traits.hxx \
+		../../pgsqlconnect/include/odb/forward.hxx \
+		../../pgsqlconnect/include/odb/details/export.hxx \
+		../../pgsqlconnect/include/odb/post.hxx \
+		../../pgsqlconnect/include/odb/compilers/vc/post.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr-fwd.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/counter-type.hxx \
+		../../pgsqlconnect/include/odb/pointer-traits.hxx \
+		../../pgsqlconnect/include/odb/details/meta/remove-const.hxx \
+		../../pgsqlconnect/include/odb/schema-version.hxx \
+		../../pgsqlconnect/include/odb/query.hxx \
+		../../pgsqlconnect/include/odb/prepared-query.hxx \
+		../../pgsqlconnect/include/odb/result.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/base.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/base.ixx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/base.txx \
+		../../pgsqlconnect/include/odb/details/meta/answer.hxx \
+		../../pgsqlconnect/include/odb/details/meta/polymorphic-p.hxx \
+		../../pgsqlconnect/include/odb/details/meta/class-p.hxx \
+		../../pgsqlconnect/include/odb/details/meta/remove-const-volatile.hxx \
+		../../pgsqlconnect/include/odb/details/meta/remove-volatile.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/exception.hxx \
+		../../pgsqlconnect/include/odb/exception.hxx \
+		../../pgsqlconnect/include/odb/result.txx \
+		../../pgsqlconnect/include/odb/statement.hxx \
+		../../pgsqlconnect/include/odb/connection.hxx \
+		../../pgsqlconnect/include/odb/details/c-string.hxx \
+		../../pgsqlconnect/include/odb/connection.ixx \
+		../../pgsqlconnect/include/odb/connection.txx \
+		../../pgsqlconnect/include/odb/exceptions.hxx \
+		../../pgsqlconnect/include/odb/details/mutex.hxx \
+		../../pgsqlconnect/include/odb/details/posix/mutex.hxx \
+		../../pgsqlconnect/include/odb/details/posix/mutex.ixx \
+		../../pgsqlconnect/include/odb/details/posix/exceptions.hxx \
+		../../pgsqlconnect/include/odb/details/exception.hxx \
+		../../pgsqlconnect/include/odb/details/function-wrapper.hxx \
+		../../pgsqlconnect/include/odb/details/function-wrapper.ixx \
+		../../pgsqlconnect/include/odb/details/function-wrapper.txx \
+		../../pgsqlconnect/include/odb/database.ixx \
+		../../pgsqlconnect/include/odb/transaction.hxx \
+		../../pgsqlconnect/include/odb/details/unique-ptr.hxx \
+		../../pgsqlconnect/include/odb/transaction.ixx \
+		../../pgsqlconnect/include/odb/database.txx \
+		../../pgsqlconnect/include/odb/section.hxx \
+		../../pgsqlconnect/include/odb/no-op-cache-traits.hxx \
+		../../pgsqlconnect/include/odb/details/transfer-ptr.hxx \
+		../../pgsqlconnect/include/odb/pgsql/version.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/config.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/config.h \
+		../../pgsqlconnect/include/odb/version.hxx \
+		../../pgsqlconnect/include/odb/pgsql/forward.hxx \
+		../../pgsqlconnect/include/odb/pgsql/query.hxx \
+		../../pgsqlconnect/include/odb/pgsql/traits.hxx \
+		../../pgsqlconnect/include/odb/wrapper-traits.hxx \
+		../../pgsqlconnect/include/odb/nullable.hxx \
+		../../pgsqlconnect/include/odb/details/buffer.hxx \
+		../../pgsqlconnect/include/odb/details/wrapper-p.hxx \
+		../../pgsqlconnect/include/odb/pgsql/pgsql-types.hxx \
+		../../pgsqlconnect/include/odb/pgsql/pgsql-fwd.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/export.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/endian-traits.hxx \
+		../../pgsqlconnect/include/odb/pgsql/binding.hxx \
+		../../pgsqlconnect/include/odb/pgsql/pgsql-oid.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/conversion.hxx \
+		../../pgsqlconnect/include/odb/pgsql/query.ixx \
+		../../pgsqlconnect/include/odb/pgsql/query.txx \
+		../../pgsqlconnect/include/odb/pgsql/tracer.hxx \
+		../../pgsqlconnect/include/odb/tracer.hxx \
+		../../pgsqlconnect/include/odb/pgsql/connection.hxx \
+		../../pgsqlconnect/include/odb/pgsql/transaction-impl.hxx \
+		../../pgsqlconnect/include/odb/pgsql/transaction-impl.ixx \
+		../../pgsqlconnect/include/odb/pgsql/auto-handle.hxx \
+		../../pgsqlconnect/include/odb/pgsql/connection.ixx \
+		../../pgsqlconnect/include/odb/pgsql/connection-factory.hxx \
+		../../pgsqlconnect/include/odb/details/condition.hxx \
+		../../pgsqlconnect/include/odb/details/posix/condition.hxx \
+		../../pgsqlconnect/include/odb/details/posix/condition.ixx \
+		../../pgsqlconnect/include/odb/pgsql/database.ixx \
+		../../pgsqlconnect/include/odb/pgsql/transaction.hxx \
+		../../pgsqlconnect/include/odb/pgsql/transaction.ixx \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QObject \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qobject.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qobjectdefs.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qnamespace.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qglobal.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qconfig-bootstrapped.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qconfig.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qtcore-config.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qsystemdetection.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qprocessordetection.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcompilerdetection.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qtypeinfo.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qsysinfo.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qlogging.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qflags.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qatomic.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qbasicatomic.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qatomic_bootstrap.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qgenericatomic.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qatomic_cxx11.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qatomic_msvc.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qglobalstatic.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qmutex.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qnumeric.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qversiontagging.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qobjectdefs_impl.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstring.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qchar.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qbytearray.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qrefcount.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qarraydata.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringliteral.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringalgorithms.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringview.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringbuilder.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qlist.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qalgorithms.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qiterator.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qhashfunctions.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qpair.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qvector.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcontainertools_impl.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qpoint.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qbytearraylist.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringlist.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qregexp.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcoreevent.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qscopedpointer.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qmetatype.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qvarlengtharray.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcontainerfwd.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qobject_impl.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QJsonArray \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qjsonarray.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qjsonvalue.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qshareddata.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qhash.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcborvalue.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qdatetime.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcborcommon.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qdebug.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qmap.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qtextstream.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qiodevice.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qlocale.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qvariant.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qset.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcontiguouscache.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qsharedpointer.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qsharedpointer_impl.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qregularexpression.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qurl.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qurlquery.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/quuid.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QJsonDocument \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qjsondocument.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QJsonObject \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qjsonobject.h \
+		B:/QT/5.15.2/mingw81_64/include/QtQml/QJSValue \
+		B:/QT/5.15.2/mingw81_64/include/QtQml/qjsvalue.h \
+		B:/QT/5.15.2/mingw81_64/include/QtQml/qtqmlglobal.h \
+		B:/QT/5.15.2/mingw81_64/include/QtQml/qtqml-config.h \
+		B:/QT/5.15.2/mingw81_64/include/QtNetwork/qtnetworkglobal.h \
+		B:/QT/5.15.2/mingw81_64/include/QtNetwork/qtnetwork-config.h \
+		B:/QT/5.15.2/mingw81_64/include/QtQml/QQmlParserStatus \
+		B:/QT/5.15.2/mingw81_64/include/QtQml/qqmlparserstatus.h \
+		release/moc_predefs.h \
+		B:/QT/5.15.2/mingw81_64/bin/moc.exe
+	B:\QT\5.15.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/12738/Desktop/testProject/TestTableView/TestTableViewListModel/build/Desktop_Qt_5_15_2_MinGW_64_bit-Debug/release/moc_predefs.h -IB:/QT/5.15.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/12738/Desktop/testProject/TestTableView/TestTableViewListModel -IC:/Users/12738/Desktop/testProject/TestTableView/TestTableViewListModel/pgsqlconnect/include -IC:/Users/12738/Desktop/testProject/TestTableView/TestTableViewListModel/pgsqlconnect/include/postgresql -IC:/Users/12738/Desktop/testProject/TestTableView/TestTableViewListModel/generated -IB:/QT/5.15.2/mingw81_64/include -IB:/QT/5.15.2/mingw81_64/include/QtQuick -IB:/QT/5.15.2/mingw81_64/include/QtWidgets -IB:/QT/5.15.2/mingw81_64/include/QtGui -IB:/QT/5.15.2/mingw81_64/include/QtANGLE -IB:/QT/5.15.2/mingw81_64/include/QtQmlModels -IB:/QT/5.15.2/mingw81_64/include/QtQml -IB:/QT/5.15.2/mingw81_64/include/QtNetwork -IB:/QT/5.15.2/mingw81_64/include/QtSql -IB:/QT/5.15.2/mingw81_64/include/QtCore -I. -IB:/QT/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IB:/QT/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IB:/QT/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IB:/QT/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IB:/QT/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IB:/QT/Tools/mingw810_64/x86_64-w64-mingw32/include ..\..\reconnaissanceCommunicationdao.h -o release\moc_reconnaissanceCommunicationdao.cpp
 
 release/moc_uavmodelbombingmethoddao.cpp: ../../uavmodelbombingmethoddao.h \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/QObject \
@@ -4512,6 +4705,180 @@ release/MountingSchemeEntity-odb.o: ../../MountingSchemeEntity-odb.cxx ../../pgs
 		../../pgsqlconnect/include/odb/pgsql/simple-object-result.hxx \
 		../../pgsqlconnect/include/odb/pgsql/simple-object-result.txx
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\MountingSchemeEntity-odb.o ..\..\MountingSchemeEntity-odb.cxx
+
+release/ReconnaissanceCommunicationEntity-odb.o: ../../ReconnaissanceCommunicationEntity-odb.cxx ../../pgsqlconnect/include/odb/pre.hxx \
+		../../pgsqlconnect/include/odb/compilers/vc/pre.hxx \
+		../../ReconnaissanceCommunicationEntity-odb.hxx \
+		../../pgsqlconnect/include/odb/version.hxx \
+		../../pgsqlconnect/include/odb/post.hxx \
+		../../pgsqlconnect/include/odb/compilers/vc/post.hxx \
+		../../ReconnaissanceCommunicationEntity.h \
+		../../pgsqlconnect/include/odb/core.hxx \
+		../../pgsqlconnect/include/odb/forward.hxx \
+		../../pgsqlconnect/include/odb/details/export.hxx \
+		../../pgsqlconnect/include/odb/details/config.hxx \
+		../../pgsqlconnect/include/odb/details/config.h \
+		../../pgsqlconnect/include/odb/details/shared-ptr-fwd.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/counter-type.hxx \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QDateTime \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qdatetime.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstring.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qchar.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qglobal.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qconfig-bootstrapped.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qconfig.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qtcore-config.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qsystemdetection.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qprocessordetection.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcompilerdetection.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qtypeinfo.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qsysinfo.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qlogging.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qflags.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qatomic.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qbasicatomic.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qatomic_bootstrap.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qgenericatomic.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qatomic_cxx11.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qatomic_msvc.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qglobalstatic.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qmutex.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qnumeric.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qversiontagging.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qbytearray.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qrefcount.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qnamespace.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qarraydata.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringliteral.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringalgorithms.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringview.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringbuilder.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qshareddata.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qhash.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qiterator.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qlist.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qalgorithms.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qhashfunctions.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qpair.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qvector.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcontainertools_impl.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qpoint.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qbytearraylist.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringlist.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qregexp.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
+		../../datetime-traits.hxx \
+		../../pgsqlconnect/include/odb/pgsql/traits.hxx \
+		../../pgsqlconnect/include/odb/traits.hxx \
+		../../pgsqlconnect/include/odb/pointer-traits.hxx \
+		../../pgsqlconnect/include/odb/details/meta/remove-const.hxx \
+		../../pgsqlconnect/include/odb/wrapper-traits.hxx \
+		../../pgsqlconnect/include/odb/nullable.hxx \
+		../../pgsqlconnect/include/odb/details/buffer.hxx \
+		../../pgsqlconnect/include/odb/details/wrapper-p.hxx \
+		../../pgsqlconnect/include/odb/details/meta/answer.hxx \
+		../../pgsqlconnect/include/odb/pgsql/version.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/config.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/config.h \
+		../../pgsqlconnect/include/odb/pgsql/pgsql-types.hxx \
+		../../pgsqlconnect/include/odb/pgsql/pgsql-fwd.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/export.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/endian-traits.hxx \
+		../../pgsqlconnect/include/odb/callback.hxx \
+		../../pgsqlconnect/include/odb/container-traits.hxx \
+		../../pgsqlconnect/include/odb/std-map-traits.hxx \
+		../../pgsqlconnect/include/odb/std-set-traits.hxx \
+		../../pgsqlconnect/include/odb/std-list-traits.hxx \
+		../../pgsqlconnect/include/odb/std-vector-traits.hxx \
+		../../pgsqlconnect/include/odb/std-deque-traits.hxx \
+		../../pgsqlconnect/include/odb/std-array-traits.hxx \
+		../../pgsqlconnect/include/odb/std-forward-list-traits.hxx \
+		../../pgsqlconnect/include/odb/std-unordered-map-traits.hxx \
+		../../pgsqlconnect/include/odb/std-unordered-set-traits.hxx \
+		../../pgsqlconnect/include/odb/session.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/base.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/base.ixx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/base.txx \
+		../../pgsqlconnect/include/odb/details/meta/polymorphic-p.hxx \
+		../../pgsqlconnect/include/odb/details/meta/class-p.hxx \
+		../../pgsqlconnect/include/odb/details/meta/remove-const-volatile.hxx \
+		../../pgsqlconnect/include/odb/details/meta/remove-volatile.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/exception.hxx \
+		../../pgsqlconnect/include/odb/exception.hxx \
+		../../pgsqlconnect/include/odb/details/type-info.hxx \
+		../../pgsqlconnect/include/odb/session.ixx \
+		../../pgsqlconnect/include/odb/exceptions.hxx \
+		../../pgsqlconnect/include/odb/session.txx \
+		../../pgsqlconnect/include/odb/cache-traits.hxx \
+		../../pgsqlconnect/include/odb/no-op-cache-traits.hxx \
+		../../pgsqlconnect/include/odb/result.hxx \
+		../../pgsqlconnect/include/odb/result.txx \
+		../../pgsqlconnect/include/odb/simple-object-result.hxx \
+		../../pgsqlconnect/include/odb/object-result.hxx \
+		../../pgsqlconnect/include/odb/simple-object-result.txx \
+		../../pgsqlconnect/include/odb/details/unused.hxx \
+		../../pgsqlconnect/include/odb/pgsql/forward.hxx \
+		../../pgsqlconnect/include/odb/pgsql/binding.hxx \
+		../../pgsqlconnect/include/odb/pgsql/query.hxx \
+		../../pgsqlconnect/include/odb/query.hxx \
+		../../pgsqlconnect/include/odb/pgsql/pgsql-oid.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/conversion.hxx \
+		../../pgsqlconnect/include/odb/pgsql/query.ixx \
+		../../pgsqlconnect/include/odb/pgsql/query.txx \
+		../../ReconnaissanceCommunicationEntity-odb.ixx \
+		../../pgsqlconnect/include/odb/pgsql/database.hxx \
+		../../pgsqlconnect/include/odb/database.hxx \
+		../../pgsqlconnect/include/odb/schema-version.hxx \
+		../../pgsqlconnect/include/odb/prepared-query.hxx \
+		../../pgsqlconnect/include/odb/statement.hxx \
+		../../pgsqlconnect/include/odb/connection.hxx \
+		../../pgsqlconnect/include/odb/details/c-string.hxx \
+		../../pgsqlconnect/include/odb/connection.ixx \
+		../../pgsqlconnect/include/odb/connection.txx \
+		../../pgsqlconnect/include/odb/details/mutex.hxx \
+		../../pgsqlconnect/include/odb/details/posix/mutex.hxx \
+		../../pgsqlconnect/include/odb/details/posix/mutex.ixx \
+		../../pgsqlconnect/include/odb/details/posix/exceptions.hxx \
+		../../pgsqlconnect/include/odb/details/exception.hxx \
+		../../pgsqlconnect/include/odb/details/function-wrapper.hxx \
+		../../pgsqlconnect/include/odb/details/function-wrapper.ixx \
+		../../pgsqlconnect/include/odb/details/function-wrapper.txx \
+		../../pgsqlconnect/include/odb/database.ixx \
+		../../pgsqlconnect/include/odb/transaction.hxx \
+		../../pgsqlconnect/include/odb/details/unique-ptr.hxx \
+		../../pgsqlconnect/include/odb/transaction.ixx \
+		../../pgsqlconnect/include/odb/database.txx \
+		../../pgsqlconnect/include/odb/section.hxx \
+		../../pgsqlconnect/include/odb/details/transfer-ptr.hxx \
+		../../pgsqlconnect/include/odb/pgsql/tracer.hxx \
+		../../pgsqlconnect/include/odb/tracer.hxx \
+		../../pgsqlconnect/include/odb/pgsql/connection.hxx \
+		../../pgsqlconnect/include/odb/pgsql/transaction-impl.hxx \
+		../../pgsqlconnect/include/odb/pgsql/transaction-impl.ixx \
+		../../pgsqlconnect/include/odb/pgsql/auto-handle.hxx \
+		../../pgsqlconnect/include/odb/pgsql/connection.ixx \
+		../../pgsqlconnect/include/odb/pgsql/connection-factory.hxx \
+		../../pgsqlconnect/include/odb/details/condition.hxx \
+		../../pgsqlconnect/include/odb/details/posix/condition.hxx \
+		../../pgsqlconnect/include/odb/details/posix/condition.ixx \
+		../../pgsqlconnect/include/odb/pgsql/database.ixx \
+		../../pgsqlconnect/include/odb/pgsql/transaction.hxx \
+		../../pgsqlconnect/include/odb/pgsql/transaction.ixx \
+		../../pgsqlconnect/include/odb/pgsql/statement.hxx \
+		../../pgsqlconnect/include/odb/pgsql/statement-cache.hxx \
+		../../pgsqlconnect/include/odb/pgsql/statements-base.hxx \
+		../../pgsqlconnect/include/odb/pgsql/statement-cache.txx \
+		../../pgsqlconnect/include/odb/pgsql/simple-object-statements.hxx \
+		../../pgsqlconnect/include/odb/pgsql/simple-object-statements.ixx \
+		../../pgsqlconnect/include/odb/pgsql/simple-object-statements.txx \
+		../../pgsqlconnect/include/odb/pgsql/traits-calls.hxx \
+		../../pgsqlconnect/include/odb/pgsql/container-statements.hxx \
+		../../pgsqlconnect/include/odb/pgsql/container-statements.txx \
+		../../pgsqlconnect/include/odb/pgsql/exceptions.hxx \
+		../../pgsqlconnect/include/odb/pgsql/simple-object-result.hxx \
+		../../pgsqlconnect/include/odb/pgsql/simple-object-result.txx
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\ReconnaissanceCommunicationEntity-odb.o ..\..\ReconnaissanceCommunicationEntity-odb.cxx
 
 release/UavModelBombingMethodEntity-odb.o: ../../UavModelBombingMethodEntity-odb.cxx ../../pgsqlconnect/include/odb/pre.hxx \
 		../../pgsqlconnect/include/odb/compilers/vc/pre.hxx \
@@ -7064,7 +7431,32 @@ release/interferencepoddao.o: ../../interferencepoddao.cpp ../../interferencepod
 		../../pgsqlconnect/include/odb/details/unused.hxx \
 		../../InterferencePodEntity-odb.ixx \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/QJsonValue \
-		B:/QT/5.15.2/mingw81_64/include/QtCore/QDebug
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QDebug \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QFile \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qfile.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qfiledevice.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QTemporaryFile \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/QImage \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qimage.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qtguiglobal.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qtgui-config.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qcolor.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qrgb.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qpaintdevice.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qwindowdefs.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qwindowdefs_win.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qrect.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qmargins.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qsize.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qpixelformat.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qtransform.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qmatrix.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qpolygon.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qregion.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qdatastream.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\interferencepoddao.o ..\..\interferencepoddao.cpp
 
 release/main.o: ../../main.cpp B:/QT/5.15.2/mingw81_64/include/QtGui/QGuiApplication \
@@ -7493,6 +7885,237 @@ release/mountingschemedao.o: ../../mountingschemedao.cpp ../../mountingschemedao
 		B:/QT/5.15.2/mingw81_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mountingschemedao.o ..\..\mountingschemedao.cpp
 
+release/reconnaissanceCommunicationdao.o: ../../reconnaissanceCommunicationdao.cpp ../../reconnaissanceCommunicationdao.h \
+		../../databaseconnection.h \
+		../../pgsqlconnect/include/odb/pgsql/database.hxx \
+		../../pgsqlconnect/include/odb/pre.hxx \
+		../../pgsqlconnect/include/odb/compilers/vc/pre.hxx \
+		../../pgsqlconnect/include/odb/database.hxx \
+		../../pgsqlconnect/include/odb/details/config.hxx \
+		../../pgsqlconnect/include/odb/details/config.h \
+		../../pgsqlconnect/include/odb/traits.hxx \
+		../../pgsqlconnect/include/odb/forward.hxx \
+		../../pgsqlconnect/include/odb/details/export.hxx \
+		../../pgsqlconnect/include/odb/post.hxx \
+		../../pgsqlconnect/include/odb/compilers/vc/post.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr-fwd.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/counter-type.hxx \
+		../../pgsqlconnect/include/odb/pointer-traits.hxx \
+		../../pgsqlconnect/include/odb/details/meta/remove-const.hxx \
+		../../pgsqlconnect/include/odb/schema-version.hxx \
+		../../pgsqlconnect/include/odb/query.hxx \
+		../../pgsqlconnect/include/odb/prepared-query.hxx \
+		../../pgsqlconnect/include/odb/result.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/base.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/base.ixx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/base.txx \
+		../../pgsqlconnect/include/odb/details/meta/answer.hxx \
+		../../pgsqlconnect/include/odb/details/meta/polymorphic-p.hxx \
+		../../pgsqlconnect/include/odb/details/meta/class-p.hxx \
+		../../pgsqlconnect/include/odb/details/meta/remove-const-volatile.hxx \
+		../../pgsqlconnect/include/odb/details/meta/remove-volatile.hxx \
+		../../pgsqlconnect/include/odb/details/shared-ptr/exception.hxx \
+		../../pgsqlconnect/include/odb/exception.hxx \
+		../../pgsqlconnect/include/odb/result.txx \
+		../../pgsqlconnect/include/odb/statement.hxx \
+		../../pgsqlconnect/include/odb/connection.hxx \
+		../../pgsqlconnect/include/odb/details/c-string.hxx \
+		../../pgsqlconnect/include/odb/connection.ixx \
+		../../pgsqlconnect/include/odb/connection.txx \
+		../../pgsqlconnect/include/odb/exceptions.hxx \
+		../../pgsqlconnect/include/odb/details/mutex.hxx \
+		../../pgsqlconnect/include/odb/details/posix/mutex.hxx \
+		../../pgsqlconnect/include/odb/details/posix/mutex.ixx \
+		../../pgsqlconnect/include/odb/details/posix/exceptions.hxx \
+		../../pgsqlconnect/include/odb/details/exception.hxx \
+		../../pgsqlconnect/include/odb/details/function-wrapper.hxx \
+		../../pgsqlconnect/include/odb/details/function-wrapper.ixx \
+		../../pgsqlconnect/include/odb/details/function-wrapper.txx \
+		../../pgsqlconnect/include/odb/database.ixx \
+		../../pgsqlconnect/include/odb/transaction.hxx \
+		../../pgsqlconnect/include/odb/details/unique-ptr.hxx \
+		../../pgsqlconnect/include/odb/transaction.ixx \
+		../../pgsqlconnect/include/odb/database.txx \
+		../../pgsqlconnect/include/odb/section.hxx \
+		../../pgsqlconnect/include/odb/no-op-cache-traits.hxx \
+		../../pgsqlconnect/include/odb/details/transfer-ptr.hxx \
+		../../pgsqlconnect/include/odb/pgsql/version.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/config.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/config.h \
+		../../pgsqlconnect/include/odb/version.hxx \
+		../../pgsqlconnect/include/odb/pgsql/forward.hxx \
+		../../pgsqlconnect/include/odb/pgsql/query.hxx \
+		../../pgsqlconnect/include/odb/pgsql/traits.hxx \
+		../../pgsqlconnect/include/odb/wrapper-traits.hxx \
+		../../pgsqlconnect/include/odb/nullable.hxx \
+		../../pgsqlconnect/include/odb/details/buffer.hxx \
+		../../pgsqlconnect/include/odb/details/wrapper-p.hxx \
+		../../pgsqlconnect/include/odb/pgsql/pgsql-types.hxx \
+		../../pgsqlconnect/include/odb/pgsql/pgsql-fwd.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/export.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/endian-traits.hxx \
+		../../pgsqlconnect/include/odb/pgsql/binding.hxx \
+		../../pgsqlconnect/include/odb/pgsql/pgsql-oid.hxx \
+		../../pgsqlconnect/include/odb/pgsql/details/conversion.hxx \
+		../../pgsqlconnect/include/odb/pgsql/query.ixx \
+		../../pgsqlconnect/include/odb/pgsql/query.txx \
+		../../pgsqlconnect/include/odb/pgsql/tracer.hxx \
+		../../pgsqlconnect/include/odb/tracer.hxx \
+		../../pgsqlconnect/include/odb/pgsql/connection.hxx \
+		../../pgsqlconnect/include/odb/pgsql/transaction-impl.hxx \
+		../../pgsqlconnect/include/odb/pgsql/transaction-impl.ixx \
+		../../pgsqlconnect/include/odb/pgsql/auto-handle.hxx \
+		../../pgsqlconnect/include/odb/pgsql/connection.ixx \
+		../../pgsqlconnect/include/odb/pgsql/connection-factory.hxx \
+		../../pgsqlconnect/include/odb/details/condition.hxx \
+		../../pgsqlconnect/include/odb/details/posix/condition.hxx \
+		../../pgsqlconnect/include/odb/details/posix/condition.ixx \
+		../../pgsqlconnect/include/odb/pgsql/database.ixx \
+		../../pgsqlconnect/include/odb/pgsql/transaction.hxx \
+		../../pgsqlconnect/include/odb/pgsql/transaction.ixx \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QObject \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qobject.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qobjectdefs.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qnamespace.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qglobal.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qconfig-bootstrapped.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qconfig.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qtcore-config.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qsystemdetection.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qprocessordetection.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcompilerdetection.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qtypeinfo.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qsysinfo.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qlogging.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qflags.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qatomic.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qbasicatomic.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qatomic_bootstrap.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qgenericatomic.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qatomic_cxx11.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qatomic_msvc.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qglobalstatic.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qmutex.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qnumeric.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qversiontagging.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qobjectdefs_impl.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstring.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qchar.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qbytearray.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qrefcount.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qarraydata.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringliteral.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringalgorithms.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringview.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringbuilder.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qlist.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qalgorithms.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qiterator.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qhashfunctions.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qpair.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qvector.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcontainertools_impl.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qpoint.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qbytearraylist.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringlist.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qregexp.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qstringmatcher.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcoreevent.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qscopedpointer.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qmetatype.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qvarlengtharray.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcontainerfwd.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qobject_impl.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QJsonArray \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qjsonarray.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qjsonvalue.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qshareddata.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qhash.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcborvalue.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qdatetime.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcborcommon.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qdebug.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qmap.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qtextstream.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qiodevice.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qlocale.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qvariant.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qset.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qcontiguouscache.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qsharedpointer.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qsharedpointer_impl.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qregularexpression.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qurl.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qurlquery.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/quuid.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QJsonDocument \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qjsondocument.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QJsonObject \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qjsonobject.h \
+		B:/QT/5.15.2/mingw81_64/include/QtQml/QJSValue \
+		B:/QT/5.15.2/mingw81_64/include/QtQml/qjsvalue.h \
+		B:/QT/5.15.2/mingw81_64/include/QtQml/qtqmlglobal.h \
+		B:/QT/5.15.2/mingw81_64/include/QtQml/qtqml-config.h \
+		B:/QT/5.15.2/mingw81_64/include/QtNetwork/qtnetworkglobal.h \
+		B:/QT/5.15.2/mingw81_64/include/QtNetwork/qtnetwork-config.h \
+		B:/QT/5.15.2/mingw81_64/include/QtQml/QQmlParserStatus \
+		B:/QT/5.15.2/mingw81_64/include/QtQml/qqmlparserstatus.h \
+		../../ReconnaissanceCommunicationEntity.h \
+		../../pgsqlconnect/include/odb/core.hxx \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QDateTime \
+		../../datetime-traits.hxx \
+		../../ReconnaissanceCommunicationEntity-odb.hxx \
+		../../pgsqlconnect/include/odb/callback.hxx \
+		../../pgsqlconnect/include/odb/container-traits.hxx \
+		../../pgsqlconnect/include/odb/std-map-traits.hxx \
+		../../pgsqlconnect/include/odb/std-set-traits.hxx \
+		../../pgsqlconnect/include/odb/std-list-traits.hxx \
+		../../pgsqlconnect/include/odb/std-vector-traits.hxx \
+		../../pgsqlconnect/include/odb/std-deque-traits.hxx \
+		../../pgsqlconnect/include/odb/std-array-traits.hxx \
+		../../pgsqlconnect/include/odb/std-forward-list-traits.hxx \
+		../../pgsqlconnect/include/odb/std-unordered-map-traits.hxx \
+		../../pgsqlconnect/include/odb/std-unordered-set-traits.hxx \
+		../../pgsqlconnect/include/odb/session.hxx \
+		../../pgsqlconnect/include/odb/details/type-info.hxx \
+		../../pgsqlconnect/include/odb/session.ixx \
+		../../pgsqlconnect/include/odb/session.txx \
+		../../pgsqlconnect/include/odb/cache-traits.hxx \
+		../../pgsqlconnect/include/odb/simple-object-result.hxx \
+		../../pgsqlconnect/include/odb/object-result.hxx \
+		../../pgsqlconnect/include/odb/simple-object-result.txx \
+		../../pgsqlconnect/include/odb/details/unused.hxx \
+		../../ReconnaissanceCommunicationEntity-odb.ixx \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QJsonValue \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QDebug \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QFile \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qfile.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qfiledevice.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/QImage \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qimage.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qtguiglobal.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qtgui-config.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qcolor.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qrgb.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qpaintdevice.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qwindowdefs.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qwindowdefs_win.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qrect.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qmargins.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qsize.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qpixelformat.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qtransform.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qmatrix.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qpolygon.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qregion.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qdatastream.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qline.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QTemporaryFile \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\reconnaissanceCommunicationdao.o ..\..\reconnaissanceCommunicationdao.cpp
+
 release/uavmodelbombingmethoddao.o: ../../uavmodelbombingmethoddao.cpp ../../uavmodelbombingmethoddao.h \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/QObject \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/qobject.h \
@@ -7887,6 +8510,27 @@ release/uavmodeldao.o: ../../uavmodeldao.cpp ../../uavmodeldao.h \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/qtemporaryfile.h \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/qfile.h \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/qfiledevice.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QFile \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/QImage \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qimage.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qtguiglobal.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qtgui-config.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qcolor.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qrgb.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qpaintdevice.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qwindowdefs.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qwindowdefs_win.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qrect.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qmargins.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qsize.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qpixelformat.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qtransform.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qmatrix.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qpolygon.h \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qregion.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qdatastream.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qline.h \
 		../../AmmunitionEntity-odb.hxx \
 		../../AmmunitionEntity.h \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/QDateTime \
@@ -7931,28 +8575,7 @@ release/uavmodeldao.o: ../../uavmodeldao.cpp ../../uavmodeldao.h \
 		../../UavModelRecoveryModeEntity-odb.ixx \
 		../../UavModelOperationWayEntity-odb.hxx \
 		../../UavModelOperationWayEntity.h \
-		../../UavModelOperationWayEntity-odb.ixx \
-		B:/QT/5.15.2/mingw81_64/include/QtCore/QFile \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/QImage \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/qimage.h \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/qtguiglobal.h \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/qtgui-config.h \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/qcolor.h \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/qrgb.h \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/qrgba64.h \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/qpaintdevice.h \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/qwindowdefs.h \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/qwindowdefs_win.h \
-		B:/QT/5.15.2/mingw81_64/include/QtCore/qrect.h \
-		B:/QT/5.15.2/mingw81_64/include/QtCore/qmargins.h \
-		B:/QT/5.15.2/mingw81_64/include/QtCore/qsize.h \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/qpixelformat.h \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/qtransform.h \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/qmatrix.h \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/qpolygon.h \
-		B:/QT/5.15.2/mingw81_64/include/QtGui/qregion.h \
-		B:/QT/5.15.2/mingw81_64/include/QtCore/qdatastream.h \
-		B:/QT/5.15.2/mingw81_64/include/QtCore/qline.h
+		../../UavModelOperationWayEntity-odb.ixx
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\uavmodeldao.o ..\..\uavmodeldao.cpp
 
 release/uavmodelentity-odb.o: ../../uavmodelentity-odb.cxx ../../pgsqlconnect/include/odb/pre.hxx \
@@ -9176,6 +9799,9 @@ release/moc_interferencepoddao.o: release/moc_interferencepoddao.cpp
 
 release/moc_mountingschemedao.o: release/moc_mountingschemedao.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_mountingschemedao.o release\moc_mountingschemedao.cpp
+
+release/moc_reconnaissanceCommunicationdao.o: release/moc_reconnaissanceCommunicationdao.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_reconnaissanceCommunicationdao.o release\moc_reconnaissanceCommunicationdao.cpp
 
 release/moc_uavmodelbombingmethoddao.o: release/moc_uavmodelbombingmethoddao.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_uavmodelbombingmethoddao.o release\moc_uavmodelbombingmethoddao.cpp

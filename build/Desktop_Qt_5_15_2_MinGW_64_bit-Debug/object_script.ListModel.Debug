@@ -7,6 +7,7 @@ debug/AmmunitionKillingMethodEntity-odb.o
 debug/AmmunitionTypeEntity-odb.o
 debug/InterferencePodEntity-odb.o
 debug/MountingSchemeEntity-odb.o
+debug/ReconnaissanceCommunicationEntity-odb.o
 debug/UavModelBombingMethodEntity-odb.o
 debug/UavModelLoadTypeEntity-odb.o
 debug/UavModelMountLocationEntity-odb.o
@@ -24,6 +25,7 @@ debug/databaseconnection.o
 debug/interferencepoddao.o
 debug/main.o
 debug/mountingschemedao.o
+debug/reconnaissanceCommunicationdao.o
 debug/uavmodelbombingmethoddao.o
 debug/uavmodeldao.o
 debug/uavmodelentity-odb.o
@@ -43,6 +45,7 @@ debug/moc_ammolaunchwaydao.o
 debug/moc_ammotypedao.o
 debug/moc_interferencepoddao.o
 debug/moc_mountingschemedao.o
+debug/moc_reconnaissanceCommunicationdao.o
 debug/moc_uavmodelbombingmethoddao.o
 debug/moc_uavmodeldao.o
 debug/moc_uavmodelloadtypedao.o

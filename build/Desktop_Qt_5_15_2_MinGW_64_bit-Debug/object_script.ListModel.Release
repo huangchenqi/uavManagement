@@ -7,6 +7,7 @@ release/AmmunitionKillingMethodEntity-odb.o
 release/AmmunitionTypeEntity-odb.o
 release/InterferencePodEntity-odb.o
 release/MountingSchemeEntity-odb.o
+release/ReconnaissanceCommunicationEntity-odb.o
 release/UavModelBombingMethodEntity-odb.o
 release/UavModelLoadTypeEntity-odb.o
 release/UavModelMountLocationEntity-odb.o
@@ -24,6 +25,7 @@ release/databaseconnection.o
 release/interferencepoddao.o
 release/main.o
 release/mountingschemedao.o
+release/reconnaissanceCommunicationdao.o
 release/uavmodelbombingmethoddao.o
 release/uavmodeldao.o
 release/uavmodelentity-odb.o
@@ -43,6 +45,7 @@ release/moc_ammolaunchwaydao.o
 release/moc_ammotypedao.o
 release/moc_interferencepoddao.o
 release/moc_mountingschemedao.o
+release/moc_reconnaissanceCommunicationdao.o
 release/moc_uavmodelbombingmethoddao.o
 release/moc_uavmodeldao.o
 release/moc_uavmodelloadtypedao.o
