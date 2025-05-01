@@ -7,8 +7,9 @@ import "qrc:/AddAmmoModules/Component"
 Item {
     id:custom_PassiveInterferencePod
     anchors.fill:parent
-    // width: 600
-    // height: 470
+    visible:  true
+
+
 
     // 获取当前时间并转换为字符串
     property var currentTime: new Date().toLocaleString()
@@ -23,6 +24,7 @@ Item {
     property int loadState: 0  //0:新增、1:查看、2:编辑
 
     Component.onCompleted: {
+        console.log("InterferencePodRecordManagement.qml")
         loadView()
     }
 

@@ -681,7 +681,7 @@ Rectangle {
                                                           assignmentEncapsulation(transformedData)
                                                           processInfo.hangingCapacity = rowData.origHangingCapacity
                                                           //console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
-                                                          pageUavModelLoader.setSource("qrc:./AddUavModelAllData.qml",
+                                                          pageUavModelLoader.setSource("qrc:./AddUavModelAllData_add.qml",//AddUavModelAllData
                                                                                {processInfo: processInfo,
                                                                                    backUi: "qrc:/UavManageCommon.qml"})
                                                           uavModelRecordView.visible = false
@@ -709,7 +709,7 @@ Rectangle {
                                                           assignmentEncapsulation(transformedData)
                                                           processInfo.hangingCapacity = rowData.origHangingCapacity
                                                           console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
-                                                          pageUavModelLoader.setSource("qrc:./AddUavModelAllData.qml",
+                                                          pageUavModelLoader.setSource("qrc:./AddUavModelAllData_add.qml",//AddUavModelAllData
                                                                                {processInfo: processInfo,
                                                                                    backUi: "qrc:/UavManageCommon.qml"})
                                                           uavModelRecordView.visible = false
@@ -953,7 +953,7 @@ Rectangle {
                               onClicked: {
 
                                   processInfo.loadViewType = "addUavData"
-                                  pageUavModelLoader.setSource("qrc:./AddUavModelAllData.qml",
+                                  pageUavModelLoader.setSource("qrc:./AddUavModelAllData_add.qml",//AddUavModelAllData
                                                        {processInfo: processInfo,
                                                            backUi: "qrc:/UavManageCommon.qml"})
 

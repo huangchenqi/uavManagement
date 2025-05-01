@@ -45,22 +45,22 @@ Item {
         "field": "mass"
     }, {
         "title": "前舱长",
-        "width": 50,
+        "width": 150,
         "field": "frontCoverLength"
     },
     {
         "title": "后舱长",
-        "width": 50,
+        "width": 150,
         "field": "rearCoverLength"
     },
     {
         "title": "主舱",
-        "width": 50,
+        "width": 150,
         "field": "mainCabinSectione"
     },
     {
         "title": "用途",
-        "width": 250,
+        "width": 150,
         "field": "description"
     },
     {
@@ -98,11 +98,6 @@ Item {
     InterferencePodDaoTableModel {
         id: interferencePodDaoTableModel
     }
-    AddInterferencePodData{
-        id:addInterferencePodData
-        anchors.fill: parent
-        visible: false
-    }
     
     // 确保Loader初始状态为不可见
     Loader {
@@ -115,7 +110,7 @@ Item {
             function onBackPayloadRecord() {
                 console.log("返回到干扰吊舱记录管理界面");
                 root.visible = true;
-                //pagePayloadLoader.visible = false;
+                pagePayloadLoader.visible = false;
             }
         }
     }
@@ -156,12 +151,37 @@ Item {
         Item {
             id: chechBoxId
             anchors.fill: parent
+            
+            // 添加一个透明背景以确保事件区域明确
+            Rectangle {
+                anchors.fill: parent
+                color: "transparent"
+            }
+            
             CheckBox {
-                checked: false
+                id: rowCheckBox
                 anchors.centerIn: parent
+                // 双向绑定到模型数据
+                checked: rowData ? !!rowData.checked : false
+                
+                // 阻止事件传播，避免被表格MouseArea捕获
                 onClicked: {
-                    console.log(cellData)
+                    console.log("CheckBox被点击，行数据:", JSON.stringify(rowData));
+                    
+                    // 更新数据模型
+                    if (rowData) {
+                        rowData.checked = checked;
+                        console.log("CheckBox状态更新为:", checked);
+                    }
+                    
+                    // 阻止事件继续传播
+                    mouse.accepted = true;
                 }
+                
+                // 确保组件可见并允许交互
+                visible: true
+                enabled: true
+                z: 10
             }
         }
     }
@@ -463,19 +483,14 @@ Item {
                         implicitHeight: 30
                         text: "新增"
                         onClicked: {
-                            console.log("dayig")
+                            processInfo = {};
                             processInfo.loadViewType = "addUavData";
-
-                            addInterferencePodData.visible = true
-
-                            // console.log("dayig!")
                             pagePayloadLoader.setSource("qrc:./AddInterferencePodData.qml", {
-                                "processInfo": processInfo//,
-                                //"backUi": "qrc:/UavReconnaissancePayloadManagement.qml"
+                                "processInfo": processInfo,
+                                "backUi": "qrc:/UavReconnaissancePayloadManagement.qml"
                             });
-                            console.log("dayig!!")
                             root.visible = false;
-
+                            pagePayloadLoader.visible = true;
                         }
                     }
                 }
@@ -573,7 +588,8 @@ Item {
                         rearCoverLength: 25,
                         mainCabinSectione: "标准舱",
                         description: "通用干扰",
-                        id: "1"
+                        id: "1",
+                        checked: false  // 初始化选中状态
                     },
                     {
                         recordId: "2", 
@@ -585,9 +601,18 @@ Item {
                         rearCoverLength: 30,
                         mainCabinSectione: "增强舱",
                         description: "高频干扰",
-                        id: "2"
+                        id: "2",
+                        checked: false  // 初始化选中状态
                     }
                 ];
+            }
+            else {
+                // 确保后端返回的数据也有checked属性
+                for (var i = 0; i < result.length; i++) {
+                    if (typeof result[i].checked === 'undefined') {
+                        result[i].checked = false;
+                    }
+                }
             }
             
             // 更新表格数据

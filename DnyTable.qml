@@ -251,22 +251,25 @@ Item {
                                     // 单元格点击区域
                                     MouseArea {
                                         anchors.fill: parent
-                                        propagateComposedEvents: true
+                                        propagateComposedEvents: true  // 允许事件继续传播
                                         hoverEnabled: true
                                         z: 1
 
                                         onClicked: {
                                             console.log("[DnyTable] 单元格点击: 行=" + rowContainer.rowIndex + ", 列=" + index);
-                                            root.cellClicked(rowContainer.rowIndex, index, cellLoader.cellData);
-                                            mouse.accepted = false;
+                                            // 检查是否是代理组件的事件
+                                            if (!mouse.accepted) {
+                                                root.cellClicked(rowContainer.rowIndex, index, cellLoader.cellData);
+                                            }
+                                            mouse.accepted = false;  // 允许事件继续传播
                                         }
 
                                         onPressed: {
-                                            mouse.accepted = false;
+                                            mouse.accepted = false;  // 允许事件继续传播
                                         }
 
                                         onReleased: {
-                                            mouse.accepted = false;
+                                            mouse.accepted = false;  // 允许事件继续传播
                                         }
                                     }
 
@@ -305,7 +308,7 @@ Item {
                         MouseArea {
                             anchors.fill: parent
                             hoverEnabled: true
-                            propagateComposedEvents: true
+                            propagateComposedEvents: true  // 允许事件继续传播
                             z: 0
 
                             onEntered: {
@@ -318,8 +321,11 @@ Item {
 
                             onClicked: {
                                 console.log("[DnyTable] 行点击: 行=" + index);
-                                select(index);
-                                mouse.accepted = false;
+                                // 只有当事件未被其他控件处理时才处理点击
+                                if (!mouse.accepted) {
+                                    select(index);
+                                }
+                                mouse.accepted = false;  // 允许事件继续传播
                             }
                         }
                     }

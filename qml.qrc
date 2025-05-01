@@ -62,5 +62,6 @@
         <file>MountSchemeRecordManagement.qml</file>
         <file>UavRecordManagement.qml</file>
         <file>DnyTable.qml</file>
+        <file>AddUavModelAllData_add.qml</file>
     </qresource>
 </RCC>
