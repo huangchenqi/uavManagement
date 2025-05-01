@@ -1,7 +1,7 @@
 ﻿import QtQuick 2.12
 import QtQuick.Controls 2.12
 import "qrc:/AddAmmoModules/Component"
-
+import AmmoDaoModel 1.0
 //航空反坦克子母弹
 
 Item {
@@ -14,7 +14,16 @@ Item {
         anchors.fill: parent
         color:"#50000000"
         border.width: 0
+        property int selectType:0
+        AmmoDaoTableModel{
+            id:ammoDaoModel
+        }
+        onSelectTypeChanged: {
+            if(missileCommonData.selectType == 1 || missileCommonData.selectType == 2){
 
+            }
+
+        }
         CText{
             id:title
             text: "爆炸威力:"

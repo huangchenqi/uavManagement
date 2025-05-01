@@ -3,22 +3,31 @@ import QtQuick.Controls 2.12
 import "qrc:/"
 import "qrc:/AddAmmoModules/Component"
 import UavDaoModel 1.0
+import AmmoDaoModel 1.0
 Item{//航空导弹与航空炸弹
     id:missileCommonData
-    width: 1000
+    width: 800
     height: 300
 
     property int selectType:0 //0 代表新增，1代表查看，2代表修改。
+
+    property int shaShangType: 0
     property string text: ""
 
+    AmmoDaoTableModel{
+        id:ammoDaoModel
+    }
     onSelectTypeChanged: {
+        if(missileCommonData.selectType === 1 || missileCommonData.selectType === 2){
+            console.log("<><><>")
+            loadAmmoData()
+        }
 
     }
     UavModelDaoTableModel{
         id:uavModelDao
     }
     Component.onCompleted: {
-
     }
 
     Rectangle {
@@ -558,36 +567,72 @@ Item{//航空导弹与航空炸弹
                                 color:mainColor
                                 text:"杀伤方式: "
                             }
-                            Item{
+                            CButton{
+                                id:text_Input_ShaShangFangshi
                                 width: parent.width - text_ShaShangFangshiTitle.width
-                                height: parent.height
+                                height: 36
                                 anchors.left:text_ShaShangFangshiTitle.right
-                                anchors.top: parent.top
-                                TextInput{
-                                    id:text_Input_ShaShangFangshi
-                                    anchors.fill: parent
-                                    color:"#ffffffff"
-                                    font.family:text_ShaShangFangshiTitle.family
-                                    font.pixelSize:(18)
-                                    selectByMouse: true
-                                    selectionColor: "#ffcc8800"
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
-
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.ammoKillingWay =text
-                                        console.log("Text content changed to: " + text)
+                                color:"#ffddaa00"
+                                borderColor: "#ffddaa00"
+                                borderHigtColor: "#ffeebb22"
+                                anchors.verticalCenter: text_ShaShangFangshiTitle.verticalCenter
+                                pixelSize: 20
+                                text:{
+                                    if(shaShangType < 0)
+                                    {
+                                        return "方式1"
+                                    }
+                                    else
+                                    {
+                                        if(listmodel_Box_ShaSHangType.count > 0)
+                                          return  listmodel_Box_ShaSHangType.get(shaShangType).m_TypeName
                                     }
                                 }
-                                Rectangle{
-                                    width: parent.width
-                                    height: (2)
-                                    anchors.left: parent.left
-                                    anchors.bottom: parent.bottom
-                                    color:mainColor
+                                onClicked: {
+                                    view_List_ShaShangTypeSelect.visible = !view_List_ShaShangTypeSelect.visible
+                                }
+                            }
+                            ListView{
+                                id:view_List_ShaShangTypeSelect
+                                width: text_Input_ShaShangFangshi.width
+                                height: text_Input_ShaShangFangshi.height * 5
+                                anchors.left: text_Input_ShaShangFangshi.left
+                                anchors.leftMargin: text_Input_ShaShangFangshi.width/2 - width/2
+                                anchors.top: text_Input_ShaShangFangshi.bottom
+                                anchors.topMargin: 2
+                                visible: false
+                                clip: true
+                                model:ListModel{
+                                    id:listmodel_Box_ShaSHangType
+                                }
+                                delegate:Component{
+                                    Item{
+                                        id:item_Delegate
+                                        width: view_List_ShaShangTypeSelect.width
+                                        height: 36
+                                        CButton{
+                                            id:comp_TypeBtn
+                                            anchors.fill: parent
+                                            text:m_TypeName
+                                            color:"#ffddaa00"
+                                            borderColor: "#ffddaa00"
+                                            borderHigtColor: "#ffeebb22"
+                                            pixelSize: 18
+                                            isSelect: m_SelectState
+                                            onClicked: {
+                                                view_List_ShaShangTypeSelect.visible = false
+                                                shaShangType = index
+                                                // m_SelectState = !m_SelectState
+                                                console.log(text_Input_ShaShangFangshi.text)
+                                            }
+                                        }
+                                    }
+                                }
+                                Component.onCompleted: {
+                                    listmodel_Box_ShaSHangType.append({m_TypeName:"方式1",m_SelectState:false})
+                                    listmodel_Box_ShaSHangType.append({m_TypeName:"方式2",m_SelectState:false})
+                                    listmodel_Box_ShaSHangType.append({m_TypeName:"方式3",m_SelectState:false})
+
                                 }
                             }
                         }
@@ -1193,7 +1238,28 @@ Item{//航空导弹与航空炸弹
             }
         }
     }
-    function loadUavModelType(){
+    function loadAmmoData(){
+        input_name.text = addAmmoAllDatView.ammoSelectData.ammoName
+
+        text_Input_MissileRange.text = addAmmoAllDatView.ammoSelectData.ammoLenth
+        text_Input_MissileDiameter.text = addAmmoAllDatView.ammoSelectData.ammoDiameter
+        text_Input_MissileWeight.text = addAmmoAllDatView.ammoSelectData.ammoMass
+        text_Input_FillWeight.text = addAmmoAllDatView.ammoSelectData.ammoChargeMass
+        text_Input_Wingspan.text = addAmmoAllDatView.ammoSelectData.ammoWingspan
+        text_Input_MissileSheCheng.text = addAmmoAllDatView.ammoSelectData.effective_range
+        text_Input_DanErJuli.text = addAmmoAllDatView.ammoSelectData.ammoLugSpacing
+        // text_Input_ShaShangFangshi.text = addAmmoAllDatView.ammoSelectData.ammoKillingWay
+        text_Input_BombSpeedMin.text = addAmmoAllDatView.ammoSelectData.ammoMinReleaseSpeed
+        text_Input_BombSpeedMax.text = addAmmoAllDatView.ammoSelectData.ammoMaxReleaseSpeed
+        text_Input_BombHeightMin.text = addAmmoAllDatView.ammoSelectData.ammoMinReleaseHeight
+        text_Input_BombHeightMax.text = addAmmoAllDatView.ammoSelectData.ammoMaxReleaseHeight
+        text_Input_FuzeModel.text = addAmmoAllDatView.ammoSelectData.fuze_model
+        text_Input_FuzeNum.text = addAmmoAllDatView.ammoSelectData.number_of_fuses
+        text_Input_ActionTime.text = addAmmoAllDatView.ammoSelectData.action_time
+        text_Input_DelayTime.text = addAmmoAllDatView.ammoSelectData.available_extension_time
+        console.log("loadAmmoData()"+addAmmoAllDatView.ammoSelectData.ammoToUavModel)
+
+
 
     }
 

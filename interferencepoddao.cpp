@@ -2,6 +2,7 @@
 #include "InterferencePodEntity.h"
 #include "InterferencePodEntity-odb.hxx"
 #include <stdexcept>
+//#include
 #include "iostream"
 // ODB 头文件
 #include <odb/database.hxx>
@@ -18,6 +19,21 @@
 #include <QTemporaryFile>
 #include <QImage>
 #include <QUrl>
+struct count {
+    count(odb::pgsql::database *db) : db_{db} {}
+    template <typename T>::std::size_t from(odb::query<T> query = {}) {
+        using traits_t = odb::access::object_traits_impl<T, odb::id_pgsql>;
+        QString sql{"select count(*) from %1 where"};
+        odb::query<T> all{sql.arg(&traits_t::table_name[0]).toStdString().c_str()};
+        all += query;
+        auto res = db_->query_value<view::dummy>(all);
+        return res.value;
+    }
+    ~count() = default;
+
+private:
+    odb::pgsql::database *db_;
+};
 InterferencePodDao::InterferencePodDao(QObject* parent) : QObject(parent){
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
     dbConn_.reset(new DatabaseConnection(
@@ -33,6 +49,7 @@ InterferencePodDao::InterferencePodDao(QObject* parent) : QObject(parent){
 QJsonArray InterferencePodDao::selectInterferencePodData(const QJsonObject &selectedData)
 {
     QJsonArray ammoModelData;
+    QJsonObject rst;
     QJsonDocument adoc(selectedData);
     qDebug()<<"当前xASRA wae  q函数名称:" << __FUNCTION__<<":";
     qDebug().noquote() << adoc.toJson(QJsonDocument::Indented);
@@ -73,6 +90,26 @@ QJsonArray InterferencePodDao::selectInterferencePodData(const QJsonObject &sele
                 }
             }
         }
+        // auto value{count{&db}.from<InterferencePodEntity>(q)};
+        // // 计算分页参数
+        // int pageSize = selectedData["pageSize"].toInt();
+        // int currentPage = selectedData["currentPage"].toInt();
+        // int offset = (currentPage - 1) * pageSize;
+
+        // // 使用limit和offset应用分页
+        // auto result = db.query<InterferencePodEntity>(
+        //     q + "LIMIT" + std::to_string(pageSize) + "OFFSET" +
+        //     std::to_string(offset));
+
+        // // 创建包含metadata的响应
+
+        // rst["total"] = QJsonValue::fromVariant(value);
+        // rst["page"] = QJsonValue::fromVariant(currentPage);
+        // rst["page_size"] = QJsonValue::fromVariant(pageSize);
+        // rst["pages"] =
+        //     QJsonValue::fromVariant((value + pageSize - 1) / pageSize); // 向上取整计算总页数
+
+
         odb::result<InterferencePodEntity> result = db.query<InterferencePodEntity>(q);
         qDebug() << "Query returned" << result.size() << "records";  // 添加此行
         // 关键修正2：遍历所有结果
@@ -132,12 +169,15 @@ QJsonArray InterferencePodDao::selectInterferencePodData(const QJsonObject &sele
         }
         trans.commit();
         //qDebug()<<"ammoModelData:"<<sum;
+
     }
-    catch (const odb::exception& e) {
+    catch (const std::exception& e) {
         qCritical() << "Database error:" << e.what();
-        throw; // 或返回包含错误信息的 JSON
+        // throw; // 或返回包含错误信息的 JSON
+        return ammoModelData;
     }
-    QJsonDocument doc(ammoModelData);
+    rst["data"] = ammoModelData;
+    QJsonDocument doc(rst);
     qDebug()<<"当前函数名称:" << __FUNCTION__<<":";
     qDebug().noquote() << doc.toJson(QJsonDocument::Indented);
     return ammoModelData;

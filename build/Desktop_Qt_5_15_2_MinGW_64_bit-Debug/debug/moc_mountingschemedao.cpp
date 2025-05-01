@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MountingSchemeDao_t {
-    QByteArrayData data[8];
-    char stringdata0[141];
+    QByteArrayData data[10];
+    char stringdata0[172];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,16 +36,19 @@ QT_MOC_LITERAL(0, 0, 17), // "MountingSchemeDao"
 QT_MOC_LITERAL(1, 18, 24), // "selectMountingSchemeData"
 QT_MOC_LITERAL(2, 43, 0), // ""
 QT_MOC_LITERAL(3, 44, 12), // "selectedData"
-QT_MOC_LITERAL(4, 57, 24), // "updateMountingSchemeData"
-QT_MOC_LITERAL(5, 82, 24), // "deleteMountingSchemeData"
-QT_MOC_LITERAL(6, 107, 8), // "QJSValue"
-QT_MOC_LITERAL(7, 116, 24) // "insertMountingSchemeData"
+QT_MOC_LITERAL(4, 57, 23), // "queryMountingSchemeData"
+QT_MOC_LITERAL(5, 81, 24), // "updateMountingSchemeData"
+QT_MOC_LITERAL(6, 106, 24), // "deleteMountingSchemeData"
+QT_MOC_LITERAL(7, 131, 8), // "QJSValue"
+QT_MOC_LITERAL(8, 140, 24), // "insertMountingSchemeData"
+QT_MOC_LITERAL(9, 165, 6) // "object"
 
     },
     "MountingSchemeDao\0selectMountingSchemeData\0"
-    "\0selectedData\0updateMountingSchemeData\0"
+    "\0selectedData\0queryMountingSchemeData\0"
+    "updateMountingSchemeData\0"
     "deleteMountingSchemeData\0QJSValue\0"
-    "insertMountingSchemeData"
+    "insertMountingSchemeData\0object"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,7 +58,7 @@ static const uint qt_meta_data_MountingSchemeDao[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -63,16 +66,18 @@ static const uint qt_meta_data_MountingSchemeDao[] = {
        0,       // signalCount
 
  // methods: name, argc, parameters, tag, flags
-       1,    1,   34,    2, 0x02 /* Public */,
-       4,    1,   37,    2, 0x02 /* Public */,
-       5,    1,   40,    2, 0x02 /* Public */,
-       7,    1,   43,    2, 0x02 /* Public */,
+       1,    1,   39,    2, 0x02 /* Public */,
+       4,    1,   42,    2, 0x02 /* Public */,
+       5,    1,   45,    2, 0x02 /* Public */,
+       6,    1,   48,    2, 0x02 /* Public */,
+       8,    1,   51,    2, 0x02 /* Public */,
 
  // methods: parameters
     QMetaType::QJsonArray, QMetaType::QJsonObject,    3,
+    QMetaType::QJsonObject, QMetaType::QJsonObject,    3,
     QMetaType::Bool, QMetaType::QJsonObject,    3,
-    QMetaType::Bool, 0x80000000 | 6,    3,
-    QMetaType::Bool, QMetaType::QJsonObject,    3,
+    QMetaType::Bool, 0x80000000 | 7,    3,
+    QMetaType::Bool, QMetaType::QJsonObject,    9,
 
        0        // eod
 };
@@ -85,18 +90,20 @@ void MountingSchemeDao::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         switch (_id) {
         case 0: { QJsonArray _r = _t->selectMountingSchemeData((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QJsonArray*>(_a[0]) = std::move(_r); }  break;
-        case 1: { bool _r = _t->updateMountingSchemeData((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
+        case 1: { QJsonObject _r = _t->queryMountingSchemeData((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QJsonObject*>(_a[0]) = std::move(_r); }  break;
+        case 2: { bool _r = _t->updateMountingSchemeData((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 2: { bool _r = _t->deleteMountingSchemeData((*reinterpret_cast< const QJSValue(*)>(_a[1])));
+        case 3: { bool _r = _t->deleteMountingSchemeData((*reinterpret_cast< const QJSValue(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 3: { bool _r = _t->insertMountingSchemeData((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
+        case 4: { bool _r = _t->insertMountingSchemeData((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 2:
+        case 3:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -136,13 +143,13 @@ int MountingSchemeDao::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

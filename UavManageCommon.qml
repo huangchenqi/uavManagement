@@ -13,7 +13,7 @@ import UavModelOperationWayDaoModel 1.0
 import UavMountLocationDaoModel 1.0
 import AmmoDaoModel 1.0
 import UavModelTypeDaoModel 1.0
-/**
+/** 弃用该界面
 https://blog.csdn.net/qq_24890953/article/details/104640454
   */
 //Window {
@@ -21,6 +21,7 @@ Rectangle {
            id: uavManagementroot
            visible: true
            color: "#ECF2FE"
+           anchors.fill: parent
            //signal customSignal(string message)
            property color borderColor: "#A5B3C0"
            property color headerColor: "#D3E1FE"
@@ -28,10 +29,10 @@ Rectangle {
            property var rowsModel: []
            property string managementType: "";
            property string queryedit: ""
-           width: 1400; height: 900//width: screenWidth; height: screenHeight
+           /*width: 1400; height: 900*///width: screenWidth; height: screenHeight
            property var rowData : ({test:1})
            property int bottonHeight: 50
-           property var uavTypeLoad:[]
+           property var uavTypeLoad:[""]
            property var uavTypeOriginStr:[]
 
 
@@ -50,6 +51,8 @@ Rectangle {
                   target: pageUavModelLoader.item
                   onBackUavRecord: {
                       console.log("connectuion!!!!!")
+                      loadUavAllData()
+                      loadRecord()
                       uavModelRecordView.visible = true
                   }
               }
@@ -234,7 +237,7 @@ Rectangle {
                   anchors.centerIn: Overlay.overlay // 居中显示
                   closePolicy: Popup.NoAutoClose    // 完全禁用自动关闭
                   // 直接引用 admin.qml
-                    AddMountLocationManagement{  // 假设 admin.qml 的根元素是 Admin 类型
+                    AddMountLocation{  // 假设 admin.qml 的根元素是 Admin 类型
                           id: addMountLocationPanel
                           anchors.fill: parent
 
@@ -412,7 +415,7 @@ Rectangle {
                                           text = newText
 
                                           // 恢复光标位置（考虑文本缩短的情况）
-                                          cursorPosition = Math.min(cursorPos, newText.length)
+                                          //cursorPosition = Math.min(cursorPos, newText.length)
                                       }
                                   }
                               }
@@ -424,7 +427,7 @@ Rectangle {
                                   text: "搜索"
                                   Layout.leftMargin: 30
                                   onClicked: {
-                                      inputValidator()
+                                      //inputValidator()
                                       queryConditionUavModelData()
 
                                   }
@@ -438,7 +441,7 @@ Rectangle {
                                   text: "重置"
                                   onClicked: {
                                       modelSelector.currentIndex = 0
-                                      uavIdSelect.text = ""
+                                      uavIdSelect.currentIndex = 0
                                       uavNameSelect.text = ""
                                   }
                               }
@@ -1136,7 +1139,7 @@ Rectangle {
                uavData.uavName = uavNameSelect.text
                var uavDataStr = JSON.stringify(uavData)
                var queryUavData = uavModelDaoTable.queryUavModelData(uavDataStr)
-               console.log("queryConditionModelData!"+JSON.stringify(queryUavData))
+               console.log("queryConditionModelData!"+JSON.stringify(uavDataStr))
                const modifiedData = convertMultiFields(queryUavData);
                 console.log("receiveData"+JSON.stringify(modifiedData, null, 2));
                 // 清空旧数据
@@ -1209,9 +1212,10 @@ Rectangle {
                console.log("uavMccelTypeDaoTableModel"+JSON.stringify(loaduavId))
 
 
-              var uavTypeArrayStr = loaduavId.map(item=>item.uavComponeName)
+              var uavTypeArrayStr  = loaduavId.map(item=>item.uavComponeName)
                console.log("uavModelTypeDaoTableModel"+JSON.stringify(uavTypeArrayStr))
-               uavManagementroot.uavTypeLoad = uavTypeArrayStr
+               uavManagementroot.uavTypeLoad = ["全部"].concat(uavTypeArrayStr);
+              console.log("uavManagementroot.uavTypeLoad" +JSON.stringify(uavManagementroot.uavTypeLoad))
                //console.log("datying"+uavManagementroot.uavTypeLoad)
 
                uavManagementroot.uavTypeOriginStr = loaduavId

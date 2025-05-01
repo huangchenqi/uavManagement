@@ -29,6 +29,8 @@
 #include <odb/cache-traits.hxx>
 #include <odb/result.hxx>
 #include <odb/simple-object-result.hxx>
+#include <odb/view-image.hxx>
+#include <odb/view-result.hxx>
 
 #include <odb/details/unused.hxx>
 #include <odb/details/shared-ptr.hxx>
@@ -79,6 +81,44 @@ namespace odb
 
     static void
     callback (database&, const object_type&, callback_event);
+  };
+
+  // dummy
+  //
+  template <>
+  struct class_traits< ::view::dummy >
+  {
+    static const class_kind kind = class_view;
+  };
+
+  template <>
+  class access::view_traits< ::view::dummy >
+  {
+    public:
+    typedef ::view::dummy view_type;
+    typedef ::view::dummy* pointer_type;
+
+    static void
+    callback (database&, view_type&, callback_event);
+  };
+
+  // string
+  //
+  template <>
+  struct class_traits< ::view::string >
+  {
+    static const class_kind kind = class_view;
+  };
+
+  template <>
+  class access::view_traits< ::view::string >
+  {
+    public:
+    typedef ::view::string view_type;
+    typedef ::view::string* pointer_type;
+
+    static void
+    callback (database&, view_type&, callback_event);
   };
 }
 
@@ -629,7 +669,7 @@ namespace odb
 
       // recordCreationTime_
       //
-      unsigned  long long recordCreationTime_value;
+     unsigned long long recordCreationTime_value;
       bool recordCreationTime_null;
 
       // useStatus_
@@ -751,6 +791,113 @@ namespace odb
   template <>
   class access::object_traits_impl< ::InterferencePodEntity, id_common >:
     public access::object_traits_impl< ::InterferencePodEntity, id_pgsql >
+  {
+  };
+
+  // dummy
+  //
+  template <>
+  class access::view_traits_impl< ::view::dummy, id_pgsql >:
+    public access::view_traits< ::view::dummy >
+  {
+    public:
+    struct image_type
+    {
+      // value
+      //
+      long long value_value;
+      bool value_null;
+
+      std::size_t version;
+    };
+
+    typedef pgsql::view_statements<view_type> statements_type;
+
+    typedef pgsql::query_base query_base_type;
+    struct query_columns
+    {
+    };
+
+    static const bool versioned = false;
+
+    static bool
+    grow (image_type&,
+          bool*);
+
+    static void
+    bind (pgsql::bind*,
+          image_type&);
+
+    static void
+    init (view_type&,
+          const image_type&,
+          database*);
+
+    static const std::size_t column_count = 1UL;
+
+    static result<view_type>
+    query (database&, const query_base_type&);
+
+    static const char query_statement_name[];
+  };
+
+  template <>
+  class access::view_traits_impl< ::view::dummy, id_common >:
+    public access::view_traits_impl< ::view::dummy, id_pgsql >
+  {
+  };
+
+  // string
+  //
+  template <>
+  class access::view_traits_impl< ::view::string, id_pgsql >:
+    public access::view_traits< ::view::string >
+  {
+    public:
+    struct image_type
+    {
+      // value
+      //
+      details::buffer value_value;
+      std::size_t value_size;
+      bool value_null;
+
+      std::size_t version;
+    };
+
+    typedef pgsql::view_statements<view_type> statements_type;
+
+    typedef pgsql::query_base query_base_type;
+    struct query_columns
+    {
+    };
+
+    static const bool versioned = false;
+
+    static bool
+    grow (image_type&,
+          bool*);
+
+    static void
+    bind (pgsql::bind*,
+          image_type&);
+
+    static void
+    init (view_type&,
+          const image_type&,
+          database*);
+
+    static const std::size_t column_count = 1UL;
+
+    static result<view_type>
+    query (database&, const query_base_type&);
+
+    static const char query_statement_name[];
+  };
+
+  template <>
+  class access::view_traits_impl< ::view::string, id_common >:
+    public access::view_traits_impl< ::view::string, id_pgsql >
   {
   };
 

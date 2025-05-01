@@ -13,9 +13,14 @@ Window {
 
     property var processInfo: new Object // global记录对应行对象// 声明全局对象用于记录流程信息（可通过此对象跨组件传递数据）
     //property var processInfo: ({})//new Object() 是一种更传统的创建对象的方式。{} 是一种更简洁的字面量表示法。
-    UavMainManagement{
-        id:uavMain
-    }
+    // UavMainManagement{
+    //     id:uavMain
+    // }
+MainWindow{
+    id:show
+    anchors.fill: parent
+}
+
 //    Component.objectName: {
 //        addAmmoData()
 //    }

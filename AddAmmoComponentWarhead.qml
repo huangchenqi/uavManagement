@@ -16,10 +16,52 @@ Rectangle{//航空弹药的组件战斗部
     onSelectedWarheadChanged: {
         if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
                         topTitle.text = "增强型杀爆战斗部"
+                        warheadTypeText.visible = true
+                        warheadWeightText.visible = true
+                        warheadLengthText.visible = true
+                        warheadDiameterText.visible = true
+                        warheadDiameterText.visible = true
+                        warheadChargeQualityText.visible = true
+                        warheadChargingDensityText.visible = true
+                        warheadFillingCoefficientText.visible = true
+                        warheadBoosterText.visible = true
+                        warheadfragmentsNumberText.visible = true
+                        warheadVehiclesEffectiveKillingRadiusText.visible = true
+                        warheadPeopleEffectiveKillingRadiusText.visible = true
+                        warheadInvasivenessText.visible = true
+                        warheadVerticalStaticArmorPenetrationDepthText.visible = true
         }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
                         topTitle.text = "侵爆战斗部"
+                        warheadTypeText.visible = false
+                        warheadWeightText.visible = false
+                        warheadLengthText.visible = false
+                        warheadDiameterText.visible = false
+                        warheadDiameterText.visible = false
+                        warheadChargeQualityText.visible = false
+                        warheadChargingDensityText.visible = false
+                        warheadFillingCoefficientText.visible = false
+                        warheadBoosterText.visible = false
+                        warheadfragmentsNumberText.visible = false
+                        warheadVehiclesEffectiveKillingRadiusText.visible = false
+                        warheadPeopleEffectiveKillingRadiusText.visible = false
+                        warheadInvasivenessText.visible = false
+                        warheadVerticalStaticArmorPenetrationDepthText.visible = false
         }else if(addAmmoComponentWarheadRoot.selectedWarhead === "third"){
                         topTitle.text = "战斗部"
+                        warheadTypeText.visible = true
+                        warheadWeightText.visible = true
+                        warheadLengthText.visible = true
+                        warheadDiameterText.visible = true
+                        warheadDiameterText.visible = true
+                        warheadChargeQualityText.visible = true
+                        warheadChargingDensityText.visible = true
+                        warheadFillingCoefficientText.visible = true
+                        warheadBoosterText.visible = true
+                        warheadfragmentsNumberText.visible = true
+                        warheadVehiclesEffectiveKillingRadiusText.visible = true
+                        warheadPeopleEffectiveKillingRadiusText.visible = true
+                        warheadInvasivenessText.visible = true
+                        warheadVerticalStaticArmorPenetrationDepthText.visible = true
         }else{
             console.log("Unkown selectedWarhead!")
         }
@@ -43,7 +85,7 @@ Rectangle{//航空弹药的组件战斗部
 
         CText{
             id:topTitle
-            text: "a战斗部"
+            text: "未知战斗部"
             // {    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
             //               return ""
 
@@ -87,16 +129,23 @@ Rectangle{//航空弹药的组件战斗部
                 height: 30
                 onlyNum: false
                 onTextChanged: {
-                    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                            ammoData.combat_unit_type =text
 
-                    }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
+                    ammoData.combat_unit_type =text
 
-                            ammoData.combat_unit_type_add =text
-                    }else{
-                              ammoData.combat_unit_type =text
-                              console.log("Unkown selectedWarhead!")
-                    }
+                    console.log("Text content changed to: " + text)
+                }
+            }
+            CTextInput{
+                id:warheadTypeText_add
+                title: "类型:"
+                pixelSize: 18
+                titleWidth: pixelSize * 2.5
+                width: parent.width/2 - 10
+                height: 30
+                visible: !warheadTypeText.visible
+                onlyNum: false
+                onTextChanged: {
+                    ammoData.combat_unit_type_add =text
 
                     console.log("Text content changed to: " + text)
                 }
@@ -109,16 +158,21 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                            ammoData.combat_department_quality =text
+                    ammoData.combat_department_quality =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
+            CTextInput{
+                id:warheadWeightText_add
+                title: "重量(Kg):"
+                pixelSize: 18
+                titleWidth: pixelSize * 4.5
+                width: parent.width/2 - 10
+                height: 30
+                visible: !warheadWeightText.visible
+                onTextChanged: {
 
-                    }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                             ammoData.combat_department_quality_add =text
-                    }else{
-                              ammoData.combat_department_quality =text
-                              console.log("Unkown selectedWarhead!")
-                    }
-
+                    ammoData.combat_department_quality_add =text
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -131,16 +185,21 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                             ammoData.combat_length =text
+                    ammoData.combat_length =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
+            CTextInput{
+                id:warheadLengthText_add
+                title: "长度(mm):"
+                pixelSize: 18
+                titleWidth: pixelSize * 4.5
+                width: parent.width/2 - 10
+                height: 30
+                visible: !warheadLengthText.visible
+                onTextChanged: {
 
-                    }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                             ammoData.combat_length_add =text
-                    }else{
-                              ammoData.combat_length =text
-                              console.log("Unkown selectedWarhead!")
-                    }
-
+                    ammoData.combat_length_add =text
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -153,15 +212,20 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                        ammoData.combat_diameter =text
-                    }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                        ammoData.combat_diameter_add =text
-                    }else{
-                        ammoData.combat_diameter =text
-                              console.log("Unkown selectedWarhead!")
-                    }
-
+                    ammoData.combat_diameter =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
+            CTextInput{
+                id:warheadDiameterText_add
+                title: "直径(mm):"
+                pixelSize: 18
+                titleWidth: pixelSize * 4.5
+                width: parent.width/2 - 10
+                height: 30
+                visible: !warheadDiameterText.visible
+                onTextChanged: {
+                    ammoData.combat_diameter_add =text
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -175,16 +239,21 @@ Rectangle{//航空弹药的组件战斗部
                 height: 30
                 onlyNum: false
                 onTextChanged: {
-                    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                       ammoData.combat_main_charge_type =text
-
-                    }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                        ammoData.combat_main_charge_type_add =text
-                    }else{
-                      ammoData.combat_main_charge_type =text
-                      console.log("Unkown selectedWarhead!")
-                    }
-
+                    ammoData.combat_main_charge_type =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
+            CTextInput{
+                id:warheadMainChargeTypeText_add
+                title: "装药类型:"
+                pixelSize: 18
+                titleWidth: pixelSize * 4.5
+                width: parent.width/2 - 10
+                height: 30
+                visible: !warheadMainChargeTypeText.visible
+                onlyNum: false
+                onTextChanged: {
+                    ammoData.combat_main_charge_type_add =text
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -197,16 +266,20 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                      ammoData.combat_quantity =text
-
-                    }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                      ammoData.combat_quantity_add =text
-                    }else{
-                      ammoData.combat_quantity =text
-                      console.log("Unkown selectedWarhead!")
-                    }
-
+                    ammoData.combat_quantity =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
+            CTextInput{
+                id:warheadChargeQualityText_add
+                title: "装药质量(Kg):"
+                pixelSize: 18
+                titleWidth: pixelSize * 6.5
+                width: parent.width/2 - 10
+                height: 30
+                visible: !warheadChargeQualityText.visible
+                onTextChanged: {
+                    ammoData.combat_quantity_add =text
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -219,16 +292,20 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                             ammoData.combat_charge_density =text
-
-                      }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                             ammoData.combat_charge_density_add =text
-                      }else{
-                              ammoData.combat_charge_density =text
-                              console.log("Unkown selectedWarhead!")
-                      }
-
+                    ammoData.combat_charge_density =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
+            CTextInput{
+                id:warheadChargingDensityText_add
+                title: "装药密度(/m³):"
+                pixelSize: 18
+                titleWidth: pixelSize * 6.5
+                width: parent.width/2 - 10
+                height: 30
+                visible: !warheadChargingDensityText.visible
+                onTextChanged: {
+                    ammoData.combat_charge_density_add =text
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -241,16 +318,20 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                              ammoData.combat_loading_factor =text
-
-                      }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                              ammoData.combat_loading_factor_add =text
-                      }else{
-                              ammoData.combat_loading_factor =text
-                              console.log("Unkown selectedWarhead!")
-                      }
-
+                    ammoData.combat_loading_factor =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
+            CTextInput{
+                id:warheadFillingCoefficientText_add
+                title: "装填系数:"
+                pixelSize: 18
+                titleWidth: pixelSize * 4.5
+                width: parent.width/2 - 10
+                height: 30
+                visible: !warheadFillingCoefficientText.visible
+                onTextChanged: {
+                    ammoData.combat_loading_factor_add =text
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -263,16 +344,20 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                              ammoData.combat_explosive =text
-
-                      }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                              ammoData.combat_explosive_add =text
-                      }else{
-                              ammoData.combat_explosive =text
-                              console.log("Unkown selectedWarhead!")
-                      }
-
+                    ammoData.combat_explosive =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
+            CTextInput{
+                id:warheadBoosterText_add
+                title: "扩爆药(g):"
+                pixelSize: 18
+                titleWidth: pixelSize * 5
+                width: parent.width/2 - 10
+                height: 30
+                visible: !warheadBoosterText.visible
+                onTextChanged: {
+                    ammoData.combat_explosive_add =text
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -285,16 +370,20 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                          ammoData.combat_fragments_number =text
-
-                      }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                        ammoData.combat_fragments_number_add =text
-                      }else{
-                          ammoData.combat_fragments_number =text
-                          console.log("Unkown selectedWarhead!")
-                      }
-
+                    ammoData.combat_fragments_number =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
+            CTextInput{
+                id:warheadfragmentsNumberText_add
+                title: "破片数量:"
+                pixelSize: 18
+                titleWidth: pixelSize * 4.5
+                width: parent.width/2 - 10
+                height: 30
+                visible: !warheadfragmentsNumberText.visible
+                onTextChanged: {
+                    ammoData.combat_fragments_number_add =text
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -307,16 +396,20 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                           ammoData.combat_effective_killing_radius_vehicles =text
-
-                      }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                            ammoData.combat_effective_killing_radius_vehicles_add =text
-                      }else{
-                          ammoData.combat_effective_killing_radius_vehicles =text
-                          console.log("Unkown selectedWarhead!")
-                      }
-
+                    ammoData.combat_effective_killing_radius_vehicles =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
+            CTextInput{
+                id:warheadVehiclesEffectiveKillingRadiusText_add
+                title: "有效杀伤半径[车辆](m):"
+                pixelSize: 18
+                titleWidth: pixelSize * 11.5
+                width: parent.width/2 - 10
+                height: 30
+                visible: !warheadVehiclesEffectiveKillingRadiusText.visible
+                onTextChanged: {
+                    ammoData.combat_effective_killing_radius_vehicles_add =text
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -329,16 +422,20 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                              ammoData.combat_effective_killing_radius_personnel =text
-
-                      }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                              ammoData.combat_effective_killing_radius_personnel_add =text
-                      }else{
-                              ammoData.combat_effective_killing_radius_personnel =text
-                              console.log("Unkown selectedWarhead!")
-                      }
-
+                    ammoData.combat_effective_killing_radius_personnel =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
+            CTextInput{
+                id:warheadPeopleEffectiveKillingRadiusText_add
+                title: "有效杀伤半径[人](m):"
+                pixelSize: 18
+                titleWidth: pixelSize * 10.5
+                width: parent.width/2 - 10
+                height: 30
+                visible: !warheadPeopleEffectiveKillingRadiusText.visible
+                onTextChanged: {
+                    ammoData.combat_effective_killing_radius_personnel_add =text
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -351,16 +448,20 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                            ammoData.combat_unit_invasion_capability =text
-
-                      }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                            ammoData.combat_unit_invasion_capability_add =text
-                      }else{
-                          ammoData.combat_unit_invasion_capability =text
-                          console.log("Unkown selectedWarhead!")
-                      }
-
+                    ammoData.combat_unit_invasion_capability =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
+            CTextInput{
+                id:warheadInvasivenessText_add
+                title: "侵袭能力:"
+                pixelSize: 18
+                titleWidth: pixelSize * 4.5
+                width: parent.width/2 - 10
+                height: 30
+                visible: !warheadInvasivenessText.visible
+                onTextChanged: {
+                    ammoData.combat_unit_invasion_capability_add =text
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -373,16 +474,20 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                              ammoData.combat_vertical_static_armor_penetration_depth =text
-
-                      }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                              ammoData.combat_vertical_static_armor_penetration_depth_add =text
-                      }else{
-                              ammoData.combat_vertical_static_armor_penetration_depth =text
-                              console.log("Unkown selectedWarhead!")
-                      }
-
+                    ammoData.combat_vertical_static_armor_penetration_depth =text
+                    console.log("Text content changed to: " + text)
+                }
+            }
+            CTextInput{
+                id:warheadVerticalStaticArmorPenetrationDepthText_add
+                title: "垂直静破甲深度:"
+                pixelSize: 18
+                titleWidth: pixelSize * 7.5
+                width: parent.width/2 - 10
+                height: 30
+                visible: !warheadVerticalStaticArmorPenetrationDepthText.visible
+                onTextChanged: {
+                    ammoData.combat_vertical_static_armor_penetration_depth_add =text
                     console.log("Text content changed to: " + text)
                 }
             }

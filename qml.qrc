@@ -16,7 +16,7 @@
         <file>AddAmmoAllData.qml</file>
         <file>MountingSchemeManagement.qml</file>
         <file>MultiTextDispay.qml</file>
-        <file>AddMountLocationManagement.qml</file>
+        <file>AddMountLocation.qml</file>
         <file>AddUavComponentManagement.qml</file>
         <file>AddUavModelLoadType.qml</file>
         <file>AddUavModelBombingMethod.qml</file>
@@ -55,5 +55,12 @@
         <file>ReconnaissanceCommunicationRecordManagement.qml</file>
         <file>EffectiveReflectionArea.qml</file>
         <file>InterferencePodDropSpeed.qml</file>
+        <file>MainWindow.qml</file>
+        <file>InterferencePodRecordManagement.qml</file>
+        <file>ReconnaissanceCommunicationRecordManagementAdd.qml</file>
+        <file>AmmoRecordManagementAdd.qml</file>
+        <file>MountSchemeRecordManagement.qml</file>
+        <file>UavRecordManagement.qml</file>
+        <file>DnyTable.qml</file>
     </qresource>
 </RCC>

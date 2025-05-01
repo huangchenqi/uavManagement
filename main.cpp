@@ -21,6 +21,7 @@
 #include "ammoaerodynamicconfigurationdao.h"
 #include "interferencepoddao.h"
 #include "mountingschemedao.h"
+#include "reconnaissanceCommunicationdao.h"
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -55,6 +56,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<AmmoTypeDao>("AmmoTypeDaoModel",1,0,"AmmoTypeDaoTableModel");
     qmlRegisterType<AmmoAerodynamicConfigurationDao>("AmmoAerodynamicConfigurationDaoModel",1,0,"AmmoAerodynamicConfigurationDaoTableModel");
     qmlRegisterType<InterferencePodDao>("InterferencePodDaoModel",1,0,"InterferencePodDaoTableModel");
+    qmlRegisterType<ReconnaissanceCommunicationDao>("ReconnaissanceCommunicationDaoModel",1,0,"ReconnaissanceCommunicationDaoTableModel");
     qmlRegisterType<MountingSchemeDao>("MountingSchemeDaoModel",1,0,"MountingSchemeDaoTableModel");
     //qmlRegisterType<TableModel>("Macai.App", 1, 0, "SqlTableModel");
     const QUrl url(QStringLiteral("qrc:/main.qml"));//mainUavDataTableView.qmlUavManageCommon

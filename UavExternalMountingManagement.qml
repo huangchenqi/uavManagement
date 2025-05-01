@@ -5,19 +5,20 @@ import QtQuick.Layouts 1.14
 Item {
     id:root
     visible: true
-    width: 1600
-    height: 830
+    // width: 1600
+    // height: 830
+    anchors.fill: parent
     Rectangle{
         id: uavManageMentMain
         visible: true
-        width: 1400
-        height: 800
+        anchors.fill: parent
         // 全局可用性控制属性
         // 全局可用性控制属性
 
         //background: Rectangle { color: "#ffffff" }//#f0f0f0
         Component.onCompleted: {
             //loadData()
+            console.log("UavExternalMountingManagement初始化");
         }
         ColumnLayout{
             anchors.fill: parent
@@ -45,7 +46,7 @@ Item {
                         }
 
                         onClicked: {
-
+                            console.log("切换到侦察载荷管理选项卡");
                             stackLayout.currentIndex = 0
                             // 重置其他按钮的背景颜色
                             //resetTabColors();
@@ -68,7 +69,7 @@ Item {
                         }
 
                         onClicked: {
-
+                            console.log("切换到侦察通信管理选项卡");
                             stackLayout.currentIndex = 1
                             // 重置其他按钮的背景颜色
                             //resetTabColors();
@@ -88,7 +89,7 @@ Item {
                         }
 
                         onClicked: {
-
+                            console.log("切换到弹药载荷管理选项卡");
                             stackLayout.currentIndex = 2
 
                             //resetTabColors();
@@ -106,65 +107,97 @@ Item {
                 Layout.fillHeight: true
                 currentIndex: 0
 
-
                 // // 在 StackLayout 加载完成后设置背景颜色
                 Component.onCompleted: {
                     //uavManagement.background.color = "#87CEEB";
-
+                    console.log("StackLayout初始化，当前索引: " + currentIndex);
                 }
+                
+                // 干扰吊舱记录管理页面
+                Page{
+                    id: interferencePodPage
+                    padding: 0
+                    
+                    // 使用Rectangle替代Loader作为测试
+                    Rectangle {
+                        id: testRect
+                        anchors.fill: parent
+                        color: "#f0f0f0"
+                        visible: false
+                        
+                        Text {
+                            anchors.centerIn: parent
+                            text: "测试矩形 - 干扰吊舱记录管理"
+                            font.pixelSize: 20
+                            color: "#000000"
+                        }
+                    }
+                    
+                    // 使用相对路径加载干扰吊舱记录管理
+                    Loader {
+                        id: uavManagementLoader
+                        anchors.fill: parent
+                        source: "./InterferencePodRecordManagement.qml" //UavReconnaissancePayloadManagement
+                        // asynchronous: false
+                        // active: true
+                        visible: true
+                        
+                        onLoaded: {
+                            console.log("干扰吊舱记录管理界面加载完成");
+                            if (item) {
+                                console.log("加载项可用");
+                                item.visible = true;
+                            } else {
+                                console.log("加载项不可用");
+                                // 显示测试矩形
+                                testRect.visible = true;
+                            }
+                        }
+                        
+                        onStatusChanged: {
+                            if (status == Loader.Error) {
+                                console.error("加载失败: " + source);
+                                // 显示测试矩形
+                                testRect.visible = true;
+                            } else if (status == Loader.Loading) {
+                                console.log("正在加载: " + source);
+                            } else if (status == Loader.Ready) {
+                                console.log("加载就绪: " + source);
+                            }
+                        }
+                    }
+                }
+                
+                // 侦察通信管理页面
                 Page{
                     padding: 0
-
-                    // Rectangle{
-                    //     id:payloadTest
-
-                    //     height: parent.height
-                    //     width: parent.width
-                    //     color: "blue"
-                    // }
+                    width: parent.width; height: parent.height
                     Loader {
-                               id: uavManagementLoader
-                               source: "./UavReconnaissancePayloadManagement.qml" // 这里指定你想要加载的QML文件的路径
-                               onLoaded: {
-
-                               }
-
-                           }
-
-                           // 如果需要，你可以在Loader加载完成后访问其项（item）并进行操作
-                   Component.onCompleted: {
-                       //myLoader.item.someProperty = someValue // 假设OtherFile.qml的根元素有一个名为someProperty的属性
-                   }
+                        id: uavReconnaissanceCommunicationLoader
+                        anchors.fill: parent
+                        source: "./ReconnaissanceCommunicationRecordManagement.qml"
+                        // asynchronous: false
+                        onLoaded: {
+                            console.log("侦察通信管理界面加载完成");
+                        }
+                    }
                 }
+                
+                // 弹药载荷管理页面
                 Page{
                     padding: 0
+                    width: parent.width; height: parent.height
                     Loader {
-                               id: uavReconnaissanceCommunicationLoader
-                               source: "./ReconnaissanceCommunicationRecordManagement.qml" // 这里指定你想要加载的QML文件的路径
-                               onLoaded: {
-
-                               }
-
-                           }
-
-                           // 如果需要，你可以在Loader加载完成后访问其项（item）并进行操作
-                   Component.onCompleted: {
-                       //myLoader.item.someProperty = someValue // 假设OtherFile.qml的根元素有一个名为someProperty的属性
-                   }
+                        id: ammunitionLoadManagementLoader
+                        anchors.fill: parent
+                        source: "./AmmoRecordManagement.qml"
+                        // asynchronous: false
+                        onLoaded: {
+                            console.log("弹药载荷管理界面加载完成");
+                        }
+                    }
                 }
-                Page{
-
-                    padding: 0
-                    Loader {
-                               id: ammunitionLoadManagementLoader
-                               source: "./AmmoRecordManagement.qml" // 这里指定你想要加载的QML文件的路径
-                           }
-
-                           // 如果需要，你可以在Loader加载完成后访问其项（item）并进行操作
-                   Component.onCompleted: {
-                       //myLoader.item.someProperty = someValue // 假设OtherFile.qml的根元素有一个名为someProperty的属性
-                   }
-                }
+                
                 Page{
                     Text {
                         id: thname
@@ -174,9 +207,6 @@ Item {
                 }
             }
         }
-
-
-
     }
 
     // 重置所有标签按钮的背景颜色

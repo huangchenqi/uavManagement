@@ -284,7 +284,7 @@ Rectangle{//Window{
                 ListView{
                     id:view_List_TypeSelect
                     width: uavTypeSelect.width
-                    height: uavTypeSelect.height * 5
+                    height: uavTypeSelect.height * 3
                     anchors.left: uavTypeSelect.left
                     anchors.leftMargin: uavTypeSelect.width/2 - width/2
                     anchors.top: uavTypeSelect.bottom

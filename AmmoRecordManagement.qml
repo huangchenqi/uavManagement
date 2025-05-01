@@ -30,13 +30,14 @@ Rectangle {
            property var selectRow: []
            property string managementType: "";
            property var ammoTypeSelect: []
+           property var queryAmmo: new Object //查询某条数据
 
            width: 1400; height: 760//width: screenWidth; height: screenHeight
 
            property int bottonHeight: 50
            Loader {
                id: pageAmmoModelLoader  // 必须的标识符
-               anchors.fill: parent  // 填充父容器
+               //anchors.fill: parent  // 填充父容器
                visible: true    // 确保可见
                // 监听信号并切换界面
               Connections {
@@ -44,10 +45,19 @@ Rectangle {
                   onBackAmmoRecord: {
                       console.log("connectuion!!!!!")
                       ammoRecordDataView.visible = true
+                      loadAmmoType()
+                      var uavData = {
+                          ammoType:"请选择:",
+                          ammoName:""}
+                      loadAmmoRecord(uavData)
+                      processInfo.queryAmmo = ""
+                      processInfo.recordId = ""
+                      processInfo.loadViewType =""
+                      queryAmmo.recordId = ""
+
                   }
               }
            }
-
            AmmoTypeDaoTableModel{
                id:ammoTypeDaoTableModel
            }
@@ -80,6 +90,10 @@ Rectangle {
                           ammoType:"请选择:",
                           ammoName:""}
                       loadAmmoRecord(uavData)
+                      processInfo.queryAmmo = ""
+                      processInfo.recordId = ""
+                      processInfo.loadViewType =""
+                      queryAmmo.recordId = ""
 
 
                       // 清空从引导界返回后携带的数据。
@@ -361,7 +375,7 @@ Rectangle {
                                           text = newText
 
                                           // 恢复光标位置（考虑文本缩短的情况）
-                                          cursorPosition = Math.min(cursorPos, newText.length)
+                                         // cursorPosition = Math.min(cursorPos, newText.length)
                                       }
                                   }
                               }
@@ -578,26 +592,34 @@ Rectangle {
                                                       height: 30
                                                       onClicked: {
                                                           var rowData = tableModel.getRow(row) //.rows[row]
-                                                          console.log("查看行数据:", JSON.stringify(rowData, null, 2))
+                                                          //console.log("查看行数据:", JSON.stringify(rowData, null, 2))
                                                           // 转换数据
-                                                          var transformedData = transformData(rowData)
-                                                          console.log("转换后的数据:", JSON.stringify(transformedData, null, 2))
-
-                                                          // 将转换后的数据转换为 JSON 字符串
-                                                          //var jsonStr = JSON.stringify(transformedData)
-                                                          // processInfo.recordId = transformedData.recordId
-                                                          // processInfo.uavType = transformedData.uavType
-                                                          // processInfo.uavName = transformedData.uavName
-                                                          // processInfo.uavId = transformedData.uavId
+                                                          processInfo.recordId = rowData.recordId
+                                                          processInfo.queryAmmo = rowData.ammoType
                                                           processInfo.loadViewType = "query"
-                                                          //processInfo.jsonStr = transformedData
-                                                          assignmentEncapsulation(transformedData)
-                                                          processInfo.hangingCapacity = rowData.origHangingCapacity
-                                                          //console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
-                                                          pageUavModelLoader.setSource("qrc:./UpdateAddUavModelData.qml",
-                                                                               {processInfo: processInfo,
-                                                                                   backUi: "qrc:/UavManageCommon.qml"})
-                                                          uavModelRecordView.visible = false
+                                                          console.log("processInfo.recordId"+processInfo.recordId)
+                                                          var viewType = rowData.ammoType
+                                                         if(viewType === "航空爆破炸弹" ||
+                                                            viewType === "航空半穿甲炸弹" ||
+                                                             viewType === "航空杀伤爆破炸弹"  ||
+                                                              viewType === "航空反坦克子母弹"   ||
+                                                               viewType === "航空燃料炸弹"  ||
+                                                               viewType === "航空区域封锁字母弹"  ||
+                                                               viewType === "航空碳纤维炸弹"  ||
+                                                               viewType === "燃料空气炸弹"  ||
+                                                              viewType === "航空宣传宣传炸弹"   ||
+                                                              viewType ===  "无源干扰吊舱"  ){
+                                                             // 动态加载 QML 文件并设置属性
+                                                             pageAmmoModelLoader.setSource("qrc:./AddAmmoAllData.qml", {viewType: viewType})
+
+                                                         }else{
+                                                             // 动态加载 QML 文件并设置属性
+                                                             pageAmmoModelLoader.setSource("qrc:./AddAmmoAviationAllData.qml", {viewType: viewType})
+                                                         }
+                                                          // pageAmmoModelLoader.setSource("qrc:./AddAmmoAllData.qml",
+                                                          //                      {processInfo: processInfo,
+                                                          //                          backUi: "qrc:/UavManageCommon.qml"})
+                                                          ammoRecordDataView.visible = false
                                                       }
                                                   }
 
@@ -610,8 +632,7 @@ Rectangle {
                                                           var rowData = tableModel.rows[row]
                                                           console.log("查看行数据:", JSON.stringify(rowData, null, 2))
                                                           // 转换数据
-                                                          var transformedData = transformData(rowData)
-                                                          console.log("转换后的数据:", JSON.stringify(transformedData, null, 2))
+                                                          //console.log("转换后的数据:", JSON.stringify(transformedData, null, 2))
 
                                                           // 将转换后的数据转换为 JSON 字符串
                                                           //var jsonStr = JSON.stringify(transformedData)
@@ -619,10 +640,7 @@ Rectangle {
                                                           console.log("编辑行数据:", JSON.stringify(transformedData, null, 2))
 
                                                           processInfo.loadViewType = "update"
-                                                          assignmentEncapsulation(transformedData)
-                                                          processInfo.hangingCapacity = rowData.origHangingCapacity
-                                                          console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
-                                                          pageUavModelLoader.setSource("qrc:./UpdateAddUavModelData.qml",
+                                                          pageAmmoModelLoader.setSource("qrc:./UpdateAddUavModelData.qml",
                                                                                {processInfo: processInfo,
                                                                                    backUi: "qrc:/UavManageCommon.qml"})
                                                           uavModelRecordView.visible = false
@@ -977,6 +995,22 @@ Rectangle {
               console.log("testAmmoo"+JSON.stringify(names))
               uavAmmoManagementroot.ammoTypeSelect = names
 
+           }
+           // 转换函数
+           function transformData(data) {
+               return {
+                   "bombMethod": data.bombMethod,
+                   "hangingCapacity": data.hangingCapacity,
+                   "operationMethod": data.operationMethod,
+                   "payloadType": data.payloadType,
+                   "recordId": data.recordId,
+                   "recoveryMode": data.recoveryMode,
+                   "uavId": data.uavId,
+                   "uavName": data.uavName,
+                   "uavType": data.uavType,
+                   "uavLoadAmmoType":data.uavLoadAmmoType,
+                   "imageUrl":data.imageUrl
+               };
            }
            function loadAmmoRecord(data){
             var result = ammoDaoTableModel.selectAmmoAllData(data)

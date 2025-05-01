@@ -1,7 +1,7 @@
 #include "ammodao.h"
 #include "AmmunitionEntity.h"
 #include "AmmunitionEntity-odb.hxx"
-#include <QDebug>
+
 #include <stdexcept>
 #include "iostream"
 // ODB 头文件
@@ -17,6 +17,9 @@
 #include <QDateTime>
 #include <QFile>
 #include <QUrl>
+#include <QDebug>
+#include <QTemporaryFile>
+#include <QImage>
 AmmoDao::AmmoDao(QObject* parent) : QObject(parent){ //::UavModelDao() {
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
     dbConn_.reset(new DatabaseConnection(
@@ -174,10 +177,254 @@ QJsonArray AmmoDao::selectAmmoAllData(const QJsonObject &selectedData)
 
 }
 
-QJsonObject AmmoDao::selectSomeAmmoData(const QJsonObject &selectedData)
+QJsonObject AmmoDao::selectSomeAmmoData(const QJsonObject &object)
 {
-    QJsonObject object;
-    return object;
+    QJsonObject ammoData;
+    using query_t = odb::query<AmmunitionEntity>;
+    // 1. 建立数据库连接
+    qDebug() << "Connecting to database...";
+
+    auto& db = dbConn_->getDatabase(); // 使用成员变量获取数据库
+
+    // 2. 创建事务
+    odb::transaction trans(db.begin());
+    qDebug() << "Transaction started";
+    try {
+
+        // 3. 从JSON创建实体对象
+        AmmunitionEntity entity;
+
+        query_t q(query_t::true_expr); // 初始化为无条件
+        if (object.contains("recordId") && object["recordId"].isString()) {
+            auto uav_recordId = object["recordId"].toString();
+            q = q && (query_t::id == uav_recordId.toInt());
+        }
+
+        // 执行查询
+        auto result = db.query_one<AmmunitionEntity>(q);
+        if (result) {
+            const AmmunitionEntity& entity = *result;
+
+            // 手动转换每个字段到QJsonObject// 基础字段
+            ammoData["recordId"] = QString::number(entity.id_);
+            ammoData["ammoName"] = QString::fromStdString(entity.ammoName_);
+            ammoData["shortName"] = QString::fromStdString(entity.shortName_);
+            ammoData["ammoType"] = QString::fromStdString(entity.ammoType_);
+            ammoData["ammoId"] = QString::fromStdString(entity.ammoId_);
+            ammoData["ammoToUavModel"] = QString::fromStdString(entity.ammoToUavModel_);
+            ammoData["ammoDescription"] = QString::fromStdString(entity.ammoDescription_);
+
+            ammoData["ammoLenth"] = QString::number(entity.ammoLenth_); // 假设返回float// 使用 QString::number 方法转换 float
+            ammoData["ammoMass"] = QString::number(entity.ammoMass_);
+            ammoData["ammoDiameter"] = QString::number(entity.ammoDiameter_);
+
+            // 格式化为字符串（保留5位小数）
+            // QString formattedValue = QString::number(entity.uavLength_, 'f', 5);
+            // ammoData["uavLengthhangingCapacityStr"] = formattedValue;
+            /******************** 飞行性能 ********************/
+            ammoData["ammoWingspan"] = QString::number(entity.ammoWingspan_);
+            ammoData["ammoWarheadCgDistance"] = QString::number(entity.ammoWarheadCgDistance_) ;
+            ammoData["ammoChargeMass"] = QString::number(entity.ammoChargeMass_);
+            ammoData["ammoChargeCoefficient"] = QString::number(entity.ammoChargeCoefficient_);
+            ammoData["ammoMaxReleaseHeight"] = QString::number(entity.ammoMaxReleaseHeight_);
+            ammoData["ammoMinReleaseHeight"] = QString::number(entity.ammoMinReleaseHeight);
+            ammoData["ammoMinReleaseSpeed"] = QString::number(entity.ammoMinReleaseSpeed_);
+            ammoData["ammoMaxReleaseSpeed"] = QString::number(entity.ammoMaxReleaseSpeed_);
+            ammoData["ammoTailLength"] = QString::number(entity.ammoTailLength_);
+            ammoData["ammoLugSpacing"] = QString::number(entity.ammoLugSpacing_);
+
+            ammoData["ammoKillingWay"] = QString::fromStdString(entity.ammoKillingWway_);
+            ammoData["ammoPenetrationDepth"] = QString::number(entity.ammoPenetrationDepth_);
+            ammoData["ammoQuantitySoilThrown"] = QString::number(entity.ammoQuantitySoilThrown_);
+            ammoData["ammoCraterDiameter"] = QString::number(entity.ammoCraterDiameter_);
+            ammoData["ammoCraterDepth"] = QString::number(entity.ammoCraterDepth_);
+            ammoData["ammoDamagedArea"] = QString::number(entity.ammoDamagedArea_);
+            ammoData["ammoDenseKillingRadius"] = QString::number(entity.ammoDenseKillingRadius_);
+            ammoData["ammoInitialVelocityFragments"] = QString::number(entity.ammoInitialVelocityFragments_);
+            ammoData["ammoNumberFragments"] = QString::number(entity.ammoNumberFragments_);
+            ammoData["ammoArmorBreakingAbility"] = QString::fromStdString(entity.ammoArmorBreakingAbility_);
+            ammoData["bullet_density_range_minimum"] = QString::number(entity.bullet_density_range_minimum);
+            ammoData["bullet_density_range_maximum"] = QString::number(entity.bullet_density_range_maximum);
+            ammoData["ground_ignition_rate"] = QString::number(entity.ground_ignition_rate);
+            ammoData["combustion_temperature"] = QString::number(entity.combustion_temperature);
+            ammoData["combustion_time"] = QString::number(entity.combustion_time);
+            ammoData["combustion_agent_spread_range"] = QString::number(entity.combustion_agent_spread_range);
+            ammoData["number_of_fragments"] = QString::number(entity.number_of_fragments);
+            ammoData["breakdown_distance"] = QString::number(entity.breakdown_distance);
+            ammoData["maximum_inclusive_coverage_quantity"] = QString::number(entity.maximum_inclusive_coverage_quantity);
+            ammoData["number_of_spread"] = QString::number(entity.number_of_spread);
+            ammoData["surface_dc_resistivity"] = QString::number(entity.surface_dc_resistivity);
+            ammoData["probability_of_arc_discharge"] = QString::number(entity.probability_of_arc_discharge);
+            ammoData["fuel_dispersion_radius"] = QString::number(entity.fuel_dispersion_radius);
+            ammoData["distance_from_center_explosion"] = QString::number(entity.distance_from_center_explosion);
+            ammoData["shock_wave_overpressure_value"] = QString::number(entity.shock_wave_overpressure_value);
+            ammoData["spread_area"] = QString::number(entity.spread_area);
+            ammoData["use_description"] = QString::fromStdString(entity.use_description);
+            ammoData["interference_duration"] = QString::number(entity.interference_duration);
+            ammoData["interference_length_minimum"] = QString::number(entity.interference_length_minimum);
+
+            /******************** 挂载能力 ********************/
+            //ammoData["hardpoint_loc"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
+            // entity.uavHangingpoints_ = ammoData["hardpoint_num"].toInt();
+            // entity.uavPayloadcapacity_ = ammoData["payload_capacity"].toInt();
+
+            ammoData["interference_length_maximum"] = QString::number(entity.interference_length_maximum);
+            ammoData["interference_width_minimum"] = QString::number(entity.interference_width_minimum);
+            ammoData["interference_width_maximum"] = QString::number(entity.interference_width_maximum);
+            ammoData["fuze_model"] = QString::fromStdString(entity.fuze_model);
+            ammoData["number_of_fuses"] = QString::number(entity.number_of_fuses);
+            ammoData["storage_life"] = QString::number(entity.storage_life);
+            ammoData["action_time"] = QString::number(entity.action_time);
+            ammoData["available_extension_time"] = QString::number(entity.available_extension_time);
+            ammoData["rudder_width"] = QString::number(entity.rudder_width);
+            ammoData["aerodynamic_configuration"] = QString::fromStdString(entity.aerodynamic_configuration);
+            ammoData["working_conditions"] = QString::fromStdString(entity.working_conditions);
+            ammoData["working_temperature"] = QString::number(entity.working_temperature);
+            ammoData["working_altitude"] = QString::number(entity.working_altitude);
+            ammoData["launch_way"] = QString::fromStdString(entity.launch_way);
+            ammoData["guidance_rule"] = QString::fromStdString(entity.guidance_rule);
+            ammoData["minimum_visibility_emission"] = QString::number(entity.minimum_visibility_emission);
+            ammoData["maximum_launch_altitude"] = QString::number(entity.maximum_launch_altitude);
+            ammoData["launch_maximum_target_altitude"] = QString::number(entity.launch_maximum_target_altitude);
+            ammoData["maximum_launch_relative_height"] = QString::number(entity.maximum_launch_relative_height);
+            ammoData["minimum_relative_height_launch"] = QString::number(entity.minimum_relative_height_launch);
+            ammoData["launch_speed"] = QString::number(entity.launch_speed);
+            ammoData["launch_conditions"] = QString::fromStdString(entity.launch_conditions);
+            ammoData["launch_off_axis_angle"] = QString::number(entity.launch_off_axis_angle);
+            ammoData["guidance_way"] = QString::fromStdString(entity.guidance_way);
+            ammoData["effective_range"] = QString::number(entity.effective_range);
+            ammoData["hit_accuracy"] = QString::number(entity.hit_accuracy);
+            ammoData["hit_probability"] = QString::number(entity.hit_probability);
+            ammoData["preparation_time"] = QString::number(entity.preparation_time);
+            ammoData["allow_continuous_flight_time"] = QString::number(entity.allow_continuous_flight_time);
+            ammoData["guided_flight_time"] = QString::number(entity.guided_flight_time);
+            ammoData["maximum_speed_of_missile"] = QString::number(entity.maximum_speed_of_missile);
+            ammoData["guiding_head_working_wavelength"] = QString::number(entity.guiding_head_working_wavelength);
+            ammoData["blind_spot_of_guidance_head"] = QString::number(entity.blind_spot_of_guidance_head);
+            ammoData["guidance_head_frame_angle"] = QString::number(entity.guidance_head_frame_angle);
+            ammoData["guidance_head_operating_distance"] = QString::number(entity.guidance_head_operating_distance);
+            ammoData["guidance_head_field_of_view_angle"] = QString::number(entity.guidance_head_field_of_view_angle);
+            ammoData["guidance_head_field_of_view_angle_linearregion"] = QString::number(entity.guidance_head_field_of_view_angle_linearregion);
+            ammoData["guidance_head_field_of_view_angle_instantaneous"] = QString::number(entity.guidance_head_field_of_view_angle_instantaneous);
+
+            ammoData["adaptability_of_guidance_head_sunlight"] = QString::fromStdString(entity.adaptability_of_guidance_head_sunlight);
+            ammoData["guidance_head_operating_frequency"] = QString::number(entity.guidance_head_operating_frequency);
+            ammoData["fuse_firing_rate"] = QString::number(entity.fuse_firing_rate);
+            ammoData["fuse_type"] = QString::fromStdString(entity.fuse_type);
+            ammoData["fuse_length"] = QString::number(entity.fuse_length);
+            ammoData["fuse_diameter"] = QString::number(entity.fuse_diameter);
+            ammoData["fuze_quality"] = QString::number(entity.fuze_quality);
+            ammoData["safe_distance_of_fuse"] = QString::number(entity.safe_distance_of_fuse);
+            ammoData["time_disarming_fuse"] = QString::number(entity.time_disarming_fuse);
+            ammoData["first_level_release_time_of_fuse"] = QString::number(entity.first_level_release_time_of_fuse);
+            ammoData["secondary_release_time_of_fuse"] = QString::number(entity.secondary_release_time_of_fuse);
+            ammoData["reliability_rate_of_fuse_action"] = QString::number(entity.reliability_rate_of_fuse_action);
+            ammoData["fuse_self_destruct_time"] = QString::number(entity.fuse_self_destruct_time);
+            ammoData["combat_department_quality"] = QString::number(entity.combat_department_quality);
+            ammoData["combat_quantity"] = QString::number(entity.combat_quantity);
+            ammoData["combat_unit_type"] = QString::fromStdString(entity.combat_unit_type);
+            ammoData["combat_length"] = QString::number(entity.combat_length);
+            ammoData["combat_diameter"] = QString::number(entity.combat_diameter);
+            ammoData["combat_main_charge_type"] = QString::fromStdString(entity.combat_main_charge_type);
+            ammoData["combat_charge_density"] = QString::number(entity.combat_charge_density);
+            ammoData["combat_loading_factor"] = QString::number(entity.combat_loading_factor);
+            ammoData["combat_explosive"] = QString::number(entity.combat_explosive);
+            ammoData["combat_fragments_number"] = QString::number(entity.combat_fragments_number);
+            ammoData["combat_unit_invasion_capability"] = QString::fromStdString(entity.combat_unit_invasion_capability);
+            ammoData["combat_effective_killing_radius_vehicles"] = QString::number(entity.combat_effective_killing_radius_vehicles);
+            ammoData["combat_effective_killing_radius_personnel"] = QString::number(entity.combat_effective_killing_radius_personnel);
+            ammoData["combat_vertical_static_armor_penetration_depth"] = QString::number(entity.combat_vertical_static_armor_penetration_depth);
+            ammoData["combat_department_quality_add"] = QString::number(entity.combat_department_quality_add);
+            ammoData["combat_quantity_add"] = QString::number(entity.combat_quantity_add);
+
+            ammoData["combat_unit_type_add"] = QString::fromStdString(entity.combat_unit_type_add);
+            ammoData["combat_length_add"] = QString::number(entity.combat_length_add);
+            ammoData["combat_diameter_add"] = QString::number(entity.combat_diameter_add);
+            ammoData["combat_main_charge_type_add"] = QString::fromStdString(entity.combat_main_charge_type_add);
+            ammoData["combat_charge_density_add"] = QString::number(entity.combat_charge_density_add);
+            ammoData["combat_loading_factor_add"] = QString::number(entity.combat_loading_factor_add);
+            ammoData["combat_explosive_add"] = QString::number(entity.combat_explosive_add);
+            ammoData["combat_fragments_number_add"] = QString::number(entity.combat_fragments_number_add);
+            ammoData["combat_unit_invasion_capability_add"] = QString::fromStdString(entity.combat_unit_invasion_capability_add);
+            ammoData["combat_effective_killing_radius_vehicles_add"] = QString::number(entity.combat_effective_killing_radius_vehicles_add);
+            ammoData["combat_effective_killing_radius_personnel_add"] = QString::number(entity.combat_effective_killing_radius_personnel_add);
+            ammoData["combat_vertical_static_armor_penetration_depth_add"] = QString::number(entity.combat_vertical_static_armor_penetration_depth_add);
+            ammoData["service_life"] = QString::number(entity.service_life);
+            ammoData["distance_between_center_mass_end"] = QString::number(entity.distance_between_center_mass_end);
+            ammoData["lifting_lug"] = QString::fromStdString(entity.lifting_lug);
+            ammoData["distance_suspension_lifting_lug"] = QString::number(entity.distance_suspension_lifting_lug);
+            //ammoData["image_url"] = QString::fromStdString(entity.image_url);
+           /******************** 系统记录 ********************/
+            //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
+            //ammoData["image_name"] = QString::fromStdString(entity.uavImgName_);
+
+            QByteArray imageData(entity.image_name.data(), entity.image_name.size());
+            //建立临时文件名
+
+            QString tempFileName = "Uav" + QDateTime::currentDateTime().toString("yyyyMMddHHmmss") + "Image";
+            // 创建一个临时文件
+            QTemporaryFile tempFile(tempFileName);
+            //tempFile.setAutoRemove(false); // 禁用自动删除
+            if (!tempFile.open()) {
+                qDebug() << "Failed to create temporary file:" << tempFile.errorString();
+                //return QString();
+            }
+
+            // 写入图片数据
+            tempFile.write(imageData);
+            tempFile.close();
+
+            // 返回临时文件的路径
+            QUrl imageUrl;
+            QString tempFilePath =tempFile.fileName();
+            if (!tempFilePath.isEmpty()) {
+                imageUrl = QUrl::fromLocalFile(tempFilePath);
+            }
+
+            QString filePath = imageUrl.toString();
+            // 去掉文件路径中的 "file:///"
+            filePath = filePath.mid(8);
+
+            // 检查文件是否存在
+            QFile file(filePath);
+            if (!file.exists()) {
+                qDebug()<< "错误, 文件不存在！";
+
+            }
+
+            // 加载图片
+            QImage image(filePath);
+            //                if (image.isNull()) {
+            //                    qDebug()<<"错误, 无法加载图片！";
+            //                    return -1;
+            //                }
+            QString fileType = ".png";
+
+            // 修改文件扩展名
+            QString newFilePath = filePath.section('.', 0, -2) + fileType;
+
+            // 保存为PNG格式
+            if (!image.save(newFilePath, "PNG")) {
+                qDebug()<<"错误, 保存失败！";
+            }
+            qDebug()<<"QTemporaryFile"<<newFilePath;
+
+            ammoData["image_url"] = newFilePath;
+            // 转换为格式化的JSON字符串
+            QJsonDocument doc(ammoData);
+            QString jsonString = doc.toJson(QJsonDocument::Indented);
+            qDebug()<<"当前函数名称:" << __FUNCTION__<<":"<<jsonString;
+        } else {
+            qDebug() << "No matching record found";
+        }
+
+        trans.commit();
+    } catch (const odb::exception& e) {
+        qCritical() << "Database error:" << e.what();
+        trans.rollback(); // 显式回滚事务（可选）
+        throw; // 重新抛出异常或返回空结果
+    }
+    return ammoData;
 }
 
 bool AmmoDao::updateAmmoData(const QJSValue &selectedData)
@@ -438,200 +685,3 @@ bool AmmoDao::insertAmmoData(const QJsonObject &object)
     return true;
 
 }
-// bool UavModelDao::insertModelDate(const QJsonObject& objectData)
-// {
-//     qDebug() << "Starting database insertion...";
-//     QJsonObject checkResult;
-//     QJsonObject object;
-//     //checkResult = checkUavDataObject(object);
-//     // 转换为格式化的JSON字符串
-//     QJsonDocument doc(objectData);
-//     QString jsonString = doc.toJson(QJsonDocument::Indented);
-//     qDebug() << "图片的数据:" << jsonString;
-//     // 解析 JSON 数据
-//     QJsonDocument trDoc(objectData); //QJsonDocument::fromJson(jsonString.toUtf8());
-//     if (!trDoc.isNull() && trDoc.isObject()) {
-//         QJsonObject uavData = trDoc.object();
-
-//         // 指定需要转换的字段
-//         QStringList fieldsToTransform = {
-//             "load_ammo_type",
-//             "payload_type",
-//             "bomb_method",
-//             "operation_method",
-//             "recovery_mode"
-//         };
-
-//         object  = transformArrayToStr(uavData, fieldsToTransform);
-
-//         // 打印转换后的数据
-//         QJsonDocument transformedDoc(object);
-//         qDebug() << "转换后的数据:" << transformedDoc.toJson(QJsonDocument::Compact);
-//     }        // 打印到控制台
-//     qDebug()<<"Qt function UavModelDao insertModelDat JSON内容：\n" << jsonString;
-//     try {
-//         // 1. 建立数据库连接
-//         qDebug() << "Connecting to database...";
-//         // odb::pgsql::database db(
-//         //     "postgres",       // username
-//         //     "123456",         // password
-//         //     "db_aux_prac_sys",// database
-//         //     "192.168.0.101",  // host
-//         //     5432              // port
-//         //     );
-//         auto& db = dbConn_->getDatabase(); // 使用成员变量获取数据库
-
-//         // 2. 创建事务
-//         odb::transaction trans(db.begin());
-//         qDebug() << "Transaction insert started";
-
-//         // 3. 从JSON创建实体对象
-//         UavModelEntity entity;
-//         QDateTime recordCreationTime;//创建记录时间
-
-//         // 4. 映射JSON字段到实体属性
-//         // 基础字段
-//         entity.uavType_ = object["uav_type"].toString().toStdString();
-//         entity.uavName_ = object["uav_name"].toString().toStdString();
-//         entity.uavId_ = object["uav_id"].toString().toStdString();
-
-//         /******************** 尺寸参数 ********************/
-//         entity.uavLength_ = object["length"].toDouble();
-//         entity.uavWidth_ = object["width"].toDouble();
-//         entity.uavHeight_ = object["height"].toDouble();
-
-
-//         /******************** 飞行性能 ********************/
-//         entity.uavFlightHeightRangeMin_ = object["flight_height_min"].toDouble();
-//         entity.uavFlightHeightRangeMax_ = object["flight_height_max"].toDouble();
-//         entity.uavFlightSpeedRangeMin_ = object["flight_speed_min"].toDouble();
-//         entity.uavFlightSpeedRangeMax_ = object["flight_speed_max"].toDouble();
-//         entity.uavFlightDistanceRangeMin_ = object["flight_distance_min"].toDouble();
-//         entity.uavFlightDistanceRangeMax_ = object["flight_distance_max"].toDouble();
-//         entity.uavFlightTimeRangeMin_ = object["flight_time_min"].toDouble();
-//         entity.uavFlightTimeRangeMax_ = object["flight_time_max"].toDouble();
-
-//         /******************** 起降参数 ********************/
-//         entity.uavTakeoffDistance_ = object["takeoff_distance"].toDouble();
-//         entity.uavLandDistance_ = object["landing_distance"].toDouble();
-
-//         /******************** 机动性能 ********************/
-//         entity.uavTurningRadiusRangeMin_ = object["turn_radius_min"].toDouble();
-//         entity.uavTurningRadiusRangeMax_ = object["turn_radius_max"].toDouble();
-//         entity.uavOperatioanalRadius_ = object["combat_radius"].toDouble();
-
-//         /******************** 载荷配置 ********************/
-//         entity.uavInvestigationPayloadType_ = object["payload_type"].toString().toStdString();
-
-//         entity.uavBombingway_ = object["bomb_method"].toString().toStdString();
-//         entity.uavOperationWay_ = object["operation_method"].toString().toStdString();
-//         entity.uavRecoveryway_ = object["recovery_mode"].toString().toStdString();
-//         entity.uavHangingLoctionCapacity_ = object["hanging_capacity"].toString().toStdString();
-//         entity.uavLoadAmmoType_ = object["load_ammo_type"].toString().toStdString();
-
-//         entity.uavLoadReconnaissanceRangeMin_ = object["recon_range_min"].toDouble();
-//         entity.uavLoadReconnaissanceRangeMax_ = object["recon_range_max"].toDouble();
-//         entity.uavLoadReconnaissanceAccuracy_ = object["recon_accuracy"].toDouble();
-
-//         /******************** 回收与突防 ********************/
-
-//         entity.uavLowAltitudeBreakthroughSpeed_ = object["low_alt_speed"].toDouble();
-
-//         /******************** 挂载能力 ********************/
-
-//         // entity.uavPayloadcapacity_ = object["payload_capacity"].toInt();
-//         entity.uavAttackaccuracy_ = object["attack_accuracy"].toDouble();
-
-//         /******************** 雷达特征 ********************/
-//         entity.uavRadarCrossSection_ = object["rcs"].toDouble();
-
-//         /******************** 重量与平衡 ********************/
-//         entity.uavCenterOfGravityFrontLimit_ = object["cg_front_limit"].toDouble();
-//         entity.uavCenterOfGravityAfterwardLimit_ = object["cg_rear_limit"].toDouble();
-//         entity.uavMaximumTakeoffWeight_ = object["max_takeoff_weight"].toDouble();
-//         entity.uavEmptyWeight_ = object["empty_weight"].toDouble();
-
-//         /******************** 燃油与载重 ********************/
-//         entity.uavMaximumFuelCapacity_ = object["max_fuel"].toDouble();
-//         entity.uavMaximumExternalWeight_ = object["max_external_weight"].toDouble();
-
-//         /******************** 高度性能 ********************/
-//         entity.uavCeiling_ = object["ceiling"].toDouble();
-//         entity.uavMaximumGroundStartingHeight_ = object["ground_start_alt"].toDouble();
-//         entity.uavMaximumAirStartingAltitude_ = object["air_start_alt"].toDouble();
-
-//         /******************** 续航性能 ********************/
-//         entity.uavMaximumEndurance_ = object["endurance"].toDouble();
-//         entity.uavMaximumFlightVacuumSpeed_ = object["max_vacuum_speed"].toDouble();
-//         entity.uavMinimumFlightMeterSpeed_ = object["min_meter_speed"].toDouble();
-
-//         /******************** 特殊场景性能 ********************/
-//         entity.sealLevelTakeoffAndRollDistance_ = object["sea_takeoff_roll"].toDouble();
-//         entity.sealLevelLandingAndRollDistance_ = object["sea_landing_roll"].toDouble();
-//         entity.cruiseAltitudeReconnaissanceConfiguration_ = object["recon_cruise_alt"].toDouble();
-//         entity.cruiseAltitudeFullExternalConfiguration_ = object["full_external_cruise_alt"].toDouble();
-
-//         /******************** 系统记录 ********************/
-//         //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
-//         // 使用 QUrl 解析 URL 并提取本地路径
-//         QString image_url = object["image_url"].toString();
-//         QUrl url(image_url);
-//         QString localFilePath = url.toLocalFile();
-//         QFile file(localFilePath);
-
-//         qDebug()<<"image_url:"<<object["image_url"].toString();
-//         file.open(QIODevice::ReadOnly);
-//         QByteArray data = file.readAll();
-//         file.close();
-//         //std::vector  imagByteA = std::vector<unsigned char>(data.begin(),data.end());
-//         entity.uavImgName_ = std::vector<char>(data.begin(),data.end());
-//         std::vector<char> imagByteA(data.begin(), data.end());
-//         std::cout << "imagByteA: "<<imagByteA.size()<<"Data size" << entity.uavImgName_.size() << std::endl;
-
-
-//         // std::vector<unsigned char> content;
-
-//         // // 文件写入方法
-//         // bool save_to_file(const std::string& path) {
-//         //     QFile file(QString::fromStdString(path));
-//         //     if (!file.open(QIODevice::WriteOnly)) return false;
-//         //     file.write(reinterpret_cast<const char*>(content.data()), content.size());
-//         //     return file.flush();
-//         // }
-
-//         // // 文件加载方法
-//         // static BinaryData load_from_file(const std::string& path) {
-//         //     QFile file(QString::fromStdString(path));
-//         //     file.open(QIODevice::ReadOnly);
-//         //     QByteArray data = file.readAll();
-//         //     return {std::vector<unsigned char>(data.begin(), data.end())};
-//         // }
-//         //entity.uavImgName_ = object["image_name"].toString().toStdString();
-//         //entity.uavImgUrl_ = object["image_url"].toString().toStdString();
-
-//         // 5. 数据验证
-//         // if (entity.getUavType().empty()) {
-//         //     throw std::invalid_argument("Missing required field: uav_type");
-//         // }
-//         // 6. 持久化到数据库
-//         qDebug() << "Persisting entity...";
-//         auto id = db.persist(entity);
-
-//         // 7. 提交事务
-//         trans.commit();
-//         qDebug() <<"当前函数名称:" << __FUNCTION__<<":"<< "Transaction committed, ID:" << id;
-
-//         //return id;
-//     }
-//     catch (const odb::exception& e) {
-//         qCritical() << "Database error:" << e.what();
-//         return false;
-//         //throw;
-//     }
-//     catch (const std::exception& e) {
-//         qCritical() << "Error:" << e.what();
-//         return false;//throw;
-//     }
-//     return true;
-
-// }

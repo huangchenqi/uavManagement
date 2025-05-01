@@ -5,7 +5,6 @@ import QtQuick.Window 2.12
 import Qt.labs.qmlmodels 1.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.12
 import "."
 import "qrc:/"
 import "qrc:/AddAmmoModules/Component"
@@ -278,112 +277,112 @@ Rectangle {
                                   text: "无人机名称:"
                               }//显示区域
 
-                              Rectangle{
-                                  id:showSelect
-                                  color: "transparent"
-                                  width: 200
-                                  height: 36
-                                  border.width: 0
+    //                           Rectangle{
+    //                               id:showSelect
+    //                               color: "transparent"
+    //                               width: 200
+    //                               height: 36
+    //                               border.width: 0
 
-                                  CButton{
-                                      id:comp_DamageFactorType
-                                      width: 200
-                                      height: 36
-                                      color:"#ffddaa00"
-                                      borderColor: "#ffddaa00"
-                                      borderHigtColor: "#ffeebb22"
-                                      anchors.left: parent.left
-                                      anchors.leftMargin: 5
-                                      anchors.verticalCenter: parent.verticalCenter
-            //                          anchors.bottom: confirmAddAmmoData.bottom
-            //                          anchors.bottomMargin: confirmAddAmmoData.bottom +50
-            //                          anchors.verticalCenter: parent.verticalCenter
-                                      pixelSize: 20
-                                      text:"请选择:"
-                                      onClicked: {
-                                          view_List_TypeSelect.visible = !view_List_TypeSelect.visible
-                                      }
-                                  }
+    //                               CButton{
+    //                                   id:comp_DamageFactorType
+    //                                   width: 200
+    //                                   height: 36
+    //                                   color:"#ffddaa00"
+    //                                   borderColor: "#ffddaa00"
+    //                                   borderHigtColor: "#ffeebb22"
+    //                                   anchors.left: parent.left
+    //                                   anchors.leftMargin: 5
+    //                                   anchors.verticalCenter: parent.verticalCenter
+    //         //                          anchors.bottom: confirmAddAmmoData.bottom
+    //         //                          anchors.bottomMargin: confirmAddAmmoData.bottom +50
+    //         //                          anchors.verticalCenter: parent.verticalCenter
+    //                                   pixelSize: 20
+    //                                   text:"请选择:"
+    //                                   onClicked: {
+    //                                       view_List_TypeSelect.visible = !view_List_TypeSelect.visible
+    //                                   }
+    //                               }
 
-                                  ListView{
-                                      id:view_List_TypeSelect
-                                      width: comp_DamageFactorType.width
-                                      height: comp_DamageFactorType.height * 5
-                                      anchors.left: comp_DamageFactorType.left
-                                      anchors.leftMargin: comp_DamageFactorType.width/2 - width/2
-                                      anchors.top: comp_DamageFactorType.bottom
-                                      anchors.topMargin: 2
-                                      visible: false
-                                      clip: true
-                                      model:ListModel{
-                                          id:listmodel_Box
-                                      }
-                                      delegate:Component{
-                                          Item{
-                                              id:item_Delegate
-                                              width: view_List_TypeSelect.width
-                                              height: 36
-                                              CButton{
-                                                  id:comp_TypeBtn
-                                                  anchors.fill: parent
-                                                  text:m_TypeName
-                                                  color:"#ffddaa00"
-                                                  borderColor: "#ffddaa00"
-                                                  pixelSize: 18
-                                                  onClicked: {
-                                                      console.log("#include <QTextCodec>"+m_PlanNumber)
-                                                       var viewType = m_TypeName
-            //                                          view_List_TypeSelect.visible = false
-            //                                          selectType = index
-            //                                          m_SelectState = !m_SelectState
-            //                                          isSelect = m_SelectState
+    //                               ListView{
+    //                                   id:view_List_TypeSelect
+    //                                   width: comp_DamageFactorType.width
+    //                                   height: comp_DamageFactorType.height * 5
+    //                                   anchors.left: comp_DamageFactorType.left
+    //                                   anchors.leftMargin: comp_DamageFactorType.width/2 - width/2
+    //                                   anchors.top: comp_DamageFactorType.bottom
+    //                                   anchors.topMargin: 2
+    //                                   visible: false
+    //                                   clip: true
+    //                                   model:ListModel{
+    //                                       id:listmodel_Box
+    //                                   }
+    //                                   delegate:Component{
+    //                                       Item{
+    //                                           id:item_Delegate
+    //                                           width: view_List_TypeSelect.width
+    //                                           height: 36
+    //                                           CButton{
+    //                                               id:comp_TypeBtn
+    //                                               anchors.fill: parent
+    //                                               text:m_TypeName
+    //                                               color:"#ffddaa00"
+    //                                               borderColor: "#ffddaa00"
+    //                                               pixelSize: 18
+    //                                               onClicked: {
+    //                                                   console.log("#include <QTextCodec>"+m_PlanNumber)
+    //                                                    var viewType = m_TypeName
+    //         //                                          view_List_TypeSelect.visible = false
+    //         //                                          selectType = index
+    //         //                                          m_SelectState = !m_SelectState
+    //         //                                          isSelect = m_SelectState
 
-                                                  }
-                                              }
-                                          }
-                                      }
-                                      Component.onCompleted: {
-    //                                       var ammoType = mountingSchemeDaoTableModel.selectMountingSchemeData()
-    //                                       console.log("testammoType"+JSON.stringify(ammoType))
-    //                                      var result = [];
-    //                                      for (var i = 0; i < ammoType.length; i++) {
-    //                                          result.push({
-    //                                              m_PlanNumber: ammoType[i].recordId,
-    //                                              m_SelectState:false,// ammoType[i].checked,
-    //                                              m_TypeName: ammoType[i].ammoComponeName
-    //                                          });
-    //                                      }
-                                          listmodel_Box.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"侦察无人机"})
-                                          listmodel_Box.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"攻击无人机"})
-                                          listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
-                                      }
-                                  }
+    //                                               }
+    //                                           }
+    //                                       }
+    //                                   }
+    //                                   Component.onCompleted: {
+    // //                                       var ammoType = mountingSchemeDaoTableModel.selectMountingSchemeData()
+    // //                                       console.log("testammoType"+JSON.stringify(ammoType))
+    // //                                      var result = [];
+    // //                                      for (var i = 0; i < ammoType.length; i++) {
+    // //                                          result.push({
+    // //                                              m_PlanNumber: ammoType[i].recordId,
+    // //                                              m_SelectState:false,// ammoType[i].checked,
+    // //                                              m_TypeName: ammoType[i].ammoComponeName
+    // //                                          });
+    // //                                      }
+    //                                       listmodel_Box.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"侦察无人机"})
+    //                                       listmodel_Box.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"攻击无人机"})
+    //                                       listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
+    //                                   }
+    //                               }
 
 
-                              }
+    //                           }
 
-//                              TextField{
-//                                  id:uavNameText
-//                                  width: 100
-//                                  height:50
-//                                  font.pointSize: 12
-//                                  onTextChanged: {
-//                                      // 使用正则表达式移除首尾的空白字符（包括空格、tab、换行）
-//                                      var newText = text.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')
+                             TextField{
+                                 id:uavNameText
+                                 width: 100
+                                 height:50
+                                 font.pointSize: 12
+                                 onTextChanged: {
+                                     // 使用正则表达式移除首尾的空白字符（包括空格、tab、换行）
+                                     var newText = text.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')
 
-//                                      // 判断是否需要更新（避免无限循环）
-//                                      if (newText !== text) {
-//                                          // 保存当前光标位置
-//                                          var cursorPos = cursorPosition
+                                     // 判断是否需要更新（避免无限循环）
+                                     if (newText !== text) {
+                                         // 保存当前光标位置
+                                         var cursorPos = cursorPosition
 
-//                                          // 更新文本
-//                                          text = newText
+                                         // 更新文本
+                                         text = newText
 
-//                                          // 恢复光标位置（考虑文本缩短的情况）
-//                                          cursorPosition = Math.min(cursorPos, newText.length)
-//                                      }
-//                                  }
-//                              }
+                                         // 恢复光标位置（考虑文本缩短的情况）
+                                         //cursorPosition = Math.min(cursorPos, newText.length)
+                                     }
+                                 }
+                             }
                               //Item { Layout.fillWidth: true }
                               Item {
                                   id: item

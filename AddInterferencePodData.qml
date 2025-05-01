@@ -6,9 +6,9 @@ import "qrc:/AddAmmoModules/Component"
 //无源干扰吊舱
 Item {
     id:custom_PassiveInterferencePod
-
-    width: 600
-    height: 470
+    anchors.fill:parent
+    // width: 600
+    // height: 470
 
     // 获取当前时间并转换为字符串
     property var currentTime: new Date().toLocaleString()

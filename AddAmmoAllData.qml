@@ -12,7 +12,7 @@ import AmmoDaoModel 1.0
 Rectangle {
     id:addAmmoAllDatView
     visible: true
-    width: 920
+    width: 900
     height: 800
     z: 100
     //property var ammoSelecttype: ""
@@ -21,6 +21,7 @@ Rectangle {
     property string mainColor:"#fff0cc55"
     property var uavArray: []
     property var ammoData: new Object // 记录ammo的数据在保存、修改、加载时候
+    property var ammoSelectData: new Object
     readonly property string mainBackgroundSource: "file:Resources/Background/bg_MainBackground.png"
     signal backAmmoRecord()
     Component.onCompleted: {
@@ -331,14 +332,27 @@ Rectangle {
         if(processInfo.loadViewType === "addition"){
            addAmmo.selectType = 0 //0 代表新增，1代表查看，2代表修改。
         }else if(processInfo.loadViewType === "query"){
+            loadAmmoData()
             addAmmo.selectType = 1
+
         }else if(processInfo.loadViewType === "update"){
+            loadAmmoData()
             addAmmo.selectType = 2
         }else{
             console.log("Unknown processInfo.loadViewType!")
         }
     }
-
+    function loadAmmoData(){
+       var ammoLoadData = new Object
+        ammoLoadData.recordId = processInfo.recordId
+       var result = ammoDaoModel.selectSomeAmmoData(ammoLoadData)
+        addAmmoAllDatView.ammoSelectData = result
+        console.log("ammloadoDaoModel"+JSON.stringify(addAmmoAllDatView.ammoSelectData))
+        var imageUrlStr = "file:///"+addAmmoAllDatView.ammoSelectData.image_url
+        console.log("imageUrlStr"+imageUrlStr)
+        ammunitionImg.source = imageUrlStr
+        usageDescriptionText.text = addAmmoAllDatView.ammoSelectData.ammoDescription
+    }
     function initAmmoData(){
         //#pragma db not_null column("ammo_name")//            VARCHAR(100) NOT NULL ,--COMMENT '名称',
         addAmmoAllDatView.ammoData.ammoName = ""

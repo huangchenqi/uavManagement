@@ -2,33 +2,81 @@
 import QtQuick.Controls 2.12
 import "qrc:/"
 import "qrc:/AddAmmoModules/Component"
-
+import UavMountLocationDaoModel 1.0
+import AmmoDaoModel 1.0
+import MountingSchemeDaoModel 1.0
 Item {
     id:addMountSchemeData
 
     width: 800
     height: 700
+    property var mountSchemeData: new Object//保存、查看、修改数据
+    property var mountLocationArray: []
+    property var ammoName:[]
     signal backMountingScheme()
+    Component.onCompleted: {
+        init()
+    }
+    UavMountLocationDaoTableModel{
+        id:uavMountLocationDaoTableModel
+    }
+    AmmoDaoTableModel{
+        id:ammoDaoModel
+    }
+    MountingSchemeDaoTableModel{
+        id:mountingSchemeDaoTableModel
+    }
+    // 定义警告对话框
+    Popup {
+            id: warningPopup
+            width: 200
+            height: 100
+            x: (parent.width - width) / 2
+            y: (parent.height - height) / 2
+            modal: true
+            focus: true
+            closePolicy: Popup.NoAutoClose // 禁止点击外部关闭
+
+            background: Rectangle {
+                color: "#ffeb3b"
+                border.color: "#fbc02d"
+                radius: 5
+            }
+
+            contentItem: Text {
+                id:warningItem
+                //text: "您查询的是全部数据！"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font.pixelSize: 16
+            }
+        }
+    Timer {
+            id: autoCloseTimer
+            interval: 500 // 2秒
+            onTriggered: warningPopup.close()
+        }
+
     //1号挂点位置
-    property var sMountNum1Place: "位置1"
+    property var sMountNum1Place: "请选择:"
     //2号挂点位置
-    property var sMountNum2Place: "位置1"
+    property var sMountNum2Place: "请选择:"
     //3号挂点位置
-    property var sMountNum3Place: "位置1"
+    property var sMountNum3Place: "请选择:"
     //4号挂点位置
-    property var sMountNum4Place: "位置1"
+    property var sMountNum4Place: "请选择:"
     //5号挂点位置
-    property var sMountNum5Place: "位置1"
+    property var sMountNum5Place: "请选择:"
     //6号挂点位置
-    property var sMountNum6Place: "位置1"
+    property var sMountNum6Place: "请选择:"
     //7号挂点位置
-    property var sMountNum7Place: "位置1"
+    property var sMountNum7Place: "请选择:"
     //8号挂点位置
-    property var sMountNum8Place: "位置1"
+    property var sMountNum8Place: "请选择:"
     //9号挂点位置
-    property var sMountNum9Place: "位置1"
+    property var sMountNum9Place: "请选择:"
     //10号挂点位置
-    property var sMountNum10Place: "位置1"
+    property var sMountNum10Place: "请选择:"
 
     //挂点是否选择
     property bool isMount1Select: false
@@ -42,16 +90,16 @@ Item {
     property bool isMount9Select: false
     property bool isMount10Select: false
 
-    property var sMountNum1AmmoType: "弹药1"
-    property var sMountNum2AmmoType: "弹药1"
-    property var sMountNum3AmmoType: "弹药1"
-    property var sMountNum4AmmoType: "弹药1"
-    property var sMountNum5AmmoType: "弹药1"
-    property var sMountNum6AmmoType: "弹药1"
-    property var sMountNum7AmmoType: "弹药1"
-    property var sMountNum8AmmoType: "弹药1"
-    property var sMountNum9AmmoType: "弹药1"
-    property var sMountNum10AmmoType: "弹药1"
+    property var sMountNum1AmmoType: "请选择:"
+    property var sMountNum2AmmoType: "请选择:"
+    property var sMountNum3AmmoType: "请选择:"
+    property var sMountNum4AmmoType: "请选择:"
+    property var sMountNum5AmmoType: "请选择:"
+    property var sMountNum6AmmoType: "请选择:"
+    property var sMountNum7AmmoType: "请选择:"
+    property var sMountNum8AmmoType: "请选择:"
+    property var sMountNum9AmmoType: "请选择:"
+    property var sMountNum10AmmoType: "请选择:"
 
     property int currentMountPlaceSelect: 0
     function openMountPlace(id){
@@ -221,10 +269,11 @@ Item {
                 selectByMouse: true
                 selectionColor: "#ffcc8800"
                 onTextChanged: {
-                    if(text != "")
-                    {
+                    // if(text != "")
+                    // {
 
-                    }
+                    // }
+                    addMountSchemeData.mountSchemeData.mountSchemeName = text
                 }
                 validator: RegExpValidator {
                     regExp: /[^\s]*/  // 不允许任何空格
@@ -267,10 +316,11 @@ Item {
                 selectByMouse: true
                 selectionColor: "#ffcc8800"
                 onTextChanged: {
-                    if(text != "")
-                    {
+                    // if(text != "")
+                    // {
 
-                    }
+                    // }
+                    addMountSchemeData.mountSchemeData.uavName = text
                 }
                 validator: RegExpValidator {
                     regExp: /[^\s]*/  // 不允许任何空格
@@ -296,6 +346,9 @@ Item {
             titleWidth: pixelSize * 11.5
             width: 350
             height: 30
+            onTextChanged: {
+                addMountSchemeData.mountSchemeData.maxTakeoffWeight = textToFloat(text)
+            }
         }
 
         CTextInput{
@@ -309,6 +362,9 @@ Item {
             titleWidth: pixelSize * 9.5
             width: 350
             height: 30
+            onTextChanged: {
+                addMountSchemeData.mountSchemeData.emptyWeight = textToFloat(text)
+            }
         }
 
         CTextInput{
@@ -321,6 +377,9 @@ Item {
             titleWidth: pixelSize * 10
             width: 350
             height: 30
+            onTextChanged: {
+                addMountSchemeData.mountSchemeData.maxFuel = textToFloat(text)
+            }
         }
 
         CTextInput{
@@ -333,6 +392,9 @@ Item {
             titleWidth: pixelSize * 11.5
             width: 350
             height: 30
+            onTextChanged: {
+                addMountSchemeData.mountSchemeData.maxExternalWeight = textToFloat(text)
+            }
         }
 
         CTextInput{
@@ -345,6 +407,9 @@ Item {
             titleWidth: pixelSize * 4.5
             width: 170
             height: 30
+            onTextChanged: {
+                addMountSchemeData.mountSchemeData.runningDistance = textToFloat(text)
+            }
         }
 
         CTextInput{
@@ -357,6 +422,9 @@ Item {
             titleWidth: pixelSize * 4
             width: 170
             height: 30
+            onTextChanged: {
+                addMountSchemeData.mountSchemeData.endurance = textToFloat(text)
+            }
         }
 
         CTextInput{
@@ -369,6 +437,9 @@ Item {
             titleWidth: pixelSize * 6.5
             width: 170
             height: 30
+            onTextChanged: {
+                addMountSchemeData.mountSchemeData.fightRadius = textToFloat(text)
+            }
         }
 
         Rectangle{
@@ -797,6 +868,9 @@ Item {
                         openAmmoType(1)
                     }
                 }
+                onTextChanged: {
+
+                }
             }
 
             Text{
@@ -1008,24 +1082,44 @@ Item {
                                 switch(currentMountPlaceSelect)
                                 {
                                 case 1: sMountNum1Place = text
+                                    addMountSchemeData.mountSchemeData.oneHangingPoint = "1";
+                                    addMountSchemeData.mountSchemeData.oneLocation = text;
                                     break
                                 case 2: sMountNum2Place = text
+                                    addMountSchemeData.mountSchemeData.twoHangingPoint = "2";
+                                    addMountSchemeData.mountSchemeData.twoLocation = text;
                                     break
                                 case 3: sMountNum3Place = text
+                                    addMountSchemeData.mountSchemeData.threeHangingPoint = "3";
+                                    addMountSchemeData.mountSchemeData.threeLocation = text;
                                     break
                                 case 4: sMountNum4Place = text
+                                    addMountSchemeData.mountSchemeData.fourHangingPoint = "4";
+                                    addMountSchemeData.mountSchemeData.fourLocation = text;
                                     break
                                 case 5: sMountNum5Place = text
+                                    addMountSchemeData.mountSchemeData.fiveHangingPoint = "5";
+                                    addMountSchemeData.mountSchemeData.fiveLocation = text;
                                     break
                                 case 6: sMountNum6Place = text
+                                    addMountSchemeData.mountSchemeData.sixHangingPoint = "6";
+                                    addMountSchemeData.mountSchemeData.sixLocation = text;
                                     break
                                 case 7: sMountNum7Place = text
+                                    addMountSchemeData.mountSchemeData.sevenHangingPoint = "7";
+                                    addMountSchemeData.mountSchemeData.sevenLocation = text;
                                     break
                                 case 8: sMountNum8Place = text
+                                    addMountSchemeData.mountSchemeData.eightHangingPoint = "8";
+                                    addMountSchemeData.mountSchemeData.eightLocation = text;
                                     break
                                 case 9: sMountNum9Place = text
+                                    addMountSchemeData.mountSchemeData.nineHangingPoint = "9";
+                                    addMountSchemeData.mountSchemeData.nineLocation = text;
                                     break
                                 case 10: sMountNum10Place = text
+                                    addMountSchemeData.mountSchemeData.tenHangingPoint = "10";
+                                    addMountSchemeData.mountSchemeData.tenLocation = text;
                                     break
                                 }
                             }
@@ -1034,9 +1128,16 @@ Item {
                 }
 
                 Component.onCompleted: {
-                    listmodel_MountPlace.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"位置1"})
-                    listmodel_MountPlace.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"位置2"})
-                    listmodel_MountPlace.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"位置3"})
+                   var uavMountData = uavMountLocationDaoTableModel.selectUavMountLocationAllData()
+                   var result = uavMountData.map(function(item) {
+                        return {
+                            m_SelectState: item.checked,
+                            m_PlanNumber: item.recordId,
+                            m_TypeName: item.uavModelName
+                        }
+                    })
+
+                   listmodel_MountPlace.append(result)
                 }
             }
 
@@ -1070,24 +1171,34 @@ Item {
                                 switch(currentAmmoTypeSelect)
                                 {
                                 case 1: sMountNum1AmmoType = text
+                                    addMountSchemeData.mountSchemeData.oneAmmoName = text;
                                     break
                                 case 2: sMountNum2AmmoType = text
+                                    addMountSchemeData.mountSchemeData.twoAmmoName = text;
                                     break
                                 case 3: sMountNum3AmmoType = text
+                                    addMountSchemeData.mountSchemeData.threeAmmoName = text;
                                     break
                                 case 4: sMountNum4AmmoType = text
+                                    addMountSchemeData.mountSchemeData.fourAmmoName = text;
                                     break
                                 case 5: sMountNum5AmmoType = text
+                                    addMountSchemeData.mountSchemeData.fiveAmmoName = text;
                                     break
                                 case 6: sMountNum6AmmoType = text
+                                    addMountSchemeData.mountSchemeData.sixAmmoName = text;
                                     break
                                 case 7: sMountNum7AmmoType = text
+                                    addMountSchemeData.mountSchemeData.sevenAmmoName = text;
                                     break
                                 case 8: sMountNum8AmmoType = text
+                                    addMountSchemeData.mountSchemeData.eightAmmoName = text;
                                     break
                                 case 9: sMountNum9AmmoType = text
+                                    addMountSchemeData.mountSchemeData.nineAmmoName = text;
                                     break
                                 case 10: sMountNum10AmmoType = text
+                                    addMountSchemeData.mountSchemeData.tenAmmoName = text;
                                     break
                                 }
                             }
@@ -1096,9 +1207,21 @@ Item {
                 }
 
                 Component.onCompleted: {
-                    listmodel_MountAmmoType.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"弹药1"})
-                    listmodel_MountAmmoType.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"弹药2"})
-                    listmodel_MountAmmoType.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"弹药3"})
+                    var ammoQueryData = new Object
+                    ammoQueryData.ammoType = "请选择:"
+                    ammoQueryData.ammoName = ""
+                    var ammoData = ammoDaoModel.selectAmmoAllData(ammoQueryData)
+                   var extractedData = ammoData.map(function(item) {
+                                return {
+                                    m_SelectState: item.checked,
+                                    m_PlanNumber: item.recordId,
+                                    m_TypeName: item.ammoName
+                                }
+                            })
+                    //addMountSchemeData.mountLocationArray = addMountSchemeData.ammoName
+                    console.log("<>"+"ammoData"+JSON.stringify(ammoData))
+                    listmodel_MountAmmoType.append(extractedData)//({m_PlanNumber:0,m_SelectState:false,m_TypeName:"弹药1"})
+
                 }
             }
         }
@@ -1131,6 +1254,90 @@ Item {
         onClicked: {
             backMountingScheme()
             addMountSchemeData.visible = false
+            saveMountSchemrData()
         }
+    }
+    function init(){
+
+        addMountSchemeData.mountSchemeData.mountSchemeName = "";
+        addMountSchemeData.mountSchemeData.uavName = "";
+        addMountSchemeData.mountSchemeData.maxTakeoffWeight = 0.0;
+        addMountSchemeData.mountSchemeData.emptyWeight = 0.0;
+        addMountSchemeData.mountSchemeData.oneHangingPoint = "";
+        addMountSchemeData.mountSchemeData.oneLocation = "";
+        addMountSchemeData.mountSchemeData.oneAmmoName = "";
+        addMountSchemeData.mountSchemeData.twoHangingPoint = "";
+        addMountSchemeData.mountSchemeData.twoLocation = "";
+        addMountSchemeData.mountSchemeData.twoAmmoName = "";
+        addMountSchemeData.mountSchemeData.threeHangingPoint = "";
+        addMountSchemeData.mountSchemeData.threeLocation = "";
+        addMountSchemeData.mountSchemeData.threeAmmoName = "";
+        addMountSchemeData.mountSchemeData.fourHangingPoint = "";
+        addMountSchemeData.mountSchemeData.fourLocation = "";
+        addMountSchemeData.mountSchemeData.fourAmmoName = "";
+        addMountSchemeData.mountSchemeData.fiveHangingPoint = "";
+        addMountSchemeData.mountSchemeData.fiveLocation = "";
+        addMountSchemeData.mountSchemeData.fiveAmmoName = "";
+        addMountSchemeData.mountSchemeData.sixHangingPoint = "";
+        addMountSchemeData.mountSchemeData.sixLocation = "";
+        addMountSchemeData.mountSchemeData.sixAmmoName = "";
+        addMountSchemeData.mountSchemeData.sevenHangingPoint = "";
+        addMountSchemeData.mountSchemeData.sevenLocation = "";
+        addMountSchemeData.mountSchemeData.sevenAmmoName = "";
+        addMountSchemeData.mountSchemeData.eightHangingPoint = "";
+        addMountSchemeData.mountSchemeData.eightLocation = "";
+        addMountSchemeData.mountSchemeData.eightAmmoName = "";
+        addMountSchemeData.mountSchemeData.nineHangingPoint = "";
+        addMountSchemeData.mountSchemeData.nineLocation = "";
+        addMountSchemeData.mountSchemeData.nineAmmoName = "";
+        addMountSchemeData.mountSchemeData.tenHangingPoint = "";
+        addMountSchemeData.mountSchemeData.tenLocation = "";
+        addMountSchemeData.mountSchemeData.tenAmmoName = "";
+        addMountSchemeData.mountSchemeData.runningDistance = 0.0;
+        addMountSchemeData.mountSchemeData.endurance = 0.0;
+        addMountSchemeData.mountSchemeData.fightRadius = 0.0;
+        addMountSchemeData.mountSchemeData.maxFuel = 0.0;
+        addMountSchemeData.mountSchemeData.maxExternalWeight = 0.0;
+    }
+
+
+    function saveMountSchemrData(){
+        console.log("AddMountSchemeData"+JSON.stringify(addMountSchemeData.mountSchemeData))
+        let result = mountingSchemeDaoTableModel.insertMountingSchemeData(addMountSchemeData.mountSchemeData)
+          if(result === true){
+              warningItem.text = "^_^挂载方案新增数据成功!^_^"
+              warningPopup.open()
+              // 2秒后自动关闭
+              autoCloseTimer.start()
+          }else if(result === false){
+              warningItem.text = "^_^挂载方案新增数据失败!^_^"
+              warningPopup.open()
+              // 2秒后自动关闭
+              autoCloseTimer.start()
+           }else{
+              console.log("unknown deleteMountLocation")
+          }
+
+    }
+    function textToFloat(data){
+        console.log("textToFloatdata"+data)
+        // 检查是否以小数点结尾
+        if (data.endsWith(".")) {
+            data = data.slice(0, -1); // 去掉小数点
+        }
+        console.log("textToFloatdata"+data)
+        // 将文本转换为浮点数
+        var num = parseFloat(data);
+        if (!isNaN(num)) {
+
+            return num; // 有效时赋值
+        } else {
+            // 无效时恢复原值（可选）
+            num = 0.00
+            return num;
+        }
+    }
+    function updateMountSchemeData(){
+
     }
 }

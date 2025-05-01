@@ -2,6 +2,7 @@
 #include "MountingSchemeEntity.h"
 #include "MountingSchemeEntity-odb.hxx"
 #include <stdexcept>
+#include "iostream"
 // ODB 头文件
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
@@ -137,6 +138,12 @@ QJsonArray MountingSchemeDao::selectMountingSchemeData(const QJsonObject &select
     return ammoModelData;
 }
 
+QJsonObject MountingSchemeDao::queryMountingSchemeData(const QJsonObject &selectedData)
+{
+    QJsonObject mountSchemeData;
+    return mountSchemeData;
+}
+
 bool MountingSchemeDao::updateMountingSchemeData(const QJsonObject &selectedData)
 {
     return  true;
@@ -193,7 +200,106 @@ bool MountingSchemeDao::deleteMountingSchemeData(const QJSValue &selectedData)
     return  true;
 }
 
-bool MountingSchemeDao::insertMountingSchemeData(const QJsonObject &selectedData)
+bool MountingSchemeDao::insertMountingSchemeData(const QJsonObject &object)
 {
-    return  true;
+    qDebug() << "Starting database insertUavMountLocationDate insertion...";
+    QJsonDocument doc(object);
+    qDebug()<<"当前函数名称:" << __FUNCTION__<<":";
+    qDebug().noquote() << doc.toJson(QJsonDocument::Indented);
+    try {
+        // 1. 建立数据库连接
+        qDebug() << "Connecting to database...";
+        auto& db = dbConn_->getDatabase(); // 使用成员变量获取数据库
+
+        // 2. 创建事务
+        odb::transaction trans(db.begin());
+        qDebug() << "Transaction insert Ammo started";
+
+        // 3. 从JSON创建实体对象
+        UavMountSchemeEntity entity;
+        QDateTime recordCreationTime;//创建记录时间
+
+        // 4. 映射JSON字段到实体属性
+        // 基础字段
+        //#pragma db not_null column("ammo_name")//            VARCHAR(100) NOT NULL ,--COMMENT '名称',
+
+
+        entity.mountSchemeName_ = object["mountSchemeName"].toString().toStdString();//.toInt();
+        entity.uavName_ = object["uavName"].toString().toStdString();
+        entity.maxTakeoffWeight_ = object["maxTakeoffWeight"].toDouble();
+        entity.emptyWeight_ = object["emptyWeight"].toDouble();
+        entity.oneHangingPoint_ = object["oneHangingPoint"].toString().toStdString();//.toInt();
+        entity.oneLocation_ = object["oneLocation"].toString().toStdString();
+        entity.oneAmmoName_ = object["oneAmmoName"].toString().toStdString();
+        entity.twoHangingPoint_ = object["twoHangingPoint"].toString().toStdString();
+        entity.twoLocation_ = object["twoLocation"].toString().toStdString();
+        entity.twoAmmoName_ = object["twoAmmoName"].toString().toStdString();//.toInt();
+        entity.threeHangingPoint_ = object["threeHangingPoint"].toString().toStdString();
+        entity.threeLocation_ = object["threeLocation"].toString().toStdString();
+        entity.threeAmmoName_ = object["threeAmmoName"].toString().toStdString();
+        entity.fourHangingPoint_ = object["fourHangingPoint"].toString().toStdString();
+        entity.fourLocation_ = object["fourLocation"].toString().toStdString();//.toInt();
+        entity.fourAmmoName_ = object["fourAmmoName"].toString().toStdString();
+        entity.fiveHangingPoint_ = object["fiveHangingPoint"].toString().toStdString();//.toInt();
+        entity.fiveLocation_ = object["fiveLocation"].toString().toStdString();
+        entity.fiveAmmoName_ = object["fiveAmmoName"].toString().toStdString();//.toInt();
+        entity.sixHangingPoint_ = object["sixHangingPoint"].toString().toStdString();
+        entity.sixLocation_ = object["sixLocation"].toString().toStdString();//.toInt();
+        entity.sixAmmoName_ = object["sixAmmoName"].toString().toStdString();
+        entity.sevenHangingPoint_ = object["sevenHangingPoint"].toString().toStdString();//.toInt();
+        entity.sevenLocation_ = object["sevenLocation"].toString().toStdString();
+        entity.sevenAmmoName_ = object["sevenAmmoName"].toString().toStdString();//.toInt();
+        entity.eightHangingPoint_ = object["eightHangingPoint"].toString().toStdString();
+        entity.eightLocation_ = object["eightLocation"].toString().toStdString();//.toInt();
+        entity.eightAmmoName_ = object["eightAmmoName"].toString().toStdString();
+        entity.nineHangingPoint_ = object["nineHangingPoint"].toString().toStdString();
+        entity.nineLocation_ = object["nineLocation"].toString().toStdString();
+        entity.nineAmmoName_ = object["nineAmmoName"].toString().toStdString();
+        entity.tenHangingPoint_ = object["tenHangingPoint"].toString().toStdString();
+        entity.tenLocation_ = object["tenLocation"].toString().toStdString();
+        entity.tenAmmoName_ = object["tenAmmoName"].toString().toStdString();
+        entity.runningDistance_ = object["runningDistance"].toDouble();
+        entity.endurance_ = object["endurance"].toDouble();
+        entity.fightRadius_ = object["fightRadius"].toDouble();
+        entity.maxFuel_ = object["endurance"].toDouble();
+        entity.maxExternalWeight_ = object["maxExternalWeight"].toDouble();
+        //entity.recordCreationTime_ = QDateTime::currentDateTime();//object["record_creation_time"].toString().toStdString();//.toInt();
+        entity.status_ =  true;//object["use_status"].toBool();
+
+        std::cout <<"entity"<<entity.uavName_<< std::endl;;
+        /******************** 系统记录 ********************/
+        //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
+        // 使用 QUrl 解析 URL 并提取本地路径
+        // QString image_url = object["image_url"].toString();
+        // QUrl url(image_url);
+        // QString localFilePath = url.toLocalFile();
+        // QFile file(localFilePath);
+
+        // qDebug()<<"image_url:"<<object["image_url"].toString();
+        // file.open(QIODevice::ReadOnly);
+        // QByteArray data = file.readAll();
+        // file.close();
+        // //std::vector  imagByteA = std::vector<unsigned char>(data.begin(),data.end());
+        // entity.imageName_ = std::vector<char>(data.begin(),data.end());
+        // std::vector<char> imagByteA(data.begin(), data.end());
+        // std::cout << "imagByteA: "<<imagByteA.size()<<"Data size" << entity.imageName_.size() << std::endl;
+        // 6. 持久化到数据库
+        qDebug() << "Persisting entity...";
+        auto id = db.persist(entity);
+
+        // 7. 提交事务
+        trans.commit();
+        qDebug() <<"当前函数名称:" << __FUNCTION__<<":"<< "Transaction committed, ID:" << id;
+
+
+    }
+    catch (const odb::exception& e) {
+        qCritical() << "Database error:" << e.what();
+        return false;//throw;
+    }
+    catch (const std::exception& e) {
+        qCritical() << "Error:" << e.what();
+        return false;//throw;
+    }
+    return true;
 }

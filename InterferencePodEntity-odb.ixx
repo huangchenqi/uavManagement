@@ -32,6 +32,30 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (x);
     ODB_POTENTIALLY_UNUSED (e);
   }
+
+  // dummy
+  //
+
+  inline
+  void access::view_traits< ::view::dummy >::
+  callback (database& db, view_type& x, callback_event e)
+  {
+    ODB_POTENTIALLY_UNUSED (db);
+    ODB_POTENTIALLY_UNUSED (x);
+    ODB_POTENTIALLY_UNUSED (e);
+  }
+
+  // string
+  //
+
+  inline
+  void access::view_traits< ::view::string >::
+  callback (database& db, view_type& x, callback_event e)
+  {
+    ODB_POTENTIALLY_UNUSED (db);
+    ODB_POTENTIALLY_UNUSED (x);
+    ODB_POTENTIALLY_UNUSED (e);
+  }
 }
 
 namespace odb
@@ -57,5 +81,11 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (sts);
     ODB_POTENTIALLY_UNUSED (obj);
   }
+
+  // dummy
+  //
+
+  // string
+  //
 }
 

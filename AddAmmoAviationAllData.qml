@@ -769,20 +769,20 @@ Item {
          newAmmoData.ammoData.ammoType = newAmmoData.viewType
          newAmmoData.ammoData.ammoToUavModel = newAmmoData.uavArray.join(",")
          console.log("ammoSelecttype"+JSON.stringify(newAmmoData.ammoData))//console.log("ammoData.push"+JSON.stringify(ammoData))
-          // let result = ammoDaoModel.insertAmmoData(ammoData)
-          //   if(result === true){
-          //       warningItem.text = "^_^航弹新增数据成功!^_^"
-          //       warningPopup.open()
-          //       // 2秒后自动关闭
-          //       autoCloseTimer.start()
-          //   }else if(result === false){
-          //       warningItem.text = "^_^航弹新增数据失败!^_^"
-          //       warningPopup.open()
-          //       // 2秒后自动关闭
-          //       autoCloseTimer.start()
-          //    }else{
-          //       console.log("unknown deleteMountLocation")
-          //   }
+          let result = ammoDaoModel.insertAmmoData(ammoData)
+            if(result === true){
+                warningItem.text = "^_^航弹新增数据成功!^_^"
+                warningPopup.open()
+                // 2秒后自动关闭
+                autoCloseTimer.start()
+            }else if(result === false){
+                warningItem.text = "^_^航弹新增数据失败!^_^"
+                warningPopup.open()
+                // 2秒后自动关闭
+                autoCloseTimer.start()
+             }else{
+                console.log("unknown deleteMountLocation")
+            }
     }
 
 }

@@ -10,6 +10,7 @@
 #include "datetime-traits.hxx"
 #pragma once
 #pragma db object schema("uav_type_man") table("interference_pod") // 指定表名
+
 class InterferencePodEntity
 {
 
@@ -88,4 +89,28 @@ class InterferencePodEntity
     bool useStatus_;
 
 };
+
+
+namespace view{
+#pragma db view
+    struct dummy{
+        std::size_t value;
+
+        inline operator std::size_t() const noexcept{
+            return value;
+        }
+    };
+
+#pragma db view
+    struct string
+    {
+        std::string value;
+
+        inline operator std::string() const noexcept{
+            return value;
+        }
+    };
+
+}
+
 #endif // INTERFERENCEPODENTITY_H

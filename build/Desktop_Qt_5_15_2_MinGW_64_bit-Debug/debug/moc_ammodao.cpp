@@ -37,17 +37,16 @@ QT_MOC_LITERAL(1, 8, 17), // "selectAmmoAllData"
 QT_MOC_LITERAL(2, 26, 0), // ""
 QT_MOC_LITERAL(3, 27, 12), // "selectedData"
 QT_MOC_LITERAL(4, 40, 18), // "selectSomeAmmoData"
-QT_MOC_LITERAL(5, 59, 14), // "updateAmmoData"
-QT_MOC_LITERAL(6, 74, 8), // "QJSValue"
-QT_MOC_LITERAL(7, 83, 14), // "deleteAmmoData"
-QT_MOC_LITERAL(8, 98, 14), // "insertAmmoData"
-QT_MOC_LITERAL(9, 113, 6) // "object"
+QT_MOC_LITERAL(5, 59, 6), // "object"
+QT_MOC_LITERAL(6, 66, 14), // "updateAmmoData"
+QT_MOC_LITERAL(7, 81, 8), // "QJSValue"
+QT_MOC_LITERAL(8, 90, 14), // "deleteAmmoData"
+QT_MOC_LITERAL(9, 105, 14) // "insertAmmoData"
 
     },
     "AmmoDao\0selectAmmoAllData\0\0selectedData\0"
-    "selectSomeAmmoData\0updateAmmoData\0"
-    "QJSValue\0deleteAmmoData\0insertAmmoData\0"
-    "object"
+    "selectSomeAmmoData\0object\0updateAmmoData\0"
+    "QJSValue\0deleteAmmoData\0insertAmmoData"
 };
 #undef QT_MOC_LITERAL
 
@@ -67,16 +66,16 @@ static const uint qt_meta_data_AmmoDao[] = {
  // methods: name, argc, parameters, tag, flags
        1,    1,   39,    2, 0x02 /* Public */,
        4,    1,   42,    2, 0x02 /* Public */,
-       5,    1,   45,    2, 0x02 /* Public */,
-       7,    1,   48,    2, 0x02 /* Public */,
-       8,    1,   51,    2, 0x02 /* Public */,
+       6,    1,   45,    2, 0x02 /* Public */,
+       8,    1,   48,    2, 0x02 /* Public */,
+       9,    1,   51,    2, 0x02 /* Public */,
 
  // methods: parameters
     QMetaType::QJsonArray, QMetaType::QJsonObject,    3,
-    QMetaType::QJsonObject, QMetaType::QJsonObject,    3,
-    QMetaType::Bool, 0x80000000 | 6,    3,
-    QMetaType::Bool, 0x80000000 | 6,    3,
-    QMetaType::Bool, QMetaType::QJsonObject,    9,
+    QMetaType::QJsonObject, QMetaType::QJsonObject,    5,
+    QMetaType::Bool, 0x80000000 | 7,    3,
+    QMetaType::Bool, 0x80000000 | 7,    3,
+    QMetaType::Bool, QMetaType::QJsonObject,    5,
 
        0        // eod
 };
