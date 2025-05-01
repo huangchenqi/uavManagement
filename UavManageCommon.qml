@@ -318,6 +318,7 @@ Rectangle {
 
               Item {
                   id: uavModelRecordView
+                  anchors.fill: parent
 
                   ColumnLayout {
                       //@disable-check M16
@@ -469,13 +470,13 @@ Rectangle {
                       }
                       RowLayout {
                           Layout.minimumWidth: uavManagementroot.width
-                          Layout.minimumHeight: uavManagementroot.height-280
+                          Layout.minimumHeight: uavManagementroot.height-180
                           Layout.fillHeight: true
                           Layout.fillWidth: true
                           Item {
                               id: control
                               implicitHeight: uavManagementroot.width
-                              implicitWidth: uavManagementroot.height-280
+                              implicitWidth: uavManagementroot.height-180
                               Layout.fillWidth: true
                               Layout.fillHeight: true
                               //表头行高
@@ -497,7 +498,7 @@ Rectangle {
                               TableView {
                                   id: tableView
                                   implicitHeight: uavManagementroot.width
-                                  implicitWidth: uavManagementroot.height-280
+                                  implicitWidth: uavManagementroot.height-180
                                   Layout.fillWidth: true
                                   Layout.fillHeight: true
                                   anchors {

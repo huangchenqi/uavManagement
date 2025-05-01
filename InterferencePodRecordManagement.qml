@@ -45,22 +45,22 @@ Item {
         "field": "mass"
     }, {
         "title": "前舱长",
-        "width": 150,
+        "width": 50,
         "field": "frontCoverLength"
     },
     {
         "title": "后舱长",
-        "width": 150,
+        "width": 50,
         "field": "rearCoverLength"
     },
     {
         "title": "主舱",
-        "width": 150,
+        "width": 50,
         "field": "mainCabinSectione"
     },
     {
         "title": "用途",
-        "width": 150,
+        "width": 250,
         "field": "description"
     },
     {
@@ -98,12 +98,32 @@ Item {
     InterferencePodDaoTableModel {
         id: interferencePodDaoTableModel
     }
+    // AddInterferencePodData{
+    //     id:addInterferencePodData
+    //     anchors.fill: parent
+    //     visible: false
+    // }
     
     // 确保Loader初始状态为不可见
     Loader {
         id: pagePayloadLoader
         anchors.fill: parent
-        visible: false
+        visible: true
+        source: "qrc:./AddInterferencePodData.qml"
+        onLoaded: {
+            console.log("干扰吊舱新增界面加载完成");
+
+            if (item) {
+                console.log("加载项可用");
+                item.visible = true;
+                item.width = root.width;
+                item.height = root.height;
+            } else {
+                console.log("加载项不可用");
+                // 显示测试矩形
+            }
+
+        }
         
         Connections {
             target: pagePayloadLoader.item || null
@@ -147,42 +167,58 @@ Item {
     }
 
     Component {
-        id:chechBox
+        id: chechBox
         Item {
             id: chechBoxId
             anchors.fill: parent
             
-            // 添加一个透明背景以确保事件区域明确
-            Rectangle {
-                anchors.fill: parent
-                color: "transparent"
-            }
-            
             CheckBox {
-                id: rowCheckBox
+                id: checkBoxControl
                 anchors.centerIn: parent
-                // 双向绑定到模型数据
-                checked: rowData ? !!rowData.checked : false
+                // 绑定到rowData.checked，确保当rowData变化时更新
+                checked: rowData && rowData.checked === true
                 
-                // 阻止事件传播，避免被表格MouseArea捕获
                 onClicked: {
-                    console.log("CheckBox被点击，行数据:", JSON.stringify(rowData));
+                    // 阻止事件进一步传播
+                    mouse.accepted = true
                     
-                    // 更新数据模型
-                    if (rowData) {
-                        rowData.checked = checked;
-                        console.log("CheckBox状态更新为:", checked);
+                    // 直接修改数据，不要尝试修改控件
+                    var index = rowIndex;
+                    if (index >= 0 && index < root.tableData.length) {
+                        // 创建tableData的深拷贝
+                        var newData = [];
+                        for (var i = 0; i < root.tableData.length; i++) {
+                            newData.push(JSON.parse(JSON.stringify(root.tableData[i])));
+                        }
+                        
+                        // 切换选中状态
+                        newData[index].checked = !newData[index].checked;
+                        
+                        // 更新tableData并强制刷新
+                        root.tableData = newData;
+                        dynamicTable.forceLayout();
+                        
+                        console.log("行 " + index + " 选中状态改变为: " + newData[index].checked);
                     }
-                    
-                    // 阻止事件继续传播
-                    mouse.accepted = true;
                 }
-                
-                // 确保组件可见并允许交互
-                visible: true
-                enabled: true
-                z: 10
             }
+            // Rectangle {
+            //         id: myRectangle
+            //         anchors.fill: parent
+            //         color: "transparent"  // 初始状态为透明
+
+            //         MouseArea {
+            //             anchors.fill: parent
+            //             onClicked: {
+            //                 // 单击事件处理
+            //                 myRectangle.color = myRectangle.color === "transparent" ? "blue" : "transparent";
+            //             }
+            //             onDoubleClicked: {
+            //                 // 双击事件处理
+            //                 myRectangle.color = myRectangle.color === "transparent" ? "blue" : "transparent";
+            //             }
+            //         }
+            //     }
         }
     }
     
@@ -483,14 +519,18 @@ Item {
                         implicitHeight: 30
                         text: "新增"
                         onClicked: {
-                            processInfo = {};
+                            console.log("dayig")
                             processInfo.loadViewType = "addUavData";
-                            pagePayloadLoader.setSource("qrc:./AddInterferencePodData.qml", {
-                                "processInfo": processInfo,
-                                "backUi": "qrc:/UavReconnaissancePayloadManagement.qml"
-                            });
+                            //pagePayloadLoader.visible = true
+                            pagePayloadLoader.visible = true
+                            // console.log("dayig!")
+                            // pagePayloadLoader.setSource("qrc:./AddInterferencePodData.qml", {
+                            //     "processInfo": processInfo//,
+                            //     //"backUi": "qrc:/UavReconnaissancePayloadManagement.qml"
+                            // });
+                            console.log("dayig!!")
                             root.visible = false;
-                            pagePayloadLoader.visible = true;
+
                         }
                     }
                 }
@@ -588,8 +628,7 @@ Item {
                         rearCoverLength: 25,
                         mainCabinSectione: "标准舱",
                         description: "通用干扰",
-                        id: "1",
-                        checked: false  // 初始化选中状态
+                        id: "1"
                     },
                     {
                         recordId: "2", 
@@ -601,17 +640,15 @@ Item {
                         rearCoverLength: 30,
                         mainCabinSectione: "增强舱",
                         description: "高频干扰",
-                        id: "2",
-                        checked: false  // 初始化选中状态
+                        id: "2"
                     }
                 ];
             }
-            else {
-                // 确保后端返回的数据也有checked属性
-                for (var i = 0; i < result.length; i++) {
-                    if (typeof result[i].checked === 'undefined') {
-                        result[i].checked = false;
-                    }
+            
+            // 确保所有行都有checked属性
+            for (var i = 0; i < result.length; i++) {
+                if (result[i].checked === undefined) {
+                    result[i].checked = false;
                 }
             }
             

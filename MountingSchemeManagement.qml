@@ -31,7 +31,7 @@ Rectangle {
            property string managementType: "";
            property var ammoTypeSelect: []
            property var mountSchemeData:new Object  //创建对象来实现数据的查询
-           width: 1400; height: 820//width: screenWidth; height: screenHeight
+           anchors.fill:parent//  width: 1400; height: 820//width: screenWidth; height: screenHeight
 
            property int bottonHeight: 50
            Loader {
@@ -488,7 +488,7 @@ Rectangle {
                               property int scrollBarWidth: 7
                               //列宽
                               property variant columnWidthArr: [50,50, 180, 180, 120, 120,
-                                  120, 120, 200,300 ]
+                                  120, 120, 100,300 ]
 
                               // 显示10个字段
                               property var horHeader: ["","序号", "挂载方案名称", "无人机名", "起飞重量", "空重",

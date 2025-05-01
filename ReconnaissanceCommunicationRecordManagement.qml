@@ -1185,7 +1185,7 @@ Rectangle {
            property var ammoTypeSelect: []
            property var payloadData:new Object  //创建对象来实现数据的查询
 
-           width: 1400; height: 760//width: screenWidth; height: screenHeight
+           anchors.fill: parent//width: 1400; height: 760//width: screenWidth; height: screenHeight
 
            property int bottonHeight: 50
            Loader {

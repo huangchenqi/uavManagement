@@ -851,7 +851,6 @@ import QtQuick.Window 2.12
 import Qt.labs.qmlmodels 1.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.12
 import "."
 import "qrc:/"   //引入所有的qml文件使用
 import "qrc:/AddAmmoModules/Component"
@@ -863,6 +862,10 @@ import AmmoDaoModel 1.0
 https://blog.csdn.net/qq_24890953/article/details/104640454
   */
 //Window {
+// Item {
+//     id: root
+//     anchors.fill: parent
+// }
 Rectangle {
            id: uavPayloadManagementroot
            visible: true
@@ -879,7 +882,7 @@ Rectangle {
            property var ammoTypeSelect: []
            property var payloadData:new Object  //创建对象来实现数据的查询
 
-           width: 1400; height: 760//width: screenWidth; height: screenHeight
+           anchors.fill:parent // width: 1400; height: 760//width: screenWidth; height: screenHeight
 
            property int bottonHeight: 50
            Loader {
@@ -1311,8 +1314,8 @@ Rectangle {
                               property color scrollBarColor: "#E5E5E5"
                               property int scrollBarWidth: 7
                               //列宽
-                              property variant columnWidthArr: [50,50, 180, 180, 120, 120,
-                                  120, 120, 200,300 ]
+                              property variant columnWidthArr: [50,50, 150, 100, 120, 120,
+                                  120, 120, 250,300 ]
 
                               // 显示10个字段
                               property var horHeader: ["","序号", "干扰设备名称", "主舱长度", "单吊舱质量", "前罩长",

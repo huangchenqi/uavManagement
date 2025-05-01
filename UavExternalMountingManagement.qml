@@ -137,7 +137,7 @@ Item {
                     Loader {
                         id: uavManagementLoader
                         anchors.fill: parent
-                        source: "./InterferencePodRecordManagement.qml" //UavReconnaissancePayloadManagement
+                        source: "./UavReconnaissancePayloadManagement.qml" //InterferencePodRecordManagement
                         // asynchronous: false
                         // active: true
                         visible: true

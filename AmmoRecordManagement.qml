@@ -21,8 +21,6 @@ Rectangle {
            visible: true
            color: "#ECF2FE"
            signal customSignal(string message)
-           property int screenWidth: Qt.platform.os === "android" ? Screen.width : 975;
-           property int screenHeight: Qt.platform.os === "android" ? Screen.height : 608;
            property color borderColor: "#A5B3C0"
            property color headerColor: "#D3E1FE"
            property color fontColor: "#3E3E3E"
@@ -32,7 +30,7 @@ Rectangle {
            property var ammoTypeSelect: []
            property var queryAmmo: new Object //查询某条数据
 
-           width: 1400; height: 760//width: screenWidth; height: screenHeight
+           anchors.fill: parent//  width: 1400; height: 760//width: screenWidth; height: screenHeight
 
            property int bottonHeight: 50
            Loader {

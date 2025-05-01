@@ -251,25 +251,22 @@ Item {
                                     // 单元格点击区域
                                     MouseArea {
                                         anchors.fill: parent
-                                        propagateComposedEvents: true  // 允许事件继续传播
+                                        propagateComposedEvents: true
                                         hoverEnabled: true
                                         z: 1
 
                                         onClicked: {
                                             console.log("[DnyTable] 单元格点击: 行=" + rowContainer.rowIndex + ", 列=" + index);
-                                            // 检查是否是代理组件的事件
-                                            if (!mouse.accepted) {
-                                                root.cellClicked(rowContainer.rowIndex, index, cellLoader.cellData);
-                                            }
-                                            mouse.accepted = false;  // 允许事件继续传播
+                                            root.cellClicked(rowContainer.rowIndex, index, cellLoader.cellData);
+                                            mouse.accepted = false;
                                         }
 
                                         onPressed: {
-                                            mouse.accepted = false;  // 允许事件继续传播
+                                            mouse.accepted = false;
                                         }
 
                                         onReleased: {
-                                            mouse.accepted = false;  // 允许事件继续传播
+                                            mouse.accepted = false;
                                         }
                                     }
 
@@ -308,7 +305,7 @@ Item {
                         MouseArea {
                             anchors.fill: parent
                             hoverEnabled: true
-                            propagateComposedEvents: true  // 允许事件继续传播
+                            propagateComposedEvents: true
                             z: 0
 
                             onEntered: {
@@ -321,11 +318,8 @@ Item {
 
                             onClicked: {
                                 console.log("[DnyTable] 行点击: 行=" + index);
-                                // 只有当事件未被其他控件处理时才处理点击
-                                if (!mouse.accepted) {
-                                    select(index);
-                                }
-                                mouse.accepted = false;  // 允许事件继续传播
+                                select(index);
+                                mouse.accepted = false;
                             }
                         }
                     }
@@ -346,6 +340,13 @@ Item {
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignLeft
         }
+    }
+    // 添加到DnyTable.qml中
+    function forceLayout() {
+        // 触发表格重新布局
+        var temp = tableData;
+        tableData = [];
+        tableData = temp;
     }
 }
 
