@@ -63,5 +63,9 @@
         <file>UavRecordManagement.qml</file>
         <file>DnyTable.qml</file>
         <file>AddUavModelAllData_add.qml</file>
+        <file>AddReconnaissanceCommunicationData_add.qml</file>
+        <file>EffectiveReflectionArea_add.qml</file>
+        <file>InterferencePodDropSpeed_add.qml</file>
+        <file>AddInterferencePodData_add.qml</file>
     </qresource>
 </RCC>

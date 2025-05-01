@@ -19,7 +19,7 @@ Item {
     property int iIntensity: 0
 
     property int iLaunchControlType: 0
-    signal backRecord()
+    signal backPayloadRecord()
 
     property int loadState: 0  //0:新增、1:查看、2:编辑
 
@@ -485,7 +485,7 @@ Item {
                 pixelSize: 20
                 text: "取消"
                 onClicked: {
-                    backRecord()
+                    backPayloadRecord()
                     custom_PassiveInterferencePod.visible = false
                 }
             }
@@ -501,7 +501,7 @@ Item {
                 pixelSize: 20
                 text: "保存"
                 onClicked: {
-                    backRecord()
+                    backPayloadRecord()
                     custom_PassiveInterferencePod.visible = false
                     if(loadState == 0)
                     {
@@ -526,13 +526,13 @@ Item {
 
     }
 
-    EffectiveReflectionArea{
+    EffectiveReflectionArea_add{
         id:custom_EffectiveReflectionArea
         anchors.centerIn: parent
         visible: false
     }
 
-    InterferencePodDropSpeed{
+    InterferencePodDropSpeed_add{
         id:custom_InterferencePodDropSpeed
         anchors.centerIn: parent
         visible: false

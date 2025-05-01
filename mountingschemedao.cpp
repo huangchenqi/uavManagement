@@ -14,6 +14,12 @@
 #include <QJsonValue>
 #include <QDebug>
 #include <QDateTime>
+struct order{
+    template<typename T>
+    static odb::query<T> by(::std::string column, ::std::string p = "DESC"){
+        return odb::query<T>{"order by "} + column + p;
+    }
+};
 MountingSchemeDao::MountingSchemeDao(QObject* parent) : QObject(parent){
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
     dbConn_.reset(new DatabaseConnection(
@@ -68,7 +74,7 @@ QJsonArray MountingSchemeDao::selectMountingSchemeData(const QJsonObject &select
                 }
             }
         }
-        odb::result<UavMountSchemeEntity> result = db.query<UavMountSchemeEntity>(q);
+        odb::result<UavMountSchemeEntity> result = db.query<UavMountSchemeEntity>(q+ order::by<UavMountSchemeEntity>(query_t::recordCreationTime.column()));
         qDebug() << "Query returned" << result.size() << "records";  // 添加此行
         // 关键修正2：遍历所有结果
         if(result.size()==0){

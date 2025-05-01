@@ -18,6 +18,12 @@
 #include <QImage>
 #include <QTemporaryFile>
 #include <QUrl>
+struct order{
+    template<typename T>
+    static odb::query<T> by(::std::string column, ::std::string p = "DESC"){
+        return odb::query<T>{"order by "} + column + p;
+    }
+};
 ReconnaissanceCommunicationDao::ReconnaissanceCommunicationDao(QObject* parent) : QObject(parent){
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
     dbConn_.reset(new DatabaseConnection(
@@ -73,7 +79,7 @@ QJsonArray ReconnaissanceCommunicationDao::selectReconnaissanceCommunicationData
                 }
             }
         }
-        odb::result<ReconnaissanceCommunicationEntity> result = db.query<ReconnaissanceCommunicationEntity>(q);
+        odb::result<ReconnaissanceCommunicationEntity> result = db.query<ReconnaissanceCommunicationEntity>(q+ order::by<ReconnaissanceCommunicationEntity>(query_t::recordCreationTime.column()));
         qDebug() << "Query returned" << result.size() << "records";  // 添加此行
         // 关键修正2：遍历所有结果
         if(result.size()==0){

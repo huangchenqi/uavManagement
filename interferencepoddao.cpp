@@ -2,7 +2,6 @@
 #include "InterferencePodEntity.h"
 #include "InterferencePodEntity-odb.hxx"
 #include <stdexcept>
-//#include
 #include "iostream"
 // ODB 头文件
 #include <odb/database.hxx>
@@ -19,20 +18,12 @@
 #include <QTemporaryFile>
 #include <QImage>
 #include <QUrl>
-struct count {
-    count(odb::pgsql::database *db) : db_{db} {}
-    template <typename T>::std::size_t from(odb::query<T> query = {}) {
-        using traits_t = odb::access::object_traits_impl<T, odb::id_pgsql>;
-        QString sql{"select count(*) from %1 where"};
-        odb::query<T> all{sql.arg(&traits_t::table_name[0]).toStdString().c_str()};
-        all += query;
-        auto res = db_->query_value<view::dummy>(all);
-        return res.value;
-    }
-    ~count() = default;
 
-private:
-    odb::pgsql::database *db_;
+struct order{
+    template<typename T>
+    static odb::query<T> by(::std::string column, ::std::string p = "DESC"){
+        return odb::query<T>{"order by "} + column + p;
+    }
 };
 InterferencePodDao::InterferencePodDao(QObject* parent) : QObject(parent){
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
@@ -49,7 +40,6 @@ InterferencePodDao::InterferencePodDao(QObject* parent) : QObject(parent){
 QJsonArray InterferencePodDao::selectInterferencePodData(const QJsonObject &selectedData)
 {
     QJsonArray ammoModelData;
-    QJsonObject rst;
     QJsonDocument adoc(selectedData);
     qDebug()<<"当前xASRA wae  q函数名称:" << __FUNCTION__<<":";
     qDebug().noquote() << adoc.toJson(QJsonDocument::Indented);
@@ -90,27 +80,7 @@ QJsonArray InterferencePodDao::selectInterferencePodData(const QJsonObject &sele
                 }
             }
         }
-        // auto value{count{&db}.from<InterferencePodEntity>(q)};
-        // // 计算分页参数
-        // int pageSize = selectedData["pageSize"].toInt();
-        // int currentPage = selectedData["currentPage"].toInt();
-        // int offset = (currentPage - 1) * pageSize;
-
-        // // 使用limit和offset应用分页
-        // auto result = db.query<InterferencePodEntity>(
-        //     q + "LIMIT" + std::to_string(pageSize) + "OFFSET" +
-        //     std::to_string(offset));
-
-        // // 创建包含metadata的响应
-
-        // rst["total"] = QJsonValue::fromVariant(value);
-        // rst["page"] = QJsonValue::fromVariant(currentPage);
-        // rst["page_size"] = QJsonValue::fromVariant(pageSize);
-        // rst["pages"] =
-        //     QJsonValue::fromVariant((value + pageSize - 1) / pageSize); // 向上取整计算总页数
-
-
-        odb::result<InterferencePodEntity> result = db.query<InterferencePodEntity>(q);
+        odb::result<InterferencePodEntity> result = db.query<InterferencePodEntity>(q+ order::by<InterferencePodEntity>(query_t::recordCreationTime.column()));
         qDebug() << "Query returned" << result.size() << "records";  // 添加此行
         // 关键修正2：遍历所有结果
         if(result.size()==0){
@@ -169,15 +139,12 @@ QJsonArray InterferencePodDao::selectInterferencePodData(const QJsonObject &sele
         }
         trans.commit();
         //qDebug()<<"ammoModelData:"<<sum;
-
     }
-    catch (const std::exception& e) {
+    catch (const odb::exception& e) {
         qCritical() << "Database error:" << e.what();
-        // throw; // 或返回包含错误信息的 JSON
-        return ammoModelData;
+        throw; // 或返回包含错误信息的 JSON
     }
-    rst["data"] = ammoModelData;
-    QJsonDocument doc(rst);
+    QJsonDocument doc(ammoModelData);
     qDebug()<<"当前函数名称:" << __FUNCTION__<<":";
     qDebug().noquote() << doc.toJson(QJsonDocument::Indented);
     return ammoModelData;
@@ -260,12 +227,13 @@ QJsonObject InterferencePodDao::queryInterferencePodData(const QJsonObject &obje
             interferencePodData["rearCoverLength"] = QString::number(entity.rearCoverLength_);
             interferencePodData["mainCabinSection"] = QString::number(entity.mainCabinSection_);
             interferencePodData["maximumWeightPodFullyLoaded"] = QString::number(entity.maximumWeightPodFullyLoaded_);
+            interferencePodData["interferenceLength"] = QString::number(entity.interferenceLength_);
             interferencePodData["interferenceBand"] = QString::fromStdString(entity.interferenceBand_);
             interferencePodData["effectiveReflectionArea"] = QString::fromStdString(entity.effectiveReflectionArea_);
             interferencePodData["deliveryControlWay"] = QString::fromStdString(entity.deliveryControlWay_);
             interferencePodData["deliverySpeed"] = QString::fromStdString(entity.deliverySpeed_);
             interferencePodData["loadingCapacity"] = QString::number(entity.loadingCapacity_);
-            interferencePodData["interferenceIntensity_"] = QString::fromStdString(entity.interferenceIntensity_);
+            interferencePodData["interferenceIntensity"] = QString::fromStdString(entity.interferenceIntensity_);
             // 格式化为字符串（保留5位小数）
             // QString formattedValue = QString::number(entity.uavLength_, 'f', 5);
             // interferencePodData["uavLengthhangingCapacityStr"] = formattedValue;
@@ -408,23 +376,24 @@ bool InterferencePodDao::updateInterferencePodData(const QJsonObject &selectedDa
         entity.usedUavModels_ = selectedData["usedUavModels"].toString().toStdString();
         entity.description_ = selectedData["description"].toString().toStdString();//.toInt();
         entity.mainLength_ = selectedData["mainLength"].toDouble();
+        entity.interferenceLength_ = selectedData["interferenceLength"].toDouble();
         entity.mass_ = selectedData["mass"].toDouble();
         entity.frontCoverLength_ = selectedData["frontCoverLength"].toDouble();
         entity.rearCoverLength_ = selectedData["rearCoverLength"].toDouble();
         entity.mainCabinSection_ = selectedData["mainCabinSection"].toDouble();//.toInt();
         entity.maximumWeightPodFullyLoaded_ = selectedData["maximumWeightPodFullyLoaded"].toDouble();
-        entity.interferenceBand_ = selectedData["interferenceBand"].toBool();
-        entity.effectiveReflectionArea_ = selectedData["effectiveReflectionArea"].toDouble();
-        entity.deliveryControlWay_ = selectedData["deliveryControlWay"].toDouble();
-        entity.deliverySpeed_ = selectedData["deliverySpeed"].toDouble();//.toInt();
+        entity.interferenceBand_ = selectedData["interferenceBand"].toString().toStdString();
+        entity.effectiveReflectionArea_ = selectedData["effectiveReflectionArea"].toString().toStdString();
+        entity.deliveryControlWay_ = selectedData["deliveryControlWay"].toString().toStdString();
+        entity.deliverySpeed_ = selectedData["deliverySpeed"].toString().toStdString();
         entity.loadingCapacity_ = selectedData["loadingCapacity"].toDouble();
-        entity.interferenceIntensity_ = selectedData["interferenceIntensity"].toDouble();
+        entity.interferenceIntensity_ = selectedData["interferenceIntensity"].toString().toStdString();
         //entity.imageName_ = selectedData["imageName"].toDouble();
 
 
 
         entity.imageUrl_ = selectedData["imageUrl"].toString().toStdString();
-        entity.recordCreationTime_ = QDateTime::currentDateTime();//selectedData["record_creation_time"].toString().toStdString();//.toInt();
+//        entity.recordCreationTime_ = QDateTime::currentDateTime();//selectedData["record_creation_time"].toString().toStdString();//.toInt();
         entity.useStatus_ =  true;//selectedData["use_status"].toBool();
         /******************** 系统记录 ********************/
         //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
@@ -542,17 +511,17 @@ bool InterferencePodDao::insertInterferencePodData(const QJsonObject &object)
         entity.rearCoverLength_ = object["rearCoverLength"].toDouble();
         entity.mainCabinSection_ = object["mainCabinSection"].toDouble();//.toInt();
         entity.maximumWeightPodFullyLoaded_ = object["maximumWeightPodFullyLoaded"].toDouble();
+        entity.interferenceLength_ = object["interferencelength"].toDouble();
         entity.interferenceBand_ = object["interferenceBand"].toString().toStdString();
         entity.effectiveReflectionArea_ = object["effectiveReflectionArea"].toString().toStdString();
         entity.deliveryControlWay_ = object["deliveryControlWay"].toString().toStdString();
         entity.deliverySpeed_ = object["deliverySpeed"].toString().toStdString();//.toInt();
         entity.loadingCapacity_ = object["loadingCapacity"].toDouble();
         entity.interferenceIntensity_ = object["interferenceIntensity"].toString().toStdString();
-        //entity.imageName_ = object["imageName"].toDouble();
 
 
 
-        entity.imageUrl_ = object["imageUrl"].toString().toStdString();
+        entity.imageUrl_ = object["image_url"].toString().toStdString();
         //entity.recordCreationTime_ = QDateTime::currentDateTime();//object["record_creation_time"].toString().toStdString();//.toInt();
         entity.useStatus_ =  true;//object["use_status"].toBool();
         /******************** 系统记录 ********************/
@@ -563,7 +532,7 @@ bool InterferencePodDao::insertInterferencePodData(const QJsonObject &object)
         QString localFilePath = url.toLocalFile();
         QFile file(localFilePath);
 
-        qDebug()<<"image_url:"<<object["image_url"].toString();
+        qDebug()<<"image_url:"<<object["imageUrl"].toString();
         file.open(QIODevice::ReadOnly);
         QByteArray data = file.readAll();
         file.close();

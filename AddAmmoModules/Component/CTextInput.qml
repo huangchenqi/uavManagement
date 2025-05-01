@@ -25,6 +25,8 @@ Item {
 
     property bool onlyNum: true
 
+    property var horizontalAlignment: Text.AlignLeft
+
     Component {
         id: doubleValidatorComponent
         DoubleValidator {
@@ -71,9 +73,12 @@ Item {
             font.bold: true
             color:"#ffffffff"
             verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: item_TextInput.horizontalAlignment
             clip: true
             text:item_TextInput.text
             onTextChanged: {
+                if(text.includes(" "))
+                    text = text.replace(/\s+/g, "")  // 移除所有空格
                 item_TextInput.text = text
             }
             selectByMouse: true

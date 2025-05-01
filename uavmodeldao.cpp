@@ -42,7 +42,12 @@ QDateTime covert(unsigned long long i){
     return pg_epoch.addMSecs (
         static_cast <qint64> (odb::pgsql::details::endian_traits::ntoh (i) / 1000LL));
 }
-
+struct order{
+    template<typename T>
+    static odb::query<T> by(::std::string column, ::std::string p = "DESC"){
+        return odb::query<T>{"order by "} + column + p;
+    }
+};
 UavModelDao::UavModelDao(QObject* parent) : QObject(parent){ //::UavModelDao() {
     // 使用 C++11 兼容的写法初始化数据库连接（参数可配置化）
     dbConn_.reset(new DatabaseConnection(
@@ -138,7 +143,7 @@ QJsonArray UavModelDao::selectUavModelAllData()
         // 关键修正1：使用 query<UavModelEntity> 获取结果集
         using query_t = odb::query<UavModelEntity>;
 
-        odb::result<UavModelEntity> result = db.query<UavModelEntity>(query_t::true_expr);
+        odb::result<UavModelEntity> result = db.query<UavModelEntity>(query_t::true_expr + order::by<UavModelEntity>(query_t::uavCreatModelTime.column()));
         qDebug() << "Query returned" << result.size() << "records";  // 添加此行
         // 关键修正2：遍历所有结果
         int sum = 1;

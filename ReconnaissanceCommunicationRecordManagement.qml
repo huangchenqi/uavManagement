@@ -1551,7 +1551,7 @@ Rectangle {
                                                           processInfo.originData = transformedData
 
                                                           //console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
-                                                          reconnaissanceCommunicationRecordLoader.setSource("qrc:./AddReconnaissanceCommunicationData.qml",
+                                                          reconnaissanceCommunicationRecordLoader.setSource("qrc:./AddReconnaissanceCommunicationData_add.qml",//AddReconnaissanceCommunicationData
                                                                                {processInfo: processInfo,
                                                                                    backUi: "qrc:/ReconnaissanceCommunicationRecordManagement.qml"})
                                                           reconnaissanceCommunicationView.visible = false
@@ -1573,7 +1573,7 @@ Rectangle {
                                                           processInfo.originData = transformedData
 
                                                           console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
-                                                          reconnaissanceCommunicationRecordLoader.setSource("qrc:./AddReconnaissanceCommunicationData.qml",
+                                                          reconnaissanceCommunicationRecordLoader.setSource("qrc:./AddReconnaissanceCommunicationData_add.qml",//AddReconnaissanceCommunicationData
                                                                                {processInfo: processInfo,
                                                                                    backUi: "qrc:/ReconnaissanceCommunicationRecordManagement.qml"})
                                                           reconnaissanceCommunicationView.visible = false
@@ -1779,7 +1779,7 @@ Rectangle {
 
 
                                   processInfo.loadViewType = "addUavData"
-                                  reconnaissanceCommunicationRecordLoader.setSource("qrc:./AddReconnaissanceCommunicationData.qml")
+                                  reconnaissanceCommunicationRecordLoader.setSource("qrc:./AddReconnaissanceCommunicationData_add.qml") //AddReconnaissanceCommunicationData
                                   reconnaissanceCommunicationView.visible = false
                               }
                           }

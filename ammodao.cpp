@@ -39,6 +39,13 @@ AmmoDao::AmmoDao(QObject* parent) : QObject(parent){ //::UavModelDao() {
     //     );
 } //UavModelDao::UavModelDao(QObject *parent) : QObject(parent){}
 
+struct order{
+    template<typename T>
+    static odb::query<T> by(::std::string column, ::std::string p = "DESC"){
+        return odb::query<T>{"order by "} + column + p;
+    }
+};
+
 QJsonArray AmmoDao::selectAmmoAllData(const QJsonObject &selectedData)
 {
     QJsonArray ammoModelData;
@@ -106,7 +113,7 @@ QJsonArray AmmoDao::selectAmmoAllData(const QJsonObject &selectedData)
                 }
             }
         }
-        odb::result<AmmunitionEntity> result = db.query<AmmunitionEntity>(q);
+        odb::result<AmmunitionEntity> result = db.query<AmmunitionEntity>(q + order::by<AmmunitionEntity>(query_t::record_creation_time.column()));
         qDebug() << "Query returned" << result.size() << "records";  // 添加此行
         // 关键修正2：遍历所有结果
         if(result.size()==0){
