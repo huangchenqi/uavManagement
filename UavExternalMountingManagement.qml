@@ -42,7 +42,7 @@ Item {
 
                         // 设置Tab的背景颜色
                         background: Rectangle {
-                            color: parent.checked ? "#87CEEB" : "#D3E1FE"
+                            color: parent.checked ? "#3498db" : "#D3E1FE" //#87CEEB
                         }
 
                         onClicked: {
@@ -65,7 +65,7 @@ Item {
 
                         // 设置Tab的背景颜色
                         background: Rectangle {
-                            color: parent.checked ? "#87CEEB" : "#D3E1FE"
+                            color: parent.checked ? "#3498db" : "#D3E1FE" //#87CEEB
                         }
 
                         onClicked: {
@@ -85,7 +85,7 @@ Item {
                         // 设置字体大小
                         font.pixelSize: 12  // 可以根据需要调整这个值
                         background: Rectangle {
-                            color: parent.checked ? "#87CEEB" : "#D3E1FE"
+                            color: parent.checked ? "#3498db" : "#D3E1FE" //#87CEEB
                         }
 
                         onClicked: {
@@ -198,13 +198,13 @@ Item {
                     }
                 }
                 
-                Page{
-                    Text {
-                        id: thname
-                        anchors.centerIn: parent
-                        text: qsTr("textpage3")
-                    }
-                }
+                // Page{
+                //     Text {
+                //         id: thname
+                //         anchors.centerIn: parent
+                //         text: qsTr("textpage3")
+                //     }
+                // }
             }
         }
     }

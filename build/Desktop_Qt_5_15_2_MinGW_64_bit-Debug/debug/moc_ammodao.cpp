@@ -39,14 +39,14 @@ QT_MOC_LITERAL(3, 27, 12), // "selectedData"
 QT_MOC_LITERAL(4, 40, 18), // "selectSomeAmmoData"
 QT_MOC_LITERAL(5, 59, 6), // "object"
 QT_MOC_LITERAL(6, 66, 14), // "updateAmmoData"
-QT_MOC_LITERAL(7, 81, 8), // "QJSValue"
-QT_MOC_LITERAL(8, 90, 14), // "deleteAmmoData"
+QT_MOC_LITERAL(7, 81, 14), // "deleteAmmoData"
+QT_MOC_LITERAL(8, 96, 8), // "QJSValue"
 QT_MOC_LITERAL(9, 105, 14) // "insertAmmoData"
 
     },
     "AmmoDao\0selectAmmoAllData\0\0selectedData\0"
     "selectSomeAmmoData\0object\0updateAmmoData\0"
-    "QJSValue\0deleteAmmoData\0insertAmmoData"
+    "deleteAmmoData\0QJSValue\0insertAmmoData"
 };
 #undef QT_MOC_LITERAL
 
@@ -67,14 +67,14 @@ static const uint qt_meta_data_AmmoDao[] = {
        1,    1,   39,    2, 0x02 /* Public */,
        4,    1,   42,    2, 0x02 /* Public */,
        6,    1,   45,    2, 0x02 /* Public */,
-       8,    1,   48,    2, 0x02 /* Public */,
+       7,    1,   48,    2, 0x02 /* Public */,
        9,    1,   51,    2, 0x02 /* Public */,
 
  // methods: parameters
     QMetaType::QJsonArray, QMetaType::QJsonObject,    3,
     QMetaType::QJsonObject, QMetaType::QJsonObject,    5,
-    QMetaType::Bool, 0x80000000 | 7,    3,
-    QMetaType::Bool, 0x80000000 | 7,    3,
+    QMetaType::Bool, QMetaType::QJsonObject,    5,
+    QMetaType::Bool, 0x80000000 | 8,    3,
     QMetaType::Bool, QMetaType::QJsonObject,    5,
 
        0        // eod
@@ -90,7 +90,7 @@ void AmmoDao::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
             if (_a[0]) *reinterpret_cast< QJsonArray*>(_a[0]) = std::move(_r); }  break;
         case 1: { QJsonObject _r = _t->selectSomeAmmoData((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QJsonObject*>(_a[0]) = std::move(_r); }  break;
-        case 2: { bool _r = _t->updateAmmoData((*reinterpret_cast< const QJSValue(*)>(_a[1])));
+        case 2: { bool _r = _t->updateAmmoData((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 3: { bool _r = _t->deleteAmmoData((*reinterpret_cast< const QJSValue(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
@@ -101,13 +101,6 @@ void AmmoDao::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 2:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QJSValue >(); break;
-            }
-            break;
         case 3:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;

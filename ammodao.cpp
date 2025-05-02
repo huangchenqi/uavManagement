@@ -434,8 +434,237 @@ QJsonObject AmmoDao::selectSomeAmmoData(const QJsonObject &object)
     return ammoData;
 }
 
-bool AmmoDao::updateAmmoData(const QJSValue &selectedData)
+bool AmmoDao::updateAmmoData(const QJsonObject &object)
 {
+    try {
+        // 1. 建立数据库连接
+        auto& db = dbConn_->getDatabase(); // 使用成员变量获取数据库
+        qDebug() << "Connecting to database...";
+
+        // 2. 创建事务
+        odb::transaction trans(db.begin());
+        qDebug() << "Transaction started";
+        // 3. 从JSON创建实体对象
+        AmmunitionEntity entity;
+        // 定义查询条件
+        // unique_ptr<entity> john (
+        //     db->query_one<entity> (query::first == "John" &&
+        //                           query::last == "Doe"));
+        // if (john.get () != 0)
+        //     db->erase (*john);
+        typedef odb::query<AmmunitionEntity> query;
+        // 3. 加载要修改的实体
+        //std::shared_ptr<Person> person(db->load<Person>(1));  // 加载ID为1的记录
+        // 获取要更新的记录ID
+        // 从 QJsonObject 中提取 "id" 字段
+        QJsonValue idValue = object.value("id");
+
+        // 检查字段是否存在
+        if (idValue.isUndefined()) {
+            qCritical() << "Error: JSON 中缺少 'id' 字段";
+            return false;
+        }
+
+        // 将字段值转为 QString（无论原始类型是字符串还是数字）
+        QString idStr = idValue.toVariant().toString();
+
+        // 转换为整型并校验格式
+        bool ok;
+        int rid = idStr.toInt(&ok);
+        if (!ok) {
+            qCritical() << "Error: 'id' 值无效，无法转换为整数：" << idStr;
+            return false;
+        }
+
+        // 检查 ID 是否为正数（根据业务需求）
+        if (rid <= 0) {
+            qCritical() << "Error: ID 必须为正整数，当前值：" << rid;
+            return false;
+        }
+
+        // 此时 id 变量已包含正确的整数值
+        qDebug() << "成功获取 ID:" << rid;
+        db.load(rid, entity);
+
+        // 基础字段
+        entity.ammoName_ = object["ammoName"].toString().toStdString();//.toInt();
+        entity.shortName_= object["shortName"].toString().toStdString();
+        entity.ammoType_ = object["ammoType"].toString().toStdString();
+        entity.ammoId_ = object["ammoId"].toString().toStdString();
+        entity.ammoToUavModel_ = object["ammoToUavModel"].toString().toStdString();
+        entity.ammoDescription_ = object["ammoDescription"].toString().toStdString();//.toInt();
+        entity.ammoLenth_ = object["ammoLenth"].toDouble();
+        entity.ammoMass_ = object["ammoMass"].toDouble();
+        entity.ammoDiameter_ = object["ammoDiameter"].toDouble();
+        entity.ammoWingspan_ = object["ammoWingspan"].toDouble();
+        entity.ammoWarheadCgDistance_ = object["ammoWarheadCgDistance"].toDouble();//.toInt();
+        entity.ammoChargeMass_ = object["ammoChargeMass"].toDouble();
+        entity.ammoChargeCoefficient_ = object["ammoChargeCoefficient"].toBool();
+        entity.ammoMaxReleaseHeight_ = object["ammoMaxReleaseHeight"].toDouble();
+        entity.ammoMinReleaseHeight = object["ammoMinReleaseHeight"].toDouble();
+        entity.ammoMinReleaseSpeed_ = object["ammoMinReleaseSpeed"].toDouble();//.toInt();
+        entity.ammoMaxReleaseSpeed_ = object["ammoMaxReleaseSpeed"].toDouble();
+        entity.ammoTailLength_ = object["ammoTailLength"].toDouble();
+        entity.ammoLugSpacing_ = object["ammoLugSpacing"].toDouble();
+
+
+
+        entity.ammoKillingWway_ = object["ammoKillingWay"].toString().toStdString();
+        entity.ammoPenetrationDepth_ = object["ammoPenetrationDepth"].toDouble();//.toInt();
+        entity.ammoQuantitySoilThrown_ = object["ammoQuantitySoilThrown"].toDouble();
+        entity.ammoCraterDiameter_ = object["ammoCraterDiameter"].toDouble();
+        entity.ammoCraterDepth_ = object["ammoCraterDepth"].toDouble();
+        entity.ammoDamagedArea_ = object["ammoDamagedArea"].toDouble();
+        entity.ammoDenseKillingRadius_ = object["ammoDenseKillingRadius"].toDouble();//.toInt();
+        entity.ammoInitialVelocityFragments_ = object["ammoInitialVelocityFragments"].toDouble();
+        entity.ammoNumberFragments_ = object["ammoNumberFragments"].toInt();
+        entity.ammoArmorBreakingAbility_ = object["ammoArmorBreakingAbility"].toString().toStdString();
+        entity.bullet_density_range_minimum = object["bullet_density_range_minimum"].toInt();
+        entity.bullet_density_range_maximum = object["bullet_density_range_maximum"].toInt();//.toInt();
+        entity.ground_ignition_rate = object["ground_ignition_rate"].toDouble();
+        entity.combustion_temperature = object["combustion_temperature"].toDouble();
+        entity.combustion_time = object["combustion_time"].toDouble();
+        entity.combustion_agent_spread_range = object["combustion_agent_spread_range"].toDouble();
+        entity.number_of_fragments = object["number_of_fragments"].toInt();//.toInt();
+        entity.breakdown_distance = object["breakdown_distance"].toDouble();
+        entity.maximum_inclusive_coverage_quantity = object["maximum_inclusive_coverage_quantity"].toInt();
+        entity.number_of_spread = object["number_of_spread"].toInt();
+        entity.surface_dc_resistivity = object["surface_dc_resistivity"].toDouble();
+        entity.probability_of_arc_discharge = object["probability_of_arc_discharge"].toDouble();//.toInt();
+        entity.fuel_dispersion_radius = object["fuel_dispersion_radius"].toDouble();
+        entity.distance_from_center_explosion = object["distance_from_center_explosion"].toDouble();
+        entity.shock_wave_overpressure_value = object["shock_wave_overpressure_value"].toDouble();
+        entity.spread_area = object["spread_area"].toDouble();
+        entity.use_description = object["use_description"].toString().toStdString();//.toInt();
+        entity.interference_duration = object["interference_duration"].toDouble();
+        entity.interference_length_minimum = object["interference_length_minimum"].toDouble();
+
+        entity.interference_length_maximum = object["interference_length_maximum"].toDouble();
+        entity.interference_width_minimum = object["interference_width_minimum"].toDouble();
+        entity.interference_width_maximum = object["interference_width_maximum"].toDouble();//.toInt();
+        entity.fuze_model = object["fuze_model"].toString().toStdString();
+        entity.number_of_fuses = object["number_of_fuses"].toInt();
+        entity.storage_life = object["storage_life"].toDouble();
+        entity.action_time = object["action_time"].toDouble();
+        entity.available_extension_time = object["available_extension_time"].toDouble();//.toInt();
+        entity.rudder_width = object["rudder_width"].toDouble();
+        entity.aerodynamic_configuration = object["aerodynamic_configuration"].toString().toStdString();
+        entity.working_conditions = object["working_conditions"].toString().toStdString();
+        entity.working_temperature = object["working_temperature"].toDouble();
+        entity.working_altitude = object["working_altitude"].toDouble();//.toInt();
+        entity.launch_way = object["launch_way"].toString().toStdString();
+        entity.guidance_rule = object["guidance_rule"].toString().toStdString();
+        entity.minimum_visibility_emission = object["minimum_visibility_emission"].toDouble();
+        entity.maximum_launch_altitude = object["maximum_launch_altitude"].toDouble();
+        entity.launch_maximum_target_altitude = object["launch_maximum_target_altitude"].toDouble();//.toInt();
+        entity.maximum_launch_relative_height = object["maximum_launch_relative_height"].toDouble();
+        entity.minimum_relative_height_launch = object["minimum_relative_height_launch"].toDouble();
+        entity.launch_speed = object["launch_speed"].toDouble();
+        entity.launch_conditions = object["launch_conditions"].toString().toStdString();
+        entity.launch_off_axis_angle = object["launch_off_axis_angle"].toDouble();//.toInt();
+        entity.guidance_way = object["guidance_way"].toString().toStdString();
+        entity.effective_range = object["effective_range"].toDouble();
+        entity.hit_accuracy = object["hit_accuracy"].toDouble();
+        entity.hit_probability = object["hit_probability"].toDouble();
+        entity.preparation_time = object["preparation_time"].toDouble();//.toInt();
+        entity.allow_continuous_flight_time = object["allow_continuous_flight_time"].toDouble();
+        entity.guided_flight_time = object["guided_flight_time"].toDouble();
+        entity.maximum_speed_of_missile = object["maximum_speed_of_missile"].toDouble();
+        entity.guiding_head_working_wavelength = object["guiding_head_working_wavelength"].toDouble();
+        entity.blind_spot_of_guidance_head = object["blind_spot_of_guidance_head"].toDouble();//.toInt();
+        entity.guidance_head_frame_angle = object["guidance_head_frame_angle"].toDouble();
+        entity.guidance_head_operating_distance = object["guidance_head_operating_distance"].toDouble();
+        entity.guidance_head_field_of_view_angle = object["guidance_head_field_of_view_angle"].toDouble();
+        entity.guidance_head_field_of_view_angle_linearregion = object["guidance_head_field_of_view_angle_linearregion"].toDouble();
+        entity.guidance_head_field_of_view_angle_instantaneous = object["guidance_head_field_of_view_angle_instantaneous"].toDouble();
+
+
+        entity.adaptability_of_guidance_head_sunlight = object["adaptability_of_guidance_head_sunlight"].toString().toStdString();
+        entity.guidance_head_operating_frequency = object["guidance_head_operating_frequency"].toDouble();
+        entity.fuse_firing_rate = object["fuse_firing_rate"].toDouble();//.toInt();
+        entity.fuse_type = object["fuse_type"].toString().toStdString();
+        entity.fuse_length = object["fuse_length"].toDouble();
+        entity.fuse_diameter = object["fuse_diameter"].toDouble();
+        entity.fuze_quality = object["fuze_quality"].toDouble();
+        entity.safe_distance_of_fuse = object["safe_distance_of_fuse"].toDouble();//.toInt();
+        entity.time_disarming_fuse = object["time_disarming_fuse"].toDouble();
+        entity.first_level_release_time_of_fuse = object["first_level_release_time_of_fuse"].toDouble();
+        entity.secondary_release_time_of_fuse = object["secondary_release_time_of_fuse"].toDouble();
+        entity.reliability_rate_of_fuse_action = object["reliability_rate_of_fuse_action"].toDouble();
+        entity.fuse_self_destruct_time = object["fuse_self_destruct_time"].toDouble();//.toInt();
+        entity.combat_department_quality = object["combat_department_quality"].toDouble();
+        entity.combat_quantity = object["combat_quantity"].toDouble();
+        entity.combat_unit_type = object["combat_unit_type"].toString().toStdString();
+        entity.combat_length = object["combat_length"].toDouble();
+        entity.combat_diameter = object["combat_diameter"].toDouble();//.toInt();
+        entity.combat_main_charge_type = object["combat_main_charge_type"].toString().toStdString();
+        entity.combat_charge_density = object["combat_charge_density"].toDouble();
+        entity.combat_loading_factor = object["combat_loading_factor"].toDouble();
+        entity.combat_explosive = object["combat_explosive"].toDouble();
+        entity.combat_fragments_number = object["combat_fragments_number"].toInt();//.toInt();
+        entity.combat_unit_invasion_capability = object["combat_unit_invasion_capability"].toString().toStdString();
+
+        entity.combat_effective_killing_radius_vehicles = object["combat_effective_killing_radius_vehicles"].toDouble();
+        entity.combat_effective_killing_radius_personnel = object["combat_effective_killing_radius_personnel"].toDouble();
+        entity.combat_vertical_static_armor_penetration_depth = object["combat_vertical_static_armor_penetration_depth"].toDouble();
+        entity.combat_department_quality_add = object["combat_department_quality_add"].toDouble();//.toInt();
+        entity.combat_quantity_add = object["combat_quantity_add"].toDouble();
+
+
+        entity.combat_unit_type_add = object["combat_unit_type_add"].toString().toStdString();
+        entity.combat_length_add = object["combat_length_add"].toDouble();
+        entity.combat_diameter_add = object["combat_diameter_add"].toDouble();
+        entity.combat_main_charge_type_add = object["combat_main_charge_type_add"].toString().toStdString();//.toInt();
+        entity.combat_charge_density_add = object["combat_charge_density_add"].toDouble();
+        entity.combat_loading_factor_add = object["combat_loading_factor_add"].toDouble();
+        entity.combat_explosive_add = object["combat_explosive_add"].toDouble();
+        entity.combat_fragments_number_add = object["combat_fragments_number_add"].toInt();
+        entity.combat_unit_invasion_capability_add = object["combat_unit_invasion_capability_add"].toString().toStdString();//.toInt();
+        entity.combat_effective_killing_radius_vehicles_add = object["combat_effective_killing_radius_vehicles_add"].toDouble();
+        entity.combat_effective_killing_radius_personnel_add = object["combat_effective_killing_radius_personnel_add"].toDouble();
+        entity.combat_vertical_static_armor_penetration_depth_add = object["combat_vertical_static_armor_penetration_depth_add"].toDouble();
+        entity.service_life = object["service_life"].toDouble();
+        entity.distance_between_center_mass_end = object["distance_between_center_mass_end"].toDouble();//.toInt();
+        entity.lifting_lug = object["lifting_lug"].toString().toStdString();
+        entity.distance_suspension_lifting_lug = object["distance_suspension_lifting_lug"].toDouble();
+        //entity.image_name = object["image_name"].toString().toStdString();
+        entity.image_url = object["image_url"].toString().toStdString();
+        entity.record_creation_time = QDateTime::currentDateTime();//object["record_creation_time"].toString().toStdString();//.toInt();
+        entity.use_status =  true;//object["use_status"].toBool();
+        /******************** 系统记录 ********************/
+        //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
+        // 使用 QUrl 解析 URL 并提取本地路径
+        QString image_url = object["image_url"].toString();
+        QUrl url(image_url);
+        QString localFilePath = url.toLocalFile();
+        QFile file(localFilePath);
+
+        qDebug()<<"image_url:"<<object["image_url"].toString();
+        file.open(QIODevice::ReadOnly);
+        QByteArray data = file.readAll();
+        file.close();
+        //std::vector  imagByteA = std::vector<unsigned char>(data.begin(),data.end());
+        entity.image_name = std::vector<char>(data.begin(),data.end());
+        std::vector<char> imagByteA(data.begin(), data.end());
+        std::cout << "imagByteA: "<<imagByteA.size()<<"Data size" << entity.image_name.size() << std::endl;
+        /******************** 系统记录 ********************/
+        //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
+        // 使用 QUrl 解析 URL 并提取本地路径
+
+        // auto id = db.persist(entity);
+        // qDebug() << "Persisting entity..."<<id;
+
+        //entity.uavName_("James");
+        //entity.age("Newland");
+        // 4. 修改数据
+        db.update(entity);
+        // 提交事务
+        trans.commit();
+        qDebug()<<"当前函数名称:" << __FUNCTION__<<":" << "Transaction committed, 数据更新成功";
+    } catch (const std::exception& e) {
+        qCritical() << "Error:" << " 数据更新操作出错: " << e.what();
+        return false;
+    }
     return true;
 }
 

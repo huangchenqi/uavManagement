@@ -37,18 +37,18 @@ QT_MOC_LITERAL(1, 18, 24), // "selectMountingSchemeData"
 QT_MOC_LITERAL(2, 43, 0), // ""
 QT_MOC_LITERAL(3, 44, 12), // "selectedData"
 QT_MOC_LITERAL(4, 57, 23), // "queryMountingSchemeData"
-QT_MOC_LITERAL(5, 81, 24), // "updateMountingSchemeData"
-QT_MOC_LITERAL(6, 106, 24), // "deleteMountingSchemeData"
-QT_MOC_LITERAL(7, 131, 8), // "QJSValue"
-QT_MOC_LITERAL(8, 140, 24), // "insertMountingSchemeData"
-QT_MOC_LITERAL(9, 165, 6) // "object"
+QT_MOC_LITERAL(5, 81, 6), // "object"
+QT_MOC_LITERAL(6, 88, 24), // "updateMountingSchemeData"
+QT_MOC_LITERAL(7, 113, 24), // "deleteMountingSchemeData"
+QT_MOC_LITERAL(8, 138, 8), // "QJSValue"
+QT_MOC_LITERAL(9, 147, 24) // "insertMountingSchemeData"
 
     },
     "MountingSchemeDao\0selectMountingSchemeData\0"
     "\0selectedData\0queryMountingSchemeData\0"
-    "updateMountingSchemeData\0"
+    "object\0updateMountingSchemeData\0"
     "deleteMountingSchemeData\0QJSValue\0"
-    "insertMountingSchemeData\0object"
+    "insertMountingSchemeData"
 };
 #undef QT_MOC_LITERAL
 
@@ -68,16 +68,16 @@ static const uint qt_meta_data_MountingSchemeDao[] = {
  // methods: name, argc, parameters, tag, flags
        1,    1,   39,    2, 0x02 /* Public */,
        4,    1,   42,    2, 0x02 /* Public */,
-       5,    1,   45,    2, 0x02 /* Public */,
-       6,    1,   48,    2, 0x02 /* Public */,
-       8,    1,   51,    2, 0x02 /* Public */,
+       6,    1,   45,    2, 0x02 /* Public */,
+       7,    1,   48,    2, 0x02 /* Public */,
+       9,    1,   51,    2, 0x02 /* Public */,
 
  // methods: parameters
     QMetaType::QJsonArray, QMetaType::QJsonObject,    3,
-    QMetaType::QJsonObject, QMetaType::QJsonObject,    3,
-    QMetaType::Bool, QMetaType::QJsonObject,    3,
-    QMetaType::Bool, 0x80000000 | 7,    3,
-    QMetaType::Bool, QMetaType::QJsonObject,    9,
+    QMetaType::QJsonObject, QMetaType::QJsonObject,    5,
+    QMetaType::Bool, QMetaType::QJsonObject,    5,
+    QMetaType::Bool, 0x80000000 | 8,    3,
+    QMetaType::Bool, QMetaType::QJsonObject,    5,
 
        0        // eod
 };

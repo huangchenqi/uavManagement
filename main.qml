@@ -16,10 +16,10 @@ Window {
     // UavMainManagement{
     //     id:uavMain
     // }
-MainWindow{
-    id:show
-    anchors.fill: parent
-}
+    MainWindow{
+        id:show
+        anchors.fill: parent
+    }
 
 //    Component.objectName: {
 //        addAmmoData()

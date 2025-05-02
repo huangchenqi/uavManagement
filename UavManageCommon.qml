@@ -335,7 +335,7 @@ Rectangle {
                               verticalAlignment: Text.AlignVCenter
                               horizontalAlignment: Text.AlignHCenter
                               text: qsTr("无人机型号记录");
-                              font.pointSize: 20
+                              font.pointSize: 16
                               color: "black"
                           }
                           Item { Layout.fillWidth: true }

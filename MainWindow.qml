@@ -62,7 +62,7 @@ Item {
 
         // Left navigation panel
         Rectangle {
-            Layout.preferredWidth: 180
+            Layout.preferredWidth: 100
             Layout.fillHeight: true
             color: "#f0f0f0"
 

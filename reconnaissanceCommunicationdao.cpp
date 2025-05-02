@@ -483,7 +483,53 @@ bool ReconnaissanceCommunicationDao::updateReconnaissanceCommunicationData(const
 
 bool ReconnaissanceCommunicationDao::deleteReconnaissanceCommunicationData(const QJSValue &selectedData)
 {
-    return true;
+    try {
+        // 1. 建立数据库连接
+        qDebug() << "Connecting to database...";
+        auto& db = dbConn_->getDatabase(); // 使用成员变量获取数据库
+
+        // 2. 创建事务
+        odb::transaction trans(db.begin());
+        qDebug() << "Transaction delete deleteInterferencePodData started";
+        // 3. 从JSON创建实体对象
+        ReconnaissanceCommunicationEntity entity;
+        //typedef odb::query<InterferencePodEntity> query;
+        // 将 QJSValue 转换为 QVariantList
+        QVariantList dataList = selectedData.toVariant().toList();
+
+        // 处理数据遍历
+        for (const QVariant &item : dataList) {
+            QVariantMap dataMap = item.toMap();
+            int  recordId = dataMap["recordId"].toInt();
+            //QString ammoNameStr = dataMap["ammoComponeName"].toString();
+            //QString ammoIdStr = dataMap["ammoComponeCode"].toString();
+            bool ammoStatusStr = false;
+            db.load(recordId, entity);
+            //entity.ammoAttackTargetCode_ = ammoIdStr.toInt();
+            //entity.ammoAttackTargetName_= ammoNameStr.toStdString();
+            entity.useStatus_ = ammoStatusStr;
+            qDebug() << "before update";
+            // 4. 修改数据
+            db.update(entity);
+            // auto rst = db.erase_query<AmmoAttackTargetTypeEntity>(//db.erase_query<UavModelEntity>
+            //     query::id == recordId
+            //     && query::ammoAttackTargetName == ammoNameStr.toStdString().c_str()
+            //     //&& query::mountLocationId == mountLocationIdStr.toInt()//.c_str()
+            //     ); // 替换 condition1、condition2 为实际的字段名，value1、value2 为实际的值
+            qDebug() << "recordId:" << dataMap["recordId"].toInt();
+            //            qDebug() << "mountName:" << dataMap["ammoComponeName"].toString();
+            //            qDebug() << "ammoLaunchWayId:" << dataMap["ammoComponeCode"].toString();
+            //qDebug() << "<<<<>>>>" << rst.size();
+        }
+
+        // 提交事务
+        trans.commit();
+        qDebug() <<"当前函数名称:" << __FUNCTION__<<":"<< "Transaction committed, 删除成功";
+    } catch (const std::exception& e) {
+        qCritical() << "Error:" << "删除操作出错: " << e.what();
+        return false;
+    }
+    return  true;
 }
 
 bool ReconnaissanceCommunicationDao::insertReconnaissanceCommunicationData(const QJsonObject &object)

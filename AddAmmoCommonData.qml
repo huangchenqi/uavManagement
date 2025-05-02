@@ -6,8 +6,8 @@ import UavDaoModel 1.0
 import AmmoDaoModel 1.0
 Item{//航空导弹与航空炸弹
     id:missileCommonData
-    width: 800
-    height: 300
+    width: 880
+    height: 350
 
     property int selectType:0 //0 代表新增，1代表查看，2代表修改。
 
@@ -114,7 +114,7 @@ Item{//航空导弹与航空炸弹
             anchors.top: rect_baseParam.bottom
             anchors.topMargin: 15
             width: rect_baseParam.width - 15
-            height: 200
+            height: 220
 
             Rectangle{
                 id:rect_missileParam
@@ -205,7 +205,7 @@ Item{//航空导弹与航空炸弹
                                 width: pixelSize * 6
                                 height: parent.height
                                 anchors.left: parent.left
-                                anchors.top: parent.top
+                                anchors.top: text_MissileRangeTitle.bottom
                                 pixelSize: 20
                                 horizontalAlignment: Text.AlignLeft
                                 color:mainColor
@@ -238,6 +238,280 @@ Item{//航空导弹与航空炸弹
                                     // }
                                     onEditingFinished: {
                                         ammoData.ammoDiameter =text
+                                        console.log("Text content changed to: " + text)
+                                    }
+                                }
+                                Rectangle{
+                                    width: parent.width
+                                    height: (2)
+                                    anchors.left: parent.left
+                                    anchors.bottom: parent.bottom
+                                    color:mainColor
+                                }
+                            }
+                        }
+                        Item {
+                            id: item_ActionTime
+                            width: custom_colum.width
+                            height: 20
+                        // Rectangle {
+                        //     id: item_ActionTime
+                        //     height: 20
+                        //     color: "transparent"
+                        //     anchors.left: item_FuzeNum.left
+                        //     anchors.top: item_MissileDiameter.bottom
+                        //     //anchors.topMargin: 20
+                        //     anchors.right: parent.right
+                        //     anchors.rightMargin: 5
+                            CText{
+                                id:text_ActionTimeTitle
+                                width: pixelSize * 6
+                                height: parent.height
+                                anchors.left: parent.left
+                                anchors.top: parent.top
+                                pixelSize: 20
+                                horizontalAlignment: Text.AlignLeft
+                                color:mainColor
+                                text:"作用时间(s): "
+                            }
+                            Item{
+                                width: parent.width - text_ActionTimeTitle.width - 5
+                                height: parent.height
+                                anchors.left:text_ActionTimeTitle.right
+                                anchors.top: parent.top
+                                TextInput{
+                                    id:text_Input_ActionTime
+                                    anchors.fill: parent
+                                    color:"#ffffffff"
+                                    font.family:text_ActionTimeTitle.family
+                                    font.pixelSize:(18)
+                                    selectByMouse: true
+                                    selectionColor: "#ffcc8800"
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
+
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.action_time =text
+                                        console.log("Text content changed to: " + text)
+                                    }
+                                }
+                                Rectangle{
+                                    width: parent.width
+                                    height: (2)
+                                    anchors.left: parent.left
+                                    anchors.bottom: parent.bottom
+                                    color:mainColor
+                                }
+                            }
+                        }
+                        Item {
+                            id: item_DelayTime
+                            width: custom_colum.width
+                            height: 20
+
+                        // Rectangle {
+                        //     id: item_DelayTime
+                        //     height: 20
+                        //     color: "transparent"
+                        //     anchors.left: item_ActionTime.left
+                        //     anchors.top: item_ActionTime.bottom
+                        //     anchors.topMargin: 20
+                        //     anchors.right: parent.right
+                        //     anchors.rightMargin: 5
+                            CText{
+                                id:text_DelayTimeTitle
+                                width: pixelSize * 6
+                                height: parent.height
+                                anchors.left: parent.left
+                                anchors.top: parent.top
+                                pixelSize: 20
+                                horizontalAlignment: Text.AlignLeft
+                                color:mainColor
+                                text:"延解时间(s): "
+                            }
+                            Item{
+                                width: parent.width - text_DelayTimeTitle.width - 5
+                                height: parent.height
+                                anchors.left:text_DelayTimeTitle.right
+                                anchors.top: parent.top
+                                TextInput{
+                                    id:text_Input_DelayTime
+                                    anchors.fill: parent
+                                    color:"#ffffffff"
+                                    font.family:text_ActionTimeTitle.family
+                                    font.pixelSize:(18)
+                                    selectByMouse: true
+                                    selectionColor: "#ffcc8800"
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
+
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.available_extension_time =text
+                                        console.log("Text content changed to: " + text)
+                                    }
+                                }
+                                Rectangle{
+                                    width: parent.width
+                                    height: (2)
+                                    anchors.left: parent.left
+                                    anchors.bottom: parent.bottom
+                                    color:mainColor
+                                }
+                            }
+                        }
+                        Item {
+                            id: item_FuzeModel
+                            width: custom_colum.width
+                            height: 20
+
+                        // Rectangle {
+                        //     id: item_FuzeModel
+                        //     height: 20
+                        //     color: "transparent"
+                        //     anchors.left: rect_missileParam3.right
+                        //     anchors.leftMargin: 5
+                        //     anchors.top: rect_missileParam3.top
+                        //     anchors.topMargin: 10
+                        //     anchors.right: parent.right
+                        //     anchors.rightMargin: 5
+
+                            CText{
+                                id:text_FuzeModelTitle
+                                width: pixelSize * 4.5
+                                height: parent.height
+                                anchors.left: parent.left
+                                anchors.top: item_DelayTime.bottom
+                                pixelSize: 20
+                                horizontalAlignment: Text.AlignLeft
+                                color:mainColor
+                                text:"引信型号: "
+                            }
+                            Item{
+                                width: parent.width - text_FuzeModelTitle.width
+                                height: parent.height
+                                anchors.left:text_FuzeModelTitle.right
+                                anchors.top: parent.top
+                                TextInput{
+                                    id:text_Input_FuzeModel
+                                    anchors.fill: parent
+                                    color:"#ffffffff"
+                                    font.family:text_FuzeModelTitle.family
+                                    font.pixelSize:(18)
+                                    selectByMouse: true
+                                    selectionColor: "#ffcc8800"
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
+
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.fuze_model =text
+                                        console.log("Text content changed to: " + text)
+                                    }
+                                }
+                                Rectangle{
+                                    width: parent.width
+                                    height: (2)
+                                    anchors.left: parent.left
+                                    anchors.bottom: parent.bottom
+                                    color:mainColor
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+
+            }
+
+
+            Rectangle{
+                id:rect_missileParam2
+                color: "transparent"
+                border.width: 0
+                anchors.left: rect_missileParam.right
+                anchors.leftMargin: 16
+                anchors.top: rect_missileParam.top
+
+                width: rect_baseParam.width / 4
+                height: 200
+                Rectangle{
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+                    anchors.top: parent.top
+                    anchors.topMargin: 5
+                    anchors.right: parent.right
+                    anchors.rightMargin: 5
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 5
+                    color: "transparent"
+
+                    Column{
+                        id:custom_colum2
+                        anchors.fill: parent
+                        spacing: 20
+                        Item {
+                            id: item_Wingspan
+                            width: custom_colum2.width
+                            height: 20
+                            CText{
+                                id:text_WingspanTitle
+                                width: pixelSize * 4.5
+                                height: parent.height
+                                anchors.left: parent.left
+                                anchors.top: parent.top
+                                pixelSize: 20
+                                horizontalAlignment: Text.AlignLeft
+                                color:mainColor
+                                text:"翼展(m): "
+                            }
+                            Item{
+                                width: parent.width - text_WingspanTitle.width
+                                height: parent.height
+                                anchors.left:text_WingspanTitle.right
+                                anchors.top: parent.top
+                                TextInput{
+                                    id:text_Input_Wingspan
+                                    anchors.fill: parent
+                                    color:"#ffffffff"
+                                    font.family:text_WingspanTitle.family
+                                    font.pixelSize:(18)
+                                    selectByMouse: true
+                                    selectionColor: "#ffcc8800"
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
+
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.ammoWingspan =text
                                         console.log("Text content changed to: " + text)
                                     }
                                 }
@@ -358,152 +632,15 @@ Item{//航空导弹与航空炸弹
                                 }
                             }
                         }
-                    }
-                }
-
-            }
 
 
-            Rectangle{
-                id:rect_missileParam2
-                color: "transparent"
-                border.width: 0
-                anchors.left: rect_missileParam.right
-                anchors.leftMargin: 10
-                anchors.top: rect_missileParam.top
-
-                width: rect_baseParam.width / 4
-                height: 200
-                Rectangle{
-                    anchors.left: parent.left
-                    anchors.leftMargin: 5
-                    anchors.top: parent.top
-                    anchors.topMargin: 5
-                    anchors.right: parent.right
-                    anchors.rightMargin: 5
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: 5
-                    color: "transparent"
-
-                    Column{
-                        id:custom_colum2
-                        anchors.fill: parent
-                        spacing: 20
-                        Item {
-                            id: item_Wingspan
-                            width: custom_colum2.width
-                            height: 20
-                            CText{
-                                id:text_WingspanTitle
-                                width: pixelSize * 4.5
-                                height: parent.height
-                                anchors.left: parent.left
-                                anchors.top: parent.top
-                                pixelSize: 20
-                                horizontalAlignment: Text.AlignLeft
-                                color:mainColor
-                                text:"翼展(m): "
-                            }
-                            Item{
-                                width: parent.width - text_WingspanTitle.width
-                                height: parent.height
-                                anchors.left:text_WingspanTitle.right
-                                anchors.top: parent.top
-                                TextInput{
-                                    id:text_Input_Wingspan
-                                    anchors.fill: parent
-                                    color:"#ffffffff"
-                                    font.family:text_WingspanTitle.family
-                                    font.pixelSize:(18)
-                                    selectByMouse: true
-                                    selectionColor: "#ffcc8800"
-                                    validator: DoubleValidator {
-                                                       bottom: -9999999
-                                                       top: 9999999
-                                                       notation: DoubleValidator.StandardNotation
-                                                       decimals: 5
-                                    }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
-
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.ammoWingspan =text
-                                        console.log("Text content changed to: " + text)
-                                    }
-                                }
-                                Rectangle{
-                                    width: parent.width
-                                    height: (2)
-                                    anchors.left: parent.left
-                                    anchors.bottom: parent.bottom
-                                    color:mainColor
-                                }
-                            }
-                        }
-                        Item {
-                            id: item_MissileSheCheng
-                            width: custom_colum2.width
-                            height: 20
-                            CText{
-                                id:text_MissileSheChengTitle
-                                width: pixelSize * 4.5
-                                height: parent.height
-                                anchors.left: parent.left
-                                anchors.top: parent.top
-                                pixelSize: 20
-                                horizontalAlignment: Text.AlignLeft
-                                color:mainColor
-                                text:"射程(Km): "
-                            }
-                            Item{
-                                width: parent.width - text_MissileSheChengTitle.width
-                                height: parent.height
-                                anchors.left:text_MissileSheChengTitle.right
-                                anchors.top: parent.top
-                                TextInput{
-                                    id:text_Input_MissileSheCheng
-                                    anchors.fill: parent
-                                    color:"#ffffffff"
-                                    font.family:text_MissileSheChengTitle.family
-                                    font.pixelSize:(18)
-                                    selectByMouse: true
-                                    selectionColor: "#ffcc8800"
-                                    validator: DoubleValidator {
-                                                       bottom: -9999999
-                                                       top: 9999999
-                                                       notation: DoubleValidator.StandardNotation
-                                                       decimals: 5
-                                    }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
-
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.effective_range =text
-                                        console.log("Text content changed to: " + text)
-                                    }
-                                }
-                                Rectangle{
-                                    width: parent.width
-                                    height: (2)
-                                    anchors.left: parent.left
-                                    anchors.bottom: parent.bottom
-                                    color:mainColor
-                                }
-                            }
-                        }
                         Item {
                             id: item_DanErJuli
                             width: custom_colum2.width
                             height: 20
                             CText{
                                 id:text_DanErJuliTitle
-                                width: pixelSize * 7
+                                width: pixelSize * 6.5
                                 height: parent.height
                                 anchors.left: parent.left
                                 anchors.top: parent.top
@@ -551,91 +688,70 @@ Item{//航空导弹与航空炸弹
                                 }
                             }
                         }
-
                         Item {
-                            id: item_ShaShangFangshi
-                            width: custom_colum2.width
+                            id: item_FuzeNum
+                            width: custom_colum.width
                             height: 20
+                        // Rectangle{
+                        //     id:item_FuzeNum
+                        //     height: 20
+                        //     color: "transparent"
+                        //     anchors.left: parent.left
+                        //     anchors.top: item_DelayTime.bottom
+                        //     anchors.topMargin: 20
+                        //     anchors.right: parent.right
+                        //     anchors.rightMargin: 5
                             CText{
-                                id:text_ShaShangFangshiTitle
-                                width: pixelSize * 4.5
+                                id:text_FuzeNumTitle
+                                width: pixelSize * 6.5
                                 height: parent.height
                                 anchors.left: parent.left
-                                anchors.top: parent.top
+                                anchors.top: item_DanErJuli.bottom
                                 pixelSize: 20
                                 horizontalAlignment: Text.AlignLeft
                                 color:mainColor
-                                text:"杀伤方式: "
+                                text:"引信数量(个):"
                             }
-                            CButton{
-                                id:text_Input_ShaShangFangshi
-                                width: parent.width - text_ShaShangFangshiTitle.width
-                                height: 36
-                                anchors.left:text_ShaShangFangshiTitle.right
-                                color:"#ffddaa00"
-                                borderColor: "#ffddaa00"
-                                borderHigtColor: "#ffeebb22"
-                                anchors.verticalCenter: text_ShaShangFangshiTitle.verticalCenter
-                                pixelSize: 20
-                                text:{
-                                    if(shaShangType < 0)
-                                    {
-                                        return "方式1"
+                            Item{
+                                width: parent.width - text_FuzeNumTitle.width
+                                height: parent.height
+                                anchors.left:text_FuzeNumTitle.right
+                                anchors.top: parent.top
+                                TextInput{
+                                    id:text_Input_FuzeNum
+                                    anchors.fill: parent
+                                    color:"#ffffffff"
+                                    font.family:text_FuzeNumTitle.family
+                                    font.pixelSize:(18)
+                                    selectByMouse: true
+                                    selectionColor: "#ffcc8800"
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
                                     }
-                                    else
-                                    {
-                                        if(listmodel_Box_ShaSHangType.count > 0)
-                                          return  listmodel_Box_ShaSHangType.get(shaShangType).m_TypeName
-                                    }
-                                }
-                                onClicked: {
-                                    view_List_ShaShangTypeSelect.visible = !view_List_ShaShangTypeSelect.visible
-                                }
-                            }
-                            ListView{
-                                id:view_List_ShaShangTypeSelect
-                                width: text_Input_ShaShangFangshi.width
-                                height: text_Input_ShaShangFangshi.height * 5
-                                anchors.left: text_Input_ShaShangFangshi.left
-                                anchors.leftMargin: text_Input_ShaShangFangshi.width/2 - width/2
-                                anchors.top: text_Input_ShaShangFangshi.bottom
-                                anchors.topMargin: 2
-                                visible: false
-                                clip: true
-                                model:ListModel{
-                                    id:listmodel_Box_ShaSHangType
-                                }
-                                delegate:Component{
-                                    Item{
-                                        id:item_Delegate
-                                        width: view_List_ShaShangTypeSelect.width
-                                        height: 36
-                                        CButton{
-                                            id:comp_TypeBtn
-                                            anchors.fill: parent
-                                            text:m_TypeName
-                                            color:"#ffddaa00"
-                                            borderColor: "#ffddaa00"
-                                            borderHigtColor: "#ffeebb22"
-                                            pixelSize: 18
-                                            isSelect: m_SelectState
-                                            onClicked: {
-                                                view_List_ShaShangTypeSelect.visible = false
-                                                shaShangType = index
-                                                // m_SelectState = !m_SelectState
-                                                console.log(text_Input_ShaShangFangshi.text)
-                                            }
-                                        }
-                                    }
-                                }
-                                Component.onCompleted: {
-                                    listmodel_Box_ShaSHangType.append({m_TypeName:"方式1",m_SelectState:false})
-                                    listmodel_Box_ShaSHangType.append({m_TypeName:"方式2",m_SelectState:false})
-                                    listmodel_Box_ShaSHangType.append({m_TypeName:"方式3",m_SelectState:false})
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
 
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.number_of_fuses =text
+                                        console.log("Text content changed to: " + text)
+                                    }
+                                }
+                                Rectangle{
+                                    width: parent.width
+                                    height: (2)
+                                    anchors.left: parent.left
+                                    anchors.bottom: parent.bottom
+                                    color:mainColor
                                 }
                             }
                         }
+
                     }
                 }
             }
@@ -646,10 +762,10 @@ Item{//航空导弹与航空炸弹
                 color: "transparent"
                 border.width: 0
                 anchors.left: rect_missileParam2.right
-                anchors.leftMargin: 10
+                anchors.leftMargin: 15
                 anchors.top: rect_missileParam2.top
 
-                width: rect_baseParam.width / 4
+                width: rect_baseParam.width / 2
                 height: 200
                 Rectangle{
                     anchors.left: parent.left
@@ -683,7 +799,7 @@ Item{//航空导弹与航空炸弹
                             }
                             Item{
                                 id:item_InputBombSpeedMin
-                                width: parent.width - text_BombSpeedMinTitle.width
+                                width: parent.width - text_BombSpeedMinTitle.width-50
                                 height: parent.height
                                 anchors.left:text_BombSpeedMinTitle.right
                                 anchors.top: parent.top
@@ -737,7 +853,7 @@ Item{//航空导弹与航空炸弹
                                 text:"最大投弹速度(Km/h): "
                             }
                             Item{
-                                width: parent.width - text_BombSpeedMaxTitle.width
+                                width: parent.width - text_BombSpeedMaxTitle.width-50
                                 height: parent.height
                                 anchors.left:text_BombSpeedMaxTitle.right
                                 anchors.top: parent.top
@@ -782,18 +898,18 @@ Item{//航空导弹与航空炸弹
                             height: 20
                             CText{
                                 id:text_BombHeightTitle
-                                width: pixelSize * 8.5
+                                width: pixelSize * 9.5
                                 height: parent.height
                                 anchors.left: parent.left
                                 anchors.top: parent.top
                                 pixelSize: 20
                                 horizontalAlignment: Text.AlignLeft
                                 color:mainColor
-                                text:"最小投弹高度(Km): "
+                                text:"  最小投弹高度(Km): "
                             }
                             Item{
                                 id:item_InputBombHeightMin
-                                width: parent.width - text_BombHeightTitle.width
+                                width: parent.width - text_BombHeightTitle.width-50
                                 height: parent.height
                                 anchors.left:text_BombHeightTitle.right
                                 anchors.top: parent.top
@@ -837,17 +953,17 @@ Item{//航空导弹与航空炸弹
                             height: 20
                             CText{
                                 id:text_BombHeightMaxTitle
-                                width: pixelSize * 8.5
+                                width: pixelSize *  9.5
                                 height: parent.height
                                 anchors.left: parent.left
                                 anchors.top: parent.top
                                 pixelSize: 20
                                 horizontalAlignment: Text.AlignLeft
                                 color:mainColor
-                                text:"最大投弹高度(Km): "
+                                text:"  最大投弹高度(Km): "
                             }
                             Item{
-                                width: parent.width - text_BombHeightMaxTitle.width
+                                width: parent.width - text_BombHeightMaxTitle.width-50
                                 height: parent.height
                                 anchors.left:text_BombHeightMaxTitle.right
                                 anchors.top: parent.top
@@ -885,252 +1001,70 @@ Item{//航空导弹与航空炸弹
                                 }
                             }
                         }
+                        Item {
+                            id: item_MissileSheCheng
+                            width: custom_colum3.width
+                            height: 20
+                            CText{
+                                id:text_MissileSheChengTitle
+                                width: pixelSize * 9.5
+                                height: parent.height
+                                anchors.left: parent.left
+                                anchors.top: parent.top
+                                pixelSize: 20
+                                horizontalAlignment: Text.AlignLeft
+                                color:mainColor
+                                text:"      弹药射程(Km): "
+                            }
+                            Item{
+                                width: parent.width - text_MissileSheChengTitle.width -50
+                                height: parent.height
+                                anchors.left:text_MissileSheChengTitle.right
+                                anchors.top: parent.top
+                                TextInput{
+                                    id:text_Input_MissileSheCheng
+                                    anchors.fill: parent
+                                    color:"#ffffffff"
+                                    font.family:text_MissileSheChengTitle.family
+                                    font.pixelSize:(18)
+                                    selectByMouse: true
+                                    selectionColor: "#ffcc8800"
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    // onTextChanged: {
+                                    //     if(text != "")
+                                    //     {
+
+                                    //     }
+                                    // }
+                                    onEditingFinished: {
+                                        ammoData.effective_range =text
+                                        console.log("Text content changed to: " + text)
+                                    }
+                                }
+                                Rectangle{
+                                    width: parent.width
+                                    height: (2)
+                                    anchors.left: parent.left
+                                    anchors.bottom: parent.bottom
+                                    color:mainColor
+                                }
+                            }
+                        }
                     }
                 }
             }
 
-
-            Rectangle {
-                id: item_FuzeModel
-                height: 20
-                color: "transparent"
-                anchors.left: rect_missileParam3.right
-                anchors.leftMargin: 5
-                anchors.top: rect_missileParam3.top
-                anchors.topMargin: 10
-                anchors.right: parent.right
-                anchors.rightMargin: 5
-
-                CText{
-                    id:text_FuzeModelTitle
-                    width: pixelSize * 4.5
-                    height: parent.height
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    pixelSize: 20
-                    horizontalAlignment: Text.AlignLeft
-                    color:mainColor
-                    text:"引信型号: "
-                }
-                Item{
-                    width: parent.width - text_FuzeModelTitle.width
-                    height: parent.height
-                    anchors.left:text_FuzeModelTitle.right
-                    anchors.top: parent.top
-                    TextInput{
-                        id:text_Input_FuzeModel
-                        anchors.fill: parent
-                        color:"#ffffffff"
-                        font.family:text_FuzeModelTitle.family
-                        font.pixelSize:(18)
-                        selectByMouse: true
-                        selectionColor: "#ffcc8800"
-                        // onTextChanged: {
-                        //     if(text != "")
-                        //     {
-
-                        //     }
-                        // }
-                        onEditingFinished: {
-                            ammoData.fuze_model =text
-                            console.log("Text content changed to: " + text)
-                        }
-                    }
-                    Rectangle{
-                        width: parent.width
-                        height: (2)
-                        anchors.left: parent.left
-                        anchors.bottom: parent.bottom
-                        color:mainColor
-                    }
-                }
-            }
-
-            Rectangle{
-                id:item_FuzeNum
-                height: 20
-                color: "transparent"
-                anchors.left: item_FuzeModel.left
-                anchors.top: item_FuzeModel.bottom
-                anchors.topMargin: 20
-                anchors.right: parent.right
-                anchors.rightMargin: 5
-                CText{
-                    id:text_FuzeNumTitle
-                    width: pixelSize * 4.5
-                    height: parent.height
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    pixelSize: 20
-                    horizontalAlignment: Text.AlignLeft
-                    color:mainColor
-                    text:"引信数量: "
-                }
-                Item{
-                    width: parent.width - text_FuzeNumTitle.width
-                    height: parent.height
-                    anchors.left:text_FuzeNumTitle.right
-                    anchors.top: parent.top
-                    TextInput{
-                        id:text_Input_FuzeNum
-                        anchors.fill: parent
-                        color:"#ffffffff"
-                        font.family:text_FuzeNumTitle.family
-                        font.pixelSize:(18)
-                        selectByMouse: true
-                        selectionColor: "#ffcc8800"
-                        validator: DoubleValidator {
-                                           bottom: -9999999
-                                           top: 9999999
-                                           notation: DoubleValidator.StandardNotation
-                                           decimals: 5
-                        }
-                        // onTextChanged: {
-                        //     if(text != "")
-                        //     {
-
-                        //     }
-                        // }
-                        onEditingFinished: {
-                            ammoData.number_of_fuses =text
-                            console.log("Text content changed to: " + text)
-                        }
-                    }
-                    Rectangle{
-                        width: parent.width
-                        height: (2)
-                        anchors.left: parent.left
-                        anchors.bottom: parent.bottom
-                        color:mainColor
-                    }
-                }
-            }
-
-            Rectangle {
-                id: item_ActionTime
-                height: 20
-                color: "transparent"
-                anchors.left: item_FuzeNum.left
-                anchors.top: item_FuzeNum.bottom
-                anchors.topMargin: 20
-                anchors.right: parent.right
-                anchors.rightMargin: 5
-                CText{
-                    id:text_ActionTimeTitle
-                    width: pixelSize * 6
-                    height: parent.height
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    pixelSize: 20
-                    horizontalAlignment: Text.AlignLeft
-                    color:mainColor
-                    text:"作用时间(s): "
-                }
-                Item{
-                    width: parent.width - text_ActionTimeTitle.width - 5
-                    height: parent.height
-                    anchors.left:text_ActionTimeTitle.right
-                    anchors.top: parent.top
-                    TextInput{
-                        id:text_Input_ActionTime
-                        anchors.fill: parent
-                        color:"#ffffffff"
-                        font.family:text_ActionTimeTitle.family
-                        font.pixelSize:(18)
-                        selectByMouse: true
-                        selectionColor: "#ffcc8800"
-                        validator: DoubleValidator {
-                                           bottom: -9999999
-                                           top: 9999999
-                                           notation: DoubleValidator.StandardNotation
-                                           decimals: 5
-                        }
-                        // onTextChanged: {
-                        //     if(text != "")
-                        //     {
-
-                        //     }
-                        // }
-                        onEditingFinished: {
-                            ammoData.action_time =text
-                            console.log("Text content changed to: " + text)
-                        }
-                    }
-                    Rectangle{
-                        width: parent.width
-                        height: (2)
-                        anchors.left: parent.left
-                        anchors.bottom: parent.bottom
-                        color:mainColor
-                    }
-                }
-            }
-
-            Rectangle {
-                id: item_DelayTime
-                height: 20
-                color: "transparent"
-                anchors.left: item_ActionTime.left
-                anchors.top: item_ActionTime.bottom
-                anchors.topMargin: 20
-                anchors.right: parent.right
-                anchors.rightMargin: 5
-                CText{
-                    id:text_DelayTimeTitle
-                    width: pixelSize * 6
-                    height: parent.height
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    pixelSize: 20
-                    horizontalAlignment: Text.AlignLeft
-                    color:mainColor
-                    text:"延解时间(s): "
-                }
-                Item{
-                    width: parent.width - text_DelayTimeTitle.width - 5
-                    height: parent.height
-                    anchors.left:text_DelayTimeTitle.right
-                    anchors.top: parent.top
-                    TextInput{
-                        id:text_Input_DelayTime
-                        anchors.fill: parent
-                        color:"#ffffffff"
-                        font.family:text_ActionTimeTitle.family
-                        font.pixelSize:(18)
-                        selectByMouse: true
-                        selectionColor: "#ffcc8800"
-                        validator: DoubleValidator {
-                                           bottom: -9999999
-                                           top: 9999999
-                                           notation: DoubleValidator.StandardNotation
-                                           decimals: 5
-                        }
-                        // onTextChanged: {
-                        //     if(text != "")
-                        //     {
-
-                        //     }
-                        // }
-                        onEditingFinished: {
-                            ammoData.available_extension_time =text
-                            console.log("Text content changed to: " + text)
-                        }
-                    }
-                    Rectangle{
-                        width: parent.width
-                        height: (2)
-                        anchors.left: parent.left
-                        anchors.bottom: parent.bottom
-                        color:mainColor
-                    }
-                }
-            }
 
         }
 
         Label{
             id:uavType
-            text: "对应无人机类型:"
+            text: "无人机类型:"
             anchors.left: input_name.right
             anchors.leftMargin: 10
             anchors.verticalCenter: ammoName.verticalCenter
@@ -1237,6 +1171,95 @@ Item{//航空导弹与航空炸弹
                 view_List_TypeSelect.visible = !view_List_TypeSelect.visible
             }
         }
+        Item {
+            id: item_ShaShangFangshi
+            width: custom_colum2.width
+            anchors.left: comp_DamageFactorType.right
+            anchors.leftMargin: 10
+            anchors.verticalCenter: uavType.verticalCenter
+            height: 20
+            CText{
+                id:text_ShaShangFangshiTitle
+                width: pixelSize * 4.5
+                height: parent.height
+                anchors.left: comp_DamageFactorType.right
+                anchors.leftMargin: 10
+                //anchors.top: parent.top
+                pixelSize: 20
+                horizontalAlignment: Text.AlignLeft
+                color:mainColor
+                text:"杀伤方式: "
+            }
+            CButton{
+                id:text_Input_ShaShangFangshi
+                width: parent.width - text_ShaShangFangshiTitle.width
+                height: 36
+                anchors.left:text_ShaShangFangshiTitle.right
+                color:"#ffddaa00"
+                borderColor: "#ffddaa00"
+                borderHigtColor: "#ffeebb22"
+                anchors.verticalCenter: text_ShaShangFangshiTitle.verticalCenter
+                pixelSize: 20
+                text:{
+                    if(shaShangType < 0)
+                    {
+                        return "方式1"
+                    }
+                    else
+                    {
+                        if(listmodel_Box_ShaSHangType.count > 0)
+                          return  listmodel_Box_ShaSHangType.get(shaShangType).m_TypeName
+                    }
+                }
+                onClicked: {
+                    view_List_ShaShangTypeSelect.visible = !view_List_ShaShangTypeSelect.visible
+                }
+            }
+            ListView{
+                id:view_List_ShaShangTypeSelect
+                width: text_Input_ShaShangFangshi.width
+                height: text_Input_ShaShangFangshi.height * 5
+                anchors.left: text_Input_ShaShangFangshi.left
+                anchors.leftMargin: text_Input_ShaShangFangshi.width/2 - width/2
+                anchors.top: text_Input_ShaShangFangshi.bottom
+                anchors.topMargin: 2
+                visible: false
+                clip: true
+                model:ListModel{
+                    id:listmodel_Box_ShaSHangType
+                }
+                delegate:Component{
+                    Item{
+                        id:item_Delegate
+                        width: view_List_ShaShangTypeSelect.width
+                        height: 36
+                        CButton{
+                            id:comp_TypeBtn
+                            anchors.fill: parent
+                            text:m_TypeName
+                            color:"#ffddaa00"
+                            borderColor: "#ffddaa00"
+                            borderHigtColor: "#ffeebb22"
+                            pixelSize: 18
+                            isSelect: m_SelectState
+                            onClicked: {
+                                view_List_ShaShangTypeSelect.visible = false
+                                shaShangType = index
+                                // m_SelectState = !m_SelectState
+                                console.log(text_Input_ShaShangFangshi.text)
+                            }
+                        }
+                    }
+                }
+                Component.onCompleted: {
+                    listmodel_Box_ShaSHangType.append({m_TypeName:"方式1",m_SelectState:false})
+                    listmodel_Box_ShaSHangType.append({m_TypeName:"方式2",m_SelectState:false})
+                    listmodel_Box_ShaSHangType.append({m_TypeName:"方式3",m_SelectState:false})
+
+                }
+            }
+        }
+
     }
     function loadAmmoData(){
         input_name.text = addAmmoAllDatView.ammoSelectData.ammoName

@@ -19,7 +19,7 @@ https://blog.csdn.net/qq_24890953/article/details/104640454
 Rectangle {
            id: uavAmmoManagementroot
            visible: true
-           color: "#ECF2FE"
+           color: "#ECF2FE" //整个界面的背景色
            signal customSignal(string message)
            property color borderColor: "#A5B3C0"
            property color headerColor: "#D3E1FE"
@@ -48,6 +48,7 @@ Rectangle {
                           ammoType:"请选择:",
                           ammoName:""}
                       loadAmmoRecord(uavData)
+                      uavAmmoManagementroot.color = "#ECF2FE"
                       processInfo.queryAmmo = ""
                       processInfo.recordId = ""
                       processInfo.loadViewType =""
@@ -608,9 +609,11 @@ Rectangle {
                                                               viewType === "航空宣传宣传炸弹"   ||
                                                               viewType ===  "无源干扰吊舱"  ){
                                                              // 动态加载 QML 文件并设置属性
+                                                             uavAmmoManagementroot.color = "transparent"//
                                                              pageAmmoModelLoader.setSource("qrc:./AddAmmoAllData.qml", {viewType: viewType})
 
                                                          }else{
+                                                             uavAmmoManagementroot.color = "transparent"//
                                                              // 动态加载 QML 文件并设置属性
                                                              pageAmmoModelLoader.setSource("qrc:./AddAmmoAviationAllData.qml", {viewType: viewType})
                                                          }
@@ -634,7 +637,7 @@ Rectangle {
 
                                                           // 将转换后的数据转换为 JSON 字符串
                                                           //var jsonStr = JSON.stringify(transformedData)
-
+                                                          uavAmmoManagementroot.color = "transparent"//
                                                           console.log("编辑行数据:", JSON.stringify(transformedData, null, 2))
 
                                                           processInfo.loadViewType = "update"
@@ -826,6 +829,7 @@ Rectangle {
                               onClicked: {
                                   addAmmoDataPopup.open()
                                   processInfo.loadViewType = "addition"
+                                  uavAmmoManagementroot.color = "transparent"//
                                   //pageAmmoModelLoader.setSource("qrc:./AddAmmoAllData.qml")
                                   //ammoRecordDataView.visible = false
                               }

@@ -725,14 +725,14 @@ Item{
                             height: 20
                             CText{
                                 id:text_FlightTimeTitle
-                                width: pixelSize * 11
+                                width: pixelSize * 9
                                 height: parent.height
                                 anchors.left: parent.left
                                 anchors.top: parent.top
                                 pixelSize: 20
                                 horizontalAlignment: Text.AlignLeft
                                 color:mainColor
-                                text:"允许连续载飞时间(min): "
+                                text:"连续载飞时间(min): "
                             }
                             Item{
                                 width: parent.width - text_FlightTimeTitle.width

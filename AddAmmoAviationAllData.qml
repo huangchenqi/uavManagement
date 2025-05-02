@@ -89,7 +89,7 @@ Item {
         anchors.left: custom_WorkData.left
         anchors.right: custom_NewMissileBaseData.right
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 10
+        anchors.bottomMargin: 160
         color:"#50000000"
         radius: 10
 
@@ -113,7 +113,7 @@ Item {
             anchors.right: parent.right
             anchors.rightMargin: 5
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 5
+            anchors.bottomMargin: 15
             // 边框样式
                 background: Rectangle {
                     border.color: "#cccccc"
@@ -147,7 +147,7 @@ Item {
     Rectangle {
         id: rect_ImageShow
         visible: true
-        width:500
+        width:400
         height: 600
         anchors.left: custom_NewMissileBaseData.right
         anchors.leftMargin: 10
@@ -219,7 +219,9 @@ Item {
         CButton{
             id:btn_Cancel
             anchors.top: parent.bottom
-            anchors.topMargin: 5
+            anchors.topMargin: 115
+            // anchors.bottom: parent.bottom
+            // anchors.bottomMargin: 6
             anchors.right: parent.right
             anchors.rightMargin: 5
             height: pixelSize * 2
@@ -234,7 +236,9 @@ Item {
         CButton{
             id:btn_Save
             anchors.top: parent.bottom
-            anchors.topMargin: 5
+            anchors.topMargin: 115
+            // anchors.bottom: parent.bottom
+            // anchors.bottomMargin: 6
             anchors.right: btn_Cancel.left
             anchors.rightMargin: 10
             height: pixelSize * 2
