@@ -185,7 +185,7 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.combat_department_quality =text
+                    ammoData.combat_department_quality = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -199,7 +199,7 @@ Rectangle{//航空弹药的组件战斗部
                 visible: !warheadWeightText.visible
                 onTextChanged: {
 
-                    ammoData.combat_department_quality_add =text
+                    ammoData.combat_department_quality_add = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -212,7 +212,7 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.combat_length =text
+                    ammoData.combat_length = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -226,7 +226,7 @@ Rectangle{//航空弹药的组件战斗部
                 visible: !warheadLengthText.visible
                 onTextChanged: {
 
-                    ammoData.combat_length_add =text
+                    ammoData.combat_length_add = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -239,7 +239,7 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.combat_diameter =text
+                    ammoData.combat_diameter = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -252,7 +252,7 @@ Rectangle{//航空弹药的组件战斗部
                 height: 30
                 visible: !warheadDiameterText.visible
                 onTextChanged: {
-                    ammoData.combat_diameter_add =text
+                    ammoData.combat_diameter_add = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -293,7 +293,7 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.combat_quantity =text
+                    ammoData.combat_quantity = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -306,7 +306,7 @@ Rectangle{//航空弹药的组件战斗部
                 height: 30
                 visible: !warheadChargeQualityText.visible
                 onTextChanged: {
-                    ammoData.combat_quantity_add =text
+                    ammoData.combat_quantity_add = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -319,7 +319,7 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.combat_charge_density =text
+                    ammoData.combat_charge_density = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -332,7 +332,7 @@ Rectangle{//航空弹药的组件战斗部
                 height: 30
                 visible: !warheadChargingDensityText.visible
                 onTextChanged: {
-                    ammoData.combat_charge_density_add =text
+                    ammoData.combat_charge_density_add = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -345,7 +345,7 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.combat_loading_factor =text
+                    ammoData.combat_loading_factor = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -358,7 +358,7 @@ Rectangle{//航空弹药的组件战斗部
                 height: 30
                 visible: !warheadFillingCoefficientText.visible
                 onTextChanged: {
-                    ammoData.combat_loading_factor_add =text
+                    ammoData.combat_loading_factor_add = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -371,7 +371,7 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.combat_explosive =text
+                    ammoData.combat_explosive = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -384,7 +384,7 @@ Rectangle{//航空弹药的组件战斗部
                 height: 30
                 visible: !warheadBoosterText.visible
                 onTextChanged: {
-                    ammoData.combat_explosive_add =text
+                    ammoData.combat_explosive_add = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -397,7 +397,7 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.combat_fragments_number =text
+                    ammoData.combat_fragments_number = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -410,7 +410,7 @@ Rectangle{//航空弹药的组件战斗部
                 height: 30
                 visible: !warheadfragmentsNumberText.visible
                 onTextChanged: {
-                    ammoData.combat_fragments_number_add =text
+                    ammoData.combat_fragments_number_add = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -423,7 +423,7 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.combat_effective_killing_radius_vehicles =text
+                    ammoData.combat_effective_killing_radius_vehicles = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -436,7 +436,7 @@ Rectangle{//航空弹药的组件战斗部
                 height: 30
                 visible: !warheadVehiclesEffectiveKillingRadiusText.visible
                 onTextChanged: {
-                    ammoData.combat_effective_killing_radius_vehicles_add =text
+                    ammoData.combat_effective_killing_radius_vehicles_add = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -449,7 +449,7 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.combat_effective_killing_radius_personnel =text
+                    ammoData.combat_effective_killing_radius_personnel = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -462,7 +462,7 @@ Rectangle{//航空弹药的组件战斗部
                 height: 30
                 visible: !warheadPeopleEffectiveKillingRadiusText.visible
                 onTextChanged: {
-                    ammoData.combat_effective_killing_radius_personnel_add =text
+                    ammoData.combat_effective_killing_radius_personnel_add = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -501,7 +501,7 @@ Rectangle{//航空弹药的组件战斗部
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.combat_vertical_static_armor_penetration_depth =text
+                    ammoData.combat_vertical_static_armor_penetration_depth = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -514,7 +514,7 @@ Rectangle{//航空弹药的组件战斗部
                 height: 30
                 visible: !warheadVerticalStaticArmorPenetrationDepthText.visible
                 onTextChanged: {
-                    ammoData.combat_vertical_static_armor_penetration_depth_add =text
+                    ammoData.combat_vertical_static_armor_penetration_depth_add = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -551,6 +551,24 @@ Rectangle{//航空弹药的组件战斗部
             }
         }
 
+    }
+    function textToFloat(data){
+        console.log("textToFloatdata"+data)
+        // 检查是否以小数点结尾
+        if (data.endsWith(".")) {
+            data = data.slice(0, -1); // 去掉小数点
+        }
+        console.log("textToFloatdata"+data)
+        // 将文本转换为浮点数
+        var num = parseFloat(data);
+        if (!isNaN(num)) {
+
+            return num; // 有效时赋值
+        } else {
+            // 无效时恢复原值（可选）
+            num = 0.00
+            return num;
+        }
     }
     function allComponentEnable(){
         warheadTypeText.enabled = false

@@ -124,7 +124,7 @@ Item {
                             // {
                             //     //取值
                             // }
-                            newAmmoData.ammoData.working_temperature =text
+                            newAmmoData.ammoData.working_temperature = textToFloat(text)
                             console.log("Text content changed to: " + text)
                         }
                     }
@@ -168,7 +168,7 @@ Item {
                             // {
                             //     //取值
                             // }
-                            newAmmoData.ammoData.working_altitude =text
+                            newAmmoData.ammoData.working_altitude = textToFloat(text)
                             console.log("Text content changed to: " + text)
                         }
                     }
@@ -362,6 +362,24 @@ Item {
                 }
 
             }
+        }
+    }
+    function textToFloat(data){
+        console.log("textToFloatdata"+data)
+        // 检查是否以小数点结尾
+        if (data.endsWith(".")) {
+            data = data.slice(0, -1); // 去掉小数点
+        }
+        console.log("textToFloatdata"+data)
+        // 将文本转换为浮点数
+        var num = parseFloat(data);
+        if (!isNaN(num)) {
+
+            return num; // 有效时赋值
+        } else {
+            // 无效时恢复原值（可选）
+            num = 0.00
+            return num;
         }
     }
     function allComponentEnable(){

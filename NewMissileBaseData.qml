@@ -193,13 +193,13 @@ Item{
                                         // {
 
                                         // }
-                                        newAmmoData.ammoData.ammoLenth =text
+                                        newAmmoData.ammoData.ammoLenth = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
-                                    onEditingFinished: {
-                                        newAmmoData.ammoData.ammoLenth =text
-                                        console.log("Text content changed to: " + text)
-                                    }
+                                    // onEditingFinished: {
+                                    //     newAmmoData.ammoData.ammoLenth =text
+                                    //     console.log("Text content changed to: " + text)
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -249,13 +249,13 @@ Item{
                                         // {
 
                                         // }
-                                        newAmmoData.ammoData.ammoDiameter =text
+                                        newAmmoData.ammoData.ammoDiameter = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
-                                    onEditingFinished: {
-                                        newAmmoData.ammoData.ammoDiameter =text
-                                        console.log("Text content changed to: " + text)
-                                    }
+                                    // onEditingFinished: {
+                                    //     newAmmoData.ammoData.ammoDiameter =text
+                                    //     console.log("Text content changed to: " + text)
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -305,13 +305,13 @@ Item{
                                         // {
 
                                         // }
-                                        newAmmoData.ammoData.ammoMass =text
+                                        newAmmoData.ammoData.ammoMass = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
-                                    onEditingFinished: {
-                                        newAmmoData.ammoData.ammoMass =text
-                                        console.log("Text content changed to: " + text)
-                                    }
+                                    // onEditingFinished: {
+                                    //     newAmmoData.ammoData.ammoMass =text
+                                    //     console.log("Text content changed to: " + text)
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -390,14 +390,14 @@ Item{
                                         // {
 
                                         // }
-                                        newAmmoData.ammoData.ammoWingspan =text
+                                        newAmmoData.ammoData.ammoWingspan = textToFloat(text)
                                         console.log("Text content changed to: " + text)
 
                                     }
-                                    onEditingFinished: {
-                                        newAmmoData.ammoData.ammoWingspan =text
-                                        console.log("Text content changed to: " + text)
-                                    }
+                                    // onEditingFinished: {
+                                    //     newAmmoData.ammoData.ammoWingspan =text
+                                    //     console.log("Text content changed to: " + text)
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -447,14 +447,14 @@ Item{
                                         // {
 
                                         // }
-                                        newAmmoData.ammoData.effective_range =text
+                                        newAmmoData.ammoData.effective_range = textToFloat(text)
                                         console.log("Text content changed to: " + text)
 
                                     }
-                                    onEditingFinished: {
-                                        newAmmoData.ammoData.effective_range =text
-                                        console.log("Text content changed to: " + text)
-                                    }
+                                    // onEditingFinished: {
+                                    //     newAmmoData.ammoData.effective_range =text
+                                    //     console.log("Text content changed to: " + text)
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -504,14 +504,14 @@ Item{
                                         // {
 
                                         // }
-                                        newAmmoData.ammoData.preparation_time =text
+                                        newAmmoData.ammoData.preparation_time = textToFloat(text)
                                         console.log("Text content changed to: " + text)
 
                                     }
-                                    onEditingFinished: {
-                                        newAmmoData.ammoData.preparation_time =text
-                                        console.log("Text content changed to: " + text)
-                                    }
+                                    // onEditingFinished: {
+                                    //     newAmmoData.ammoData.preparation_time =text
+                                    //     console.log("Text content changed to: " + text)
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -591,13 +591,13 @@ Item{
                                         // {
 
                                         // }
-                                        newAmmoData.ammoData.hit_accuracy =text
+                                        newAmmoData.ammoData.hit_accuracy = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
-                                    onEditingFinished: {
-                                        newAmmoData.ammoData.hit_accuracy =text
-                                        console.log("Text content changed to: " + text)
-                                    }
+                                    // onEditingFinished: {
+                                    //     newAmmoData.ammoData.hit_accuracy =text
+                                    //     console.log("Text content changed to: " + text)
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -647,13 +647,13 @@ Item{
                                         // {
 
                                         // }
-                                        newAmmoData.ammoData.hit_probability =text
+                                        newAmmoData.ammoData.hit_probability = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
-                                    onEditingFinished: {
-                                        newAmmoData.ammoData.hit_probability =text
-                                        console.log("Text content changed to: " + text)
-                                    }
+                                    // onEditingFinished: {
+                                    //     newAmmoData.ammoData.hit_probability =text
+                                    //     console.log("Text content changed to: " + text)
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -705,13 +705,13 @@ Item{
                                         // {
 
                                         // }
-                                        newAmmoData.ammoData.rudder_width =text
+                                        newAmmoData.ammoData.rudder_width = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
-                                    onEditingFinished: {
-                                        newAmmoData.ammoData.rudder_width =text
-                                        console.log("Text content changed to: " + text)
-                                    }
+                                    // onEditingFinished: {
+                                    //     newAmmoData.ammoData.rudder_width =text
+                                    //     console.log("Text content changed to: " + text)
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -789,13 +789,13 @@ Item{
                                         // {
 
                                         // }
-                                        newAmmoData.ammoData.allow_continuous_flight_time =text
+                                        newAmmoData.ammoData.allow_continuous_flight_time = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
-                                    onEditingFinished: {
-                                        newAmmoData.ammoData.allow_continuous_flight_time =text
-                                        console.log("Text content changed to: " + text)
-                                    }
+                                    // onEditingFinished: {
+                                    //     newAmmoData.ammoData.allow_continuous_flight_time =text
+                                    //     console.log("Text content changed to: " + text)
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -846,13 +846,13 @@ Item{
                                         // {
 
                                         // }
-                                        newAmmoData.ammoData.guided_flight_time =text
+                                        newAmmoData.ammoData.guided_flight_time = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
-                                    onEditingFinished: {
-                                        newAmmoData.ammoData.guided_flight_time =text
-                                        console.log("Text content changed to: " + text)
-                                    }
+                                    // onEditingFinished: {
+                                    //     newAmmoData.ammoData.guided_flight_time =text
+                                    //     console.log("Text content changed to: " + text)
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -903,13 +903,13 @@ Item{
                                         // {
 
                                         // }
-                                        newAmmoData.ammoData.maximum_speed_of_missile =text
+                                        newAmmoData.ammoData.maximum_speed_of_missile = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
-                                    onEditingFinished: {
-                                        newAmmoData.ammoData.maximum_speed_of_missile =text
-                                        console.log("Text content changed to: " + text)
-                                    }
+                                    // onEditingFinished: {
+                                    //     newAmmoData.ammoData.maximum_speed_of_missile =text
+                                    //     console.log("Text content changed to: " + text)
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -1057,6 +1057,24 @@ Item{
         text_Input_GuidFlightTime.enabled = false
         text_Input_MaxSpeed.enabled = false
 
+    }
+    function textToFloat(data){
+        console.log("textToFloatdata"+data)
+        // 检查是否以小数点结尾
+        if (data.endsWith(".")) {
+            data = data.slice(0, -1); // 去掉小数点
+        }
+        console.log("textToFloatdata"+data)
+        // 将文本转换为浮点数
+        var num = parseFloat(data);
+        if (!isNaN(num)) {
+
+            return num; // 有效时赋值
+        } else {
+            // 无效时恢复原值（可选）
+            num = 0.00
+            return num;
+        }
     }
 
    function loadAmmoData(){

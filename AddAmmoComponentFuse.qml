@@ -89,7 +89,7 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.fuse_length =text
+                    ammoData.fuse_length = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -105,7 +105,7 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.fuze_quality =text
+                    ammoData.fuze_quality = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -121,7 +121,7 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.fuse_self_destruct_time =text
+                    ammoData.fuse_self_destruct_time = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -137,7 +137,7 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.first_level_release_time_of_fuse =text
+                    ammoData.first_level_release_time_of_fuse = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -153,7 +153,7 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.reliability_rate_of_fuse_action =text
+                    ammoData.reliability_rate_of_fuse_action = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -169,7 +169,7 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.fuse_firing_rate =text
+                    ammoData.fuse_firing_rate = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -185,7 +185,7 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.fuse_diameter =text
+                    ammoData.fuse_diameter = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -201,7 +201,7 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.safe_distance_of_fuse =text
+                    ammoData.safe_distance_of_fuse = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -217,7 +217,7 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.time_disarming_fuse =text
+                    ammoData.time_disarming_fuse = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -233,7 +233,7 @@ Rectangle{//航空弹药的组件引信
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.secondary_release_time_of_fuse =text
+                    ammoData.secondary_release_time_of_fuse = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -266,6 +266,24 @@ Rectangle{//航空弹药的组件引信
             onClicked: {
                 addAmmoComponentFusePopup.close()//addAmmoComponentFuseRoot.visible = false
             }
+        }
+    }
+    function textToFloat(data){
+        console.log("textToFloatdata"+data)
+        // 检查是否以小数点结尾
+        if (data.endsWith(".")) {
+            data = data.slice(0, -1); // 去掉小数点
+        }
+        console.log("textToFloatdata"+data)
+        // 将文本转换为浮点数
+        var num = parseFloat(data);
+        if (!isNaN(num)) {
+
+            return num; // 有效时赋值
+        } else {
+            // 无效时恢复原值（可选）
+            num = 0.00
+            return num;
         }
     }
     function allComponemntEnable(){

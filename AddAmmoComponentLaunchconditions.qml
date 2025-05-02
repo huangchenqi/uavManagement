@@ -91,7 +91,7 @@ Rectangle{//航空弹药的组件发射条件
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.minimum_visibility_emission =text
+                    ammoData.minimum_visibility_emission = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -107,7 +107,7 @@ Rectangle{//航空弹药的组件发射条件
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.launch_maximum_target_altitude =text
+                    ammoData.launch_maximum_target_altitude = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -123,7 +123,7 @@ Rectangle{//航空弹药的组件发射条件
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.minimum_relative_height_launch =text
+                    ammoData.minimum_relative_height_launch = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -139,7 +139,7 @@ Rectangle{//航空弹药的组件发射条件
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.launch_conditions =text
+                    ammoData.launch_conditions = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -155,7 +155,7 @@ Rectangle{//航空弹药的组件发射条件
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.maximum_launch_altitude =text
+                    ammoData.maximum_launch_altitude = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -171,7 +171,7 @@ Rectangle{//航空弹药的组件发射条件
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.maximum_launch_relative_height =text
+                    ammoData.maximum_launch_relative_height = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -187,7 +187,7 @@ Rectangle{//航空弹药的组件发射条件
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.launch_speed =text
+                    ammoData.launch_speed = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -203,7 +203,7 @@ Rectangle{//航空弹药的组件发射条件
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.launch_off_axis_angle =text
+                    ammoData.launch_off_axis_angle = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -241,7 +241,24 @@ Rectangle{//航空弹药的组件发射条件
             }
         }
     }
+    function textToFloat(data){
+        console.log("textToFloatdata"+data)
+        // 检查是否以小数点结尾
+        if (data.endsWith(".")) {
+            data = data.slice(0, -1); // 去掉小数点
+        }
+        console.log("textToFloatdata"+data)
+        // 将文本转换为浮点数
+        var num = parseFloat(data);
+        if (!isNaN(num)) {
 
+            return num; // 有效时赋值
+        } else {
+            // 无效时恢复原值（可选）
+            num = 0.00
+            return num;
+        }
+    }
 
     function allComponentEnable(){
         launchMinimumVisibilityText.enabled =  false
@@ -259,10 +276,6 @@ Rectangle{//航空弹药的组件发射条件
         weatherRestrictionsText.enabled  =  false
         //#pragma db not_null column("launch_off_axis_angle") //launch_off_axis_angle REAL NOT NULL ,--COMMENT '发射离轴角',
         launchOffAxisAngleText.enabled  =   false
-    }
-
-    function updateData() {
-
     }
 
     function loadData() {

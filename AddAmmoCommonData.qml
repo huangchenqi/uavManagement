@@ -176,16 +176,17 @@ Item{//航空导弹与航空炸弹
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.ammoLenth =text
+                                        // }
+                                        ammoData.ammoLenth = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -230,16 +231,17 @@ Item{//航空导弹与航空炸弹
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.ammoDiameter =text
+                                        // }
+                                        ammoData.ammoDiameter = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -293,16 +295,17 @@ Item{//航空导弹与航空炸弹
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.action_time =text
+                                        // }
+                                        ammoData.action_time = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -357,16 +360,17 @@ Item{//航空导弹与航空炸弹
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.available_extension_time =text
+                                        // }
+                                        ammoData.available_extension_time = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -504,16 +508,17 @@ Item{//航空导弹与航空炸弹
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.ammoWingspan =text
+                                        // }
+                                        ammoData.ammoWingspan = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -558,16 +563,17 @@ Item{//航空导弹与航空炸弹
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.ammoMass =text
+                                        // }
+                                        ammoData.ammoMass = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -612,16 +618,17 @@ Item{//航空导弹与航空炸弹
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.ammoChargeMass =text
+                                        // }
+                                        ammoData.ammoChargeMass = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -668,16 +675,17 @@ Item{//航空导弹与航空炸弹
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.ammoLugSpacing =text
+                                        // }
+                                        ammoData.ammoLugSpacing = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -731,16 +739,17 @@ Item{//航空导弹与航空炸弹
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.number_of_fuses =text
+                                        // }
+                                        ammoData.number_of_fuses = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -817,16 +826,17 @@ Item{//航空导弹与航空炸弹
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.ammoMinReleaseSpeed =text
+                                        // }
+                                        ammoData.ammoMinReleaseSpeed = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -871,16 +881,17 @@ Item{//航空导弹与航空炸弹
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.ammoMaxReleaseSpeed =text
+                                        // }
+                                        ammoData.ammoMaxReleaseSpeed = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -927,16 +938,17 @@ Item{//航空导弹与航空炸弹
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.ammoMinReleaseHeight =text
+                                        // }
+                                        ammoData.ammoMinReleaseHeight = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -981,16 +993,17 @@ Item{//航空导弹与航空炸弹
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.ammoMaxReleaseHeight =text
+                                        // }
+                                        ammoData.ammoMaxReleaseHeight = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -1035,16 +1048,17 @@ Item{//航空导弹与航空炸弹
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
-                                        ammoData.effective_range =text
+                                        // }
+                                        ammoData.effective_range = textToFloat(text)
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -1261,6 +1275,24 @@ Item{//航空导弹与航空炸弹
         }
 
     }
+    function textToFloat(data){
+        console.log("textToFloatdata"+data)
+        // 检查是否以小数点结尾
+        if (data.endsWith(".")) {
+            data = data.slice(0, -1); // 去掉小数点
+        }
+        console.log("textToFloatdata"+data)
+        // 将文本转换为浮点数
+        var num = parseFloat(data);
+        if (!isNaN(num)) {
+
+            return num; // 有效时赋值
+        } else {
+            // 无效时恢复原值（可选）
+            num = 0.00
+            return num;
+        }
+    }
     function loadAmmoData(){
         input_name.text = addAmmoAllDatView.ammoSelectData.ammoName
 
@@ -1281,9 +1313,6 @@ Item{//航空导弹与航空炸弹
         text_Input_ActionTime.text = addAmmoAllDatView.ammoSelectData.action_time
         text_Input_DelayTime.text = addAmmoAllDatView.ammoSelectData.available_extension_time
         console.log("loadAmmoData()"+addAmmoAllDatView.ammoSelectData.ammoToUavModel)
-
-
-
     }
 
 }

@@ -74,7 +74,7 @@ Rectangle{//航空弹药的组件导引头
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.guiding_head_working_wavelength =text
+                    ammoData.guiding_head_working_wavelength = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -90,7 +90,7 @@ Rectangle{//航空弹药的组件导引头
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.guidance_head_operating_distance =text
+                    ammoData.guidance_head_operating_distance = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -106,7 +106,7 @@ Rectangle{//航空弹药的组件导引头
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.guidance_head_frame_angle =text
+                    ammoData.guidance_head_frame_angle = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -122,7 +122,7 @@ Rectangle{//航空弹药的组件导引头
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.guidance_head_field_of_view_angle_linearregion =text
+                    ammoData.guidance_head_field_of_view_angle_linearregion = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -138,7 +138,7 @@ Rectangle{//航空弹药的组件导引头
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.guidance_head_operating_frequency =text
+                    ammoData.guidance_head_operating_frequency = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -154,7 +154,7 @@ Rectangle{//航空弹药的组件导引头
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.blind_spot_of_guidance_head =text
+                    ammoData.blind_spot_of_guidance_head = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -170,7 +170,7 @@ Rectangle{//航空弹药的组件导引头
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.adaptability_of_guidance_head_sunlight =text
+                    ammoData.adaptability_of_guidance_head_sunlight = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -186,7 +186,7 @@ Rectangle{//航空弹药的组件导引头
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.guidance_head_field_of_view_angle_instantaneous =text
+                    ammoData.guidance_head_field_of_view_angle_instantaneous = textToFloat(text)
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -222,6 +222,24 @@ Rectangle{//航空弹药的组件导引头
                 //addAmmoComponentSeekerRoot.visible = false
                 addAmmoComponentSeekerPopup.close()
             }
+        }
+    }
+    function textToFloat(data){
+        console.log("textToFloatdata"+data)
+        // 检查是否以小数点结尾
+        if (data.endsWith(".")) {
+            data = data.slice(0, -1); // 去掉小数点
+        }
+        console.log("textToFloatdata"+data)
+        // 将文本转换为浮点数
+        var num = parseFloat(data);
+        if (!isNaN(num)) {
+
+            return num; // 有效时赋值
+        } else {
+            // 无效时恢复原值（可选）
+            num = 0.00
+            return num;
         }
     }
     function allComponentEnable(){
