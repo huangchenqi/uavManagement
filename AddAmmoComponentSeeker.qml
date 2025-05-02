@@ -12,7 +12,19 @@ Rectangle{//航空弹药的组件导引头
     width: 540
     height: 380
     color:"skyblue"
+    property int loadDataType: 0
     //title: qsTr("QML TableView example")
+    onLoadDataTypeChanged: {
+        if(addAmmoComponentSeekerRoot.loadDataType === 1){
+            allComponentEnable()
+            loadAmmoData()
+        }else if(addAmmoComponentSeekerRoot.loadDataType === 2){
+            loadAmmoData()
+        }else{
+            console.log("Unknown loadDataType!")
+        }
+    }
+
     Item {
         anchors.fill: parent
         Image {
@@ -212,26 +224,46 @@ Rectangle{//航空弹药的组件导引头
             }
         }
     }
-    function loadAmmoData(){
-
-        //#pragma db not_null column("guiding_head_working_wavelength")  //guiding_head_working_wavelength REAL NOT NULL ,--COMMENT '导引头工作波长(激光波长) (laser wavelength)',
-        seekerWorkingWavelengthText.text = newAmmoData.ammoData.guiding_head_working_wavelength
+    function allComponentEnable(){
+        seekerWorkingWavelengthText.enabled = false
         //#pragma db not_null column("guidance_head_operating_distance")  //guidance_head_operating_distance REAL NOT NULL ,--COMMENT '导引头作用距离',
-        seekerEffectDistanceText.text =    newAmmoData.ammoData.guidance_head_operating_distance
+        seekerEffectDistanceText.enabled =    false
         //#pragma db not_null column("blind_spot_of_guidance_head")  //blind_spot_of_guidance_head REAL NOT NULL ,--COMMENT '导引头盲区',
-        seekerBlindAreaText.text  =   newAmmoData.ammoData.blind_spot_of_guidance_head
+        seekerBlindAreaText.enabled  =  false
         //#pragma db not_null column("guidance_head_frame_angle")  //guidance_head_frame_angle REAL NOT NULL ,--COMMENT '导引头框架角',
-        seekerFrameAngleText.text  =   newAmmoData.ammoData.guidance_head_frame_angle
+        seekerFrameAngleText.enabled  =   false
         //#pragma db not_null column("guidance_head_field_of_view_angle")  //guidance_head_field_of_view_angle REAL NOT NULL ,--COMMENT '导引头视场角',
-        //    newAmmoData.ammoData.guidance_head_field_of_view_angle   = 0.0
-        seekerViewingAngleLinearRegionText.text  =   newAmmoData.ammoData.guidance_head_field_of_view_angle_linearregion    //线性区
-        seekerViewingAngleIFOVText.text  =   newAmmoData.ammoData.guidance_head_field_of_view_angle_instantaneous    //瞬时区
+        //    newAmmoData.ammoSelectData.guidance_head_field_of_view_angle   = 0.0
+        seekerViewingAngleLinearRegionText.enabled  =   false
+        seekerViewingAngleIFOVText.enabled  =  false
 
 
         //#pragma db not_null column("adaptability_of_guidance_head_sunlight")  //adaptability_of_guidance_head_sunlight VARCHAR(50) ,--COMMENT '导引头对太阳光的适应性',
-        seekerAdaptabilityToSunlightText  =   newAmmoData.ammoData.adaptability_of_guidance_head_sunlight
+        seekerAdaptabilityToSunlightText.enabled  =   false
         //#pragma db not_null column("guidance_head_operating_frequency")  //guidance_head_operating_frequency REAL NOT NULL ,--COMMENT '导引头工作频率',
-         seekerOperatingFrequencyText.text =   newAmmoData.ammoData.guidance_head_operating_frequency
+         seekerOperatingFrequencyText.enabled =   false
+    }
+
+    function loadAmmoData(){
+        console.log("addAmmoSeeker"+newAmmoData.ammoSelectData.guiding_head_working_wavelength)
+        //#pragma db not_null column("guiding_head_working_wavelength")  //guiding_head_working_wavelength REAL NOT NULL ,--COMMENT '导引头工作波长(激光波长) (laser wavelength)',
+        seekerWorkingWavelengthText.text = newAmmoData.ammoSelectData.guiding_head_working_wavelength
+        //#pragma db not_null column("guidance_head_operating_distance")  //guidance_head_operating_distance REAL NOT NULL ,--COMMENT '导引头作用距离',
+        seekerEffectDistanceText.text =    newAmmoData.ammoSelectData.guidance_head_operating_distance
+        //#pragma db not_null column("blind_spot_of_guidance_head")  //blind_spot_of_guidance_head REAL NOT NULL ,--COMMENT '导引头盲区',
+        seekerBlindAreaText.text  =   newAmmoData.ammoSelectData.blind_spot_of_guidance_head
+        //#pragma db not_null column("guidance_head_frame_angle")  //guidance_head_frame_angle REAL NOT NULL ,--COMMENT '导引头框架角',
+        seekerFrameAngleText.text  =   newAmmoData.ammoSelectData.guidance_head_frame_angle
+        //#pragma db not_null column("guidance_head_field_of_view_angle")  //guidance_head_field_of_view_angle REAL NOT NULL ,--COMMENT '导引头视场角',
+        //    newAmmoData.ammoSelectData.guidance_head_field_of_view_angle   = 0.0
+        seekerViewingAngleLinearRegionText.text  =   newAmmoData.ammoSelectData.guidance_head_field_of_view_angle_linearregion    //线性区
+        seekerViewingAngleIFOVText.text  =   newAmmoData.ammoSelectData.guidance_head_field_of_view_angle_instantaneous    //瞬时区
+
+
+        //#pragma db not_null column("adaptability_of_guidance_head_sunlight")  //adaptability_of_guidance_head_sunlight VARCHAR(50) ,--COMMENT '导引头对太阳光的适应性',
+        seekerAdaptabilityToSunlightText.text  =   newAmmoData.ammoSelectData.adaptability_of_guidance_head_sunlight
+        //#pragma db not_null column("guidance_head_operating_frequency")  //guidance_head_operating_frequency REAL NOT NULL ,--COMMENT '导引头工作频率',
+         seekerOperatingFrequencyText.text =   newAmmoData.ammoSelectData.guidance_head_operating_frequency
 
 
     }

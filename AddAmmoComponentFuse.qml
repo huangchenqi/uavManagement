@@ -12,6 +12,7 @@ Rectangle{//航空弹药的组件引信
     width: 530
     height: 460
     color:"skyblue"
+    property int loadDataType: 0
     //title: qsTr("QML TableView example")
     Item {
         anchors.fill: parent
@@ -20,6 +21,16 @@ Rectangle{//航空弹药的组件引信
             anchors.fill: parent
             sourceSize: Qt.size(width,height)
             source: mainBackgroundSource
+        }
+    }
+    onLoadDataTypeChanged:{
+        if(addAmmoComponentFuseRoot.loadDataType === 1){
+            allComponemntEnable()
+            loadAmmoData()
+        }else if(addAmmoComponentFuseRoot.loadDataType === 2){
+            loadAmmoData()
+        }else{
+            console.log("Unkown loadDataType! ")
         }
     }
 
@@ -257,31 +268,57 @@ Rectangle{//航空弹药的组件引信
             }
         }
     }
-    function loadAmmoData(){
-
+    function allComponemntEnable(){
         //#pragma db not_null column("fuse_firing_rate") //fuse_firing_rate REAL NOT NULL ,--COMMENT '引信发火率',
-        fuseFiringRateText.text   = newAmmoData.ammoData.fuse_firing_rate
+        fuseFiringRateText.enabled = false
         //#pragma db not_null column("fuse_type") //fuse_type VARCHAR(50) ,--COMMENT '引信类型',
-         fuseTypeText.text =   newAmmoData.ammoData.fuse_type
+         fuseTypeText.enabled = false
         //#pragma db not_null column("fuse_length") //fuse_length REAL NOT NULL ,--COMMENT '引信长度',
-        fuseLengthText.text  =  newAmmoData.ammoData.fuse_length
+        fuseLengthText.enabled = false
         //#pragma db not_null column("fuse_diameter")  //fuse_diameter REAL NOT NULL ,--COMMENT '引信直径',
-        fuseDiameterText.text  =   newAmmoData.ammoData.fuse_diameter
+        fuseDiameterText.enabled = false
         //#pragma db not_null column("fuze_quality")  //fuze_quality REAL NOT NULL ,--COMMENT '引信质量',
-        fuseWeightText.text  =  newAmmoData.ammoData.fuze_quality
+        fuseWeightText.enabled = false
         //#pragma db not_null column("safe_distance_of_fuse")  //safe_distance_of_fuse REAL NOT NULL ,--COMMENT '引信安全距离',
-        fuseSafeDistanceText.text  =  newAmmoData.ammoData.safe_distance_of_fuse
+        fuseSafeDistanceText.enabled = false
         //#pragma db not_null column("time_disarming_fuse")  //time_disarming_fuse REAL NOT NULL ,--COMMENT '引信解除保险时间',
-        terminationInsuranceTimeText.text   =    newAmmoData.ammoData.time_disarming_fuse
+        terminationInsuranceTimeText.enabled = false
         //#pragma db not_null column("first_level_release_time_of_fuse")  //first_level_release_time_of_fuse REAL NOT NULL ,--COMMENT '引信一级解除保险时间',
-         fuseFirstLevelTerminationInsuranceTimeText.text =   newAmmoData.ammoData.first_level_release_time_of_fuse
+         fuseFirstLevelTerminationInsuranceTimeText.enabled = false
         //#pragma db not_null column("secondary_release_time_of_fuse")  //secondary_release_time_of_fuse REAL NOT NULL ,--COMMENT '引信二级解除保险时间',
-        fuseSecondaryLevelTerminationInsuranceTime.text   =   newAmmoData.ammoData.secondary_release_time_of_fuse
+        fuseSecondaryLevelTerminationInsuranceTime.enabled = false
         //#pragma db not_null column("reliability_rate_of_fuse_action")  //reliability_rate_of_fuse_action REAL NOT NULL ,--COMMENT '引信作用可靠率',
-        fuseActionReliabilityRateText.text  =   newAmmoData.ammoData.reliability_rate_of_fuse_action
+        fuseActionReliabilityRateText.enabled = false
         //#pragma db not_null column("fuse_self_destruct_time")  //fuse_self_destruct_time REAL NOT NULL ,--COMMENT '引信自毁时间',
 
-        fuseSelfDestructionTimeText.text  =  newAmmoData.ammoData.fuse_self_destruct_time
+        fuseSelfDestructionTimeText.enabled = false
+    }
+
+    function loadAmmoData(){
+        console.log("loadAmmoData()"+newAmmoData.ammoSelectData.fuse_firing_rate)
+        //#pragma db not_null column("fuse_firing_rate") //fuse_firing_rate REAL NOT NULL ,--COMMENT '引信发火率',
+        fuseFiringRateText.text   = newAmmoData.ammoSelectData.fuse_firing_rate
+        //#pragma db not_null column("fuse_type") //fuse_type VARCHAR(50) ,--COMMENT '引信类型',
+         fuseTypeText.text =   newAmmoData.ammoSelectData.fuse_type
+        //#pragma db not_null column("fuse_length") //fuse_length REAL NOT NULL ,--COMMENT '引信长度',
+        fuseLengthText.text  =  newAmmoData.ammoSelectData.fuse_length
+        //#pragma db not_null column("fuse_diameter")  //fuse_diameter REAL NOT NULL ,--COMMENT '引信直径',
+        fuseDiameterText.text  =   newAmmoData.ammoSelectData.fuse_diameter
+        //#pragma db not_null column("fuze_quality")  //fuze_quality REAL NOT NULL ,--COMMENT '引信质量',
+        fuseWeightText.text  =  newAmmoData.ammoSelectData.fuze_quality
+        //#pragma db not_null column("safe_distance_of_fuse")  //safe_distance_of_fuse REAL NOT NULL ,--COMMENT '引信安全距离',
+        fuseSafeDistanceText.text  =  newAmmoData.ammoSelectData.safe_distance_of_fuse
+        //#pragma db not_null column("time_disarming_fuse")  //time_disarming_fuse REAL NOT NULL ,--COMMENT '引信解除保险时间',
+        terminationInsuranceTimeText.text   =    newAmmoData.ammoSelectData.time_disarming_fuse
+        //#pragma db not_null column("first_level_release_time_of_fuse")  //first_level_release_time_of_fuse REAL NOT NULL ,--COMMENT '引信一级解除保险时间',
+         fuseFirstLevelTerminationInsuranceTimeText.text =   newAmmoData.ammoSelectData.first_level_release_time_of_fuse
+        //#pragma db not_null column("secondary_release_time_of_fuse")  //secondary_release_time_of_fuse REAL NOT NULL ,--COMMENT '引信二级解除保险时间',
+        fuseSecondaryLevelTerminationInsuranceTime.text   =   newAmmoData.ammoSelectData.secondary_release_time_of_fuse
+        //#pragma db not_null column("reliability_rate_of_fuse_action")  //reliability_rate_of_fuse_action REAL NOT NULL ,--COMMENT '引信作用可靠率',
+        fuseActionReliabilityRateText.text  =   newAmmoData.ammoSelectData.reliability_rate_of_fuse_action
+        //#pragma db not_null column("fuse_self_destruct_time")  //fuse_self_destruct_time REAL NOT NULL ,--COMMENT '引信自毁时间',
+
+        fuseSelfDestructionTimeText.text  =  newAmmoData.ammoSelectData.fuse_self_destruct_time
 
 
     }
@@ -290,13 +327,5 @@ Rectangle{//航空弹药的组件引信
 
 
     }
-    function convertToJsonArray(jsonData) {
-
-    }
-
-    function getSelectedPayloads(buttons) {
-
-    }
-
 }
 

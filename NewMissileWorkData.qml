@@ -10,6 +10,11 @@ Item {
     //——————对外参数接口——————
     //工作条件
     property int workCondition: -1
+    property int lastWorkCondition: -1
+    //气动布局
+    property int aerodynamicConfiguration: -1
+    property int lastAerodynamicConfiguration: -1
+    property int loadAllData: 0
     onWorkConditionChanged: {
 
         console.log("condition:",workCondition)
@@ -18,10 +23,7 @@ Item {
         if(lastWorkCondition > -1){
             listmodel_Box.set(lastWorkCondition,{m_SelectState:false})
         }
-    }
-
-    property int lastWorkCondition: -1
-
+    }   
     //signal workCondition(var indexStr)
     // Connections {
     //     target: item_Missile
@@ -31,16 +33,25 @@ Item {
     //     }
     // }
 
-    //气动布局
-    property int aerodynamicConfiguration: -1
+
     onAerodynamicConfigurationChanged: {
         if(lastWorkCondition == workCondition)
             return
         if(lastAerodynamicConfiguration > -1)
             listmodel_Box_AerodynamicConfiguration.set(lastAerodynamicConfiguration,{m_SelectState:false})
     }
+    onLoadAllDataChanged: {
+        if(item_Missile.loadAllData === 1 ){
+            console.log("<><><>")
+            loadAmmoData()
+            allComponentEnable()
+        }else if(item_Missile.loadAllData === 2){
+            loadAmmoData()
+        }else{
+            console.log("Unknown selectType!")
+        }
+    }
 
-    property int lastAerodynamicConfiguration: -1
     AmmoAerodynamicConfigurationDaoTableModel{
         id:ammoAerodynamicConfigurationDaoTableModel
     }
@@ -353,12 +364,18 @@ Item {
             }
         }
     }
+    function allComponentEnable(){
+        text_Input_WorkTemperature.enabled = false
+        text_Input_WorkAlt.enabled = false
+    }
+
     function loadAmmoData(){
+        console.log("newAmmoData.ammoData.ammoName"+newAmmoData.ammoSelectData.ammoName)
         //#pragma db not_null column("warhead_cg_distance") //warhead_cg_distance REAL NOT NULL ,--COMMENT '弹头端面至重心距离(m)',
       //  newAmmoData.ammoData.ammoWarheadCgDistance   = 0.0
         //#pragma db not_null column("charge_mass") //charge_mass REAL NOT NULL ,--COMMENT '炸弹装药质量(kg)',
-       text_Input_WorkTemperature.text = newAmmoData.ammoData.working_temperature
-       text_Input_WorkAlt.text = newAmmoData.ammoData.working_altitude
+       text_Input_WorkTemperature.text = newAmmoData.ammoSelectData.working_temperature
+       text_Input_WorkAlt.text = newAmmoData.ammoSelectData.working_altitude
 
     //view_List_AerodynamicConfiguration  = newAmmoData.ammoData.aerodynamic_configuration
     // view_List_WorkCondition   = newAmmoData.ammoData.working_conditions

@@ -15,7 +15,7 @@ Item {
     height: 880
     z: 100
     property string selectedType: ""//判断是否是新增、查看、修改
-    property string viewType: ""
+    property string viewType: "" //分辨航空导弹与炸弹来决定战斗部
     property var uavArray: []  //记录选中的无人机
     property string mainColor:"#fff0cc55"
     property var ammoData: new Object//保存、查看、修改数据
@@ -25,7 +25,6 @@ Item {
     //弹药类型
     property int missileType: -1
     Component.onCompleted: {
-        initAmmoData()
         loadSelectedViewType()
     }
     AmmoDaoTableModel{
@@ -197,6 +196,7 @@ Item {
             anchors.right: parent.right
             anchors.top: parent.top
             width: parent.width - btn_Cancel.width
+            height: parent.height
             source: {
                 if(processInfo.loadViewType === "addUavData"){
                     return ""
@@ -216,15 +216,25 @@ Item {
             anchors.centerIn: parent
             text: "图片展示区域"
             color: "#9E9E9E"
-        }
+        }       
+
+    }
+    Item {
+        id: allButton
+        anchors.right: newAmmoData.right //parent
+        anchors.top: rect_ImageShow.bottom
+        anchors.topMargin: 30
+
         CButton{
             id:btn_Cancel
-            anchors.top: parent.bottom
-            anchors.topMargin: 115
+            anchors.top: allButton.bottom
+            anchors.topMargin: 15
             // anchors.bottom: parent.bottom
             // anchors.bottomMargin: 6
             anchors.right: parent.right
-            anchors.rightMargin: 5
+            anchors.rightMargin: 0
+            // anchors.left: allButton.left
+            // anchors.leftMargin: 10
             height: pixelSize * 2
             width: pixelSize * 4
             text: "取消"
@@ -236,8 +246,8 @@ Item {
 
         CButton{
             id:btn_Save
-            anchors.top: parent.bottom
-            anchors.topMargin: 115
+            anchors.top: allButton.bottom
+            anchors.topMargin: 15
             // anchors.bottom: parent.bottom
             // anchors.bottomMargin: 6
             anchors.right: btn_Cancel.left
@@ -252,8 +262,8 @@ Item {
 
             }
         }
-
     }
+
 
     Rectangle{
         id:rect_BtnControl
@@ -485,24 +495,49 @@ Item {
 //        visible: false
 //    }
     function loadSelectedViewType(){
+
         if(processInfo.loadViewType === "addition"){
-           newAmmoData.selectType = 0 //0 代表新增，1代表查看，2代表修改。
+           initAmmoData()
+           addAmmoComponentWarheadPanel.loadStatus = "addition"
+           //newAmmoData.selectType = 0 //0 代表新增，1代表查看，2代表修改。
         }else if(processInfo.loadViewType === "query"){
-            newAmmoData.selectType = 1
+
+            console.log("<>"+processInfo.recordId+"<>"+processInfo.loadViewType)
+            addAmmoComponentWarheadPanel.loadStatus = 1
             loadAmmoData()
+            btn_Cancel.text = "返回"
+            btn_Save.visible = false
+            custom_NewMissileBaseData.selectType = 1
+            custom_WorkData.loadAllData = 1
+            custom_LaunchData.loadDataType = 1
+            addAmmoComponentFusePanel.loadDataType = 1
+            addAmmoComponentLaunchconditionsPanel.loadDataType = 1
+            addAmmoComponentSeekerPanel.loadDataType = 1
+            addAmmoComponentWarheadPanel.loadStatus =1
         }else if(processInfo.loadViewType === "update"){
-            newAmmoData.selectType = 2
+            addAmmoComponentWarheadPanel.loadStatus = 2
             loadAmmoData()
+            custom_NewMissileBaseData.selectType = 2
+            btn_Cancel.text = "返回"
+            btn_Save.text = "编辑"
+            custom_WorkData.loadAllData = 2
+            custom_LaunchData.loadDataType = 2
+            addAmmoComponentFusePanel.loadDataType = 2
+            addAmmoComponentLaunchconditionsPanel.loadDataType = 2
+            addAmmoComponentSeekerPanel.loadDataType = 2
+            addAmmoComponentWarheadPanel.loadStatus =2
         }else{
             console.log("Unknown processInfo.loadViewType!")
         }
     }
     function loadAmmoData(){
+
         var ammoLoadData = new Object
         ammoLoadData.recordId = processInfo.recordId
         var result = ammoDaoModel.selectSomeAmmoData(ammoLoadData)
         newAmmoData.ammoSelectData = result
-        console.log("ammloadoDaoModel"+JSON.stringify(newAmmoData.ammoSelectData))
+        console.log("ammloaaaassadoDaoModel"+JSON.stringify(newAmmoData.ammoSelectData))
+        //rect_ImageShow
         var imageUrlStr = "file:///"+newAmmoData.ammoSelectData.image_url
         console.log("imageUrlStr"+imageUrlStr)
         ammunitionImg.source = imageUrlStr
@@ -800,7 +835,7 @@ Item {
                 // 2秒后自动关闭
                 autoCloseTimer.start()
              }else{
-                console.log("unknown deleteMountLocation")
+                console.log("unknown insertNewAmmoData!")
             }
     }
 

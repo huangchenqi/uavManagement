@@ -12,6 +12,13 @@ Item {
     //——————对外参数接口——————
     //发射方式
     property int launchedType: -1
+    property int lastLaunchedType: -1
+    //导引规律
+    property int guidRule: 0
+    //制导方式
+    property int guidType: -1
+    property int lastGuidType: -1
+    property int loadDataType: 0
     onLaunchedTypeChanged: {
         if(lastLaunchedType == launchedType)
             return
@@ -20,12 +27,6 @@ Item {
             listmodel_Box.set(lastLaunchedType,{m_SelectState:false})
         }
     }
-
-    property int lastLaunchedType: -1
-    //导引规律
-    property int guidRule: 0
-    //制导方式
-    property int guidType: -1
     onGuidTypeChanged: {
         if(lastGuidType == guidType)
             return
@@ -34,8 +35,17 @@ Item {
             listmodel_Box_GuidType.set(lastGuidType,{m_SelectState:false})
         }
     }
+    onLoadDataTypeChanged: {
+        if(item_Missile.loadDataType === 1){
+            //loadAllData()
+            allComponentEnable()
+        }else if(item_Missile.loadDataType === 2){
+            //loadAllData()
+        }else{
 
-    property int lastGuidType: -1
+        }
+    }
+
     // AmmoKillingWayDaoTableModel{
     //     id:ammoKillingWayDaoTableModel
     // }
@@ -374,5 +384,13 @@ Item {
             }
 
         }
+    }
+    function allComponentEnable(){
+      view_List_LaunchedData.enabled = false
+       view_List_GuidTypeData.enabled = false
+    }
+
+    function loadAllData(){
+        //newAmmoData.ammoSelectData
     }
 }

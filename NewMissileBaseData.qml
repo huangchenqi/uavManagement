@@ -11,9 +11,14 @@ Item{
 
     property int selectType:0
     onSelectTypeChanged: {
-        if(missileCommonData.selectType === 1 || missileCommonData.selectType === 2){
+        if(missileCommonData.selectType === 1 ){
             console.log("<><><>")
             loadAmmoData()
+            allComponentEnable()
+        }else if(missileCommonData.selectType === 2){
+            loadAmmoData()
+        }else{
+            console.log("Unknown selectType!")
         }
     }
     UavModelDaoTableModel{
@@ -78,6 +83,8 @@ Item{
                     //     // 恢复光标位置（考虑文本缩短的情况）
                     //     cursorPosition = Math.min(cursorPos, newText.length)
                     // }
+                    newAmmoData.ammoData.ammoName =text
+                    console.log("Text content changed to: " + text)
                 }
                 // onTextChanged: {
                 //     if(text != "")
@@ -181,12 +188,14 @@ Item{
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
+                                        // }
+                                        newAmmoData.ammoData.ammoLenth =text
+                                        console.log("Text content changed to: " + text)
+                                    }
                                     onEditingFinished: {
                                         newAmmoData.ammoData.ammoLenth =text
                                         console.log("Text content changed to: " + text)
@@ -235,12 +244,14 @@ Item{
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
+                                        // }
+                                        newAmmoData.ammoData.ammoDiameter =text
+                                        console.log("Text content changed to: " + text)
+                                    }
                                     onEditingFinished: {
                                         newAmmoData.ammoData.ammoDiameter =text
                                         console.log("Text content changed to: " + text)
@@ -289,12 +300,14 @@ Item{
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
+                                        // }
+                                        newAmmoData.ammoData.ammoMass =text
+                                        console.log("Text content changed to: " + text)
+                                    }
                                     onEditingFinished: {
                                         newAmmoData.ammoData.ammoMass =text
                                         console.log("Text content changed to: " + text)
@@ -372,12 +385,15 @@ Item{
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
+                                        // }
+                                        newAmmoData.ammoData.ammoWingspan =text
+                                        console.log("Text content changed to: " + text)
+
+                                    }
                                     onEditingFinished: {
                                         newAmmoData.ammoData.ammoWingspan =text
                                         console.log("Text content changed to: " + text)
@@ -426,12 +442,15 @@ Item{
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
+                                        // }
+                                        newAmmoData.ammoData.effective_range =text
+                                        console.log("Text content changed to: " + text)
+
+                                    }
                                     onEditingFinished: {
                                         newAmmoData.ammoData.effective_range =text
                                         console.log("Text content changed to: " + text)
@@ -480,12 +499,15 @@ Item{
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
+                                        // }
+                                        newAmmoData.ammoData.preparation_time =text
+                                        console.log("Text content changed to: " + text)
+
+                                    }
                                     onEditingFinished: {
                                         newAmmoData.ammoData.preparation_time =text
                                         console.log("Text content changed to: " + text)
@@ -564,12 +586,14 @@ Item{
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
+                                        // }
+                                        newAmmoData.ammoData.hit_accuracy =text
+                                        console.log("Text content changed to: " + text)
+                                    }
                                     onEditingFinished: {
                                         newAmmoData.ammoData.hit_accuracy =text
                                         console.log("Text content changed to: " + text)
@@ -618,12 +642,14 @@ Item{
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
+                                        // }
+                                        newAmmoData.ammoData.hit_probability =text
+                                        console.log("Text content changed to: " + text)
+                                    }
                                     onEditingFinished: {
                                         newAmmoData.ammoData.hit_probability =text
                                         console.log("Text content changed to: " + text)
@@ -674,12 +700,14 @@ Item{
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
+                                        // }
+                                        newAmmoData.ammoData.rudder_width =text
+                                        console.log("Text content changed to: " + text)
+                                    }
                                     onEditingFinished: {
                                         newAmmoData.ammoData.rudder_width =text
                                         console.log("Text content changed to: " + text)
@@ -756,12 +784,14 @@ Item{
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
+                                        // }
+                                        newAmmoData.ammoData.allow_continuous_flight_time =text
+                                        console.log("Text content changed to: " + text)
+                                    }
                                     onEditingFinished: {
                                         newAmmoData.ammoData.allow_continuous_flight_time =text
                                         console.log("Text content changed to: " + text)
@@ -811,12 +841,14 @@ Item{
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
+                                        // }
+                                        newAmmoData.ammoData.guided_flight_time =text
+                                        console.log("Text content changed to: " + text)
+                                    }
                                     onEditingFinished: {
                                         newAmmoData.ammoData.guided_flight_time =text
                                         console.log("Text content changed to: " + text)
@@ -866,12 +898,14 @@ Item{
                                                        notation: DoubleValidator.StandardNotation
                                                        decimals: 5
                                     }
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
+                                        // }
+                                        newAmmoData.ammoData.maximum_speed_of_missile =text
+                                        console.log("Text content changed to: " + text)
+                                    }
                                     onEditingFinished: {
                                         newAmmoData.ammoData.maximum_speed_of_missile =text
                                         console.log("Text content changed to: " + text)
@@ -1006,30 +1040,49 @@ Item{
         }
 
     }
+    function allComponentEnable(){
+        text_Input_Name.enabled = false
+        text_Input_MissileRange.enabled = false
+        text_Input_MissileDiameter.enabled = false
+        text_Input_MissileWeight.enabled = false
+        text_Input_Wingspan.enabled = false
+        text_Input_MissileSheCheng.enabled = false
+
+       // newAmmoData.ammoSelectData.ammoToUavModel = ""
+        text_action_time.enabled = false
+        text_hit_accuracy.enabled = false
+        text_hit_probability.enabled = false
+        text_rudder_width.enabled = false
+        text_Input_FlightTime.enabled = false
+        text_Input_GuidFlightTime.enabled = false
+        text_Input_MaxSpeed.enabled = false
+
+    }
 
    function loadAmmoData(){
+
        //#pragma db not_null column("ammo_name")//            VARCHAR(100) NOT NULL ,--COMMENT '名称',
-    text_Input_Name.text  = newAmmoData.ammoData.ammoName
+       text_Input_Name.text  = newAmmoData.ammoSelectData.ammoName
 
        //#pragma db not_null column("used_uav_models")                        // used_uav_models VARCHAR(200) NOT NULL ,--COMMENT '使用机型'
-      // newAmmoData.ammoData.ammoToUavModel = ""
+      // newAmmoData.ammoSelectData.ammoToUavModel = ""
 
-     text_Input_MissileRange.text = newAmmoData.ammoData.ammoLenth
+     text_Input_MissileRange.text = newAmmoData.ammoSelectData.ammoLenth
        //#pragma db not_null column("mass")    //mass REAL NOT NULL ,--COMMENT '炸弹质量(kg)',
-     text_Input_MissileWeight.text =  newAmmoData.ammoData.ammoMass
+     text_Input_MissileWeight.text =  newAmmoData.ammoSelectData.ammoMass
        //#pragma db not_null column("diameter")   //        diameter REAL NOT NULL ,--COMMENT '直径(m)',
-     text_Input_MissileDiameter.text =  newAmmoData.ammoData.ammoDiameter
+     text_Input_MissileDiameter.text =  newAmmoData.ammoSelectData.ammoDiameter
        //#pragma db not_null column("wingspan") //wingspan REAL NOT NULL ,--COMMENT '翼展(m)',
-     text_Input_Wingspan.text   =  newAmmoData.ammoData.ammoWingspan
+     text_Input_Wingspan.text   =  newAmmoData.ammoSelectData.ammoWingspan
        //#pragma db not_null column("effective_range") //effective_range REAL NOT NULL ,--COMMENT '射程',
-       text_Input_MissileSheCheng.text  =  newAmmoData.ammoData.effective_range
-       text_action_time.text =   newAmmoData.ammoData.action_time
-       text_hit_accuracy.text  = newAmmoData.ammoData.hit_accuracy
-       text_hit_probability.text =  newAmmoData.ammoData.hit_probability
-       text_rudder_width.text =  newAmmoData.ammoData.rudder_width
-       text_Input_FlightTime.text  =  newAmmoData.ammoData.allow_continuous_flight_time
-       text_Input_GuidFlightTime.text  = newAmmoData.ammoData.guided_flight_time
-       text_Input_MaxSpeed.text =  newAmmoData.ammoData.maximum_speed_of_missile
+       text_Input_MissileSheCheng.text  =  newAmmoData.ammoSelectData.effective_range
+       text_action_time.text =   newAmmoData.ammoSelectData.action_time
+       text_hit_accuracy.text  = newAmmoData.ammoSelectData.hit_accuracy
+       text_hit_probability.text =  newAmmoData.ammoSelectData.hit_probability
+       text_rudder_width.text =  newAmmoData.ammoSelectData.rudder_width
+       text_Input_FlightTime.text  =  newAmmoData.ammoSelectData.allow_continuous_flight_time
+       text_Input_GuidFlightTime.text  = newAmmoData.ammoSelectData.guided_flight_time
+       text_Input_MaxSpeed.text =  newAmmoData.ammoSelectData.maximum_speed_of_missile
        //view_List_TypeSelect
 
     }

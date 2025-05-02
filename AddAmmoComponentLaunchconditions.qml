@@ -13,6 +13,18 @@ Rectangle{//航空弹药的组件发射条件
     height: 340
     color:"skyblue"
     //title: qsTr("QML TableView example")
+    property int loadDataType: 0
+    onLoadDataTypeChanged: {
+        if(addAmmoComponentLaunchconditionsRoot.loadDataType === 1){
+            allComponentEnable()
+            loadData()
+        }else if(addAmmoComponentLaunchconditionsRoot.loadDataType === 2){
+            loadData()
+        }else{
+            console.log("Unknown loadDataType!")
+        }
+    }
+
     Item {
         anchors.fill: parent
         Image {
@@ -44,7 +56,7 @@ Rectangle{//航空弹药的组件发射条件
 
                 anchors.top: parent.top
                 anchors.topMargin: 15
-                anchors.left: launchCondition.right
+                anchors.left: rect_DataTitle.right
                 anchors.leftMargin: 2
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: mainColor
@@ -231,10 +243,24 @@ Rectangle{//航空弹药的组件发射条件
     }
 
 
-    function saveammunitionData(){
-
-
+    function allComponentEnable(){
+        launchMinimumVisibilityText.enabled =  false
+        //#pragma db not_null column("maximum_launch_altitude") //maximum_launch_altitude REAL NOT NULL ,--COMMENT '发射最大发射海拔高度',
+         launchMaximumAltitudeText.enabled  =  false
+        //#pragma db not_null column("launch_maximum_target_altitude") //launch_maximum_target_altitude REAL NOT NULL ,--COMMENT '发射最大目标海拔高度',
+        launchMaximumTargetAltitudeText.enabled   =  false
+        //#pragma db not_null column("maximum_launch_relative_height") //maximum_launch_relative_height REAL NOT NULL ,--COMMENT '发射最大发射相对高度',
+        launchMaximumRelativeHeightText.enabled  =  false
+        //#pragma db not_null column("minimum_relative_height_launch")  //minimum_relative_height_launch REAL NOT NULL ,--COMMENT '发射最小发射相对高度',
+        launchMinimumRelativeHeightText.enabled  =   false
+        //#pragma db not_null column("launch_speed") //launch_speed REAL NOT NULL ,--COMMENT '发射速度',
+        launchSpeedText.enabled  =   false
+        //#pragma db not_null column("launch_conditions") //launch_conditions VARCHAR(50) ,--COMMENT '发射条件天气限制',
+        weatherRestrictionsText.enabled  =  false
+        //#pragma db not_null column("launch_off_axis_angle") //launch_off_axis_angle REAL NOT NULL ,--COMMENT '发射离轴角',
+        launchOffAxisAngleText.enabled  =   false
     }
+
     function updateData() {
 
     }
@@ -243,23 +269,23 @@ Rectangle{//航空弹药的组件发射条件
 
 
         //#pragma db not_null column("guidance_rule")  //guidance_rule VARCHAR(50) ,--COMMENT '导引规律',
-            newAmmoData.ammoData.guidance_rule   = ""
+           // newAmmoData.ammoSelectData.guidance_rule   = ""
         //#pragma db not_null column("minimum_visibility_emission") //minimum_visibility_emission REAL NOT NULL ,--COMMENT '发射最小能见度',
-          launchMinimumVisibilityText.text =  newAmmoData.ammoData.minimum_visibility_emission
+        launchMinimumVisibilityText.text =  newAmmoData.ammoSelectData.minimum_visibility_emission
         //#pragma db not_null column("maximum_launch_altitude") //maximum_launch_altitude REAL NOT NULL ,--COMMENT '发射最大发射海拔高度',
-         launchMaximumAltitudeText.text  =  newAmmoData.ammoData.maximum_launch_altitude
+         launchMaximumAltitudeText.text  =  newAmmoData.ammoSelectData.maximum_launch_altitude
         //#pragma db not_null column("launch_maximum_target_altitude") //launch_maximum_target_altitude REAL NOT NULL ,--COMMENT '发射最大目标海拔高度',
-        launchMaximumTargetAltitudeText.text   =  newAmmoData.ammoData.launch_maximum_target_altitude
+        launchMaximumTargetAltitudeText.text   =  newAmmoData.ammoSelectData.launch_maximum_target_altitude
         //#pragma db not_null column("maximum_launch_relative_height") //maximum_launch_relative_height REAL NOT NULL ,--COMMENT '发射最大发射相对高度',
-        launchMaximumRelativeHeightText.text  =  newAmmoData.ammoData.maximum_launch_relative_height
+        launchMaximumRelativeHeightText.text  =  newAmmoData.ammoSelectData.maximum_launch_relative_height
         //#pragma db not_null column("minimum_relative_height_launch")  //minimum_relative_height_launch REAL NOT NULL ,--COMMENT '发射最小发射相对高度',
-        launchMinimumRelativeHeightText.text  =   newAmmoData.ammoData.minimum_relative_height_launch
+        launchMinimumRelativeHeightText.text  =   newAmmoData.ammoSelectData.minimum_relative_height_launch
         //#pragma db not_null column("launch_speed") //launch_speed REAL NOT NULL ,--COMMENT '发射速度',
-        launchSpeedText  =   newAmmoData.ammoData.launch_speed
+        launchSpeedText.text  =   newAmmoData.ammoSelectData.launch_speed
         //#pragma db not_null column("launch_conditions") //launch_conditions VARCHAR(50) ,--COMMENT '发射条件天气限制',
-        weatherRestrictionsText.text  =  newAmmoData.ammoData.launch_conditions
+        weatherRestrictionsText.text  =  newAmmoData.ammoSelectData.launch_conditions
         //#pragma db not_null column("launch_off_axis_angle") //launch_off_axis_angle REAL NOT NULL ,--COMMENT '发射离轴角',
-        launchOffAxisAngleText.text  =   newAmmoData.ammoData.launch_off_axis_angle
+        launchOffAxisAngleText.text  =   newAmmoData.ammoSelectData.launch_off_axis_angle
 
 
     }

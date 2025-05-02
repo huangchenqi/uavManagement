@@ -12,70 +12,83 @@ Rectangle{//航空弹药的组件战斗部
     width: 600
     height: 500
     color:"skyblue"
+    property int loadStatus: 0 //先于selectedWarhead赋值确保在查看与修改时候先加载数据
     property var selectedWarhead: "first"
     onSelectedWarheadChanged: {
+        if(addAmmoComponentWarheadRoot.loadStatus === 0){
+           console.log("新增战斗部数据!")
+        }else if(addAmmoComponentWarheadRoot.loadStatus === 1){
+           loadAmmoData()
+           allComponentEnable()
+
+        }else if(addAmmoComponentWarheadPanel.loadStatus === 2){
+            loadAmmoData()
+        }else{
+            console.log("未知的加载方式!")
+        }
+
         if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
-                        topTitle.text = "增强型杀爆战斗部"
-                        warheadTypeText.visible = true
-                        warheadWeightText.visible = true
-                        warheadLengthText.visible = true
-                        warheadDiameterText.visible = true
-                        warheadMainChargeTypeText.visible = true
-                        warheadChargeQualityText.visible = true
-                        warheadChargingDensityText.visible = true
-                        warheadFillingCoefficientText.visible = true
-                        warheadBoosterText.visible = true
-                        warheadfragmentsNumberText.visible = true
-                        warheadVehiclesEffectiveKillingRadiusText.visible = true
-                        warheadPeopleEffectiveKillingRadiusText.visible = true
-                        warheadInvasivenessText.visible = true
-                        warheadVerticalStaticArmorPenetrationDepthText.visible = true
+            topTitle.text = "增强型杀爆战斗部"
+            warheadTypeText.visible = true
+            warheadWeightText.visible = true
+            warheadLengthText.visible = true
+            warheadDiameterText.visible = true
+            warheadMainChargeTypeText.visible = true
+            warheadChargeQualityText.visible = true
+            warheadChargingDensityText.visible = true
+            warheadFillingCoefficientText.visible = true
+            warheadBoosterText.visible = true
+            warheadfragmentsNumberText.visible = true
+            warheadVehiclesEffectiveKillingRadiusText.visible = true
+            warheadPeopleEffectiveKillingRadiusText.visible = true
+            warheadInvasivenessText.visible = true
+            warheadVerticalStaticArmorPenetrationDepthText.visible = true
         }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
-                        topTitle.text = "侵爆战斗部"
-                        warheadTypeText.visible = false
-                        warheadWeightText.visible = false
-                        warheadLengthText.visible = false
-                        warheadDiameterText.visible = false
-                        warheadMainChargeTypeText.visible = false
-                        warheadChargeQualityText.visible = false
-                        warheadChargingDensityText.visible = false
-                        warheadFillingCoefficientText.visible = false
-                        warheadBoosterText.visible = false
-                        warheadfragmentsNumberText.visible = false
-                        warheadVehiclesEffectiveKillingRadiusText.visible = false
-                        warheadPeopleEffectiveKillingRadiusText.visible = false
-                        warheadInvasivenessText.visible = false
-                        warheadVerticalStaticArmorPenetrationDepthText.visible = false
-                        // warheadTypeText_add.visible = true
-                        // warheadWeightText_add.visible = true
-                        // warheadLengthText_add.visible = true
-                        // warheadMainChargeTypeText_add.visible = true
-                        // warheadDiameterText_add.visible = true
-                        // warheadChargeQualityText_add.visible = true
-                        // warheadChargingDensityText_add.visible = true
-                        // warheadFillingCoefficientText_add.visible = true
-                        // warheadBoosterText_add.visible = true
-                        // warheadfragmentsNumberText_add.visible = true
-                        // warheadVehiclesEffectiveKillingRadiusText_add.visible = true
-                        // warheadPeopleEffectiveKillingRadiusText_add.visible = true
-                        // warheadInvasivenessText_add.visible = true
-                        // warheadVerticalStaticArmorPenetrationDepthText_add.visible = true
+            topTitle.text = "侵爆战斗部"
+            warheadTypeText.visible = false
+            warheadWeightText.visible = false
+            warheadLengthText.visible = false
+            warheadDiameterText.visible = false
+            warheadMainChargeTypeText.visible = false
+            warheadChargeQualityText.visible = false
+            warheadChargingDensityText.visible = false
+            warheadFillingCoefficientText.visible = false
+            warheadBoosterText.visible = false
+            warheadfragmentsNumberText.visible = false
+            warheadVehiclesEffectiveKillingRadiusText.visible = false
+            warheadPeopleEffectiveKillingRadiusText.visible = false
+            warheadInvasivenessText.visible = false
+            warheadVerticalStaticArmorPenetrationDepthText.visible = false
+            // warheadTypeText_add.visible = true
+            // warheadWeightText_add.visible = true
+            // warheadLengthText_add.visible = true
+            // warheadMainChargeTypeText_add.visible = true
+            // warheadDiameterText_add.visible = true
+            // warheadChargeQualityText_add.visible = true
+            // warheadChargingDensityText_add.visible = true
+            // warheadFillingCoefficientText_add.visible = true
+            // warheadBoosterText_add.visible = true
+            // warheadfragmentsNumberText_add.visible = true
+            // warheadVehiclesEffectiveKillingRadiusText_add.visible = true
+            // warheadPeopleEffectiveKillingRadiusText_add.visible = true
+            // warheadInvasivenessText_add.visible = true
+            // warheadVerticalStaticArmorPenetrationDepthText_add.visible = true
         }else if(addAmmoComponentWarheadRoot.selectedWarhead === "third"){
-                        topTitle.text = "战斗部"
-                        warheadTypeText.visible = true
-                        warheadWeightText.visible = true
-                        warheadLengthText.visible = true
-                        warheadDiameterText.visible = true
-                        warheadMainChargeTypeText.visible = true
-                        warheadChargeQualityText.visible = true
-                        warheadChargingDensityText.visible = true
-                        warheadFillingCoefficientText.visible = true
-                        warheadBoosterText.visible = true
-                        warheadfragmentsNumberText.visible = true
-                        warheadVehiclesEffectiveKillingRadiusText.visible = true
-                        warheadPeopleEffectiveKillingRadiusText.visible = true
-                        warheadInvasivenessText.visible = true
-                        warheadVerticalStaticArmorPenetrationDepthText.visible = true
+            topTitle.text = "战斗部"
+            warheadTypeText.visible = true
+            warheadWeightText.visible = true
+            warheadLengthText.visible = true
+            warheadDiameterText.visible = true
+            warheadMainChargeTypeText.visible = true
+            warheadChargeQualityText.visible = true
+            warheadChargingDensityText.visible = true
+            warheadFillingCoefficientText.visible = true
+            warheadBoosterText.visible = true
+            warheadfragmentsNumberText.visible = true
+            warheadVehiclesEffectiveKillingRadiusText.visible = true
+            warheadPeopleEffectiveKillingRadiusText.visible = true
+            warheadInvasivenessText.visible = true
+            warheadVerticalStaticArmorPenetrationDepthText.visible = true
         }else{
             console.log("Unkown selectedWarhead!")
         }
@@ -539,102 +552,133 @@ Rectangle{//航空弹药的组件战斗部
         }
 
     }
+    function allComponentEnable(){
+        warheadTypeText.enabled = false
+        warheadWeightText.enabled = false
+        warheadLengthText.enabled = false
+        warheadDiameterText.enabled = false
+        warheadMainChargeTypeText.enabled = false
+        warheadChargeQualityText.enabled = false
+        warheadChargingDensityText.enabled = false
+        warheadFillingCoefficientText.enabled = false
+        warheadBoosterText.enabled = false
+        warheadfragmentsNumberText.enabled = false
+        warheadVehiclesEffectiveKillingRadiusText.enabled = false
+        warheadPeopleEffectiveKillingRadiusText.enabled = false
+        warheadInvasivenessText.enabled = false
+        warheadVerticalStaticArmorPenetrationDepthText.enabled = false
+        warheadTypeText_add.enabled = false
+        warheadWeightText_add.enabled = false
+        warheadLengthText_add.enabled = false
+        warheadMainChargeTypeText_add.enabled = false
+        warheadDiameterText_add.enabled = false
+        warheadChargeQualityText_add.enabled = false
+        warheadChargingDensityText_add.enabled = false
+        warheadFillingCoefficientText_add.enabled = false
+        warheadBoosterText_add.enabled = false
+        warheadfragmentsNumberText_add.enabled = false
+        warheadVehiclesEffectiveKillingRadiusText_add.enabled = false
+        warheadPeopleEffectiveKillingRadiusText_add.enabled = false
+        warheadInvasivenessText_add.enabled = false
+        warheadVerticalStaticArmorPenetrationDepthText_add.enabled = false
+    }
+
     function loadAmmoData() {
 
         if(addAmmoComponentWarheadRoot.selectedWarhead === "first"){
             //        topTitle.text = "增强型杀爆战斗部"
             //#pragma db not_null column("combat_department_quality")  //combat_department_quality REAL NOT NULL ,--COMMENT '战斗部质量',
-            warheadWeightText.text  =   newAmmoData.ammoData.combat_department_quality
+            warheadWeightText.text  =   newAmmoData.ammoSelectData.combat_department_quality
             //#pragma db not_null column("combat_quantity")  //combat_quantity REAL NOT NULL ,--COMMENT '战斗部装药量',
-            warheadChargeQualityText.text =    newAmmoData.ammoData.combat_quantity
+            warheadChargeQualityText.text =    newAmmoData.ammoSelectData.combat_quantity
             //#pragma db not_null column("combat_unit_type")  //combat_unit_type VARCHAR(50) ,--COMMENT '战斗部类型',
-             warheadTypeText.text =  newAmmoData.ammoData.combat_unit_type
+             warheadTypeText.text =  newAmmoData.ammoSelectData.combat_unit_type
             //#pragma db not_null column("combat_length")  //combat_length  REAL NOT NULL ,--COMMENT '战斗部长度',
-            warheadLengthText.text  =   newAmmoData.ammoData.combat_length
+            warheadLengthText.text  =   newAmmoData.ammoSelectData.combat_length
 
             //#pragma db not_null column("combat_diameter")  //combat_diameter REAL NOT NULL ,--COMMENT '战斗部直径',
-            warheadDiameterText.text  =   newAmmoData.ammoData.combat_diameter
+            warheadDiameterText.text  =   newAmmoData.ammoSelectData.combat_diameter
             //#pragma db not_null column("combat_main_charge_type")  //combat_main_charge_type VARCHAR(50) ,--COMMENT '战斗部主装药类型',
-            warheadMainChargeTypeText.text =    newAmmoData.ammoData.combat_main_charge_type
+            warheadMainChargeTypeText.text =    newAmmoData.ammoSelectData.combat_main_charge_type
             //#pragma db not_null column("combat_charge_density")  //combat_charge_density REAL NOT NULL ,--COMMENT '战斗部装药密度',
-            warheadChargingDensityText.text  =   newAmmoData.ammoData.combat_charge_density
+            warheadChargingDensityText.text  =   newAmmoData.ammoSelectData.combat_charge_density
             //#pragma db not_null column("combat_loading_factor")  //combat_loading_factor REAL NOT NULL ,--COMMENT '战斗部装填系数',
-            warheadFillingCoefficientText.text =    newAmmoData.ammoData.combat_loading_factor
+            warheadFillingCoefficientText.text =    newAmmoData.ammoSelectData.combat_loading_factor
             //#pragma db not_null column("combat_explosive")  //combat_explosive REAL NOT NULL ,--COMMENT '战斗部扩爆药',
-            warheadBoosterText.text  =   newAmmoData.ammoData.combat_explosive
+            warheadBoosterText.text  =   newAmmoData.ammoSelectData.combat_explosive
             //#pragma db not_null column("combat_fragments_number")  //combat_fragments_number INT NOT NULL ,--COMMENT '战斗部破片数量',
-            warheadfragmentsNumberText.text  =   newAmmoData.ammoData.combat_fragments_number
+            warheadfragmentsNumberText.text  =   newAmmoData.ammoSelectData.combat_fragments_number
             //#pragma db not_null column("combat_unit_invasion_capability")  //combat_unit_invasion_capability VARCHAR(50) ,--COMMENT '战斗部侵袭能力',
-            warheadInvasivenessText.text  =   newAmmoData.ammoData.combat_unit_invasion_capability
+            warheadInvasivenessText.text  =   newAmmoData.ammoSelectData.combat_unit_invasion_capability
             //#pragma db not_null column("combat_effective_killing_radius_vehicles")  //combat_effective_killing_radius_vehicles REAL NOT NULL ,--COMMENT '战斗部对车辆的有效杀伤半径',
-            warheadVehiclesEffectiveKillingRadiusText.text =    newAmmoData.ammoData.combat_effective_killing_radius_vehicles
+            warheadVehiclesEffectiveKillingRadiusText.text =    newAmmoData.ammoSelectData.combat_effective_killing_radius_vehicles
             //#pragma db not_null column("combat_effective_killing_radius_personnel")   //combat_effective_killing_radius_personnel REAL NOT NULL ,--COMMENT '战斗部对人员的有效杀伤半径',
-            warheadPeopleEffectiveKillingRadiusText.text =    newAmmoData.ammoData.combat_effective_killing_radius_personnel
+            warheadPeopleEffectiveKillingRadiusText.text =    newAmmoData.ammoSelectData.combat_effective_killing_radius_personnel
             //#pragma db not_null column("combat_vertical_static_armor_penetration_depth")  //combat_vertical_static_armor_penetration_depth REAL NOT NULL ,--COMMENT '战斗部垂直静破甲深度',
-            warheadVerticalStaticArmorPenetrationDepthText.text =    newAmmoData.ammoData.combat_vertical_static_armor_penetration_depth
+            warheadVerticalStaticArmorPenetrationDepthText.text =    newAmmoData.ammoSelectData.combat_vertical_static_armor_penetration_depth
         }else if(addAmmoComponentWarheadRoot.selectedWarhead === "second"){
 
             //#pragma db not_null column("combat_department_quality_add")  //combat_department_quality_add REAL NOT NULL ,--COMMENT '第二个战斗部质量',
-            warheadWeightText_add.text  =  newAmmoData.ammoData.combat_department_quality_add
+            warheadWeightText_add.text  =  newAmmoData.ammoSelectData.combat_department_quality_add
             //#pragma db not_null column("combat_quantity_add")  //combat_quantity_add REAL NOT NULL ,--COMMENT '第二个战斗部装药量',
-            warheadChargeQualityText_add.text =    newAmmoData.ammoData.combat_quantity_add
+            warheadChargeQualityText_add.text =    newAmmoData.ammoSelectData.combat_quantity_add
 
             //#pragma db not_null column("combat_unit_type_add")  //combat_unit_type_add VARCHAR(50) ,--COMMENT '第二个战斗部类型',
-            warheadTypeText_add.text  =   newAmmoData.ammoData.combat_unit_type_add
+            warheadTypeText_add.text  =   newAmmoData.ammoSelectData.combat_unit_type_add
             //#pragma db not_null column("combat_length_add")  //combat_length_add  REAL NOT NULL ,--COMMENT '第二个战斗部长度',
-            warheadLengthText_add.text =    newAmmoData.ammoData.combat_length_add
+            warheadLengthText_add.text =    newAmmoData.ammoSelectData.combat_length_add
             //#pragma db not_null column("combat_diameter_add")  //combat_diameter_add REAL NOT NULL ,--COMMENT '第二个战斗部直径',
-            warheadDiameterText_add.text  =   newAmmoData.ammoData.combat_diameter_add
+            warheadDiameterText_add.text  =   newAmmoData.ammoSelectData.combat_diameter_add
             //#pragma db not_null column("combat_main_charge_type_add")  //combat_main_charge_type_add VARCHAR(50) ,--COMMENT '第二个战斗部主装药类型',
-            warheadMainChargeTypeText_add.text  =   newAmmoData.ammoData.combat_main_charge_type_add
+            warheadMainChargeTypeText_add.text  =   newAmmoData.ammoSelectData.combat_main_charge_type_add
             //#pragma db not_null column("combat_charge_density_add")  //combat_charge_density_add REAL NOT NULL ,--COMMENT '第二个战斗部装药密度',
-            warheadChargingDensityText_add.text  =   newAmmoData.ammoData.combat_charge_density_add
+            warheadChargingDensityText_add.text  =   newAmmoData.ammoSelectData.combat_charge_density_add
             //#pragma db not_null column("combat_loading_factor_add")  //combat_loading_factor_add REAL NOT NULL ,--COMMENT '第二个战斗部装填系数',
-            warheadFillingCoefficientText_add.text  =   newAmmoData.ammoData.combat_loading_factor_add
+            warheadFillingCoefficientText_add.text  =   newAmmoData.ammoSelectData.combat_loading_factor_add
             //#pragma db not_null column("combat_explosive_add")  //combat_explosive_add REAL NOT NULL ,--COMMENT '第二个战斗部扩爆药',
-            warheadBoosterText_add.text   =  newAmmoData.ammoData.combat_explosive_add
+            warheadBoosterText_add.text   =  newAmmoData.ammoSelectData.combat_explosive_add
             //#pragma db not_null column("combat_fragments_number_add")  //combat_fragments_number_add INT NOT NULL ,--COMMENT '第二个战斗部破片数量',
-            warheadfragmentsNumberText_add.text  =   newAmmoData.ammoData.combat_fragments_number_add
+            warheadfragmentsNumberText_add.text  =   newAmmoData.ammoSelectData.combat_fragments_number_add
             //#pragma db not_null column("combat_unit_invasion_capability_add")  //combat_unit_invasion_capability_add VARCHAR(50) ,--COMMENT '第二个战斗部侵袭能力',
-            warheadInvasivenessText_add.text  =   newAmmoData.ammoData.combat_unit_invasion_capability_add
+            warheadInvasivenessText_add.text  =   newAmmoData.ammoSelectData.combat_unit_invasion_capability_add
             //#pragma db not_null column("combat_effective_killing_radius_vehicles_add")  //combat_effective_killing_radius_vehicles_add REAL NOT NULL ,--COMMENT '第二个战斗部对车辆的有效杀伤半径',
-             warheadVehiclesEffectiveKillingRadiusText_add.text =   newAmmoData.ammoData.combat_effective_killing_radius_vehicles_add
+             warheadVehiclesEffectiveKillingRadiusText_add.text =   newAmmoData.ammoSelectData.combat_effective_killing_radius_vehicles_add
 
             //#pragma db not_null column("combat_effective_killing_radius_personnel_add")  //combat_effective_killing_radius_personnel_add REAL NOT NULL ,--COMMENT '第二个战斗部对人员的有效杀伤半径',
-            warheadPeopleEffectiveKillingRadiusText_add.text  =   newAmmoData.ammoData.combat_effective_killing_radius_personnel_add
+            warheadPeopleEffectiveKillingRadiusText_add.text  =   newAmmoData.ammoSelectData.combat_effective_killing_radius_personnel_add
             //#pragma db not_null column("combat_vertical_static_armor_penetration_depth_add")  //combat_vertical_static_armor_penetration_depth_add REAL NOT NULL ,--COMMENT '第二个战斗部垂直静破甲深度',
-            warheadVerticalStaticArmorPenetrationDepthText_add.text  =   newAmmoData.ammoData.combat_vertical_static_armor_penetration_depth_add
+            warheadVerticalStaticArmorPenetrationDepthText_add.text  =   newAmmoData.ammoSelectData.combat_vertical_static_armor_penetration_depth_add
         }else if(addAmmoComponentWarheadRoot.selectedWarhead === "third"){
             //topTitle.text = "战斗部"
             //#pragma db not_null column("combat_department_quality")  //combat_department_quality REAL NOT NULL ,--COMMENT '战斗部质量',
-            warheadWeightText.text  =   newAmmoData.ammoData.combat_department_quality
+            warheadWeightText.text  =   newAmmoData.ammoSelectData.combat_department_quality
             //#pragma db not_null column("combat_quantity")  //combat_quantity REAL NOT NULL ,--COMMENT '战斗部装药量',
-            warheadChargeQualityText.text =    newAmmoData.ammoData.combat_quantity
+            warheadChargeQualityText.text =    newAmmoData.ammoSelectData.combat_quantity
             //#pragma db not_null column("combat_unit_type")  //combat_unit_type VARCHAR(50) ,--COMMENT '战斗部类型',
-             warheadTypeText.text =  newAmmoData.ammoData.combat_unit_type
+             warheadTypeText.text =  newAmmoData.ammoSelectData.combat_unit_type
             //#pragma db not_null column("combat_length")  //combat_length  REAL NOT NULL ,--COMMENT '战斗部长度',
-            warheadLengthText.text  =   newAmmoData.ammoData.combat_length
+            warheadLengthText.text  =   newAmmoData.ammoSelectData.combat_length
 
             //#pragma db not_null column("combat_diameter")  //combat_diameter REAL NOT NULL ,--COMMENT '战斗部直径',
-            warheadDiameterText.text  =   newAmmoData.ammoData.combat_diameter
+            warheadDiameterText.text  =   newAmmoData.ammoSelectData.combat_diameter
             //#pragma db not_null column("combat_main_charge_type")  //combat_main_charge_type VARCHAR(50) ,--COMMENT '战斗部主装药类型',
-            warheadMainChargeTypeText.text =    newAmmoData.ammoData.combat_main_charge_type
+            warheadMainChargeTypeText.text =    newAmmoData.ammoSelectData.combat_main_charge_type
             //#pragma db not_null column("combat_charge_density")  //combat_charge_density REAL NOT NULL ,--COMMENT '战斗部装药密度',
-            warheadChargingDensityText.text  =   newAmmoData.ammoData.combat_charge_density
+            warheadChargingDensityText.text  =   newAmmoData.ammoSelectData.combat_charge_density
             //#pragma db not_null column("combat_loading_factor")  //combat_loading_factor REAL NOT NULL ,--COMMENT '战斗部装填系数',
-            warheadFillingCoefficientText.text =    newAmmoData.ammoData.combat_loading_factor
+            warheadFillingCoefficientText.text =    newAmmoData.ammoSelectData.combat_loading_factor
             //#pragma db not_null column("combat_explosive")  //combat_explosive REAL NOT NULL ,--COMMENT '战斗部扩爆药',
-            warheadBoosterText.text  =   newAmmoData.ammoData.combat_explosive
+            warheadBoosterText.text  =   newAmmoData.ammoSelectData.combat_explosive
             //#pragma db not_null column("combat_fragments_number")  //combat_fragments_number INT NOT NULL ,--COMMENT '战斗部破片数量',
-            warheadfragmentsNumberText.text  =   newAmmoData.ammoData.combat_fragments_number
+            warheadfragmentsNumberText.text  =   newAmmoData.ammoSelectData.combat_fragments_number
             //#pragma db not_null column("combat_unit_invasion_capability")  //combat_unit_invasion_capability VARCHAR(50) ,--COMMENT '战斗部侵袭能力',
-            warheadInvasivenessText.text  =   newAmmoData.ammoData.combat_unit_invasion_capability
+            warheadInvasivenessText.text  =   newAmmoData.ammoSelectData.combat_unit_invasion_capability
             //#pragma db not_null column("combat_effective_killing_radius_vehicles")  //combat_effective_killing_radius_vehicles REAL NOT NULL ,--COMMENT '战斗部对车辆的有效杀伤半径',
-            warheadVehiclesEffectiveKillingRadiusText.text =    newAmmoData.ammoData.combat_effective_killing_radius_vehicles
+            warheadVehiclesEffectiveKillingRadiusText.text =    newAmmoData.ammoSelectData.combat_effective_killing_radius_vehicles
             //#pragma db not_null column("combat_effective_killing_radius_personnel")   //combat_effective_killing_radius_personnel REAL NOT NULL ,--COMMENT '战斗部对人员的有效杀伤半径',
-            warheadPeopleEffectiveKillingRadiusText =    newAmmoData.ammoData.combat_effective_killing_radius_personnel
+            warheadPeopleEffectiveKillingRadiusText =    newAmmoData.ammoSelectData.combat_effective_killing_radius_personnel
             //#pragma db not_null column("combat_vertical_static_armor_penetration_depth")  //combat_vertical_static_armor_penetration_depth REAL NOT NULL ,--COMMENT '战斗部垂直静破甲深度',
-            warheadVerticalStaticArmorPenetrationDepthText.text =    newAmmoData.ammoData.combat_vertical_static_armor_penetration_depth
+            warheadVerticalStaticArmorPenetrationDepthText.text =    newAmmoData.ammoSelectData.combat_vertical_static_armor_penetration_depth
         }else{
             console.log("Unkown selectedWarhead!")
         }
