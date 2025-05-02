@@ -19,6 +19,7 @@ Item {
     property var uavArray: []  //记录选中的无人机
     property string mainColor:"#fff0cc55"
     property var ammoData: new Object//保存、查看、修改数据
+    property var ammoSelectData: new Object
     signal backAmmoRecord()
     readonly property string mainBackgroundSource: "file:Resources/Background/bg_MainBackground.png"
     //弹药类型
@@ -488,12 +489,26 @@ Item {
            newAmmoData.selectType = 0 //0 代表新增，1代表查看，2代表修改。
         }else if(processInfo.loadViewType === "query"){
             newAmmoData.selectType = 1
+            loadAmmoData()
         }else if(processInfo.loadViewType === "update"){
             newAmmoData.selectType = 2
+            loadAmmoData()
         }else{
             console.log("Unknown processInfo.loadViewType!")
         }
     }
+    function loadAmmoData(){
+        var ammoLoadData = new Object
+        ammoLoadData.recordId = processInfo.recordId
+        var result = ammoDaoModel.selectSomeAmmoData(ammoLoadData)
+        newAmmoData.ammoSelectData = result
+        console.log("ammloadoDaoModel"+JSON.stringify(newAmmoData.ammoSelectData))
+        var imageUrlStr = "file:///"+newAmmoData.ammoSelectData.image_url
+        console.log("imageUrlStr"+imageUrlStr)
+        ammunitionImg.source = imageUrlStr
+        usageDescriptionText.text = newAmmoData.ammoSelectData.ammoDescription
+    }
+
     function initAmmoData(){
         //#pragma db not_null column("ammo_name")//            VARCHAR(100) NOT NULL ,--COMMENT '名称',
         newAmmoData.ammoData.ammoName = ""

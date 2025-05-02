@@ -11,7 +11,10 @@ Item{
 
     property int selectType:0
     onSelectTypeChanged: {
-      ammoData.idi
+        if(missileCommonData.selectType === 1 || missileCommonData.selectType === 2){
+            console.log("<><><>")
+            loadAmmoData()
+        }
     }
     UavModelDaoTableModel{
         id:uavModelDao
@@ -464,7 +467,7 @@ Item{
                                 anchors.left:text_DanErJuliTitle.right
                                 anchors.top: parent.top
                                 TextInput{
-                                    id:text_Input_DanErJuli
+                                    id:text_action_time
                                     anchors.fill: parent
                                     color:"#ffffffff"
                                     font.family:text_DanErJuliTitle.family
@@ -548,7 +551,7 @@ Item{
                                 anchors.left:text_BombSpeedMinTitle.right
                                 anchors.top: parent.top
                                 TextInput{
-                                    id:text_Input_BombSpeedMin
+                                    id:text_hit_accuracy
                                     anchors.fill: parent
                                     color:"#ffffffff"
                                     font.family:text_BombSpeedMinTitle.family
@@ -602,7 +605,7 @@ Item{
                                 anchors.left:text_BombSpeedMaxTitle.right
                                 anchors.top: parent.top
                                 TextInput{
-                                    id:text_Input_BombSpeedMax
+                                    id:text_hit_probability
                                     anchors.fill: parent
                                     color:"#ffffffff"
                                     font.family:text_BombSpeedMaxTitle.family
@@ -658,7 +661,7 @@ Item{
                                 anchors.left:text_BombHeightTitle.right
                                 anchors.top: parent.top
                                 TextInput{
-                                    id:text_Input_BombHeightMin
+                                    id:text_rudder_width
                                     anchors.fill: parent
                                     color:"#ffffffff"
                                     font.family:text_BombHeightTitle.family
@@ -1001,6 +1004,33 @@ Item{
                 view_List_TypeSelect.visible = !view_List_TypeSelect.visible
             }
         }
+
+    }
+
+   function loadAmmoData(){
+       //#pragma db not_null column("ammo_name")//            VARCHAR(100) NOT NULL ,--COMMENT '名称',
+    text_Input_Name.text  = newAmmoData.ammoData.ammoName
+
+       //#pragma db not_null column("used_uav_models")                        // used_uav_models VARCHAR(200) NOT NULL ,--COMMENT '使用机型'
+      // newAmmoData.ammoData.ammoToUavModel = ""
+
+     text_Input_MissileRange.text = newAmmoData.ammoData.ammoLenth
+       //#pragma db not_null column("mass")    //mass REAL NOT NULL ,--COMMENT '炸弹质量(kg)',
+     text_Input_MissileWeight.text =  newAmmoData.ammoData.ammoMass
+       //#pragma db not_null column("diameter")   //        diameter REAL NOT NULL ,--COMMENT '直径(m)',
+     text_Input_MissileDiameter.text =  newAmmoData.ammoData.ammoDiameter
+       //#pragma db not_null column("wingspan") //wingspan REAL NOT NULL ,--COMMENT '翼展(m)',
+     text_Input_Wingspan.text   =  newAmmoData.ammoData.ammoWingspan
+       //#pragma db not_null column("effective_range") //effective_range REAL NOT NULL ,--COMMENT '射程',
+       text_Input_MissileSheCheng.text  =  newAmmoData.ammoData.effective_range
+       text_action_time.text =   newAmmoData.ammoData.action_time
+       text_hit_accuracy.text  = newAmmoData.ammoData.hit_accuracy
+       text_hit_probability.text =  newAmmoData.ammoData.hit_probability
+       text_rudder_width.text =  newAmmoData.ammoData.rudder_width
+       text_Input_FlightTime.text  =  newAmmoData.ammoData.allow_continuous_flight_time
+       text_Input_GuidFlightTime.text  = newAmmoData.ammoData.guided_flight_time
+       text_Input_MaxSpeed.text =  newAmmoData.ammoData.maximum_speed_of_missile
+       //view_List_TypeSelect
 
     }
 

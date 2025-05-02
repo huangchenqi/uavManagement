@@ -11,6 +11,7 @@ Item {
     //工作条件
     property int workCondition: -1
     onWorkConditionChanged: {
+
         console.log("condition:",workCondition)
         if(lastWorkCondition == workCondition)
             return
@@ -351,5 +352,17 @@ Item {
 
             }
         }
+    }
+    function loadAmmoData(){
+        //#pragma db not_null column("warhead_cg_distance") //warhead_cg_distance REAL NOT NULL ,--COMMENT '弹头端面至重心距离(m)',
+      //  newAmmoData.ammoData.ammoWarheadCgDistance   = 0.0
+        //#pragma db not_null column("charge_mass") //charge_mass REAL NOT NULL ,--COMMENT '炸弹装药质量(kg)',
+       text_Input_WorkTemperature.text = newAmmoData.ammoData.working_temperature
+       text_Input_WorkAlt.text = newAmmoData.ammoData.working_altitude
+
+    //view_List_AerodynamicConfiguration  = newAmmoData.ammoData.aerodynamic_configuration
+    // view_List_WorkCondition   = newAmmoData.ammoData.working_conditions
+
+
     }
 }

@@ -343,9 +343,9 @@ Rectangle {
         }
     }
     function loadAmmoData(){
-       var ammoLoadData = new Object
+        var ammoLoadData = new Object
         ammoLoadData.recordId = processInfo.recordId
-       var result = ammoDaoModel.selectSomeAmmoData(ammoLoadData)
+        var result = ammoDaoModel.selectSomeAmmoData(ammoLoadData)
         addAmmoAllDatView.ammoSelectData = result
         console.log("ammloadoDaoModel"+JSON.stringify(addAmmoAllDatView.ammoSelectData))
         var imageUrlStr = "file:///"+addAmmoAllDatView.ammoSelectData.image_url
