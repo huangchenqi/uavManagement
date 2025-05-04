@@ -15,6 +15,7 @@ Item {
     property int aerodynamicConfiguration: -1
     property int lastAerodynamicConfiguration: -1
     property int loadAllData: 0
+    property var ammoAerodynamicConfigurationStr: ""
     onWorkConditionChanged: {
 
         console.log("condition:",workCondition)
@@ -42,7 +43,7 @@ Item {
     }
     onLoadAllDataChanged: {
         if(item_Missile.loadAllData === 1 ){
-            console.log("<><><>")
+            //console.log("<><><>")
             loadAmmoData()
             allComponentEnable()
         }else if(item_Missile.loadAllData === 2){
@@ -222,7 +223,12 @@ Item {
                                 isSelect :m_SelectState
                                 onClicked: {
                                     view_List_AerodynamicConfiguration.visible = false
-                                    lastAerodynamicConfiguration = aerodynamicConfiguration
+                                    //lastAerodynamicConfiguration = aerodynamicConfiguration
+                                    aerodynamicConfiguration = 0
+                                    // 清除所有按钮的选中状态
+                                    for (var i = 0; i < listmodel_Box_AerodynamicConfiguration.count; i++) {
+                                        listmodel_Box_AerodynamicConfiguration.setProperty(i, "m_SelectState", false);
+                                    }
                                     aerodynamicConfiguration = index
                                     m_SelectState = true
                                     newAmmoData.ammoData.aerodynamic_configuration = m_PlanNumber
@@ -235,7 +241,7 @@ Item {
                     Component.onCompleted: {
 
                         var ammoAerodynamicConfigurationData = ammoAerodynamicConfigurationDaoTableModel.selectAmmoAerodynamicConfigurationAllData()
-                        console.log("ammoAerodynamicConfigurationDao"+JSON.stringify(ammoAerodynamicConfigurationData))
+                        //console.log("ammoAerodynamicConfigurationDao"+JSON.stringify(ammoAerodynamicConfigurationData))
                         var result = [];
                         for (var i = 0; i < ammoAerodynamicConfigurationData.length; i++) {
                             result.push({
@@ -244,6 +250,24 @@ Item {
                                 m_TypeName: ammoAerodynamicConfigurationData[i].ammoComponeName
                             });
                         }
+                        console.log("ammoAerodynamicConfigurationDao"+JSON.stringify(result))
+                        if(item_Missile.loadAllData === 1 ){
+                            //console.log("<~>"+newAmmoData.ammoSelectData.aerodynamic_configuration)
+                            newAmmoData.ammoData.aerodynamic_configuration = newAmmoData.ammoSelectData.aerodynamic_configuration
+                            // 遍历数组 a 和 b，更新 m_SelectState
+                            for (var j = 0; j < result.length; j++) {
+                                if (result[j].m_PlanNumber === newAmmoData.ammoSelectData.aerodynamic_configuration) {
+                                    result[j].m_SelectState = true;
+                                    item_Missile.ammoAerodynamicConfigurationStr = result[j].m_TypeName
+                                    console.log("</>"+result[j].m_PlanNumber+"<,>"+result[j].m_TypeName+"aerodynamicConfiguration"+aerodynamicConfiguration)
+                                }
+                            }
+                        }else if(item_Missile.loadAllData === 2){
+                            console.log("<`~>")
+                        }else{
+                            console.log("Unknown selectType!")
+                        }
+                       console.log("newAmmoData.ammoData.aerodynamic_configuration"+newAmmoData.ammoData.aerodynamic_configuration)
                        listmodel_Box_AerodynamicConfiguration.append(result);
                         //console.log("listmodel_Box_AerodynamicConfiguration"+JSON.stringify(result))
                     }
@@ -262,7 +286,11 @@ Item {
                     text:{
                         if(aerodynamicConfiguration < 0)
                         {
-                            return "请选择:"
+                            if(item_Missile.loadAllData === 1 || item_Missile.loadAllData === 2 ){
+                                return  item_Missile.ammoAerodynamicConfigurationStr
+                            }else{
+                                return "请选择:"
+                            }
                         }
                         else
                         {
@@ -394,10 +422,5 @@ Item {
         //#pragma db not_null column("charge_mass") //charge_mass REAL NOT NULL ,--COMMENT '炸弹装药质量(kg)',
        text_Input_WorkTemperature.text = newAmmoData.ammoSelectData.working_temperature
        text_Input_WorkAlt.text = newAmmoData.ammoSelectData.working_altitude
-
-    //view_List_AerodynamicConfiguration  = newAmmoData.ammoData.aerodynamic_configuration
-    // view_List_WorkCondition   = newAmmoData.ammoData.working_conditions
-
-
     }
 }

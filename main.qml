@@ -6,7 +6,7 @@ Window {
     visible: true
     width: 1600
     height: 830
-    title: qsTr("无人机型号管理软件")
+    title: qsTr("无人机型号管理软件V1.0.0")//
 
     property string mainColor:"#fff0cc55"
     readonly property string mainBackgroundSource: "qrc:/Resources/Background/bg_MainBackground.png"
