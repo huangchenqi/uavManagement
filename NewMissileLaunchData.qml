@@ -19,6 +19,8 @@ Item {
     property int guidType: -1
     property int lastGuidType: -1
     property int loadDataType: 0
+    property var launchWay: ""
+    property var guideWay: ""
     onLaunchedTypeChanged: {
         if(lastLaunchedType == launchedType)
             return
@@ -42,7 +44,7 @@ Item {
         }else if(item_Missile.loadDataType === 2){
             //loadAllData()
         }else{
-
+            console.log("Unknown loadDataType!")
         }
     }
 
@@ -120,7 +122,11 @@ Item {
                     text:{
                         if(launchedType < 0)
                         {
-                            return "请选择:"
+                            if(item_Missile.loadDataType === 1 ||item_Missile.loadDataType === 2){
+                                return item_Missile.launchWay
+                            }else{
+                                return "请选择:"
+                            }
                         }
                         else
                         {
@@ -162,10 +168,14 @@ Item {
                                 isSelect: m_SelectState
                                 onClicked: {
                                     view_List_LaunchedData.visible = false
-                                    lastLaunchedType = launchedType
+                                    //lastLaunchedType = launchedType
+
+                                    // 清除所有按钮的选中状态
+                                    for (var i = 0; i < listmodel_Box.count; i++) {
+                                        listmodel_Box.setProperty(i, "m_SelectState", false);
+                                    }
                                     launchedType = index
                                     m_SelectState = true
-
                                     newAmmoData.ammoData.launch_way =m_PlanNumber
                                     console.log("Text content changed to: " + newAmmoData.ammoData.launch_way)
                                 }
@@ -182,6 +192,20 @@ Item {
                                 m_SelectState:false,// ammoType[i].checked,
                                 m_TypeName: ammoAmmoLaunchWayData[i].ammoComponeName
                             });
+                        }
+                        if(item_Missile.loadDataType === 1 || item_Missile.loadDataType === 2){
+                            //console.log("<~>"+newAmmoData.ammoSelectData.aerodynamic_configuration)
+                            newAmmoData.ammoData.launch_way = newAmmoData.ammoSelectData.launch_way
+                            // 遍历数组 a 和 b，更新 m_SelectState
+                            for (var j = 0; j < result.length; j++) {
+                                if (result[j].m_PlanNumber === newAmmoData.ammoSelectData.launch_way) {
+                                    result[j].m_SelectState = true;
+                                    item_Missile.launchWay = result[j].m_TypeName
+                                    console.log("</>"+result[j].m_PlanNumber+"<,>"+result[j].m_TypeName)
+                                }
+                            }
+                        }else{
+                            console.log("Unknown loadDataType!")
                         }
                        listmodel_Box.append(result);
                         console.log("ammoAmmoLaunchWayData"+JSON.stringify(result))
@@ -314,7 +338,11 @@ Item {
                     text:{
                         if(guidType < 0)
                         {
-                            return "请选择:"
+                            if(item_Missile.loadDataType === 1 ||item_Missile.loadDataType === 2){
+                                return item_Missile.guideWay
+                            }else{
+                                return "请选择:"
+                            }
                         }
                         else
                         {
@@ -356,7 +384,11 @@ Item {
                                 isSelect: m_SelectState
                                 onClicked: {
                                     view_List_GuidTypeData.visible = false
-                                    lastGuidType = guidType
+                                    //lastGuidType = guidType
+                                    // 清除所有按钮的选中状态
+                                    for (var i = 0; i < listmodel_Box_GuidType.count; i++) {
+                                        listmodel_Box_GuidType.setProperty(i, "m_SelectState", false);
+                                    }
                                     guidType = index
                                     m_SelectState = true
                                     newAmmoData.ammoData.guidance_way =m_PlanNumber
@@ -376,6 +408,20 @@ Item {
                                 m_SelectState:false,// ammoType[i].checked,
                                 m_TypeName: ammoGuidanceTypeData[i].ammoComponeName
                             });
+                        }
+                        if(item_Missile.loadDataType === 1 || item_Missile.loadDataType === 2){
+                            //console.log("<~>"+newAmmoData.ammoSelectData.aerodynamic_configuration)
+                            newAmmoData.ammoData.guidance_way = newAmmoData.ammoSelectData.guidance_way
+                            // 遍历数组 a 和 b，更新 m_SelectState
+                            for (var j = 0; j < result.length; j++) {
+                                if (result[j].m_PlanNumber === newAmmoData.ammoSelectData.guidance_way) {
+                                    result[j].m_SelectState = true;
+                                    item_Missile.guideWay = result[j].m_TypeName
+                                    console.log("</>"+result[j].m_PlanNumber+"<,>"+result[j].m_TypeName)
+                                }
+                            }
+                        }else{
+                            console.log("Unknown loadDataType!")
                         }
                        listmodel_Box_GuidType.append(result);
                         console.log("ammoAmmoLaunchWayData"+JSON.stringify(result))

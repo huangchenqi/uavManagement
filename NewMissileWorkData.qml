@@ -24,7 +24,7 @@ Item {
         if(lastWorkCondition > -1){
             listmodel_Box.set(lastWorkCondition,{m_SelectState:false})
         }
-    }   
+    }
     //signal workCondition(var indexStr)
     // Connections {
     //     target: item_Missile
@@ -263,6 +263,16 @@ Item {
                                 }
                             }
                         }else if(item_Missile.loadAllData === 2){
+                            //console.log("<~>"+newAmmoData.ammoSelectData.aerodynamic_configuration)
+                            newAmmoData.ammoData.aerodynamic_configuration = newAmmoData.ammoSelectData.aerodynamic_configuration
+                            // 遍历数组 a 和 b，更新 m_SelectState
+                            for (var j = 0; j < result.length; j++) {
+                                if (result[j].m_PlanNumber === newAmmoData.ammoSelectData.aerodynamic_configuration) {
+                                    result[j].m_SelectState = true;
+                                    item_Missile.ammoAerodynamicConfigurationStr = result[j].m_TypeName
+                                    console.log("</>"+result[j].m_PlanNumber+"<,>"+result[j].m_TypeName+"aerodynamicConfiguration"+aerodynamicConfiguration)
+                                }
+                            }
                             console.log("<`~>")
                         }else{
                             console.log("Unknown selectType!")
@@ -329,7 +339,11 @@ Item {
                     text:{
                         if(workCondition < 0)
                         {
-                            return "请选择:"
+                            if(item_Missile.loadAllData === 1 || item_Missile.loadAllData === 2 ){
+                                return  newAmmoData.ammoSelectData.working_conditions
+                            }else{
+                                return "请选择:"
+                            }
                         }
                         else
                         {
