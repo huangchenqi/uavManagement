@@ -79,16 +79,17 @@ Item {
                                            notation: DoubleValidator.StandardNotation
                                            decimals: 5
                         }
-                        // onTextChanged: {
-                        //     if(text != "")
-                        //     {
+                        onTextChanged: {
+                            // if(text != "")
+                            // {
 
-                        //     }
-                        // }
-                        onEditingFinished: {
-                            ammoData.fuel_dispersion_radius =text
+                            // }
+                            ammoData.fuel_dispersion_radius = textToFloat(text)
                             console.log("Text content changed to: " + text)
                         }
+                        // onEditingFinished: {
+
+                        // }
                     }
                     Rectangle{
                         width: parent.width
@@ -137,16 +138,17 @@ Item {
                                            notation: DoubleValidator.StandardNotation
                                            decimals: 5
                         }
-                        // onTextChanged: {
-                        //     if(text != "")
-                        //     {
+                        onTextChanged: {
+                            // if(text != "")
+                            // {
 
-                        //     }
-                        // }
-                        onEditingFinished: {
-                            ammoData.distance_from_center_explosion =text
+                            // }
+                            ammoData.distance_from_center_explosion = textToFloat(text)
                             console.log("Text content changed to: " + text)
                         }
+                        // onEditingFinished: {
+
+                        // }
                     }
                     Rectangle{
                         width: parent.width
@@ -195,16 +197,17 @@ Item {
                                            notation: DoubleValidator.StandardNotation
                                            decimals: 5
                         }
-                        // onTextChanged: {
-                        //     if(text != "")
-                        //     {
+                        onTextChanged: {
+                            // if(text != "")
+                            // {
 
-                        //     }
-                        // }
-                        onEditingFinished: {
-                            ammoData.shock_wave_overpressure_value =text
+                            // }
+                            ammoData.shock_wave_overpressure_value = textToFloat(text)
                             console.log("Text content changed to: " + text)
                         }
+                        // onEditingFinished: {
+
+                        // }
                     }
                     Rectangle{
                         width: parent.width
@@ -215,6 +218,24 @@ Item {
                     }
                 }
             }
+        }
+    }
+    function textToFloat(data){
+        console.log("textToFloatdata"+data)
+        // 检查是否以小数点结尾
+        if (data.endsWith(".")) {
+            data = data.slice(0, -1); // 去掉小数点
+        }
+        console.log("textToFloatdata"+data)
+        // 将文本转换为浮点数
+        var num = parseFloat(data);
+        if (!isNaN(num)) {
+
+            return num; // 有效时赋值
+        } else {
+            // 无效时恢复原值（可选）
+            num = 0.00
+            return num;
         }
     }
 }

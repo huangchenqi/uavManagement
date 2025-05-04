@@ -220,6 +220,7 @@ Rectangle {
                                       onClicked: {
                                           console.log("#include <QTextCodec>"+m_PlanNumber)
                                            var viewType = m_TypeName
+                                          processInfo.loadViewType = "addition"
                                           if(viewType === "航空爆破炸弹" ||
                                              viewType === "航空半穿甲炸弹" ||
                                               viewType === "航空杀伤爆破炸弹"  ||
@@ -231,11 +232,11 @@ Rectangle {
                                                viewType === "航空宣传宣传炸弹"   ||
                                                viewType ===  "无源干扰吊舱"  ){
                                               // 动态加载 QML 文件并设置属性
-                                              pageAmmoModelLoader.setSource("qrc:./AddAmmoAllData.qml", {viewType: viewType})
+                                              pageAmmoModelLoader.setSource("qrc:./AddAmmoAllData.qml", {viewType: viewType,processInfo: processInfo})
 
                                           }else{
                                               // 动态加载 QML 文件并设置属性
-                                              pageAmmoModelLoader.setSource("qrc:./AddAmmoAviationAllData.qml", {viewType: viewType})
+                                              pageAmmoModelLoader.setSource("qrc:./AddAmmoAviationAllData.qml", {viewType: viewType,processInfo: processInfo})
                                           }
 
                                           // 动态加载 QML 文件并设置属性
@@ -845,7 +846,7 @@ Rectangle {
                               text: "新增弹药"
                               onClicked: {
                                   addAmmoDataPopup.open()
-                                  processInfo.loadViewType = "addition"
+
                                   uavAmmoManagementroot.color = "transparent"//
                                   //pageAmmoModelLoader.setSource("qrc:./AddAmmoAllData.qml")
                                   //ammoRecordDataView.visible = false

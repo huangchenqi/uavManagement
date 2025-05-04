@@ -457,7 +457,7 @@ bool AmmoDao::updateAmmoData(const QJsonObject &object)
         //std::shared_ptr<Person> person(db->load<Person>(1));  // 加载ID为1的记录
         // 获取要更新的记录ID
         // 从 QJsonObject 中提取 "id" 字段
-        QJsonValue idValue = object.value("id");
+        QJsonValue idValue = object.value("recordId");
 
         // 检查字段是否存在
         if (idValue.isUndefined()) {

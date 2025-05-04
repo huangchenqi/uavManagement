@@ -9,13 +9,13 @@ Item{
     width: 1000
     height: 230
 
-    property int selectType:0
-    onSelectTypeChanged: {
-        if(missileCommonData.selectType === 1 ){
+    property int selectAmmoViewType:0
+    onSelectAmmoViewTypeChanged: {
+        if(missileCommonData.selectAmmoViewType === 1 ){
             console.log("<><><>")
             loadAmmoData()
             allComponentEnable()
-        }else if(missileCommonData.selectType === 2){
+        }else if(missileCommonData.selectAmmoViewType === 2){
             loadAmmoData()
         }else{
             console.log("Unknown selectType!")
@@ -968,7 +968,7 @@ Item{
                         pixelSize: 18
                         onClicked: {
                             view_List_TypeSelect.visible = false
-                            selectType = index
+                            //selectType = index
                             m_SelectState = !m_SelectState
                             isSelect = m_SelectState                            
                             // 检查数组中是否已经存在该数字

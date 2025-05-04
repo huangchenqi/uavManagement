@@ -198,7 +198,7 @@ Item {
             width: parent.width - btn_Cancel.width
             height: parent.height
             source: {
-                if(processInfo.loadViewType === "addUavData"){
+                if(processInfo.loadViewType === "addition"){
                     return ""
                 }else if(processInfo.loadViewType === "query"){
                     rect_ImageShow.enabled = false
@@ -256,10 +256,16 @@ Item {
             width: pixelSize * 4
             text: "保存"
             onClicked: {
+                console.log("processInfo.loadViewType+:"+processInfo.loadViewType)
+                if(processInfo.loadViewType === "addition"){
+                    saveAmmoData()
+                }else if(processInfo.loadViewType === "update"){
+                    updateAmmoData()
+                }else{
+                    console.log("Unknown processInfo.loadViewType!")
+                }
                 backAmmoRecord()
                 newAmmoData.visible = false
-                saveAmmoData()
-
             }
         }
     }
@@ -495,10 +501,15 @@ Item {
 //        visible: false
 //    }
     function loadSelectedViewType(){
-
         if(processInfo.loadViewType === "addition"){
            initAmmoData()
-           addAmmoComponentWarheadPanel.loadStatus = "addition"
+            custom_NewMissileBaseData.selectAmmoViewType = 0
+            custom_WorkData.loadAllData = 0
+            custom_LaunchData.loadDataType = 0
+            addAmmoComponentFusePanel.loadDataType = 0
+            addAmmoComponentLaunchconditionsPanel.loadDataType = 0
+            addAmmoComponentSeekerPanel.loadDataType = 0
+            addAmmoComponentWarheadPanel.loadStatus =0
            //newAmmoData.selectType = 0 //0 代表新增，1代表查看，2代表修改。
         }else if(processInfo.loadViewType === "query"){
 
@@ -507,7 +518,7 @@ Item {
             loadAmmoData()
             btn_Cancel.text = "返回"
             btn_Save.visible = false
-            custom_NewMissileBaseData.selectType = 1
+            custom_NewMissileBaseData.selectAmmoViewType = 1
             custom_WorkData.loadAllData = 1
             custom_LaunchData.loadDataType = 1
             addAmmoComponentFusePanel.loadDataType = 1
@@ -517,7 +528,7 @@ Item {
         }else if(processInfo.loadViewType === "update"){
             addAmmoComponentWarheadPanel.loadStatus = 2
             loadAmmoData()
-            custom_NewMissileBaseData.selectType = 2
+            custom_NewMissileBaseData.selectAmmoViewType = 2
             btn_Cancel.text = "返回"
             btn_Save.text = "编辑"
             custom_WorkData.loadAllData = 2
@@ -837,6 +848,27 @@ Item {
              }else{
                 console.log("unknown insertNewAmmoData!")
             }
+    }
+    function updateAmmoData(){
+        newAmmoData.ammoData.ammoType = newAmmoData.viewType
+        newAmmoData.ammoData.recordId = processInfo.recordId
+        console.log("newAmmoData.ammoData.recordId"+newAmmoData.ammoData.recordId+"processInfo.recordId"+processInfo.recordId)
+        newAmmoData.ammoData.ammoToUavModel = newAmmoData.uavArray.join(",")
+        console.log("ammoSelecttype"+JSON.stringify(newAmmoData.ammoData))//console.log("ammoData.push"+JSON.stringify(ammoData))
+         let result = ammoDaoModel.updateAmmoData(ammoData)
+           if(result === true){
+               warningItem.text = "^_^航弹更新数据成功!^_^"
+               warningPopup.open()
+               // 2秒后自动关闭
+               autoCloseTimer.start()
+           }else if(result === false){
+               warningItem.text = "^_^航弹更新数据失败!^_^"
+               warningPopup.open()
+               // 2秒后自动关闭
+               autoCloseTimer.start()
+            }else{
+               console.log("unknown insertNewAmmoData!")
+           }
     }
 
 }
