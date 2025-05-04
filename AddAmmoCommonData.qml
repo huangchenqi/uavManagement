@@ -1354,7 +1354,6 @@ Item{//航空导弹与航空炸弹
         view_List_ShaShangTypeSelect.enabled = false
         view_List_TypeSelect.enabled = false
         text_Input_DanErJuli.enabled = false
-        text_Input_ShaShangFangshi.enabled = false
         text_Input_BombSpeedMin.enabled = false
         text_Input_BombSpeedMax.enabled = false
         text_Input_BombHeightMin.enabled = false
