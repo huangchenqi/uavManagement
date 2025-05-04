@@ -1225,6 +1225,7 @@ Rectangle {
                   TableModelColumn { display: "frequencyMinimum" }
                   TableModelColumn { display: "frequencyMaximum" }
                   TableModelColumn { display: "description" }
+                  TableModelColumn { display: "recordcreationTime"}
                   TableModelColumn { display: "" }
               }
               // 组件加载完成后生成测试数据
@@ -1427,11 +1428,11 @@ Rectangle {
                               property color scrollBarColor: "#E5E5E5"
                               property int scrollBarWidth: 7
                               //列宽
-                              property variant columnWidthArr: [50,50, 180, 180, 120, 120, 200,300 ]
+                              property variant columnWidthArr: [50,50, 180, 180, 120, 120,200, 200,300 ]
 
                               // 显示10个字段
                               property var horHeader: ["","序号", "通信侦察名称", "使用机型","频率最小值", "频率最大值",
-                                  "用途描述",  "操作"]
+                                  "用途描述","时间",  "操作"]
                               property int selected: -1
                               //数据展示
                               TableView {
@@ -1525,7 +1526,7 @@ Rectangle {
                                         }
 
                                       DelegateChoice {
-                                          column:7
+                                          column:8
                                           delegate: Rectangle {
                                               color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
                                               width: control.columnWidthArr[column]

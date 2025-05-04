@@ -127,7 +127,21 @@ QJsonArray ReconnaissanceCommunicationDao::selectReconnaissanceCommunicationData
             // QDateTime dateTime;
             // dateTime = entity.recordCreationTime_;
             // qDebug() <<"recordcreation_time"<< entity.recordCreationTime_;
-            // obj["recordcreation_time"] = entity.recordCreationTime_.toString(Qt::ISODate);
+            // 原始日期时间字符串
+            QString originalDateTime = entity.recordCreationTime_.toString(Qt::ISODate);
+
+            // 解析原始日期时间字符串
+            QDateTime dateTime = QDateTime::fromString(originalDateTime, "yyyy-MM-ddTHH:mm:ss");
+            QString formattedDateTime;
+            // 检查解析是否成功
+            if (dateTime.isValid()) {
+                // 转换为指定格式
+                formattedDateTime = dateTime.toString("yyyy-MM-dd HH:mm:ss");
+                qDebug() << "Formatted Date and Time:" << formattedDateTime;
+            } else {
+                qDebug() << "Invalid date time string";
+            }
+            obj["recordcreationTime"] = formattedDateTime;
 
 
             obj["operation"] = "";
@@ -144,7 +158,7 @@ QJsonArray ReconnaissanceCommunicationDao::selectReconnaissanceCommunicationData
         throw; // 或返回包含错误信息的 JSON
     }
     QJsonDocument doc(ammoModelData);
-    qDebug()<<"当前函数名称:" << __FUNCTION__<<":";
+    qDebug()<<"当前函数名称aaaaa:" << __FUNCTION__<<":";
     qDebug().noquote() << doc.toJson(QJsonDocument::Indented);
     return ammoModelData;
 }
