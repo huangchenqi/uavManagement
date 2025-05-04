@@ -328,20 +328,27 @@ Rectangle {
             addAmmoAllDatView.visible = false
         }
     }
+    //该界面时多用。需要区分是新增、查看、修改
     function loadViewType(){
         if(processInfo.loadViewType === "addition"){
            addAmmo.selectType = 0 //0 代表新增，1代表查看，2代表修改。
         }else if(processInfo.loadViewType === "query"){
             loadAmmoData()
             addAmmo.selectType = 1
+            usageDescriptionText.enabled = false
+            uavImagSelect.enabled = false
+            btn_Cancel.text = "返回"
+            btn_Save.visible = false
 
         }else if(processInfo.loadViewType === "update"){
             loadAmmoData()
             addAmmo.selectType = 2
+            btn_Save.text = "编辑"
         }else{
             console.log("Unknown processInfo.loadViewType!")
         }
     }
+    //加载全部数据
     function loadAmmoData(){
         var ammoLoadData = new Object
         ammoLoadData.recordId = processInfo.recordId
@@ -353,6 +360,7 @@ Rectangle {
         ammunitionImg.source = imageUrlStr
         usageDescriptionText.text = addAmmoAllDatView.ammoSelectData.ammoDescription
     }
+    //初始化数据
     function initAmmoData(){
         //#pragma db not_null column("ammo_name")//            VARCHAR(100) NOT NULL ,--COMMENT '名称',
         addAmmoAllDatView.ammoData.ammoName = ""
@@ -627,6 +635,7 @@ Rectangle {
             addAmmoAllDatView.ammoData.use_status   = true
 
     }
+    //保存数据
     function saveAmmoData(){
 
          ammoData.ammoType = addAmmoAllDatView.viewType

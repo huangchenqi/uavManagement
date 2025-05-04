@@ -386,7 +386,7 @@ Item {
                                 isSelect: m_SelectState
                                 onClicked: {
                                     view_List_WorkCondition.visible = false
-                                    lastWorkCondition =  workCondition
+                                    //lastWorkCondition =  workCondition
                                     workCondition = index
                                     //workCondition(index)
                                     console.log("current workCondition:",workCondition)
@@ -398,14 +398,22 @@ Item {
                         }
                     }
                     Component.onCompleted: {
-                        listmodel_Box.append({m_Number:0,m_SelectState:false,m_TypeName:"白天"})
-                        listmodel_Box.append({m_Number:1,m_SelectState:false,m_TypeName:"夜晚"})
+                        // listmodel_Box.append({m_Number:0,m_SelectState:false,m_TypeName:"白天"})
+                        // listmodel_Box.append({m_Number:1,m_SelectState:false,m_TypeName:"夜晚"})
+                        var result = [{m_Number: 0, m_SelectState: false, m_TypeName: "白天"},
+                                      {m_Number: 1, m_SelectState: false, m_TypeName: "夜晚"}]
+                        if(item_Missile.loadAllData === 1 || item_Missile.loadAllData === 2 ){
+                            updateSelectState(newAmmoData.ammoSelectData.working_conditions,result)
+                        }
+                        listmodel_Box.append(result)
+
                     }
                 }
 
             }
         }
     }
+    //将文本框的文字转化为数字或者小数
     function textToFloat(data){
         console.log("textToFloatdata"+data)
         // 检查是否以小数点结尾
@@ -424,11 +432,15 @@ Item {
             return num;
         }
     }
+    //禁用相关的控件
     function allComponentEnable(){
         text_Input_WorkTemperature.enabled = false
         text_Input_WorkAlt.enabled = false
-    }
+        view_List_AerodynamicConfiguration.enabled =false
+        view_List_WorkCondition.enabled = false
 
+    }
+    //加载数据
     function loadAmmoData(){
         console.log("newAmmoData.ammoData.ammoName"+newAmmoData.ammoSelectData.ammoName)
         //#pragma db not_null column("warhead_cg_distance") //warhead_cg_distance REAL NOT NULL ,--COMMENT '弹头端面至重心距离(m)',
@@ -436,5 +448,13 @@ Item {
         //#pragma db not_null column("charge_mass") //charge_mass REAL NOT NULL ,--COMMENT '炸弹装药质量(kg)',
        text_Input_WorkTemperature.text = newAmmoData.ammoSelectData.working_temperature
        text_Input_WorkAlt.text = newAmmoData.ammoSelectData.working_altitude
+    }
+    //设置相关的行凸显
+    function updateSelectState(targetTypeName,myArray) {
+            for (var i = 0; i < myArray.length; i++) {
+                if (myArray[i].m_TypeName === targetTypeName) {
+                    myArray[i].m_SelectState = true;
+                }
+            }
     }
 }

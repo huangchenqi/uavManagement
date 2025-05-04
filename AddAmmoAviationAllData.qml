@@ -525,6 +525,7 @@ Item {
             addAmmoComponentLaunchconditionsPanel.loadDataType = 1
             addAmmoComponentSeekerPanel.loadDataType = 1
             addAmmoComponentWarheadPanel.loadStatus =1
+            usageDescriptionText.enabled = false
         }else if(processInfo.loadViewType === "update"){
             addAmmoComponentWarheadPanel.loadStatus = 2
             loadAmmoData()

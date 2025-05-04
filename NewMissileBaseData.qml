@@ -15,6 +15,7 @@ Item{
             //console.log("<><><>")
             loadAmmoData()
             allComponentEnable()
+
         }else if(missileCommonData.selectAmmoViewType === 2){
             loadAmmoData()
         }else{
@@ -1094,6 +1095,7 @@ Item{
         text_Input_FlightTime.enabled = false
         text_Input_GuidFlightTime.enabled = false
         text_Input_MaxSpeed.enabled = false
+        view_List_TypeSelect.enabled =false
 
     }
     //将字符串转变为数字或者小数

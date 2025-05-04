@@ -4,6 +4,7 @@ import "qrc:/"
 import "qrc:/AddAmmoModules/Component"
 import UavDaoModel 1.0
 import AmmoDaoModel 1.0
+import AmmoKillingWayDaoModel 1.0
 Item{//航空导弹与航空炸弹
     id:missileCommonData
     width: 880
@@ -11,21 +12,28 @@ Item{//航空导弹与航空炸弹
 
     property int selectType:0 //0 代表新增，1代表查看，2代表修改。
 
-    property int shaShangType: 0
+    property int shaShangType: -1
     property string text: ""
-
+    property var ammoKillingMethod: ""
     AmmoDaoTableModel{
         id:ammoDaoModel
     }
     onSelectTypeChanged: {
-        if(missileCommonData.selectType === 1 || missileCommonData.selectType === 2){
-            console.log("<><><>")
+        if(missileCommonData.selectType === 1 ){
+            allComponentEnable()
             loadAmmoData()
+        }else if(missileCommonData.selectType === 2){
+            loadAmmoData()
+        }else{
+            console.log("Unknown selectType!")
         }
 
     }
     UavModelDaoTableModel{
         id:uavModelDao
+    }
+    AmmoKillingWayDaoTableModel{
+        id:ammoKillingWayDaoTableModel
     }
     Component.onCompleted: {
     }
@@ -421,16 +429,17 @@ Item{//航空导弹与航空炸弹
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
-                                    // onTextChanged: {
-                                    //     if(text != "")
-                                    //     {
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
 
-                                    //     }
-                                    // }
-                                    onEditingFinished: {
+                                        // }
                                         ammoData.fuze_model =text
                                         console.log("Text content changed to: " + text)
                                     }
+                                    // onEditingFinished: {
+
+                                    // }
                                 }
                                 Rectangle{
                                     width: parent.width
@@ -1118,7 +1127,7 @@ Item{//航空导弹与航空炸弹
                         pixelSize: 18
                         onClicked: {
                             view_List_TypeSelect.visible = false
-                            selectType = index
+                            //selectType = index
                             m_SelectState = !m_SelectState
                             isSelect = m_SelectState
                             // 检查数组中是否已经存在该数字
@@ -1155,6 +1164,24 @@ Item{//航空导弹与航空炸弹
                         m_SelectState:false,// ammoType[i].checked,
                         m_TypeName: uavData[i].uavName
                     });
+                }
+                if(missileCommonData.selectType === 1 || missileCommonData.selectType === 2){
+                    var ammoToUavModel = addAmmoAllDatView.ammoSelectData.ammoToUavModel
+                    console.log("addAmmoAllDatView.ammoSelectData."+addAmmoAllDatView.ammoSelectData.ammoToUavModel)
+                    var a = ammoToUavModel.split(",");
+                     addAmmoAllDatView.uavArray = a
+                    // 遍历数组 a 和 b，更新 m_SelectState
+                    for (var i = 0; i < a.length; i++) {
+                        for (var j = 0; j < result.length; j++) {
+                            if (result[j].m_PlanNumber === a[i]) {
+                                result[j].m_SelectState = true;
+                            }
+                        }
+                    }
+
+                    // 打印更新后的数组 b
+                    console.log("Updated array b:", JSON.stringify(result, null, 2),"addAmmoAllDatView.uavArray"+addAmmoAllDatView.uavArray);
+
                 }
                listmodel_Box.append(result);
             }
@@ -1217,7 +1244,13 @@ Item{//航空导弹与航空炸弹
                 text:{
                     if(shaShangType < 0)
                     {
-                        return "方式1"
+                        if(missileCommonData.selectType === 1 || missileCommonData.selectType === 2){
+                            return missileCommonData.ammoKillingMethod
+                        }else{
+                           return "请选择:"
+                        }
+
+
                     }
                     else
                     {
@@ -1260,21 +1293,78 @@ Item{//航空导弹与航空炸弹
                                 view_List_ShaShangTypeSelect.visible = false
                                 shaShangType = index
                                 // m_SelectState = !m_SelectState
+                                for (var i = 0; i < listmodel_Box_ShaSHangType.count; i++) {
+                                    listmodel_Box_ShaSHangType.setProperty(i, "m_SelectState", false);
+                                }
+                                m_SelectState = true
+                                ammoData.ammoKillingWay  = m_PlanNumber
                                 console.log(text_Input_ShaShangFangshi.text)
                             }
                         }
                     }
                 }
                 Component.onCompleted: {
-                    listmodel_Box_ShaSHangType.append({m_TypeName:"方式1",m_SelectState:false})
-                    listmodel_Box_ShaSHangType.append({m_TypeName:"方式2",m_SelectState:false})
-                    listmodel_Box_ShaSHangType.append({m_TypeName:"方式3",m_SelectState:false})
+                    var ammokillData = ammoKillingWayDaoTableModel.selectAmmoKillingWayAllData()
+                    console.log("<>ammoKillingWayDaoTableModel"+JSON.stringify(ammokillData))
+                    var result = [];
+                    for (var i = 0; i < ammokillData.length; i++) {
+                        result.push({
+                            m_PlanNumber: ammokillData[i].recordId,
+                            m_SelectState:false,// ammoType[i].checked,
+                            m_TypeName: ammokillData[i].ammoComponeName
+                        });
+                    }
+                    // listmodel_Box_ShaSHangType.append({m_TypeName:"方式1",m_SelectState:false})
+                    if(missileCommonData.selectType === 1 || missileCommonData.selectType === 2){
+                        var ammoKillingWayStr = addAmmoAllDatView.ammoSelectData.ammoKillingWay
+                        //var a = ammoToUavModel.split(",");
+
+                        // 遍历数组 a 和 b，更新 m_SelectState
+                        // for (var i = 0; i < a.length; i++) {
+                        //     for (var j = 0; j < result.length; j++) {
+                        //         if (result[j].m_PlanNumber === a[i]) {
+                        //             result[j].m_SelectState = true;
+                        //         }
+                        //     }
+                        // }
+                        for (var j = 0; j < result.length; j++) {
+                            if (result[j].m_PlanNumber === ammoKillingWayStr) {
+                                result[j].m_SelectState = true;
+                                missileCommonData.ammoKillingMethod = result[j].m_TypeName
+                            }
+                        }
+
+                        // 打印更新后的数组 b
+                        //console.log("Updated array ammoKillingWayStr b:", JSON.stringify(result, null, 2));
+                    }
+                    listmodel_Box_ShaSHangType.append(result)
 
                 }
             }
         }
 
     }
+    function allComponentEnable(){
+        input_name.enabled = false
+        text_Input_MissileRange.enabled = false
+        text_Input_MissileDiameter.enabled = false
+        text_Input_MissileWeight.enabled = false
+        text_Input_FillWeight.enabled = false
+        text_Input_Wingspan.enabled = false
+        view_List_ShaShangTypeSelect.enabled = false
+        view_List_TypeSelect.enabled = false
+        text_Input_DanErJuli.enabled = false
+        text_Input_ShaShangFangshi.enabled = false
+        text_Input_BombSpeedMin.enabled = false
+        text_Input_BombSpeedMax.enabled = false
+        text_Input_BombHeightMin.enabled = false
+        text_Input_BombHeightMax.enabled = false
+        text_Input_FuzeModel.enabled = false
+        text_Input_FuzeNum.enabled = false
+        text_Input_ActionTime.enabled = false
+        text_Input_DelayTime.enabled = false
+    }
+
     function textToFloat(data){
         console.log("textToFloatdata"+data)
         // 检查是否以小数点结尾
@@ -1295,7 +1385,6 @@ Item{//航空导弹与航空炸弹
     }
     function loadAmmoData(){
         input_name.text = addAmmoAllDatView.ammoSelectData.ammoName
-
         text_Input_MissileRange.text = addAmmoAllDatView.ammoSelectData.ammoLenth
         text_Input_MissileDiameter.text = addAmmoAllDatView.ammoSelectData.ammoDiameter
         text_Input_MissileWeight.text = addAmmoAllDatView.ammoSelectData.ammoMass
