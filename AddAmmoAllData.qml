@@ -323,9 +323,23 @@ Rectangle {
         text: "保存"
         onClicked: {
 
-            saveAmmoData()
-            backAmmoRecord()
-            addAmmoAllDatView.visible = false
+            // saveAmmoData()
+            // backAmmoRecord()
+
+            if(processInfo.loadViewType === "addition"){
+                saveAmmoData()
+                backAmmoRecord()
+                addAmmoAllDatView.visible = false
+            }else if(processInfo.loadViewType === "query"){
+                //addAmmoAllDatView.visible = false
+                backAmmoRecord()
+            }else if(processInfo.loadViewType === "update"){
+                updateAmmoData()
+                backAmmoRecord()
+                addAmmoAllDatView.visible = false
+            }else{
+                console.log("Unknown processInfo.loadViewType!")
+            }
         }
     }
     //该界面时多用。需要区分是新增、查看、修改
@@ -662,8 +676,25 @@ Rectangle {
        return true
     }
     function updateAmmoData(){  //函数不能大写开头
-      return true
+        addAmmoAllDatView.ammoData.ammoType = addAmmoAllDatView.viewType
+        addAmmoAllDatView.ammoData.recordId = processInfo.recordId
+        console.log("`1processInfo.recordId"+processInfo.recordId)
+        addAmmoAllDatView.ammoData.ammoToUavModel = addAmmoAllDatView.uavArray.join(",")
+        console.log("ammoSelecttype"+JSON.stringify(addAmmoAllDatView.ammoData))//console.log("ammoData.push"+JSON.stringify(ammoData))
+         let result = ammoDaoModel.updateAmmoData(ammoData)
+           if(result === true){
+               warningItem.text = "^_^航弹更新数据成功!^_^"
+               warningPopup.open()
+               // 2秒后自动关闭
+               autoCloseTimer.start()
+           }else if(result === false){
+               warningItem.text = "^_^航弹更新数据失败!^_^"
+               warningPopup.open()
+               // 2秒后自动关闭
+               autoCloseTimer.start()
+            }else{
+               console.log("unknown addAmmoAllDatView!")
+           }
+        return true
     }
-
-
 }
