@@ -170,7 +170,7 @@ Rectangle{//航空弹药的组件导引头
                 width: parent.width/2 - 10
                 height: 30
                 onTextChanged: {
-                    ammoData.adaptability_of_guidance_head_sunlight = textToFloat(text)
+                    ammoData.adaptability_of_guidance_head_sunlight = text
                     console.log("Text content changed to: " + text)
                 }
             }
@@ -287,10 +287,6 @@ Rectangle{//航空弹药的组件导引头
     }
 
     function saveammunitionData(){
-
-    }
-
-    function getSelectedPayloads(buttons) {
 
     }
 

@@ -547,7 +547,7 @@ Item {
         ammoLoadData.recordId = processInfo.recordId
         var result = ammoDaoModel.selectSomeAmmoData(ammoLoadData)
         newAmmoData.ammoSelectData = result
-        console.log("ammloaaaassadoDaoModel"+JSON.stringify(newAmmoData.ammoSelectData))
+        console.log("ammloaaaassadoDaoModel"+JSON.stringify(newAmmoData.ammoSelectData.preparation_time))
         //rect_ImageShow
         var imageUrlStr = "file:///"+newAmmoData.ammoSelectData.image_url
         console.log("imageUrlStr"+imageUrlStr)

@@ -135,11 +135,12 @@ Rectangle{//航空弹药的组件发射条件
                 anchors.topMargin: 15
                 title: "天气限制:"
                 pixelSize: 18
+                onlyNum: false
                 titleWidth: pixelSize * 4.5
                 width: parent.width/2 - 20
                 height: 30
                 onTextChanged: {
-                    ammoData.launch_conditions = textToFloat(text)
+                    ammoData.launch_conditions = text
                     console.log("Text content changed to: " + text)
                 }
             }

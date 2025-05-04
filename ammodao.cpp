@@ -814,12 +814,14 @@ bool AmmoDao::insertAmmoData(const QJsonObject &object)
         entity.minimum_relative_height_launch = object["minimum_relative_height_launch"].toDouble();
         entity.launch_speed = object["launch_speed"].toDouble();
         entity.launch_conditions = object["launch_conditions"].toString().toStdString();
+        //qDebug()<<"launch_conditions"<<object["launch_conditions"].toString();
         entity.launch_off_axis_angle = object["launch_off_axis_angle"].toDouble();//.toInt();
         entity.guidance_way = object["guidance_way"].toString().toStdString();
         entity.effective_range = object["effective_range"].toDouble();
         entity.hit_accuracy = object["hit_accuracy"].toDouble();
         entity.hit_probability = object["hit_probability"].toDouble();
         entity.preparation_time = object["preparation_time"].toDouble();//.toInt();
+
         entity.allow_continuous_flight_time = object["allow_continuous_flight_time"].toDouble();
         entity.guided_flight_time = object["guided_flight_time"].toDouble();
         entity.maximum_speed_of_missile = object["maximum_speed_of_missile"].toDouble();

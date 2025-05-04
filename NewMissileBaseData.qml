@@ -12,7 +12,7 @@ Item{
     property int selectAmmoViewType:0
     onSelectAmmoViewTypeChanged: {
         if(missileCommonData.selectAmmoViewType === 1 ){
-            console.log("<><><>")
+            //console.log("<><><>")
             loadAmmoData()
             allComponentEnable()
         }else if(missileCommonData.selectAmmoViewType === 2){
@@ -92,10 +92,10 @@ Item{
 
                 //     }
                 // }
-                onEditingFinished: {
-                    newAmmoData.ammoData.ammoName =text
-                    console.log("Text content changed to: " + text)
-                }
+                // onEditingFinished: {
+                //     newAmmoData.ammoData.ammoName =text
+                //     console.log("Text content changed to: " + text)
+                // }
             }
             Rectangle{
                 width: parent.width
@@ -486,7 +486,7 @@ Item{
                                 anchors.left:text_DanErJuliTitle.right
                                 anchors.top: parent.top
                                 TextInput{
-                                    id:text_action_time
+                                    id:preparation_time
                                     anchors.fill: parent
                                     color:"#ffffffff"
                                     font.family:text_DanErJuliTitle.family
@@ -1008,6 +1008,43 @@ Item{
                         m_TypeName: uavData[i].uavName
                     });
                 }
+
+                if(missileCommonData.selectAmmoViewType === 1 ){
+                    var ammoToUavModel = newAmmoData.ammoSelectData.ammoToUavModel
+                    var a = ammoToUavModel.split(",");
+
+                    // 遍历数组 a 和 b，更新 m_SelectState
+                    for (var i = 0; i < a.length; i++) {
+                        for (var j = 0; j < result.length; j++) {
+                            if (result[j].m_PlanNumber === a[i]) {
+                                result[j].m_SelectState = true;
+                            }
+                        }
+                    }
+
+                    // 打印更新后的数组 b
+                    console.log("Updated array b:", JSON.stringify(result, null, 2));
+                    console.log("<!><@><#>")
+                }else if(missileCommonData.selectAmmoViewType === 2){
+                    var ammoToUavModelUpdate = newAmmoData.ammoSelectData.ammoToUavModel
+                    var a = ammoToUavModelUpdate.split(",");
+                    uavArray = a
+                    // 遍历数组 a 和 b，更新 m_SelectState
+                    for (var i = 0; i < a.length; i++) {
+                        for (var j = 0; j < result.length; j++) {
+                            if (result[j].m_PlanNumber === a[i]) {
+                                result[j].m_SelectState = true;
+                            }
+                        }
+                    }
+
+                    // 打印更新后的数组 b
+                    console.log("Updated array b:", JSON.stringify(result, null, 2));
+                    console.log("<!><@><#>loadAmmoData")
+                }else{
+                    console.log("Unknown selectType!")
+                }
+               console.log("listmodel_Box::"+JSON.stringify(result))
                listmodel_Box.append(result);
 
             }
@@ -1040,6 +1077,7 @@ Item{
         }
 
     }
+    //控制所有控件的使用状态
     function allComponentEnable(){
         text_Input_Name.enabled = false
         text_Input_MissileRange.enabled = false
@@ -1049,7 +1087,7 @@ Item{
         text_Input_MissileSheCheng.enabled = false
 
        // newAmmoData.ammoSelectData.ammoToUavModel = ""
-        text_action_time.enabled = false
+        preparation_time.enabled = false
         text_hit_accuracy.enabled = false
         text_hit_probability.enabled = false
         text_rudder_width.enabled = false
@@ -1058,6 +1096,7 @@ Item{
         text_Input_MaxSpeed.enabled = false
 
     }
+    //将字符串转变为数字或者小数
     function textToFloat(data){
         console.log("textToFloatdata"+data)
         // 检查是否以小数点结尾
@@ -1076,7 +1115,7 @@ Item{
             return num;
         }
     }
-
+   //加载数据使其查看与修改
    function loadAmmoData(){
 
        //#pragma db not_null column("ammo_name")//            VARCHAR(100) NOT NULL ,--COMMENT '名称',
@@ -1084,17 +1123,18 @@ Item{
 
        //#pragma db not_null column("used_uav_models")                        // used_uav_models VARCHAR(200) NOT NULL ,--COMMENT '使用机型'
       // newAmmoData.ammoSelectData.ammoToUavModel = ""
-
-     text_Input_MissileRange.text = newAmmoData.ammoSelectData.ammoLenth
+      preparation_time.text = newAmmoData.ammoSelectData.preparation_time
+      //console.log("preparation_time.text"+preparation_time.text+"newAmmoData.ammoSelectData.preparation_time"+newAmmoData.ammoSelectData.preparation_time)
+      text_Input_MissileRange.text = newAmmoData.ammoSelectData.ammoLenth
        //#pragma db not_null column("mass")    //mass REAL NOT NULL ,--COMMENT '炸弹质量(kg)',
-     text_Input_MissileWeight.text =  newAmmoData.ammoSelectData.ammoMass
+      text_Input_MissileWeight.text =  newAmmoData.ammoSelectData.ammoMass
        //#pragma db not_null column("diameter")   //        diameter REAL NOT NULL ,--COMMENT '直径(m)',
-     text_Input_MissileDiameter.text =  newAmmoData.ammoSelectData.ammoDiameter
+      text_Input_MissileDiameter.text =  newAmmoData.ammoSelectData.ammoDiameter
        //#pragma db not_null column("wingspan") //wingspan REAL NOT NULL ,--COMMENT '翼展(m)',
-     text_Input_Wingspan.text   =  newAmmoData.ammoSelectData.ammoWingspan
+      text_Input_Wingspan.text   =  newAmmoData.ammoSelectData.ammoWingspan
        //#pragma db not_null column("effective_range") //effective_range REAL NOT NULL ,--COMMENT '射程',
        text_Input_MissileSheCheng.text  =  newAmmoData.ammoSelectData.effective_range
-       text_action_time.text =   newAmmoData.ammoSelectData.action_time
+       //preparation_time.text =   newAmmoData.ammoSelectData.action_time
        text_hit_accuracy.text  = newAmmoData.ammoSelectData.hit_accuracy
        text_hit_probability.text =  newAmmoData.ammoSelectData.hit_probability
        text_rudder_width.text =  newAmmoData.ammoSelectData.rudder_width
@@ -1102,6 +1142,8 @@ Item{
        text_Input_GuidFlightTime.text  = newAmmoData.ammoSelectData.guided_flight_time
        text_Input_MaxSpeed.text =  newAmmoData.ammoSelectData.maximum_speed_of_missile
        //view_List_TypeSelect
+       console.log("view_List_TypeSelectnewAmmoData.ammoSelectData.ammoToUavModel"+newAmmoData.ammoSelectData.ammoToUavModel)
+
 
     }
 
