@@ -8,22 +8,29 @@ Item {
     id:item_Missile
     width: 280
     height: 300
+    property int loadDataWay: 0
+    AmmoDaoTableModel{
+        id:ammoDaoModel
+    }
+    onLoadDataWayChanged: {
+        if(item_Missile.loadDataWay === 1){
+
+            loadAllAmmoData()
+            allComponentEnable
+        }else if(item_Missile.loadDataWay === 2){
+            loadAllAmmoData()
+        }else{
+            console.log("航空爆破炸弹!")
+        }
+
+    }
     //——————对外参数接口——————
     Rectangle{
         id:rect_J_6Missile
         anchors.fill: parent
         color:"#50000000"
         border.width: 0
-        property int selectType:0
-        AmmoDaoTableModel{
-            id:ammoDaoModel
-        }
-        onSelectTypeChanged: {
-            if(missileCommonData.selectType == 1 || missileCommonData.selectType == 2){
 
-            }
-
-        }
         CText{
             id:title
             text: "爆炸威力:"
@@ -61,7 +68,7 @@ Item {
 
                 CText{
                     id:text_Title1
-                    width: pixelSize * 8
+                    width: pixelSize * 9
                     height: parent.height
                     anchors.left: parent.left
                     anchors.top: parent.top
@@ -71,11 +78,12 @@ Item {
                     text:"子弹密度最小值(m): "
                 }
                 Item{
-                    width: parent.width - text_Title1.width - 8
+                    width: parent.width - text_Title1.width - 14
                     height: parent.height
                     anchors.left:text_Title1.right
                     anchors.top: parent.top
                     TextInput{
+                        id:bullet_density_range_minimum_text
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title1.family
@@ -120,7 +128,7 @@ Item {
 
                 CText{
                     id:text_TitleMa
-                    width: pixelSize * 8
+                    width: pixelSize * 9
                     height: parent.height
                     anchors.left: parent.left
                     anchors.top: parent.top
@@ -135,6 +143,7 @@ Item {
                     anchors.left:text_TitleMa.right
                     anchors.top: parent.top
                     TextInput{
+                        id:bullet_density_range_maximum_text
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_TitleMa.family
@@ -194,6 +203,7 @@ Item {
                     anchors.left:text_Title2.right
                     anchors.top: parent.top
                     TextInput{
+                        id:ground_ignition_rate_text
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title2.family
@@ -246,5 +256,16 @@ Item {
             num = 0.00
             return num;
         }
+    }
+    function loadAllAmmoData(){
+
+       bullet_density_range_minimum_text.text  = addAmmoAllDatView.ammoSelectData.bullet_density_range_maximum
+       bullet_density_range_maximum_text.text  = addAmmoAllDatView.ammoSelectData.bullet_density_range_maximum
+       ground_ignition_rate_text.text = addAmmoAllDatView.ammoSelectData.ground_ignition_rate
+    }
+    function allComponentEnable(){
+        bullet_density_range_minimum_text.enabled = false
+        bullet_density_range_maximum_text.enabled = false
+         ground_ignition_rate_text.enabled = false
     }
 }

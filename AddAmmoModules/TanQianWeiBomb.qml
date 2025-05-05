@@ -8,6 +8,17 @@ Item {
     id:item_Missile
     width: 280
     height: 300
+    property int loadDataWay: 0
+    onLoadDataWayChanged: {
+        if(item_Missile.loadDataWay === 1){
+            loadAllAmmoData()
+            allComponentEnable
+        }else if(item_Missile.loadDataWay === 2){
+            loadAllAmmoData()
+        }else{
+            console.log("航空爆破炸弹!")
+        }
+    }
     //——————对外参数接口——————
     Rectangle{
         id:rect_J_6Missile
@@ -67,6 +78,7 @@ Item {
                     anchors.left:text_Title1.right
                     anchors.top: parent.top
                     TextInput{
+                        id:maximum_inclusive_coverage_quantity_text
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title1.family
@@ -126,6 +138,7 @@ Item {
                     anchors.left:text_Title2.right
                     anchors.top: parent.top
                     TextInput{
+                        id:number_of_spread_text
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title2.family
@@ -185,6 +198,7 @@ Item {
                     anchors.left:text_Title3.right
                     anchors.top: parent.top
                     TextInput{
+                        id:surface_dc_resistivity_text
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title3.family
@@ -244,6 +258,7 @@ Item {
                     anchors.left:text_Title4.right
                     anchors.top: parent.top
                     TextInput{
+                        id:probability_of_arc_discharge_text
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title4.family
@@ -296,5 +311,19 @@ Item {
             num = 0.00
             return num;
         }
+    }
+    //加载数据
+    function loadAllAmmoData(){
+       maximum_inclusive_coverage_quantity_text.text  = addAmmoAllDatView.ammoSelectData.maximum_inclusive_coverage_quantity
+       number_of_spread_text.text  = addAmmoAllDatView.ammoSelectData.number_of_spread
+       surface_dc_resistivity_text.text  = addAmmoAllDatView.ammoSelectData.surface_dc_resistivity
+       probability_of_arc_discharge_text.text  = addAmmoAllDatView.ammoSelectData.probability_of_arc_discharge
+    }
+    //限制控件的使用状态
+    function allComponentEnable(){
+        maximum_inclusive_coverage_quantity_text.enabled = false
+        number_of_spread_text.enabled = false
+        surface_dc_resistivity_text.enabled = false
+        probability_of_arc_discharge_text.enabled = false
     }
 }

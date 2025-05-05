@@ -8,6 +8,18 @@ Item {
     id:item_Missile
     width: 280
     height: 300
+    property int loadDataWay: 0
+    onLoadDataWayChanged: {
+        if(item_Missile.loadDataWay === 1){
+            loadAllAmmoData()
+            allComponentEnable
+        }else if(item_Missile.loadDataWay === 2){
+            loadAllAmmoData()
+        }else{
+            console.log("航空爆破炸弹!")
+        }
+    }
+
     //——————对外参数接口——————
     Rectangle{
         id:rect_J_6Missile
@@ -181,5 +193,13 @@ Item {
             num = 0.00
             return num;
         }
+    }
+    function loadAllAmmoData(){
+       text_Input_QinCheShenDu.text  = addAmmoAllDatView.ammoSelectData.ammoPenetrationDepth
+       text_Input_PaoTuLiang.text  = addAmmoAllDatView.ammoSelectData.ammoQuantitySoilThrown
+    }
+    function allComponentEnable(){
+        text_Input_QinCheShenDu.enabled = false
+        text_Input_PaoTuLiang.enabled = false
     }
 }

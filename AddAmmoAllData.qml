@@ -252,16 +252,17 @@ Rectangle {
                 ammunitionImg.source = fileUrls[0]
                 //addUavModelData.image_name = uavImg.source.toString()
                 ammoData.image_url = ammunitionImg.source.toString()
-                var currentModel = navBar.currentIndex === 0 ? droneModel : schemeModel
-                for(var i = 0; i < currentModel.count; i++){
-                    if(currentModel.get(i).expanded){
-                        currentModel.get(i).items.push({
-                            name: "新条目",
-                            selected: false
-                        });
-                        break;
-                    }
-                }
+                //console.log("ammoData.image_url"+ammoData.image_url)
+                // var currentModel = navBar.currentIndex === 0 ? droneModel : schemeModel
+                // for(var i = 0; i < currentModel.count; i++){
+                //     if(currentModel.get(i).expanded){
+                //         currentModel.get(i).items.push({
+                //             name: "新条目",
+                //             selected: false
+                //         });
+                //         break;
+                //     }
+                // }
             }
             // onAccepted: {
             //             // 获取选中的文件路径
@@ -353,11 +354,13 @@ Rectangle {
             uavImagSelect.enabled = false
             btn_Cancel.text = "返回"
             btn_Save.visible = false
+            loadQueryAmmoComponentData()
 
         }else if(processInfo.loadViewType === "update"){
             loadAmmoData()
             addAmmo.selectType = 2
             btn_Save.text = "编辑"
+            loadUpdateAmmoComponentData()
         }else{
             console.log("Unknown processInfo.loadViewType!")
         }
@@ -372,6 +375,7 @@ Rectangle {
         var imageUrlStr = "file:///"+addAmmoAllDatView.ammoSelectData.image_url
         console.log("imageUrlStr"+imageUrlStr)
         ammunitionImg.source = imageUrlStr
+        ammoData.image_url = imageUrlStr
         usageDescriptionText.text = addAmmoAllDatView.ammoSelectData.ammoDescription
     }
     //初始化数据
@@ -670,10 +674,81 @@ Rectangle {
                 console.log("unknown deleteMountLocation")
             }
     }
+    //查看时候跳转
+    function loadQueryAmmoComponentData(){
+        if(addAmmoAllDatView.viewType === "航空反坦克子母弹"){
+            custom_FanTanKeZiMu.loadDataWay = 1
+            console.log("addAmmoAllDatView.ammoSelectData.bullet_density_range_maximum"+addAmmoAllDatView.ammoSelectData.bullet_density_range_maximum)
 
-    function loadAmmoComponentData(){
-        addAmmo.selectType = 0;
-       return true
+            return true
+        }else if(addAmmoAllDatView.viewType === "无源干扰吊舱"){
+            custom_PassiveInterferencePod.loadDataWay = 1;
+            return true
+        }else if(addAmmoAllDatView.viewType === "燃料空气炸弹"){
+            custom_FuelAirBomb.loadDataWay = 1;
+            return true
+        }else if(addAmmoAllDatView.viewType === "航空半穿甲炸弹"){
+           custom_HalfarmorPiercingBullet.loadDataWay = 1;
+           return true
+        }else if(addAmmoAllDatView.viewType === "航空爆破炸弹"){
+            custom_J6Missile.loadDataWay = 1;
+            return true
+        }else if(addAmmoAllDatView.viewType === "航空区域封锁字母弹"){
+            custom_QuYuFengSuoZiMu.loadDataWay = 1;
+            return true
+        }else if(addAmmoAllDatView.viewType === "航空燃料炸弹"){
+            custom_RanShaoDan.loadDataWay = 1;
+            return true
+        }else if(addAmmoAllDatView.viewType === "航空杀伤爆破炸弹"){
+            custom_ShaShangBaoPo.loadDataWay = 1;
+            return true
+        }else if(addAmmoAllDatView.viewType === "航空碳纤维炸弹"){
+            custom_TanQianWeiBomb.loadDataWay = 1;
+            return true
+        }else if(addAmmoAllDatView.viewType === "航空宣传宣传炸弹"){
+            custom_XuanChuanBomb.loadDataWay = 1;
+            return true
+        }else{
+            console.log("Unknown addAmmoAllDataView.viewType!")
+            return false
+        }
+    }
+    //编辑时候跳转
+    function loadUpdateAmmoComponentData(){
+        if(addAmmoAllDatView.viewType === "航空反坦克子母弹"){
+            custom_FanTanKeZiMu.loadDataWay = 2;
+            return true
+        }else if(addAmmoAllDatView.viewType === "无源干扰吊舱"){
+            custom_PassiveInterferencePod.loadDataWay = 2;
+            return true
+        }else if(addAmmoAllDatView.viewType === "燃料空气炸弹"){
+            custom_FuelAirBomb.loadDataWay = 2;
+            return true
+        }else if(addAmmoAllDatView.viewType === "航空半穿甲炸弹"){
+           custom_HalfarmorPiercingBullet.loadDataWay = 2;
+           return true
+        }else if(addAmmoAllDatView.viewType === "航空爆破炸弹"){
+            custom_J6Missile.loadDataWay = 2;
+            return true
+        }else if(addAmmoAllDatView.viewType === "航空区域封锁字母弹"){
+            custom_QuYuFengSuoZiMu.loadDataWay = 2;
+            return true
+        }else if(addAmmoAllDatView.viewType === "航空燃料炸弹"){
+            custom_RanShaoDan.loadDataWay = 2;
+            return true
+        }else if(addAmmoAllDatView.viewType === "航空杀伤爆破炸弹"){
+            custom_ShaShangBaoPo.loadDataWay = 2;
+            return true
+        }else if(addAmmoAllDatView.viewType === "航空碳纤维炸弹"){
+            custom_TanQianWeiBomb.loadDataWay = 2;
+            return true
+        }else if(addAmmoAllDatView.viewType === "航空宣传宣传炸弹"){
+            custom_XuanChuanBomb.loadDataWay = 2;
+            return true
+        }else{
+            console.log("Unknown addAmmoAllDataView.viewType!")
+            return false
+        }
     }
     function updateAmmoData(){  //函数不能大写开头
         addAmmoAllDatView.ammoData.ammoType = addAmmoAllDatView.viewType

@@ -14,6 +14,17 @@ Item {
         anchors.fill: parent
         color:"#50000000"
         border.width: 0
+        property int loadDataWay: 0
+        onLoadDataWayChanged: {
+            if(item_Missile.loadDataWay === 1){
+                loadAllAmmoData()
+                allComponentEnable
+            }else if(item_Missile.loadDataWay === 2){
+                loadAllAmmoData()
+            }else{
+                console.log("航空爆破炸弹!")
+            }
+        }
 
         CText{
             id:title
@@ -67,6 +78,7 @@ Item {
                     anchors.left:text_Title1.right
                     anchors.top: parent.top
                     TextInput{
+                        id:interference_duration_text
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title1.family
@@ -79,16 +91,17 @@ Item {
                                            notation: DoubleValidator.StandardNotation
                                            decimals: 5
                         }
-                        // onTextChanged: {
-                        //     if(text != "")
-                        //     {
+                        onTextChanged: {
+                            // if(text != "")
+                            // {
 
-                        //     }
-                        // }
-                        onEditingFinished: {
+                            // }
                             ammoData.interference_duration =text
                             console.log("Text content changed to: " + text)
                         }
+                        // onEditingFinished: {
+
+                        // }
                     }
                     Rectangle{
                         width: parent.width
@@ -125,6 +138,7 @@ Item {
                     anchors.left:text_Title2.right
                     anchors.top: parent.top
                     TextInput{
+                        id:interference_length_minimum_text
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title2.family
@@ -184,6 +198,7 @@ Item {
                     anchors.left:text_Title3.right
                     anchors.top: parent.top
                     TextInput{
+                        id:interference_length_maximum_text
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title3.family
@@ -243,6 +258,7 @@ Item {
                     anchors.left:text_Title4.right
                     anchors.top: parent.top
                     TextInput{
+                        id:interference_width_minimum_text
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title4.family
@@ -302,6 +318,7 @@ Item {
                     anchors.left:text_Title5.right
                     anchors.top: parent.top
                     TextInput{
+                        id:interference_width_maximum_text
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title5.family
@@ -354,5 +371,19 @@ Item {
             num = 0.00
             return num;
         }
+    }
+    function loadAllAmmoData(){
+       interference_duration_text.text  = addAmmoAllDatView.ammoSelectData.interference_duration
+       interference_length_minimum_text.text  = addAmmoAllDatView.ammoSelectData.interference_length_minimum
+       interference_length_maximum_text.text  = addAmmoAllDatView.ammoSelectData.interference_length_maximum
+       interference_width_minimum_text.text  = addAmmoAllDatView.ammoSelectData.interference_width_minimum
+       interference_width_maximum_text.text  = addAmmoAllDatView.ammoSelectData.interference_width_maximum
+    }
+    function allComponentEnable(){
+        interference_duration_text.enabled = false
+        interference_length_minimum_text.enabled = false
+        interference_length_maximum_text.enabled = false
+        interference_width_minimum_text.enabled = false
+        interference_width_maximum_text.enabled = false
     }
 }

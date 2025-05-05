@@ -8,6 +8,17 @@ Item {
     id:item_Missile
     width: 280
     height: 300
+    property int loadDataWay: 0
+    onLoadDataWayChanged: {
+        if(item_Missile.loadDataWay === 1){
+            loadAllAmmoData()
+            allComponentEnable
+        }else if(item_Missile.loadDataWay === 2){
+            loadAllAmmoData()
+        }else{
+            console.log("航空爆破炸弹!")
+        }
+    }
     //——————对外参数接口——————
     Rectangle{
         id:rect_J_6Missile
@@ -67,6 +78,7 @@ Item {
                     anchors.left:text_Title1.right
                     anchors.top: parent.top
                     TextInput{
+                        id:combustion_temperature_text
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title1.family
@@ -126,6 +138,7 @@ Item {
                     anchors.left:text_Title2.right
                     anchors.top: parent.top
                     TextInput{
+                        id:combustion_time_text
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title2.family
@@ -185,6 +198,7 @@ Item {
                     anchors.left:text_Title3.right
                     anchors.top: parent.top
                     TextInput{
+                        id:combustion_agent_spread_range_txt
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title3.family
@@ -237,5 +251,15 @@ Item {
             num = 0.00
             return num;
         }
+    }
+    function loadAllAmmoData(){
+       combustion_temperature_text.text  = addAmmoAllDatView.ammoSelectData.combustion_temperature
+       combustion_time_text.text  = addAmmoAllDatView.ammoSelectData.combustion_time
+       combustion_agent_spread_range_txt.text  = addAmmoAllDatView.ammoSelectData.combustion_agent_spread_range
+    }
+    function allComponentEnable(){
+        combustion_temperature_text.enabled = false
+        combustion_time_text.enabled = false
+        combustion_agent_spread_range_txt.enabled = false
     }
 }

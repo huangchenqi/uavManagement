@@ -519,6 +519,8 @@ bool AmmoDao::updateAmmoData(const QJsonObject &object)
         entity.ammoInitialVelocityFragments_ = object["ammoInitialVelocityFragments"].toDouble();
         entity.ammoNumberFragments_ = object["ammoNumberFragments"].toInt();
         entity.ammoArmorBreakingAbility_ = object["ammoArmorBreakingAbility"].toString().toStdString();
+
+
         entity.bullet_density_range_minimum = object["bullet_density_range_minimum"].toInt();
         entity.bullet_density_range_maximum = object["bullet_density_range_maximum"].toInt();//.toInt();
         entity.ground_ignition_rate = object["ground_ignition_rate"].toDouble();
@@ -772,6 +774,10 @@ bool AmmoDao::insertAmmoData(const QJsonObject &object)
         entity.ammoInitialVelocityFragments_ = object["ammoInitialVelocityFragments"].toDouble();
         entity.ammoNumberFragments_ = object["ammoNumberFragments"].toInt();
         entity.ammoArmorBreakingAbility_ = object["ammoArmorBreakingAbility"].toString().toStdString();
+
+
+        std::cout << "entity.ammoArmorBreakingAbility_"<<entity.ammoArmorBreakingAbility_<<"";
+        qDebug()<<"objectammoArmorBreakingAbility"<<object["ammoArmorBreakingAbility"].toString();
         entity.bullet_density_range_minimum = object["bullet_density_range_minimum"].toInt();
         entity.bullet_density_range_maximum = object["bullet_density_range_maximum"].toInt();//.toInt();
         entity.ground_ignition_rate = object["ground_ignition_rate"].toDouble();

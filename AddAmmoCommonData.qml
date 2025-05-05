@@ -94,12 +94,13 @@ Item{//航空导弹与航空炸弹
                 //     // 恢复光标位置（考虑文本缩短的情况）
                 //     cursorPosition = Math.min(cursorPos, newText.length)
                 // }
-            }
-
-            onEditingFinished: {
                 ammoData.ammoName =text
                 console.log("Text content changed to: " + text)
             }
+
+            // onEditingFinished: {
+
+            // }
         }
 
         Rectangle{

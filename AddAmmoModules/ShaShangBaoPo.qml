@@ -8,6 +8,17 @@ Item {
     id:item_Missile
     width: 280
     height: 300
+    property int loadDataWay: 0
+    onLoadDataWayChanged: {
+        if(item_Missile.loadDataWay === 1){
+            loadAllAmmoData()
+            allComponentEnable
+        }else if(item_Missile.loadDataWay === 2){
+            loadAllAmmoData()
+        }else{
+            console.log("航空爆破炸弹!")
+        }
+    }
     //——————对外参数接口——————
     Rectangle{
         id:rect_J_6Missile
@@ -67,6 +78,7 @@ Item {
                     anchors.left:text_Title1.right
                     anchors.top: parent.top
                     TextInput{
+                        id:ammoDenseKillingRadiusValue
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title1.family
@@ -126,6 +138,7 @@ Item {
                     anchors.left:text_Title2.right
                     anchors.top: parent.top
                     TextInput{
+                        id:ammoInitialVelocityFragmentsValue
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title2.family
@@ -186,6 +199,7 @@ Item {
                     anchors.left:text_Title3.right
                     anchors.top: parent.top
                     TextInput{
+                        id:ammoNumberFragmentsValue
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title3.family
@@ -245,6 +259,7 @@ Item {
                     anchors.left:text_Title4.right
                     anchors.top: parent.top
                     TextInput{
+                        id:ammoArmorBreakingAbilityValue
                         anchors.fill: parent
                         color:"#ffffffff"
                         font.family:text_Title4.family
@@ -262,7 +277,7 @@ Item {
                             // {
 
                             // }
-                            ammoData.ammoArmorBreakingAbility = textToFloat(text)
+                            ammoData.ammoArmorBreakingAbility = text
                             console.log("Text content changed to: " + text)
                         }
                         // onEditingFinished: {
@@ -297,5 +312,18 @@ Item {
             num = 0.00
             return num;
         }
+    }
+    function loadAllAmmoData(){
+       ammoDenseKillingRadiusValue.text  = addAmmoAllDatView.ammoSelectData.ammoDenseKillingRadius
+       ammoInitialVelocityFragmentsValue.text  = addAmmoAllDatView.ammoSelectData.ammoInitialVelocityFragments
+       ammoNumberFragmentsValue.text  = addAmmoAllDatView.ammoSelectData.ammoNumberFragments
+        console.log("addAmmoAllDatView.ammoSelectData.ammoArmorBreakingAbility"+addAmmoAllDatView.ammoSelectData.ammoArmorBreakingAbility)
+       ammoArmorBreakingAbilityValue.text  = addAmmoAllDatView.ammoSelectData.ammoArmorBreakingAbility
+    }
+    function allComponentEnable(){
+        ammoDenseKillingRadiusValue.enabled = false
+        ammoInitialVelocityFragmentsValue.enabled = false
+        ammoNumberFragmentsValue.enabled = false
+        ammoArmorBreakingAbilityValue.enabled = false
     }
 }
