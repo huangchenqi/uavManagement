@@ -26,7 +26,7 @@ Rectangle {
     signal backAmmoRecord()
     Component.onCompleted: {
         loadViewType()
-        initAmmoData()
+
     }
     AmmoDaoTableModel{
         id:ammoDaoModel
@@ -347,6 +347,7 @@ Rectangle {
     function loadViewType(){
         if(processInfo.loadViewType === "addition"){
            addAmmo.selectType = 0 //0 代表新增，1代表查看，2代表修改。
+            initAmmoData()
         }else if(processInfo.loadViewType === "query"){
             loadAmmoData()
             addAmmo.selectType = 1
@@ -755,7 +756,7 @@ Rectangle {
         addAmmoAllDatView.ammoData.recordId = processInfo.recordId
         console.log("`1processInfo.recordId"+processInfo.recordId)
         addAmmoAllDatView.ammoData.ammoToUavModel = addAmmoAllDatView.uavArray.join(",")
-        console.log("ammoSelecttype"+JSON.stringify(addAmmoAllDatView.ammoData))//console.log("ammoData.push"+JSON.stringify(ammoData))
+        console.log("ammoSelecttypeupdate"+JSON.stringify(addAmmoAllDatView.ammoData))//console.log("ammoData.push"+JSON.stringify(ammoData))
          let result = ammoDaoModel.updateAmmoData(ammoData)
            if(result === true){
                warningItem.text = "^_^航弹更新数据成功!^_^"

@@ -1318,6 +1318,7 @@ Item{//航空导弹与航空炸弹
                     // listmodel_Box_ShaSHangType.append({m_TypeName:"方式1",m_SelectState:false})
                     if(missileCommonData.selectType === 1 || missileCommonData.selectType === 2){
                         var ammoKillingWayStr = addAmmoAllDatView.ammoSelectData.ammoKillingWay
+                        ammoData.ammoKillingWay = addAmmoAllDatView.ammoSelectData.ammoKillingWay
                         //var a = ammoToUavModel.split(",");
 
                         // 遍历数组 a 和 b，更新 m_SelectState
@@ -1402,6 +1403,24 @@ Item{//航空导弹与航空炸弹
         text_Input_ActionTime.text = addAmmoAllDatView.ammoSelectData.action_time
         text_Input_DelayTime.text = addAmmoAllDatView.ammoSelectData.available_extension_time
         console.log("loadAmmoData()"+addAmmoAllDatView.ammoSelectData.ammoToUavModel)
+        //将查看与编辑的数据加载到保存的数据对象中
+        ammoData.ammoName = addAmmoAllDatView.ammoSelectData.ammoName
+        ammoData.ammoLenth = textToFloat(addAmmoAllDatView.ammoSelectData.ammoLenth)
+        ammoData.ammoDiameter = textToFloat(addAmmoAllDatView.ammoSelectData.ammoDiameter)
+        ammoData.ammoMass = textToFloat(addAmmoAllDatView.ammoSelectData.ammoMass)
+        ammoData.ammoChargeMass = textToFloat(addAmmoAllDatView.ammoSelectData.ammoChargeMass)
+        ammoData.ammoWingspan = textToFloat(addAmmoAllDatView.ammoSelectData.ammoWingspan)
+        ammoData.effective_range = textToFloat(addAmmoAllDatView.ammoSelectData.effective_range)
+        ammoData.ammoLugSpacing = textToFloat(addAmmoAllDatView.ammoSelectData.ammoLugSpacing)
+        // text_Input_ShaShangFangshi.text = addAmmoAllDatView.ammoSelectData.ammoKillingWay
+        ammoData.ammoMinReleaseSpeed = textToFloat(addAmmoAllDatView.ammoSelectData.ammoMinReleaseSpeed)
+        ammoData.ammoMaxReleaseSpeed = textToFloat(addAmmoAllDatView.ammoSelectData.ammoMaxReleaseSpeed)
+        ammoData.ammoMinReleaseHeight = textToFloat(addAmmoAllDatView.ammoSelectData.ammoMinReleaseHeight)
+        ammoData.ammoMaxReleaseHeight = textToFloat(addAmmoAllDatView.ammoSelectData.ammoMaxReleaseHeight)
+        ammoData.fuze_model = addAmmoAllDatView.ammoSelectData.fuze_model
+        ammoData.number_of_fuses = textToFloat(addAmmoAllDatView.ammoSelectData.number_of_fuses)
+        ammoData.action_time = textToFloat(addAmmoAllDatView.ammoSelectData.action_time)
+        ammoData.available_extension_time = textToFloat(addAmmoAllDatView.ammoSelectData.available_extension_time)
     }
 
 }
