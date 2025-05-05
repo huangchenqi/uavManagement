@@ -238,6 +238,7 @@ Rectangle{//航空弹药的组件发射条件
             text: "返回"
             onClicked: {
                 //addAmmoComponentLaunchconditionsRoot.visible = false
+                cancelAmmoData()
                 addAmmoComponentLaunchconditionsPopup.close()
             }
         }
@@ -281,7 +282,6 @@ Rectangle{//航空弹药的组件发射条件
 
     function loadData() {
 
-
         //#pragma db not_null column("guidance_rule")  //guidance_rule VARCHAR(50) ,--COMMENT '导引规律',
            // newAmmoData.ammoSelectData.guidance_rule   = ""
         //#pragma db not_null column("minimum_visibility_emission") //minimum_visibility_emission REAL NOT NULL ,--COMMENT '发射最小能见度',
@@ -301,9 +301,40 @@ Rectangle{//航空弹药的组件发射条件
         //#pragma db not_null column("launch_off_axis_angle") //launch_off_axis_angle REAL NOT NULL ,--COMMENT '发射离轴角',
         launchOffAxisAngleText.text  =   newAmmoData.ammoSelectData.launch_off_axis_angle
 
+        newAmmoData.ammoData.minimum_visibility_emission =  textToFloat(newAmmoData.ammoSelectData.minimum_visibility_emission)
+        //#pragma db not_null column("maximum_launch_altitude") //maximum_launch_altitude REAL NOT NULL ,--COMMENT '发射最大发射海拔高度',
+        newAmmoData.ammoData.maximum_launch_altitude  =  textToFloat(newAmmoData.ammoSelectData.maximum_launch_altitude)
+        //#pragma db not_null column("launch_maximum_target_altitude") //launch_maximum_target_altitude REAL NOT NULL ,--COMMENT '发射最大目标海拔高度',
+        newAmmoData.ammoData.launch_maximum_target_altitude   =  textToFloat(newAmmoData.ammoSelectData.launch_maximum_target_altitude)
+        //#pragma db not_null column("maximum_launch_relative_height") //maximum_launch_relative_height REAL NOT NULL ,--COMMENT '发射最大发射相对高度',
+        newAmmoData.ammoData.maximum_launch_relative_height  =  textToFloat(newAmmoData.ammoSelectData.maximum_launch_relative_height)
+        //#pragma db not_null column("minimum_relative_height_launch")  //minimum_relative_height_launch REAL NOT NULL ,--COMMENT '发射最小发射相对高度',
+        newAmmoData.ammoData.minimum_relative_height_launch  =   textToFloat(newAmmoData.ammoSelectData.minimum_relative_height_launch)
+        //#pragma db not_null column("launch_speed") //launch_speed REAL NOT NULL ,--COMMENT '发射速度',
+        newAmmoData.ammoData.launch_speed  =   textToFloat(newAmmoData.ammoSelectData.launch_speed)
+        //#pragma db not_null column("launch_conditions") //launch_conditions VARCHAR(50) ,--COMMENT '发射条件天气限制',
+        newAmmoData.ammoData.launch_conditions  =  newAmmoData.ammoSelectData.launch_conditions
+        //#pragma db not_null column("launch_off_axis_angle") //launch_off_axis_angle REAL NOT NULL ,--COMMENT '发射离轴角',
+        newAmmoData.ammoData.launch_off_axis_angle  =   textToFloat(newAmmoData.ammoSelectData.launch_off_axis_angle)
 
     }
-
+    function cancelAmmoData(){
+        launchMinimumVisibilityText.text =  ""
+        //#pragma db not_null column("maximum_launch_altitude") //maximum_launch_altitude REAL NOT NULL ,--COMMENT '发射最大发射海拔高度',
+         launchMaximumAltitudeText.text  =  ""
+        //#pragma db not_null column("launch_maximum_target_altitude") //launch_maximum_target_altitude REAL NOT NULL ,--COMMENT '发射最大目标海拔高度',
+        launchMaximumTargetAltitudeText.text   =  ""
+        //#pragma db not_null column("maximum_launch_relative_height") //maximum_launch_relative_height REAL NOT NULL ,--COMMENT '发射最大发射相对高度',
+        launchMaximumRelativeHeightText.text  =  ""
+        //#pragma db not_null column("minimum_relative_height_launch")  //minimum_relative_height_launch REAL NOT NULL ,--COMMENT '发射最小发射相对高度',
+        launchMinimumRelativeHeightText.text  =   ""
+        //#pragma db not_null column("launch_speed") //launch_speed REAL NOT NULL ,--COMMENT '发射速度',
+        launchSpeedText.text  =   ""
+        //#pragma db not_null column("launch_conditions") //launch_conditions VARCHAR(50) ,--COMMENT '发射条件天气限制',
+        weatherRestrictionsText.text  =  ""
+        //#pragma db not_null column("launch_off_axis_angle") //launch_off_axis_angle REAL NOT NULL ,--COMMENT '发射离轴角',
+        launchOffAxisAngleText.text  =   ""
+    }
 
 }
 

@@ -554,6 +554,8 @@ Item {
         console.log("imageUrlStr"+imageUrlStr)
         ammunitionImg.source = imageUrlStr
         usageDescriptionText.text = newAmmoData.ammoSelectData.ammoDescription
+        newAmmoData.ammoData.ammoDescription = newAmmoData.ammoSelectData.ammoDescription
+        newAmmoData.ammoData.image_url = imageUrlStr
     }
 
     function initAmmoData(){

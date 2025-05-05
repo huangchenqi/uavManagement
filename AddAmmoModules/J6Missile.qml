@@ -12,7 +12,7 @@ Item {
     onLoadDataWayChanged: {
         if(item_Missile.loadDataWay === 1){
             loadAllAmmoData()
-            allComponentEnable
+            allComponentEnable()
         }else if(item_Missile.loadDataWay === 2){
             loadAllAmmoData()
         }else{
@@ -194,9 +194,12 @@ Item {
             return num;
         }
     }
+    //将数据加载进行查看与编辑
     function loadAllAmmoData(){
        text_Input_QinCheShenDu.text  = addAmmoAllDatView.ammoSelectData.ammoPenetrationDepth
        text_Input_PaoTuLiang.text  = addAmmoAllDatView.ammoSelectData.ammoQuantitySoilThrown
+        ammoData.ammoPenetrationDepth = textToFloat(addAmmoAllDatView.ammoSelectData.ammoPenetrationDepth)
+        ammoData.ammoQuantitySoilThrown = textToFloat(addAmmoAllDatView.ammoSelectData.ammoQuantitySoilThrown)
     }
     function allComponentEnable(){
         text_Input_QinCheShenDu.enabled = false

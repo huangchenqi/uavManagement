@@ -16,11 +16,11 @@ Item {
         if(item_Missile.loadDataWay === 1){
 
             loadAllAmmoData()
-            allComponentEnable
+            allComponentEnable()
         }else if(item_Missile.loadDataWay === 2){
             loadAllAmmoData()
         }else{
-            console.log("航空爆破炸弹!")
+            console.log("航空反坦克子母弹!")
         }
 
     }
@@ -257,15 +257,20 @@ Item {
             return num;
         }
     }
+    //加载查看、编辑的数据
     function loadAllAmmoData(){
 
-       bullet_density_range_minimum_text.text  = addAmmoAllDatView.ammoSelectData.bullet_density_range_maximum
+       bullet_density_range_minimum_text.text  = addAmmoAllDatView.ammoSelectData.bullet_density_range_minimum
        bullet_density_range_maximum_text.text  = addAmmoAllDatView.ammoSelectData.bullet_density_range_maximum
        ground_ignition_rate_text.text = addAmmoAllDatView.ammoSelectData.ground_ignition_rate
+       //将原数据保存在更新的数据中
+        ammoData.bullet_density_range_minimum  = textToFloat(addAmmoAllDatView.ammoSelectData.bullet_density_range_minimum)
+        ammoData.bullet_density_range_maximum  = textToFloat(addAmmoAllDatView.ammoSelectData.bullet_density_range_maximum)
+        ammoData.ground_ignition_rate = textToFloat(addAmmoAllDatView.ammoSelectData.ground_ignition_rate)
     }
     function allComponentEnable(){
         bullet_density_range_minimum_text.enabled = false
         bullet_density_range_maximum_text.enabled = false
-         ground_ignition_rate_text.enabled = false
+        ground_ignition_rate_text.enabled = false
     }
 }

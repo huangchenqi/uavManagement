@@ -376,8 +376,9 @@ Rectangle {
         var imageUrlStr = "file:///"+addAmmoAllDatView.ammoSelectData.image_url
         console.log("imageUrlStr"+imageUrlStr)
         ammunitionImg.source = imageUrlStr
-        ammoData.image_url = imageUrlStr
         usageDescriptionText.text = addAmmoAllDatView.ammoSelectData.ammoDescription
+        ammoData.image_url = imageUrlStr
+        ammoData.ammoDescription = addAmmoAllDatView.ammoSelectData.ammoDescription
     }
     //初始化数据
     function initAmmoData(){

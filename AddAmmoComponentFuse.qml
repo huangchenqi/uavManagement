@@ -264,6 +264,7 @@ Rectangle{//航空弹药的组件引信
             height: 40
             text: "返回"
             onClicked: {
+                cancelAmmunitionData()
                 addAmmoComponentFusePopup.close()//addAmmoComponentFuseRoot.visible = false
             }
         }
@@ -335,15 +336,57 @@ Rectangle{//航空弹药的组件引信
         //#pragma db not_null column("reliability_rate_of_fuse_action")  //reliability_rate_of_fuse_action REAL NOT NULL ,--COMMENT '引信作用可靠率',
         fuseActionReliabilityRateText.text  =   newAmmoData.ammoSelectData.reliability_rate_of_fuse_action
         //#pragma db not_null column("fuse_self_destruct_time")  //fuse_self_destruct_time REAL NOT NULL ,--COMMENT '引信自毁时间',
-
         fuseSelfDestructionTimeText.text  =  newAmmoData.ammoSelectData.fuse_self_destruct_time
 
 
+        //#pragma db not_null column("fuse_firing_rate") //fuse_firing_rate REAL NOT NULL ,--COMMENT '引信发火率',
+        newAmmoData.ammoData.fuse_firing_rate   = textToFloat(newAmmoData.ammoSelectData.fuse_firing_rate)
+        //#pragma db not_null column("fuse_type") //fuse_type VARCHAR(50) ,--COMMENT '引信类型',
+         newAmmoData.ammoData.fuse_type =   newAmmoData.ammoSelectData.fuse_type
+        //#pragma db not_null column("fuse_length") //fuse_length REAL NOT NULL ,--COMMENT '引信长度',
+        newAmmoData.ammoData.fuse_length  =  textToFloat(newAmmoData.ammoSelectData.fuse_length)
+        //#pragma db not_null column("fuse_diameter")  //fuse_diameter REAL NOT NULL ,--COMMENT '引信直径',
+        newAmmoData.ammoData.fuse_diameter  =   textToFloat(newAmmoData.ammoSelectData.fuse_diameter)
+        //#pragma db not_null column("fuze_quality")  //fuze_quality REAL NOT NULL ,--COMMENT '引信质量',
+        newAmmoData.ammoData.fuze_quality  =  textToFloat(newAmmoData.ammoSelectData.fuze_quality)
+        //#pragma db not_null column("safe_distance_of_fuse")  //safe_distance_of_fuse REAL NOT NULL ,--COMMENT '引信安全距离',
+        newAmmoData.ammoData.safe_distance_of_fuse  =  textToFloat(newAmmoData.ammoSelectData.safe_distance_of_fuse)
+        //#pragma db not_null column("time_disarming_fuse")  //time_disarming_fuse REAL NOT NULL ,--COMMENT '引信解除保险时间',
+        newAmmoData.ammoData.time_disarming_fuse   =    textToFloat(newAmmoData.ammoSelectData.time_disarming_fuse)
+        //#pragma db not_null column("first_level_release_time_of_fuse")  //first_level_release_time_of_fuse REAL NOT NULL ,--COMMENT '引信一级解除保险时间',
+        newAmmoData.ammoData.first_level_release_time_of_fuse =   textToFloat(newAmmoData.ammoSelectData.first_level_release_time_of_fuse)
+        //#pragma db not_null column("secondary_release_time_of_fuse")  //secondary_release_time_of_fuse REAL NOT NULL ,--COMMENT '引信二级解除保险时间',
+        newAmmoData.ammoData.secondary_release_time_of_fuse   =   textToFloat(newAmmoData.ammoSelectData.secondary_release_time_of_fuse)
+        //#pragma db not_null column("reliability_rate_of_fuse_action")  //reliability_rate_of_fuse_action REAL NOT NULL ,--COMMENT '引信作用可靠率',
+        newAmmoData.ammoData.reliability_rate_of_fuse_action  =   textToFloat(newAmmoData.ammoSelectData.reliability_rate_of_fuse_action)
+        //#pragma db not_null column("fuse_self_destruct_time")  //fuse_self_destruct_time REAL NOT NULL ,--COMMENT '引信自毁时间',
+        newAmmoData.ammoData.fuse_self_destruct_time  =  textToFloat(newAmmoData.ammoSelectData.fuse_self_destruct_time)
+
     }
 
-    function saveammunitionData(){
+    function cancelAmmunitionData(){
 
-
+        fuseFiringRateText.text   = ""
+        //#pragma db not_null column("fuse_type") //fuse_type VARCHAR(50) ,--COMMENT '引信类型',
+         fuseTypeText.text =   ""
+        //#pragma db not_null column("fuse_length") //fuse_length REAL NOT NULL ,--COMMENT '引信长度',
+        fuseLengthText.text  =  ""
+        //#pragma db not_null column("fuse_diameter")  //fuse_diameter REAL NOT NULL ,--COMMENT '引信直径',
+        fuseDiameterText.text  =   ""
+        //#pragma db not_null column("fuze_quality")  //fuze_quality REAL NOT NULL ,--COMMENT '引信质量',
+        fuseWeightText.text  =  ""
+        //#pragma db not_null column("safe_distance_of_fuse")  //safe_distance_of_fuse REAL NOT NULL ,--COMMENT '引信安全距离',
+        fuseSafeDistanceText.text  =  ""
+        //#pragma db not_null column("time_disarming_fuse")  //time_disarming_fuse REAL NOT NULL ,--COMMENT '引信解除保险时间',
+        terminationInsuranceTimeText.text   =    ""
+        //#pragma db not_null column("first_level_release_time_of_fuse")  //first_level_release_time_of_fuse REAL NOT NULL ,--COMMENT '引信一级解除保险时间',
+         fuseFirstLevelTerminationInsuranceTimeText.text =   ""
+        //#pragma db not_null column("secondary_release_time_of_fuse")  //secondary_release_time_of_fuse REAL NOT NULL ,--COMMENT '引信二级解除保险时间',
+        fuseSecondaryLevelTerminationInsuranceTime.text   =   ""
+        //#pragma db not_null column("reliability_rate_of_fuse_action")  //reliability_rate_of_fuse_action REAL NOT NULL ,--COMMENT '引信作用可靠率',
+        fuseActionReliabilityRateText.text  =   ""
+        //#pragma db not_null column("fuse_self_destruct_time")  //fuse_self_destruct_time REAL NOT NULL ,--COMMENT '引信自毁时间',
+        fuseSelfDestructionTimeText.text  =  ""
     }
 }
 

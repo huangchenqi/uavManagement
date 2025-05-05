@@ -18,7 +18,7 @@ Item {
         onLoadDataWayChanged: {
             if(item_Missile.loadDataWay === 1){
                 loadAllAmmoData()
-                allComponentEnable
+                allComponentEnable()
             }else if(item_Missile.loadDataWay === 2){
                 loadAllAmmoData()
             }else{
@@ -372,12 +372,18 @@ Item {
             return num;
         }
     }
+    //加载数据进行查看与修改
     function loadAllAmmoData(){
        interference_duration_text.text  = addAmmoAllDatView.ammoSelectData.interference_duration
        interference_length_minimum_text.text  = addAmmoAllDatView.ammoSelectData.interference_length_minimum
        interference_length_maximum_text.text  = addAmmoAllDatView.ammoSelectData.interference_length_maximum
        interference_width_minimum_text.text  = addAmmoAllDatView.ammoSelectData.interference_width_minimum
        interference_width_maximum_text.text  = addAmmoAllDatView.ammoSelectData.interference_width_maximum
+        ammoData.interference_duration  = addAmmoAllDatView.ammoSelectData.interference_duration
+        ammoData.interference_length_minimum = textToFloat(addAmmoAllDatView.ammoSelectData.interference_length_minimum)
+        ammoData.interference_length_maximum = textToFloat(addAmmoAllDatView.ammoSelectData.interference_length_maximum)
+        ammoData.interference_width_minimum = textToFloat(addAmmoAllDatView.ammoSelectData.interference_width_minimum)
+        ammoData.interference_width_maximum = textToFloat(addAmmoAllDatView.ammoSelectData.interference_width_maximum)
     }
     function allComponentEnable(){
         interference_duration_text.enabled = false

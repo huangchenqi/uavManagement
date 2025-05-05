@@ -12,7 +12,7 @@ Item {
     onLoadDataWayChanged: {
         if(item_Missile.loadDataWay === 1){
             loadAllAmmoData()
-            allComponentEnable
+            allComponentEnable()
         }else if(item_Missile.loadDataWay === 2){
             loadAllAmmoData()
         }else{
@@ -192,9 +192,12 @@ Item {
             return num;
         }
     }
+    //加载数据进行查看与修改
     function loadAllAmmoData(){
        number_of_fragments_text.text  = addAmmoAllDatView.ammoSelectData.number_of_fragments
        breakdown_distance_text.text  = addAmmoAllDatView.ammoSelectData.breakdown_distance
+        ammoData.number_of_fragments = textToFloat(addAmmoAllDatView.ammoSelectData.number_of_fragments)
+        ammoData.breakdown_distance = textToFloat(addAmmoAllDatView.ammoSelectData.breakdown_distance)
     }
     function allComponentEnable(){
         number_of_fragments_text.enabled = false

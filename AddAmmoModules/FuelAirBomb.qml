@@ -12,7 +12,7 @@ Item {
     onLoadDataWayChanged: {
         if(item_Missile.loadDataWay === 1){
             loadAllAmmoData()
-            allComponentEnable
+            allComponentEnable()
         }else if(item_Missile.loadDataWay === 2){
             loadAllAmmoData()
         }else{
@@ -252,10 +252,14 @@ Item {
             return num;
         }
     }
+    //加载数据查看与修改
     function loadAllAmmoData(){
        fuel_dispersion_radius_text.text  = addAmmoAllDatView.ammoSelectData.fuel_dispersion_radius
        distance_from_center_explosion_text.text  = addAmmoAllDatView.ammoSelectData.distance_from_center_explosion
        shock_wave_overpressure_value_text.text = addAmmoAllDatView.ammoSelectData.shock_wave_overpressure_value
+        ammoData.fuel_dispersion_radius = textToFloat(addAmmoAllDatView.ammoSelectData.fuel_dispersion_radius)
+        ammoData.distance_from_center_explosion = textToFloat(addAmmoAllDatView.ammoSelectData.distance_from_center_explosion)
+        ammoData.shock_wave_overpressure_value = textToFloat(addAmmoAllDatView.ammoSelectData.shock_wave_overpressure_value)
     }
     function allComponentEnable(){
         fuel_dispersion_radius_text.enabled = false

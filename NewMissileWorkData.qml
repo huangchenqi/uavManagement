@@ -404,6 +404,7 @@ Item {
                                       {m_Number: 1, m_SelectState: false, m_TypeName: "夜晚"}]
                         if(item_Missile.loadAllData === 1 || item_Missile.loadAllData === 2 ){
                             updateSelectState(newAmmoData.ammoSelectData.working_conditions,result)
+                            newAmmoData.ammoData.working_conditions = newAmmoData.ammoSelectData.working_conditions
                         }
                         listmodel_Box.append(result)
 
@@ -448,6 +449,8 @@ Item {
         //#pragma db not_null column("charge_mass") //charge_mass REAL NOT NULL ,--COMMENT '炸弹装药质量(kg)',
        text_Input_WorkTemperature.text = newAmmoData.ammoSelectData.working_temperature
        text_Input_WorkAlt.text = newAmmoData.ammoSelectData.working_altitude
+        newAmmoData.ammoData.working_temperature = textToFloat(newAmmoData.ammoSelectData.working_temperature)
+        newAmmoData.ammoData.working_altitude = textToFloat(newAmmoData.ammoSelectData.working_altitude)
     }
     //设置相关的行凸显
     function updateSelectState(targetTypeName,myArray) {

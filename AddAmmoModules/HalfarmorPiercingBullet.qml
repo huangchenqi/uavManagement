@@ -258,6 +258,9 @@ Item {
        text_Input_CraterRange.text  = addAmmoAllDatView.ammoSelectData.ammoCraterDiameter
        text_Input_CraterDepth.text  = addAmmoAllDatView.ammoSelectData.ammoCraterDepth
        text_Input_DamageArea.text  = addAmmoAllDatView.ammoSelectData.ammoDamagedArea
+        ammoData.ammoCraterDiameter = textToFloat(addAmmoAllDatView.ammoSelectData.ammoCraterDiameter)
+        ammoData.ammoCraterDepth = textToFloat(addAmmoAllDatView.ammoSelectData.ammoCraterDepth)
+        ammoData.ammoDamagedArea = textToFloat(addAmmoAllDatView.ammoSelectData.ammoDamagedArea)
     }
     function allComponentEnable(){
         text_Input_CraterRange.enabled = false

@@ -12,7 +12,7 @@ Item {
     onLoadDataWayChanged: {
         if(item_Missile.loadDataWay === 1){
             loadAllAmmoData()
-            allComponentEnable
+            allComponentEnable()
         }else if(item_Missile.loadDataWay === 2){
             loadAllAmmoData()
         }else{
@@ -318,6 +318,10 @@ Item {
        number_of_spread_text.text  = addAmmoAllDatView.ammoSelectData.number_of_spread
        surface_dc_resistivity_text.text  = addAmmoAllDatView.ammoSelectData.surface_dc_resistivity
        probability_of_arc_discharge_text.text  = addAmmoAllDatView.ammoSelectData.probability_of_arc_discharge
+       ammoData.maximum_inclusive_coverage_quantity = textToFloat(addAmmoAllDatView.ammoSelectData.maximum_inclusive_coverage_quantity)
+       ammoData.number_of_spread = textToFloat(addAmmoAllDatView.ammoSelectData.number_of_spread)
+       ammoData.surface_dc_resistivity = textToFloat(addAmmoAllDatView.ammoSelectData.surface_dc_resistivity)
+       ammoData.probability_of_arc_discharge = textToFloat(addAmmoAllDatView.ammoSelectData.probability_of_arc_discharge)
     }
     //限制控件的使用状态
     function allComponentEnable(){

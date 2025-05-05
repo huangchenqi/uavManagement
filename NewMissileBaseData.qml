@@ -1145,7 +1145,27 @@ Item{
        text_Input_MaxSpeed.text =  newAmmoData.ammoSelectData.maximum_speed_of_missile
        //view_List_TypeSelect
        console.log("view_List_TypeSelectnewAmmoData.ammoSelectData.ammoToUavModel"+newAmmoData.ammoSelectData.ammoToUavModel)
+       text_Input_Name.text  = newAmmoData.ammoSelectData.ammoName
 
+       //#pragma db not_null column("used_uav_models")                        // used_uav_models VARCHAR(200) NOT NULL ,--COMMENT '使用机型'
+      ammoData.preparation_time = textToFloat(newAmmoData.ammoSelectData.preparation_time)
+      //console.log("preparation_time.text"+preparation_time.text+"newAmmoData.ammoSelectData.preparation_time"+newAmmoData.ammoSelectData.preparation_time)
+      ammoData.ammoLenth = textToFloat(newAmmoData.ammoSelectData.ammoLenth)
+       //#pragma db not_null column("mass")    //mass REAL NOT NULL ,--COMMENT '炸弹质量(kg)',
+      ammoData.ammoMass =  textToFloat(newAmmoData.ammoSelectData.ammoMass)
+       //#pragma db not_null column("diameter")   //        diameter REAL NOT NULL ,--COMMENT '直径(m)',
+      ammoData.ammoDiameter =  textToFloat(newAmmoData.ammoSelectData.ammoDiameter)
+       //#pragma db not_null column("wingspan") //wingspan REAL NOT NULL ,--COMMENT '翼展(m)',
+      ammoData.ammoWingspan   =  textToFloat(newAmmoData.ammoSelectData.ammoWingspan)
+       //#pragma db not_null column("effective_range") //effective_range REAL NOT NULL ,--COMMENT '射程',
+       ammoData.effective_range  =  textToFloat(newAmmoData.ammoSelectData.effective_range)
+       //preparation_time.text =   newAmmoData.ammoSelectData.action_time
+       ammoData.hit_accuracy  = textToFloat(newAmmoData.ammoSelectData.hit_accuracy)
+       ammoData.hit_probability =  textToFloat(newAmmoData.ammoSelectData.hit_probability)
+       ammoData.rudder_width =  textToFloat(newAmmoData.ammoSelectData.rudder_width)
+       ammoData.allow_continuous_flight_time  =  textToFloat(newAmmoData.ammoSelectData.allow_continuous_flight_time)
+       ammoData.guided_flight_time  = textToFloat(newAmmoData.ammoSelectData.guided_flight_time)
+       ammoData.maximum_speed_of_missile  =  textToFloat(newAmmoData.ammoSelectData.maximum_speed_of_missile)
 
     }
 

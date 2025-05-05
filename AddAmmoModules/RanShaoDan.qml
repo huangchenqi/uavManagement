@@ -12,7 +12,7 @@ Item {
     onLoadDataWayChanged: {
         if(item_Missile.loadDataWay === 1){
             loadAllAmmoData()
-            allComponentEnable
+            allComponentEnable()
         }else if(item_Missile.loadDataWay === 2){
             loadAllAmmoData()
         }else{
@@ -256,6 +256,9 @@ Item {
        combustion_temperature_text.text  = addAmmoAllDatView.ammoSelectData.combustion_temperature
        combustion_time_text.text  = addAmmoAllDatView.ammoSelectData.combustion_time
        combustion_agent_spread_range_txt.text  = addAmmoAllDatView.ammoSelectData.combustion_agent_spread_range
+        ammoData.combustion_temperature = textToFloat(addAmmoAllDatView.ammoSelectData.combustion_temperature)
+        ammoData.combustion_time = textToFloat(addAmmoAllDatView.ammoSelectData.combustion_time)
+        ammoData.combustion_agent_spread_range = textToFloat(addAmmoAllDatView.ammoSelectData.combustion_agent_spread_range)
     }
     function allComponentEnable(){
         combustion_temperature_text.enabled = false

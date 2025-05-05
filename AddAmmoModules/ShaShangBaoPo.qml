@@ -12,7 +12,7 @@ Item {
     onLoadDataWayChanged: {
         if(item_Missile.loadDataWay === 1){
             loadAllAmmoData()
-            allComponentEnable
+            allComponentEnable()
         }else if(item_Missile.loadDataWay === 2){
             loadAllAmmoData()
         }else{
@@ -319,6 +319,11 @@ Item {
        ammoNumberFragmentsValue.text  = addAmmoAllDatView.ammoSelectData.ammoNumberFragments
         console.log("addAmmoAllDatView.ammoSelectData.ammoArmorBreakingAbility"+addAmmoAllDatView.ammoSelectData.ammoArmorBreakingAbility)
        ammoArmorBreakingAbilityValue.text  = addAmmoAllDatView.ammoSelectData.ammoArmorBreakingAbility
+
+        ammoData.ammoDenseKillingRadius = textToFloat(addAmmoAllDatView.ammoSelectData.ammoDenseKillingRadius)
+        ammoData.ammoInitialVelocityFragments = textToFloat(addAmmoAllDatView.ammoSelectData.ammoInitialVelocityFragments)
+        ammoData.ammoNumberFragments = textToFloat(addAmmoAllDatView.ammoSelectData.ammoNumberFragments)
+        ammoData.ammoArmorBreakingAbility = addAmmoAllDatView.ammoSelectData.ammoArmorBreakingAbility
     }
     function allComponentEnable(){
         ammoDenseKillingRadiusValue.enabled = false

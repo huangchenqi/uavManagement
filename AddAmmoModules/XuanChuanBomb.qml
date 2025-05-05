@@ -12,7 +12,7 @@ Item {
     onLoadDataWayChanged: {
         if(item_Missile.loadDataWay === 1){
             loadAllAmmoData()
-            allComponentEnable
+            allComponentEnable()
         }else if(item_Missile.loadDataWay === 2){
             loadAllAmmoData()
         }else{
@@ -135,6 +135,7 @@ Item {
     }
     function loadAllAmmoData(){
        spread_area_text.text  = addAmmoAllDatView.ammoSelectData.spread_area
+       ammoData.spread_area = textToFloat(addAmmoAllDatView.ammoSelectData.spread_area)
     }
     function allComponentEnable(){
         spread_area_text.enabled = false
