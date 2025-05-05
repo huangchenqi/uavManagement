@@ -2,15 +2,13 @@
 import QtQuick.Dialogs 1.2
 import "qrc:/"
 import "qrc:/AddAmmoModules/Component"
-
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.5
 //无源干扰吊舱
 Item {
     id:custom_PassiveInterferencePod
     anchors.fill:parent
     visible:  true
-
-
-
     // 获取当前时间并转换为字符串
     property var currentTime: new Date().toLocaleString()
     //干扰波段
@@ -430,6 +428,61 @@ Item {
                 listmodel_Box_LaunchControlType.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"方式3"})
                 listmodel_Box_LaunchControlType.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"方式4"})
                 listmodel_Box_LaunchControlType.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"方式5"})
+            }
+        }
+
+        Rectangle{
+            id:rect_Describe
+            anchors.top: btn_LaunchControlType.bottom
+            anchors.left: btn_LaunchSpeed.left
+            width:300
+            height: 100
+            anchors.leftMargin: 10
+            // anchors.right: addAmmo.right
+            // anchors.bottom: custom_PassiveInterferencePod.bottom
+            color:"#50000000"
+            radius: 10
+
+            CText {
+                id: text_DescribeTitle
+                text: qsTr("用途描述:")
+                pixelSize: 25
+                color: "#4EC4FF"
+                anchors.left: parent.left
+                anchors.leftMargin: 10
+                anchors.top: parent.top
+                anchors.topMargin: 20
+                horizontalAlignment: Text.AlignLeft
+
+            }
+            TextArea {
+                id: usageDescriptionText
+                anchors.top: text_DescribeTitle.bottom
+                anchors.topMargin: 15
+                anchors.left: text_DescribeTitle.left
+                anchors.right: parent.right
+                anchors.rightMargin: 5
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 5
+                // 边框样式
+                    background: Rectangle {
+                        border.color: "#cccccc"
+                        radius: 10
+                    }
+
+                // 多行显示关键配置
+                wrapMode: Text.Wrap                   // 自动换行
+                placeholderText: "请输入多行描述..."    // 占位提示
+                textFormat: Text.PlainText            // 文本格式
+                selectByMouse: true                   // 允许鼠标选择
+                inputMethodHints: Qt.ImhMultiLine      // 启用多行输入法支持
+                font.family: "黑体"
+                font.pixelSize: 20
+                onTextChanged: {
+                    //ammoData.ammoDescription =text
+                    console.log("Text content changed to: " + text)
+
+                }
             }
         }
 

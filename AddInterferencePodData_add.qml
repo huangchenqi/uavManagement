@@ -2,7 +2,9 @@
 import QtQuick.Dialogs 1.2
 import "qrc:/"
 import "qrc:/AddAmmoModules/Component"
-
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.5
+import UavDaoModel 1.0
 //无源干扰吊舱
 Item {
     id:custom_PassiveInterferencePod
@@ -12,7 +14,8 @@ Item {
     // width: 1280
     // height: 900
     anchors.fill:parent
-
+    //记录选择的机型数组
+    property var useToUavArray: []
     // 获取当前时间并转换为字符串
     property var currentTime: new Date().toLocaleString()
     //干扰波段
@@ -29,19 +32,11 @@ Item {
     property int loadState: 0  //0:新增、1:查看、2:编辑
 
     Component.onCompleted: {
-        listmodel_Box_Band.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"2cm"})
-        listmodel_Box_Band.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"3cm"})
-        listmodel_Box_Band.append({m_PlanNumber:3,m_SelectState:false,m_TypeName:"5cm"})
-        listmodel_Box_Band.append({m_PlanNumber:4,m_SelectState:false,m_TypeName:"10cm"})
-        listmodel_Box_Band.append({m_PlanNumber:5,m_SelectState:false,m_TypeName:"22cm"})
-
-        listmodel_Box_Intensity.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"强度1(轻度干扰)"})
-        listmodel_Box_Intensity.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"强度2(中度干扰)"})
-        listmodel_Box_Intensity.append({m_PlanNumber:3,m_SelectState:false,m_TypeName:"强度3(重度干扰)"})
-
         loadView()
     }
-
+    UavModelDaoTableModel{
+        id:uavModelDao
+    }
     Item {
         anchors.fill: parent
         Image {
@@ -82,67 +77,288 @@ Item {
             width: 280
             height: 30
         }
-
-        CTextInput{
-            id:text_PodTotaloLength
-            anchors.left: parent.left
+        CText{
+            id:uavType
+            text: "对应无人机类型:"
+            anchors.left: text_PodName.right
             anchors.leftMargin: 20
-            anchors.top: text_PodName.bottom
-            anchors.topMargin: 30
-            title: "吊舱总长度(mm):"
+            anchors.top: title.bottom
+            anchors.topMargin: 34
+            //verticalAlignment:parent.verticalCenter
             pixelSize: 18
-            titleWidth: pixelSize * 7.5
+            color: mainColor
+            width: pixelSize * 7.5
+            height: pixelSize
+            bold: true
+        }
+        ListView{
+            id:view_List_TypeSelect
+            width: comp_DamageFactorType.width
+            height: comp_DamageFactorType.height * 5
+            anchors.left: comp_DamageFactorType.left
+            anchors.leftMargin: comp_DamageFactorType.width/2 - width/2
+            anchors.top: comp_DamageFactorType.bottom
+            anchors.topMargin: 2
+            visible: false
+            clip: true
+            z:2
+            model:ListModel{
+                id:listmodel_Box
+            }
+            delegate:Component{
+                Item{
+                    id:item_Delegate
+                    width: view_List_TypeSelect.width
+                    height: 36
+                    CButton{
+                        id:comp_TypeBtn
+                        anchors.fill: parent
+                        text:m_TypeName
+                        color:"#ffddaa00"
+                        borderColor: m_SelectState ? "#A5FBB4" : "#ffddaa00"
+                        selectColor: borderColor
+                        selectBorderColor: borderColor
+                        selectBorderHigtColor: borderColor
+                        borderHigtColor: "#ffeebb22"
+                        pixelSize: 18
+                        onClicked: {
+                            view_List_TypeSelect.visible = false
+                            //selectType = index
+                            m_SelectState = !m_SelectState
+                            isSelect = m_SelectState
+                            // 检查数组中是否已经存在该数字
+                                var uavIndex = useToUavArray.indexOf(m_PlanNumber)
+
+                                if (uavIndex === -1) {
+                                    // 数字不存在，添加到数组
+                                    useToUavArray.push(m_PlanNumber)
+                                    console.log("Number added: " + m_PlanNumber)
+                                } else {
+                                    // 数字已存在，从数组中删除
+                                    useToUavArray.splice(uavIndex, 1)
+                                    console.log("Number removed: " + m_PlanNumber)
+                                }
+                            // 检查数组中是否已经存在该数字
+                            // if (!newAmmoData.useToUavArray.includes(m_PlanNumber)) {
+                            //     newAmmoData.useToUavArray.push(m_PlanNumber) // 添加数字到数组
+                            //     console.log("Number added: " + m_PlanNumber)
+                            // } else {
+                            //     console.log("Number already exists: " + m_PlanNumber)
+                            // }
+                            console.log("useToUavArray"+custom_PassiveInterferencePod.useToUavArray)
+
+                        }
+                    }
+                }
+            }
+            Component.onCompleted: {
+
+                var uavData = uavModelDao.selectUavModelAllData()
+                console.log("uavModelDao"+JSON.stringify(uavData))
+                var result = [];
+                for (var i = 0; i < uavData.length; i++) {
+                    result.push({
+                        m_PlanNumber: uavData[i].recordId,
+                        m_SelectState:false,// ammoType[i].checked,
+                        m_TypeName: uavData[i].uavName
+                    });
+                }
+
+                // if(missileCommonData.selectAmmoViewType === 1 ){
+                //     var ammoToUavModel = newAmmoData.ammoSelectData.ammoToUavModel
+                //     var a = ammoToUavModel.split(",");
+
+                //     // 遍历数组 a 和 b，更新 m_SelectState
+                //     for (var i = 0; i < a.length; i++) {
+                //         for (var j = 0; j < result.length; j++) {
+                //             if (result[j].m_PlanNumber === a[i]) {
+                //                 result[j].m_SelectState = true;
+                //             }
+                //         }
+                //     }
+
+                //     // 打印更新后的数组 b
+                //     console.log("Updated array b:", JSON.stringify(result, null, 2));
+                //     console.log("<!><@><#>")
+                // }else if(missileCommonData.selectAmmoViewType === 2){
+                //     var ammoToUavModelUpdate = newAmmoData.ammoSelectData.ammoToUavModel
+                //     var a = ammoToUavModelUpdate.split(",");
+                //     uavArray = a
+                //     // 遍历数组 a 和 b，更新 m_SelectState
+                //     for (var i = 0; i < a.length; i++) {
+                //         for (var j = 0; j < result.length; j++) {
+                //             if (result[j].m_PlanNumber === a[i]) {
+                //                 result[j].m_SelectState = true;
+                //             }
+                //         }
+                //     }
+
+                //     // 打印更新后的数组 b
+                //     console.log("Updated array b:", JSON.stringify(result, null, 2));
+                //     console.log("<!><@><#>loadAmmoData")
+                // }else{
+                //     console.log("Unknown selectType!")
+                // }
+               console.log("listmodel_Box::"+JSON.stringify(result))
+               listmodel_Box.append(result);
+
+            }
+        }
+        //显示区域
+        CButton{
+            id:comp_DamageFactorType
             width: 200
-            height: 30
+            height: 36
+            color:"#ffddaa00"
+            borderColor: "#ffddaa00"
+            borderHigtColor: "#ffeebb22"
+            anchors.left: uavType.right
+            anchors.leftMargin: 2
+            anchors.top: title.bottom
+            anchors.topMargin: 30
+            //anchors.verticalCenter: uavType.verticalCenter
+            pixelSize: 20
+            text:"请选择:"/*{
+                if(selectType < 0)
+                {
+                    return "侦察无人机"
+                }
+                else
+                {
+                    if(listmodel_Box.count > 0)
+                        listmodel_Box.get(selectType).m_TypeName
+                }
+            }*/
+            onClicked: {
+                view_List_TypeSelect.visible = !view_List_TypeSelect.visible
+            }
         }
 
         CTextInput{
             id:text_MainCarbinLength
-            anchors.left: text_PodTotaloLength.left
-            anchors.top: text_PodTotaloLength.bottom
-            anchors.topMargin: 20
+            // anchors.left: text_PodTotaloLength.left
+            // anchors.top: text_PodTotaloLength.bottom
+            // anchors.topMargin: 20
+            anchors.left: parent.left
+            anchors.leftMargin: 20
+            anchors.top: text_PodName.bottom
+            anchors.topMargin: 30
             title: "主舱长(mm):"
             pixelSize: 18
             titleWidth: pixelSize * 5.5
-            width: 200
+            width: 240
             height: 30
         }
 
         CTextInput{
             id:text_FrontHoodLength
-            anchors.left: text_MainCarbinLength.left
-            anchors.top: text_MainCarbinLength.bottom
-            anchors.topMargin: 20
+            anchors.left: text_MainCarbinLength.right
+            anchors.leftMargin: 30
+            anchors.top: text_PodName.bottom
+            anchors.topMargin: 30
             title: "前罩长(mm):"
             pixelSize: 18
             titleWidth: pixelSize * 5.5
-            width: 200
+            width: 240
             height: 30
         }
 
         CTextInput{
             id:text_BackHoodLength
-            anchors.left: text_FrontHoodLength.left
-            anchors.top: text_FrontHoodLength.bottom
-            anchors.topMargin: 20
+            anchors.left: text_FrontHoodLength.right
+            anchors.leftMargin: 30
+            anchors.top: text_PodName.bottom
+            anchors.topMargin: 30
             title: "后罩长(mm):"
             pixelSize: 18
             titleWidth: pixelSize * 5.5
-            width: 200
+            width: 240
             height: 30
         }
-
         CTextInput{
             id:text_MainCarbinSection
-            anchors.left: text_PodTotaloLength.right
-            anchors.leftMargin: 20
-            anchors.top: text_PodTotaloLength.top
+            anchors.left: text_MainCarbinLength.left
+            //anchors.leftMargin: 20
+            anchors.top: text_MainCarbinLength.bottom
+            anchors.topMargin: 20
             title: "主舱截面(mm):"
             pixelSize: 18
             titleWidth: pixelSize * 6.5
-            width: 200
+            width: 240
             height: 30
         }
+        CTextInput{
+            id:text_LoadCapacity
+            anchors.left: text_MainCarbinSection.right
+            anchors.top: text_MainCarbinLength.bottom
+            anchors.leftMargin: 30
+            anchors.topMargin: 20
+            title: "装载容量:"
+            pixelSize: 18
+            titleWidth: pixelSize * 4.5
+            width: 240
+            height: 30
+        }
+        CTextInput{
+            id:text_PodTotaloLength
+            anchors.left: text_LoadCapacity.right
+            anchors.leftMargin: 30
+            anchors.top: text_MainCarbinLength.bottom
+            anchors.topMargin: 20
+            title: "吊舱总长度(mm):"
+            pixelSize: 18
+            titleWidth: pixelSize * 7.5
+            width: 240
+            height: 30
+        }
+
+        // CTextInput{
+        //     id:text_MainCarbinLength
+        //     anchors.left: text_PodTotaloLength.left
+        //     anchors.top: text_PodTotaloLength.bottom
+        //     anchors.topMargin: 20
+        //     title: "主舱长(mm):"
+        //     pixelSize: 18
+        //     titleWidth: pixelSize * 5.5
+        //     width: 200
+        //     height: 30
+        // }
+
+        // CTextInput{
+        //     id:text_FrontHoodLength
+        //     anchors.left: text_MainCarbinLength.left
+        //     anchors.top: text_MainCarbinLength.bottom
+        //     anchors.topMargin: 20
+        //     title: "前罩长(mm):"
+        //     pixelSize: 18
+        //     titleWidth: pixelSize * 5.5
+        //     width: 200
+        //     height: 30
+        // }
+
+        // CTextInput{
+        //     id:text_BackHoodLength
+        //     anchors.left: text_FrontHoodLength.left
+        //     anchors.top: text_FrontHoodLength.bottom
+        //     anchors.topMargin: 20
+        //     title: "后罩长(mm):"
+        //     pixelSize: 18
+        //     titleWidth: pixelSize * 5.5
+        //     width: 200
+        //     height: 30
+        // }
+
+        // CTextInput{
+        //     id:text_MainCarbinSection
+        //     anchors.left: text_PodTotaloLength.right
+        //     anchors.leftMargin: 20
+        //     anchors.top: text_PodTotaloLength.top
+        //     title: "主舱截面(mm):"
+        //     pixelSize: 18
+        //     titleWidth: pixelSize * 6.5
+        //     width: 200
+        //     height: 30
+        // }
 
         CTextInput{
             id:text_SinglePodWeight
@@ -152,38 +368,29 @@ Item {
             title: "单吊舱自重(Kg):"
             pixelSize: 18
             titleWidth: pixelSize * 7.5
-            width: 200
+            width: 240
             height: 30
         }
 
-        CTextInput{
-            id:text_LoadCapacity
-            anchors.left: text_SinglePodWeight.left
-            anchors.top: text_SinglePodWeight.bottom
-            anchors.topMargin: 20
-            title: "装载容量:"
-            pixelSize: 18
-            titleWidth: pixelSize * 4.5
-            width: 200
-            height: 30
-        }
+
 
         CTextInput{
             id:text_SinglePodFullLoadWeight
-            anchors.left: text_LoadCapacity.left
-            anchors.top: text_LoadCapacity.bottom
+            anchors.left: text_SinglePodWeight.right
+            anchors.leftMargin: 30
+            anchors.top: text_MainCarbinSection.bottom
             anchors.topMargin: 20
             title: "单吊舱满载最大重量(Kg):"
             pixelSize: 18
             titleWidth: pixelSize * 11.5
-            width: 280
+            width: 500
             height: 30
         }
 
         CText{
             id:text_InterferenceBand
-            anchors.left: text_SinglePodFullLoadWeight.left
-            anchors.top: text_SinglePodFullLoadWeight.bottom
+            anchors.left: text_SinglePodWeight.left
+            anchors.top: text_SinglePodWeight.bottom
             anchors.topMargin: 30
             text: "干扰波段:"
             pixelSize: 18
@@ -195,7 +402,7 @@ Item {
 
         CButton{
             id:btn_InterferenceBand
-            width: 200
+            width: 160
             height: 36
             color:"#ffddaa00"
             borderColor: "#ffddaa00"
@@ -256,13 +463,19 @@ Item {
                 }
             }
             Component.onCompleted: {
+                listmodel_Box_Band.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"2cm"})
+                listmodel_Box_Band.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"3cm"})
+                listmodel_Box_Band.append({m_PlanNumber:3,m_SelectState:false,m_TypeName:"5cm"})
+                listmodel_Box_Band.append({m_PlanNumber:4,m_SelectState:false,m_TypeName:"10cm"})
+                listmodel_Box_Band.append({m_PlanNumber:5,m_SelectState:false,m_TypeName:"22cm"})
             }
         }
 
         CText{
             id:text_InterferenceIntensity
-            anchors.left: text_InterferenceBand.left
-            anchors.top: text_InterferenceBand.bottom
+            anchors.left: btn_InterferenceBand.right
+            anchors.leftMargin: 30
+            anchors.top: text_SinglePodWeight.bottom
             anchors.topMargin: 30
             text: "干扰强度:"
             pixelSize: 18
@@ -274,7 +487,7 @@ Item {
 
         CButton{
             id:btn_InterferenceIntensity
-            width: 200
+            width: 160
             height: 36
             color:"#ffddaa00"
             borderColor: "#ffddaa00"
@@ -309,6 +522,7 @@ Item {
             anchors.topMargin: 2
             visible: false
             clip: true
+            z:3
             model:ListModel{
                 id:listmodel_Box_Intensity
             }
@@ -333,49 +547,18 @@ Item {
                 }
             }
             Component.onCompleted: {
+                listmodel_Box_Intensity.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"强度1(轻度干扰)"})
+                listmodel_Box_Intensity.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"强度2(中度干扰)"})
+                listmodel_Box_Intensity.append({m_PlanNumber:3,m_SelectState:false,m_TypeName:"强度3(重度干扰)"})
             }
         }
 
-        CButton{
-            id:btn_EffectiveReflectionArea
-            width: 200
-            height: 36
-            color:"#ffddaa00"
-            borderColor: "#ffddaa00"
-            borderHigtColor: "#ffeebb22"
-            anchors.left: text_BackHoodLength.left
-            anchors.top: text_BackHoodLength.bottom
-            anchors.topMargin: 20
-            pixelSize: 20
-            text: "有效反射面积"
-            onClicked: {
-                //弹出窗口
-                comp_EffectiveReflectionArea.visible = !comp_EffectiveReflectionArea.visible
-            }
-        }
-
-        CButton{
-            id:btn_LaunchSpeed
-            width: 200
-            height: 36
-            color:"#ffddaa00"
-            borderColor: "#ffddaa00"
-            borderHigtColor: "#ffeebb22"
-            anchors.left: btn_EffectiveReflectionArea.left
-            anchors.top: btn_EffectiveReflectionArea.bottom
-            anchors.topMargin: 20
-            pixelSize: 20
-            text: "投放速度"
-            onClicked: {
-                //弹出窗口
-                comp_InterferencePodDropSpeed.visible = !comp_InterferencePodDropSpeed.visible
-            }
-        }
 
         CText{
             id:text_LaunchControlType
-            anchors.left: btn_LaunchSpeed.left
-            anchors.top: btn_LaunchSpeed.bottom
+            anchors.left: btn_InterferenceIntensity.right
+            anchors.leftMargin: 30
+            anchors.top: text_SinglePodWeight.bottom
             anchors.topMargin: 30
             text: "控制方式:"
             pixelSize: 18
@@ -387,7 +570,7 @@ Item {
 
         CButton{
             id:btn_LaunchControlType
-            width: 150
+            width: 160
             height: 36
             color:"#ffddaa00"
             borderColor: "#ffddaa00"
@@ -422,6 +605,7 @@ Item {
             anchors.topMargin: 2
             visible: false
             clip: true
+            z:3
             model:ListModel{
                 id:listmodel_Box_LaunchControlType
             }
@@ -452,12 +636,108 @@ Item {
             }
         }
 
+        CButton{
+            id:btn_EffectiveReflectionArea
+            width: 240
+            height: 36
+            color:"#ffddaa00"
+            borderColor: "#ffddaa00"
+            borderHigtColor: "#ffeebb22"
+            anchors.left: text_InterferenceBand.left
+            anchors.top: text_InterferenceBand.bottom
+            anchors.topMargin: 30
+            pixelSize: 20
+            text: "有效反射面积"
+            onClicked: {
+                //弹出窗口
+                comp_EffectiveReflectionArea.visible = !comp_EffectiveReflectionArea.visible
+            }
+        }
+
+        CButton{
+            id:btn_LaunchSpeed
+            width: 240
+            height: 36
+            color:"#ffddaa00"
+            borderColor: "#ffddaa00"
+            borderHigtColor: "#ffeebb22"
+            anchors.left: btn_EffectiveReflectionArea.right
+            anchors.top: text_InterferenceBand.bottom
+            anchors.leftMargin: 30
+            anchors.topMargin: 30
+            pixelSize: 20
+            text: "投放速度"
+            onClicked: {
+                //弹出窗口
+                comp_InterferencePodDropSpeed.visible = !comp_InterferencePodDropSpeed.visible
+            }
+        }
+
+
+        Rectangle{
+            id:rect_Describe
+            anchors.top: btn_EffectiveReflectionArea.bottom
+            anchors.left: btn_EffectiveReflectionArea.left
+            width:770
+            //height: 300
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 50
+            anchors.leftMargin: 0
+            anchors.topMargin: 10
+            // anchors.right: addAmmo.right
+            // anchors.bottom: custom_PassiveInterferencePod.bottom
+            color:"#50000000"
+            radius: 10
+
+            CText {
+                id: text_DescribeTitle
+                text: qsTr("用途描述:")
+                pixelSize: 18
+                color: "#4EC4FF"
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                anchors.top: parent.top
+                anchors.topMargin: 20
+                horizontalAlignment: Text.AlignLeft
+
+            }
+            TextArea {
+                id: usageDescriptionText
+                anchors.top: text_DescribeTitle.bottom
+                anchors.topMargin: 15
+                anchors.left: text_DescribeTitle.left
+                anchors.right: parent.right
+                anchors.rightMargin: 5
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 5
+                // 边框样式
+                    background: Rectangle {
+                        border.color: "#cccccc"
+                        radius: 10
+                    }
+
+                // 多行显示关键配置
+                wrapMode: Text.Wrap                   // 自动换行
+                placeholderText: "请输入多行描述..."    // 占位提示
+                textFormat: Text.PlainText            // 文本格式
+                selectByMouse: true                   // 允许鼠标选择
+                inputMethodHints: Qt.ImhMultiLine      // 启用多行输入法支持
+                font.family: "黑体"
+                font.pixelSize: 20
+                onTextChanged: {
+                    //ammoData.ammoDescription =text
+                    console.log("Text content changed to: " + text)
+
+                }
+            }
+        }
+
         Rectangle {
             id: rect_ImageShow
             visible: true
             width:520
             anchors.right: parent.right
-            anchors.rightMargin: 10
+            anchors.rightMargin: 30
             anchors.top: title.bottom
             anchors.topMargin: 20
             anchors.bottom: parent.bottom
@@ -639,8 +919,8 @@ Item {
             interferencePodName:"",
             interferencePodType:"",
             interferencePodId:"",
-            usedUavModels:"",
-            description:"",
+            usedUavModels:"",  //选择的机型
+            description:"",  //描述
             mainLength:0.0,//主舱长度
             interferenceLength:0.0,//吊舱长度
             mass:0.0,//单吊舱质量
@@ -659,6 +939,8 @@ Item {
         }
         //名称
         interferencePodData.interferencePodName = text_PodName.text
+        interferencePodData.description = usageDescriptionText.text
+        interferencePodData.usedUavModels  = custom_PassiveInterferencePod.useToUavArray.join(",")
         //主舱长度
         interferencePodData.mainLength = textToFloat(text_MainCarbinLength.text)
         //吊舱长度
