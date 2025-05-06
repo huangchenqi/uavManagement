@@ -33,7 +33,7 @@ Item {
     property int iLaunchControlType: -1
 
     property var effectiveReflectionArea: []
-
+    //property var deliverySpeed: []
     signal backPayloadRecord()
 
     property int loadState: 0  //0:新增、1:查看、2:编辑
@@ -709,7 +709,7 @@ Item {
                         color:"#ffddaa00"
                         borderColor: "#ffddaa00"
                         pixelSize: 18
-//                        isSelect: m_SelectState
+                        isSelect: m_SelectState
                         onClicked: {
                             view_List_LaunchControlType.visible = false
                             iLaunchControlType = index
@@ -719,8 +719,32 @@ Item {
                 }
             }
             Component.onCompleted: {
-                listmodel_Box_LaunchControlType.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"人工控制"})
-                listmodel_Box_LaunchControlType.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"自动控制"})
+                // listmodel_Box_LaunchControlType.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"人工控制"})
+                // listmodel_Box_LaunchControlType.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"自动控制"})
+                if(processInfo.loadViewType === "addUavData"){
+                    var interferenceBandData = [{m_PlanNumber:1,m_SelectState:false,m_TypeName:"人工控制"},
+                            {m_PlanNumber:2,m_SelectState:false,m_TypeName:"自动控制"}]
+                    listmodel_Box_LaunchControlType.append(interferenceBandData)
+
+                }else if(processInfo.loadViewType === "query" || processInfo.loadViewType === "update"){
+                    // var ammoToUavModel = custom_PassiveInterferencePod.useToUavResult
+                    // var a = ammoToUavModel.split(",");
+
+                    // // 遍历数组 a 和 b，更新 m_SelectState
+                    // for (var i = 0; i < a.length; i++) {
+                    //     for (var j = 0; j < result.length; j++) {
+                    //         if (result[j].m_PlanNumber === a[i]) {
+                    //             result[j].m_SelectState = true;
+                    //         }
+                    //     }
+                    // }
+
+                    // // 打印更新后的数组 b
+                    // console.log("Updated array b:", JSON.stringify(result, null, 2));
+                    // console.log("<!><@><#>")
+                }else{
+                    console.log("processInfo.loadViewType Unknown")
+                }
             }
         }
 
@@ -938,9 +962,11 @@ Item {
             loadState = 1;
             comp_InterferencePodDropSpeed.loadDataType = 1
             loadInterferencePodData()
+            comp_EffectiveReflectionArea.loadDataType = 1
         }else if(processInfo.loadViewType === "update"){
             //编辑
             loadState = 2;
+            comp_EffectiveReflectionArea.loadDataType = 2
             comp_InterferencePodDropSpeed.loadDataType = 2
             loadInterferencePodData()
         }else{
@@ -988,7 +1014,23 @@ Item {
         // ));
 
         //控制方式
-        iLaunchControlType = Number.parseInt(podData.deliveryControlWay) - 1   //index值比存储值小1
+        //iLaunchControlType = Number.parseInt(podData.deliveryControlWay) - 1   //index值比存储值小1
+
+        //控制方式
+        var iLaunchControlType = (podData.deliveryControlWay).split(",")
+        var iLaunchControlTypeData = [{m_PlanNumber:1,m_SelectState:false,m_TypeName:"人工控制"},
+                                      {m_PlanNumber:2,m_SelectState:false,m_TypeName:"自动控制"}]
+        listmodel_Box_LaunchControlType.append(iLaunchControlTypeData)
+        for(var iLaunchControl of iLaunchControlType)
+        {
+            for(var index = 0; index < listmodel_Box_LaunchControlType.count; index++)
+            {
+                if(listmodel_Box_LaunchControlType.get(index).m_PlanNumber === Number.parseInt(iLaunchControl))  //
+                {
+                    listmodel_Box_LaunchControlType.set(index,{m_SelectState:true})
+                }
+            }
+        }
         //干扰强度
         iIntensity = Number.parseInt(podData.interferenceIntensity) - 1   //index值比存储值小1
         ammunitionImg.source = "file:///" + podData.image_url
@@ -998,6 +1040,7 @@ Item {
         console.log("有效反射面积：",effectiveReflectionArea)
         //投放速度
         comp_InterferencePodDropSpeed.initListData(podData.deliverySpeed)
+        custom_PassiveInterferencePod.interencePodSpeed = podData.deliverySpeed
     }
 
     function textToFloat(data){
@@ -1080,7 +1123,19 @@ Item {
         interferencePodData.interferenceIntensity = (listmodel_Box_Intensity.get(iIntensity).m_PlanNumber).toString()
 
         //控制方式
-        interferencePodData.deliveryControlWay = (listmodel_Box_LaunchControlType.get(iLaunchControlType).m_PlanNumber).toString()
+        //interferencePodData.deliveryControlWay = (listmodel_Box_LaunchControlType.get(iLaunchControlType).m_PlanNumber).toString()
+        var deliveryControlWayStr = ""
+        for(var i=0; i<listmodel_Box_LaunchControlType.count; i++)
+        {
+            if(listmodel_Box_LaunchControlType.get(i).m_SelectState)
+            {
+                deliveryControlWayStr += (listmodel_Box_LaunchControlType.get(i).m_PlanNumber).toString()
+                deliveryControlWayStr += ","
+            }
+        }
+        if(deliveryControlWayStr.endsWith(","))
+            interferencePodData.deliveryControlWay = deliveryControlWayStr.slice(0,-1)
+
 
         //装载容量(kg)
         interferencePodData.loadingCapacity = textToFloat(text_LoadCapacity.text)

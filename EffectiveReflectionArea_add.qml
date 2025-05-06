@@ -10,6 +10,16 @@ Item {
     id:custom_EffectiveReflectionArea
     width: 1000
     height: 500
+    property int loadDataType: 0
+    onLoadDataTypeChanged: {
+        if(custom_EffectiveReflectionArea.loadDataType === 1){
+                allComponentEnable()
+        }else if(custom_EffectiveReflectionArea.loadDataType === 2){
+
+        }else{
+           console.log("Unknown loadDataType!")
+        }
+    }
 
     Image {
         id: backGround
@@ -440,5 +450,12 @@ Item {
             returnData.push(listmodel_.get(index).m_MinData + "," + listmodel_.get(index).m_MaxData + "," + listmodel_.get(index).m_AreaData + "," + listmodel_.get(index).m_DescribeData)
         }
         return returnData
+    }
+    function allComponentEnable(){
+        btn_Add.visible = false
+        btn_Del.visible = false
+        btn_Confir.visible = false
+        btn_Cancel.text = "返回"
+        listView_DataShow.enabled = false
     }
 }
