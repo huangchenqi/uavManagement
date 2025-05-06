@@ -54,7 +54,6 @@
         <file>AddReconnaissanceCommunicationData.qml</file>
         <file>ReconnaissanceCommunicationRecordManagement.qml</file>
         <file>EffectiveReflectionArea.qml</file>
-        <file>InterferencePodDropSpeed.qml</file>
         <file>MainWindow.qml</file>
         <file>InterferencePodRecordManagement.qml</file>
         <file>ReconnaissanceCommunicationRecordManagementAdd.qml</file>

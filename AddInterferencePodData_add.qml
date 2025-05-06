@@ -14,10 +14,11 @@ Item {
     // width: 1280
     // height: 900
     anchors.fill:parent
+    property var interencePodSpeed: ""
     //新增与更新的数据
-    property var interferencePodData: new Object
+    //property var interferencePodData: new Object
     //加载数据
-    property var interferencePodDataResult: new Object
+    //property var interferencePodDataResult: new Object
     //记录选择的机型数组
     property var useToUavArray: []
     property var useToUavResult: ""
@@ -27,9 +28,9 @@ Item {
     //干扰波段
     property int iBand: 0
     //干扰强度
-    property int iIntensity: 0
+    property int iIntensity: -1
 
-    property int iLaunchControlType: 0
+    property int iLaunchControlType: -1
 
     property var effectiveReflectionArea: []
 
@@ -220,6 +221,7 @@ Item {
                 }else if(processInfo.loadViewType === "update"){
                     var ammoToUavModel = custom_PassiveInterferencePod.useToUavResult
                     var a = ammoToUavModel.split(",");
+                    custom_PassiveInterferencePod.useToUavArray = a
 
                     // 遍历数组 a 和 b，更新 m_SelectState
                     for (var i = 0; i < a.length; i++) {
@@ -934,10 +936,12 @@ Item {
             //查看
             allComponentEnable()
             loadState = 1;
+            comp_InterferencePodDropSpeed.loadDataType = 1
             loadInterferencePodData()
         }else if(processInfo.loadViewType === "update"){
             //编辑
             loadState = 2;
+            comp_InterferencePodDropSpeed.loadDataType = 2
             loadInterferencePodData()
         }else{
             console.log("processInfo.loadViewType Unknown")
@@ -979,9 +983,9 @@ Item {
         }
 
         //打印listview中model的数据 方法 2
-        console.log("All items:", JSON.stringify(
-            Array.from({length: listmodel_Box_Band.count}, (_, i) => listmodel_Box_Band.get(i))
-        ));
+        // console.log("All items:", JSON.stringify(
+        //     Array.from({length: listmodel_Box_Band.count}, (_, i) => listmodel_Box_Band.get(i))
+        // ));
 
         //控制方式
         iLaunchControlType = Number.parseInt(podData.deliveryControlWay) - 1   //index值比存储值小1
@@ -992,6 +996,8 @@ Item {
         effectiveReflectionArea = podData.effectiveReflectionArea.split(";")
         comp_EffectiveReflectionArea.initListData(effectiveReflectionArea)
         console.log("有效反射面积：",effectiveReflectionArea)
+        //投放速度
+        comp_InterferencePodDropSpeed.initListData(podData.deliverySpeed)
     }
 
     function textToFloat(data){
@@ -1040,6 +1046,9 @@ Item {
         interferencePodData.interferencePodName = text_PodName.text
         interferencePodData.description = usageDescriptionText.text
         interferencePodData.usedUavModels  = custom_PassiveInterferencePod.useToUavArray.join(",")
+        interferencePodData.deliverySpeed = custom_PassiveInterferencePod.interencePodSpeed
+
+        //console.log("deliverySpeed"+interferencePodData.deliverySpeed)
         //主舱长度
         interferencePodData.mainLength = textToFloat(text_MainCarbinLength.text)
         //吊舱长度

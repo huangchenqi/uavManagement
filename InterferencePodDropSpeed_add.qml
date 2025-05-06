@@ -13,16 +13,24 @@ Item {
     id:custom_InterferencePodDropSpeed
     width: 450
     height: 400
-
+    property int loadDataType: 0  // 0:新增，1:查看,2:修改
     property int selectIndex: -1
+    property int lastSelectIndex: -1
     onScaleChanged: {
         if(lastSelectIndex == selectIndex)
             return
         if(lastSelectIndex > -1)
             listmodel_.set(lastSelectIndex,{m_SelectState:fasle})
     }
+    onLoadDataTypeChanged: {
+        if(custom_InterferencePodDropSpeed.loadDataType === 1){
+            allComponentEnable()
+        }else if(custom_InterferencePodDropSpeed.loadDataType === 2){
+        }else{
+            console.log("Unknown custom_InterferencePodDropSpeed.loadDataType")
+        }
+    }
 
-    property int lastSelectIndex: -1
 
     Image {
         id: backGround
@@ -225,11 +233,26 @@ Item {
                     }
                 }
                 Component.onCompleted: {
-                    listmodel_.append({m_SelectState:false,m_DropMethod:"同时1",m_DropSpeed:"12"})
-                    listmodel_.append({m_SelectState:false,m_DropMethod:"同时2",m_DropSpeed:"5"})
-                    listmodel_.append({m_SelectState:false,m_DropMethod:"交替1",m_DropSpeed:"3.3"})
-                    listmodel_.append({m_SelectState:false,m_DropMethod:"交替2",m_DropSpeed:"2"})
-                    listmodel_.append({m_SelectState:false,m_DropMethod:"交替3",m_DropSpeed:"1.5"})
+                    if(custom_InterferencePodDropSpeed.loadDataType === 0){
+                        listmodel_.clear()
+                        listmodel_.append({m_SelectState:false,m_DropMethod:"同时1",m_DropSpeed:""})
+                        listmodel_.append({m_SelectState:false,m_DropMethod:"同时2",m_DropSpeed:""})
+                        listmodel_.append({m_SelectState:false,m_DropMethod:"交替1",m_DropSpeed:""})
+                        listmodel_.append({m_SelectState:false,m_DropMethod:"交替2",m_DropSpeed:""})
+                        listmodel_.append({m_SelectState:false,m_DropMethod:"交替3",m_DropSpeed:""})
+                    }else if(custom_InterferencePodDropSpeed.loadDataType === 1){
+
+                    }else if(custom_InterferencePodDropSpeed.loadDataType === 2){
+
+                    }else{
+                        console.log("Unknown custom_InterferencePodDropSpeed.loadDataType")
+                    }
+
+                    // listmodel_.append({m_SelectState:false,m_DropMethod:"同时1",m_DropSpeed:"12"})
+                    // listmodel_.append({m_SelectState:false,m_DropMethod:"同时2",m_DropSpeed:"5"})
+                    // listmodel_.append({m_SelectState:false,m_DropMethod:"交替1",m_DropSpeed:"3.3"})
+                    // listmodel_.append({m_SelectState:false,m_DropMethod:"交替2",m_DropSpeed:"2"})
+                    // listmodel_.append({m_SelectState:false,m_DropMethod:"交替3",m_DropSpeed:"1.5"})
                 }
             }
 
@@ -262,9 +285,56 @@ Item {
             height: 36
             onClicked: {
                 //
+               let iSpeedData = saveData(listmodel_)
+                custom_PassiveInterferencePod.interencePodSpeed = iSpeedData
+                console.log("iSpeedData"+iSpeedData+"<>"+custom_PassiveInterferencePod.interencePodSpeed)
                 custom_InterferencePodDropSpeed.visible = false
             }
         }
 
+    }
+    //提取model中的数据封装成字符串
+    function saveData(listModel) {
+        var result = "";
+        for (var i = 0; i < listModel.count; i++) {
+            var item = listModel.get(i);
+            if (item.m_DropMethod && item.m_DropSpeed) {
+                if (result !== "") {
+                    result += ";";
+                }
+                result += item.m_DropMethod + ":" + item.m_DropSpeed;
+            }
+        }
+        return result;
+    }
+    //加载数据查看与修改
+    function initListData(data) {
+            listmodel_.clear()
+
+            // 将字符串 "同时1:1;同时2:2;交替1:1;交替2:2;交替3:1" 转化为数组
+            var pairs = data.split(";")
+            var listModelArray = []
+
+            for (var i = 0; i < pairs.length; i++) {
+                var pair = pairs[i].split(":")
+                if (pair.length === 2) {
+                    listModelArray.push({
+                        m_SelectState: false,
+                        m_DropMethod: pair[0].trim(), // : 前的值
+                        m_DropSpeed: pair[1].trim()  // : 后的值
+                    })
+                }
+            }
+
+            // 将数组中的对象添加到 ListModel
+            for (var j = 0; j < listModelArray.length; j++) {
+                listmodel_.append(listModelArray[j])
+            }
+
+    }
+    function allComponentEnable(){
+      listView_DataShow.enabled = false
+      btn_Confir.text = "返回"
+      btn_Cancel.visible = false
     }
 }

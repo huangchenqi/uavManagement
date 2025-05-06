@@ -489,7 +489,7 @@ bool InterferencePodDao::insertInterferencePodData(const QJsonObject &object)
 
         // 2. 创建事务
         odb::transaction trans(db.begin());
-        qDebug() << "Transaction insert Ammo started";
+        qDebug() << "Transaction insert insertInterferencePodData started";
 
         // 3. 从JSON创建实体对象
         InterferencePodEntity entity;

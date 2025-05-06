@@ -419,7 +419,7 @@ Item {
             }
         }
     }
-
+    //加载数据查看与修改
     function initListData(data){
         listmodel_.clear()
         for(var index = 0; index < data.length; index++)
