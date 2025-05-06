@@ -25,8 +25,6 @@ Rectangle {
            visible: true
            color: "#ECF2FE"
            signal customSignal(string message)
-           property int screenWidth: Qt.platform.os === "android" ? Screen.width : 975;
-           property int screenHeight: Qt.platform.os === "android" ? Screen.height : 608;
            property color borderColor: "#A5B3C0"
            property color headerColor: "#D3E1FE"
            property color fontColor: "#3E3E3E"
@@ -47,8 +45,12 @@ Rectangle {
               Connections {
                   target: pagePayloadLoader.item
                   onBackPayloadRecord: {
-                      console.log("connectuion!!!!!")
                       payloadRecordView.visible = true
+                      loadPayloadData()
+                      console.log("payloadDat+a"+JSON.stringify(uavPayloadManagementroot.payloadData))
+                      loadPayloadRecord(uavPayloadManagementroot.payloadData)
+                      console.log("loadPayloadDataconnectuion!!!!!")
+
                   }
               }
 

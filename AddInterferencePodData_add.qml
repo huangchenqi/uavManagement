@@ -14,8 +14,14 @@ Item {
     // width: 1280
     // height: 900
     anchors.fill:parent
+    //新增与更新的数据
+    property var interferencePodData: new Object
+    //加载数据
+    property var interferencePodDataResult: new Object
     //记录选择的机型数组
     property var useToUavArray: []
+    property var useToUavResult: ""
+    property var interenceBandResult: ""
     // 获取当前时间并转换为字符串
     property var currentTime: new Date().toLocaleString()
     //干扰波段
@@ -30,7 +36,36 @@ Item {
     signal backPayloadRecord()
 
     property int loadState: 0  //0:新增、1:查看、2:编辑
+    // 定义警告对话框
+    Popup {
+            id: warningPopup
+            width: 200
+            height: 100
+            x: (parent.width - width) / 2
+            y: (parent.height - height) / 2
+            modal: true
+            focus: true
+            closePolicy: Popup.NoAutoClose // 禁止点击外部关闭
 
+            background: Rectangle {
+                color: "#ffeb3b"
+                border.color: "#fbc02d"
+                radius: 5
+            }
+
+            contentItem: Text {
+                id:warningItem
+                //text: "您查询的是全部数据！"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font.pixelSize: 16
+            }
+        }
+    Timer {
+            id: autoCloseTimer
+            interval: 500 // 2秒
+            onTriggered: warningPopup.close()
+        }
     Component.onCompleted: {
         loadView()
     }
@@ -163,23 +198,46 @@ Item {
                         m_TypeName: uavData[i].uavName
                     });
                 }
+                if(processInfo.loadViewType === "addUavData"){
 
+
+                }else if(processInfo.loadViewType === "query"){
+                    var ammoToUavModel = custom_PassiveInterferencePod.useToUavResult
+                    var a = ammoToUavModel.split(",");
+
+                    // 遍历数组 a 和 b，更新 m_SelectState
+                    for (var i = 0; i < a.length; i++) {
+                        for (var j = 0; j < result.length; j++) {
+                            if (result[j].m_PlanNumber === a[i]) {
+                                result[j].m_SelectState = true;
+                            }
+                        }
+                    }
+
+                    // 打印更新后的数组 b
+                    console.log("Updated array b:", JSON.stringify(result, null, 2));
+                    console.log("<!><@><#>")
+                }else if(processInfo.loadViewType === "update"){
+                    var ammoToUavModel = custom_PassiveInterferencePod.useToUavResult
+                    var a = ammoToUavModel.split(",");
+
+                    // 遍历数组 a 和 b，更新 m_SelectState
+                    for (var i = 0; i < a.length; i++) {
+                        for (var j = 0; j < result.length; j++) {
+                            if (result[j].m_PlanNumber === a[i]) {
+                                result[j].m_SelectState = true;
+                            }
+                        }
+                    }
+
+                    // 打印更新后的数组 b
+                    console.log("Updated array b:", JSON.stringify(result, null, 2));
+                    console.log("<!><@><#>")
+                }else{
+                    console.log("processInfo.loadViewType Unknown")
+                }
                 // if(missileCommonData.selectAmmoViewType === 1 ){
-                //     var ammoToUavModel = newAmmoData.ammoSelectData.ammoToUavModel
-                //     var a = ammoToUavModel.split(",");
 
-                //     // 遍历数组 a 和 b，更新 m_SelectState
-                //     for (var i = 0; i < a.length; i++) {
-                //         for (var j = 0; j < result.length; j++) {
-                //             if (result[j].m_PlanNumber === a[i]) {
-                //                 result[j].m_SelectState = true;
-                //             }
-                //         }
-                //     }
-
-                //     // 打印更新后的数组 b
-                //     console.log("Updated array b:", JSON.stringify(result, null, 2));
-                //     console.log("<!><@><#>")
                 // }else if(missileCommonData.selectAmmoViewType === 2){
                 //     var ammoToUavModelUpdate = newAmmoData.ammoSelectData.ammoToUavModel
                 //     var a = ammoToUavModelUpdate.split(",");
@@ -463,11 +521,39 @@ Item {
                 }
             }
             Component.onCompleted: {
-                listmodel_Box_Band.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"2cm"})
-                listmodel_Box_Band.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"3cm"})
-                listmodel_Box_Band.append({m_PlanNumber:3,m_SelectState:false,m_TypeName:"5cm"})
-                listmodel_Box_Band.append({m_PlanNumber:4,m_SelectState:false,m_TypeName:"10cm"})
-                listmodel_Box_Band.append({m_PlanNumber:5,m_SelectState:false,m_TypeName:"22cm"})
+
+                if(processInfo.loadViewType === "addUavData"){
+                    var interferenceBandData = [{m_PlanNumber:1,m_SelectState:false,m_TypeName:"2cm"},
+                            {m_PlanNumber:2,m_SelectState:false,m_TypeName:"3cm"},
+                            {m_PlanNumber:3,m_SelectState:false,m_TypeName:"5cm"},
+                            {m_PlanNumber:4,m_SelectState:false,m_TypeName:"10cm"},
+                            {m_PlanNumber:5,m_SelectState:false,m_TypeName:"22cm"}]
+                    listmodel_Box_Band.append(interferenceBandData)
+
+                }else if(processInfo.loadViewType === "query" || processInfo.loadViewType === "update"){
+                    // var ammoToUavModel = custom_PassiveInterferencePod.useToUavResult
+                    // var a = ammoToUavModel.split(",");
+
+                    // // 遍历数组 a 和 b，更新 m_SelectState
+                    // for (var i = 0; i < a.length; i++) {
+                    //     for (var j = 0; j < result.length; j++) {
+                    //         if (result[j].m_PlanNumber === a[i]) {
+                    //             result[j].m_SelectState = true;
+                    //         }
+                    //     }
+                    // }
+
+                    // // 打印更新后的数组 b
+                    // console.log("Updated array b:", JSON.stringify(result, null, 2));
+                    // console.log("<!><@><#>")
+                }else{
+                    console.log("processInfo.loadViewType Unknown")
+                }
+                // listmodel_Box_Band.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"2cm"})
+                // listmodel_Box_Band.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"3cm"})
+                // listmodel_Box_Band.append({m_PlanNumber:3,m_SelectState:false,m_TypeName:"5cm"})
+                // listmodel_Box_Band.append({m_PlanNumber:4,m_SelectState:false,m_TypeName:"10cm"})
+                // listmodel_Box_Band.append({m_PlanNumber:5,m_SelectState:false,m_TypeName:"22cm"})
             }
         }
 
@@ -498,7 +584,7 @@ Item {
             text:{
                 if(iIntensity < 0)
                 {
-                    return "强度1(轻度干扰)"
+                    return "请选择:"
                 }
                 else
                 {
@@ -581,7 +667,7 @@ Item {
             text: /*loadState == 1 ? "查看" : "请选择" */{
                 if(iLaunchControlType < 0)
                 {
-                    return "人工控制"
+                    return "请选择:"
                 }
                 else
                 {
@@ -800,16 +886,16 @@ Item {
                 pixelSize: 20
                 text: "保存"
                 onClicked: {
-                    backPayloadRecord()
-                    custom_PassiveInterferencePod.visible = false
                     if(loadState == 1)
                     {
                         return
                     }
-                    else
-                    {
+                    else{
                         saveInterferencePodData()
                     }
+                    custom_PassiveInterferencePod.visible = false
+                    backPayloadRecord()
+
                 }
             }
         }
@@ -846,6 +932,7 @@ Item {
 
         }else if(processInfo.loadViewType === "query"){
             //查看
+            allComponentEnable()
             loadState = 1;
             loadInterferencePodData()
         }else if(processInfo.loadViewType === "update"){
@@ -862,6 +949,8 @@ Item {
         var podData = interferencePodDaoTableModel.queryInterferencePodData(processInfo.podJsonStr)
 
         text_PodName.text = podData.interferencePodName//名称
+        usageDescriptionText.text = podData.description  //描述
+        custom_PassiveInterferencePod.useToUavResult = podData.usedUavModels  //选择机型
         text_FrontHoodLength.text = podData.frontCoverLength//前罩长
         text_BackHoodLength.text = podData.rearCoverLength//后罩长
         text_MainCarbinSection.text = podData.mainCabinSection//主舱截面
@@ -872,16 +961,27 @@ Item {
         text_SinglePodWeight.text = podData.mass//单吊舱质量
         //波段
         var bandArray = (podData.interferenceBand).split(",")
+        var interferenceBandData = [{m_PlanNumber:1,m_SelectState:false,m_TypeName:"2cm"},
+                {m_PlanNumber:2,m_SelectState:false,m_TypeName:"3cm"},
+                {m_PlanNumber:3,m_SelectState:false,m_TypeName:"5cm"},
+                {m_PlanNumber:4,m_SelectState:false,m_TypeName:"10cm"},
+                {m_PlanNumber:5,m_SelectState:false,m_TypeName:"22cm"}]
+        listmodel_Box_Band.append(interferenceBandData)
         for(var band of bandArray)
         {
             for(var index = 0; index < listmodel_Box_Band.count; index++)
             {
-                if(listmodel_Box_Band.get(index).m_PlanNumber === Number.parseInt(band))
+                if(listmodel_Box_Band.get(index).m_PlanNumber === Number.parseInt(band))  //
                 {
                     listmodel_Box_Band.set(index,{m_SelectState:true})
                 }
             }
         }
+
+        //打印listview中model的数据 方法 2
+        console.log("All items:", JSON.stringify(
+            Array.from({length: listmodel_Box_Band.count}, (_, i) => listmodel_Box_Band.get(i))
+        ));
 
         //控制方式
         iLaunchControlType = Number.parseInt(podData.deliveryControlWay) - 1   //index值比存储值小1
@@ -913,7 +1013,6 @@ Item {
 
     //
     function saveInterferencePodData(){
-
         var interferencePodData = {
             id:0,
             interferencePodName:"",
@@ -989,17 +1088,61 @@ Item {
         if(temp.endsWith(";"))
             interferencePodData.effectiveReflectionArea = temp.slice(0,-1)
 
-        var succ
-        if(loadState == 0)//新增
-            succ = interferencePodDaoTableModel.insertInterferencePodData(interferencePodData)
-        else if(loadState == 2)
+
+        if(loadState == 0){//新增
+            let result = interferencePodDaoTableModel.insertInterferencePodData(interferencePodData)
+              if(result === true){
+                  warningItem.text = "^_^干扰吊舱新增数据成功!^_^"
+                  warningPopup.open()
+                  // 2秒后自动关闭
+                  autoCloseTimer.start()
+              }else if(result === false){
+                  warningItem.text = "^_^干扰吊舱新增数据失败!^_^"
+                  warningPopup.open()
+                  // 2秒后自动关闭
+                  autoCloseTimer.start()
+               }else{
+                  console.log("unknown addAmmoAllDatView!")
+              }
+        }else if(loadState == 2)
         {//更新
             interferencePodData.id = parseInt(processInfo.podJsonStr.recordId)
-            succ = interferencePodDaoTableModel.updateInterferencePodData(interferencePodData)
+            let result = interferencePodDaoTableModel.updateInterferencePodData(interferencePodData)
+            if(result === true){
+                warningItem.text = "^_^干扰吊舱更新数据成功!^_^"
+                warningPopup.open()
+                // 2秒后自动关闭
+                autoCloseTimer.start()
+            }else if(result === false){
+                warningItem.text = "^_^干扰吊舱更新数据失败!^_^"
+                warningPopup.open()
+                // 2秒后自动关闭
+                autoCloseTimer.start()
+             }else{
+                console.log("unknown addAmmoAllDatView!")
+            }
         }
-        if(succ)
-            console.log("成功！！！")
-        else
-            console.log("失败！！！")
+        return true
+    }
+
+    function allComponentEnable(){
+        text_PodName.enabled = false
+        view_List_TypeSelect.enabled = false
+        text_MainCarbinLength.enabled = false
+        text_FrontHoodLength.enabled = false
+        text_BackHoodLength.enabled = false
+        text_MainCarbinSection.enabled = false
+        text_LoadCapacity.enabled = false
+        text_SinglePodWeight.enabled = false
+        text_PodTotaloLength.enabled = false
+        text_SinglePodFullLoadWeight.enabled = false
+        text_SinglePodFullLoadWeight.enabled = false
+        view_List_Band.enabled = false
+        view_List_InterferenceIntensity.enabled = false
+        view_List_LaunchControlType.enabled = false
+        usageDescriptionText.enabled = false
+        uavImagSelect.enabled = false
+        btn_Save.visible = false
+        btn_Cancel.text = "返回"
     }
 }
