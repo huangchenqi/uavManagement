@@ -14,6 +14,7 @@ Item {
     // width: 1280
     // height: 900
     anchors.fill:parent
+    property var originData: new Object
     property var interencePodSpeed: ""
     //新增与更新的数据
     //property var interferencePodData: new Object
@@ -189,7 +190,7 @@ Item {
             }
             Component.onCompleted: {
 
-                var uavData = uavModelDao.selectUavModelAllData()
+                var uavData = uavModelDao.queryUavModelPartData()//selectUavModelAllData()
                 console.log("uavModelDao"+JSON.stringify(uavData))
                 var result = [];
                 for (var i = 0; i < uavData.length; i++) {
@@ -868,6 +869,7 @@ Item {
                 Image {
                     id: ammunitionImg
                     anchors.fill: parent
+
                 }
                 CText {
                     anchors.centerIn: parent
@@ -897,6 +899,12 @@ Item {
                 text: "取消"
                 onClicked: {
                     backPayloadRecord()
+                    if(processInfo.loadViewType === "update"){
+                        var selectPodData = new Object
+                        selectPodData.originImage_url = custom_PassiveInterferencePod.originData.image_url.toString()
+                        var result = interferencePodDaoTableModel.deletePicture(selectPodData)
+                    }
+
                     custom_PassiveInterferencePod.visible = false
                 }
             }
@@ -961,23 +969,27 @@ Item {
             allComponentEnable()
             loadState = 1;
             comp_InterferencePodDropSpeed.loadDataType = 1
-            loadInterferencePodData()
+            loadInterferencePodData("query")
             comp_EffectiveReflectionArea.loadDataType = 1
         }else if(processInfo.loadViewType === "update"){
             //编辑
             loadState = 2;
             comp_EffectiveReflectionArea.loadDataType = 2
             comp_InterferencePodDropSpeed.loadDataType = 2
-            loadInterferencePodData()
+            loadInterferencePodData("update")
         }else{
             console.log("processInfo.loadViewType Unknown")
         }
     }
 
-    function loadInterferencePodData(){
+    function loadInterferencePodData(method){
         //加载数据
-        var podData = interferencePodDaoTableModel.queryInterferencePodData(processInfo.podJsonStr)
-
+        var selectPodData = new Object
+        selectPodData.recordId =processInfo.podJsonStr.recordId
+        selectPodData.loadDataMethod = method
+        console.log("selectPodData"+JSON.stringify(selectPodData)+"<processInfo.podJsonStr>"+JSON.stringify(processInfo.podJsonStr))
+        var podData = interferencePodDaoTableModel.queryInterferencePodData(selectPodData) //processInfo.podJsonStr
+        custom_PassiveInterferencePod.originData = podData
         text_PodName.text = podData.interferencePodName//名称
         usageDescriptionText.text = podData.description  //描述
         custom_PassiveInterferencePod.useToUavResult = podData.usedUavModels  //选择机型
@@ -1033,7 +1045,7 @@ Item {
         }
         //干扰强度
         iIntensity = Number.parseInt(podData.interferenceIntensity) - 1   //index值比存储值小1
-        ammunitionImg.source = "file:///" + podData.image_url
+
         //有效反射面积
         effectiveReflectionArea = podData.effectiveReflectionArea.split(";")
         comp_EffectiveReflectionArea.initListData(effectiveReflectionArea)
@@ -1041,6 +1053,15 @@ Item {
         //投放速度
         comp_InterferencePodDropSpeed.initListData(podData.deliverySpeed)
         custom_PassiveInterferencePod.interencePodSpeed = podData.deliverySpeed
+        if(method === "query"){
+            //console.log("ammunitionImgloadImage"+ podData.loadImage)
+            ammunitionImg.source = "data:image/png;base64," + podData.loadImage
+        }else if(method === "update"){
+            ammunitionImg.source = "file:///" + podData.image_url
+            custom_PassiveInterferencePod.originData.image_url = ammunitionImg.source
+        }else{
+            console.log("Unknown mehtod!")
+        }
     }
 
     function textToFloat(data){
@@ -1083,7 +1104,8 @@ Item {
             loadingCapacity:0.0,//装载容量(kg)
             interferenceIntensity:"",//干扰强度
             image_name:"",
-            image_url:""
+            image_url:"",
+            originImage_url:""
         }
         //名称
         interferencePodData.interferencePodName = text_PodName.text
@@ -1142,7 +1164,8 @@ Item {
 
         //图片地址
         interferencePodData.image_url = ammunitionImg.source.toString()
-
+        interferencePodData.originImage_url = custom_PassiveInterferencePod.originData.image_url.toString()
+        console.log("custom_PassiveInterferencePod.originData.image_url",interferencePodData.image_url === interferencePodData.originImage_url)
         var temp = ""
         for(var i = 0; i < effectiveReflectionArea.length; i++)
         {

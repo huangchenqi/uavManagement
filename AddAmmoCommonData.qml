@@ -1156,7 +1156,7 @@ Item{//航空导弹与航空炸弹
                 }
             }
             Component.onCompleted: {
-                var uavData = uavModelDao.selectUavModelAllData()
+                var uavData = uavModelDao.queryUavModelPartData()//.selectUavModelAllData()
                 console.log("uavModelDao"+JSON.stringify(uavData))
                 var result = [];
                 for (var i = 0; i < uavData.length; i++) {

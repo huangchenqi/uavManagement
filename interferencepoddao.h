@@ -18,6 +18,7 @@ public:
     Q_INVOKABLE QJsonObject queryInterferencePodData(const QJsonObject &object);//查询某个条件的全部数据
     Q_INVOKABLE bool updateInterferencePodData(const QJsonObject &selectedData);//更新数据
     Q_INVOKABLE bool deleteInterferencePodData(const QJSValue &selectedData);//删除数据
+    Q_INVOKABLE bool deletePicture(const QJsonObject &object);//删除图片
     //QJsonObject checkAmmoDataObject(const QJsonObject& object);//检查QML界面的数据是否匹配
     Q_INVOKABLE bool insertInterferencePodData(const QJsonObject &object);//插入数据
 

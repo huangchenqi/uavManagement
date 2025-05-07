@@ -321,7 +321,6 @@ debug/qrc_qml.cpp: ../../qml.qrc \
 		../../ReconnaissanceCommunicationRecordManagementAdd.qml \
 		../../AddMountLocation.qml \
 		../../DnyTable.qml \
-		../../AddReconnaissanceCommunicationData.qml \
 		../../NewMissileBaseData.qml \
 		../../NewMissileLaunchData.qml \
 		../../AddUavModelAllData_add.qml \
@@ -7503,7 +7502,11 @@ debug/interferencepoddao.o: ../../interferencepoddao.cpp ../../interferencepodda
 		B:/QT/5.15.2/mingw81_64/include/QtGui/qregion.h \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/qdatastream.h \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/qline.h \
-		B:/QT/5.15.2/mingw81_64/include/QtCore/QUrl
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QUrl \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/QPixmap \
+		B:/QT/5.15.2/mingw81_64/include/QtGui/qpixmap.h \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/QBuffer \
+		B:/QT/5.15.2/mingw81_64/include/QtCore/qbuffer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\interferencepoddao.o ..\..\interferencepoddao.cpp
 
 debug/main.o: ../../main.cpp B:/QT/5.15.2/mingw81_64/include/QtGui/QGuiApplication \
@@ -7601,6 +7604,8 @@ debug/main.o: ../../main.cpp B:/QT/5.15.2/mingw81_64/include/QtGui/QGuiApplicati
 		B:/QT/5.15.2/mingw81_64/include/QtCore/qpointer.h \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/qmetaobject.h \
 		B:/QT/5.15.2/mingw81_64/include/QtQml/qqmlerror.h \
+		B:/QT/5.15.2/mingw81_64/include/QtQml/QQmlContext \
+		B:/QT/5.15.2/mingw81_64/include/QtQml/qqmlcontext.h \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/QDebug \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/QTextCodec \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/qtextcodec.h \

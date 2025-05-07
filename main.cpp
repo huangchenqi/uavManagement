@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <QDebug>
 #include <QTextCodec>
 #include "odb/database.hxx"
@@ -40,7 +41,6 @@ int main(int argc, char *argv[])
     // 设置默认编码为 UTF-8
         QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
     QQmlApplicationEngine engine;
-
     qmlRegisterType<UavModelDao>("UavDaoModel",1,0,"UavModelDaoTableModel");
     qmlRegisterType<UavMountLocationDao>("UavMountLocationDaoModel",1,0,"UavMountLocationDaoTableModel");
     qmlRegisterType<UavModelBombingMethodDao>("UavBombingMethodDaoModel",1,0,"UavBombingMethodDaoTableModel");

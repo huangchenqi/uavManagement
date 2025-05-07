@@ -53,7 +53,7 @@ Item {
             title: "通信侦察名称:"
             pixelSize: 18
             titleWidth: pixelSize * 6.5
-            width: 280
+            width: 380
             height: 30
             onlyNum: false
             enabled: loadState != 1
@@ -65,9 +65,9 @@ Item {
             anchors.leftMargin: 5
             anchors.top: text_name.bottom
             anchors.topMargin: 20
-            title: "最小频率(Hz):"
+            title: "最小频率(MHz):"
             pixelSize: 18
-            titleWidth: pixelSize * 6.5
+            titleWidth: pixelSize * 7
             width: 220
             height: 30
             enabled: loadState != 1
@@ -76,10 +76,11 @@ Item {
         CTextInput{
             id:text_Frequency_Max
             anchors.left: text_Frequency_Min.right
+            anchors.leftMargin: 20
             anchors.top: text_Frequency_Min.top
-            title: "最大频率(Hz):"
+            title: "最大频率(GHz):"
             pixelSize: 18
-            titleWidth: pixelSize * 6.5
+            titleWidth: pixelSize * 7
             width: 220
             height: 30
             enabled: loadState != 1
@@ -92,7 +93,7 @@ Item {
             anchors.topMargin: 10
             text: "侦察距离"
             pixelSize: 18
-            width: 120
+            width: 220
             height: 36
             onClicked: {
                 rect_PositioningAccuracyDataShow.visible = false
@@ -104,11 +105,11 @@ Item {
         CButton{
             id:btn_LateralAccuracy
             anchors.left: btn_EconnaissanceRange.right
-            anchors.leftMargin: 5
+            anchors.leftMargin: 20
             anchors.top: btn_EconnaissanceRange.top
-            text: "侧向精度"
+            text: "测向精度"
             pixelSize: 18
-            width: 120
+            width: 220
             height: 36
             onClicked: {
                 rect_EconnaissanceRangeDataShow.visible = false
@@ -120,16 +121,73 @@ Item {
         CButton{
             id:btn_PositioningAccuracy
             anchors.left: btn_LateralAccuracy.right
-            anchors.leftMargin: 5
+            anchors.leftMargin: 20
             anchors.top: btn_LateralAccuracy.top
             text: "定位精度"
             pixelSize: 18
-            width: 120
+            width: 220
             height: 36
             onClicked: {
                 rect_EconnaissanceRangeDataShow.visible = false
                 rect_LateralAccuracyDataShow.visible = false
                 rect_PositioningAccuracyDataShow.visible = !rect_PositioningAccuracyDataShow.visible
+            }
+        }
+        Rectangle{
+            id:rect_Describe
+            anchors.top: btn_EconnaissanceRange.bottom
+            anchors.left: btn_EconnaissanceRange.left
+            width:770
+            //height: 300
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 350
+            anchors.leftMargin: 0
+            anchors.topMargin: 10
+            // anchors.right: addAmmo.right
+            // anchors.bottom: custom_PassiveInterferencePod.bottom
+            color:"#50000000"
+            radius: 10
+
+            CText {
+                id: text_DescribeTitle
+                text: qsTr("用途描述:")
+                pixelSize: 18
+                color: "#4EC4FF"
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                anchors.top: parent.top
+                anchors.topMargin: 20
+                horizontalAlignment: Text.AlignLeft
+
+            }
+            TextArea {
+                id: usageDescriptionText
+                anchors.top: text_DescribeTitle.bottom
+                anchors.topMargin: 15
+                anchors.left: text_DescribeTitle.left
+                anchors.right: parent.right
+                anchors.rightMargin: 5
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 5
+                // 边框样式
+                    background: Rectangle {
+                        border.color: "#cccccc"
+                        radius: 10
+                    }
+
+                // 多行显示关键配置
+                wrapMode: Text.Wrap                   // 自动换行
+                placeholderText: "请输入多行描述..."    // 占位提示
+                textFormat: Text.PlainText            // 文本格式
+                selectByMouse: true                   // 允许鼠标选择
+                inputMethodHints: Qt.ImhMultiLine      // 启用多行输入法支持
+                font.family: "黑体"
+                font.pixelSize: 20
+                onTextChanged: {
+                    //ammoData.ammoDescription =text
+                    console.log("Text content changed to: " + text)
+
+                }
             }
         }
 
@@ -907,11 +965,11 @@ Item {
             width: 80
             height: 36
             onClicked: {
-                reconnaissanceCommunicationRecord()
-                custom_ReconnaissanceCommunication.visible = false
-                if(loadState == 1)
-                    return
+                // if(loadState == 1)
+                //     return
                 saveReconnaissanceCommunicationData()
+                reconnaissanceCommunicationRecord()
+                custom_ReconnaissanceCommunication.visible = false                
             }
         }
     }
@@ -945,6 +1003,8 @@ Item {
             //查看
             loadState = 1;
             loadReconnaissanceCommunicationData()
+            btn_Confir.visible = false
+            btn_Cancel.text = "返回"
         }else if(processInfo.loadViewType === "update"){
             //编辑
             loadState = 2;
@@ -972,7 +1032,7 @@ Item {
 
         text_Frequency_Min.text = loadData.frequencyMinimum
         text_Frequency_Max.text = loadData.frequencyMaximum
-
+        usageDescriptionText.text = loadData.description
         listmodel_EconnaissanceRange.append({m_SelectState:false,m_RangeData:loadData.firstReconnaissanceRange,m_MinData:loadData.firstReconnaissanceFrequencyMinimum,m_MaxData:loadData.firstReconnaissanceFrequencyMaximum,m_RadiatedPower:loadData.firstReconnaissanceRadiatedPower})
         listmodel_EconnaissanceRange.append({m_SelectState:false,m_RangeData:loadData.secondReconnaissanceRange,m_MinData:loadData.secondReconnaissanceFrequencyMinimum,m_MaxData:loadData.secondReconnaissanceFrequencyMaximum,m_RadiatedPower:loadData.secondReconnaissanceRadiatedPower})
         listmodel_EconnaissanceRange.append({m_SelectState:false,m_RangeData:loadData.thirdReconnaissanceRange,m_MinData:loadData.thirdReconnaissanceFrequencyMinimum,m_MaxData:loadData.thirdReconnaissanceFrequencyMaximum,m_RadiatedPower:loadData.thirdReconnaissanceRadiatedPower})
@@ -1047,7 +1107,7 @@ Item {
         saveData.reconnaissanceName = text_name.text
         saveData.frequencyMinimum = textToFloat(text_Frequency_Min.text)
         saveData.frequencyMaximum = textToFloat(text_Frequency_Max.text)
-
+        saveData.description = usageDescriptionText.text
         if(listmodel_EconnaissanceRange.count == 4)
         {
             saveData.firstReconnaissanceRange = textToFloat(listmodel_EconnaissanceRange.get(0).m_RangeData)

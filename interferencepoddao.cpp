@@ -18,7 +18,8 @@
 #include <QTemporaryFile>
 #include <QImage>
 #include <QUrl>
-
+#include <QPixmap>
+#include <QBuffer>
 struct order{
     template<typename T>
     static odb::query<T> by(::std::string column, ::std::string p = "DESC"){
@@ -248,61 +249,84 @@ QJsonObject InterferencePodDao::queryInterferencePodData(const QJsonObject &obje
             //interferencePodData["image_name"] = QString::fromStdString(entity.uavImgName_);
 
             QByteArray imageData(entity.imageName_.data(), entity.imageName_.size());
-            //建立临时文件名
 
-            QString tempFileName = "Uav" + QDateTime::currentDateTime().toString("yyyyMMddHHmmss") + "Image";
-            // 创建一个临时文件
-            QTemporaryFile tempFile(tempFileName);
-            //tempFile.setAutoRemove(false); // 禁用自动删除
-            if (!tempFile.open()) {
-                qDebug() << "Failed to create temporary file:" << tempFile.errorString();
-                //return QString();
+            if (object.contains("loadDataMethod") && object["loadDataMethod"].isString()) {
+                QString loadDataMethodStr = object["loadDataMethod"].toString();
+                if(loadDataMethodStr == "query"){
+                    // 加载图片
+                    QPixmap da;
+                    da.loadFromData(imageData);
+                    QImage  loadImage = da.toImage();
+                    qDebug()<<"loadImage:"<<loadImage.size();
+                    // 将 QImage 转换为 Base64 字符串
+                    QByteArray byteArray;
+                    QBuffer buffer(&byteArray);
+                    buffer.open(QIODevice::WriteOnly);
+                    loadImage.save(&buffer, "PNG"); // 保存为 PNG 格式
+                    QString base64Image = QString::fromLatin1(byteArray.toBase64().data());
+                    qDebug() << "Base64 数据长度:" << base64Image.length();
+                    // 存入 JSON
+                    interferencePodData["loadImage"] = base64Image;
+                    qDebug()<<"当前函数名称:" << __FUNCTION__<<"loadDataMethodStr:"<<loadDataMethodStr;
+                }else if(loadDataMethodStr == "update"){
+                    //建立临时文件名
+
+                    QString tempFileName = "Uav" + QDateTime::currentDateTime().toString("yyyyMMddHHmmss") + "Image";
+                    // 创建一个临时文件
+                    QTemporaryFile tempFile(tempFileName);
+                    //tempFile.setAutoRemove(false); // 禁用自动删除
+                    if (!tempFile.open()) {
+                        qDebug() << "Failed to create temporary file:" << tempFile.errorString();
+                        //return QString();
+                    }
+
+                    // 写入图片数据
+                    tempFile.write(imageData);
+                    tempFile.close();
+
+                    // 返回临时文件的路径
+                    QUrl imageUrl;
+                    QString tempFilePath =tempFile.fileName();
+                    if (!tempFilePath.isEmpty()) {
+                        imageUrl = QUrl::fromLocalFile(tempFilePath);
+                    }
+
+                    QString filePath = imageUrl.toString();
+                    // 去掉文件路径中的 "file:///"
+                    filePath = filePath.mid(8);
+
+                    // 检查文件是否存在
+                    QFile file(filePath);
+                    if (!file.exists()) {
+                        qDebug()<< "错误, 文件不存在！";
+
+                    }
+                    QImage image(filePath);//image = da.toImage();
+                    //                if (image.isNull()) {
+                    //                    qDebug()<<"错误, 无法加载图片！";
+                    //                    return -1;
+                    //                }
+                    QString fileType = ".png";
+
+                    // 修改文件扩展名
+                    QString newFilePath = filePath.section('.', 0, -2) + fileType;
+
+                    // 保存为PNG格式
+                    if (!image.save(newFilePath, "PNG")) {
+                        qDebug()<<"错误, 保存失败！";
+                    }
+                    qDebug()<<"QTemporaryFile"<<newFilePath;
+
+                    interferencePodData["image_url"] = newFilePath;
+                    qDebug()<<""<<"当前函数名称:" << __FUNCTION__<<"loadDataMethodStr:"<<loadDataMethodStr;
+                }else{
+                    qDebug()<<"Unknown loadDataMethod!";
+                }
             }
-
-            // 写入图片数据
-            tempFile.write(imageData);
-            tempFile.close();
-
-            // 返回临时文件的路径
-            QUrl imageUrl;
-            QString tempFilePath =tempFile.fileName();
-            if (!tempFilePath.isEmpty()) {
-                imageUrl = QUrl::fromLocalFile(tempFilePath);
-            }
-
-            QString filePath = imageUrl.toString();
-            // 去掉文件路径中的 "file:///"
-            filePath = filePath.mid(8);
-
-            // 检查文件是否存在
-            QFile file(filePath);
-            if (!file.exists()) {
-                qDebug()<< "错误, 文件不存在！";
-
-            }
-
-            // 加载图片
-            QImage image(filePath);
-            //                if (image.isNull()) {
-            //                    qDebug()<<"错误, 无法加载图片！";
-            //                    return -1;
-            //                }
-            QString fileType = ".png";
-
-            // 修改文件扩展名
-            QString newFilePath = filePath.section('.', 0, -2) + fileType;
-
-            // 保存为PNG格式
-            if (!image.save(newFilePath, "PNG")) {
-                qDebug()<<"错误, 保存失败！";
-            }
-            qDebug()<<"QTemporaryFile"<<newFilePath;
-
-            interferencePodData["image_url"] = newFilePath;
             // 转换为格式化的JSON字符串
             QJsonDocument doc(interferencePodData);
             QString jsonString = doc.toJson(QJsonDocument::Indented);
-            qDebug()<<"当前函数名称:" << __FUNCTION__<<":"<<jsonString;
+            //qDebug()<<"当前函数名称:" << __FUNCTION__<<":"<<jsonString;
         } else {
             qDebug() << "No matching record found";
         }
@@ -421,6 +445,28 @@ bool InterferencePodDao::updateInterferencePodData(const QJsonObject &selectedDa
         // 提交事务
         trans.commit();
         qDebug()<<"当前函数名称:" << __FUNCTION__<<":" << "Transaction committed, 数据更新成功";
+
+        if(selectedData["originImage_url"] == selectedData["image_url"]){
+            // 将 std::string 转换为 QString
+            QString qFilePath = image_url;
+
+            // 将 URL 格式的路径转换为本地路径
+            QUrl urlDel(qFilePath);
+            QString delLocalFilePath = urlDel.toLocalFile();
+
+            // 检查文件是否存在
+            if (QFile::exists(delLocalFilePath)) {
+                // 删除文件
+                if (QFile::remove(delLocalFilePath)) {
+                    std::cout << "File deleted successfully: " << entity.imageUrl_ << std::endl;
+                } else {
+                    std::cerr << "Failed to delete file: " << entity.imageUrl_ << std::endl;
+                }
+            } else {
+                std::cerr << "File does not exist: " << entity.imageUrl_ << std::endl;
+            }
+        }
+
     } catch (const std::exception& e) {
         qCritical() << "Error:" << " 数据更新操作出错: " << e.what();
         return false;
@@ -477,6 +523,32 @@ bool InterferencePodDao::deleteInterferencePodData(const QJSValue &selectedData)
         return false;
     }
     return  true;
+}
+
+bool InterferencePodDao::deletePicture(const QJsonObject &object)
+{
+        // 将 std::string 转换为 QString
+        QString qFilePath = object["originImage_url"].toString();
+
+        // 将 URL 格式的路径转换为本地路径
+        QUrl urlDel(qFilePath);
+        QString delLocalFilePath = urlDel.toLocalFile();
+
+        // 检查文件是否存在
+        if (QFile::exists(delLocalFilePath)) {
+            // 删除文件
+            if (QFile::remove(delLocalFilePath)) {
+                std::cout << "File deleted successfully: " << std::endl;
+                return true;
+            } else {
+                std::cerr << "Failed to delete file: " << std::endl;
+                return false;
+            }
+        } else {
+            std::cerr << "File does not exist: " <<  std::endl;
+        }
+
+        return true;
 }
 
 bool InterferencePodDao::insertInterferencePodData(const QJsonObject &object)

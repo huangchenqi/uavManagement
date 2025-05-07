@@ -421,6 +421,57 @@ QJsonArray UavModelDao::queryUavModelData(const QString &jsonStr)
     return queryUavModelArray;
 }
 
+QJsonArray UavModelDao::queryUavModelPartData()
+{
+    QJsonArray uavModelData;
+    //std::vector<person> persons;
+
+    try{
+        //using query_t = odb::query<UavModelEntity>;
+        // 1. 建立数据库连接
+        qDebug() << "Connecting to database...";
+        auto& db = dbConn_->getDatabase(); // 使用成员变量获取数据库
+        // 2. 创建事务
+        odb::transaction trans(db.begin());
+        qDebug() << "Transaction select all started";
+        // 关键修正1：使用 query<UavModelEntity> 获取结果集
+        using query_t = odb::query<UavModelEntity>;
+
+        odb::result<UavModelEntity> result = db.query<UavModelEntity>(query_t::true_expr + order::by<UavModelEntity>(query_t::uavCreatModelTime.column()));
+        qDebug() << "Query returned" << result.size() << "records";  // 添加此行
+        // 关键修正2：遍历所有结果
+        int sum = 1;
+        bool checked = false;
+        if(result.size()==0){
+            return uavModelData;
+        }
+
+        for (UavModelEntity entity : result) { //auto&& entity : result) {
+            QJsonObject obj;
+            qDebug() << "Processing record ID:" << entity.id_;  // 输出当前记录ID
+            // 手动转换实体到 JSON（需要根据实际字段补充）
+            obj["index"] = sum;
+            obj["recordId"] = QString::number(entity.id_);
+            obj["uavId"] = QString::fromStdString(entity.uavId_);
+            obj["uavName"] = QString::fromStdString(entity.uavName_);
+            obj["uavType"] = QString::fromStdString(entity.uavType_);
+            obj["checked"] = checked;
+            sum++;
+            qDebug()<<"uavModelAllDatauavcreat:";
+            uavModelData.append(obj);
+        }
+        trans.commit();
+    }
+    catch (const odb::exception& e) {
+        qCritical() << "Database error:" << e.what();
+        throw; // 或返回包含错误信息的 JSON
+    }
+    QJsonDocument doc(uavModelData);
+    qDebug()<<"当前函数名称:" << __FUNCTION__<<":";
+    qDebug().noquote() << doc.toJson(QJsonDocument::Indented);
+    return uavModelData;
+}
+
 QJsonArray UavModelDao::transformQueryAllData()
 {
     QJsonArray transformUavData;

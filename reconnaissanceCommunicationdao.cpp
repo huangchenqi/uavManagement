@@ -285,64 +285,64 @@ QJsonObject ReconnaissanceCommunicationDao::queryReconnaissanceCommunicationData
             // entity.uavHangingpoints_ = reconnaissanceCommunicationData["hardpoint_num"].toInt();
             // entity.uavPayloadcapacity_ = reconnaissanceCommunicationData["payload_capacity"].toInt();
 
-            reconnaissanceCommunicationData["imageUrl"] = QString::fromStdString(entity.imageUrl_);
+            //reconnaissanceCommunicationData["imageUrl"] = QString::fromStdString(entity.imageUrl_);
 
             /******************** 系统记录 ********************/
             //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
             //reconnaissanceCommunicationData["image_name"] = QString::fromStdString(entity.uavImgName_);
 
-            QByteArray imageData(entity.imageName_.data(), entity.imageName_.size());
-            //建立临时文件名
+            // QByteArray imageData(entity.imageName_.data(), entity.imageName_.size());
+            // //建立临时文件名
 
-            QString tempFileName = "Uav" + QDateTime::currentDateTime().toString("yyyyMMddHHmmss") + "Image";
-            // 创建一个临时文件
-            QTemporaryFile tempFile(tempFileName);
-            //tempFile.setAutoRemove(false); // 禁用自动删除
-            if (!tempFile.open()) {
-                qDebug() << "Failed to create temporary file:" << tempFile.errorString();
-                //return QString();
-            }
+            // QString tempFileName = "Uav" + QDateTime::currentDateTime().toString("yyyyMMddHHmmss") + "Image";
+            // // 创建一个临时文件
+            // QTemporaryFile tempFile(tempFileName);
+            // //tempFile.setAutoRemove(false); // 禁用自动删除
+            // if (!tempFile.open()) {
+            //     qDebug() << "Failed to create temporary file:" << tempFile.errorString();
+            //     //return QString();
+            // }
 
-            // 写入图片数据
-            tempFile.write(imageData);
-            tempFile.close();
+            // // 写入图片数据
+            // tempFile.write(imageData);
+            // tempFile.close();
 
-            // 返回临时文件的路径
-            QUrl imageUrl;
-            QString tempFilePath =tempFile.fileName();
-            if (!tempFilePath.isEmpty()) {
-                imageUrl = QUrl::fromLocalFile(tempFilePath);
-            }
+            // // 返回临时文件的路径
+            // QUrl imageUrl;
+            // QString tempFilePath =tempFile.fileName();
+            // if (!tempFilePath.isEmpty()) {
+            //     imageUrl = QUrl::fromLocalFile(tempFilePath);
+            // }
 
-            QString filePath = imageUrl.toString();
-            // 去掉文件路径中的 "file:///"
-            filePath = filePath.mid(8);
+            // QString filePath = imageUrl.toString();
+            // // 去掉文件路径中的 "file:///"
+            // filePath = filePath.mid(8);
 
-            // 检查文件是否存在
-            QFile file(filePath);
-            if (!file.exists()) {
-                qDebug()<< "错误, 文件不存在！";
+            // // 检查文件是否存在
+            // QFile file(filePath);
+            // if (!file.exists()) {
+            //     qDebug()<< "错误, 文件不存在！";
 
-            }
+            // }
 
-            // 加载图片
-            QImage image(filePath);
-            //                if (image.isNull()) {
-            //                    qDebug()<<"错误, 无法加载图片！";
-            //                    return -1;
-            //                }
-            QString fileType = ".png";
+            // // 加载图片
+            // QImage image(filePath);
+            // //                if (image.isNull()) {
+            // //                    qDebug()<<"错误, 无法加载图片！";
+            // //                    return -1;
+            // //                }
+            // QString fileType = ".png";
 
-            // 修改文件扩展名
-            QString newFilePath = filePath.section('.', 0, -2) + fileType;
+            // // 修改文件扩展名
+            // QString newFilePath = filePath.section('.', 0, -2) + fileType;
 
-            // 保存为PNG格式
-            if (!image.save(newFilePath, "PNG")) {
-                qDebug()<<"错误, 保存失败！";
-            }
-            qDebug()<<"QTemporaryFile"<<newFilePath;
+            // // 保存为PNG格式
+            // if (!image.save(newFilePath, "PNG")) {
+            //     qDebug()<<"错误, 保存失败！";
+            // }
+            // qDebug()<<"QTemporaryFile"<<newFilePath;
 
-            reconnaissanceCommunicationData["image_url"] = newFilePath;
+            // reconnaissanceCommunicationData["image_url"] = newFilePath;
             // 转换为格式化的JSON字符串
             QJsonDocument doc(reconnaissanceCommunicationData);
             QString jsonString = doc.toJson(QJsonDocument::Indented);
@@ -569,33 +569,33 @@ bool ReconnaissanceCommunicationDao::insertReconnaissanceCommunicationData(const
         //std::shared_ptr<Person> person(db->load<Person>(1));  // 加载ID为1的记录
         // 获取要更新的记录ID
         // 从 QJsonObject 中提取 "id" 字段
-        QJsonValue idValue = object.value("id");
+        // QJsonValue idValue = object.value("id");
 
-        // 检查字段是否存在
-        if (idValue.isUndefined()) {
-            qCritical() << "Error: JSON 中缺少 'id' 字段";
-            return false;
-        }
+        // // 检查字段是否存在
+        // if (idValue.isUndefined()) {
+        //     qCritical() << "Error: JSON 中缺少 'id' 字段";
+        //     return false;
+        // }
 
-        // 将字段值转为 QString（无论原始类型是字符串还是数字）
-        QString idStr = idValue.toVariant().toString();
+        // // 将字段值转为 QString（无论原始类型是字符串还是数字）
+        // QString idStr = idValue.toVariant().toString();
 
-        // 转换为整型并校验格式
-        bool ok;
-        int rid = idStr.toInt(&ok);
-        if (!ok) {
-            qCritical() << "Error: 'id' 值无效，无法转换为整数：" << idStr;
-            return false;
-        }
+        // // 转换为整型并校验格式
+        // bool ok;
+        // int rid = idStr.toInt(&ok);
+        // if (!ok) {
+        //     qCritical() << "Error: 'id' 值无效，无法转换为整数：" << idStr;
+        //     return false;
+        // }
 
-        // 检查 ID 是否为正数（根据业务需求）
-        if (rid <= 0) {
-            qCritical() << "Error: ID 必须为正整数，当前值：" << rid;
-            return false;
-        }
+        // // 检查 ID 是否为正数（根据业务需求）
+        // if (rid <= 0) {
+        //     qCritical() << "Error: ID 必须为正整数，当前值：" << rid;
+        //     return false;
+        // }
 
-        // 此时 id 变量已包含正确的整数值
-        qDebug() << "成功获取 ID:" << rid;
+        // // 此时 id 变量已包含正确的整数值
+        // qDebug() << "成功获取 ID:" << rid;
         //db.load(rid, entity);
         entity.reconnaissanceName_ =  object["reconnaissanceName"].toString().toStdString();;
         entity.usedUavModels_ = object["usedUavModels"].toString().toStdString();;
@@ -603,6 +603,7 @@ bool ReconnaissanceCommunicationDao::insertReconnaissanceCommunicationData(const
         // 处理数值类型（示例）/******************** 尺寸参数 ********************/
         entity.frequencyMinimum_ = object["frequencyMinimum"].toDouble(); // 假设返回float// 使用 QString::number 方法转换 float
         entity.frequencyMaximum_ = object["frequencyMaximum"].toDouble();
+        entity.firstReconnaissanceRange_ = object["firstReconnaissanceRange"].toDouble();
         entity.firstReconnaissanceFrequencyMinimum_ = object["firstReconnaissanceFrequencyMinimum"].toDouble();
         entity.firstReconnaissanceFrequencyMaximum_ = object["firstReconnaissanceFrequencyMaximum"].toDouble();
         entity.firstReconnaissanceRadiatedPower_ = object["firstReconnaissanceRadiatedPower"].toDouble();
@@ -645,24 +646,24 @@ bool ReconnaissanceCommunicationDao::insertReconnaissanceCommunicationData(const
         // 基础字段
 
         entity.imageUrl_ = object["imageUrl"].toString().toStdString();
-        entity.recordCreationTime_ = QDateTime::currentDateTime();//object["record_creation_time"].toString().toStdString();//.toInt();
+        //entity.recordCreationTime_ = QDateTime::currentDateTime();//object["record_creation_time"].toString().toStdString();//.toInt();
         entity.useStatus_ =  true;//object["use_status"].toBool();
         /******************** 系统记录 ********************/
         //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
         // 使用 QUrl 解析 URL 并提取本地路径
-        QString image_url = object["image_url"].toString();
-        QUrl url(image_url);
-        QString localFilePath = url.toLocalFile();
-        QFile file(localFilePath);
+        // QString image_url = object["image_url"].toString();
+        // QUrl url(image_url);
+        // QString localFilePath = url.toLocalFile();
+        // QFile file(localFilePath);
 
-        qDebug()<<"image_url:"<<object["image_url"].toString();
-        file.open(QIODevice::ReadOnly);
-        QByteArray data = file.readAll();
-        file.close();
-        //std::vector  imagByteA = std::vector<unsigned char>(data.begin(),data.end());
-        entity.imageName_ = std::vector<char>(data.begin(),data.end());
-        std::vector<char> imagByteA(data.begin(), data.end());
-        std::cout << "imagByteA: "<<imagByteA.size()<<"Data size" << entity.imageName_.size() << std::endl;
+        // qDebug()<<"image_url:"<<object["image_url"].toString();
+        // file.open(QIODevice::ReadOnly);
+        // QByteArray data = file.readAll();
+        // file.close();
+        // //std::vector  imagByteA = std::vector<unsigned char>(data.begin(),data.end());
+        // entity.imageName_ = std::vector<char>(data.begin(),data.end());
+        // std::vector<char> imagByteA(data.begin(), data.end());
+        // std::cout << "imagByteA: "<<imagByteA.size()<<"Data size" << entity.imageName_.size() << std::endl;
         // auto id = db.persist(entity);
         // qDebug() << "Persisting entity..."<<id;
 
