@@ -472,6 +472,152 @@ QJsonArray UavModelDao::queryUavModelPartData()
     return uavModelData;
 }
 
+QJsonObject UavModelDao::queryMountSchemeToUavMod(const QJsonObject &object)
+{
+    QJsonObject mountSchemData;
+
+    using query_t = odb::query<UavModelEntity>;
+    // 1. 建立数据库连接
+    qDebug() << "Connecting to database...";
+
+    auto& db = dbConn_->getDatabase(); // 使用成员变量获取数据库
+
+    // 2. 创建事务
+    odb::transaction trans(db.begin());
+    qDebug() << "Transaction started";
+    try {
+
+        // 3. 从JSON创建实体对象
+        UavModelEntity entity;
+
+        query_t q(query_t::true_expr); // 初始化为无条件
+        if (object.contains("recordId") && object["recordId"].isString()) {
+            auto uav_recordId = object["recordId"].toString();
+            q = q && (query_t::id == uav_recordId.toInt());
+        }
+
+        // 执行查询
+        auto result = db.query_one<UavModelEntity>(q);
+        if (result) {
+            const UavModelEntity& entity = *result;
+
+            // 手动转换每个字段到QJsonObject// 基础字段
+            mountSchemData["uavRecordId"] = QString::number(entity.id_);
+            mountSchemData["uavId"] = QString::fromStdString(entity.uavId_);
+            mountSchemData["uavType"] = QString::fromStdString(entity.uavType_);
+            mountSchemData["uavName"] = QString::fromStdString(entity.uavName_);
+            // 处理数值类型（示例）/******************** 尺寸参数 ********************/
+            mountSchemData["uavLength"] = QString::number(entity.uavLength_); // 假设返回float// 使用 QString::number 方法转换 float
+            mountSchemData["uavWidth"] = QString::number(entity.uavWidth_);
+            mountSchemData["uavHeight"] = QString::number(entity.uavHeight_);
+            mountSchemData["load_ammo_type"] = QString::fromStdString(entity.uavLoadAmmoType_);
+            // 格式化为字符串（保留5位小数）
+            // QString formattedValue = QString::number(entity.uavLength_, 'f', 5);
+            // mountSchemData["uavLengthhangingCapacityStr"] = formattedValue;
+            /******************** 飞行性能 ********************/
+            mountSchemData["flight_height_min"] = QString::number(entity.uavFlightHeightRangeMin_);
+            mountSchemData["flight_height_max"] = QString::number(entity.uavFlightHeightRangeMax_) ;
+            mountSchemData["flight_speed_min"] = QString::number(entity.uavFlightSpeedRangeMin_);
+            mountSchemData["flight_speed_max"] = QString::number(entity.uavFlightSpeedRangeMax_);
+            mountSchemData["flight_distance_min"] = QString::number(entity.uavFlightDistanceRangeMin_);
+            mountSchemData["flight_distance_max"] = QString::number(entity.uavFlightDistanceRangeMax_);
+            mountSchemData["flight_time_min"] = QString::number(entity.uavFlightTimeRangeMin_);
+            mountSchemData["flight_time_max"] = QString::number(entity.uavFlightTimeRangeMax_);
+
+            /******************** 起降参数 ********************/
+            mountSchemData["takeoff_distance"] = QString::number(entity.uavTakeoffDistance_);
+            mountSchemData["landing_distance"] = QString::number(entity.uavLandDistance_);
+
+            /******************** 机动性能 ********************/
+            mountSchemData["turn_radius_min"] = QString::number(entity.uavTurningRadiusRangeMin_);
+            mountSchemData["turn_radius_max"] = QString::number(entity.uavTurningRadiusRangeMax_);
+            mountSchemData["combat_radius"] = QString::number(entity.uavOperatioanalRadius_);
+
+            /******************** 载荷配置 ********************/
+            mountSchemData["payload_type"] = QString::fromStdString(entity.uavInvestigationPayloadType_);
+            mountSchemData["bomb_method"] = QString::fromStdString(entity.uavBombingway_);
+            mountSchemData["operation_method"] = QString::fromStdString(entity.uavOperationWay_);
+            mountSchemData["recon_range_min"] = QString::number(entity.uavLoadReconnaissanceRangeMin_);
+            mountSchemData["recon_range_max"] = QString::number(entity.uavLoadReconnaissanceRangeMax_);
+            mountSchemData["recon_accuracy"] = QString::number(entity.uavLoadReconnaissanceAccuracy_);
+
+            /******************** 回收与突防 ********************/
+            mountSchemData["recovery_mode"] = QString::fromStdString(entity.uavRecoveryway_);
+            mountSchemData["low_alt_speed"] = QString::number(entity.uavLowAltitudeBreakthroughSpeed_);
+
+            /******************** 挂载能力 ********************/
+            //mountSchemData["hardpoint_loc"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
+            // entity.uavHangingpoints_ = mountSchemData["hardpoint_num"].toInt();
+            // entity.uavPayloadcapacity_ = mountSchemData["payload_capacity"].toInt();
+            mountSchemData["attack_accuracy"] = QString::number(entity.uavAttackaccuracy_);
+            mountSchemData["hangingCapacity"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
+
+
+
+
+            /******************** 雷达特征 ********************/
+            mountSchemData["rcs"] = QString::number(entity.uavRadarCrossSection_);
+
+            /******************** 重量与平衡 ********************/
+            mountSchemData["cg_front_limit"] = QString::number(entity.uavCenterOfGravityFrontLimit_);
+            mountSchemData["cg_rear_limit"] = QString::number(entity.uavCenterOfGravityAfterwardLimit_);
+            mountSchemData["max_takeoff_weight"] = QString::number(entity.uavMaximumTakeoffWeight_);
+            mountSchemData["empty_weight"] = QString::number(entity.uavEmptyWeight_);
+
+            /******************** 燃油与载重 ********************/
+            mountSchemData["max_fuel"] = QString::number(entity.uavMaximumFuelCapacity_);
+            mountSchemData["max_external_weight"] = QString::number(entity.uavMaximumExternalWeight_);
+
+            /******************** 高度性能 ********************/
+            mountSchemData["ceiling"] = QString::number(entity.uavCeiling_);
+            mountSchemData["ground_start_alt"] = QString::number(entity.uavMaximumGroundStartingHeight_);
+            mountSchemData["air_start_alt"] = QString::number(entity.uavMaximumAirStartingAltitude_);
+
+            /******************** 续航性能 ********************/
+            mountSchemData["endurance"] = QString::number(entity.uavMaximumEndurance_);
+            mountSchemData["max_vacuum_speed"] = QString::number(entity.uavMaximumFlightVacuumSpeed_);
+            mountSchemData["min_meter_speed"] = QString::number(entity.uavMinimumFlightMeterSpeed_);
+
+            /******************** 特殊场景性能 ********************/
+            mountSchemData["sea_takeoff_roll"] = QString::number(entity.sealLevelTakeoffAndRollDistance_);
+            mountSchemData["sea_landing_roll"] = QString::number(entity.sealLevelLandingAndRollDistance_);
+            mountSchemData["recon_cruise_alt"] = QString::number(entity.cruiseAltitudeReconnaissanceConfiguration_);
+            mountSchemData["full_external_cruise_alt"] = QString::number(entity.cruiseAltitudeFullExternalConfiguration_);
+            mountSchemData["hangingCapacity"] = [&db,&entity](){//QString::fromStdString(entity.uavHangingLoctionCapacity_);
+                auto loaded{load{db}.from<UavModelMountLocationEntity>(QString::fromStdString(entity.uavHangingLoctionCapacity_))};
+                QJsonArray arr;
+                for(auto load: loaded){
+
+                    arr.append(QString::fromStdString(load.mountLocationName_));
+                }
+                return QJsonValue{arr};
+            }();
+            mountSchemData["uavLoadAmmoType"] = [&db,&entity](){
+                auto loaded{load{db}.from<AmmunitionEntity>(QString::fromStdString(entity.uavLoadAmmoType_))};
+                QJsonArray arr;
+                for(auto load: loaded){
+                    //qDebug() << "loaded: " << load.ammoName_.c_str();
+                    arr.append(QString::fromStdString(load.ammoName_));
+                }
+                return QJsonValue{arr};
+            }();
+            // 转换为格式化的JSON字符串
+            QJsonDocument doc(mountSchemData);
+            QString jsonString = doc.toJson(QJsonDocument::Indented);
+            qDebug()<<"当前函数名称:" << __FUNCTION__<<":"<<jsonString;
+        } else {
+            qDebug() << "No matching record found";
+        }
+
+        trans.commit();
+    } catch (const odb::exception& e) {
+        qCritical() << "Database error:" << e.what();
+        trans.rollback(); // 显式回滚事务（可选）
+        throw; // 重新抛出异常或返回空结果
+    }
+    return mountSchemData;
+}
+
 QJsonArray UavModelDao::transformQueryAllData()
 {
     QJsonArray transformUavData;

@@ -16,6 +16,7 @@ public:
     Q_INVOKABLE QJsonArray selectUavModelAllData();//查询全部数据
     Q_INVOKABLE QJsonArray queryUavModelData(const QString &jsonStr);//查询条件数据
     Q_INVOKABLE QJsonArray queryUavModelPartData();//查询无人机名称与编号数据
+    Q_INVOKABLE QJsonObject queryMountSchemeToUavMod(const QJsonObject& object );//为挂载方案提供数据
     Q_INVOKABLE QJsonArray transformQueryAllData();
     QHash<QString,QString>createIdMap(const QJsonArray &bArray);
     QJsonArray ProcessUavComponentWay(const QString &uavComponent,const QHash<QString,QString> &idMap);

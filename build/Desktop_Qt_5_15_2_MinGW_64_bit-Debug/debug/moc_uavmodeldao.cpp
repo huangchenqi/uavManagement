@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_UavModelDao_t {
-    QByteArrayData data[17];
-    char stringdata0[242];
+    QByteArrayData data[18];
+    char stringdata0[267];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,26 +38,28 @@ QT_MOC_LITERAL(2, 34, 0), // ""
 QT_MOC_LITERAL(3, 35, 17), // "queryUavModelData"
 QT_MOC_LITERAL(4, 53, 7), // "jsonStr"
 QT_MOC_LITERAL(5, 61, 21), // "queryUavModelPartData"
-QT_MOC_LITERAL(6, 83, 21), // "transformQueryAllData"
-QT_MOC_LITERAL(7, 105, 11), // "processData"
-QT_MOC_LITERAL(8, 117, 6), // "aArray"
-QT_MOC_LITERAL(9, 124, 22), // "QHash<QString,QString>"
-QT_MOC_LITERAL(10, 147, 5), // "idMap"
-QT_MOC_LITERAL(11, 153, 22), // "selectSomeUavModelDate"
-QT_MOC_LITERAL(12, 176, 15), // "updateModelDate"
-QT_MOC_LITERAL(13, 192, 15), // "deleteModelDate"
-QT_MOC_LITERAL(14, 208, 6), // "object"
-QT_MOC_LITERAL(15, 215, 15), // "insertModelDate"
-QT_MOC_LITERAL(16, 231, 10) // "objectData"
+QT_MOC_LITERAL(6, 83, 24), // "queryMountSchemeToUavMod"
+QT_MOC_LITERAL(7, 108, 6), // "object"
+QT_MOC_LITERAL(8, 115, 21), // "transformQueryAllData"
+QT_MOC_LITERAL(9, 137, 11), // "processData"
+QT_MOC_LITERAL(10, 149, 6), // "aArray"
+QT_MOC_LITERAL(11, 156, 22), // "QHash<QString,QString>"
+QT_MOC_LITERAL(12, 179, 5), // "idMap"
+QT_MOC_LITERAL(13, 185, 22), // "selectSomeUavModelDate"
+QT_MOC_LITERAL(14, 208, 15), // "updateModelDate"
+QT_MOC_LITERAL(15, 224, 15), // "deleteModelDate"
+QT_MOC_LITERAL(16, 240, 15), // "insertModelDate"
+QT_MOC_LITERAL(17, 256, 10) // "objectData"
 
     },
     "UavModelDao\0selectUavModelAllData\0\0"
     "queryUavModelData\0jsonStr\0"
-    "queryUavModelPartData\0transformQueryAllData\0"
-    "processData\0aArray\0QHash<QString,QString>\0"
-    "idMap\0selectSomeUavModelDate\0"
-    "updateModelDate\0deleteModelDate\0object\0"
-    "insertModelDate\0objectData"
+    "queryUavModelPartData\0queryMountSchemeToUavMod\0"
+    "object\0transformQueryAllData\0processData\0"
+    "aArray\0QHash<QString,QString>\0idMap\0"
+    "selectSomeUavModelDate\0updateModelDate\0"
+    "deleteModelDate\0insertModelDate\0"
+    "objectData"
 };
 #undef QT_MOC_LITERAL
 
@@ -67,7 +69,7 @@ static const uint qt_meta_data_UavModelDao[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -75,26 +77,28 @@ static const uint qt_meta_data_UavModelDao[] = {
        0,       // signalCount
 
  // methods: name, argc, parameters, tag, flags
-       1,    0,   59,    2, 0x02 /* Public */,
-       3,    1,   60,    2, 0x02 /* Public */,
-       5,    0,   63,    2, 0x02 /* Public */,
-       6,    0,   64,    2, 0x02 /* Public */,
-       7,    2,   65,    2, 0x02 /* Public */,
-      11,    1,   70,    2, 0x02 /* Public */,
-      12,    1,   73,    2, 0x02 /* Public */,
-      13,    1,   76,    2, 0x02 /* Public */,
-      15,    1,   79,    2, 0x02 /* Public */,
+       1,    0,   64,    2, 0x02 /* Public */,
+       3,    1,   65,    2, 0x02 /* Public */,
+       5,    0,   68,    2, 0x02 /* Public */,
+       6,    1,   69,    2, 0x02 /* Public */,
+       8,    0,   72,    2, 0x02 /* Public */,
+       9,    2,   73,    2, 0x02 /* Public */,
+      13,    1,   78,    2, 0x02 /* Public */,
+      14,    1,   81,    2, 0x02 /* Public */,
+      15,    1,   84,    2, 0x02 /* Public */,
+      16,    1,   87,    2, 0x02 /* Public */,
 
  // methods: parameters
     QMetaType::QJsonArray,
     QMetaType::QJsonArray, QMetaType::QString,    4,
     QMetaType::QJsonArray,
+    QMetaType::QJsonObject, QMetaType::QJsonObject,    7,
     QMetaType::QJsonArray,
-    QMetaType::QJsonArray, QMetaType::QJsonArray, 0x80000000 | 9,    8,   10,
+    QMetaType::QJsonArray, QMetaType::QJsonArray, 0x80000000 | 11,   10,   12,
     QMetaType::QJsonObject, QMetaType::QString,    4,
     QMetaType::Bool, QMetaType::QString,    4,
-    QMetaType::Bool, QMetaType::QJsonArray,   14,
-    QMetaType::Bool, QMetaType::QJsonObject,   16,
+    QMetaType::Bool, QMetaType::QJsonArray,    7,
+    QMetaType::Bool, QMetaType::QJsonObject,   17,
 
        0        // eod
 };
@@ -111,17 +115,19 @@ void UavModelDao::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
             if (_a[0]) *reinterpret_cast< QJsonArray*>(_a[0]) = std::move(_r); }  break;
         case 2: { QJsonArray _r = _t->queryUavModelPartData();
             if (_a[0]) *reinterpret_cast< QJsonArray*>(_a[0]) = std::move(_r); }  break;
-        case 3: { QJsonArray _r = _t->transformQueryAllData();
-            if (_a[0]) *reinterpret_cast< QJsonArray*>(_a[0]) = std::move(_r); }  break;
-        case 4: { QJsonArray _r = _t->processData((*reinterpret_cast< const QJsonArray(*)>(_a[1])),(*reinterpret_cast< const QHash<QString,QString>(*)>(_a[2])));
-            if (_a[0]) *reinterpret_cast< QJsonArray*>(_a[0]) = std::move(_r); }  break;
-        case 5: { QJsonObject _r = _t->selectSomeUavModelDate((*reinterpret_cast< const QString(*)>(_a[1])));
+        case 3: { QJsonObject _r = _t->queryMountSchemeToUavMod((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QJsonObject*>(_a[0]) = std::move(_r); }  break;
-        case 6: { bool _r = _t->updateModelDate((*reinterpret_cast< const QString(*)>(_a[1])));
+        case 4: { QJsonArray _r = _t->transformQueryAllData();
+            if (_a[0]) *reinterpret_cast< QJsonArray*>(_a[0]) = std::move(_r); }  break;
+        case 5: { QJsonArray _r = _t->processData((*reinterpret_cast< const QJsonArray(*)>(_a[1])),(*reinterpret_cast< const QHash<QString,QString>(*)>(_a[2])));
+            if (_a[0]) *reinterpret_cast< QJsonArray*>(_a[0]) = std::move(_r); }  break;
+        case 6: { QJsonObject _r = _t->selectSomeUavModelDate((*reinterpret_cast< const QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QJsonObject*>(_a[0]) = std::move(_r); }  break;
+        case 7: { bool _r = _t->updateModelDate((*reinterpret_cast< const QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 7: { bool _r = _t->deleteModelDate((*reinterpret_cast< const QJsonArray(*)>(_a[1])));
+        case 8: { bool _r = _t->deleteModelDate((*reinterpret_cast< const QJsonArray(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 8: { bool _r = _t->insertModelDate((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
+        case 9: { bool _r = _t->insertModelDate((*reinterpret_cast< const QJsonObject(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
@@ -157,13 +163,13 @@ int UavModelDao::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 10;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 10)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 9;
+        _id -= 10;
     }
     return _id;
 }
