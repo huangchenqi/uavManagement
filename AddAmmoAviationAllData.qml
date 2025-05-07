@@ -145,7 +145,7 @@ Item {
     }
     Rectangle{
         id:rect_Image
-        width:400
+        width:460
         //height: 820
         anchors.left: custom_NewMissileBaseData.right
         anchors.leftMargin: 2
@@ -160,10 +160,11 @@ Item {
             id: rect_ImageShow
             visible: true
             width:parent.width
-            height: 600
+            //height: 600
             anchors.left: rect_Image.left
             //anchors.leftMargin: 10
             anchors.top: rect_Image.top
+            anchors.bottom: btn_Cancel.top
             color: "#ECF2FE"
             border.color: "#BDBDBD"
             // 点击区域

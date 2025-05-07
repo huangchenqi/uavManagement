@@ -6,8 +6,8 @@ import UavDaoModel 1.0
 Item{
 
     id:missileCommonData
-    width: 1000
-    height: 230
+    width: 940
+    height: 260
 
     property int selectAmmoViewType:0
     onSelectAmmoViewTypeChanged: {
@@ -124,6 +124,7 @@ Item{
             border.width: 1
             border.color: mainColor
             anchors.left: parent.left
+            anchors.leftMargin: 3
             anchors.top: rect_baseParam.bottom
             anchors.topMargin: 15
             anchors.bottom: parent.bottom
@@ -135,9 +136,10 @@ Item{
                 color: "transparent"
                 border.width: 0
                 anchors.left: parent.left
+                anchors.leftMargin: 3
                 anchors.top: parent.top
                 anchors.topMargin: 15
-                width: (rect_baseParam.width / 4 ) - (2 * rect_missileParam2.anchors.leftMargin)
+                width: (rect_baseParam.width / 3 ) - (2 * rect_missileParam2.anchors.leftMargin)
                 height: 200
                 Rectangle{
                     anchors.left: parent.left
@@ -323,6 +325,63 @@ Item{
                                 }
                             }
                         }
+                        Item {
+                            id: item_DanErJuli
+                            width: custom_colum.width
+                            height: 20
+                            CText{
+                                id:text_DanErJuliTitle
+                                width: pixelSize * 6
+                                height: parent.height
+                                anchors.left: parent.left
+                                anchors.top: parent.top
+                                pixelSize: 20
+                                horizontalAlignment: Text.AlignLeft
+                                color:mainColor
+                                text:"准备时间(s): "
+                            }
+                            Item{
+                                width: parent.width - text_DanErJuliTitle.width
+                                height: parent.height
+                                anchors.left:text_DanErJuliTitle.right
+                                anchors.top: parent.top
+                                TextInput{
+                                    id:preparation_time
+                                    anchors.fill: parent
+                                    color:"#ffffffff"
+                                    font.family:text_DanErJuliTitle.family
+                                    font.pixelSize:(18)
+                                    selectByMouse: true
+                                    selectionColor: "#ffcc8800"
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
+
+                                        // }
+                                        newAmmoData.ammoData.preparation_time = textToFloat(text)
+                                        console.log("Text content changed to: " + text)
+
+                                    }
+                                    // onEditingFinished: {
+                                    //     newAmmoData.ammoData.preparation_time =text
+                                    //     console.log("Text content changed to: " + text)
+                                    // }
+                                }
+                                Rectangle{
+                                    width: parent.width
+                                    height: (2)
+                                    anchors.left: parent.left
+                                    anchors.bottom: parent.bottom
+                                    color:mainColor
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -335,7 +394,7 @@ Item{
                 anchors.leftMargin: 10
                 anchors.top: rect_missileParam.top
 
-                width: (rect_baseParam.width / 4 ) - (2 * rect_missileParam2.anchors.leftMargin)
+                width: (rect_baseParam.width / 3 ) - (2 * rect_missileParam2.anchors.leftMargin)
                 height: 200
                 Rectangle{
                     anchors.left: parent.left
@@ -467,30 +526,31 @@ Item{
                             }
                         }
                         Item {
-                            id: item_DanErJuli
+                            id: item_BombHeightMin
                             width: custom_colum2.width
                             height: 20
                             CText{
-                                id:text_DanErJuliTitle
-                                width: pixelSize * 6
+                                id:text_BombHeightTitle
+                                width: pixelSize * 4.5
                                 height: parent.height
                                 anchors.left: parent.left
                                 anchors.top: parent.top
                                 pixelSize: 20
                                 horizontalAlignment: Text.AlignLeft
                                 color:mainColor
-                                text:"准备时间(s): "
+                                text:"舵宽(mm): "
                             }
                             Item{
-                                width: parent.width - text_DanErJuliTitle.width
+                                id:item_InputBombHeightMin
+                                width: parent.width - text_BombHeightTitle.width
                                 height: parent.height
-                                anchors.left:text_DanErJuliTitle.right
+                                anchors.left:text_BombHeightTitle.right
                                 anchors.top: parent.top
                                 TextInput{
-                                    id:preparation_time
+                                    id:text_rudder_width
                                     anchors.fill: parent
                                     color:"#ffffffff"
-                                    font.family:text_DanErJuliTitle.family
+                                    font.family:text_BombHeightTitle.family
                                     font.pixelSize:(18)
                                     selectByMouse: true
                                     selectionColor: "#ffcc8800"
@@ -505,12 +565,11 @@ Item{
                                         // {
 
                                         // }
-                                        newAmmoData.ammoData.preparation_time = textToFloat(text)
+                                        newAmmoData.ammoData.rudder_width = textToFloat(text)
                                         console.log("Text content changed to: " + text)
-
                                     }
                                     // onEditingFinished: {
-                                    //     newAmmoData.ammoData.preparation_time =text
+                                    //     newAmmoData.ammoData.rudder_width =text
                                     //     console.log("Text content changed to: " + text)
                                     // }
                                 }
@@ -523,6 +582,64 @@ Item{
                                 }
                             }
                         }
+                        Item {
+                            id: item_GuidFlightTime
+                            width: custom_colum2.width
+                            height: 20
+                            CText{
+                                id:text_GuidFlightTimeTitle
+                                width: pixelSize * 8
+                                height: parent.height
+                                anchors.left: parent.left
+                                anchors.top: parent.top
+                                pixelSize: 20
+                                horizontalAlignment: Text.AlignLeft
+                                color:mainColor
+                                text:"制导飞行时间(h): "
+                            }
+                            Item{
+                                width: parent.width - text_GuidFlightTimeTitle.width
+                                height: parent.height
+                                anchors.left:text_GuidFlightTimeTitle.right
+                                anchors.top: parent.top
+                                TextInput{
+                                    id:text_Input_GuidFlightTime
+                                    anchors.fill: parent
+                                    color:"#ffffffff"
+                                    font.family:text_GuidFlightTimeTitle.family
+                                    font.pixelSize:(18)
+                                    selectByMouse: true
+                                    selectionColor: "#ffcc8800"
+                                    validator: DoubleValidator {
+                                                       bottom: -9999999
+                                                       top: 9999999
+                                                       notation: DoubleValidator.StandardNotation
+                                                       decimals: 5
+                                    }
+                                    onTextChanged: {
+                                        // if(text != "")
+                                        // {
+
+                                        // }
+                                        newAmmoData.ammoData.guided_flight_time = textToFloat(text)
+                                        console.log("Text content changed to: " + text)
+                                    }
+                                    // onEditingFinished: {
+                                    //     newAmmoData.ammoData.guided_flight_time =text
+                                    //     console.log("Text content changed to: " + text)
+                                    // }
+                                }
+                                Rectangle{
+                                    width: parent.width
+                                    height: (2)
+                                    anchors.left: parent.left
+                                    anchors.bottom: parent.bottom
+                                    color:mainColor
+                                }
+                            }
+                        }
+
+
                     }
                 }
             }
@@ -535,7 +652,7 @@ Item{
                 anchors.leftMargin: 10
                 anchors.top: rect_missileParam2.top
 
-                width: (rect_baseParam.width / 4 ) - (2 * rect_missileParam2.anchors.leftMargin)
+                width: (rect_baseParam.width / 3 ) - (2 * rect_missileParam2.anchors.leftMargin)
                 height: 200
                 Rectangle{
                     anchors.left: parent.left
@@ -665,95 +782,9 @@ Item{
                                 }
                             }
                         }
-
-                        Item {
-                            id: item_BombHeightMin
-                            width: custom_colum3.width
-                            height: 20
-                            CText{
-                                id:text_BombHeightTitle
-                                width: pixelSize * 4.5
-                                height: parent.height
-                                anchors.left: parent.left
-                                anchors.top: parent.top
-                                pixelSize: 20
-                                horizontalAlignment: Text.AlignLeft
-                                color:mainColor
-                                text:"舵宽(mm): "
-                            }
-                            Item{
-                                id:item_InputBombHeightMin
-                                width: parent.width - text_BombHeightTitle.width
-                                height: parent.height
-                                anchors.left:text_BombHeightTitle.right
-                                anchors.top: parent.top
-                                TextInput{
-                                    id:text_rudder_width
-                                    anchors.fill: parent
-                                    color:"#ffffffff"
-                                    font.family:text_BombHeightTitle.family
-                                    font.pixelSize:(18)
-                                    selectByMouse: true
-                                    selectionColor: "#ffcc8800"
-                                    validator: DoubleValidator {
-                                                       bottom: -9999999
-                                                       top: 9999999
-                                                       notation: DoubleValidator.StandardNotation
-                                                       decimals: 5
-                                    }
-                                    onTextChanged: {
-                                        // if(text != "")
-                                        // {
-
-                                        // }
-                                        newAmmoData.ammoData.rudder_width = textToFloat(text)
-                                        console.log("Text content changed to: " + text)
-                                    }
-                                    // onEditingFinished: {
-                                    //     newAmmoData.ammoData.rudder_width =text
-                                    //     console.log("Text content changed to: " + text)
-                                    // }
-                                }
-                                Rectangle{
-                                    width: parent.width
-                                    height: (2)
-                                    anchors.left: parent.left
-                                    anchors.bottom: parent.bottom
-                                    color:mainColor
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            Rectangle{
-                id:rect_missileParam4
-                color: "transparent"
-                anchors.left: rect_missileParam3.right
-                anchors.leftMargin: 10
-                anchors.top: rect_missileParam3.top
-
-                width: (rect_baseParam.width / 4 ) + (2 * rect_missileParam2.anchors.leftMargin)
-                height: parent.height
-                Rectangle{
-                    anchors.left: parent.left
-                    anchors.leftMargin: 5
-                    anchors.top: parent.top
-                    anchors.topMargin: 5
-                    anchors.right: parent.right
-                    anchors.rightMargin: 5
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: 5
-                    color: "transparent"
-
-                    Column{
-                        id:custom_colum4
-                        anchors.fill: parent
-                        spacing: 20
                         Item {
                             id: item_FlightTime
-                            width: custom_colum4.width
+                            width: custom_colum3.width
                             height: 20
                             CText{
                                 id:text_FlightTimeTitle
@@ -808,66 +839,10 @@ Item{
                             }
                         }
 
-                        Item {
-                            id: item_GuidFlightTime
-                            width: custom_colum4.width
-                            height: 20
-                            CText{
-                                id:text_GuidFlightTimeTitle
-                                width: pixelSize * 8
-                                height: parent.height
-                                anchors.left: parent.left
-                                anchors.top: parent.top
-                                pixelSize: 20
-                                horizontalAlignment: Text.AlignLeft
-                                color:mainColor
-                                text:"制导飞行时间(h): "
-                            }
-                            Item{
-                                width: parent.width - text_GuidFlightTimeTitle.width
-                                height: parent.height
-                                anchors.left:text_GuidFlightTimeTitle.right
-                                anchors.top: parent.top
-                                TextInput{
-                                    id:text_Input_GuidFlightTime
-                                    anchors.fill: parent
-                                    color:"#ffffffff"
-                                    font.family:text_GuidFlightTimeTitle.family
-                                    font.pixelSize:(18)
-                                    selectByMouse: true
-                                    selectionColor: "#ffcc8800"
-                                    validator: DoubleValidator {
-                                                       bottom: -9999999
-                                                       top: 9999999
-                                                       notation: DoubleValidator.StandardNotation
-                                                       decimals: 5
-                                    }
-                                    onTextChanged: {
-                                        // if(text != "")
-                                        // {
-
-                                        // }
-                                        newAmmoData.ammoData.guided_flight_time = textToFloat(text)
-                                        console.log("Text content changed to: " + text)
-                                    }
-                                    // onEditingFinished: {
-                                    //     newAmmoData.ammoData.guided_flight_time =text
-                                    //     console.log("Text content changed to: " + text)
-                                    // }
-                                }
-                                Rectangle{
-                                    width: parent.width
-                                    height: (2)
-                                    anchors.left: parent.left
-                                    anchors.bottom: parent.bottom
-                                    color:mainColor
-                                }
-                            }
-                        }
 
                         Item {
                             id: item_MaxSpeed
-                            width: custom_colum4.width
+                            width: custom_colum3.width
                             height: 20
                             CText{
                                 id:text_MaxSpeedTitle
@@ -924,6 +899,35 @@ Item{
                     }
                 }
             }
+
+            // Rectangle{
+            //     id:rect_missileParam4
+            //     color: "transparent"
+            //     anchors.left: rect_missileParam3.right
+            //     anchors.leftMargin: 10
+            //     anchors.top: rect_missileParam3.top
+
+            //     width: (rect_baseParam.width / 4 ) + (2 * rect_missileParam2.anchors.leftMargin)
+            //     height: parent.height
+            //     Rectangle{
+            //         anchors.left: parent.left
+            //         anchors.leftMargin: 5
+            //         anchors.top: parent.top
+            //         anchors.topMargin: 5
+            //         anchors.right: parent.right
+            //         anchors.rightMargin: 5
+            //         anchors.bottom: parent.bottom
+            //         anchors.bottomMargin: 5
+            //         color: "transparent"
+
+            //         Column{
+            //             id:custom_colum4
+            //             anchors.fill: parent
+            //             spacing: 20
+
+            //         }
+            //     }
+            // }
 
         }
 

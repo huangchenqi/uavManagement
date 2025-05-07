@@ -159,31 +159,34 @@ Item {
                         borderHigtColor: "#ffeebb22"
                         pixelSize: 18
                         onClicked: {
-                            view_List_TypeSelect.visible = false
-                            //selectType = index
-                            m_SelectState = !m_SelectState
-                            isSelect = m_SelectState
-                            // 检查数组中是否已经存在该数字
-                                var uavIndex = useToUavArray.indexOf(m_PlanNumber)
+                            if(processInfo.loadViewType === "query"){
 
-                                if (uavIndex === -1) {
-                                    // 数字不存在，添加到数组
-                                    useToUavArray.push(m_PlanNumber)
-                                    console.log("Number added: " + m_PlanNumber)
-                                } else {
-                                    // 数字已存在，从数组中删除
-                                    useToUavArray.splice(uavIndex, 1)
-                                    console.log("Number removed: " + m_PlanNumber)
-                                }
-                            // 检查数组中是否已经存在该数字
-                            // if (!newAmmoData.useToUavArray.includes(m_PlanNumber)) {
-                            //     newAmmoData.useToUavArray.push(m_PlanNumber) // 添加数字到数组
-                            //     console.log("Number added: " + m_PlanNumber)
-                            // } else {
-                            //     console.log("Number already exists: " + m_PlanNumber)
-                            // }
-                            console.log("useToUavArray"+custom_PassiveInterferencePod.useToUavArray)
+                            }else{
+                                view_List_TypeSelect.visible = false
+                                //selectType = index
+                                m_SelectState = !m_SelectState
+                                isSelect = m_SelectState
+                                // 检查数组中是否已经存在该数字
+                                    var uavIndex = useToUavArray.indexOf(m_PlanNumber)
 
+                                    if (uavIndex === -1) {
+                                        // 数字不存在，添加到数组
+                                        useToUavArray.push(m_PlanNumber)
+                                        console.log("Number added: " + m_PlanNumber)
+                                    } else {
+                                        // 数字已存在，从数组中删除
+                                        useToUavArray.splice(uavIndex, 1)
+                                        console.log("Number removed: " + m_PlanNumber)
+                                    }
+                                // 检查数组中是否已经存在该数字
+                                // if (!newAmmoData.useToUavArray.includes(m_PlanNumber)) {
+                                //     newAmmoData.useToUavArray.push(m_PlanNumber) // 添加数字到数组
+                                //     console.log("Number added: " + m_PlanNumber)
+                                // } else {
+                                //     console.log("Number already exists: " + m_PlanNumber)
+                                // }
+                                console.log("useToUavArray"+custom_PassiveInterferencePod.useToUavArray)
+                            }
                         }
                     }
                 }
@@ -1355,7 +1358,8 @@ Item {
 
     function allComponentEnable(){
         text_PodName.enabled = false
-        view_List_TypeSelect.enabled = false
+        //view_List_TypeSelect.enabled = false
+        view_List_DeliveryWay.enabled = false
         text_MainCarbinLength.enabled = false
         text_FrontHoodLength.enabled = false
         text_BackHoodLength.enabled = false

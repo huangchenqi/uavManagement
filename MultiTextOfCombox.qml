@@ -170,7 +170,7 @@ Rectangle {
                                //列宽
                                property variant columnWidthArr: [50,100, 100, 100,100,100]
                                // 显示10个字段
-                               property var horHeader: ["","序号", "挂载位置", "位置编号","挂载数量","载弹量"]
+                               property var horHeader: ["","序号", "飞机名称", "挂载位置","位置编号","载弹量"]
                                property int selected: -1
                                //数据展示
                                TableView {

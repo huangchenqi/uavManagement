@@ -487,8 +487,8 @@ Rectangle {
                               property color scrollBarColor: "#E5E5E5"
                               property int scrollBarWidth: 7
                               //列宽
-                              property variant columnWidthArr: [50,50, 180, 180, 120, 120,
-                                  120, 120, 100,300 ]
+                              property variant columnWidthArr: [50,50, 200, 200, 120, 120,
+                                  120, 120, 120,300 ]
 
                               // 显示10个字段
                               property var horHeader: ["","序号", "挂载方案名称", "无人机名", "起飞重量", "空重",

@@ -205,7 +205,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
 
                 Item{
                     id:item_NameInput
-                    width: (parent.width / 4) - ammoName.width
+                    width: (parent.width / 4) - ammoName.width+20
                     height: 20
                     anchors.left:ammoName.right
                     anchors.top: ammoName.top
@@ -251,7 +251,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
 
                 CButton{
                     id:uavTypeSelect
-                    width: 180
+                    width: 140
                     height: 36
                     color:"#ffddaa00"
                     borderColor: "#ffddaa00"
