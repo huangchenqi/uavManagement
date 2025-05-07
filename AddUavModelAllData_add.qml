@@ -16,7 +16,7 @@ import UavModelOperationWayDaoModel 1.0
 import UavMountLocationDaoModel 1.0
 import AmmoDaoModel 1.0
 import UavModelTypeDaoModel 1.0
-Rectangle{//Window{
+Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界面的背景与颜色显示出问题只能使用Item
     id:addUavModelData
     visible: true
     width: 1400

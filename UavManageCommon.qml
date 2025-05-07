@@ -319,7 +319,6 @@ Rectangle {
               Item {
                   id: uavModelRecordView
                   anchors.fill: parent
-
                   ColumnLayout {
                       //@disable-check M16
                       anchors.fill: parent

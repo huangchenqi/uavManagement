@@ -143,132 +143,146 @@ Item {
         anchors.top: custom_NewMissileBaseData.bottom
         anchors.topMargin: 10
     }
-
-    Rectangle {
-        id: rect_ImageShow
-        visible: true
+    Rectangle{
+        id:rect_Image
         width:400
-        height: 600
+        //height: 820
         anchors.left: custom_NewMissileBaseData.right
-        anchors.leftMargin: 10
+        anchors.leftMargin: 2
         anchors.top: custom_NewMissileBaseData.top
-        color: "#ECF2FE"
-        border.color: "#BDBDBD"
-        // 点击区域
-        MouseArea {
-            id:uavImagSelect
-            anchors.fill: parent
-            onClicked: {
-                fileDialog.open()
-            }
-        }
-        FileDialog {
-            id: fileDialog
-            title: "选择图片"
-            nameFilters: ["图片文件 (*.png *.jpg *.jpeg)"]
-            onAccepted: {
-                ammunitionImg.source = fileUrls[0]
-                //addUavModelData.image_name = uavImg.source.toString()
-                ammoData.image_url = ammunitionImg.source.toString()
-                // var currentModel = navBar.currentIndex === 0 ? droneModel : schemeModel
-                // for(var i = 0; i < currentModel.count; i++){
-                //     if(currentModel.get(i).expanded){
-                //         currentModel.get(i).items.push({
-                //             name: "新条目",
-                //             selected: false
-                //         });
-                //         break;
-                //     }
-                // }
-            }
-            // onAccepted: {
-            //             // 获取选中的文件路径
-            //             var filePath = fileDialog.fileUrl.toString()
-            //             // 去掉 "file://" 前缀
-            //             filePath = filePath.replace("file://", "")
-            //             // 加载图片
-            //             uavImg.source = filePath
-            //         }
-        }
-        Image {
-            id: ammunitionImg
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            width: parent.width - btn_Cancel.width
-            height: parent.height
-            source: {
-                if(processInfo.loadViewType === "addition"){
-                    return ""
-                }else if(processInfo.loadViewType === "query"){
-                    rect_ImageShow.enabled = false
-
-                    //return processInfo.imagUrl
-                }else if(processInfo.loadViewType === "update"){
-                    //return processInfo.imagUrl
-                    //console.log("addUavDataView"+processInfo.loadViewType)
-                }else{
-                    console.log("uav Image processInfo.loadViewType Unknown")
+        anchors.bottom: newAmmoData.bottom
+        anchors.bottomMargin: 100
+        // anchors.top: parent.top
+        // anchors.left: parent.left
+        // anchors.right: parent.right
+        //color: "#ECF2FE"
+        Rectangle {
+            id: rect_ImageShow
+            visible: true
+            width:parent.width
+            height: 600
+            anchors.left: rect_Image.left
+            //anchors.leftMargin: 10
+            anchors.top: rect_Image.top
+            color: "#ECF2FE"
+            border.color: "#BDBDBD"
+            // 点击区域
+            MouseArea {
+                id:uavImagSelect
+                anchors.fill: parent
+                onClicked: {
+                    fileDialog.open()
                 }
             }
-        }
-        CText {
-            anchors.centerIn: parent
-            text: "图片展示区域"
-            color: "#9E9E9E"
-        }       
-
-    }
-    Item {
-        id: allButton
-        anchors.right: newAmmoData.right //parent
-        anchors.top: rect_ImageShow.bottom
-        anchors.topMargin: 30
-
-        CButton{
-            id:btn_Cancel
-            anchors.top: allButton.bottom
-            anchors.topMargin: 15
-            // anchors.bottom: parent.bottom
-            // anchors.bottomMargin: 6
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-            // anchors.left: allButton.left
-            // anchors.leftMargin: 10
-            height: pixelSize * 2
-            width: pixelSize * 4
-            text: "取消"
-            onClicked: {
-                backAmmoRecord()
-                newAmmoData.visible = false
-            }
-        }
-
-        CButton{
-            id:btn_Save
-            anchors.top: allButton.bottom
-            anchors.topMargin: 15
-            // anchors.bottom: parent.bottom
-            // anchors.bottomMargin: 6
-            anchors.right: btn_Cancel.left
-            anchors.rightMargin: 10
-            height: pixelSize * 2
-            width: pixelSize * 4
-            text: "保存"
-            onClicked: {
-                console.log("processInfo.loadViewType+:"+processInfo.loadViewType)
-                if(processInfo.loadViewType === "addition"){
-                    saveAmmoData()
-                }else if(processInfo.loadViewType === "update"){
-                    updateAmmoData()
-                }else{
-                    console.log("Unknown processInfo.loadViewType!")
+            FileDialog {
+                id: fileDialog
+                title: "选择图片"
+                nameFilters: ["图片文件 (*.png *.jpg *.jpeg)"]
+                onAccepted: {
+                    ammunitionImg.source = fileUrls[0]
+                    //addUavModelData.image_name = uavImg.source.toString()
+                    ammoData.image_url = ammunitionImg.source.toString()
+                    // var currentModel = navBar.currentIndex === 0 ? droneModel : schemeModel
+                    // for(var i = 0; i < currentModel.count; i++){
+                    //     if(currentModel.get(i).expanded){
+                    //         currentModel.get(i).items.push({
+                    //             name: "新条目",
+                    //             selected: false
+                    //         });
+                    //         break;
+                    //     }
+                    // }
                 }
-                backAmmoRecord()
-                newAmmoData.visible = false
+                // onAccepted: {
+                //             // 获取选中的文件路径
+                //             var filePath = fileDialog.fileUrl.toString()
+                //             // 去掉 "file://" 前缀
+                //             filePath = filePath.replace("file://", "")
+                //             // 加载图片
+                //             uavImg.source = filePath
+                //         }
+            }
+            Image {
+                id: ammunitionImg
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                width: parent.width - btn_Cancel.width
+                height: parent.height
+                source: {
+                    if(processInfo.loadViewType === "addition"){
+                        return ""
+                    }else if(processInfo.loadViewType === "query"){
+                        rect_ImageShow.enabled = false
+
+                        //return processInfo.imagUrl
+                    }else if(processInfo.loadViewType === "update"){
+                        //return processInfo.imagUrl
+                        //console.log("addUavDataView"+processInfo.loadViewType)
+                    }else{
+                        console.log("uav Image processInfo.loadViewType Unknown")
+                    }
+                }
+            }
+            CText {
+                anchors.centerIn: parent
+                text: "图片展示区域"
+                color: "#9E9E9E"
             }
         }
+        // Item {
+        //     id: allButton
+        //     anchors.right: newAmmoData.right //parent
+        //     anchors.top: rect_ImageShow.bottom
+        //     anchors.topMargin: 30
+
+            CButton{
+                id:btn_Cancel
+                // anchors.top: rect_ImageShow.bottom
+                // anchors.topMargin: 15
+                anchors.bottom: rect_Image.bottom
+                anchors.bottomMargin: 6
+                anchors.right: parent.right
+                anchors.rightMargin: 0
+                // anchors.left: allButton.left
+                // anchors.leftMargin: 10
+                height: pixelSize * 2
+                width: pixelSize * 4
+                text: "取消"
+                onClicked: {
+                    backAmmoRecord()
+                    newAmmoData.visible = false
+                }
+            }
+
+            CButton{
+                id:btn_Save
+                // anchors.top: rect_ImageShow.bottom
+                // anchors.topMargin: 15
+                anchors.bottom: rect_Image.bottom
+                anchors.bottomMargin: 6
+                anchors.right: btn_Cancel.left
+                anchors.rightMargin: 10
+                height: pixelSize * 2
+                width: pixelSize * 4
+                text: "保存"
+                onClicked: {
+                    console.log("processInfo.loadViewType+:"+processInfo.loadViewType)
+                    if(processInfo.loadViewType === "addition"){
+                        saveAmmoData()
+                    }else if(processInfo.loadViewType === "update"){
+                        updateAmmoData()
+                    }else{
+                        console.log("Unknown processInfo.loadViewType!")
+                    }
+                    backAmmoRecord()
+                    newAmmoData.visible = false
+                }
+            }
+        //}
     }
+
+
 
 
     Rectangle{

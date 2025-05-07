@@ -225,124 +225,141 @@ Rectangle {
             }
         }
     }
-
-    Rectangle {
-        id: rect_ImageShow
-        visible: true
+    Rectangle{
+        id:rect_Image
         width:500
-        height: 600
+        height: 720
         anchors.left: addAmmo.right
         anchors.leftMargin: 10
         anchors.top: addAmmo.top
-        color: "#ECF2FE"
-        border.color: "#BDBDBD"
-        // 点击区域
-        MouseArea {
-            id:uavImagSelect
-            anchors.fill: parent
-            onClicked: {
-                fileDialog.open()
-            }
-        }
-        FileDialog {
-            id: fileDialog
-            title: "选择图片"
-            nameFilters: ["图片文件 (*.png *.jpg *.jpeg)"]
-            onAccepted: {
-                ammunitionImg.source = fileUrls[0]
-                //addUavModelData.image_name = uavImg.source.toString()
-                ammoData.image_url = ammunitionImg.source.toString()
-                //console.log("ammoData.image_url"+ammoData.image_url)
-                // var currentModel = navBar.currentIndex === 0 ? droneModel : schemeModel
-                // for(var i = 0; i < currentModel.count; i++){
-                //     if(currentModel.get(i).expanded){
-                //         currentModel.get(i).items.push({
-                //             name: "新条目",
-                //             selected: false
-                //         });
-                //         break;
-                //     }
-                // }
-            }
-            // onAccepted: {
-            //             // 获取选中的文件路径
-            //             var filePath = fileDialog.fileUrl.toString()
-            //             // 去掉 "file://" 前缀
-            //             filePath = filePath.replace("file://", "")
-            //             // 加载图片
-            //             uavImg.source = filePath
-            //         }
-        }
-        Image {
-            id: ammunitionImg
-            anchors.fill: parent
-            source: {
-                if(processInfo.loadViewType === "addUavData"){
-                    return ""
-                }else if(processInfo.loadViewType === "query"){
-                    rect_ImageShow.enabled = false
+        // anchors.bottom: addAmmoAllDatView.bottom
+        // anchors.bottomMargin: 100
+        // anchors.top: parent.top
+        // anchors.left: parent.left
+        // anchors.right: parent.right
+        //color: "#ECF2FE"
+        Rectangle {
+            id: rect_ImageShow
+            visible: true
+            width: parent.width
+            anchors.left: rect_Image.left
+            anchors.leftMargin: 10
+            anchors.top: rect_Image.top
+            //anchors.topMargin: 10
+            anchors.bottom: rect_Image.bottom
+            anchors.bottomMargin: 50
+            color: "#ECF2FE"
+            border.color: "#BDBDBD"
 
-                    //return processInfo.imagUrl
+            // 点击区域
+            MouseArea {
+                id:uavImagSelect
+                anchors.fill: parent
+                onClicked: {
+                    fileDialog.open()
+                }
+            }
+            FileDialog {
+                id: fileDialog
+                title: "选择图片"
+                nameFilters: ["图片文件 (*.png *.jpg *.jpeg)"]
+                onAccepted: {
+                    ammunitionImg.source = fileUrls[0]
+                    //addUavModelData.image_name = uavImg.source.toString()
+                    ammoData.image_url = ammunitionImg.source.toString()
+                    //console.log("ammoData.image_url"+ammoData.image_url)
+                    // var currentModel = navBar.currentIndex === 0 ? droneModel : schemeModel
+                    // for(var i = 0; i < currentModel.count; i++){
+                    //     if(currentModel.get(i).expanded){
+                    //         currentModel.get(i).items.push({
+                    //             name: "新条目",
+                    //             selected: false
+                    //         });
+                    //         break;
+                    //     }
+                    // }
+                }
+                // onAccepted: {
+                //             // 获取选中的文件路径
+                //             var filePath = fileDialog.fileUrl.toString()
+                //             // 去掉 "file://" 前缀
+                //             filePath = filePath.replace("file://", "")
+                //             // 加载图片
+                //             uavImg.source = filePath
+                //         }
+            }
+            Image {
+                id: ammunitionImg
+                anchors.fill: parent
+                source: {
+                    if(processInfo.loadViewType === "addUavData"){
+                        return ""
+                    }else if(processInfo.loadViewType === "query"){
+                        rect_ImageShow.enabled = false
+
+                        //return processInfo.imagUrl
+                    }else if(processInfo.loadViewType === "update"){
+                        //return processInfo.imagUrl
+                        //console.log("addUavDataView"+processInfo.loadViewType)
+                    }else{
+                        console.log("uav Image processInfo.loadViewType Unknown")
+                    }
+                }
+            }
+
+            CText {
+                anchors.centerIn: parent
+                text: "图片展示区域"
+                color: "#9E9E9E"
+            }
+        }
+        CButton{
+            id:btn_Cancel
+            anchors.top: rect_ImageShow.bottom
+            anchors.topMargin: 5
+            anchors.right: rect_ImageShow.right
+            anchors.rightMargin: 5
+            height: pixelSize * 2
+            width: pixelSize * 4
+            text: "取消"
+            onClicked: {
+                backAmmoRecord()
+                addAmmoAllDatView.visible = false
+            }
+        }
+        CButton{
+            id:btn_Save
+            anchors.top: rect_ImageShow.bottom
+            anchors.topMargin: 5
+            anchors.right: btn_Cancel.left
+            anchors.rightMargin: 10
+            height: pixelSize * 2
+            width: pixelSize * 4
+            text: "保存"
+            onClicked: {
+                // saveAmmoData()
+                // backAmmoRecord()
+
+                if(processInfo.loadViewType === "addition"){
+                    saveAmmoData()
+                    backAmmoRecord()
+                    addAmmoAllDatView.visible = false
+                }else if(processInfo.loadViewType === "query"){
+                    //addAmmoAllDatView.visible = false
+                    backAmmoRecord()
                 }else if(processInfo.loadViewType === "update"){
-                    //return processInfo.imagUrl
-                    //console.log("addUavDataView"+processInfo.loadViewType)
+                    updateAmmoData()
+                    backAmmoRecord()
+                    addAmmoAllDatView.visible = false
                 }else{
-                    console.log("uav Image processInfo.loadViewType Unknown")
+                    console.log("Unknown processInfo.loadViewType!")
                 }
             }
         }
-
-        CText {
-            anchors.centerIn: parent
-            text: "图片展示区域"
-            color: "#9E9E9E"
-        }
     }
 
-    CButton{
-        id:btn_Cancel
-        anchors.top: rect_ImageShow.bottom
-        anchors.topMargin: 5
-        anchors.right: rect_ImageShow.right
-        anchors.rightMargin: 5
-        height: pixelSize * 2
-        width: pixelSize * 4
-        text: "取消"
-        onClicked: {
-            backAmmoRecord()
-            addAmmoAllDatView.visible = false
-        }
-    }
-    CButton{
-        id:btn_Save
-        anchors.top: rect_ImageShow.bottom
-        anchors.topMargin: 5
-        anchors.right: btn_Cancel.left
-        anchors.rightMargin: 10
-        height: pixelSize * 2
-        width: pixelSize * 4
-        text: "保存"
-        onClicked: {
 
-            // saveAmmoData()
-            // backAmmoRecord()
 
-            if(processInfo.loadViewType === "addition"){
-                saveAmmoData()
-                backAmmoRecord()
-                addAmmoAllDatView.visible = false
-            }else if(processInfo.loadViewType === "query"){
-                //addAmmoAllDatView.visible = false
-                backAmmoRecord()
-            }else if(processInfo.loadViewType === "update"){
-                updateAmmoData()
-                backAmmoRecord()
-                addAmmoAllDatView.visible = false
-            }else{
-                console.log("Unknown processInfo.loadViewType!")
-            }
-        }
-    }
     //该界面时多用。需要区分是新增、查看、修改
     function loadViewType(){
         if(processInfo.loadViewType === "addition"){
