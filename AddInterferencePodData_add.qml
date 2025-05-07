@@ -30,7 +30,7 @@ Item {
     property int iBand: 0
     //干扰强度
     property int iIntensity: -1
-
+    property int ideliveryWay: -1
     property int iLaunchControlType: -1
 
     property var effectiveReflectionArea: []
@@ -627,18 +627,32 @@ Item {
                         color:"#ffddaa00"
                         borderColor: "#ffddaa00"
                         pixelSize: 18
+                        isSelect: m_SelectState
                         onClicked: {
                             view_List_InterferenceIntensity.visible = false
                             iIntensity = index
+                            for (var i = 0; i < listmodel_Box_Intensity.count; i++) {
+                                listmodel_Box_Intensity.setProperty(i, "m_SelectState", false);
+                            }
                             m_SelectState = !m_SelectState
                         }
                     }
                 }
             }
             Component.onCompleted: {
-                listmodel_Box_Intensity.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"强度1(轻度干扰)"})
-                listmodel_Box_Intensity.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"强度2(中度干扰)"})
-                listmodel_Box_Intensity.append({m_PlanNumber:3,m_SelectState:false,m_TypeName:"强度3(重度干扰)"})
+                var interferenceIntensityArray = [{m_PlanNumber:1,m_SelectState:false,m_TypeName:"强度1(轻度干扰)"},
+                        {m_PlanNumber:2,m_SelectState:false,m_TypeName:"强度2(中度干扰)"},
+                        {m_PlanNumber:3,m_SelectState:false,m_TypeName:"强度3(重度干扰)"}]
+
+                //listmodel_Box_Intensity.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"强度2(中度干扰)"})
+                if(processInfo.loadViewType === "addUavData"){
+                    listmodel_Box_Intensity.append(interferenceIntensityArray)
+
+                }else if(processInfo.loadViewType === "query" || processInfo.loadViewType === "update"){
+
+                }else{
+                    console.log("processInfo.loadViewType Unknown")
+                }
             }
         }
 
@@ -783,6 +797,107 @@ Item {
             onClicked: {
                 //弹出窗口
                 comp_InterferencePodDropSpeed.visible = !comp_InterferencePodDropSpeed.visible
+            }
+        }
+        CText{
+            id:text_DeliveryWay
+            anchors.left: btn_LaunchSpeed.right
+            anchors.leftMargin: 30
+            anchors.top: text_InterferenceBand.bottom
+            anchors.topMargin: 40
+            text: "投放方式:"
+            pixelSize: 18
+            color: mainColor
+            width: pixelSize * 4.5
+            height: pixelSize
+            bold: true
+        }
+
+        CButton{
+            id:btn_DeliveryWay
+            width: 160
+            height: 36
+            color:"#ffddaa00"
+            borderColor: "#ffddaa00"
+            borderHigtColor: "#ffeebb22"
+            anchors.left: text_DeliveryWay.right
+            anchors.verticalCenter: text_DeliveryWay.verticalCenter
+            pixelSize: 20
+            text:{
+                if(ideliveryWay < 0)
+                {
+                    return "请选择:"
+                }
+                else
+                {
+                    if(listmodel_Box_DeliveryWay.count > 0)
+                        listmodel_Box_DeliveryWay.get(ideliveryWay).m_TypeName
+                }
+            }
+            onClicked: {
+                view_List_DeliveryWay.visible = !view_List_DeliveryWay.visible
+            }
+        }
+
+        ListView{
+            //干扰强度ListView  单选
+            id:view_List_DeliveryWay
+            width: btn_DeliveryWay.width
+            height: btn_DeliveryWay.height * 5
+            anchors.left: btn_DeliveryWay.left
+            anchors.leftMargin: btn_DeliveryWay.width/2 - width/2
+            anchors.top: btn_DeliveryWay.bottom
+            anchors.topMargin: 2
+            visible: false
+            clip: true
+            z:3
+            model:ListModel{
+                id:listmodel_Box_DeliveryWay
+            }
+            delegate:Component{
+                Item{
+                    id:item_Delegate
+                    width: view_List_DeliveryWay.width
+                    height: 36
+                    CButton{
+                        id:comp_DeliverWayTypeBtn
+                        anchors.fill: parent
+                        text:m_TypeName
+                        color:"#ffddaa00"
+                        borderColor: "#ffddaa00"
+                        pixelSize: 18
+                        isSelect: m_SelectState
+                        onClicked: {
+                            view_List_DeliveryWay.visible = false
+                            ideliveryWay = index
+                            for (var i = 0; i < listmodel_Box_DeliveryWay.count; i++) {
+                                listmodel_Box_DeliveryWay.setProperty(i, "m_SelectState", false);
+                            }
+                            // m_SelectState = true
+                            m_SelectState = !m_SelectState
+
+                        }
+                    }
+                }
+            }
+            Component.onCompleted: {
+                // listmodel_Box_Intensity.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"强度1(轻度干扰)"})
+                // listmodel_Box_Intensity.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"强度2(中度干扰)"})
+                // listmodel_Box_Intensity.append({m_PlanNumber:3,m_SelectState:false,m_TypeName:"强度3(重度干扰)"})
+                var deliveryWayArray = [{m_PlanNumber:1,m_SelectState:false,m_TypeName:"同时1"},
+                        {m_PlanNumber:2,m_SelectState:false,m_TypeName:"同时2"},
+                        {m_PlanNumber:3,m_SelectState:false,m_TypeName:"交替1"},
+                        {m_PlanNumber:4,m_SelectState:false,m_TypeName:"交替2"},
+                        {m_PlanNumber:5,m_SelectState:false,m_TypeName:"交替3"}]               
+                if(processInfo.loadViewType === "addUavData"){
+                    listmodel_Box_DeliveryWay.append(deliveryWayArray)
+
+                }else if(processInfo.loadViewType === "query" || processInfo.loadViewType === "update"){
+
+                }else{
+                    console.log("processInfo.loadViewType Unknown")
+                }
+
             }
         }
 
@@ -963,6 +1078,7 @@ Item {
         if(processInfo.loadViewType === "addUavData"){
             //新增
             loadState = 0;
+            custom_PassiveInterferencePod.originData.image_url = ""
 
         }else if(processInfo.loadViewType === "query"){
             //查看
@@ -1045,7 +1161,31 @@ Item {
         }
         //干扰强度
         iIntensity = Number.parseInt(podData.interferenceIntensity) - 1   //index值比存储值小1
-
+        var interferenceIntensityArray = [{m_PlanNumber:1,m_SelectState:false,m_TypeName:"强度1(轻度干扰)"},
+                {m_PlanNumber:2,m_SelectState:false,m_TypeName:"强度2(中度干扰)"},
+                {m_PlanNumber:3,m_SelectState:false,m_TypeName:"强度3(重度干扰)"}]
+        listmodel_Box_Intensity.append(interferenceIntensityArray)
+        for(var index = 0; index < listmodel_Box_Intensity.count; index++)
+        {
+            if(listmodel_Box_Intensity.get(index).m_PlanNumber === Number.parseInt(podData.interferenceIntensity))  //
+            {
+                listmodel_Box_Intensity.set(index,{m_SelectState:true})
+            }
+        }
+        ideliveryWay = Number.parseInt(podData.deliverWay) - 1
+        var deliveryWayArray = [{m_PlanNumber:1,m_SelectState:false,m_TypeName:"同时1"},
+                {m_PlanNumber:2,m_SelectState:false,m_TypeName:"同时2"},
+                {m_PlanNumber:3,m_SelectState:false,m_TypeName:"交替1"},
+                {m_PlanNumber:4,m_SelectState:false,m_TypeName:"交替2"},
+                {m_PlanNumber:5,m_SelectState:false,m_TypeName:"交替3"}]
+        listmodel_Box_DeliveryWay.append(deliveryWayArray)
+        for(var index = 0; index < listmodel_Box_DeliveryWay.count; index++)
+        {
+            if(listmodel_Box_DeliveryWay.get(index).m_PlanNumber === Number.parseInt(podData.deliverWay))  //
+            {
+                listmodel_Box_DeliveryWay.set(index,{m_SelectState:true})
+            }
+        }
         //有效反射面积
         effectiveReflectionArea = podData.effectiveReflectionArea.split(";")
         comp_EffectiveReflectionArea.initListData(effectiveReflectionArea)
@@ -1101,6 +1241,7 @@ Item {
             effectiveReflectionArea:"",//有效反射面积
             deliveryControlWay:"",//投放控制方式
             deliverySpeed:"",//投放速度
+            deliverWay:"",//投放方式
             loadingCapacity:0.0,//装载容量(kg)
             interferenceIntensity:"",//干扰强度
             image_name:"",
@@ -1143,7 +1284,7 @@ Item {
 
         //干扰强度
         interferencePodData.interferenceIntensity = (listmodel_Box_Intensity.get(iIntensity).m_PlanNumber).toString()
-
+        interferencePodData.deliverWay = (listmodel_Box_DeliveryWay.get(ideliveryWay).m_PlanNumber).toString()
         //控制方式
         //interferencePodData.deliveryControlWay = (listmodel_Box_LaunchControlType.get(iLaunchControlType).m_PlanNumber).toString()
         var deliveryControlWayStr = ""

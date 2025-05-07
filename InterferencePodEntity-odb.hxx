@@ -329,6 +329,18 @@ namespace odb
 
     static const deliveryControlWay_type_ deliveryControlWay;
 
+    // deliveryWay
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    deliveryWay_type_;
+
+    static const deliveryWay_type_ deliveryWay;
+
     // deliverySpeed
     //
     typedef
@@ -495,6 +507,11 @@ namespace odb
   deliveryControlWay (A::table_name, "\"delivery_control_way\"", 0);
 
   template <typename A>
+  const typename query_columns< ::InterferencePodEntity, id_pgsql, A >::deliveryWay_type_
+  query_columns< ::InterferencePodEntity, id_pgsql, A >::
+  deliveryWay (A::table_name, "\"delivery_way\"", 0);
+
+  template <typename A>
   const typename query_columns< ::InterferencePodEntity, id_pgsql, A >::deliverySpeed_type_
   query_columns< ::InterferencePodEntity, id_pgsql, A >::
   deliverySpeed (A::table_name, "\"delivery_speed\"", 0);
@@ -638,6 +655,12 @@ namespace odb
       std::size_t deliveryControlWay_size;
       bool deliveryControlWay_null;
 
+      // deliveryWay_
+      //
+      details::buffer deliveryWay_value;
+      std::size_t deliveryWay_size;
+      bool deliveryWay_null;
+
       // deliverySpeed_
       //
       details::buffer deliverySpeed_value;
@@ -719,7 +742,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 23UL;
+    static const std::size_t column_count = 24UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;

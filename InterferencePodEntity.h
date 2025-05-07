@@ -65,7 +65,8 @@ class InterferencePodEntity
 
     #pragma db column("delivery_control_way") type("varchar(100)") // 投放控制方式 由于是多选设置成字符串
     std::string deliveryControlWay_;
-
+    #pragma db column("delivery_way") type("varchar(25)") // 投放方式
+    std::string deliveryWay_;
     #pragma db column("delivery_speed") type("varchar(100)") // 投放速度(m/s) 由于是多选设置成字符串
     std::string deliverySpeed_;
 

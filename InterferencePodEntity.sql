@@ -21,6 +21,7 @@ CREATE TABLE "uav_type_man"."interference_pod" (
   "interference_band" varchar(100) NOT NULL,
   "effective_reflection_area" varchar(100) NOT NULL,
   "delivery_control_way" varchar(100) NOT NULL,
+  "delivery_way" varchar(25) NOT NULL,
   "delivery_speed" varchar(100) NOT NULL,
   "loading_capacity" real NOT NULL,
   "interference_intensity" varchar(100) NOT NULL,

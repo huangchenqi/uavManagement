@@ -233,6 +233,7 @@ QJsonObject InterferencePodDao::queryInterferencePodData(const QJsonObject &obje
             interferencePodData["effectiveReflectionArea"] = QString::fromStdString(entity.effectiveReflectionArea_);
             interferencePodData["deliveryControlWay"] = QString::fromStdString(entity.deliveryControlWay_);
             interferencePodData["deliverySpeed"] = QString::fromStdString(entity.deliverySpeed_);
+            interferencePodData["deliverWay"] = QString::fromStdString(entity.deliveryWay_);
             interferencePodData["loadingCapacity"] = QString::number(entity.loadingCapacity_);
             interferencePodData["interferenceIntensity"] = QString::fromStdString(entity.interferenceIntensity_);
             // 格式化为字符串（保留5位小数）
@@ -410,6 +411,7 @@ bool InterferencePodDao::updateInterferencePodData(const QJsonObject &selectedDa
         entity.effectiveReflectionArea_ = selectedData["effectiveReflectionArea"].toString().toStdString();
         entity.deliveryControlWay_ = selectedData["deliveryControlWay"].toString().toStdString();
         entity.deliverySpeed_ = selectedData["deliverySpeed"].toString().toStdString();
+        entity.deliveryWay_ = selectedData["deliverWay"].toString().toStdString();//.toInt();
         entity.loadingCapacity_ = selectedData["loadingCapacity"].toDouble();
         entity.interferenceIntensity_ = selectedData["interferenceIntensity"].toString().toStdString();
         //entity.imageName_ = selectedData["imageName"].toDouble();
@@ -588,6 +590,7 @@ bool InterferencePodDao::insertInterferencePodData(const QJsonObject &object)
         entity.effectiveReflectionArea_ = object["effectiveReflectionArea"].toString().toStdString();
         entity.deliveryControlWay_ = object["deliveryControlWay"].toString().toStdString();
         entity.deliverySpeed_ = object["deliverySpeed"].toString().toStdString();//.toInt();
+        entity.deliveryWay_ = object["deliverWay"].toString().toStdString();//.toInt();
         entity.loadingCapacity_ = object["loadingCapacity"].toDouble();
         entity.interferenceIntensity_ = object["interferenceIntensity"].toString().toStdString();
 
