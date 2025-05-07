@@ -43,6 +43,8 @@ Rectangle {
                   target: pageMountingSchemeLoader.item
                   onBackMountingScheme: {
                       console.log("connectuion!!!!!")
+                      loadMountShemeData()
+                      loadMountShemeRecord(mountingSchemeManagementroot.mountSchemeData)
                       mountingSchemeManagementView.visible = true
                   }
               }

@@ -1252,9 +1252,10 @@ Item {
         height: 36
         text: "确定"
         onClicked: {
+            saveMountSchemrData()
             backMountingScheme()
             addMountSchemeData.visible = false
-            saveMountSchemrData()
+
         }
     }
     function init(){
