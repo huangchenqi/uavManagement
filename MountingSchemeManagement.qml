@@ -606,18 +606,18 @@ Rectangle {
                                                           var rowData = tableModel.getRow(row) //.rows[row]
                                                           console.log("查看行数据:", JSON.stringify(rowData, null, 2))
                                                           // 转换数据
-                                                          var transformedData = transformData(rowData)
-                                                          console.log("转换后的数据:", JSON.stringify(transformedData, null, 2))
+                                                          //var transformedData = transformData(rowData)
+                                                          //console.log("转换后的数据:", JSON.stringify(transformedData, null, 2))
 
                                                           // 将转换后的数据转换为 JSON 字符串
                                                           //var jsonStr = JSON.stringify(transformedData)
-                                                          // processInfo.recordId = transformedData.recordId
+                                                          processInfo.recordId = rowData.recordId
                                                           // processInfo.uavType = transformedData.uavType
                                                           // processInfo.uavName = transformedData.uavName
                                                           // processInfo.uavId = transformedData.uavId
                                                           processInfo.loadViewType = "query"
                                                           //processInfo.jsonStr = transformedData
-                                                          assignmentEncapsulation(transformedData)
+                                                          //assignmentEncapsulation(transformedData)
                                                           processInfo.hangingCapacity = rowData.origHangingCapacity
                                                           //console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
                                                           pageMountingSchemeLoader.setSource("qrc:./AddMountingSchemeData.qml",
@@ -636,16 +636,16 @@ Rectangle {
                                                           var rowData = tableModel.rows[row]
                                                           console.log("查看行数据:", JSON.stringify(rowData, null, 2))
                                                           // 转换数据
-                                                          var transformedData = transformData(rowData)
-                                                          console.log("转换后的数据:", JSON.stringify(transformedData, null, 2))
+                                                          //var transformedData = transformData(rowData)
+                                                          //console.log("转换后的数据:", JSON.stringify(transformedData, null, 2))
 
                                                           // 将转换后的数据转换为 JSON 字符串
                                                           //var jsonStr = JSON.stringify(transformedData)
 
-                                                          console.log("编辑行数据:", JSON.stringify(transformedData, null, 2))
-
+                                                          //console.log("编辑行数据:", JSON.stringify(transformedData, null, 2))
+                                                          processInfo.recordId = rowData.recordId
                                                           processInfo.loadViewType = "update"
-                                                          assignmentEncapsulation(transformedData)
+                                                          //assignmentEncapsulation(transformedData)
                                                           processInfo.hangingCapacity = rowData.origHangingCapacity
                                                           console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
                                                           pageMountingSchemeLoader.setSource("qrc:./AddMountingSchemeData.qml",

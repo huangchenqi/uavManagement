@@ -114,6 +114,22 @@ Rectangle {
                                //Layout.leftMargin: 4
                                Layout.preferredWidth: 200   // 指定宽度为 60 像素
                                height: 50
+                               onTextChanged: {
+                                   // 使用正则表达式移除首尾的空白字符（包括空格、tab、换行）
+                                   var newText = text.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')
+
+                                   // 判断是否需要更新（避免无限循环）
+                                   if (newText !== text) {
+                                       // 保存当前光标位置
+                                       var cursorPos = cursorPosition
+
+                                       // 更新文本
+                                       text = newText
+
+                                       // 恢复光标位置（考虑文本缩短的情况）
+                                       cursorPosition = Math.min(cursorPos, newText.length)
+                                   }
+                               }
                            }
                            Item { Layout.fillWidth: true }
 
@@ -274,7 +290,22 @@ Rectangle {
                                                      //color: (model.row % 2) ? "#FFFFFF": "#EBF2FD"
                                                      color: "#000000"
                                                      //elide: Text.ElideRight
+                                                     onTextChanged: {
+                                                         // 使用正则表达式移除首尾的空白字符（包括空格、tab、换行）
+                                                         var newText = text.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '')
 
+                                                         // 判断是否需要更新（避免无限循环）
+                                                         if (newText !== text) {
+                                                             // 保存当前光标位置
+                                                             var cursorPos = cursorPosition
+
+                                                             // 更新文本
+                                                             text = newText
+
+                                                             // 恢复光标位置（考虑文本缩短的情况）
+                                                             cursorPosition = Math.min(cursorPos, newText.length)
+                                                         }
+                                                     }
                                                      // 当文本变化时更新模型数据
                                                      onEditingFinished:{
                                                          // 方法1：通过模型索引修改（推荐）
@@ -497,12 +528,13 @@ Rectangle {
            }
            function deleteUavComponentData(){
                var selectedRowsData = [];
-
+               var sum = 0
                for (var i = 0; i < tableModel.rowCount; i++) {
 
                    //console.log("tableModel.rows[i].checked Rows JSON:", JSON.stringify(tableModel.rows[i]));
                    //console.log("tablemodel",JSON.stringify(tableModel.rows))
                    if (tableModel.rows[i].checked) {
+                       sum++
                        var rowData = {
                            recordId: tableModel.rows[i].recordId,
                            uavComponeName: tableModel.rows[i].uavComponeName,
@@ -514,20 +546,27 @@ Rectangle {
                }
                // 打印当前函数的名称
                 console.log("当前函数名称:", arguments.callee.name);
-               let result = uavModelRecoveryModeDaoModel.deleteModelRecoveryModeDate(selectedRowsData)
-               recieveUavComponentAllData()
-               if(result === true){
-                   warningItem.text = "数据删除成功!"
+               if(sum === tableModel.rowCount){
+                   warningItem.text = "回收数据不能全部删除!"
                    warningPopup.open()
                    // 2秒后自动关闭
                    autoCloseTimer.start()
-               }else if(result === false){
-                   warningItem.text = "数据删除失败!"
-                   warningPopup.open()
-                   // 2秒后自动关闭
-                   autoCloseTimer.start()
-                }else{
-                   console.log("unknown deleteMountLocation")
+               }else{
+                   let result = uavModelRecoveryModeDaoModel.deleteModelRecoveryModeDate(selectedRowsData)
+                   recieveUavComponentAllData()
+                   if(result === true){
+                       warningItem.text = "数据删除成功!"
+                       warningPopup.open()
+                       // 2秒后自动关闭
+                       autoCloseTimer.start()
+                   }else if(result === false){
+                       warningItem.text = "数据删除失败!"
+                       warningPopup.open()
+                       // 2秒后自动关闭
+                       autoCloseTimer.start()
+                    }else{
+                       console.log("unknown deleteMountLocation")
+                   }
                }
 
                // 将选中的行的数据转换为 JSONArray 格式

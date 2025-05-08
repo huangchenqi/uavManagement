@@ -16,9 +16,12 @@ Item {
     property var ammoName:[]
     signal backMountingScheme()
     property int selectType: -1
+    property int ammoIndex: 0
+    property var ammoContentArray: []
     Component.onCompleted: {
         init()
         textComponentEnable()
+        loadView()
     }
     UavMountLocationDaoTableModel{
         id:uavMountLocationDaoTableModel
@@ -446,38 +449,38 @@ Item {
 
 
                 }else if(processInfo.loadViewType === "query"){
-                    var ammoToUavModel = custom_PassiveInterferencePod.useToUavResult
-                    var a = ammoToUavModel.split(",");
+                    // var ammoToUavModel = custom_PassiveInterferencePod.useToUavResult
+                    // var a = ammoToUavModel.split(",");
 
-                    // 遍历数组 a 和 b，更新 m_SelectState
-                    for (var i = 0; i < a.length; i++) {
-                        for (var j = 0; j < result.length; j++) {
-                            if (result[j].m_PlanNumber === a[i]) {
-                                result[j].m_SelectState = true;
-                            }
-                        }
-                    }
+                    // // 遍历数组 a 和 b，更新 m_SelectState
+                    // for (var i = 0; i < a.length; i++) {
+                    //     for (var j = 0; j < result.length; j++) {
+                    //         if (result[j].m_PlanNumber === a[i]) {
+                    //             result[j].m_SelectState = true;
+                    //         }
+                    //     }
+                    // }
 
-                    // 打印更新后的数组 b
-                    console.log("Updated array b:", JSON.stringify(result, null, 2));
-                    console.log("<!><@><#>")
+                    // // 打印更新后的数组 b
+                    // console.log("Updated array b:", JSON.stringify(result, null, 2));
+                    // console.log("<!><@><#>")
                 }else if(processInfo.loadViewType === "update"){
-                    var ammoToUavModel = custom_PassiveInterferencePod.useToUavResult
-                    var a = ammoToUavModel.split(",");
-                    custom_PassiveInterferencePod.useToUavArray = a
+                    // var ammoToUavModel = custom_PassiveInterferencePod.useToUavResult
+                    // var a = ammoToUavModel.split(",");
+                    // custom_PassiveInterferencePod.useToUavArray = a
 
-                    // 遍历数组 a 和 b，更新 m_SelectState
-                    for (var i = 0; i < a.length; i++) {
-                        for (var j = 0; j < result.length; j++) {
-                            if (result[j].m_PlanNumber === a[i]) {
-                                result[j].m_SelectState = true;
-                            }
-                        }
-                    }
+                    // // 遍历数组 a 和 b，更新 m_SelectState
+                    // for (var i = 0; i < a.length; i++) {
+                    //     for (var j = 0; j < result.length; j++) {
+                    //         if (result[j].m_PlanNumber === a[i]) {
+                    //             result[j].m_SelectState = true;
+                    //         }
+                    //     }
+                    // }
 
-                    // 打印更新后的数组 b
-                    console.log("Updated array b:", JSON.stringify(result, null, 2));
-                    console.log("<!><@><#>")
+                    // // 打印更新后的数组 b
+                    // console.log("Updated array b:", JSON.stringify(result, null, 2));
+                    // console.log("<!><@><#>")
                 }else{
                     console.log("processInfo.loadViewType Unknown")
                 }
@@ -1331,16 +1334,17 @@ Item {
                 }
 
                 Component.onCompleted: {
-                   var uavMountData = uavMountLocationDaoTableModel.selectUavMountLocationAllData()
-                   var result = uavMountData.map(function(item) {
-                        return {
-                            m_SelectState: item.checked,
-                            m_PlanNumber: item.recordId,
-                            m_TypeName: item.uavModelName
-                        }
-                    })
+                   // var uavMountData = uavMountLocationDaoTableModel.selectUavMountLocationAllData()
+                   // var result = uavMountData.map(function(item) {
+                   //      return {
+                   //          m_SelectState: item.checked,
+                   //          m_PlanNumber: item.recordId,
+                   //          m_TypeName: item.uavModelName
+                   //      }
+                   //  })
 
-                   listmodel_MountPlace.append(result)
+                   // listmodel_MountPlace.append(result)
+
                 }
             }
 
@@ -1367,63 +1371,224 @@ Item {
                             color:"#ffddaa00"
                             borderColor: "#ffddaa00"
                             pixelSize: 17
+                            isSelect: m_SelectState
                             onClicked: {
                                 view_List_MountAmmoType.visible = false
-                                m_SelectState = !m_SelectState
-
                                 switch(currentAmmoTypeSelect)
                                 {
-                                case 1: sMountNum1AmmoType = text
-                                    addMountSchemeData.mountSchemeData.oneAmmoName = text;
+                                case 1:
+                                    if(ammoIndex === index){
+                                       m_SelectState = !m_SelectState
+                                       if(m_SelectState === true){
+                                           sMountNum1AmmoType = text
+                                           addMountSchemeData.mountSchemeData.oneAmmoName = text;
+                                       }else{
+                                          sMountNum1AmmoType = "请选择:"
+                                       }
+                                    }else{
+                                        ammoIndex = index
+                                        for (var i = 0; i < listmodel_MountAmmoType.count; i++) {
+                                            listmodel_MountAmmoType.setProperty(i, "m_SelectState", false);
+                                        }
+                                        m_SelectState =   !m_SelectState
+                                        sMountNum1AmmoType = text
+                                        addMountSchemeData.mountSchemeData.oneAmmoName = text;
+                                    }
                                     break
-                                case 2: sMountNum2AmmoType = text
-                                    addMountSchemeData.mountSchemeData.twoAmmoName = text;
+                                case 2:
+                                    if(ammoIndex === index){
+                                       m_SelectState = !m_SelectState
+                                       if(m_SelectState === true){
+                                           sMountNum2AmmoType = text
+                                           addMountSchemeData.mountSchemeData.twoAmmoName = text;
+                                       }else{
+                                          sMountNum2AmmoType = "请选择:"
+                                       }
+                                    }else{
+                                        ammoIndex = index
+                                        for (var i = 0; i < listmodel_MountAmmoType.count; i++) {
+                                            listmodel_MountAmmoType.setProperty(i, "m_SelectState", false);
+                                        }
+                                        m_SelectState = !m_SelectState
+                                        sMountNum2AmmoType = text
+                                        addMountSchemeData.mountSchemeData.twoAmmoName = text;
+                                    }
                                     break
-                                case 3: sMountNum3AmmoType = text
-                                    addMountSchemeData.mountSchemeData.threeAmmoName = text;
+                                case 3:
+                                    if(ammoIndex === index){
+                                       m_SelectState = !m_SelectState
+                                       if(m_SelectState === true){
+                                           sMountNum3AmmoType = text
+                                           addMountSchemeData.mountSchemeData.threeAmmoName = text;
+                                       }else{
+                                          sMountNum3AmmoType = "请选择:"
+                                       }
+                                    }else{
+                                        ammoIndex = index
+                                        for (var i = 0; i < listmodel_MountAmmoType.count; i++) {
+                                            listmodel_MountAmmoType.setProperty(i, "m_SelectState", false);
+                                        }
+                                        m_SelectState = !m_SelectState
+                                        sMountNum3AmmoType = text
+                                        addMountSchemeData.mountSchemeData.threeAmmoName = text;
+                                    }
                                     break
-                                case 4: sMountNum4AmmoType = text
-                                    addMountSchemeData.mountSchemeData.fourAmmoName = text;
+                                case 4:
+                                    if(ammoIndex === index){
+                                       m_SelectState = !m_SelectState
+                                       if(m_SelectState === true){
+                                           sMountNum4AmmoType = text
+                                           addMountSchemeData.mountSchemeData.fourAmmoName = text;
+                                       }else{
+                                          sMountNum4AmmoType = "请选择:"
+                                       }
+                                    }else{
+                                        ammoIndex = index
+                                        for (var i = 0; i < listmodel_MountAmmoType.count; i++) {
+                                            listmodel_MountAmmoType.setProperty(i, "m_SelectState", false);
+                                        }
+                                        m_SelectState = !m_SelectState
+                                        sMountNum4AmmoType = text
+                                        addMountSchemeData.mountSchemeData.fourAmmoName = text;
+                                    }
                                     break
-                                case 5: sMountNum5AmmoType = text
-                                    addMountSchemeData.mountSchemeData.fiveAmmoName = text;
+                                case 5:
+                                    if(ammoIndex === index){
+                                       m_SelectState = !m_SelectState
+                                       if(m_SelectState === true){
+                                           sMountNum5AmmoType = text
+                                           addMountSchemeData.mountSchemeData.fiveAmmoName = text;
+                                       }else{
+                                          sMountNum5AmmoType = "请选择:"
+                                       }
+                                    }else{
+                                        ammoIndex = index
+                                        for (var i = 0; i < listmodel_MountAmmoType.count; i++) {
+                                            listmodel_MountAmmoType.setProperty(i, "m_SelectState", false);
+                                        }
+                                        m_SelectState = !m_SelectState
+                                        sMountNum5AmmoType = text
+                                        addMountSchemeData.mountSchemeData.fiveAmmoName = text;
+                                    }
                                     break
-                                case 6: sMountNum6AmmoType = text
-                                    addMountSchemeData.mountSchemeData.sixAmmoName = text;
+                                case 6:
+                                    if(ammoIndex === index){
+                                       m_SelectState = !m_SelectState
+                                       if(m_SelectState === true){
+                                           sMountNum6AmmoType = text
+                                           addMountSchemeData.mountSchemeData.sixAmmoName = text;
+                                       }else{
+                                          sMountNum6AmmoType = "请选择:"
+                                       }
+                                    }else{
+                                        ammoIndex = index
+                                        for (var i = 0; i < listmodel_MountAmmoType.count; i++) {
+                                            listmodel_MountAmmoType.setProperty(i, "m_SelectState", false);
+                                        }
+                                        m_SelectState = !m_SelectState
+                                        sMountNum6AmmoType = text
+                                        addMountSchemeData.mountSchemeData.sixAmmoName = text;
+                                    }
                                     break
-                                case 7: sMountNum7AmmoType = text
-                                    addMountSchemeData.mountSchemeData.sevenAmmoName = text;
+                                case 7:
+                                    if(ammoIndex === index){
+                                       m_SelectState = !m_SelectState
+                                       if(m_SelectState === true){
+                                           sMountNum7AmmoType = text
+                                           addMountSchemeData.mountSchemeData.sevenAmmoName = text;
+                                       }else{
+                                          sMountNum7AmmoType = "请选择:"
+                                       }
+                                    }else{
+                                        ammoIndex = index
+                                        for (var i = 0; i < listmodel_MountAmmoType.count; i++) {
+                                            listmodel_MountAmmoType.setProperty(i, "m_SelectState", false);
+                                        }
+                                        m_SelectState = !m_SelectState
+                                        sMountNum7AmmoType = text
+                                        addMountSchemeData.mountSchemeData.sevenAmmoName = text;
+                                    }
                                     break
-                                case 8: sMountNum8AmmoType = text
-                                    addMountSchemeData.mountSchemeData.eightAmmoName = text;
+                                case 8:
+                                    if(ammoIndex === index){
+                                       m_SelectState = !m_SelectState
+                                       if(m_SelectState === true){
+                                           sMountNum8AmmoType = text
+                                           addMountSchemeData.mountSchemeData.eightAmmoName = text;
+                                       }else{
+                                          sMountNum8AmmoType = "请选择:"
+                                       }
+                                    }else{
+                                        ammoIndex = index
+                                        for (var i = 0; i < listmodel_MountAmmoType.count; i++) {
+                                            listmodel_MountAmmoType.setProperty(i, "m_SelectState", false);
+                                        }
+                                        m_SelectState = !m_SelectState
+                                        sMountNum8AmmoType = text
+                                        addMountSchemeData.mountSchemeData.eightAmmoName = text;
+                                    }
                                     break
-                                case 9: sMountNum9AmmoType = text
-                                    addMountSchemeData.mountSchemeData.nineAmmoName = text;
+                                case 9:
+                                    if(ammoIndex === index){
+                                       m_SelectState = !m_SelectState
+                                       if(m_SelectState === true){
+                                           sMountNum9AmmoType = text
+                                           addMountSchemeData.mountSchemeData.nineAmmoName = text;
+                                       }else{
+                                          sMountNum9AmmoType = "请选择:"
+                                       }
+                                    }else{
+                                        ammoIndex = index
+                                        for (var i = 0; i < listmodel_MountAmmoType.count; i++) {
+                                            listmodel_MountAmmoType.setProperty(i, "m_SelectState", false);
+                                        }
+                                        m_SelectState = !m_SelectState
+                                        sMountNum9AmmoType = text
+                                        addMountSchemeData.mountSchemeData.nineAmmoName = text;
+                                    }
                                     break
-                                case 10: sMountNum10AmmoType = text
-                                    addMountSchemeData.mountSchemeData.tenAmmoName = text;
+                                case 10:
+                                    if(ammoIndex === index){
+                                       m_SelectState = !m_SelectState
+                                       if(m_SelectState === true){
+                                           sMountNum10AmmoType = text
+                                           addMountSchemeData.mountSchemeData.tenAmmoName = text;
+                                       }else{
+                                          sMountNum10AmmoType = "请选择:"
+                                       }
+                                    }else{
+                                        ammoIndex = index
+                                        for (var i = 0; i < listmodel_MountAmmoType.count; i++) {
+                                            listmodel_MountAmmoType.setProperty(i, "m_SelectState", false);
+                                        }
+                                        m_SelectState = !m_SelectState
+                                        sMountNum10AmmoType = text
+                                        addMountSchemeData.mountSchemeData.tenAmmoName = text;
+                                    }
                                     break
                                 }
+
+                                computingFlight()
                             }
                         }
                     }
                 }
 
                 Component.onCompleted: {
-                    var ammoQueryData = new Object
-                    ammoQueryData.ammoType = "请选择:"
-                    ammoQueryData.ammoName = ""
-                    var ammoData = ammoDaoModel.selectAmmoAllData(ammoQueryData)
-                   var extractedData = ammoData.map(function(item) {
-                                return {
-                                    m_SelectState: item.checked,
-                                    m_PlanNumber: item.recordId,
-                                    m_TypeName: item.ammoName
-                                }
-                            })
-                    //addMountSchemeData.mountLocationArray = addMountSchemeData.ammoName
-                    console.log("<>"+"ammoData"+JSON.stringify(ammoData))
-                    listmodel_MountAmmoType.append(extractedData)//({m_PlanNumber:0,m_SelectState:false,m_TypeName:"弹药1"})
+                   //  var ammoQueryData = new Object
+                   //  ammoQueryData.ammoType = "请选择:"
+                   //  ammoQueryData.ammoName = ""
+                   //  var ammoData = ammoDaoModel.selectAmmoAllData(ammoQueryData)
+                   // var extractedData = ammoData.map(function(item) {
+                   //              return {
+                   //                  m_SelectState: item.checked,
+                   //                  m_PlanNumber: item.recordId,
+                   //                  m_TypeName: item.ammoName
+                   //              }
+                    //         })
+                    // //addMountSchemeData.mountLocationArray = addMountSchemeData.ammoName
+                    // console.log("<>"+"ammoData"+JSON.stringify(ammoData))
+                    // listmodel_MountAmmoType.append(extractedData)//({m_PlanNumber:0,m_SelectState:false,m_TypeName:"弹药1"})
 
                 }
             }
@@ -1455,7 +1620,18 @@ Item {
         height: 36
         text: "确定"
         onClicked: {
-            saveMountSchemrData()
+            if(processInfo.loadViewType === "addUavData"){
+               console.log("addtion!")
+               saveMountSchemrData()
+            }else if(processInfo.loadViewType === "query"){
+               console.log("query!" + processInfo.recordId)
+
+            }else if(processInfo.loadViewType === "update"){
+                updateMountSchemeData()
+            }else{
+                console.log("processInfo.loadViewType Unknown")
+            }
+
             backMountingScheme()
             addMountSchemeData.visible = false
 
@@ -1509,11 +1685,17 @@ Item {
        text_UavEmptyWeight.readOnly = true
        text_UavMaxFuelWeight.readOnly = true
        text_UavMaxExternalWeight.readOnly = true
+       text_RunningDistance.readOnly = true
+       text_FlightTime.readOnly = true
+       text_FightRadius.readOnly = true
 
        text_MaxTakeOffWeight.color = "#fff0cc55"
        text_UavEmptyWeight.color = "#fff0cc55"
        text_UavMaxFuelWeight.color = "#fff0cc55"
        text_UavMaxExternalWeight.color = "#fff0cc55"
+       text_RunningDistance.color = "#fff0cc55"
+       text_FlightTime.color = "#fff0cc55"
+       text_FightRadius.color = "#fff0cc55"
 
        btn_Mount1.enabled = false;
        btn_Mount2.enabled = false;
@@ -1571,64 +1753,297 @@ Item {
    function selectMountMethod(data) {
        // 获取挂载能力字符串，例如 "1,3"
        var location = data.hangingCapacity;
-       console.log("location", JSON.stringify(location));
+       var locationContent = data.mountCapacity
+       var newFuel = {"ammoId": "0", "ammoName": "副油箱", "ammoWeight": "608"};
+       var ammoDataArray = data.uavLoadAmmoContent
+       addMountSchemeData.ammoContentArray = data.uavLoadAmmoContent
+       listmodel_MountPlace.clear()
+       var mountResult = locationContent.map(function(item) {
+            return {
+                m_SelectState: false,//item.checked
+                m_PlanNumber: item.mountLocationId,
+                m_TypeName: item.mountLocationName
+            }
+        })
+
+       listmodel_MountPlace.append(mountResult)
+       listmodel_MountAmmoType.clear()
+       var result = ammoDataArray.map(function(item) {
+            return {
+                m_SelectState: false,//item.checked
+                m_PlanNumber: item.ammoId,
+                m_TypeName: item.ammoName
+            }
+        })
+       //result.push(newFuel)
+       listmodel_MountAmmoType.append(result)
+       console.log("locationammoDataArray", JSON.stringify(ammoDataArray));
 
        // 将字符串 "1,3" 转换为数组
-       var array = location.split(",");
+       //var array = location.split(",");
 
        // 遍历数组
-       for (var j = 0; j < array.length; j++) {
+       for (var j = 0; j < locationContent.length; j++) {
            // 将数组中的字符串转换为数字
-           var hangingLocation = parseInt(array[j], 10);
+           var hangingLocation = parseInt(locationContent[j].mountLocationId, 10);
 
            // 根据挂载位置设置对应的按钮选中状态
            switch (hangingLocation) {
                case 1:
                    btn_Mount1.enabled = true;
                    btn_Mount1.isSelect = true;
+                   isMount1Select = true
+                   //btn_MountNum1Place.text =
+                    openMountPlace(1)
+                   btn_MountNum1Place.enabled = false
+                   sMountNum1Place = locationContent[j].mountLocationName
+                   addMountSchemeData.mountSchemeData.oneHangingPoint = "1";
+                   addMountSchemeData.mountSchemeData.oneLocation = sMountNum1Place;
                    console.log("Matching value found: 1");
                    break;
                case 2:
                    btn_Mount2.enabled = true;
                    btn_Mount2.isSelect = true;
+                   isMount2Select = true
+                   openMountPlace(2)
+                   btn_MountNum2Place.enabled = false
+                   sMountNum2Place = locationContent[j].mountLocationName
+                   addMountSchemeData.mountSchemeData.twoHangingPoint = "2";
+                   addMountSchemeData.mountSchemeData.twoLocation = sMountNum2Place;
                    break;
                case 3:
                    btn_Mount3.enabled = true;
                    btn_Mount3.isSelect = true;
+                   isMount3Select = true
+                   openMountPlace(3)
+                   btn_MountNum3Place.enabled = false
+                   sMountNum3Place = locationContent[j].mountLocationName
+                   addMountSchemeData.mountSchemeData.threeHangingPoint = "3";
+                   addMountSchemeData.mountSchemeData.threeLocation = sMountNum3Place;
                    break;
                case 4:
                    btn_Mount4.enabled = true;
                    btn_Mount4.isSelect = true;
+                   isMount4Select = true
+                   openMountPlace(4)
+                   btn_MountNum4Place.enabled = false
+                   sMountNum4Place = locationContent[j].mountLocationName
+                   addMountSchemeData.mountSchemeData.fourHangingPoint = "4";
+                   addMountSchemeData.mountSchemeData.fourLocation = sMountNum4Place;
                    break;
                case 5:
                    btn_Mount5.enabled = true;
                    btn_Mount5.isSelect = true;
+                   isMount5Select = true
+                   openMountPlace(5)
+                   btn_MountNum5Place.enabled = false
+                   sMountNum5Place = locationContent[j].mountLocationName
+                   addMountSchemeData.mountSchemeData.fiveHangingPoint = "5";
+                   addMountSchemeData.mountSchemeData.fiveLocation = sMountNum5Place;
                    break;
                case 6:
                    btn_Mount6.enabled = true;
                    btn_Mount6.isSelect = true;
+                   isMount6Select = true
+                   openMountPlace(6)
+                   btn_MountNum6Place.enabled = false
+                   sMountNum6Place = locationContent[j].mountLocationName
+                   addMountSchemeData.mountSchemeData.sixHangingPoint = "6";
+                   addMountSchemeData.mountSchemeData.sixLocation = sMountNum6Place;
                    break;
                case 7:
                    btn_Mount7.enabled = true;
                    btn_Mount7.isSelect = true;
+                   isMount7Select = true
+                   openMountPlace(7)
+                   btn_MountNum7Place.enabled = false
+                   sMountNum7Place = locationContent[j].mountLocationName
+                   addMountSchemeData.mountSchemeData.sevenHangingPoint = "7";
+                   addMountSchemeData.mountSchemeData.sevenLocation = sMountNum7Place;
                    break;
                case 8:
                    btn_Mount8.enabled = true;
                    btn_Mount8.isSelect = true;
+                   isMount8Select = true
+                   openMountPlace(8)
+                   btn_MountNum8Place.enabled = false
+                   sMountNum8Place = locationContent[j].mountLocationName
+                   addMountSchemeData.mountSchemeData.eightHangingPoint = "8";
+                   addMountSchemeData.mountSchemeData.eightLocation = sMountNum8Place;
                    break;
                case 9:
                    btn_Mount9.enabled = true;
                    btn_Mount9.isSelect = true;
+                   isMount9Select = true
+                   openMountPlace(9)
+                   btn_MountNum9Place.enabled = false
+                   sMountNum9Place = locationContent[j].mountLocationName
+                   addMountSchemeData.mountSchemeData.nineHangingPoint = "9";
+                   addMountSchemeData.mountSchemeData.nineLocation = sMountNum9Place;
                    break;
                case 10:
                    btn_Mount10.enabled = true;
                    btn_Mount10.isSelect = true;
+                   isMount10Select = true
+                   openMountPlace(10)
+                   btn_MountNum10Place.enabled = false
+                   sMountNum10Place = locationContent[j].mountLocationName
+                   addMountSchemeData.mountSchemeData.tenHangingPoint = "10";
+                   addMountSchemeData.mountSchemeData.tenLocation = sMountNum10Place;
                    break;
                default:
                    console.log("Unknown hangingLocation:", hangingLocation);
                    break;
            }
        }
+   }
+   function computingFlight(){
+       var ammoSum = 0
+       var locationSum = 0
+       var allAmmoData = addMountSchemeData.ammoContentArray
+       console.log("addMountSchemeData.ammoContentArray"+addMountSchemeData.ammoContentArray)
+       for (var i = 0; i < allAmmoData.length; i++) {
+           if(sMountNum1AmmoType === "请选择:"){
+
+           }else{
+                 //
+               if (allAmmoData[i].ammoName === sMountNum1AmmoType) {
+                   var ammoWeight = parseInt(allAmmoData[i].ammoWeight, 10);
+                   console.log("AmmoName:", sMountNum1AmmoType, "AmmoWeight:", ammoWeight);
+                   ammoSum = ammoSum + ammoWeight;
+                   locationSum = locationSum +1
+               }
+           }
+           if(sMountNum2AmmoType === "请选择:"){
+
+           }else{
+                 //
+               if (allAmmoData[i].ammoName === sMountNum2AmmoType) {
+                   var ammoWeight = parseInt(allAmmoData[i].ammoWeight, 10);
+                   console.log("AmmoName:", sMountNum2AmmoType, "AmmoWeight:", ammoWeight);
+                   ammoSum = ammoSum + ammoWeight;
+                   locationSum = locationSum +1
+               }
+           }
+           if(sMountNum3AmmoType === "请选择:"){
+
+           }else{
+                 //
+               if (allAmmoData[i].ammoName === sMountNum3AmmoType) {
+                   var ammoWeight = parseInt(allAmmoData[i].ammoWeight, 10);
+                   console.log("AmmoName:", sMountNum3AmmoType, "AmmoWeight:", ammoWeight);
+                   ammoSum = ammoSum + ammoWeight;
+                   locationSum = locationSum +1
+               }
+           }
+           if(sMountNum4AmmoType === "请选择:"){
+
+           }else{
+                 //
+               if (allAmmoData[i].ammoName === sMountNum4AmmoType) {
+                   var ammoWeight = parseInt(allAmmoData[i].ammoWeight, 10);
+                   console.log("AmmoName:", sMountNum4AmmoType, "AmmoWeight:", ammoWeight);
+                   ammoSum = ammoSum + ammoWeight;
+                   locationSum = locationSum +1
+               }
+           }
+           if(sMountNum5AmmoType === "请选择:"){
+
+           }else{
+                 //
+               if (allAmmoData[i].ammoName === sMountNum5AmmoType) {
+                   var ammoWeight = parseInt(allAmmoData[i].ammoWeight, 10);
+                   console.log("AmmoName:", sMountNum5AmmoType, "AmmoWeight:", ammoWeight);
+                   ammoSum = ammoSum + ammoWeight;
+                   locationSum = locationSum +1
+               }
+           }
+           if(sMountNum6AmmoType === "请选择:"){
+
+           }else{
+                 //
+               if (allAmmoData[i].ammoName === sMountNum6AmmoType) {
+                   var ammoWeight = parseInt(allAmmoData[i].ammoWeight, 10);
+                   console.log("AmmoName:", sMountNum6AmmoType, "AmmoWeight:", ammoWeight);
+                   ammoSum = ammoSum + ammoWeight;
+                   locationSum = locationSum +1
+               }
+           }
+           if(sMountNum7AmmoType === "请选择:"){
+
+           }else{
+                 //
+               if (allAmmoData[i].ammoName === sMountNum7AmmoType) {
+                   var ammoWeight = parseInt(allAmmoData[i].ammoWeight, 10);
+                   console.log("AmmoName:", sMountNum7AmmoType, "AmmoWeight:", ammoWeight);
+                   ammoSum = ammoSum + ammoWeight;
+                   locationSum = locationSum +1
+               }
+           }
+           if(sMountNum8AmmoType === "请选择:"){
+
+           }else{
+                 //
+               if (allAmmoData[i].ammoName === sMountNum8AmmoType) {
+                   var ammoWeight = parseInt(allAmmoData[i].ammoWeight, 10);
+                   console.log("AmmoName:", sMountNum8AmmoType, "AmmoWeight:", ammoWeight);
+                   ammoSum = ammoSum + ammoWeight;
+                   locationSum = locationSum +1
+               }
+           }
+           if(sMountNum9AmmoType === "请选择:"){
+
+           }else{
+                 //
+               if (allAmmoData[i].ammoName === sMountNum9AmmoType) {
+                   var ammoWeight = parseInt(allAmmoData[i].ammoWeight, 10);
+                   console.log("AmmoName:", sMountNum9AmmoType, "AmmoWeight:", ammoWeight);
+                   ammoSum = ammoSum + ammoWeight;
+                   locationSum = locationSum +1
+               }
+           }
+           if(sMountNum10AmmoType === "请选择:"){
+
+           }else{
+                 //
+               if (allAmmoData[i].ammoName === sMountNum10AmmoType) {
+                   var ammoWeight = parseInt(allAmmoData[i].ammoWeight, 10);
+                   console.log("AmmoName:", sMountNum10AmmoType, "AmmoWeight:", ammoWeight);
+                   ammoSum = ammoSum + ammoWeight;
+                   locationSum = locationSum +1
+               }
+           }
+        }
+       if(locationSum <6){
+          ammoSum = ammoSum*2
+       }else if(locationSum >  5){
+
+       }else{
+           console.log("Unknown locationSum!")
+       }
+       if(0<=ammoSum && ammoSum< 1000){
+           text_RunningDistance.text = 800
+           text_FightRadius.text = 1400
+           text_FlightTime.text = 2
+       }else if (ammoSum === 1000) {
+           text_RunningDistance.text = 1000
+           text_FightRadius.text = 700
+           text_FlightTime.text = (700 / 800).toFixed(2) // 保留两位小数
+       } else if (ammoSum > 1000 && ammoSum <= 1600) {
+           text_RunningDistance.text = 1200
+           text_FightRadius.text = 480
+           text_FlightTime.text = (480 / 800).toFixed(2) // 保留两位小数
+       } else if (ammoSum > 1600 && ammoSum <= 2000) {
+           text_RunningDistance.text = 1300
+           text_FightRadius.text = 420
+           text_FlightTime.text = (420 / 800).toFixed(2) // 保留两位小数
+       } else if (ammoSum >= 2000) {
+           console.log("Unknown compute!")
+       } else {
+           console.log("Unknown Distance!")
+       }
+
+       console.log("ammoSum:"+ammoSum)
    }
     function saveMountSchemrData(){
         console.log("AddMountSchemeData"+JSON.stringify(addMountSchemeData.mountSchemeData))
@@ -1667,6 +2082,193 @@ Item {
         }
     }
     function updateMountSchemeData(){
+        addMountSchemeData.mountSchemeData.id = processInfo.recordId
+        console.log("AddMountSchemeData"+JSON.stringify("mountId.recordId"+addMountSchemeData.mountSchemeData.id))
+        let result = mountingSchemeDaoTableModel.updateMountingSchemeData(addMountSchemeData.mountSchemeData)
+          if(result === true){
+              warningItem.text = "^_^挂载方案新增数据成功!^_^"
+              warningPopup.open()
+              // 2秒后自动关闭
+              autoCloseTimer.start()
+          }else if(result === false){
+              warningItem.text = "^_^挂载方案新增数据失败!^_^"
+              warningPopup.open()
+              // 2秒后自动关闭
+              autoCloseTimer.start()
+           }else{
+              console.log("unknown deleteMountLocation")
+          }
+    }
+    function loadAllMountData(){
+       var selectMountScheme = new Object
+        selectMountScheme.recordId = processInfo.recordId
+       var  allMountData = mountingSchemeDaoTableModel.queryMountingSchemeData(selectMountScheme)
+        console.log("selectMountScheme"+JSON.stringify(allMountData))
+        planNameText.text = allMountData.mountSchemeName
+        planNameText.enabled = false
+        comp_DamageFactorType.text = allMountData.uavName
+        text_MaxTakeOffWeight.text = allMountData.maxTakeoffWeight
+        text_UavEmptyWeight.text = allMountData.emptyWeight
+        text_UavMaxFuelWeight.text = allMountData.maxFuel
+        text_UavMaxExternalWeight.text = allMountData.maxExternalWeight
+        text_RunningDistance.text = allMountData.runningDistance
+        text_FlightTime.text = allMountData.endurance
+        text_FightRadius.text = allMountData.fightRadius
 
+        //console.log("allMountData.oneLocation"+allMountData.oneLocation)
+        if( parseInt(allMountData.oneHangingPoint) === 1){
+            console.log("adsv")
+            addMountSchemeData.mountSchemeData.oneHangingPoint = "1";
+            addMountSchemeData.mountSchemeData.oneLocation = allMountData.oneLocation
+           btn_MountNum1Place.text = allMountData.oneLocation
+            btn_MountNum1Place.visible = true
+            btn_MountNum1AmmoType.visible = true
+            sMountNum1AmmoType = allMountData.oneAmmoName
+            addMountSchemeData.mountSchemeData.oneAmmoName = allMountData.oneAmmoName
+            btn_Mount1.isSelect = true
+
+            if(processInfo.loadViewType === "update"){
+                btn_MountNum1AmmoType.enabled = true
+            }
+        }
+        if( parseInt(allMountData.twoHangingPoint) === 2){
+            btn_MountNum2Place.text = allMountData.twoLocation
+            sMountNum2AmmoType = allMountData.twoAmmoName
+            addMountSchemeData.mountSchemeData.twoHangingPoint = "2";
+            addMountSchemeData.mountSchemeData.twoLocation = allMountData.twoLocation;
+            addMountSchemeData.mountSchemeData.twoAmmoName = allMountData.twoAmmoName
+            btn_MountNum2Place.visible =true
+            btn_MountNum2AmmoType.visible = true
+            btn_Mount2.isSelect = true
+            if(processInfo.loadViewType === "update"){
+                btn_MountNum2AmmoType.enabled = true
+            }
+        }
+        if( parseInt(allMountData.threeHangingPoint) === 3){
+            sMountNum3AmmoType = allMountData.threeLocation
+            addMountSchemeData.mountSchemeData.threeHangingPoint = "3";
+            addMountSchemeData.mountSchemeData.threeLocation = allMountData.threeLocation;
+            addMountSchemeData.mountSchemeData.threeAmmoName = allMountData.threeAmmoName
+            btn_MountNum3Place.visible = true
+            btn_MountNum3AmmoType.visible = true
+            btn_MountNum3AmmoType.text = allMountData.threeAmmoName
+            btn_Mount3.isSelect = true
+            if(processInfo.loadViewType === "update"){
+                btn_MountNum3AmmoType.enabled = true
+            }
+        }
+        if( parseInt(allMountData.fourHangingPoint) === 4){
+            sMountNum4AmmoType = allMountData.fourLocation
+            btn_MountNum4Place.visible = true
+            addMountSchemeData.mountSchemeData.fourHangingPoint = "4";
+            addMountSchemeData.mountSchemeData.fourLocation = allMountData.fourLocation;
+            addMountSchemeData.mountSchemeData.fourAmmoName = allMountData.fourAmmoName
+            btn_MountNum4AmmoType.text = allMountData.fourAmmoName
+            btn_MountNum4AmmoType.visible = true
+            btn_Mount4.isSelect = true
+            if(processInfo.loadViewType === "update"){
+                btn_MountNum4AmmoType.enabled = true
+            }
+        }
+        if( parseInt(allMountData.fiveHangingPoint) === 5){
+            sMountNum5AmmoType = allMountData.fiveLocation
+            addMountSchemeData.mountSchemeData.fiveHangingPoint = "5";
+            addMountSchemeData.mountSchemeData.fiveLocation = allMountData.fiveLocation;
+            addMountSchemeData.mountSchemeData.fiveAmmoName = allMountData.fiveAmmoName
+            btn_MountNum5Place.visible = true
+            btn_MountNum5AmmoType.visible = true
+            btn_MountNum5AmmoType.text = allMountData.fiveAmmoName
+            btn_Mount5.isSelect = true
+            if(processInfo.loadViewType === "update"){
+                btn_MountNum5AmmoType.enabled = true
+            }
+        }
+        if( parseInt(allMountData.sixHangingPoint) === 6){
+            sMountNum6AmmoType = allMountData.sixLocation
+            addMountSchemeData.mountSchemeData.sixHangingPoint = "6";
+            addMountSchemeData.mountSchemeData.sixLocation = allMountData.sixLocation;
+            addMountSchemeData.mountSchemeData.sixAmmoName = allMountData.sixAmmoName
+            btn_MountNum6Place.visible = true
+            btn_MountNum6AmmoType.visible = true
+            btn_MountNum6AmmoType.text = allMountData.sixAmmoName
+            btn_Mount6.isSelect = true
+            if(processInfo.loadViewType === "update"){
+                btn_MountNum6AmmoType.enabled = true
+            }
+        }
+        if( parseInt(allMountData.sevenHangingPoint) === 7){
+            sMountNum7AmmoType = allMountData.sevenLocation
+            addMountSchemeData.mountSchemeData.sevenHangingPoint = "7";
+            addMountSchemeData.mountSchemeData.sevenLocation = allMountData.sevenLocation;
+            addMountSchemeData.mountSchemeData.sevenAmmoName = allMountData.sevenAmmoName
+            btn_MountNum7Place.visible = true
+            btn_MountNum7AmmoType.visible = true
+            btn_MountNum7AmmoType.text = allMountData.sevenAmmoName
+            btn_Mount7.isSelect = true
+            if(processInfo.loadViewType === "update"){
+                btn_MountNum7AmmoType.enabled = true
+            }
+        }
+        if( parseInt(allMountData.eightHangingPoint) === 8){
+            sMountNum8AmmoType = allMountData.eightLocation
+            addMountSchemeData.mountSchemeData.eightHangingPoint = "8";
+            addMountSchemeData.mountSchemeData.eightLocation = allMountData.eightLocation;
+            addMountSchemeData.mountSchemeData.eightAmmoName = allMountData.eightAmmoName
+            btn_MountNum8Place.visible = true
+            btn_MountNum8AmmoType.visible = true
+            btn_MountNum8AmmoType.text = allMountData.eightAmmoName
+            btn_Mount8.isSelect = true
+            if(processInfo.loadViewType === "update"){
+                btn_MountNum8AmmoType.enabled = true
+            }
+        }
+        if( parseInt(allMountData.nineHangingPoint) === 9){
+            sMountNum9AmmoType = allMountData.nineLocation
+            addMountSchemeData.mountSchemeData.nineHangingPoint = "9";
+            addMountSchemeData.mountSchemeData.nineLocation = allMountData.nineLocation;
+            addMountSchemeData.mountSchemeData.nineAmmoName = allMountData.nineAmmoName
+            btn_MountNum9Place.visible = true
+            btn_MountNum9AmmoType.visible = true
+            btn_MountNum9AmmoType.text = allMountData.nineAmmoName
+            btn_Mount9.isSelect = true
+            if(processInfo.loadViewType === "update"){
+                btn_MountNum9AmmoType.enabled = true
+            }
+        }
+
+        if( parseInt(allMountData.tenHangingPoint) === 10){
+            sMountNum10AmmoType = allMountData.tenLocation
+            addMountSchemeData.mountSchemeData.tenHangingPoint = "10";
+            addMountSchemeData.mountSchemeData.tenLocation = allMountData.tenLocation;
+            addMountSchemeData.mountSchemeData.tenAmmoName = allMountData.tenAmmoName
+            btn_MountNum10Place.visible = true
+            btn_MountNum10AmmoType.visible = true
+            btn_MountNum10AmmoType.text = allMountData.tenAmmoName
+            btn_Mount10.isSelect = true
+            if(processInfo.loadViewType === "update"){
+                btn_MountNum10AmmoType.enabled = true
+            }
+        }
+
+    }
+
+    function loadView(){
+        console.log("processInfo.loadViewType!:"+processInfo.loadViewType)
+        var viewType = processInfo.loadViewType
+        if(processInfo.loadViewType === "addUavData"){
+           console.log("addtion!")
+
+        }else if(processInfo.loadViewType === "query"){
+           console.log("query!" + processInfo.recordId)
+            loadAllMountData()
+            btn_Cancel.text = "返回"
+            btn_Confir.visible = false
+        }else if(processInfo.loadViewType === "update"){
+            console.log("update!" +processInfo.recordId)
+            loadAllMountData()
+            btn_Confir.text = "编辑"
+        }else{
+            console.log("processInfo.loadViewType Unknown")
+        }
     }
 }

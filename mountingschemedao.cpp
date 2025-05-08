@@ -196,11 +196,8 @@ QJsonObject MountingSchemeDao::queryMountingSchemeData(const QJsonObject &object
             mountSchemeData["threeAmmoName"] = QString::fromStdString(entity.threeAmmoName_);
             mountSchemeData["fourHangingPoint"] = QString::fromStdString(entity.fourHangingPoint_);
             mountSchemeData["fourLocation"] = QString::fromStdString(entity.fourLocation_);
-
-            /******************** 起降参数 ********************/
             mountSchemeData["fourAmmoName"] = QString::fromStdString(entity.fourAmmoName_);
             mountSchemeData["fiveHangingPoint"] = QString::fromStdString(entity.fiveHangingPoint_);
-
             /******************** 机动性能 ********************/
             mountSchemeData["fiveLocation"] = QString::fromStdString(entity.fiveLocation_);
             mountSchemeData["fiveAmmoName"] = QString::fromStdString(entity.fiveAmmoName_);
@@ -230,64 +227,6 @@ QJsonObject MountingSchemeDao::queryMountingSchemeData(const QJsonObject &object
             mountSchemeData["fightRadius"] = QString::number(entity.fightRadius_);
             mountSchemeData["maxFuel"] = QString::number(entity.maxFuel_);
             mountSchemeData["maxExternalWeight"] = QString::number(entity.maxExternalWeight_);
-            //mountSchemeData["hangingCapacity"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
-
-            /******************** 系统记录 ********************/
-            //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
-            //mountSchemeData["image_name"] = QString::fromStdString(entity.uavImgName_);
-
-            // QByteArray imageData(entity.uavImgName_.data(), entity.uavImgName_.size());
-            // //建立临时文件名
-
-            // QString tempFileName = "Uav" + QDateTime::currentDateTime().toString("yyyyMMddHHmmss") + "Image";
-            // // 创建一个临时文件
-            // QTemporaryFile tempFile(tempFileName);
-            // //tempFile.setAutoRemove(false); // 禁用自动删除
-            // if (!tempFile.open()) {
-            //     qDebug() << "Failed to create temporary file:" << tempFile.errorString();
-            //     //return QString();
-            // }
-
-            // // 写入图片数据
-            // tempFile.write(imageData);
-            // tempFile.close();
-
-            // // 返回临时文件的路径
-            // QUrl imageUrl;
-            // QString tempFilePath =tempFile.fileName();
-            // if (!tempFilePath.isEmpty()) {
-            //     imageUrl = QUrl::fromLocalFile(tempFilePath);
-            // }
-
-            // QString filePath = imageUrl.toString();
-            // // 去掉文件路径中的 "file:///"
-            // filePath = filePath.mid(8);
-
-            // // 检查文件是否存在
-            // QFile file(filePath);
-            // if (!file.exists()) {
-            //     qDebug()<< "错误, 文件不存在！";
-
-            // }
-
-            // // 加载图片
-            // QImage image(filePath);
-            // //                if (image.isNull()) {
-            // //                    qDebug()<<"错误, 无法加载图片！";
-            // //                    return -1;
-            // //                }
-            // QString fileType = ".png";
-
-            // // 修改文件扩展名
-            // QString newFilePath = filePath.section('.', 0, -2) + fileType;
-
-            // // 保存为PNG格式
-            // if (!image.save(newFilePath, "PNG")) {
-            //     qDebug()<<"错误, 保存失败！";
-            // }
-            // qDebug()<<"QTemporaryFile"<<newFilePath;
-
-            // mountSchemeData["image_url"] = newFilePath;
             // 转换为格式化的JSON字符串
             QJsonDocument doc(mountSchemeData);
             QString jsonString = doc.toJson(QJsonDocument::Indented);
