@@ -5,6 +5,7 @@ import "qrc:/AddAmmoModules/Component"
 import UavMountLocationDaoModel 1.0
 import AmmoDaoModel 1.0
 import MountingSchemeDaoModel 1.0
+import UavDaoModel 1.0
 Item {
     id:addMountSchemeData
 
@@ -14,8 +15,10 @@ Item {
     property var mountLocationArray: []
     property var ammoName:[]
     signal backMountingScheme()
+    property int selectType: -1
     Component.onCompleted: {
         init()
+        textComponentEnable()
     }
     UavMountLocationDaoTableModel{
         id:uavMountLocationDaoTableModel
@@ -25,6 +28,9 @@ Item {
     }
     MountingSchemeDaoTableModel{
         id:mountingSchemeDaoTableModel
+    }
+    UavModelDaoTableModel{
+        id:uavModelDao
     }
     // 定义警告对话框
     Popup {
@@ -288,50 +294,247 @@ Item {
             }
         }
 
+        // CText{
+        //     id:text_UavName
+        //     text: "无人机名称:"
+        //     anchors.left: item_PlanNameInput.right
+        //     anchors.leftMargin: 10
+        //     anchors.verticalCenter: text_PlanName.verticalCenter
+        //     pixelSize: 20
+        //     width: pixelSize * 5.5
+        //     horizontalAlignment: Text.AlignLeft
+        //     color: mainColor
+        // }
+
+        // Item{
+        //     id:item_UavNameInput
+        //     width: 350 - text_UavName.width
+        //     height: 20
+        //     anchors.left:text_UavName.right
+        //     anchors.top: text_UavName.top
+        //     anchors.topMargin: -5
+        //     TextInput{
+        //         id:uavNameText
+        //         anchors.fill: parent
+        //         color:"#ffffffff"
+        //         font.family:text_UavName.family
+        //         font.pixelSize:(18)
+        //         selectByMouse: true
+        //         selectionColor: "#ffcc8800"
+        //         onTextChanged: {
+        //             // if(text != "")
+        //             // {
+
+        //             // }
+        //             addMountSchemeData.mountSchemeData.uavName = text
+        //         }
+        //         validator: RegExpValidator {
+        //             regExp: /[^\s]*/  // 不允许任何空格
+        //         }
+        //     }
+        //     Rectangle{
+        //         width: parent.width
+        //         height: (2)
+        //         anchors.left: parent.left
+        //         anchors.bottom: parent.bottom
+        //         color:mainColor
+        //     }
+        // }
+
         CText{
-            id:text_UavName
-            text: "无人机名称:"
+            id:uavType
+            text: "对应无人机类型:"
             anchors.left: item_PlanNameInput.right
             anchors.leftMargin: 10
-            anchors.verticalCenter: text_PlanName.verticalCenter
-            pixelSize: 20
-            width: pixelSize * 5.5
-            horizontalAlignment: Text.AlignLeft
+            anchors.top: top_title.bottom
+            anchors.topMargin: 30
+            pixelSize: 18
             color: mainColor
+            width: pixelSize * 7.5
+            height: pixelSize
+            bold: true
         }
+        ListView{
+            id:view_List_TypeSelect
+            width: comp_DamageFactorType.width
+            height: comp_DamageFactorType.height * 5
+            anchors.left: comp_DamageFactorType.left
+            anchors.leftMargin: comp_DamageFactorType.width/2 - width/2
+            anchors.top: comp_DamageFactorType.bottom
+            anchors.topMargin: 2
+            visible: false
+            clip: true
+            z:2
+            model:ListModel{
+                id:listmodel_Box
+            }
+            delegate:Component{
+                Item{
+                    id:item_Delegate
+                    width: view_List_TypeSelect.width
+                    height: 36
+                    CButton{
+                        id:comp_TypeBtn
+                        anchors.fill: parent
+                        text:m_TypeName
+                        color:"#ffddaa00"
+                        borderColor: m_SelectState ? "#A5FBB4" : "#ffddaa00"
+                        selectColor: borderColor
+                        selectBorderColor: borderColor
+                        selectBorderHigtColor: borderColor
+                        borderHigtColor: "#ffeebb22"
+                        pixelSize: 18
+                        isSelect: m_SelectState
+                        onClicked: {
+                            if(processInfo.loadViewType === "query"){
 
-        Item{
-            id:item_UavNameInput
-            width: 350 - text_UavName.width
-            height: 20
-            anchors.left:text_UavName.right
-            anchors.top: text_UavName.top
-            anchors.topMargin: -5
-            TextInput{
-                id:uavNameText
-                anchors.fill: parent
-                color:"#ffffffff"
-                font.family:text_UavName.family
-                font.pixelSize:(18)
-                selectByMouse: true
-                selectionColor: "#ffcc8800"
-                onTextChanged: {
-                    // if(text != "")
-                    // {
+                            }else{
+                                view_List_TypeSelect.visible = false
+                                selectType = index
+                                for (var i = 0; i < listmodel_Box.count; i++) {
+                                    listmodel_Box.setProperty(i, "m_SelectState", false);
+                                }
+                                m_SelectState = !m_SelectState
+                                var selectUavData = new Object
+                                selectUavData.recordId = m_PlanNumber
+                                var  queryResult = uavModelDao.queryMountSchemeToUavMod(selectUavData)
+                                text_MaxTakeOffWeight.text = queryResult.max_takeoff_weight
+                                text_UavEmptyWeight.text = queryResult.empty_weight
+                                text_UavMaxFuelWeight.text = queryResult.max_fuel
+                                text_UavMaxExternalWeight.text = queryResult.max_external_weight
+                                //isSelect = m_SelectState
+                                // 检查数组中是否已经存在该数字
+                                    // var uavIndex = useToUavArray.indexOf(m_PlanNumber)
 
-                    // }
-                    addMountSchemeData.mountSchemeData.uavName = text
-                }
-                validator: RegExpValidator {
-                    regExp: /[^\s]*/  // 不允许任何空格
+                                    // if (uavIndex === -1) {
+                                    //     // 数字不存在，添加到数组
+                                    //     useToUavArray.push(m_PlanNumber)
+                                    //     console.log("Number added: " + m_PlanNumber)
+                                    // } else {
+                                    //     // 数字已存在，从数组中删除
+                                    //     useToUavArray.splice(uavIndex, 1)
+                                    //     console.log("Number removed: " + m_PlanNumber)
+                                    // }
+                                // 检查数组中是否已经存在该数字
+                                // if (!newAmmoData.useToUavArray.includes(m_PlanNumber)) {
+                                //     newAmmoData.useToUavArray.push(m_PlanNumber) // 添加数字到数组
+                                //     console.log("Number added: " + m_PlanNumber)
+                                // } else {
+                                //     console.log("Number already exists: " + m_PlanNumber)
+                                // }
+                                addMountSchemeData.mountSchemeData.uavName = m_TypeName//m_PlanNumber
+                                selectMountMethod(queryResult)
+                                console.log("mountToUavArray"+JSON.stringify(queryResult))
+                            }
+                        }
+                    }
                 }
             }
-            Rectangle{
-                width: parent.width
-                height: (2)
-                anchors.left: parent.left
-                anchors.bottom: parent.bottom
-                color:mainColor
+            Component.onCompleted: {
+
+                var uavData = uavModelDao.queryUavModelPartData()//selectUavModelAllData()
+                console.log("uavModelDao"+JSON.stringify(uavData))
+                var result = [];
+                for (var i = 0; i < uavData.length; i++) {
+                    result.push({
+                        m_PlanNumber: uavData[i].recordId,
+                        m_SelectState:false,// ammoType[i].checked,
+                        m_TypeName: uavData[i].uavName
+                    });
+                }
+                if(processInfo.loadViewType === "addUavData"){
+
+
+                }else if(processInfo.loadViewType === "query"){
+                    var ammoToUavModel = custom_PassiveInterferencePod.useToUavResult
+                    var a = ammoToUavModel.split(",");
+
+                    // 遍历数组 a 和 b，更新 m_SelectState
+                    for (var i = 0; i < a.length; i++) {
+                        for (var j = 0; j < result.length; j++) {
+                            if (result[j].m_PlanNumber === a[i]) {
+                                result[j].m_SelectState = true;
+                            }
+                        }
+                    }
+
+                    // 打印更新后的数组 b
+                    console.log("Updated array b:", JSON.stringify(result, null, 2));
+                    console.log("<!><@><#>")
+                }else if(processInfo.loadViewType === "update"){
+                    var ammoToUavModel = custom_PassiveInterferencePod.useToUavResult
+                    var a = ammoToUavModel.split(",");
+                    custom_PassiveInterferencePod.useToUavArray = a
+
+                    // 遍历数组 a 和 b，更新 m_SelectState
+                    for (var i = 0; i < a.length; i++) {
+                        for (var j = 0; j < result.length; j++) {
+                            if (result[j].m_PlanNumber === a[i]) {
+                                result[j].m_SelectState = true;
+                            }
+                        }
+                    }
+
+                    // 打印更新后的数组 b
+                    console.log("Updated array b:", JSON.stringify(result, null, 2));
+                    console.log("<!><@><#>")
+                }else{
+                    console.log("processInfo.loadViewType Unknown")
+                }
+                // if(missileCommonData.selectAmmoViewType === 1 ){
+
+                // }else if(missileCommonData.selectAmmoViewType === 2){
+                //     var ammoToUavModelUpdate = newAmmoData.ammoSelectData.ammoToUavModel
+                //     var a = ammoToUavModelUpdate.split(",");
+                //     uavArray = a
+                //     // 遍历数组 a 和 b，更新 m_SelectState
+                //     for (var i = 0; i < a.length; i++) {
+                //         for (var j = 0; j < result.length; j++) {
+                //             if (result[j].m_PlanNumber === a[i]) {
+                //                 result[j].m_SelectState = true;
+                //             }
+                //         }
+                //     }
+
+                //     // 打印更新后的数组 b
+                //     console.log("Updated array b:", JSON.stringify(result, null, 2));
+                //     console.log("<!><@><#>loadAmmoData")
+                // }else{
+                //     console.log("Unknown selectType!")
+                // }
+               console.log("listmodel_Box::"+JSON.stringify(result))
+               listmodel_Box.append(result);
+
+            }
+        }
+        //显示区域
+        CButton{
+            id:comp_DamageFactorType
+            width: 200
+            height: 36
+            color:"#ffddaa00"
+            borderColor: "#ffddaa00"
+            borderHigtColor: "#ffeebb22"
+            anchors.left: uavType.right
+            anchors.leftMargin: 2
+            anchors.top: top_title.bottom
+            anchors.topMargin: 26
+            //anchors.topMargin: 30
+            //anchors.verticalCenter: uavType.verticalCenter
+            pixelSize: 20
+            text:{
+                if(selectType < 0)
+                {
+                    return "请选择:"
+                }
+                else
+                {
+                    if(listmodel_Box.count > 0)
+                        listmodel_Box.get(selectType).m_TypeName
+                }
+            }
+            onClicked: {
+                view_List_TypeSelect.visible = !view_List_TypeSelect.visible
             }
         }
 
@@ -1301,7 +1504,132 @@ Item {
         addMountSchemeData.mountSchemeData.maxExternalWeight = 0.0;
     }
 
+   function textComponentEnable(){
+       text_MaxTakeOffWeight.readOnly = true
+       text_UavEmptyWeight.readOnly = true
+       text_UavMaxFuelWeight.readOnly = true
+       text_UavMaxExternalWeight.readOnly = true
 
+       text_MaxTakeOffWeight.color = "#fff0cc55"
+       text_UavEmptyWeight.color = "#fff0cc55"
+       text_UavMaxFuelWeight.color = "#fff0cc55"
+       text_UavMaxExternalWeight.color = "#fff0cc55"
+
+       btn_Mount1.enabled = false;
+       btn_Mount2.enabled = false;
+       btn_Mount3.enabled = false;
+       btn_Mount4.enabled = false;
+       btn_Mount5.enabled = false;
+       btn_Mount6.enabled = false;
+       btn_Mount7.enabled = false;
+       btn_Mount8.enabled = false;
+       btn_Mount9.enabled = false;
+       btn_Mount10.enabled = false;
+   }
+   function selectMount(data){
+      // btn_Mount1.isSelect = true
+      var location = data.hangingCapacity
+       console.log("location"+JSON.stringify(location))
+      var ammoResult = []
+       // 将字符串 "1,3" 转换为数组
+       var array = location.split(",");
+
+       // 遍历 10 次循环
+       for (var j = 0; j < array.length; j++){
+           // 检查循环的次数是否与数组中的值相等
+           // 遍历数组并打印每个值
+                 for (var i=1;i<=10;i++) {
+                      console.log("Array value at index", i, ":", array[j]);
+                      if (i === 1 && parseInt(array[j]) === i){
+                           btn_Mount1.isSelect = true
+                          console.log("Matching value found:", i);
+                      }else if(i === 2 && parseInt(array[j]) === i){
+                          btn_Mount2.isSelect = true
+                      }else if(i === 3 && parseInt(array[j]) === i){
+                           btn_Mount3.isSelect = true
+                      }else if(i === 4 && parseInt(array[j]) === i){
+                           btn_Mount4.isSelect = true
+                      }else if(i === 5 && parseInt(array[j]) === i){
+                           btn_Mount5.isSelect = true
+                      }else if(i === 6 && parseInt(array[j]) === i){
+                           btn_Mount6.isSelect = true
+                      }else if(i === 7 && parseInt(array[j]) === i){
+                           btn_Mount7.isSelect = true
+                      }else if(i === 8 && parseInt(array[j]) === i){
+                           btn_Mount8.isSelect = true
+                      }else if(i === 9 && parseInt(array[j]) === i){
+                           btn_Mount9.isSelect = true
+                      }else if(i === 10 && parseInt(array[j]) === i){
+                           btn_Mount10.isSelect = true
+                      }else {
+                          console.log("Unknown hangingLocation!")
+                      }
+                  }
+       }
+   }
+   //简便方案
+   function selectMountMethod(data) {
+       // 获取挂载能力字符串，例如 "1,3"
+       var location = data.hangingCapacity;
+       console.log("location", JSON.stringify(location));
+
+       // 将字符串 "1,3" 转换为数组
+       var array = location.split(",");
+
+       // 遍历数组
+       for (var j = 0; j < array.length; j++) {
+           // 将数组中的字符串转换为数字
+           var hangingLocation = parseInt(array[j], 10);
+
+           // 根据挂载位置设置对应的按钮选中状态
+           switch (hangingLocation) {
+               case 1:
+                   btn_Mount1.enabled = true;
+                   btn_Mount1.isSelect = true;
+                   console.log("Matching value found: 1");
+                   break;
+               case 2:
+                   btn_Mount2.enabled = true;
+                   btn_Mount2.isSelect = true;
+                   break;
+               case 3:
+                   btn_Mount3.enabled = true;
+                   btn_Mount3.isSelect = true;
+                   break;
+               case 4:
+                   btn_Mount4.enabled = true;
+                   btn_Mount4.isSelect = true;
+                   break;
+               case 5:
+                   btn_Mount5.enabled = true;
+                   btn_Mount5.isSelect = true;
+                   break;
+               case 6:
+                   btn_Mount6.enabled = true;
+                   btn_Mount6.isSelect = true;
+                   break;
+               case 7:
+                   btn_Mount7.enabled = true;
+                   btn_Mount7.isSelect = true;
+                   break;
+               case 8:
+                   btn_Mount8.enabled = true;
+                   btn_Mount8.isSelect = true;
+                   break;
+               case 9:
+                   btn_Mount9.enabled = true;
+                   btn_Mount9.isSelect = true;
+                   break;
+               case 10:
+                   btn_Mount10.enabled = true;
+                   btn_Mount10.isSelect = true;
+                   break;
+               default:
+                   console.log("Unknown hangingLocation:", hangingLocation);
+                   break;
+           }
+       }
+   }
     function saveMountSchemrData(){
         console.log("AddMountSchemeData"+JSON.stringify(addMountSchemeData.mountSchemeData))
         let result = mountingSchemeDaoTableModel.insertMountingSchemeData(addMountSchemeData.mountSchemeData)

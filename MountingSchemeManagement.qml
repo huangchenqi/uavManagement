@@ -622,7 +622,7 @@ Rectangle {
                                                           //console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
                                                           pageMountingSchemeLoader.setSource("qrc:./AddMountingSchemeData.qml",
                                                                                {processInfo: processInfo,
-                                                                                   backUi: "qrc:/UavManageCommon.qml"})
+                                                                                   backUi: "qrc:/MountingSchemeManagement.qml"})
                                                           mountingSchemeManagementView.visible = false
                                                       }
                                                   }
@@ -650,7 +650,7 @@ Rectangle {
                                                           console.log("processInfo JSONDATA"+JSON.stringify(processInfo))
                                                           pageMountingSchemeLoader.setSource("qrc:./AddMountingSchemeData.qml",
                                                                                {processInfo: processInfo,
-                                                                                   backUi: "qrc:/UavManageCommon.qml"})
+                                                                                   backUi: "qrc:/MountingSchemeManagement.qml"})
                                                           mountingSchemeManagementView.visible = false
                                                       }
                                                   }
@@ -892,7 +892,10 @@ Rectangle {
                               text: "新增挂载方案"
                               onClicked: {
                                   //addAmmoDataPopup.open()
-                                  pageMountingSchemeLoader.setSource("qrc:./AddMountingSchemeData.qml")
+                                  processInfo.loadViewType = "addUavData"
+                                  pageMountingSchemeLoader.setSource("qrc:./AddMountingSchemeData.qml",
+                                                       {processInfo: processInfo,
+                                                           backUi: "qrc:/MountingSchemeManagement.qml"})
                                   mountingSchemeManagementView.visible = false
                               }
                           }
