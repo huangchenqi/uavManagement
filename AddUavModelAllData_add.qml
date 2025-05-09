@@ -2655,20 +2655,57 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
             return
         }
         uavData.uav_id = listmodel_Box_UavModelType.get(iUavModelType).m_RecordId//无人机型号
-        uavData.length = textToFloat(uavLengthText.text)
-        uavData.width = textToFloat(uavWidthText.text)
-        uavData.height = textToFloat(uavHeightText.text)
+        if(uavLengthText.text.trim() === ""){
+            uavData.length = null
+        }else{
+            uavData.length = textToFloat(uavLengthText.text)
+        }
+        if(uavWidthText.text.trim() === ""){
+            uavData.width = null
+        }else{
+            uavData.width = textToFloat(uavWidthText.text)
+        }
+        if(uavHeightText.text.trim() === ""){
+            uavData.height =  null
+        }else{
+            uavData.height = textToFloat(uavHeightText.text)
+        }
+        if(uavFlightHeightMin.text.trim() === ""){
+            uavData.flight_height_min = null
+        }else{
+            uavData.flight_height_min = textToFloat(uavFlightHeightMin.text)
+        }
+        if(uavFlightHeightMax.text.trim() === ""){
+            uavData.flight_height_max = null
+        }else{
+            uavData.flight_height_max = textToFloat(uavFlightHeightMax.text)
+        }
+        if(uavFlightSpeedMin.text.trim() === ""){
+            uavData.flight_speed_min = null
+        }else{
+            uavData.flight_speed_min = textToFloat(uavFlightSpeedMin.text)
+        }
+        if(uavFlightSpeedMax.text.trim() === ""){
+            uavData.flight_speed_max = null
+        }else{
+            uavData.flight_speed_max = textToFloat(uavFlightSpeedMax.text)
+        }
+        if(uavTurningRadiusMin.text.trim() === ""){
+            uavData.turn_radius_min = null
+        }else{
+            uavData.turn_radius_min = textToFloat(uavTurningRadiusMin.text)
+        }
+        if(uavTurningRadiusMax.text.trim() === ""){
+            uavData.turn_radius_max = null
+        }else{
+            uavData.turn_radius_max = textToFloat(uavTurningRadiusMax.text)
+        }
+        if(uavFlightDistance.text.trim() === ""){
+            uavData.flight_distance_max = null
+        }else{
+            uavData.flight_distance_max = textToFloat(uavFlightDistance.text)
+        }
         //uavData.load_ammo_type = uavLoadammoSelect.currentText
-
-        uavData.flight_height_min = textToFloat(uavFlightHeightMin.text)
-        uavData.flight_height_max = textToFloat(uavFlightHeightMax.text)
-        uavData.flight_speed_min = textToFloat(uavFlightSpeedMin.text)
-        uavData.flight_speed_max = textToFloat(uavFlightSpeedMax.text)
-        uavData.turn_radius_min = textToFloat(uavTurningRadiusMin.text)
-        uavData.turn_radius_max = textToFloat(uavTurningRadiusMax.text)
-
-        uavData.flight_distance_max = textToFloat(uavFlightDistance.text)
-
         var uavBombWay = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
         var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()
         var uavRecoveryWay = uavModelRecoveryModeDaoModel.selectModelRecoveryModeAllData()
@@ -2776,36 +2813,138 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
         }
 
         uavData.hanging_capacity = uavMountContent.queryToData//挂载位置
+        if(uavFlightTime.text.trim() === ""){
+            uavData.flight_time_max = null
+        }else{
+            uavData.flight_time_max =  textToFloat(uavFlightTime.text)
+        }
+        if(uavTakeoffDistanceValue.text.trim() === ""){
+            uavData.takeoff_distance = null
+        }else{
+            uavData.takeoff_distance = textToFloat(uavTakeoffDistanceValue.text)
+        }
+        if(uavLandDistanceValue.text.trim() === ""){
+            uavData.landing_distance = null
+        }else{
+            uavData.landing_distance = textToFloat(uavLandDistanceValue.text)
+        }
+        if(uavOperatioanalRadius.text.trim() === ""){
+            uavData.combat_radius = null
+        }else{
+            uavData.combat_radius = textToFloat(uavOperatioanalRadius.text)
+        }
+        if(uavLoadReconnaissanceRangeValue.text.trim() === ""){
+            uavData.recon_range_max = null
+        }else{
+            //uavData.recon_range_min = uavLoadReconnaissanceAccuracyText.text
+            uavData.recon_range_max = textToFloat(uavLoadReconnaissanceRangeValue.text)
+        }
+        if(uavLoadReconnaissanceAccuracyValue.text.trim() === ""){
+            uavData.recon_accuracy = null
+        }else{
+            uavData.recon_accuracy = textToFloat(uavLoadReconnaissanceAccuracyValue.text)
+        }
+        if(uavLowAltitudeBreakthroughSpeedValue.text.trim() === ""){
+            uavData.low_alt_speed = null
+        }else{
+            uavData.low_alt_speed = textToFloat(uavLowAltitudeBreakthroughSpeedValue.text)
+        }
+        if(uavOperatioanalRadius.text.trim() === ""){
+            uavData.combat_radius = null
+        }else{
+            uavData.combat_radius = textToFloat(uavOperatioanalRadius.text)
+        }
+        if(uavAttackaccuracyValue.text.trim() === ""){
+            uavData.attack_accuracy = null
+        }else{
+            uavData.attack_accuracy = textToFloat(uavAttackaccuracyValue.text)
+        }
+        if(uavRadarCrossSectionValue.text.trim() === ""){
+            uavData.rcs = null
+        }else{
+            uavData.rcs = textToFloat(uavRadarCrossSectionValue.text)
+        }
+        if(uavCenterOfGravityFrontLimitValue.text.trim() === ""){
+            uavData.cg_front_limit = null
+        }else{
+            uavData.cg_front_limit = textToFloat(uavCenterOfGravityFrontLimitValue.text)
+        }
+        if(uavCenterOfGravityAfterwardLimitValue.text.trim() === ""){
+            uavData.cg_rear_limit = null
+        }else{
+            uavData.cg_rear_limit = textToFloat(uavCenterOfGravityAfterwardLimitValue.text)
+        }
+        if(uavMaximumTakeoffWeightValue.text.trim() === ""){
+            uavData.max_takeoff_weight = null
+        }else{
+            uavData.max_takeoff_weight = textToFloat(uavMaximumTakeoffWeightValue.text)
+        }
+        if(uavEmptyWeightValue.text.trim() === ""){
+            uavData.empty_weight = null
+        }else{
+            uavData.empty_weight = textToFloat(uavEmptyWeightValue.text)
+        }
+        if(uavMaximumFuelCapacityValue.text.trim() === ""){
+            uavData.max_fuel = null
+        }else{
+            uavData.max_fuel = textToFloat(uavMaximumFuelCapacityValue.text)
+        }
+        if(uavMaximumExternalWeightValue.text.trim() === ""){
+            uavData.max_external_weight = null
+        }else{
+            uavData.max_external_weight = textToFloat(uavMaximumExternalWeightValue.text)
+        }
+        if(uavCeilingValue.text.trim() === ""){
+            uavData.ceiling = null
+        }else{
+            uavData.ceiling = textToFloat(uavCeilingValue.text)
+        }
+        if(uavMaximumGroundStartingHeightValue.text.trim() === ""){
+            uavData.ground_start_alt = null
+        }else{
+            uavData.ground_start_alt = textToFloat(uavMaximumGroundStartingHeightValue.text)
+        }
+        if(uavMaximumAirStartingAltitudeValue.text.trim() === ""){
+            uavData.air_start_alt = null
+        }else{
+            uavData.air_start_alt = textToFloat(uavMaximumAirStartingAltitudeValue.text)
+        }
+        if(uavMaximumEnduranceValue.text.trim() === ""){
+            uavData.endurance = null
+        }else{
+            uavData.endurance = textToFloat(uavMaximumEnduranceValue.text)
+        }
+        if(uavMaximumFlightVacuumSpeedValue.text.trim() === ""){
+            uavData.max_vacuum_speed = null
+        }else{
+            uavData.max_vacuum_speed = textToFloat(uavMaximumFlightVacuumSpeedValue.text)
+        }
+        if(uavMinimumFlightMeterSpeedValue.text.trim() === ""){
+            uavData.min_meter_speed = null
+        }else{
+            uavData.min_meter_speed = textToFloat(uavMinimumFlightMeterSpeedValue.text)
+        }
 
-        uavData.flight_time_max =  textToFloat(uavFlightTime.text)
-        uavData.takeoff_distance = textToFloat(uavTakeoffDistanceValue.text)
-        uavData.landing_distance = textToFloat(uavLandDistanceValue.text)
-        uavData.combat_radius = textToFloat(uavOperatioanalRadius.text)
-        //uavData.recon_range_min = uavLoadReconnaissanceAccuracyText.text
-        uavData.recon_range_max = textToFloat(uavLoadReconnaissanceRangeValue.text)
-        uavData.recon_accuracy = textToFloat(uavLoadReconnaissanceAccuracyValue.text)
-
-        uavData.low_alt_speed = textToFloat(uavLowAltitudeBreakthroughSpeedValue.text)
-        uavData.combat_radius = textToFloat(uavOperatioanalRadius.text)
-        uavData.attack_accuracy = textToFloat(uavAttackaccuracyValue.text)
-        uavData.rcs = textToFloat(uavRadarCrossSectionValue.text)
-        uavData.cg_front_limit = textToFloat(uavCenterOfGravityFrontLimitValue.text)
-        uavData.cg_rear_limit = textToFloat(uavCenterOfGravityAfterwardLimitValue.text)
-        uavData.max_takeoff_weight = textToFloat(uavMaximumTakeoffWeightValue.text)
-        uavData.empty_weight = textToFloat(uavEmptyWeightValue.text)
-        uavData.max_fuel = textToFloat(uavMaximumFuelCapacityValue.text)
-        uavData.max_external_weight = textToFloat(uavMaximumExternalWeightValue.text)
-        uavData.ceiling = textToFloat(uavCeilingValue.text)
-        uavData.ground_start_alt = textToFloat(uavMaximumGroundStartingHeightValue.text)
-        uavData.air_start_alt = textToFloat(uavMaximumAirStartingAltitudeValue.text)
-        uavData.endurance = textToFloat(uavMaximumEnduranceValue.text)
-        uavData.max_vacuum_speed = textToFloat(uavMaximumFlightVacuumSpeedValue.text)
-        uavData.min_meter_speed = textToFloat(uavMinimumFlightMeterSpeedValue.text)
-        uavData.sea_takeoff_roll = textToFloat(sealLevelTakeoffAndRollDistanceValue.text)
-        uavData.sea_landing_roll = textToFloat(sealLevelLandingAndRollDistanceValue.text)
-        uavData.recon_cruise_alt = textToFloat(cruiseAltitudeReconnaissanceConfigurationValue.text)
-        uavData.full_external_cruise_alt = textToFloat(cruiseAltitudeFullExternalConfigurationValue.text)
-
+        if(sealLevelTakeoffAndRollDistanceValue.text.trim() === ""){
+            uavData.sea_takeoff_roll = null
+        }else{
+            uavData.sea_takeoff_roll = textToFloat(sealLevelTakeoffAndRollDistanceValue.text)
+        }
+        if(sealLevelLandingAndRollDistanceValue.text.trim() === ""){
+            uavData.sea_landing_roll = null
+        }else{
+            uavData.sea_landing_roll = textToFloat(sealLevelLandingAndRollDistanceValue.text)
+        }
+        if(cruiseAltitudeReconnaissanceConfigurationValue.text.trim() === ""){
+            uavData.recon_cruise_alt = null
+        }else{
+            uavData.recon_cruise_alt = textToFloat(cruiseAltitudeReconnaissanceConfigurationValue.text)
+        }
+        if(cruiseAltitudeFullExternalConfigurationValue.text.trim() === ""){
+            uavData.full_external_cruise_alt = null
+        }else{
+            uavData.full_external_cruise_alt = textToFloat(cruiseAltitudeFullExternalConfigurationValue.text)
+        }
         uavData.image_name = "aaaaaaaaaaa"
         uavData.image_url = addUavModelData.imagUrl//uavData.image_url = JSON.stringify(addUavModelData.imagUrl)
         uavData.recordcreation_time = addUavModelData.currentTime

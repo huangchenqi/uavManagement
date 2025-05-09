@@ -957,12 +957,12 @@ namespace odb
     // uavLength_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavLength_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavLength_value, is_null, v);
       i.uavLength_null = is_null;
@@ -971,12 +971,12 @@ namespace odb
     // uavWidth_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavWidth_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavWidth_value, is_null, v);
       i.uavWidth_null = is_null;
@@ -985,12 +985,12 @@ namespace odb
     // uavHeight_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavHeight_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavHeight_value, is_null, v);
       i.uavHeight_null = is_null;
@@ -1020,12 +1020,12 @@ namespace odb
     // uavFlightHeightRangeMin_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavFlightHeightRangeMin_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavFlightHeightRangeMin_value, is_null, v);
       i.uavFlightHeightRangeMin_null = is_null;
@@ -1034,12 +1034,12 @@ namespace odb
     // uavFlightHeightRangeMax_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavFlightHeightRangeMax_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavFlightHeightRangeMax_value, is_null, v);
       i.uavFlightHeightRangeMax_null = is_null;
@@ -1048,12 +1048,12 @@ namespace odb
     // uavFlightSpeedRangeMin_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavFlightSpeedRangeMin_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavFlightSpeedRangeMin_value, is_null, v);
       i.uavFlightSpeedRangeMin_null = is_null;
@@ -1062,12 +1062,12 @@ namespace odb
     // uavFlightSpeedRangeMax_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavFlightSpeedRangeMax_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavFlightSpeedRangeMax_value, is_null, v);
       i.uavFlightSpeedRangeMax_null = is_null;
@@ -1076,12 +1076,12 @@ namespace odb
     // uavFlightDistanceRangeMin_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavFlightDistanceRangeMin_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavFlightDistanceRangeMin_value, is_null, v);
       i.uavFlightDistanceRangeMin_null = is_null;
@@ -1090,12 +1090,12 @@ namespace odb
     // uavFlightDistanceRangeMax_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavFlightDistanceRangeMax_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavFlightDistanceRangeMax_value, is_null, v);
       i.uavFlightDistanceRangeMax_null = is_null;
@@ -1104,12 +1104,12 @@ namespace odb
     // uavFlightTimeRangeMin_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavFlightTimeRangeMin_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavFlightTimeRangeMin_value, is_null, v);
       i.uavFlightTimeRangeMin_null = is_null;
@@ -1118,12 +1118,12 @@ namespace odb
     // uavFlightTimeRangeMax_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavFlightTimeRangeMax_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavFlightTimeRangeMax_value, is_null, v);
       i.uavFlightTimeRangeMax_null = is_null;
@@ -1132,12 +1132,12 @@ namespace odb
     // uavTakeoffDistance_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavTakeoffDistance_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavTakeoffDistance_value, is_null, v);
       i.uavTakeoffDistance_null = is_null;
@@ -1146,12 +1146,12 @@ namespace odb
     // uavLandDistance_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavLandDistance_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavLandDistance_value, is_null, v);
       i.uavLandDistance_null = is_null;
@@ -1160,12 +1160,12 @@ namespace odb
     // uavTurningRadiusRangeMin_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavTurningRadiusRangeMin_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavTurningRadiusRangeMin_value, is_null, v);
       i.uavTurningRadiusRangeMin_null = is_null;
@@ -1174,12 +1174,12 @@ namespace odb
     // uavTurningRadiusRangeMax_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavTurningRadiusRangeMax_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavTurningRadiusRangeMax_value, is_null, v);
       i.uavTurningRadiusRangeMax_null = is_null;
@@ -1188,12 +1188,12 @@ namespace odb
     // uavOperatioanalRadius_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavOperatioanalRadius_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavOperatioanalRadius_value, is_null, v);
       i.uavOperatioanalRadius_null = is_null;
@@ -1244,12 +1244,12 @@ namespace odb
     // uavLoadReconnaissanceRangeMin_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavLoadReconnaissanceRangeMin_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavLoadReconnaissanceRangeMin_value, is_null, v);
       i.uavLoadReconnaissanceRangeMin_null = is_null;
@@ -1258,12 +1258,12 @@ namespace odb
     // uavLoadReconnaissanceRangeMax_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavLoadReconnaissanceRangeMax_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavLoadReconnaissanceRangeMax_value, is_null, v);
       i.uavLoadReconnaissanceRangeMax_null = is_null;
@@ -1272,12 +1272,12 @@ namespace odb
     // uavLoadReconnaissanceAccuracy_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavLoadReconnaissanceAccuracy_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavLoadReconnaissanceAccuracy_value, is_null, v);
       i.uavLoadReconnaissanceAccuracy_null = is_null;
@@ -1307,12 +1307,12 @@ namespace odb
     // uavLowAltitudeBreakthroughSpeed_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavLowAltitudeBreakthroughSpeed_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavLowAltitudeBreakthroughSpeed_value, is_null, v);
       i.uavLowAltitudeBreakthroughSpeed_null = is_null;
@@ -1363,12 +1363,12 @@ namespace odb
     // uavAttackaccuracy_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavAttackaccuracy_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavAttackaccuracy_value, is_null, v);
       i.uavAttackaccuracy_null = is_null;
@@ -1377,12 +1377,12 @@ namespace odb
     // uavRadarCrossSection_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavRadarCrossSection_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavRadarCrossSection_value, is_null, v);
       i.uavRadarCrossSection_null = is_null;
@@ -1391,12 +1391,12 @@ namespace odb
     // uavCenterOfGravityFrontLimit_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavCenterOfGravityFrontLimit_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavCenterOfGravityFrontLimit_value, is_null, v);
       i.uavCenterOfGravityFrontLimit_null = is_null;
@@ -1405,12 +1405,12 @@ namespace odb
     // uavCenterOfGravityAfterwardLimit_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavCenterOfGravityAfterwardLimit_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavCenterOfGravityAfterwardLimit_value, is_null, v);
       i.uavCenterOfGravityAfterwardLimit_null = is_null;
@@ -1419,12 +1419,12 @@ namespace odb
     // uavMaximumTakeoffWeight_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavMaximumTakeoffWeight_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavMaximumTakeoffWeight_value, is_null, v);
       i.uavMaximumTakeoffWeight_null = is_null;
@@ -1433,12 +1433,12 @@ namespace odb
     // uavEmptyWeight_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavEmptyWeight_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavEmptyWeight_value, is_null, v);
       i.uavEmptyWeight_null = is_null;
@@ -1447,12 +1447,12 @@ namespace odb
     // uavMaximumFuelCapacity_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavMaximumFuelCapacity_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavMaximumFuelCapacity_value, is_null, v);
       i.uavMaximumFuelCapacity_null = is_null;
@@ -1461,12 +1461,12 @@ namespace odb
     // uavMaximumExternalWeight_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavMaximumExternalWeight_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavMaximumExternalWeight_value, is_null, v);
       i.uavMaximumExternalWeight_null = is_null;
@@ -1475,12 +1475,12 @@ namespace odb
     // uavCeiling_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavCeiling_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavCeiling_value, is_null, v);
       i.uavCeiling_null = is_null;
@@ -1489,12 +1489,12 @@ namespace odb
     // uavMaximumGroundStartingHeight_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavMaximumGroundStartingHeight_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavMaximumGroundStartingHeight_value, is_null, v);
       i.uavMaximumGroundStartingHeight_null = is_null;
@@ -1503,12 +1503,12 @@ namespace odb
     // uavMaximumAirStartingAltitude_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavMaximumAirStartingAltitude_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavMaximumAirStartingAltitude_value, is_null, v);
       i.uavMaximumAirStartingAltitude_null = is_null;
@@ -1517,12 +1517,12 @@ namespace odb
     // uavMaximumEndurance_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavMaximumEndurance_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavMaximumEndurance_value, is_null, v);
       i.uavMaximumEndurance_null = is_null;
@@ -1531,12 +1531,12 @@ namespace odb
     // uavMaximumFlightVacuumSpeed_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavMaximumFlightVacuumSpeed_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavMaximumFlightVacuumSpeed_value, is_null, v);
       i.uavMaximumFlightVacuumSpeed_null = is_null;
@@ -1545,12 +1545,12 @@ namespace odb
     // uavMinimumFlightMeterSpeed_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.uavMinimumFlightMeterSpeed_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.uavMinimumFlightMeterSpeed_value, is_null, v);
       i.uavMinimumFlightMeterSpeed_null = is_null;
@@ -1559,12 +1559,12 @@ namespace odb
     // sealLevelTakeoffAndRollDistance_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.sealLevelTakeoffAndRollDistance_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.sealLevelTakeoffAndRollDistance_value, is_null, v);
       i.sealLevelTakeoffAndRollDistance_null = is_null;
@@ -1573,12 +1573,12 @@ namespace odb
     // sealLevelLandingAndRollDistance_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.sealLevelLandingAndRollDistance_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.sealLevelLandingAndRollDistance_value, is_null, v);
       i.sealLevelLandingAndRollDistance_null = is_null;
@@ -1587,12 +1587,12 @@ namespace odb
     // cruiseAltitudeReconnaissanceConfiguration_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.cruiseAltitudeReconnaissanceConfiguration_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.cruiseAltitudeReconnaissanceConfiguration_value, is_null, v);
       i.cruiseAltitudeReconnaissanceConfiguration_null = is_null;
@@ -1601,12 +1601,12 @@ namespace odb
     // cruiseAltitudeFullExternalConfiguration_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.cruiseAltitudeFullExternalConfiguration_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.cruiseAltitudeFullExternalConfiguration_value, is_null, v);
       i.cruiseAltitudeFullExternalConfiguration_null = is_null;
@@ -1742,11 +1742,11 @@ namespace odb
     // uavLength_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavLength_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavLength_value,
@@ -1756,11 +1756,11 @@ namespace odb
     // uavWidth_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavWidth_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavWidth_value,
@@ -1770,11 +1770,11 @@ namespace odb
     // uavHeight_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavHeight_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavHeight_value,
@@ -1799,11 +1799,11 @@ namespace odb
     // uavFlightHeightRangeMin_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavFlightHeightRangeMin_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavFlightHeightRangeMin_value,
@@ -1813,11 +1813,11 @@ namespace odb
     // uavFlightHeightRangeMax_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavFlightHeightRangeMax_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavFlightHeightRangeMax_value,
@@ -1827,11 +1827,11 @@ namespace odb
     // uavFlightSpeedRangeMin_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavFlightSpeedRangeMin_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavFlightSpeedRangeMin_value,
@@ -1841,11 +1841,11 @@ namespace odb
     // uavFlightSpeedRangeMax_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavFlightSpeedRangeMax_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavFlightSpeedRangeMax_value,
@@ -1855,11 +1855,11 @@ namespace odb
     // uavFlightDistanceRangeMin_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavFlightDistanceRangeMin_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavFlightDistanceRangeMin_value,
@@ -1869,11 +1869,11 @@ namespace odb
     // uavFlightDistanceRangeMax_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavFlightDistanceRangeMax_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavFlightDistanceRangeMax_value,
@@ -1883,11 +1883,11 @@ namespace odb
     // uavFlightTimeRangeMin_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavFlightTimeRangeMin_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavFlightTimeRangeMin_value,
@@ -1897,11 +1897,11 @@ namespace odb
     // uavFlightTimeRangeMax_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavFlightTimeRangeMax_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavFlightTimeRangeMax_value,
@@ -1911,11 +1911,11 @@ namespace odb
     // uavTakeoffDistance_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavTakeoffDistance_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavTakeoffDistance_value,
@@ -1925,11 +1925,11 @@ namespace odb
     // uavLandDistance_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavLandDistance_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavLandDistance_value,
@@ -1939,11 +1939,11 @@ namespace odb
     // uavTurningRadiusRangeMin_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavTurningRadiusRangeMin_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavTurningRadiusRangeMin_value,
@@ -1953,11 +1953,11 @@ namespace odb
     // uavTurningRadiusRangeMax_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavTurningRadiusRangeMax_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavTurningRadiusRangeMax_value,
@@ -1967,11 +1967,11 @@ namespace odb
     // uavOperatioanalRadius_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavOperatioanalRadius_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavOperatioanalRadius_value,
@@ -2011,11 +2011,11 @@ namespace odb
     // uavLoadReconnaissanceRangeMin_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavLoadReconnaissanceRangeMin_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavLoadReconnaissanceRangeMin_value,
@@ -2025,11 +2025,11 @@ namespace odb
     // uavLoadReconnaissanceRangeMax_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavLoadReconnaissanceRangeMax_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavLoadReconnaissanceRangeMax_value,
@@ -2039,11 +2039,11 @@ namespace odb
     // uavLoadReconnaissanceAccuracy_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavLoadReconnaissanceAccuracy_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavLoadReconnaissanceAccuracy_value,
@@ -2068,11 +2068,11 @@ namespace odb
     // uavLowAltitudeBreakthroughSpeed_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavLowAltitudeBreakthroughSpeed_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavLowAltitudeBreakthroughSpeed_value,
@@ -2112,11 +2112,11 @@ namespace odb
     // uavAttackaccuracy_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavAttackaccuracy_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavAttackaccuracy_value,
@@ -2126,11 +2126,11 @@ namespace odb
     // uavRadarCrossSection_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavRadarCrossSection_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavRadarCrossSection_value,
@@ -2140,11 +2140,11 @@ namespace odb
     // uavCenterOfGravityFrontLimit_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavCenterOfGravityFrontLimit_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavCenterOfGravityFrontLimit_value,
@@ -2154,11 +2154,11 @@ namespace odb
     // uavCenterOfGravityAfterwardLimit_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavCenterOfGravityAfterwardLimit_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavCenterOfGravityAfterwardLimit_value,
@@ -2168,11 +2168,11 @@ namespace odb
     // uavMaximumTakeoffWeight_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavMaximumTakeoffWeight_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavMaximumTakeoffWeight_value,
@@ -2182,11 +2182,11 @@ namespace odb
     // uavEmptyWeight_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavEmptyWeight_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavEmptyWeight_value,
@@ -2196,11 +2196,11 @@ namespace odb
     // uavMaximumFuelCapacity_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavMaximumFuelCapacity_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavMaximumFuelCapacity_value,
@@ -2210,11 +2210,11 @@ namespace odb
     // uavMaximumExternalWeight_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavMaximumExternalWeight_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavMaximumExternalWeight_value,
@@ -2224,11 +2224,11 @@ namespace odb
     // uavCeiling_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavCeiling_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavCeiling_value,
@@ -2238,11 +2238,11 @@ namespace odb
     // uavMaximumGroundStartingHeight_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavMaximumGroundStartingHeight_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavMaximumGroundStartingHeight_value,
@@ -2252,11 +2252,11 @@ namespace odb
     // uavMaximumAirStartingAltitude_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavMaximumAirStartingAltitude_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavMaximumAirStartingAltitude_value,
@@ -2266,11 +2266,11 @@ namespace odb
     // uavMaximumEndurance_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavMaximumEndurance_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavMaximumEndurance_value,
@@ -2280,11 +2280,11 @@ namespace odb
     // uavMaximumFlightVacuumSpeed_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavMaximumFlightVacuumSpeed_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavMaximumFlightVacuumSpeed_value,
@@ -2294,11 +2294,11 @@ namespace odb
     // uavMinimumFlightMeterSpeed_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.uavMinimumFlightMeterSpeed_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.uavMinimumFlightMeterSpeed_value,
@@ -2308,11 +2308,11 @@ namespace odb
     // sealLevelTakeoffAndRollDistance_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.sealLevelTakeoffAndRollDistance_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.sealLevelTakeoffAndRollDistance_value,
@@ -2322,11 +2322,11 @@ namespace odb
     // sealLevelLandingAndRollDistance_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.sealLevelLandingAndRollDistance_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.sealLevelLandingAndRollDistance_value,
@@ -2336,11 +2336,11 @@ namespace odb
     // cruiseAltitudeReconnaissanceConfiguration_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.cruiseAltitudeReconnaissanceConfiguration_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.cruiseAltitudeReconnaissanceConfiguration_value,
@@ -2350,11 +2350,11 @@ namespace odb
     // cruiseAltitudeFullExternalConfiguration_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.cruiseAltitudeFullExternalConfiguration_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.cruiseAltitudeFullExternalConfiguration_value,

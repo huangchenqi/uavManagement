@@ -11,6 +11,7 @@
 #ifndef ODB_COMPILER
 #include "datetime-traits.hxx"
 #endif
+#include "odb/nullable.hxx"
 #pragma once
 #pragma db object schema("uav_type_man") table("uav_models_data") // 指定表名
 class UavModelEntity
@@ -55,13 +56,13 @@ class UavModelEntity
 
     /******************** 尺寸参数 ********************/
     #pragma db column("length") //type(float)                       // 机长(m)
-        float uavLength_;
+        odb::nullable<float> uavLength_;
 
     #pragma db column("width") //type(float4(24))                        // 翼展(m)
-        float uavWidth_;
+        odb::nullable<float> uavWidth_;
 
     #pragma db column("height")  //type(float4(24))                      // 机高(m)
-        float uavHeight_;
+        odb::nullable<float> uavHeight_;
 
     #pragma db column("load_ammo_type")  type("varchar(100)")                // 隐身能力
         std::string uavLoadAmmoType_;
@@ -69,47 +70,47 @@ class UavModelEntity
 
     /******************** 飞行性能 ********************/
     #pragma db column("flight_height_min") //type(float4(24))            // 飞行高度范围最小值(m)
-        float uavFlightHeightRangeMin_;
+        odb::nullable<float> uavFlightHeightRangeMin_;
 
     #pragma db column("flight_height_max") //type(float4(24))            // 飞行高度范围最大值(m)
-        float uavFlightHeightRangeMax_;
+        odb::nullable<float> uavFlightHeightRangeMax_;
 
     #pragma db column("flight_speed_min") //type(float4(24))            // 飞行速度范围最小值(m/s)
-        float uavFlightSpeedRangeMin_;
+        odb::nullable<float> uavFlightSpeedRangeMin_;
 
     #pragma db column("flight_speed_max") //type(float4(24))             // 飞行速度范围最大值(m/s)
-        float uavFlightSpeedRangeMax_;
+        odb::nullable<float> uavFlightSpeedRangeMax_;
 
     #pragma db column("flight_distance_min")  //type(float4(24))         // 航程范围最小值(km)
-        float uavFlightDistanceRangeMin_;
+        odb::nullable<float> uavFlightDistanceRangeMin_;
 
     #pragma db column("flight_distance_max") //type(float4(24))          // 航程范围最大值(km)
-        float uavFlightDistanceRangeMax_;
+        odb::nullable<float> uavFlightDistanceRangeMax_;
 
     #pragma db column("flight_time_min") //type(float4(24))              // 航时范围最小值(h)
-        float uavFlightTimeRangeMin_;
+        odb::nullable<float> uavFlightTimeRangeMin_;
 
     #pragma db column("flight_time_max") //type(float4(24))              // 航时范围最大值(h)
-        float uavFlightTimeRangeMax_;
+        odb::nullable<float> uavFlightTimeRangeMax_;
 
 
     /******************** 起降参数 ********************/
     #pragma db column("takeoff_distance")  //type(float4(24))            // 起飞滑跑距离(m)
-        float uavTakeoffDistance_;
+        odb::nullable<float> uavTakeoffDistance_;
 
     #pragma db column("landing_distance") //type(float4(24))             // 着陆滑跑距离(m)
-        float uavLandDistance_;
+        odb::nullable<float> uavLandDistance_;
 
 
     /******************** 机动性能 ********************/
     #pragma db column("turn_radius_min") //type(float4(24))              // 转弯半径范围最小值(m)
-        float uavTurningRadiusRangeMin_;
+        odb::nullable<float> uavTurningRadiusRangeMin_;
 
     #pragma db column("turn_radius_max") //type(float4(24))              // 转弯半径范围最大值(m)
-        float uavTurningRadiusRangeMax_;
+        odb::nullable<float> uavTurningRadiusRangeMax_;
 
     #pragma db column("combat_radius")  //type(float4(24))               // 作战半径(km)
-        float uavOperatioanalRadius_;
+        odb::nullable<float> uavOperatioanalRadius_;
 
 
     /******************** 载荷配置 ********************/
@@ -120,13 +121,13 @@ class UavModelEntity
         std::string uavBombingway_;
 
     #pragma db column("recon_range_min")  //type("float4(24)")             // 载荷侦察范围最小值(km)
-        float uavLoadReconnaissanceRangeMin_;
+        odb::nullable<float> uavLoadReconnaissanceRangeMin_;
 
     #pragma db column("recon_range_max") //type(float4(24))              // 载荷侦察范围最大值(km)
-        float uavLoadReconnaissanceRangeMax_;
+        odb::nullable<float> uavLoadReconnaissanceRangeMax_;
 
     #pragma db column("recon_accuracy")  //type(float4(24))              // 载荷侦察精度(m)
-        float uavLoadReconnaissanceAccuracy_;
+        odb::nullable<float> uavLoadReconnaissanceAccuracy_;
 
 
     /******************** 回收与突防 ********************/
@@ -134,7 +135,7 @@ class UavModelEntity
         std::string uavRecoveryway_;
 
     #pragma db column("low_alt_speed")   //type(float4(24))              // 低空突防速度(Km/h)
-        float uavLowAltitudeBreakthroughSpeed_;
+        odb::nullable<float> uavLowAltitudeBreakthroughSpeed_;
 
 
     /******************** 挂载能力 ********************/
@@ -151,70 +152,70 @@ class UavModelEntity
         std::string uavOperationWay_;
 
     #pragma db column("attack_accuracy")   //type(float4(24))            // 攻击精度(CEP/m)
-        float uavAttackaccuracy_;
+        odb::nullable<float> uavAttackaccuracy_;
 
 
     /******************** 雷达特征 ********************/
     #pragma db column("rcs")     //type(float4(24))                      // 雷达反射面积(m²)
-        float uavRadarCrossSection_;
+        odb::nullable<float> uavRadarCrossSection_;
 
 
     /******************** 重量与平衡 ********************/
     #pragma db column("cg_front_limit")    //type(float4(24))            // 重心前限(%MAC)
-        float uavCenterOfGravityFrontLimit_;
+        odb::nullable<float> uavCenterOfGravityFrontLimit_;
 
     #pragma db column("cg_rear_limit")  //type(float4(24))               // 重心后限(%MAC)
-        float uavCenterOfGravityAfterwardLimit_;
+        odb::nullable<float> uavCenterOfGravityAfterwardLimit_;
 
     #pragma db column("max_takeoff_weight") //type(float4(24))           // 最大起飞重量(kg)
-        float uavMaximumTakeoffWeight_;
+        odb::nullable<float> uavMaximumTakeoffWeight_;
 
     #pragma db column("empty_weight")  //type(float4(24))                // 空机重量(kg)
-        float uavEmptyWeight_;
+        odb::nullable<float> uavEmptyWeight_;
 
 
     /******************** 燃油与载重 ********************/
     #pragma db column("max_fuel") //type(float4(24))                     // 最大载油量(L)
-        float uavMaximumFuelCapacity_;
+        odb::nullable<float> uavMaximumFuelCapacity_;
 
     #pragma db column("max_external_weight") //type(float4(24))          // 最大外挂重量(kg)
-        float uavMaximumExternalWeight_;
+        odb::nullable<float> uavMaximumExternalWeight_;
 
 
     /******************** 高度性能 ********************/
     #pragma db column("ceiling")  //type(float4(24))                     // 最大飞行高度(m)
-        float uavCeiling_;
+        odb::nullable<float> uavCeiling_;
 
     #pragma db column("ground_start_alt")  //type(float4(24))            // 地面最大起动高度(m)
-        float uavMaximumGroundStartingHeight_;
+        odb::nullable<float> uavMaximumGroundStartingHeight_;
 
     #pragma db column("air_start_alt")  //type(float4(24))               // 空中最大起动高度(m)
-        float uavMaximumAirStartingAltitude_;
+        odb::nullable<float> uavMaximumAirStartingAltitude_;
 
 
     /******************** 续航性能 ********************/
     #pragma db column("endurance")   //type(float4(24))                  // 最大续航时间(h)
-        float uavMaximumEndurance_;
+        odb::nullable<float> uavMaximumEndurance_;
 
     #pragma db column("max_vacuum_speed")   //type(float4(24))           // 最大飞行真空速(Km/h)
-        float uavMaximumFlightVacuumSpeed_;
+        odb::nullable<float> uavMaximumFlightVacuumSpeed_;
 
     #pragma db column("min_meter_speed")  //type(float4(24))             // 最小飞行表速(Km/h)
-        float uavMinimumFlightMeterSpeed_;
+        odb::nullable<float> uavMinimumFlightMeterSpeed_;
 
 
     /******************** 特殊场景性能 ********************/
     #pragma db column("sea_takeoff_roll")  //type(float4(24))            // 海平面起飞滑跑距离(m)
-        float sealLevelTakeoffAndRollDistance_;
+        odb::nullable<float> sealLevelTakeoffAndRollDistance_;
 
     #pragma db column("sea_landing_roll")  //type(float4(24))            // 海平面着陆滑跑距离(m)
-        float sealLevelLandingAndRollDistance_;
+        odb::nullable<float> sealLevelLandingAndRollDistance_;
 
     #pragma db column("recon_cruise_alt") //type(float4(24))             // 侦察构型巡航高度(m)
-        float cruiseAltitudeReconnaissanceConfiguration_;
+        odb::nullable<float> cruiseAltitudeReconnaissanceConfiguration_;
 
     #pragma db column("full_external_cruise_alt") //type(float4(24))      // 满外挂构型巡航高度(m)
-        float cruiseAltitudeFullExternalConfiguration_;
+        odb::nullable<float> cruiseAltitudeFullExternalConfiguration_;
 
 
     /******************** 系统记录 ********************/

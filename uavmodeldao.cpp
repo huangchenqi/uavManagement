@@ -534,9 +534,21 @@ QJsonObject UavModelDao::queryMountSchemeToUavMod(const QJsonObject &object)
             mountSchemData["uavType"] = QString::fromStdString(entity.uavType_);
             mountSchemData["uavName"] = QString::fromStdString(entity.uavName_);
             // 处理数值类型（示例）/******************** 尺寸参数 ********************/
-            mountSchemData["uavLength"] = QString::number(entity.uavLength_); // 假设返回float// 使用 QString::number 方法转换 float
-            mountSchemData["uavWidth"] = QString::number(entity.uavWidth_);
-            mountSchemData["uavHeight"] = QString::number(entity.uavHeight_);
+            if(!entity.uavLength_){
+                mountSchemData["uavLength"] = "";
+            }else{
+               mountSchemData["uavLength"] = QString::number(entity.uavLength_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavWidth_){
+                mountSchemData["uavWidth"] = "";
+            }else{
+                mountSchemData["uavWidth"] = QString::number(entity.uavWidth_.get());
+            }
+            if(!entity.uavHeight_){
+                mountSchemData["uavHeight"] = "";
+            }else{
+                mountSchemData["uavHeight"] = QString::number(entity.uavHeight_.get());
+            }
             mountSchemData["load_ammo_type"] = QString::fromStdString(entity.uavLoadAmmoType_);
             // 格式化为字符串（保留5位小数）
             // QString formattedValue = QString::number(entity.uavLength_, 'f', 5);
@@ -544,22 +556,41 @@ QJsonObject UavModelDao::queryMountSchemeToUavMod(const QJsonObject &object)
             /******************** 飞行性能 ********************/
             // mountSchemData["flight_height_min"] = QString::number(entity.uavFlightHeightRangeMin_);
             // mountSchemData["flight_height_max"] = QString::number(entity.uavFlightHeightRangeMax_) ;
-            mountSchemData["flight_speed_min"] = QString::number(entity.uavFlightSpeedRangeMin_);
-            mountSchemData["flight_speed_max"] = QString::number(entity.uavFlightSpeedRangeMax_);
+
+            if(!entity.uavFlightSpeedRangeMin_){
+                mountSchemData["flight_speed_min"] = "";
+            }else{
+                mountSchemData["flight_speed_min"] = QString::number(entity.uavFlightSpeedRangeMin_.get());
+            }
+            if(!entity.uavFlightSpeedRangeMax_){
+                mountSchemData["flight_speed_max"] = "";
+            }else{
+                mountSchemData["flight_speed_max"] = QString::number(entity.uavFlightSpeedRangeMax_.get());
+            }
             // mountSchemData["flight_distance_min"] = QString::number(entity.uavFlightDistanceRangeMin_);
             // mountSchemData["flight_distance_max"] = QString::number(entity.uavFlightDistanceRangeMax_);
             // mountSchemData["flight_time_min"] = QString::number(entity.uavFlightTimeRangeMin_);
             // mountSchemData["flight_time_max"] = QString::number(entity.uavFlightTimeRangeMax_);
 
             /******************** 起降参数 ********************/
-            mountSchemData["takeoff_distance"] = QString::number(entity.uavTakeoffDistance_);
-            mountSchemData["landing_distance"] = QString::number(entity.uavLandDistance_);
-
+            if(!entity.uavTakeoffDistance_){
+                mountSchemData["takeoff_distance"] = "";
+            }else{
+                mountSchemData["takeoff_distance"] = QString::number(entity.uavTakeoffDistance_.get());
+            }
+            if(!entity.uavLandDistance_){
+                mountSchemData["landing_distance"] = "";
+            }else{
+                mountSchemData["landing_distance"] = QString::number(entity.uavLandDistance_.get());
+            }
             /******************** 机动性能 ********************/
             //mountSchemData["turn_radius_min"] = QString::number(entity.uavTurningRadiusRangeMin_);
             //mountSchemData["turn_radius_max"] = QString::number(entity.uavTurningRadiusRangeMax_);
-            mountSchemData["combat_radius"] = QString::number(entity.uavOperatioanalRadius_);
-
+            if(!entity.uavOperatioanalRadius_){
+                mountSchemData["combat_radius"] = "";
+            }else{
+                mountSchemData["combat_radius"] = QString::number(entity.uavOperatioanalRadius_.get());
+            }
             /******************** 载荷配置 ********************/
             // mountSchemData["payload_type"] = QString::fromStdString(entity.uavInvestigationPayloadType_);
             // mountSchemData["bomb_method"] = QString::fromStdString(entity.uavBombingway_);
@@ -588,13 +619,27 @@ QJsonObject UavModelDao::queryMountSchemeToUavMod(const QJsonObject &object)
             /******************** 重量与平衡 ********************/
             //mountSchemData["cg_front_limit"] = QString::number(entity.uavCenterOfGravityFrontLimit_);
             //mountSchemData["cg_rear_limit"] = QString::number(entity.uavCenterOfGravityAfterwardLimit_);
-            mountSchemData["max_takeoff_weight"] = QString::number(entity.uavMaximumTakeoffWeight_);
-            mountSchemData["empty_weight"] = QString::number(entity.uavEmptyWeight_);
-
+            if(!entity.uavMaximumTakeoffWeight_){
+                mountSchemData["max_takeoff_weight"] = "";
+            }else{
+                mountSchemData["max_takeoff_weight"] = QString::number(entity.uavMaximumTakeoffWeight_.get());
+            }
+            if(!entity.uavEmptyWeight_){
+                mountSchemData["empty_weight"] = "";
+            }else{
+                mountSchemData["empty_weight"] = QString::number(entity.uavEmptyWeight_.get());
+            }
             /******************** 燃油与载重 ********************/
-            mountSchemData["max_fuel"] = QString::number(entity.uavMaximumFuelCapacity_);
-            mountSchemData["max_external_weight"] = QString::number(entity.uavMaximumExternalWeight_);
-
+            if(!entity.uavMaximumFuelCapacity_){
+                mountSchemData["max_fuel"] = "";
+            }else{
+                mountSchemData["max_fuel"] = QString::number(entity.uavMaximumFuelCapacity_.get());
+            }
+            if(!entity.uavMaximumExternalWeight_){
+                mountSchemData["max_external_weight"] = "";
+            }else{
+                mountSchemData["max_external_weight"] = QString::number(entity.uavMaximumExternalWeight_.get());
+            }
             /******************** 高度性能 ********************/
             // mountSchemData["ceiling"] = QString::number(entity.uavCeiling_);
             // mountSchemData["ground_start_alt"] = QString::number(entity.uavMaximumGroundStartingHeight_);
@@ -873,83 +918,225 @@ QJsonObject UavModelDao::selectSomeUavModelDate(const QString &jsonStr)
             uavModelData["uavType"] = QString::fromStdString(entity.uavType_);
             uavModelData["uavName"] = QString::fromStdString(entity.uavName_);
             // 处理数值类型（示例）/******************** 尺寸参数 ********************/
-            uavModelData["uavLength"] = QString::number(entity.uavLength_); // 假设返回float// 使用 QString::number 方法转换 float
-            uavModelData["uavWidth"] = QString::number(entity.uavWidth_);
-            uavModelData["uavHeight"] = QString::number(entity.uavHeight_);
+            if(!entity.uavLength_){
+                uavModelData["uavLength"] = "";
+            }else{
+               uavModelData["uavLength"] = QString::number(entity.uavLength_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavWidth_){
+                uavModelData["uavWidth"] = "";
+            }else{
+                uavModelData["uavWidth"] = QString::number(entity.uavWidth_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavHeight_){
+                uavModelData["uavHeight"] = "";
+            }else{
+                uavModelData["uavHeight"] = QString::number(entity.uavHeight_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
             uavModelData["load_ammo_type"] = QString::fromStdString(entity.uavLoadAmmoType_);
             // 格式化为字符串（保留5位小数）
             // QString formattedValue = QString::number(entity.uavLength_, 'f', 5);
             // uavModelData["uavLengthhangingCapacityStr"] = formattedValue;
             /******************** 飞行性能 ********************/
-            uavModelData["flight_height_min"] = QString::number(entity.uavFlightHeightRangeMin_);
-            uavModelData["flight_height_max"] = QString::number(entity.uavFlightHeightRangeMax_) ;
-            uavModelData["flight_speed_min"] = QString::number(entity.uavFlightSpeedRangeMin_);
-            uavModelData["flight_speed_max"] = QString::number(entity.uavFlightSpeedRangeMax_);
-            uavModelData["flight_distance_min"] = QString::number(entity.uavFlightDistanceRangeMin_);
-            uavModelData["flight_distance_max"] = QString::number(entity.uavFlightDistanceRangeMax_);
-            uavModelData["flight_time_min"] = QString::number(entity.uavFlightTimeRangeMin_);
-            uavModelData["flight_time_max"] = QString::number(entity.uavFlightTimeRangeMax_);
+            if(!entity.uavFlightHeightRangeMin_){
+                uavModelData["flight_height_min"] = "";
+            }else{
+                uavModelData["flight_height_min"] = QString::number(entity.uavFlightHeightRangeMin_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavFlightHeightRangeMax_){
+                uavModelData["flight_height_max"] = "";
+            }else{
+                uavModelData["flight_height_max"] = QString::number(entity.uavFlightHeightRangeMax_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavFlightSpeedRangeMin_){
+                uavModelData["flight_speed_min"] = "";
+            }else{
+                uavModelData["flight_speed_min"] = QString::number(entity.uavFlightSpeedRangeMin_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavFlightSpeedRangeMax_){
+                uavModelData["flight_speed_max"] = "";
+            }else{
+                uavModelData["flight_speed_max"] = QString::number(entity.uavFlightSpeedRangeMax_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
 
             /******************** 起降参数 ********************/
-            uavModelData["takeoff_distance"] = QString::number(entity.uavTakeoffDistance_);
-            uavModelData["landing_distance"] = QString::number(entity.uavLandDistance_);
-
+            if(!entity.uavFlightDistanceRangeMin_){
+                uavModelData["flight_distance_min"] = "";
+            }else{
+                uavModelData["flight_distance_min"] = QString::number(entity.uavFlightDistanceRangeMin_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavFlightDistanceRangeMax_){
+                uavModelData["flight_distance_max"] = "";
+            }else{
+                uavModelData["flight_distance_max"] = QString::number(entity.uavFlightDistanceRangeMax_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavFlightTimeRangeMin_){
+                uavModelData["flight_time_min"] = "";
+            }else{
+                uavModelData["flight_time_min"] = QString::number(entity.uavFlightTimeRangeMin_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavFlightTimeRangeMax_){
+                uavModelData["flight_time_max"] = "";
+            }else{
+                uavModelData["flight_time_max"] = QString::number(entity.uavFlightTimeRangeMax_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavTakeoffDistance_){
+                uavModelData["takeoff_distance"] = "";
+            }else{
+                uavModelData["takeoff_distance"] = QString::number(entity.uavTakeoffDistance_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavLandDistance_){
+                uavModelData["landing_distance"] = "";
+            }else{
+                uavModelData["landing_distance"] = QString::number(entity.uavLandDistance_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
             /******************** 机动性能 ********************/
-            uavModelData["turn_radius_min"] = QString::number(entity.uavTurningRadiusRangeMin_);
-            uavModelData["turn_radius_max"] = QString::number(entity.uavTurningRadiusRangeMax_);
-            uavModelData["combat_radius"] = QString::number(entity.uavOperatioanalRadius_);
-
+            if(!entity.uavTurningRadiusRangeMin_){
+                uavModelData["turn_radius_min"] = "";
+            }else{
+                uavModelData["turn_radius_min"] = QString::number(entity.uavTurningRadiusRangeMin_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavTurningRadiusRangeMax_){
+                uavModelData["turn_radius_max"] = "";
+            }else{
+                uavModelData["turn_radius_max"] = QString::number(entity.uavTurningRadiusRangeMax_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavOperatioanalRadius_){
+                uavModelData["combat_radius"] = "";
+            }else{
+                uavModelData["combat_radius"] = QString::number(entity.uavOperatioanalRadius_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavLoadReconnaissanceRangeMin_){
+                uavModelData["recon_range_min"] = "";
+            }else{
+                uavModelData["recon_range_min"] = QString::number(entity.uavLoadReconnaissanceRangeMin_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavLoadReconnaissanceRangeMax_){
+                uavModelData["recon_range_max"] = "";
+            }else{
+                uavModelData["recon_range_max"] = QString::number(entity.uavLoadReconnaissanceRangeMax_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavLoadReconnaissanceAccuracy_){
+                uavModelData["recon_accuracy"] = "";
+            }else{
+                uavModelData["recon_accuracy"] = QString::number(entity.uavLoadReconnaissanceAccuracy_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
             /******************** 载荷配置 ********************/
             uavModelData["payload_type"] = QString::fromStdString(entity.uavInvestigationPayloadType_);
             uavModelData["bomb_method"] = QString::fromStdString(entity.uavBombingway_);
             uavModelData["operation_method"] = QString::fromStdString(entity.uavOperationWay_);
-            uavModelData["recon_range_min"] = QString::number(entity.uavLoadReconnaissanceRangeMin_);
-            uavModelData["recon_range_max"] = QString::number(entity.uavLoadReconnaissanceRangeMax_);
-            uavModelData["recon_accuracy"] = QString::number(entity.uavLoadReconnaissanceAccuracy_);
-
             /******************** 回收与突防 ********************/
             uavModelData["recovery_mode"] = QString::fromStdString(entity.uavRecoveryway_);
-            uavModelData["low_alt_speed"] = QString::number(entity.uavLowAltitudeBreakthroughSpeed_);
+
 
             /******************** 挂载能力 ********************/
             //uavModelData["hardpoint_loc"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
             // entity.uavHangingpoints_ = uavModelData["hardpoint_num"].toInt();
             // entity.uavPayloadcapacity_ = uavModelData["payload_capacity"].toInt();
-            uavModelData["attack_accuracy"] = QString::number(entity.uavAttackaccuracy_);
+
             uavModelData["hangingCapacity"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
 
-
-
-
+            if(!entity.uavLowAltitudeBreakthroughSpeed_){
+                uavModelData["low_alt_speed"] = "";
+            }else{
+                uavModelData["low_alt_speed"] = QString::number(entity.uavLowAltitudeBreakthroughSpeed_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavAttackaccuracy_){
+                uavModelData["attack_accuracy"] = "";
+            }else{
+                uavModelData["attack_accuracy"] = QString::number(entity.uavAttackaccuracy_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
             /******************** 雷达特征 ********************/
-            uavModelData["rcs"] = QString::number(entity.uavRadarCrossSection_);
-
+            if(!entity.uavRadarCrossSection_){
+                uavModelData["rcs"] = "";
+            }else{
+                uavModelData["rcs"] = QString::number(entity.uavRadarCrossSection_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
             /******************** 重量与平衡 ********************/
-            uavModelData["cg_front_limit"] = QString::number(entity.uavCenterOfGravityFrontLimit_);
-            uavModelData["cg_rear_limit"] = QString::number(entity.uavCenterOfGravityAfterwardLimit_);
-            uavModelData["max_takeoff_weight"] = QString::number(entity.uavMaximumTakeoffWeight_);
-            uavModelData["empty_weight"] = QString::number(entity.uavEmptyWeight_);
-
+            if(!entity.uavCenterOfGravityFrontLimit_){
+                uavModelData["cg_front_limit"] = "";
+            }else{
+                uavModelData["cg_front_limit"] = QString::number(entity.uavCenterOfGravityFrontLimit_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavCenterOfGravityAfterwardLimit_){
+                uavModelData["cg_rear_limit"] = "";
+            }else{
+                uavModelData["cg_rear_limit"] = QString::number(entity.uavCenterOfGravityAfterwardLimit_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
             /******************** 燃油与载重 ********************/
-            uavModelData["max_fuel"] = QString::number(entity.uavMaximumFuelCapacity_);
-            uavModelData["max_external_weight"] = QString::number(entity.uavMaximumExternalWeight_);
-
+            if(!entity.uavMaximumTakeoffWeight_){
+                uavModelData["max_takeoff_weight"] = "";
+            }else{
+                uavModelData["max_takeoff_weight"] = QString::number(entity.uavMaximumTakeoffWeight_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavEmptyWeight_){
+                uavModelData["empty_weight"] = "";
+            }else{
+                uavModelData["empty_weight"] = QString::number(entity.uavEmptyWeight_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavMaximumFuelCapacity_){
+                uavModelData["max_fuel"] = "";
+            }else{
+                uavModelData["max_fuel"] = QString::number(entity.uavMaximumFuelCapacity_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavMaximumExternalWeight_){
+                uavModelData["max_external_weight"] = "";
+            }else{
+                uavModelData["max_external_weight"] = QString::number(entity.uavMaximumExternalWeight_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
             /******************** 高度性能 ********************/
-            uavModelData["ceiling"] = QString::number(entity.uavCeiling_);
-            uavModelData["ground_start_alt"] = QString::number(entity.uavMaximumGroundStartingHeight_);
-            uavModelData["air_start_alt"] = QString::number(entity.uavMaximumAirStartingAltitude_);
-
+            if(!entity.uavCeiling_){
+                uavModelData["ceiling"] = "";
+            }else{
+                uavModelData["ceiling"] = QString::number(entity.uavCeiling_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavMaximumGroundStartingHeight_){
+                uavModelData["ground_start_alt"] = "";
+            }else{
+                uavModelData["ground_start_alt"] = QString::number(entity.uavMaximumGroundStartingHeight_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavMaximumAirStartingAltitude_){
+                uavModelData["air_start_alt"] = "";
+            }else{
+                uavModelData["air_start_alt"] = QString::number(entity.uavMaximumAirStartingAltitude_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
             /******************** 续航性能 ********************/
-            uavModelData["endurance"] = QString::number(entity.uavMaximumEndurance_);
-            uavModelData["max_vacuum_speed"] = QString::number(entity.uavMaximumFlightVacuumSpeed_);
-            uavModelData["min_meter_speed"] = QString::number(entity.uavMinimumFlightMeterSpeed_);
-
+            if(!entity.uavMaximumEndurance_){
+                uavModelData["endurance"] = "";
+            }else{
+                uavModelData["endurance"] = QString::number(entity.uavMaximumEndurance_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavMaximumFlightVacuumSpeed_){
+                uavModelData["max_vacuum_speed"] = "";
+            }else{
+                uavModelData["max_vacuum_speed"] = QString::number(entity.uavMaximumFlightVacuumSpeed_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.uavMinimumFlightMeterSpeed_){
+                uavModelData["min_meter_speed"] = "";
+            }else{
+                uavModelData["min_meter_speed"] = QString::number(entity.uavMinimumFlightMeterSpeed_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
             /******************** 特殊场景性能 ********************/
-            uavModelData["sea_takeoff_roll"] = QString::number(entity.sealLevelTakeoffAndRollDistance_);
-            uavModelData["sea_landing_roll"] = QString::number(entity.sealLevelLandingAndRollDistance_);
-            uavModelData["recon_cruise_alt"] = QString::number(entity.cruiseAltitudeReconnaissanceConfiguration_);
-            uavModelData["full_external_cruise_alt"] = QString::number(entity.cruiseAltitudeFullExternalConfiguration_);
-
+            if(!entity.sealLevelTakeoffAndRollDistance_){
+                uavModelData["sea_takeoff_roll"] = "";
+            }else{
+                uavModelData["sea_takeoff_roll"] = QString::number(entity.sealLevelTakeoffAndRollDistance_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.sealLevelLandingAndRollDistance_){
+                uavModelData["sea_landing_roll"] = "";
+            }else{
+                uavModelData["sea_landing_roll"] = QString::number(entity.sealLevelLandingAndRollDistance_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.cruiseAltitudeReconnaissanceConfiguration_){
+                uavModelData["recon_cruise_alt"] = "";
+            }else{
+                uavModelData["recon_cruise_alt"] = QString::number(entity.cruiseAltitudeReconnaissanceConfiguration_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.cruiseAltitudeFullExternalConfiguration_){
+                uavModelData["full_external_cruise_alt"] = "";
+            }else{
+                uavModelData["full_external_cruise_alt"] = QString::number(entity.cruiseAltitudeFullExternalConfiguration_.get());                 // 假设返回float// 使用 QString::number 方法转换 float
+            }
             /******************** 系统记录 ********************/
             //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
             //uavModelData["image_name"] = QString::fromStdString(entity.uavImgName_);
@@ -1419,30 +1606,90 @@ bool UavModelDao::insertModelDate(const QJsonObject& objectData)
                 entity.uavId_ = object["uav_id"].toString().toStdString();
 
                 /******************** 尺寸参数 ********************/
-                entity.uavLength_ = object["length"].toDouble();
-                entity.uavWidth_ = object["width"].toDouble();
-                entity.uavHeight_ = object["height"].toDouble();
+                if(object["length"].isNull()){
 
+                }else{
+                    entity.uavLength_ = object["length"].toDouble();
+                }
+                if(object["width"].isNull()){
 
+                }else{
+                    entity.uavWidth_ = object["width"].toDouble();
+                }
+                if(object["height"].isNull()){
+
+                }else{
+                    entity.uavHeight_ = object["height"].toDouble();
+                }
                 /******************** 飞行性能 ********************/
-                entity.uavFlightHeightRangeMin_ = object["flight_height_min"].toDouble();
-                entity.uavFlightHeightRangeMax_ = object["flight_height_max"].toDouble();
-                entity.uavFlightSpeedRangeMin_ = object["flight_speed_min"].toDouble();
-                entity.uavFlightSpeedRangeMax_ = object["flight_speed_max"].toDouble();
-                entity.uavFlightDistanceRangeMin_ = object["flight_distance_min"].toDouble();
-                entity.uavFlightDistanceRangeMax_ = object["flight_distance_max"].toDouble();
-                entity.uavFlightTimeRangeMin_ = object["flight_time_min"].toDouble();
-                entity.uavFlightTimeRangeMax_ = object["flight_time_max"].toDouble();
+                if(object["flight_height_min"].isNull()){
 
+                }else{
+                    entity.uavFlightHeightRangeMin_ = object["flight_height_min"].toDouble();
+                }
+                if(object["flight_height_max"].isNull()){
+
+                }else{
+                    entity.uavFlightHeightRangeMax_ = object["flight_height_max"].toDouble();
+                }
+                if(object["flight_speed_min"].isNull()){
+
+                }else{
+                    entity.uavFlightSpeedRangeMin_ = object["flight_speed_min"].toDouble();
+                }
+                if(object["flight_speed_max"].isNull()){
+
+                }else{
+                    entity.uavFlightSpeedRangeMax_ = object["flight_speed_max"].toDouble();
+                }
+                if(object["flight_distance_min"].isNull()){
+
+                }else{
+                    entity.uavFlightDistanceRangeMin_ = object["flight_distance_min"].toDouble();
+                }
+                if(object["flight_distance_max"].isNull()){
+
+                }else{
+                    entity.uavFlightDistanceRangeMax_ = object["flight_distance_max"].toDouble();
+                }
+                if(object["flight_time_min"].isNull()){
+
+                }else{
+                    entity.uavFlightTimeRangeMin_ = object["flight_time_min"].toDouble();
+
+                }
+                if(object["flight_time_max"].isNull()){
+
+                }else{
+                    entity.uavFlightTimeRangeMax_ = object["flight_time_max"].toDouble();
+                }
                 /******************** 起降参数 ********************/
-                entity.uavTakeoffDistance_ = object["takeoff_distance"].toDouble();
-                entity.uavLandDistance_ = object["landing_distance"].toDouble();
+                if(object["takeoff_distance"].isNull()){
 
+                }else{
+                    entity.uavTakeoffDistance_ = object["takeoff_distance"].toDouble();
+                }
+                if(object["landing_distance"].isNull()){
+
+                }else{
+                    entity.uavLandDistance_ = object["landing_distance"].toDouble();
+                }
                 /******************** 机动性能 ********************/
-                entity.uavTurningRadiusRangeMin_ = object["turn_radius_min"].toDouble();
-                entity.uavTurningRadiusRangeMax_ = object["turn_radius_max"].toDouble();
-                entity.uavOperatioanalRadius_ = object["combat_radius"].toDouble();
+                if(object["turn_radius_min"].isNull()){
 
+                }else{
+                    entity.uavTurningRadiusRangeMin_ = object["turn_radius_min"].toDouble();
+                }
+                if(object["turn_radius_max"].isNull()){
+
+                }else{
+                    entity.uavTurningRadiusRangeMax_ = object["turn_radius_max"].toDouble();
+                }
+                if(object["combat_radius"].isNull()){
+
+                }else{
+                    entity.uavOperatioanalRadius_ = object["combat_radius"].toDouble();
+                }
                 /******************** 载荷配置 ********************/
                 entity.uavInvestigationPayloadType_ = object["payload_type"].toString().toStdString();
 
@@ -1451,49 +1698,127 @@ bool UavModelDao::insertModelDate(const QJsonObject& objectData)
                 entity.uavRecoveryway_ = object["recovery_mode"].toString().toStdString();
                 entity.uavHangingLoctionCapacity_ = object["hanging_capacity"].toString().toStdString();
                 entity.uavLoadAmmoType_ = object["load_ammo_type"].toString().toStdString();
+                if(object["recon_range_min"].isNull()){
 
-                entity.uavLoadReconnaissanceRangeMin_ = object["recon_range_min"].toDouble();
-                entity.uavLoadReconnaissanceRangeMax_ = object["recon_range_max"].toDouble();
-                entity.uavLoadReconnaissanceAccuracy_ = object["recon_accuracy"].toDouble();
+                }else{
+                    entity.uavLoadReconnaissanceRangeMin_ = object["recon_range_min"].toDouble();
+                }
+                if(object["recon_range_max"].isNull()){
 
+                }else{
+                    entity.uavLoadReconnaissanceRangeMax_ = object["recon_range_max"].toDouble();
+                }
+                if(object["recon_accuracy"].isNull()){
+
+                }else{
+                    entity.uavLoadReconnaissanceAccuracy_ = object["recon_accuracy"].toDouble();
+                }
                 /******************** 回收与突防 ********************/
+                if(object["low_alt_speed"].isNull()){
 
-                entity.uavLowAltitudeBreakthroughSpeed_ = object["low_alt_speed"].toDouble();
-
+                }else{
+                    entity.uavLowAltitudeBreakthroughSpeed_ = object["low_alt_speed"].toDouble();
+                }
                 /******************** 挂载能力 ********************/
+                if(object["attack_accuracy"].isNull()){
 
-                // entity.uavPayloadcapacity_ = object["payload_capacity"].toInt();
-                entity.uavAttackaccuracy_ = object["attack_accuracy"].toDouble();
-
+                }else{
+                    // entity.uavPayloadcapacity_ = object["payload_capacity"].toInt();
+                    entity.uavAttackaccuracy_ = object["attack_accuracy"].toDouble();
+                }
                 /******************** 雷达特征 ********************/
-                entity.uavRadarCrossSection_ = object["rcs"].toDouble();
+                if(object["rcs"].isNull()){
 
+                }else{
+                    entity.uavRadarCrossSection_ = object["rcs"].toDouble();
+                }
                 /******************** 重量与平衡 ********************/
-                entity.uavCenterOfGravityFrontLimit_ = object["cg_front_limit"].toDouble();
-                entity.uavCenterOfGravityAfterwardLimit_ = object["cg_rear_limit"].toDouble();
-                entity.uavMaximumTakeoffWeight_ = object["max_takeoff_weight"].toDouble();
-                entity.uavEmptyWeight_ = object["empty_weight"].toDouble();
+                if(object["cg_front_limit"].isNull()){
 
+                }else{
+                    entity.uavCenterOfGravityFrontLimit_ = object["cg_front_limit"].toDouble();
+                }
+                if(object["cg_rear_limit"].isNull()){
+
+                }else{
+                    entity.uavCenterOfGravityAfterwardLimit_ = object["cg_rear_limit"].toDouble();
+                }
+                if(object["max_takeoff_weight"].isNull()){
+
+                }else{
+                    entity.uavMaximumTakeoffWeight_ = object["max_takeoff_weight"].toDouble();
+                }
+                if(object["empty_weight"].isNull()){
+
+                }else{
+                    entity.uavEmptyWeight_ = object["empty_weight"].toDouble();
+                }
                 /******************** 燃油与载重 ********************/
-                entity.uavMaximumFuelCapacity_ = object["max_fuel"].toDouble();
-                entity.uavMaximumExternalWeight_ = object["max_external_weight"].toDouble();
+                if(object["max_fuel"].isNull()){
 
-                /******************** 高度性能 ********************/
-                entity.uavCeiling_ = object["ceiling"].toDouble();
-                entity.uavMaximumGroundStartingHeight_ = object["ground_start_alt"].toDouble();
-                entity.uavMaximumAirStartingAltitude_ = object["air_start_alt"].toDouble();
+                }else{
+                    entity.uavMaximumFuelCapacity_ = object["max_fuel"].toDouble();
+                }
+                if(object["max_external_weight"].isNull()){
+
+                }else{
+                    entity.uavMaximumExternalWeight_ = object["max_external_weight"].toDouble();
+                }
+                /******************** 高度性能 ********************/                
+
+                if(object["ceiling"].isNull()){
+
+                }else{
+                    entity.uavCeiling_ = object["ceiling"].toDouble();
+                }
+                if(object["ground_start_alt"].isNull()){
+
+                }else{
+                    entity.uavMaximumGroundStartingHeight_ = object["ground_start_alt"].toDouble();
+                }
+                if(object["air_start_alt"].isNull()){
+
+                }else{
+                    entity.uavMaximumAirStartingAltitude_ = object["air_start_alt"].toDouble();
+                }
 
                 /******************** 续航性能 ********************/
-                entity.uavMaximumEndurance_ = object["endurance"].toDouble();
-                entity.uavMaximumFlightVacuumSpeed_ = object["max_vacuum_speed"].toDouble();
-                entity.uavMinimumFlightMeterSpeed_ = object["min_meter_speed"].toDouble();
+                if(object["endurance"].isNull()){
 
+                }else{
+                    entity.uavMaximumEndurance_ = object["endurance"].toDouble();
+                }
+                if(object["max_vacuum_speed"].isNull()){
+
+                }else{
+                    entity.uavMaximumFlightVacuumSpeed_ = object["max_vacuum_speed"].toDouble();
+                }
+                if(object["min_meter_speed"].isNull()){
+
+                }else{
+                    entity.uavMinimumFlightMeterSpeed_ = object["min_meter_speed"].toDouble();
+                }
                 /******************** 特殊场景性能 ********************/
-                entity.sealLevelTakeoffAndRollDistance_ = object["sea_takeoff_roll"].toDouble();
-                entity.sealLevelLandingAndRollDistance_ = object["sea_landing_roll"].toDouble();
-                entity.cruiseAltitudeReconnaissanceConfiguration_ = object["recon_cruise_alt"].toDouble();
-                entity.cruiseAltitudeFullExternalConfiguration_ = object["full_external_cruise_alt"].toDouble();
+                if(object["sea_takeoff_roll"].isNull()){
 
+                }else{
+                    entity.sealLevelTakeoffAndRollDistance_ = object["sea_takeoff_roll"].toDouble();
+                }
+                if(object["sea_landing_roll"].isNull()){
+
+                }else{
+                    entity.sealLevelLandingAndRollDistance_ = object["sea_landing_roll"].toDouble();
+                }
+                if(object["recon_cruise_alt"].isNull()){
+
+                }else{
+                    entity.cruiseAltitudeReconnaissanceConfiguration_ = object["recon_cruise_alt"].toDouble();
+                }
+                if(object["full_external_cruise_alt"].isNull()){
+
+                }else{
+                    entity.cruiseAltitudeFullExternalConfiguration_ = object["full_external_cruise_alt"].toDouble();
+                }
                 /******************** 系统记录 ********************/
                 //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
                 // 使用 QUrl 解析 URL 并提取本地路径
