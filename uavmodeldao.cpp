@@ -4,6 +4,7 @@
 #include "uavmodelrecoverymodedao.h"
 #include "uavmodeloperationwaydao.h"
 #include "uavmountlocationdao.h"
+#include "uavmodeltypedao.h"
 #include "odb/pgsql/database.hxx"
 #include <vector>
 #include <stdexcept>
@@ -34,6 +35,7 @@
 #include "UavModelMountLocationEntity-odb.hxx"
 #include "UavModelRecoveryModeEntity-odb.hxx"
 #include "UavModelOperationWayEntity-odb.hxx"
+#include "UavModelTypeEntity-odb.hxx"
 
 namespace nl = nlohmann;
 
@@ -158,9 +160,17 @@ QJsonArray UavModelDao::selectUavModelAllData()
             // 手动转换实体到 JSON（需要根据实际字段补充）
             obj["index"] = sum;
             obj["recordId"] = QString::number(entity.id_);
-            obj["uavId"] = QString::fromStdString(entity.uavId_);
             obj["uavName"] = QString::fromStdString(entity.uavName_);
             obj["uavType"] = QString::fromStdString(entity.uavType_);
+            obj["uavId"] = [&db,&entity](){
+                auto loaded{load{db}.from<UavModelTypeEntity>(QString::fromStdString(entity.uavId_))};
+                QJsonArray arr;
+                for(auto load: loaded){
+                    //qDebug() << "loaded: " << load.ammoName_.c_str();
+                    arr.append(QString::fromStdString(load.uavModelTypeName_));
+                }
+                return QJsonValue{arr};
+            }();
             obj["origHangingCapacity"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
             obj["hangingCapacity"] = [&db,&entity](){
                     auto loaded{load{db}.from<UavModelMountLocationEntity>(QString::fromStdString(entity.uavHangingLoctionCapacity_))};
@@ -351,7 +361,15 @@ QJsonArray UavModelDao::queryUavModelData(const QString &jsonStr)
             // 手动转换实体到 JSON（需要根据实际字段补充）
             obj["index"] = sum;
             obj["recordId"] = QString::number(entity.id_);
-            obj["uavId"] = QString::fromStdString(entity.uavId_);
+            obj["uavId"] = [&db,&entity](){
+                auto loaded{load{db}.from<UavModelTypeEntity>(QString::fromStdString(entity.uavId_))};
+                QJsonArray arr;
+                for(auto load: loaded){
+                    //qDebug() << "loaded: " << load.ammoName_.c_str();
+                    arr.append(QString::fromStdString(load.uavModelTypeName_));
+                }
+                return QJsonValue{arr};
+            }();
             obj["uavName"] = QString::fromStdString(entity.uavName_);
             obj["uavType"] = QString::fromStdString(entity.uavType_);
             obj["origHangingCapacity"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);

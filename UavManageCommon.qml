@@ -752,11 +752,13 @@ Rectangle {
                                                            anchors.fill: parent
                                                            hoverEnabled: true
                                                            onEntered: {
+                                                               console.log("typeof"+display)
                                                                var pos = mapToGlobal(0, 0)
                                                                tooltip.x = pos.x //+ width + 10
                                                                tooltip.y = pos.y -10
                                                                tooltipText.text = display
                                                                tooltip.open()
+
                                                            }
                                                            onExited: tooltip.close()
                                                        }
@@ -1168,6 +1170,7 @@ Rectangle {
                    "uavLoadAmmoType",
                    "payloadType",
                    "recoveryMode",
+                    "uavId",
                    "bombMethod"
                ];
 

@@ -310,8 +310,8 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                         }
                     }
                     Component.onCompleted: {
-                        listmodel_Box.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"侦察无人机"})
-                        listmodel_Box.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"攻击无人机"})
+                        listmodel_Box.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"侦察型无人机"})
+                        listmodel_Box.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"攻击型无人机"})
                         listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
                     }
                 }
