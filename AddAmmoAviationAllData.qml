@@ -273,11 +273,11 @@ Item {
                         saveAmmoData()
                     }else if(processInfo.loadViewType === "update"){
                         updateAmmoData()
+                        backAmmoRecord()
+                        newAmmoData.visible = false
                     }else{
                         console.log("Unknown processInfo.loadViewType!")
                     }
-                    backAmmoRecord()
-                    newAmmoData.visible = false
                 }
             }
         //}
@@ -557,6 +557,20 @@ Item {
             console.log("Unknown processInfo.loadViewType!")
         }
     }
+    function isValidContent(){
+
+        // 检查 ammoData.ammoName 是否为空
+        if (newAmmoData.ammoData.ammoName && newAmmoData.ammoData.ammoName.trim().length !== 0) {
+            return true;
+        } else {
+            warningItem.text = "^_^航弹名称不能为空!^_^";
+            warningPopup.open();
+            // 2秒后自动关闭
+            autoCloseTimer.start();
+            return false;
+        }
+    }
+
     function loadAmmoData(){
 
         var ammoLoadData = new Object
@@ -852,20 +866,26 @@ Item {
          newAmmoData.ammoData.ammoType = newAmmoData.viewType
          newAmmoData.ammoData.ammoToUavModel = newAmmoData.uavArray.join(",")
          console.log("ammoSelecttype"+JSON.stringify(newAmmoData.ammoData))//console.log("ammoData.push"+JSON.stringify(ammoData))
-          let result = ammoDaoModel.insertAmmoData(ammoData)
-            if(result === true){
-                warningItem.text = "^_^航弹新增数据成功!^_^"
-                warningPopup.open()
-                // 2秒后自动关闭
-                autoCloseTimer.start()
-            }else if(result === false){
-                warningItem.text = "^_^航弹新增数据失败!^_^"
-                warningPopup.open()
-                // 2秒后自动关闭
-                autoCloseTimer.start()
-             }else{
-                console.log("unknown insertNewAmmoData!")
-            }
+         if(isValidContent() === true){
+             let result = ammoDaoModel.insertAmmoData(ammoData)
+                 if(result === true){
+                     warningItem.text = "^_^航弹新增数据成功!^_^"
+                     warningPopup.open()
+                     // 2秒后自动关闭
+                     autoCloseTimer.start()
+                     backAmmoRecord()
+                     newAmmoData.visible = false
+                 }else if(result === false){
+                     warningItem.text = "^_^航弹新增数据失败!^_^"
+                     warningPopup.open()
+                     // 2秒后自动关闭
+                     autoCloseTimer.start()
+                  }else{
+                     console.log("unknown insertNewAmmoData!")
+                 }
+         }else{
+           console.log("Save Problem!")
+         }
     }
     function updateAmmoData(){
         newAmmoData.ammoData.ammoType = newAmmoData.viewType

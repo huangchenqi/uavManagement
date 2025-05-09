@@ -7,7 +7,10 @@
 //#include <odb/qt/date-time/pgsql/qdate-time-traits.hxx>
 #include <odb/core.hxx> // ODB核心头文件
 #include <QtCore/QDateTime>
+#ifndef ODB_COMPILER
 #include "datetime-traits.hxx"
+#endif
+#include "odb/nullable.hxx"
 #pragma once
 #pragma db object schema("uav_type_man") table("interference_pod") // 指定表名
 
@@ -38,24 +41,24 @@ class InterferencePodEntity
     std::string description_;
 
     /******************** 基础物理特性 ********************/
-    #pragma db column("main_length") type("real") // 主舱长度(m)
-    float mainLength_;
-     #pragma db column("interference_length") type("real") // 吊舱长度(m)
-     float interferenceLength_;
+    #pragma db column("main_length") type("real") null// 主舱长度(m)
+    odb::nullable<float> mainLength_;
+     #pragma db column("interference_length") type("real") null // 吊舱长度(m)
+     odb::nullable<float> interferenceLength_;
     #pragma db column("mass") type("real") // 单吊舱质量(kg)
-    float mass_;
+    odb::nullable<float> mass_;
 
     #pragma db column("front_cover_length") type("real") // 前罩长(m)
-    float frontCoverLength_;
+    odb::nullable<float> frontCoverLength_;
 
     #pragma db column("rear_cover_length") type("real") // 后罩长(m)
-    float rearCoverLength_;
+    odb::nullable<float> rearCoverLength_;
 
     #pragma db column("main_cabin_section") type("real") // 主舱截面(m)
-    float mainCabinSection_;
+    odb::nullable<float> mainCabinSection_;
 
     #pragma db column("maximum_weight_pod_fully_loaded") type("real") // 单吊舱满载最大重量(kg)
-    float maximumWeightPodFullyLoaded_;
+    odb::nullable<float> maximumWeightPodFullyLoaded_;
 
     #pragma db column("interference_band") type("varchar(100)") // 干扰波段  由于是多选设置成字符串
     std::string interferenceBand_;
@@ -71,7 +74,7 @@ class InterferencePodEntity
     std::string deliverySpeed_;
 
     #pragma db column("loading_capacity") type("real") // 装载容量(kg)
-    float loadingCapacity_;
+    odb::nullable<float> loadingCapacity_;
 
     #pragma db column("interference_intensity") type("varchar(100)") // 干扰强度
     std::string interferenceIntensity_;

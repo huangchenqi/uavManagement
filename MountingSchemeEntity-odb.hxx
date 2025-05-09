@@ -1067,7 +1067,7 @@ namespace odb
 
       // recordCreationTime_
       //
-      unsigned long long recordCreationTime_value;
+      long long recordCreationTime_value;
       bool recordCreationTime_null;
 
       // status_

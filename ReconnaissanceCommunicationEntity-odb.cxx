@@ -908,12 +908,12 @@ namespace odb
     // frequencyMinimum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.frequencyMinimum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.frequencyMinimum_value, is_null, v);
       i.frequencyMinimum_null = is_null;
@@ -922,12 +922,12 @@ namespace odb
     // frequencyMaximum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.frequencyMaximum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.frequencyMaximum_value, is_null, v);
       i.frequencyMaximum_null = is_null;
@@ -936,12 +936,12 @@ namespace odb
     // firstReconnaissanceRange_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.firstReconnaissanceRange_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.firstReconnaissanceRange_value, is_null, v);
       i.firstReconnaissanceRange_null = is_null;
@@ -950,12 +950,12 @@ namespace odb
     // firstReconnaissanceFrequencyMinimum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.firstReconnaissanceFrequencyMinimum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.firstReconnaissanceFrequencyMinimum_value, is_null, v);
       i.firstReconnaissanceFrequencyMinimum_null = is_null;
@@ -964,12 +964,12 @@ namespace odb
     // firstReconnaissanceFrequencyMaximum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.firstReconnaissanceFrequencyMaximum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.firstReconnaissanceFrequencyMaximum_value, is_null, v);
       i.firstReconnaissanceFrequencyMaximum_null = is_null;
@@ -978,12 +978,12 @@ namespace odb
     // firstReconnaissanceRadiatedPower_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.firstReconnaissanceRadiatedPower_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.firstReconnaissanceRadiatedPower_value, is_null, v);
       i.firstReconnaissanceRadiatedPower_null = is_null;
@@ -992,12 +992,12 @@ namespace odb
     // secondReconnaissanceRange_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.secondReconnaissanceRange_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.secondReconnaissanceRange_value, is_null, v);
       i.secondReconnaissanceRange_null = is_null;
@@ -1006,12 +1006,12 @@ namespace odb
     // secondReconnaissanceFrequencyMinimum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.secondReconnaissanceFrequencyMinimum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.secondReconnaissanceFrequencyMinimum_value, is_null, v);
       i.secondReconnaissanceFrequencyMinimum_null = is_null;
@@ -1020,12 +1020,12 @@ namespace odb
     // secondReconnaissanceFrequencyMaximum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.secondReconnaissanceFrequencyMaximum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.secondReconnaissanceFrequencyMaximum_value, is_null, v);
       i.secondReconnaissanceFrequencyMaximum_null = is_null;
@@ -1034,12 +1034,12 @@ namespace odb
     // secondReconnaissanceRadiatedPower_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.secondReconnaissanceRadiatedPower_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.secondReconnaissanceRadiatedPower_value, is_null, v);
       i.secondReconnaissanceRadiatedPower_null = is_null;
@@ -1048,12 +1048,12 @@ namespace odb
     // thirdReconnaissanceRange_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.thirdReconnaissanceRange_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.thirdReconnaissanceRange_value, is_null, v);
       i.thirdReconnaissanceRange_null = is_null;
@@ -1062,12 +1062,12 @@ namespace odb
     // thirdReconnaissanceFrequencyMinimum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.thirdReconnaissanceFrequencyMinimum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.thirdReconnaissanceFrequencyMinimum_value, is_null, v);
       i.thirdReconnaissanceFrequencyMinimum_null = is_null;
@@ -1076,12 +1076,12 @@ namespace odb
     // thirdReconnaissanceFrequencyMaximum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.thirdReconnaissanceFrequencyMaximum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.thirdReconnaissanceFrequencyMaximum_value, is_null, v);
       i.thirdReconnaissanceFrequencyMaximum_null = is_null;
@@ -1090,12 +1090,12 @@ namespace odb
     // thirdReconnaissanceRadiatedPower_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.thirdReconnaissanceRadiatedPower_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.thirdReconnaissanceRadiatedPower_value, is_null, v);
       i.thirdReconnaissanceRadiatedPower_null = is_null;
@@ -1104,12 +1104,12 @@ namespace odb
     // fourthReconnaissanceRange_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fourthReconnaissanceRange_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fourthReconnaissanceRange_value, is_null, v);
       i.fourthReconnaissanceRange_null = is_null;
@@ -1118,12 +1118,12 @@ namespace odb
     // fourthReconnaissanceFrequencyMinimum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fourthReconnaissanceFrequencyMinimum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fourthReconnaissanceFrequencyMinimum_value, is_null, v);
       i.fourthReconnaissanceFrequencyMinimum_null = is_null;
@@ -1132,12 +1132,12 @@ namespace odb
     // fourthReconnaissanceFrequencyMaximum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fourthReconnaissanceFrequencyMaximum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fourthReconnaissanceFrequencyMaximum_value, is_null, v);
       i.fourthReconnaissanceFrequencyMaximum_null = is_null;
@@ -1146,12 +1146,12 @@ namespace odb
     // fourthReconnaissanceRadiatedPower_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fourthReconnaissanceRadiatedPower_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fourthReconnaissanceRadiatedPower_value, is_null, v);
       i.fourthReconnaissanceRadiatedPower_null = is_null;
@@ -1160,12 +1160,12 @@ namespace odb
     // firstOrientationAccuracy_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.firstOrientationAccuracy_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.firstOrientationAccuracy_value, is_null, v);
       i.firstOrientationAccuracy_null = is_null;
@@ -1174,12 +1174,12 @@ namespace odb
     // firstOrientationFrequencyMinimum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.firstOrientationFrequencyMinimum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.firstOrientationFrequencyMinimum_value, is_null, v);
       i.firstOrientationFrequencyMinimum_null = is_null;
@@ -1188,12 +1188,12 @@ namespace odb
     // firstOrientationFrequencyMaximum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.firstOrientationFrequencyMaximum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.firstOrientationFrequencyMaximum_value, is_null, v);
       i.firstOrientationFrequencyMaximum_null = is_null;
@@ -1202,12 +1202,12 @@ namespace odb
     // secondOrientationAccuracy_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.secondOrientationAccuracy_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.secondOrientationAccuracy_value, is_null, v);
       i.secondOrientationAccuracy_null = is_null;
@@ -1216,12 +1216,12 @@ namespace odb
     // secondOrientationFrequencyMinimum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.secondOrientationFrequencyMinimum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.secondOrientationFrequencyMinimum_value, is_null, v);
       i.secondOrientationFrequencyMinimum_null = is_null;
@@ -1230,12 +1230,12 @@ namespace odb
     // secondOrientationFrequencyMaximum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.secondOrientationFrequencyMaximum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.secondOrientationFrequencyMaximum_value, is_null, v);
       i.secondOrientationFrequencyMaximum_null = is_null;
@@ -1244,12 +1244,12 @@ namespace odb
     // thirdOrientationAccuracy_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.thirdOrientationAccuracy_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.thirdOrientationAccuracy_value, is_null, v);
       i.thirdOrientationAccuracy_null = is_null;
@@ -1258,12 +1258,12 @@ namespace odb
     // thirdOrientationFrequencyMinimum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.thirdOrientationFrequencyMinimum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.thirdOrientationFrequencyMinimum_value, is_null, v);
       i.thirdOrientationFrequencyMinimum_null = is_null;
@@ -1272,12 +1272,12 @@ namespace odb
     // thirdOrientationFrequencyMaximum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.thirdOrientationFrequencyMaximum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.thirdOrientationFrequencyMaximum_value, is_null, v);
       i.thirdOrientationFrequencyMaximum_null = is_null;
@@ -1286,12 +1286,12 @@ namespace odb
     // fourthOrientationAccuracy_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fourthOrientationAccuracy_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fourthOrientationAccuracy_value, is_null, v);
       i.fourthOrientationAccuracy_null = is_null;
@@ -1300,12 +1300,12 @@ namespace odb
     // fourthOrientationFrequencyMinimum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fourthOrientationFrequencyMinimum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fourthOrientationFrequencyMinimum_value, is_null, v);
       i.fourthOrientationFrequencyMinimum_null = is_null;
@@ -1314,12 +1314,12 @@ namespace odb
     // fourthOrientationFrequencyMaximum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fourthOrientationFrequencyMaximum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fourthOrientationFrequencyMaximum_value, is_null, v);
       i.fourthOrientationFrequencyMaximum_null = is_null;
@@ -1328,12 +1328,12 @@ namespace odb
     // firstPositioningAccuracy_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.firstPositioningAccuracy_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.firstPositioningAccuracy_value, is_null, v);
       i.firstPositioningAccuracy_null = is_null;
@@ -1342,12 +1342,12 @@ namespace odb
     // firstPositioningFrequencyMinimum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.firstPositioningFrequencyMinimum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.firstPositioningFrequencyMinimum_value, is_null, v);
       i.firstPositioningFrequencyMinimum_null = is_null;
@@ -1356,12 +1356,12 @@ namespace odb
     // firstPositioningFrequencyMaximum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.firstPositioningFrequencyMaximum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.firstPositioningFrequencyMaximum_value, is_null, v);
       i.firstPositioningFrequencyMaximum_null = is_null;
@@ -1370,12 +1370,12 @@ namespace odb
     // secondPositioningAccuracy_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.secondPositioningAccuracy_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.secondPositioningAccuracy_value, is_null, v);
       i.secondPositioningAccuracy_null = is_null;
@@ -1384,12 +1384,12 @@ namespace odb
     // secondPositioningFrequencyMinimum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.secondPositioningFrequencyMinimum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.secondPositioningFrequencyMinimum_value, is_null, v);
       i.secondPositioningFrequencyMinimum_null = is_null;
@@ -1398,12 +1398,12 @@ namespace odb
     // secondPositioningFrequencyMaximum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.secondPositioningFrequencyMaximum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.secondPositioningFrequencyMaximum_value, is_null, v);
       i.secondPositioningFrequencyMaximum_null = is_null;
@@ -1412,12 +1412,12 @@ namespace odb
     // thirdPositioningAccuracy_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.thirdPositioningAccuracy_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.thirdPositioningAccuracy_value, is_null, v);
       i.thirdPositioningAccuracy_null = is_null;
@@ -1426,12 +1426,12 @@ namespace odb
     // thirdPositioningFrequencyMinimum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.thirdPositioningFrequencyMinimum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.thirdPositioningFrequencyMinimum_value, is_null, v);
       i.thirdPositioningFrequencyMinimum_null = is_null;
@@ -1440,12 +1440,12 @@ namespace odb
     // thirdPositioningFrequencyMaximum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.thirdPositioningFrequencyMaximum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.thirdPositioningFrequencyMaximum_value, is_null, v);
       i.thirdPositioningFrequencyMaximum_null = is_null;
@@ -1454,12 +1454,12 @@ namespace odb
     // fourthPositioningAccuracy_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fourthPositioningAccuracy_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fourthPositioningAccuracy_value, is_null, v);
       i.fourthPositioningAccuracy_null = is_null;
@@ -1468,12 +1468,12 @@ namespace odb
     // fourthPositioningFrequencyMinimum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fourthPositioningFrequencyMinimum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fourthPositioningFrequencyMinimum_value, is_null, v);
       i.fourthPositioningFrequencyMinimum_null = is_null;
@@ -1482,12 +1482,12 @@ namespace odb
     // fourthPositioningFrequencyMaximum_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fourthPositioningFrequencyMaximum_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fourthPositioningFrequencyMaximum_value, is_null, v);
       i.fourthPositioningFrequencyMaximum_null = is_null;
@@ -1637,11 +1637,11 @@ namespace odb
     // frequencyMinimum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.frequencyMinimum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.frequencyMinimum_value,
@@ -1651,11 +1651,11 @@ namespace odb
     // frequencyMaximum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.frequencyMaximum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.frequencyMaximum_value,
@@ -1665,11 +1665,11 @@ namespace odb
     // firstReconnaissanceRange_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.firstReconnaissanceRange_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.firstReconnaissanceRange_value,
@@ -1679,11 +1679,11 @@ namespace odb
     // firstReconnaissanceFrequencyMinimum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.firstReconnaissanceFrequencyMinimum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.firstReconnaissanceFrequencyMinimum_value,
@@ -1693,11 +1693,11 @@ namespace odb
     // firstReconnaissanceFrequencyMaximum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.firstReconnaissanceFrequencyMaximum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.firstReconnaissanceFrequencyMaximum_value,
@@ -1707,11 +1707,11 @@ namespace odb
     // firstReconnaissanceRadiatedPower_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.firstReconnaissanceRadiatedPower_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.firstReconnaissanceRadiatedPower_value,
@@ -1721,11 +1721,11 @@ namespace odb
     // secondReconnaissanceRange_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.secondReconnaissanceRange_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.secondReconnaissanceRange_value,
@@ -1735,11 +1735,11 @@ namespace odb
     // secondReconnaissanceFrequencyMinimum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.secondReconnaissanceFrequencyMinimum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.secondReconnaissanceFrequencyMinimum_value,
@@ -1749,11 +1749,11 @@ namespace odb
     // secondReconnaissanceFrequencyMaximum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.secondReconnaissanceFrequencyMaximum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.secondReconnaissanceFrequencyMaximum_value,
@@ -1763,11 +1763,11 @@ namespace odb
     // secondReconnaissanceRadiatedPower_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.secondReconnaissanceRadiatedPower_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.secondReconnaissanceRadiatedPower_value,
@@ -1777,11 +1777,11 @@ namespace odb
     // thirdReconnaissanceRange_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.thirdReconnaissanceRange_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.thirdReconnaissanceRange_value,
@@ -1791,11 +1791,11 @@ namespace odb
     // thirdReconnaissanceFrequencyMinimum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.thirdReconnaissanceFrequencyMinimum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.thirdReconnaissanceFrequencyMinimum_value,
@@ -1805,11 +1805,11 @@ namespace odb
     // thirdReconnaissanceFrequencyMaximum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.thirdReconnaissanceFrequencyMaximum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.thirdReconnaissanceFrequencyMaximum_value,
@@ -1819,11 +1819,11 @@ namespace odb
     // thirdReconnaissanceRadiatedPower_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.thirdReconnaissanceRadiatedPower_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.thirdReconnaissanceRadiatedPower_value,
@@ -1833,11 +1833,11 @@ namespace odb
     // fourthReconnaissanceRange_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fourthReconnaissanceRange_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fourthReconnaissanceRange_value,
@@ -1847,11 +1847,11 @@ namespace odb
     // fourthReconnaissanceFrequencyMinimum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fourthReconnaissanceFrequencyMinimum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fourthReconnaissanceFrequencyMinimum_value,
@@ -1861,11 +1861,11 @@ namespace odb
     // fourthReconnaissanceFrequencyMaximum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fourthReconnaissanceFrequencyMaximum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fourthReconnaissanceFrequencyMaximum_value,
@@ -1875,11 +1875,11 @@ namespace odb
     // fourthReconnaissanceRadiatedPower_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fourthReconnaissanceRadiatedPower_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fourthReconnaissanceRadiatedPower_value,
@@ -1889,11 +1889,11 @@ namespace odb
     // firstOrientationAccuracy_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.firstOrientationAccuracy_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.firstOrientationAccuracy_value,
@@ -1903,11 +1903,11 @@ namespace odb
     // firstOrientationFrequencyMinimum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.firstOrientationFrequencyMinimum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.firstOrientationFrequencyMinimum_value,
@@ -1917,11 +1917,11 @@ namespace odb
     // firstOrientationFrequencyMaximum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.firstOrientationFrequencyMaximum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.firstOrientationFrequencyMaximum_value,
@@ -1931,11 +1931,11 @@ namespace odb
     // secondOrientationAccuracy_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.secondOrientationAccuracy_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.secondOrientationAccuracy_value,
@@ -1945,11 +1945,11 @@ namespace odb
     // secondOrientationFrequencyMinimum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.secondOrientationFrequencyMinimum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.secondOrientationFrequencyMinimum_value,
@@ -1959,11 +1959,11 @@ namespace odb
     // secondOrientationFrequencyMaximum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.secondOrientationFrequencyMaximum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.secondOrientationFrequencyMaximum_value,
@@ -1973,11 +1973,11 @@ namespace odb
     // thirdOrientationAccuracy_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.thirdOrientationAccuracy_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.thirdOrientationAccuracy_value,
@@ -1987,11 +1987,11 @@ namespace odb
     // thirdOrientationFrequencyMinimum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.thirdOrientationFrequencyMinimum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.thirdOrientationFrequencyMinimum_value,
@@ -2001,11 +2001,11 @@ namespace odb
     // thirdOrientationFrequencyMaximum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.thirdOrientationFrequencyMaximum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.thirdOrientationFrequencyMaximum_value,
@@ -2015,11 +2015,11 @@ namespace odb
     // fourthOrientationAccuracy_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fourthOrientationAccuracy_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fourthOrientationAccuracy_value,
@@ -2029,11 +2029,11 @@ namespace odb
     // fourthOrientationFrequencyMinimum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fourthOrientationFrequencyMinimum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fourthOrientationFrequencyMinimum_value,
@@ -2043,11 +2043,11 @@ namespace odb
     // fourthOrientationFrequencyMaximum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fourthOrientationFrequencyMaximum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fourthOrientationFrequencyMaximum_value,
@@ -2057,11 +2057,11 @@ namespace odb
     // firstPositioningAccuracy_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.firstPositioningAccuracy_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.firstPositioningAccuracy_value,
@@ -2071,11 +2071,11 @@ namespace odb
     // firstPositioningFrequencyMinimum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.firstPositioningFrequencyMinimum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.firstPositioningFrequencyMinimum_value,
@@ -2085,11 +2085,11 @@ namespace odb
     // firstPositioningFrequencyMaximum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.firstPositioningFrequencyMaximum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.firstPositioningFrequencyMaximum_value,
@@ -2099,11 +2099,11 @@ namespace odb
     // secondPositioningAccuracy_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.secondPositioningAccuracy_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.secondPositioningAccuracy_value,
@@ -2113,11 +2113,11 @@ namespace odb
     // secondPositioningFrequencyMinimum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.secondPositioningFrequencyMinimum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.secondPositioningFrequencyMinimum_value,
@@ -2127,11 +2127,11 @@ namespace odb
     // secondPositioningFrequencyMaximum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.secondPositioningFrequencyMaximum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.secondPositioningFrequencyMaximum_value,
@@ -2141,11 +2141,11 @@ namespace odb
     // thirdPositioningAccuracy_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.thirdPositioningAccuracy_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.thirdPositioningAccuracy_value,
@@ -2155,11 +2155,11 @@ namespace odb
     // thirdPositioningFrequencyMinimum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.thirdPositioningFrequencyMinimum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.thirdPositioningFrequencyMinimum_value,
@@ -2169,11 +2169,11 @@ namespace odb
     // thirdPositioningFrequencyMaximum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.thirdPositioningFrequencyMaximum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.thirdPositioningFrequencyMaximum_value,
@@ -2183,11 +2183,11 @@ namespace odb
     // fourthPositioningAccuracy_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fourthPositioningAccuracy_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fourthPositioningAccuracy_value,
@@ -2197,11 +2197,11 @@ namespace odb
     // fourthPositioningFrequencyMinimum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fourthPositioningFrequencyMinimum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fourthPositioningFrequencyMinimum_value,
@@ -2211,11 +2211,11 @@ namespace odb
     // fourthPositioningFrequencyMaximum_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fourthPositioningFrequencyMaximum_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fourthPositioningFrequencyMaximum_value,

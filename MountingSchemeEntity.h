@@ -6,7 +6,9 @@
 #include <ctime>
 #include <odb/core.hxx> // ODB核心头文件
 #include <QtCore/QDateTime>
+#ifndef ODB_COMPILER
 #include "datetime-traits.hxx"
+#endif
 
 #pragma once
 

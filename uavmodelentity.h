@@ -8,7 +8,9 @@
 //#include <odb/qt/date-time/pgsql/qdate-time-traits.hxx>
 #include <odb/core.hxx> // ODB核心头文件
 #include <QtCore/QDateTime>
+#ifndef ODB_COMPILER
 #include "datetime-traits.hxx"
+#endif
 #pragma once
 #pragma db object schema("uav_type_man") table("uav_models_data") // 指定表名
 class UavModelEntity

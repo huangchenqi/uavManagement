@@ -41,6 +41,7 @@ InterferencePodDao::InterferencePodDao(QObject* parent) : QObject(parent){
 QJsonArray InterferencePodDao::selectInterferencePodData(const QJsonObject &selectedData)
 {
     QJsonArray ammoModelData;
+    const int INVALID_VALUE = -1;  // 定义特殊值
     QJsonDocument adoc(selectedData);
     qDebug()<<"当前xASRA wae  q函数名称:" << __FUNCTION__<<":";
     qDebug().noquote() << adoc.toJson(QJsonDocument::Indented);
@@ -108,11 +109,32 @@ QJsonArray InterferencePodDao::selectInterferencePodData(const QJsonObject &sele
             obj["interferencePodName"] = QString::fromStdString(entity.interferencePodName_);
             obj["interferencePodId"] = QString::fromStdString(entity.interferencePodId_);
             obj["interferencePodType"] = QString::fromStdString(entity.interferencePodType_);
-            obj["mainCabinSectione"] = QString::number(entity.mainCabinSection_);
-            obj["length"] = QString::number(entity.mainLength_);
-            obj["frontCoverLength"] = QString::number(entity.frontCoverLength_);
-            obj["rearCoverLength"] = QString::number(entity.rearCoverLength_);
-            obj["mass"] = QString::number(entity.mass_);
+            if(!entity.mainCabinSection_){
+               obj["mainCabinSectione"] = "";
+            }else{
+               obj["mainCabinSectione"] = QString::number(entity.mainCabinSection_.get());
+            }
+            if(!entity.mainLength_ ){
+               obj["length"] = "";
+            }else{
+                obj["length"] = QString::number(entity.mainLength_.get());
+            }
+            qDebug()<<"QString::number(entity.mainLength_)"<<entity.mainLength_.get();
+            if(!entity.frontCoverLength_){
+                obj["frontCoverLength"] = "";
+            }else{
+                obj["frontCoverLength"] = QString::number(entity.frontCoverLength_.get());
+            }
+            if(!entity.rearCoverLength_){
+                obj["rearCoverLength"] = "";
+            }else{
+                obj["rearCoverLength"] = QString::number(entity.rearCoverLength_.get());
+            }
+            if(!entity.mass_){
+                obj["mass"] = "";
+            }else{
+                obj["mass"] = QString::number(entity.mass_.get());
+            }
             obj["description"] = QString::fromStdString(entity.description_);
 
             // obj["launch_angle"] = QString::number(entity.launchAngle_);
@@ -222,19 +244,53 @@ QJsonObject InterferencePodDao::queryInterferencePodData(const QJsonObject &obje
             interferencePodData["usedUavModels"] = QString::fromStdString(entity.usedUavModels_);
             interferencePodData["description"] = QString::fromStdString(entity.description_);
             // 处理数值类型（示例）/******************** 尺寸参数 ********************/
-            interferencePodData["mass"] = QString::number(entity.mass_); // 假设返回float// 使用 QString::number 方法转换 float
-            interferencePodData["mainLength"] = QString::number(entity.mainLength_);
-            interferencePodData["frontCoverLength"] = QString::number(entity.frontCoverLength_);
-            interferencePodData["rearCoverLength"] = QString::number(entity.rearCoverLength_);
-            interferencePodData["mainCabinSection"] = QString::number(entity.mainCabinSection_);
-            interferencePodData["maximumWeightPodFullyLoaded"] = QString::number(entity.maximumWeightPodFullyLoaded_);
-            interferencePodData["interferenceLength"] = QString::number(entity.interferenceLength_);
+             // 假设返回float// 使用 QString::number 方法转换 float
+            if(!entity.mass_){
+                interferencePodData["mass"] ="";
+            }else{
+               interferencePodData["mass"] = QString::number(entity.mass_.get());
+            }
+            //interferencePodData["mainLength"] = QString::number(entity.mainLength_);
+            if(!entity.mainLength_ ){
+                interferencePodData["mainLength"] = "";
+            }else{
+                interferencePodData["mainLength"] = entity.mainLength_.get();
+            }
+            if(!entity.frontCoverLength_){
+                interferencePodData["frontCoverLength"] ="";
+            }else{
+               interferencePodData["frontCoverLength"] = QString::number(entity.frontCoverLength_.get());
+            }
+            if(!entity.rearCoverLength_){
+                interferencePodData["rearCoverLength"] ="";
+            }else{
+               interferencePodData["rearCoverLength"] = QString::number(entity.rearCoverLength_.get());
+            }
+            if(!entity.mainCabinSection_){
+                interferencePodData["mainCabinSection"] ="";
+            }else{
+               interferencePodData["mainCabinSection"] = QString::number(entity.mainCabinSection_.get());
+            }
+            if(!entity.maximumWeightPodFullyLoaded_){
+                interferencePodData["maximumWeightPodFullyLoaded"] ="";
+            }else{
+            interferencePodData["maximumWeightPodFullyLoaded"] = QString::number(entity.maximumWeightPodFullyLoaded_.get());
+            }
+            if(!entity.interferenceLength_){
+                interferencePodData["interferenceLength"] = "";
+            }else{
+            interferencePodData["interferenceLength"] = QString::number(entity.interferenceLength_.get());
+            }
             interferencePodData["interferenceBand"] = QString::fromStdString(entity.interferenceBand_);
             interferencePodData["effectiveReflectionArea"] = QString::fromStdString(entity.effectiveReflectionArea_);
             interferencePodData["deliveryControlWay"] = QString::fromStdString(entity.deliveryControlWay_);
             interferencePodData["deliverySpeed"] = QString::fromStdString(entity.deliverySpeed_);
             interferencePodData["deliverWay"] = QString::fromStdString(entity.deliveryWay_);
-            interferencePodData["loadingCapacity"] = QString::number(entity.loadingCapacity_);
+            if(!entity.loadingCapacity_){
+                interferencePodData["loadingCapacity"] = "";
+            }else{
+                interferencePodData["loadingCapacity"] = QString::number(entity.loadingCapacity_.get());}
+
             interferencePodData["interferenceIntensity"] = QString::fromStdString(entity.interferenceIntensity_);
             // 格式化为字符串（保留5位小数）
             // QString formattedValue = QString::number(entity.uavLength_, 'f', 5);
@@ -579,19 +635,52 @@ bool InterferencePodDao::insertInterferencePodData(const QJsonObject &object)
         entity.interferencePodId_ = "";
         entity.usedUavModels_ = object["usedUavModels"].toString().toStdString();
         entity.description_ = object["description"].toString().toStdString();//.toInt();
-        entity.mainLength_ = object["mainLength"].toDouble();
-        entity.mass_ = object["mass"].toDouble();
-        entity.frontCoverLength_ = object["frontCoverLength"].toDouble();
-        entity.rearCoverLength_ = object["rearCoverLength"].toDouble();
-        entity.mainCabinSection_ = object["mainCabinSection"].toDouble();//.toInt();
-        entity.maximumWeightPodFullyLoaded_ = object["maximumWeightPodFullyLoaded"].toDouble();
-        entity.interferenceLength_ = object["interferencelength"].toDouble();
+        if(object["mainLength"].isNull()){
+            //entity.mainLength_ = NULL;
+           qDebug()<<"object"<<object["mainLength"];
+        }else{
+            entity.mainLength_ = object["mainLength"].toDouble();
+        }
+        if(object["mass"].isNull()){
+
+        }else{
+            entity.mass_ = object["mass"].toDouble();
+        }
+        if(object["frontCoverLength"].isNull()){
+
+        }else{
+          entity.frontCoverLength_ = object["frontCoverLength"].toDouble();
+        }
+        if(object["rearCoverLength"].isNull()){
+
+        }else{
+            entity.rearCoverLength_ = object["rearCoverLength"].toDouble();
+        }
+        if(object["mainCabinSection"].isNull()){
+
+        }else{
+            entity.mainCabinSection_ = object["mainCabinSection"].toDouble();//.toInt();
+        }
+        if(object["maximumWeightPodFullyLoaded"].isNull()){
+
+        }else{
+            entity.maximumWeightPodFullyLoaded_ = object["maximumWeightPodFullyLoaded"].toDouble();
+        }
+        if(object["interferencelength"].isNull()){
+
+        }else{
+           entity.interferenceLength_ = object["interferencelength"].toDouble();
+        }
         entity.interferenceBand_ = object["interferenceBand"].toString().toStdString();
         entity.effectiveReflectionArea_ = object["effectiveReflectionArea"].toString().toStdString();
         entity.deliveryControlWay_ = object["deliveryControlWay"].toString().toStdString();
         entity.deliverySpeed_ = object["deliverySpeed"].toString().toStdString();//.toInt();
         entity.deliveryWay_ = object["deliverWay"].toString().toStdString();//.toInt();
-        entity.loadingCapacity_ = object["loadingCapacity"].toDouble();
+        if(object["loadingCapacity"].isNull()){
+
+        }else{
+            entity.loadingCapacity_ = object["loadingCapacity"].toDouble();
+        }
         entity.interferenceIntensity_ = object["interferenceIntensity"].toString().toStdString();
 
 

@@ -342,8 +342,6 @@ Rectangle {
 
                 if(processInfo.loadViewType === "addition"){
                     saveAmmoData()
-                    backAmmoRecord()
-                    addAmmoAllDatView.visible = false
                 }else if(processInfo.loadViewType === "query"){
                     //addAmmoAllDatView.visible = false
                     backAmmoRecord()
@@ -678,22 +676,41 @@ Rectangle {
          ammoData.ammoType = addAmmoAllDatView.viewType
          ammoData.ammoToUavModel =   addAmmoAllDatView.uavArray.join(",")
          console.log("ammoData.push"+JSON.stringify(ammoData))
-          let result = ammoDaoModel.insertAmmoData(ammoData)
-            if(result === true){
-                warningItem.text = "^_^航弹新增数据成功!^_^"
-                warningPopup.open()
-                // 2秒后自动关闭
-                autoCloseTimer.start()
-            }else if(result === false){
-                warningItem.text = "^_^航弹新增数据失败!^_^"
-                warningPopup.open()
-                // 2秒后自动关闭
-                autoCloseTimer.start()
-             }else{
-                console.log("unknown deleteMountLocation")
-            }
+        if(isValidContent() === true){
+            let result = ammoDaoModel.insertAmmoData(ammoData)
+              if(result === true){
+                  warningItem.text = "^_^航弹新增数据成功!^_^"
+                  warningPopup.open()
+                  // 2秒后自动关闭
+                  autoCloseTimer.start()
+                  backAmmoRecord()
+                  addAmmoAllDatView.visible = false
+              }else if(result === false){
+                  warningItem.text = "^_^航弹新增数据失败!^_^"
+                  warningPopup.open()
+                  // 2秒后自动关闭
+                  autoCloseTimer.start()
+               }else{
+                  console.log("unknown deleteMountLocation")
+              }
+        }else{
+            console.log("Unknown ammoName!")
+        }
+
     }
-    //查看时候跳转
+    //验证是否有未输入的必选项
+    function isValidContent(){
+         if(ammoData.ammoName && ammoData.ammoName.trim().length !== 0){
+             return true
+         }else{
+             warningItem.text = "^_^航弹名称不能为空!^_^"
+             warningPopup.open()
+             // 2秒后自动关闭
+             autoCloseTimer.start()
+             return false
+         }
+    }
+        //查看时候跳转
     function loadQueryAmmoComponentData(){
         if(addAmmoAllDatView.viewType === "航空反坦克子母弹"){
             custom_FanTanKeZiMu.loadDataWay = 1

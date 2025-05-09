@@ -3130,7 +3130,7 @@ namespace odb
 
       // record_creation_time
       //
-     unsigned long long record_creation_time_value;
+      long long record_creation_time_value;
       bool record_creation_time_null;
 
       // use_status

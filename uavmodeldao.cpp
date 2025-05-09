@@ -222,10 +222,23 @@ QJsonArray UavModelDao::selectUavModelAllData()
             }();
             // 使用 QDateTime 转换 std::time_t 到 QString
 
-            QDateTime dateTime;
-            dateTime = entity.uavCreatModelTime_;
+            // QDateTime dateTime;
+            // dateTime = entity.uavCreatModelTime_;
             qDebug() <<"uavCreatModelTime_"<< entity.uavCreatModelTime_;
-            obj["uavCreatModelTime"] = entity.uavCreatModelTime_.toString(Qt::ISODate);
+            QString originalDateTime = entity.uavCreatModelTime_.toString(Qt::ISODate);
+
+            // 解析原始日期时间字符串
+            QDateTime dateTime = QDateTime::fromString(originalDateTime, "yyyy-MM-ddTHH:mm:ss");
+            QString formattedDateTime;
+            // 检查解析是否成功
+            if (dateTime.isValid()) {
+                // 转换为指定格式
+                formattedDateTime = dateTime.toString("yyyy-MM-dd HH:mm:ss");
+                qDebug() << "Formatted Date and Time:" << formattedDateTime;
+            } else {
+                qDebug() << "Invalid date time string";
+            }
+            obj["uavCreatModelTime"] = formattedDateTime;
             obj["imageUrl"] = QString::fromStdString(entity.uavImgUrl_);
 
             obj["operation"] = "";
@@ -323,7 +336,7 @@ QJsonArray UavModelDao::queryUavModelData(const QString &jsonStr)
                 }
             }
         }
-        odb::result<UavModelEntity> result = db.query<UavModelEntity>(q);
+        odb::result<UavModelEntity> result = db.query<UavModelEntity>(q + order::by<UavModelEntity>(query_t::uavCreatModelTime.column()));
         qDebug() << "Query returned" << result.size() << "records";  // 添加此行
         // 关键修正2：遍历所有结果
         int sum = 0;
@@ -402,10 +415,24 @@ QJsonArray UavModelDao::queryUavModelData(const QString &jsonStr)
                 }();
             // 使用 QDateTime 转换 std::time_t 到 QString
 
-            QDateTime dateTime;
-            dateTime = entity.uavCreatModelTime_;
+            // QDateTime dateTime;
+            // dateTime = entity.uavCreatModelTime_;
             qDebug() <<"uavCreatModelTime_"<< entity.uavCreatModelTime_;
-            obj["uavCreatModelTime"] = entity.uavCreatModelTime_.toString(Qt::ISODate);
+            QString originalDateTime = entity.uavCreatModelTime_.toString(Qt::ISODate);
+
+            // 解析原始日期时间字符串
+            QDateTime dateTime = QDateTime::fromString(originalDateTime, "yyyy-MM-ddTHH:mm:ss");
+            QString formattedDateTime;
+            // 检查解析是否成功
+            if (dateTime.isValid()) {
+                // 转换为指定格式
+                formattedDateTime = dateTime.toString("yyyy-MM-dd HH:mm:ss");
+                qDebug() << "Formatted Date and Time:" << formattedDateTime;
+            } else {
+                qDebug() << "Invalid date time string";
+            }
+            obj["uavCreatModelTime"] = formattedDateTime;
+            //obj["uavCreatModelTime"] = entity.uavCreatModelTime_.toString(Qt::ISODate);
             obj["operation"] = "";
             obj["checked"] = checked;
             sum++;

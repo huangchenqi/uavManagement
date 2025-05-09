@@ -4,8 +4,11 @@
 #include <string>
 #include <ctime>
 // ODB编译器需要QDateTime与数据库类型的转换规则
-#include <odb/qt/date-time/pgsql/qdate-time-traits.hxx>
+//#include <odb/qt/date-time/pgsql/qdate-time-traits.hxx>
 #include <odb/core.hxx> // ODB核心头文件
+#ifndef ODB_COMPILER
+#include "datetime-traits.hxx"
+#endif
 #pragma once
 #pragma db object schema("uav_type_man") table("reconnaissance_payload") // 指定表名
 class ReconnaissancePayloadEntity

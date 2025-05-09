@@ -71,7 +71,6 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
        loadUavModelType()
        //        //loadMountLocationContent()
        loadView()
-       //generateTestData()
 
     }
 
@@ -435,6 +434,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             anchors.topMargin: 5
                             title: "机长(m):"
                             pixelSize: 18
+                            onlyNum:true
                             titleWidth: pixelSize * 4
                             width: 160
                             height: 30
@@ -447,6 +447,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             anchors.topMargin: 10
                             title: "翼展(m):"
                             pixelSize: 18
+                            onlyNum:true
                             titleWidth: pixelSize * 4
                             width: 160
                             height: 30
@@ -458,6 +459,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             anchors.top: uavWidthText.bottom
                             anchors.topMargin: 10
                             title: "机高(m):"
+                            onlyNum:true
                             pixelSize: 18
                             titleWidth: pixelSize * 4
                             width: 160
@@ -470,6 +472,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             anchors.top: uavHeightText.bottom
                             anchors.topMargin: 10
                             title: "航程(km):"
+                            onlyNum:true
                             pixelSize: 18
                             titleWidth: pixelSize * 4.5
                             width: 160
@@ -482,6 +485,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             anchors.leftMargin: 15
                             anchors.top: uavLengthText.top
                             title: "航时(h):"
+                            onlyNum:true
                             pixelSize: 18
                             titleWidth: pixelSize * 4
                             width: 160
@@ -494,6 +498,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             anchors.top: uavFlightTime.bottom
                             anchors.topMargin: 10
                             title: "作战半径(m):"
+                            onlyNum:true
                             pixelSize: 18
                             titleWidth: pixelSize * 5.5
                             width: 160
@@ -506,6 +511,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             anchors.leftMargin: 15
                             anchors.top: uavFlightTime.top
                             title: "起飞滑跑距离(m):"
+                            onlyNum:true
                             pixelSize: 18
                             titleWidth: pixelSize * 8
                             width: 220
@@ -517,6 +523,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             anchors.left: uavTakeoffDistanceValue.left
                             anchors.top: uavTakeoffDistanceValue.bottom
                             anchors.topMargin: 10
+                            onlyNum:true
                             title: "着陆滑跑距离(m):"
                             pixelSize: 18
                             titleWidth: pixelSize * 8
@@ -530,6 +537,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             anchors.top: uavLandDistanceValue.bottom
                             anchors.topMargin: 10
                             title: "最小转弯半径(m):"
+                            onlyNum:true
                             pixelSize: 18
                             titleWidth: pixelSize * 8
                             width: 220
@@ -542,6 +550,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             anchors.top: uavTurningRadiusMin.bottom
                             anchors.topMargin: 10
                             title: "最大转弯半径(m):"
+                            onlyNum:true
                             pixelSize: 18
                             titleWidth: pixelSize * 8
                             width: 220
@@ -554,6 +563,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             anchors.leftMargin: 15
                             anchors.top: uavTakeoffDistanceValue.top
                             title: "最小飞行速度(Km/h):"
+                            onlyNum:true
                             pixelSize: 18
                             titleWidth: pixelSize * 9.5
                             width: 240
@@ -566,6 +576,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             anchors.top: uavFlightSpeedMin.bottom
                             anchors.topMargin: 10
                             title: "最大飞行速度(Km/h):"
+                            onlyNum:true
                             pixelSize: 18
                             titleWidth: pixelSize * 9.5
                             width: 240
@@ -578,6 +589,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             anchors.top: uavFlightSpeedMax.bottom
                             anchors.topMargin: 10
                             title: "最小飞行高度(m):"
+                            onlyNum:true
                             pixelSize: 18
                             titleWidth: pixelSize * 8
                             width: 240
@@ -590,6 +602,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             anchors.top: uavFlightHeightMin.bottom
                             anchors.topMargin: 10
                             title: "最大飞行高度(m):"
+                            onlyNum:true
                             pixelSize: 18
                             titleWidth: pixelSize * 8
                             width: 240
@@ -935,6 +948,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     pixelSize: 18
                     titleWidth: pixelSize * 8.5
                     width: 250
+                    onlyNum:true
                     height: 30
                     enabled: {
                         if(processInfo.loadViewType === "query")
@@ -953,6 +967,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.topMargin: 20
                     title: "载荷侦察精度(m):"
                     pixelSize: 18
+                    onlyNum:true
                     titleWidth: pixelSize * 8
                     width: 250
                     height: 30
@@ -1109,6 +1124,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.topMargin: 20
                     title: "攻击精度(m):"
                     pixelSize: 18
+                    onlyNum:true
                     titleWidth: pixelSize * 6
                     anchors.right: comp_uavBombingmethod.right
                     height: 30
@@ -1151,6 +1167,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.top: text_UavFlightData.bottom
                     anchors.topMargin: 25
                     title: "最大起飞重量(Kg):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 8.5
                     width: 250
@@ -1171,6 +1188,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.top: uavMaximumTakeoffWeightValue.bottom
                     anchors.topMargin: 15
                     title: "空机重量(Kg):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 6.5
                     width: 250
@@ -1191,6 +1209,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.top: uavEmptyWeightValue.bottom
                     anchors.topMargin: 15
                     title: "最大载油量(Kg):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 7.5
                     width: 250
@@ -1212,6 +1231,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.topMargin: 15
                     title: "最大外挂重量(Kg):"
                     pixelSize: 18
+                    onlyNum:true
                     titleWidth: pixelSize * 8.5
                     width: 250
                     height: 30
@@ -1231,6 +1251,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.top: uavMaximumExternalWeightValue.bottom
                     anchors.topMargin: 15
                     title: "雷达反射面积(m²):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 8.5
                     width: 250
@@ -1251,6 +1272,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.top: uavRadarCrossSectionValue.bottom
                     anchors.topMargin: 15
                     title: "重心前限(%MAC):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 8
                     width: 250
@@ -1270,6 +1292,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.left: uavCenterOfGravityFrontLimitValue.left
                     anchors.top: uavCenterOfGravityFrontLimitValue.bottom
                     anchors.topMargin: 15
+                    onlyNum:true
                     title: "重心后限(%MAC):"
                     pixelSize: 18
                     titleWidth: pixelSize * 8
@@ -1291,6 +1314,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.leftMargin: 15
                     anchors.top: uavMaximumTakeoffWeightValue.top
                     title: "地面最大起动高度(m):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 10
                     width: 270
@@ -1311,6 +1335,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.top: uavMaximumGroundStartingHeightValue.bottom
                     anchors.topMargin: 15
                     title: "空中最大起动高度(m):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 10
                     width: 270
@@ -1331,6 +1356,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.top: uavMaximumAirStartingAltitudeValue.bottom
                     anchors.topMargin: 15
                     title: "低空突防速度(Km/h):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 9.5
                     width: 270
@@ -1351,6 +1377,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.top: uavLowAltitudeBreakthroughSpeedValue.bottom
                     anchors.topMargin: 15
                     title: "最大飞行真空速(Km/h):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 10.5
                     width: 270
@@ -1371,6 +1398,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.top: uavMaximumFlightVacuumSpeedValue.bottom
                     anchors.topMargin: 15
                     title: "最大续航时间(h):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 8
                     width: 270
@@ -1391,6 +1419,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.top: uavMaximumEnduranceValue.bottom
                     anchors.topMargin: 15
                     title: "最小飞行表速(Km/h):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 9.5
                     width: 270
@@ -1411,6 +1440,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.top: uavMinimumFlightMeterSpeedValue.bottom
                     anchors.topMargin: 15
                     title: "海平面起飞滑跑距离(m):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 11
                     width: 270
@@ -1431,6 +1461,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.leftMargin: 15
                     anchors.top: uavMaximumGroundStartingHeightValue.top
                     title: "海平面着陆滑跑距离(m):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 11
                     width: 270
@@ -1451,6 +1482,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.top: sealLevelLandingAndRollDistanceValue.bottom
                     anchors.topMargin: 15
                     title: "侦察构型巡航高度(m):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 10
                     width: 270
@@ -1471,6 +1503,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.top: cruiseAltitudeReconnaissanceConfigurationValue.bottom
                     anchors.topMargin: 15
                     title: "满外挂构型巡航高度(m):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 11
                     width: 270
@@ -1491,6 +1524,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     anchors.top: cruiseAltitudeFullExternalConfigurationValue.bottom
                     anchors.topMargin: 15
                     title: "无人机升限(m):"
+                    onlyNum:true
                     pixelSize: 18
                     titleWidth: pixelSize * 7
                     width: 270
@@ -1880,8 +1914,6 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                             updataUavModelData()//更新
                         else if((processInfo.loadViewType === "addUavData"))
                             saveUavData()//新增
-                        backUavRecord()
-                        controlUav.visible = false
 
                      }
                 }
@@ -2142,7 +2174,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
         console.log("loadUavModelData"+uavDataStr)
         var selectUavData = uavModelDaoTable.selectSomeUavModelDate(uavDataStr)
         console.log("selectUavData"+JSON.stringify(selectUavData))
-
+        uavNameText.enabled = false
         var imageUrlStr = "file:///"+selectUavData.image_url
         console.log("imageUrlStr"+imageUrlStr)
         uavImg.source = imageUrlStr
@@ -2780,16 +2812,19 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
         //var uavTransFormToData = transformArrayToStrData(uavData)
         var jsonString = JSON.stringify(uavData);
         console.log("QML saveUavModelData jsonString"+jsonString);
-
-        var insertUavModelDataResult = uavModelDaoTable.insertModelDate(uavData)
-        if(insertUavModelDataResult === true){
-            warningPopup.open()
-            warningItem.text = "无人机数据新增成功!"
-            autoCloseTimer.start()
-        }else{
-            warningPopup.open()
-            warningItem.text = "无人机数据新增失败!"
-            autoCloseTimer.start()
+        if(validateInput(uavNameText.text, "无人机名称未填写!") === true){
+            let insertUavModelDataResult = uavModelDaoTable.insertModelDate(uavData)
+            if(insertUavModelDataResult === true){
+                warningPopup.open()
+                warningItem.text = "无人机数据新增成功!"
+                autoCloseTimer.start()
+                backUavRecord()
+                controlUav.visible = false
+            }else{
+                warningPopup.open()
+                warningItem.text = "无人机数据新增失败!"
+                autoCloseTimer.start()
+            }
         }
     }
 
@@ -2869,7 +2904,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
         };
 
         //检查是否填写完全
-        checkAllValue()
+        //checkAllValue()
         var uavBombWay = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()
         var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()
         var uavRecoveryWay = uavModelRecoveryModeDaoModel.selectModelRecoveryModeAllData()
@@ -3039,6 +3074,8 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
             warningPopup.open()
             warningItem.text = "无人机数据更新成功!"
             autoCloseTimer.start()
+            backUavRecord()
+            controlUav.visible = false
         }else{
             warningPopup.open()
             warningItem.text = "无人机数据更新失败!"
@@ -3052,61 +3089,6 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
         });
     }
 
-    // 生成测试数据函数修正
-    function generateTestData() {
-        const testData = [
-                           {
-                               mountCount: "2",
-                               payloadCapacity: "500",
-                               mountingPosition: "位置A",
-                               positionNumber: "001",
-                               checked: true
-                           },
-                           {
-                               mountCount: "1",
-                               payloadCapacity: "300",
-                               mountingPosition: "位置B",
-                               positionNumber: "002",
-                               checked: false
-                           },
-                           {
-                               mountCount: "1",
-                               payloadCapacity: "300",
-                               mountingPosition: "位置B",
-                               positionNumber: "002",
-                               checked: false
-                           },
-                           {
-                               mountCount: "1",
-                               payloadCapacity: "300",
-                               mountingPosition: "位置B",
-                               positionNumber: "002",
-                               checked: false
-                           },
-                           {
-                               mountCount: "1",
-                               payloadCapacity: "300",
-                               mountingPosition: "位置B",
-                               positionNumber: "002",
-                               checked: false
-                           },
-                           {
-                               mountCount: "1",
-                               payloadCapacity: "300",
-                               mountingPosition: "位置B",
-                               positionNumber: "002",
-                               checked: false
-                           },
-                           {
-                               mountCount: "1",
-                               payloadCapacity: "300",
-                               mountingPosition: "位置B",
-                               positionNumber: "002",
-                               checked: false
-                           }
-                       ]
-        //multiTextDispay.loadData = testData
-    }
 
 }
 

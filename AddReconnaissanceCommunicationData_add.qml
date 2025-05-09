@@ -17,7 +17,35 @@ Item {
     property int loadState: 0  //0:新增、1:查看、2:编辑
 
     signal reconnaissanceCommunicationRecord()
+    Popup {
+            id: warningPopup
+            width: 200
+            height: 100
+            x: (parent.width - width) / 2
+            y: (parent.height - height) / 2
+            modal: true
+            focus: true
+            closePolicy: Popup.NoAutoClose // 禁止点击外部关闭
 
+            background: Rectangle {
+                color: "#ffeb3b"
+                border.color: "#fbc02d"
+                radius: 5
+            }
+
+            contentItem: Text {
+                id:warningItem
+                //text: "您查询的是全部数据！"
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font.pixelSize: 16
+            }
+        }
+    Timer {
+            id: autoCloseTimer
+            interval: 500 // 2秒
+            onTriggered: warningPopup.close()
+        }
     Component.onCompleted: {
         loadView()
     }
@@ -965,11 +993,10 @@ Item {
             width: 80
             height: 36
             onClicked: {
-                // if(loadState == 1)
+                // if(loadState == 1){
                 //     return
-                saveReconnaissanceCommunicationData()
-                reconnaissanceCommunicationRecord()
-                custom_ReconnaissanceCommunication.visible = false                
+                // }
+                saveReconnaissanceCommunicationData()             
             }
         }
     }
@@ -1024,12 +1051,23 @@ Item {
 
         }
     }
+    function isValidContent(){
+       if(text_name.text.trim() === ""){
+           warningItem.text = "^_^通信侦察名称不能为空!^_^"
+           warningPopup.open()
+           // 2秒后自动关闭
+           autoCloseTimer.start()
+           return false
+       }else{
+           return true
+       }
+    }
 
     function loadReconnaissanceCommunicationData()
     {
         var loadData = reconnaissanceCommunicationDaoTableModel.queryReconnaissanceCommunicationData(processInfo.originData)
         text_name.text = loadData.reconnaissanceName
-
+        text_name.enabled = false
         text_Frequency_Min.text = loadData.frequencyMinimum
         text_Frequency_Max.text = loadData.frequencyMaximum
         usageDescriptionText.text = loadData.description
@@ -1105,74 +1143,272 @@ Item {
         }
 
         saveData.reconnaissanceName = text_name.text
-        saveData.frequencyMinimum = textToFloat(text_Frequency_Min.text)
-        saveData.frequencyMaximum = textToFloat(text_Frequency_Max.text)
+        if(text_Frequency_Min.text.trim() === ""){
+           saveData.frequencyMinimum = null
+        }else{
+           saveData.frequencyMinimum = textToFloat(text_Frequency_Min.text)
+        }
+        if(text_Frequency_Max.text.trim() === ""){
+          saveData.frequencyMaximum = null
+        }else{
+          saveData.frequencyMaximum = textToFloat(text_Frequency_Max.text)
+        }
         saveData.description = usageDescriptionText.text
         if(listmodel_EconnaissanceRange.count == 4)
         {
-            saveData.firstReconnaissanceRange = textToFloat(listmodel_EconnaissanceRange.get(0).m_RangeData)
-            saveData.firstReconnaissanceFrequencyMinimum = textToFloat(listmodel_EconnaissanceRange.get(0).m_MinData)
-            saveData.firstReconnaissanceFrequencyMaximum = textToFloat(listmodel_EconnaissanceRange.get(0).m_MaxData)
-            saveData.firstReconnaissanceRadiatedPower = textToFloat(listmodel_EconnaissanceRange.get(0).m_RadiatedPower)
-            saveData.secondReconnaissanceRange = textToFloat(listmodel_EconnaissanceRange.get(1).m_RangeData)
-            saveData.secondReconnaissanceFrequencyMinimum = textToFloat(listmodel_EconnaissanceRange.get(1).m_MinData)
-            saveData.secondReconnaissanceFrequencyMaximum = textToFloat(listmodel_EconnaissanceRange.get(1).m_MaxData)
-            saveData.secondReconnaissanceRadiatedPower = textToFloat(listmodel_EconnaissanceRange.get(1).m_RadiatedPower)
-            saveData.thirdReconnaissanceRange = textToFloat(listmodel_EconnaissanceRange.get(2).m_RangeData)
-            saveData.thirdReconnaissanceFrequencyMinimum = textToFloat(listmodel_EconnaissanceRange.get(2).m_MinData)
-            saveData.thirdReconnaissanceFrequencyMaximum = textToFloat(listmodel_EconnaissanceRange.get(2).m_MaxData)
-            saveData.thirdReconnaissanceRadiatedPower = textToFloat(listmodel_EconnaissanceRange.get(2).m_RadiatedPower)
-            saveData.fourthReconnaissanceRange = textToFloat(listmodel_EconnaissanceRange.get(3).m_RangeData)
-            saveData.fourthReconnaissanceFrequencyMinimum = textToFloat(listmodel_EconnaissanceRange.get(3).m_MinData)
-            saveData.fourthReconnaissanceFrequencyMaximum = textToFloat(listmodel_EconnaissanceRange.get(3).m_MaxData)
-            saveData.fourthReconnaissanceRadiatedPower = textToFloat(listmodel_EconnaissanceRange.get(3).m_RadiatedPower)
+            if(listmodel_EconnaissanceRange.get(0).m_RangeData.trim() === ""){
+                saveData.firstReconnaissanceRange = null
+            }else{
+                saveData.firstReconnaissanceRange = textToFloat(listmodel_EconnaissanceRange.get(0).m_RangeData)
+            }
+            if(listmodel_EconnaissanceRange.get(0).m_MinData.trim() === ""){
+                saveData.firstReconnaissanceFrequencyMinimum = null
+            }else{
+                saveData.firstReconnaissanceFrequencyMinimum = textToFloat(listmodel_EconnaissanceRange.get(0).m_MinData)
+            }
+            if(listmodel_EconnaissanceRange.get(0).m_MaxData.trim() === ""){
+               saveData.firstReconnaissanceFrequencyMaximum = null
+            }else{
+                saveData.firstReconnaissanceFrequencyMaximum = textToFloat(listmodel_EconnaissanceRange.get(0).m_MaxData)
+            }
+            if(listmodel_EconnaissanceRange.get(0).m_RadiatedPower.trim() === ""){
+                saveData.firstReconnaissanceRadiatedPower = null
+            }else{
+                saveData.firstReconnaissanceRadiatedPower = textToFloat(listmodel_EconnaissanceRange.get(0).m_RadiatedPower)
+            }
+            if(listmodel_EconnaissanceRange.get(1).m_RangeData.trim() === ""){
+                saveData.secondReconnaissanceRange = null
+            }else{
+                saveData.secondReconnaissanceRange = textToFloat(listmodel_EconnaissanceRange.get(1).m_RangeData)
+            }
+            if(listmodel_EconnaissanceRange.get(1).m_MinData.trim() === ""){
+                saveData.secondReconnaissanceFrequencyMinimum = null
+            }else{
+                saveData.secondReconnaissanceFrequencyMinimum = textToFloat(listmodel_EconnaissanceRange.get(1).m_MinData)
+            }
+            if(listmodel_EconnaissanceRange.get(1).m_MaxData.trim() === ""){
+                saveData.secondReconnaissanceFrequencyMaximum = null
+            }else{
+                saveData.secondReconnaissanceFrequencyMaximum = textToFloat(listmodel_EconnaissanceRange.get(1).m_MaxData)
+            }
+            if(listmodel_EconnaissanceRange.get(1).m_RadiatedPower.trim() === ""){
+                saveData.secondReconnaissanceRadiatedPower = null
+            }else{
+                saveData.secondReconnaissanceRadiatedPower = textToFloat(listmodel_EconnaissanceRange.get(1).m_RadiatedPower)
+            }
+            if(listmodel_EconnaissanceRange.get(2).m_RangeData.trim() === ""){
+                saveData.thirdReconnaissanceRange = null
+            }else{
+                saveData.thirdReconnaissanceRange = textToFloat(listmodel_EconnaissanceRange.get(2).m_RangeData)
+            }
+            if(listmodel_EconnaissanceRange.get(2).m_MinData.trim() === ""){
+                 saveData.thirdReconnaissanceFrequencyMinimum = null
+            }else{
+                saveData.thirdReconnaissanceFrequencyMinimum = textToFloat(listmodel_EconnaissanceRange.get(2).m_MinData)
+            }
+            if(listmodel_EconnaissanceRange.get(2).m_MaxData.trim() === ""){
+                  saveData.thirdReconnaissanceFrequencyMaximum = null
+            }else{
+                saveData.thirdReconnaissanceFrequencyMaximum = textToFloat(listmodel_EconnaissanceRange.get(2).m_MaxData)
+            }
+            if(listmodel_EconnaissanceRange.get(2).m_RadiatedPower.trim() === ""){
+                 saveData.thirdReconnaissanceRadiatedPower = null
+            }else{
+                saveData.thirdReconnaissanceRadiatedPower = textToFloat(listmodel_EconnaissanceRange.get(2).m_RadiatedPower)
+            }
+            if(listmodel_EconnaissanceRange.get(3).m_RangeData.trim() === ""){
+                saveData.fourthReconnaissanceRange = null
+            }else{
+                saveData.fourthReconnaissanceRange = textToFloat(listmodel_EconnaissanceRange.get(3).m_RangeData)
+            }
+            if(listmodel_EconnaissanceRange.get(3).m_MinData.trim() === ""){
+                saveData.fourthReconnaissanceFrequencyMinimum = null
+            }else{
+                saveData.fourthReconnaissanceFrequencyMinimum = textToFloat(listmodel_EconnaissanceRange.get(3).m_MinData)
+            }
+            if(listmodel_EconnaissanceRange.get(3).m_MaxData.trim() === ""){
+                saveData.fourthReconnaissanceFrequencyMaximum = null
+            }else{
+                saveData.fourthReconnaissanceFrequencyMaximum = textToFloat(listmodel_EconnaissanceRange.get(3).m_MaxData)
+            }
+            if(listmodel_EconnaissanceRange.get(3).m_RadiatedPower.trim() === ""){
+                saveData.fourthReconnaissanceRadiatedPower = null
+            }else{
+                saveData.fourthReconnaissanceRadiatedPower = textToFloat(listmodel_EconnaissanceRange.get(3).m_RadiatedPower)
+            }
 
         }
 
         if(listmodel_LateralAccuracy.count == 4)
         {
-            saveData.firstOrientationAccuracy = textToFloat(listmodel_LateralAccuracy.get(0).m_RangeData)
-            saveData.firstOrientationFrequencyMinimum = textToFloat(listmodel_LateralAccuracy.get(0).m_MinData)
-            saveData.firstOrientationFrequencyMaximum = textToFloat(listmodel_LateralAccuracy.get(0).m_MaxData)
-            saveData.secondOrientationAccuracy = textToFloat(listmodel_LateralAccuracy.get(1).m_RangeData)
-            saveData.secondOrientationFrequencyMinimum = textToFloat(listmodel_LateralAccuracy.get(1).m_MinData)
-            saveData.secondOrientationFrequencyMaximum = textToFloat(listmodel_LateralAccuracy.get(1).m_MaxData)
-            saveData.thirdOrientationAccuracy = textToFloat(listmodel_LateralAccuracy.get(2).m_RangeData)
-            saveData.thirdOrientationFrequencyMinimum = textToFloat(listmodel_LateralAccuracy.get(2).m_MinData)
-            saveData.thirdOrientationFrequencyMaximum = textToFloat(listmodel_LateralAccuracy.get(2).m_MaxData)
-            saveData.fourthOrientationAccuracy = textToFloat(listmodel_LateralAccuracy.get(3).m_RangeData)
-            saveData.fourthOrientationFrequencyMinimum = textToFloat(listmodel_LateralAccuracy.get(3).m_MinData)
-            saveData.fourthOrientationFrequencyMaximum = textToFloat(listmodel_LateralAccuracy.get(3).m_MaxData)
+            if(listmodel_LateralAccuracy.get(0).m_RangeData.trim() === ""){
+                saveData.firstOrientationAccuracy = null
+            }else{
+                saveData.firstOrientationAccuracy = textToFloat(listmodel_LateralAccuracy.get(0).m_RangeData)
+            }
+            if(listmodel_LateralAccuracy.get(0).m_MinData.trim() === ""){
+                saveData.firstOrientationFrequencyMinimum = null
+            }else{
+                saveData.firstOrientationFrequencyMinimum = textToFloat(listmodel_LateralAccuracy.get(0).m_MinData)
+            }
+            if(listmodel_LateralAccuracy.get(0).m_MaxData.trim() === ""){
+                saveData.firstOrientationFrequencyMaximum = null
+            }else{
+                saveData.firstOrientationFrequencyMaximum = textToFloat(listmodel_LateralAccuracy.get(0).m_MaxData)
+            }
+            if(listmodel_LateralAccuracy.get(1).m_RangeData.trim() === ""){
+                saveData.secondOrientationAccuracy = null
+            }else{
+                saveData.secondOrientationAccuracy = textToFloat(listmodel_LateralAccuracy.get(1).m_RangeData)
+            }
+            if(listmodel_LateralAccuracy.get(1).m_MinData.trim() === ""){
+                saveData.secondOrientationFrequencyMinimum =  null
+            }else{
+                saveData.secondOrientationFrequencyMinimum = textToFloat(listmodel_LateralAccuracy.get(1).m_MinData)
+            }
+            if(listmodel_LateralAccuracy.get(1).m_MaxData.trim() === ""){
+                saveData.secondOrientationFrequencyMaximum = null
+            }else{
+                saveData.secondOrientationFrequencyMaximum = textToFloat(listmodel_LateralAccuracy.get(1).m_MaxData)
+            }
+            if(listmodel_LateralAccuracy.get(2).m_RangeData.trim() === ""){
+                saveData.thirdOrientationAccuracy = null
+            }else{
+                saveData.thirdOrientationAccuracy = textToFloat(listmodel_LateralAccuracy.get(2).m_RangeData)
+            }
+            if(listmodel_LateralAccuracy.get(2).m_MinData.trim() === ""){
+                saveData.thirdOrientationFrequencyMinimum = null
+            }else{
+                saveData.thirdOrientationFrequencyMinimum = textToFloat(listmodel_LateralAccuracy.get(2).m_MinData)
+            }
+            if(listmodel_LateralAccuracy.get(2).m_MaxData.trim() === ""){
+                saveData.thirdOrientationFrequencyMaximum = null
+            }else{
+                saveData.thirdOrientationFrequencyMaximum = textToFloat(listmodel_LateralAccuracy.get(2).m_MaxData)
+            }
+            if(listmodel_LateralAccuracy.get(3).m_RangeData.trim() === ""){
+                saveData.fourthOrientationAccuracy = null
+            }else{
+                saveData.fourthOrientationAccuracy = textToFloat(listmodel_LateralAccuracy.get(3).m_RangeData)
+            }
+            if(listmodel_LateralAccuracy.get(3).m_MinData.trim() === ""){
+                saveData.fourthOrientationFrequencyMinimum = null
+            }else{
+                saveData.fourthOrientationFrequencyMinimum = textToFloat(listmodel_LateralAccuracy.get(3).m_MinData)
+            }
+            if(listmodel_LateralAccuracy.get(3).m_MaxData.trim() === ""){
+                saveData.fourthOrientationFrequencyMaximum = null
+            }else{
+                saveData.fourthOrientationFrequencyMaximum = textToFloat(listmodel_LateralAccuracy.get(3).m_MaxData)
+            }
 
         }
 
         if(listmodel_PositioningAccuracy.count == 4)
         {
-            saveData.firstPositioningAccuracy = textToFloat(listmodel_PositioningAccuracy.get(0).m_RangeData)
-            saveData.firstPositioningFrequencyMinimum = textToFloat(listmodel_PositioningAccuracy.get(0).m_MinData)
-            saveData.firstPositioningFrequencyMaximum = textToFloat(listmodel_PositioningAccuracy.get(0).m_MaxData)
-            saveData.secondPositioningAccuracy = textToFloat(listmodel_PositioningAccuracy.get(1).m_RangeData)
-            saveData.secondPositioningFrequencyMinimum = textToFloat(listmodel_PositioningAccuracy.get(1).m_MinData)
-            saveData.secondPositioningFrequencyMaximum = textToFloat(listmodel_PositioningAccuracy.get(1).m_MaxData)
-            saveData.thirdPositioningAccuracy = textToFloat(listmodel_PositioningAccuracy.get(2).m_RangeData)
-            saveData.thirdPositioningFrequencyMinimum = textToFloat(listmodel_PositioningAccuracy.get(2).m_MinData)
-            saveData.thirdPositioningFrequencyMaximum = textToFloat(listmodel_PositioningAccuracy.get(2).m_MaxData)
-            saveData.fourthPositioningAccuracy = textToFloat(listmodel_PositioningAccuracy.get(3).m_RangeData)
-            saveData.fourthPositioningFrequencyMinimum = textToFloat(listmodel_PositioningAccuracy.get(3).m_MinData)
-            saveData.fourthPositioningFrequencyMaximum = textToFloat(listmodel_PositioningAccuracy.get(3).m_MaxData)
+            if(listmodel_PositioningAccuracy.get(0).m_RangeData.trim() === ""){
+               saveData.firstPositioningAccuracy = null
+            }else{
+                saveData.firstPositioningAccuracy = textToFloat(listmodel_PositioningAccuracy.get(0).m_RangeData)
+            }
+            if(listmodel_PositioningAccuracy.get(0).m_MinData.trim() === ""){
+                saveData.firstPositioningFrequencyMinimum = null
+            }else{
+                saveData.firstPositioningFrequencyMinimum = textToFloat(listmodel_PositioningAccuracy.get(0).m_MinData)
+            }
+            if(listmodel_PositioningAccuracy.get(0).m_MaxData.trim() === ""){
+                saveData.firstPositioningFrequencyMaximum = null
+            }else{
+                saveData.firstPositioningFrequencyMaximum = textToFloat(listmodel_PositioningAccuracy.get(0).m_MaxData)
+            }
+            if(listmodel_PositioningAccuracy.get(1).m_RangeData.trim() === ""){
+                saveData.secondPositioningAccuracy = null
+            }else{
+                saveData.secondPositioningAccuracy = textToFloat(listmodel_PositioningAccuracy.get(1).m_RangeData)
+            }
+            if(listmodel_PositioningAccuracy.get(1).m_MinData.trim() === ""){
+                saveData.secondPositioningFrequencyMinimum = null
+            }else{
+                saveData.secondPositioningFrequencyMinimum = textToFloat(listmodel_PositioningAccuracy.get(1).m_MinData)
+            }
+            if(listmodel_PositioningAccuracy.get(1).m_MaxData.trim() === ""){
+                saveData.secondPositioningFrequencyMaximum = null
+            }else{
+                saveData.secondPositioningFrequencyMaximum = textToFloat(listmodel_PositioningAccuracy.get(1).m_MaxData)
+            }
+            if(listmodel_PositioningAccuracy.get(2).m_RangeData.trim() === ""){
+                saveData.thirdPositioningAccuracy = null
+            }else{
+                saveData.thirdPositioningAccuracy = textToFloat(listmodel_PositioningAccuracy.get(2).m_RangeData)
+            }
+
+            if(listmodel_PositioningAccuracy.get(2).m_MinData.trim() === ""){
+                saveData.thirdPositioningFrequencyMinimum = null
+            }else{
+                saveData.thirdPositioningFrequencyMinimum = textToFloat(listmodel_PositioningAccuracy.get(2).m_MinData)
+            }
+            if(listmodel_PositioningAccuracy.get(2).m_MaxData.trim() === ""){
+                saveData.thirdPositioningFrequencyMaximum = null
+            }else{
+                saveData.thirdPositioningFrequencyMaximum = textToFloat(listmodel_PositioningAccuracy.get(2).m_MaxData)
+            }
+            if(listmodel_PositioningAccuracy.get(3).m_RangeData.trim() === ""){
+               saveData.fourthPositioningAccuracy = null
+            }else{
+                saveData.fourthPositioningAccuracy = textToFloat(listmodel_PositioningAccuracy.get(3).m_RangeData)
+            }
+            if(listmodel_PositioningAccuracy.get(3).m_MinData.trim() === ""){
+                saveData.fourthPositioningFrequencyMinimum = null
+            }else{
+                saveData.fourthPositioningFrequencyMinimum = textToFloat(listmodel_PositioningAccuracy.get(3).m_MinData)
+            }
+            if(listmodel_PositioningAccuracy.get(3).m_MaxData.trim() === ""){
+                saveData.fourthPositioningFrequencyMaximum = null
+            }else{
+                saveData.fourthPositioningFrequencyMaximum = textToFloat(listmodel_PositioningAccuracy.get(3).m_MaxData)
+            }
         }
 
-        var succ
-        if(loadState == 0)
-            succ = reconnaissanceCommunicationDaoTableModel.insertReconnaissanceCommunicationData(saveData)
-        else
-        {
+        if(loadState == 0){
+            if(isValidContent() === true){
+                let result = reconnaissanceCommunicationDaoTableModel.insertReconnaissanceCommunicationData(saveData)
+                if(result === true){
+                    warningItem.text = "^_^通信侦察新增数据成功!^_^"
+                    warningPopup.open()
+                    // 2秒后自动关闭
+                    autoCloseTimer.start()
+                    reconnaissanceCommunicationRecord()
+                    custom_ReconnaissanceCommunication.visible = false
+                }else if(result === false){
+                    warningItem.text = "^_^通信侦察新增数据失败!^_^"
+                    warningPopup.open()
+                    // 2秒后自动关闭
+                    autoCloseTimer.start()
+                 }else{
+                    console.log("unknown addAmmoAllDatView!")
+                }
+            }else{
+
+            }
+        }else{
             saveData.id = processInfo.recordId
-            succ = reconnaissanceCommunicationDaoTableModel.updateReconnaissanceCommunicationData(saveData)
+            let result = reconnaissanceCommunicationDaoTableModel.updateReconnaissanceCommunicationData(saveData)
+            if(result === true){
+                warningItem.text = "^_^通信侦察更新数据成功!^_^"
+                warningPopup.open()
+                // 2秒后自动关闭
+                autoCloseTimer.start()
+                reconnaissanceCommunicationRecord()
+                custom_ReconnaissanceCommunication.visible = false
+            }else if(result === false){
+                warningItem.text = "^_^通信侦察更新数据失败!^_^"
+                warningPopup.open()
+                // 2秒后自动关闭
+                autoCloseTimer.start()
+             }else{
+                console.log("unknown addAmmoAllDatView!")
+            }
         }
-        if(succ)
-            console.log("写入数据库成功")
-        else
-            console.log("写入数据库失败")
+
     }
 }

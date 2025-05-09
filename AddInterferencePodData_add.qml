@@ -1040,13 +1040,13 @@ Item {
                 onClicked: {
                     if(loadState == 1)
                     {
+                        custom_PassiveInterferencePod.visible = false
+                        backPayloadRecord()
                         return
                     }
                     else{
                         saveInterferencePodData()
                     }
-                    custom_PassiveInterferencePod.visible = false
-                    backPayloadRecord()
 
                 }
             }
@@ -1103,6 +1103,7 @@ Item {
 
     function loadInterferencePodData(method){
         //加载数据
+        text_PodName.enabled = false
         var selectPodData = new Object
         selectPodData.recordId =processInfo.podJsonStr.recordId
         selectPodData.loadDataMethod = method
@@ -1115,6 +1116,8 @@ Item {
         text_FrontHoodLength.text = podData.frontCoverLength//前罩长
         text_BackHoodLength.text = podData.rearCoverLength//后罩长
         text_MainCarbinSection.text = podData.mainCabinSection//主舱截面
+        // if(Number.parseInt(podData.mainLength) === -1)
+        //     text_MainCarbinLength.text = ""
         text_MainCarbinLength.text = podData.mainLength//主舱长度
         text_PodTotaloLength.text = podData.interferenceLength//吊舱总长度
         text_LoadCapacity.text = podData.loadingCapacity//装载容量
@@ -1163,19 +1166,42 @@ Item {
             }
         }
         //干扰强度
-        iIntensity = Number.parseInt(podData.interferenceIntensity) - 1   //index值比存储值小1
+        var intensityResult = podData.interferenceIntensity;
+        var intensityResultData = 0
+                // 检查是否为空字符串、null 或 undefined
+                if (typeof intensityResult === "undefined" || intensityResult === null || intensityResult.trim() === "") {
+                    console.log("interferenceIntensity is empty or undefined");
+                    intensityResultData =  0
+                } else {
+                    console.log("interferenceIntensity has a valid value:", intensityResultData);
+                      //index值比存储值小1
+                   intensityResultData = Number.parseInt(podData.interferenceIntensity)
+                }
+        iIntensity =intensityResultData   - 1
         var interferenceIntensityArray = [{m_PlanNumber:1,m_SelectState:false,m_TypeName:"强度1(轻度干扰)"},
                 {m_PlanNumber:2,m_SelectState:false,m_TypeName:"强度2(中度干扰)"},
                 {m_PlanNumber:3,m_SelectState:false,m_TypeName:"强度3(重度干扰)"}]
         listmodel_Box_Intensity.append(interferenceIntensityArray)
         for(var index = 0; index < listmodel_Box_Intensity.count; index++)
         {
-            if(listmodel_Box_Intensity.get(index).m_PlanNumber === Number.parseInt(podData.interferenceIntensity))  //
+            if(listmodel_Box_Intensity.get(index).m_PlanNumber === Number.parseInt(intensityResult))  //podData.interferenceIntensity
             {
                 listmodel_Box_Intensity.set(index,{m_SelectState:true})
             }
         }
-        ideliveryWay = Number.parseInt(podData.deliverWay) - 1
+
+        var ideliveryWayResult = podData.interferenceIntensity;
+        var ideliveryWayResultData = 0
+                // 检查是否为空字符串、null 或 undefined
+                if (typeof ideliveryWayResult === "undefined" || ideliveryWayResult === null || ideliveryWayResult.trim() === "") {
+                    console.log("interferenceIntensity is empty or undefined");
+                    ideliveryWayResultData =  0
+                } else {
+                    console.log("interferenceIntensity has a valid value:", ideliveryWayResultData);
+                      //index值比存储值小1
+                   ideliveryWayResultData = Number.parseInt(Number.parseInt(podData.deliverWay))
+                }
+        ideliveryWay = ideliveryWayResultData - 1
         var deliveryWayArray = [{m_PlanNumber:1,m_SelectState:false,m_TypeName:"同时1"},
                 {m_PlanNumber:2,m_SelectState:false,m_TypeName:"同时2"},
                 {m_PlanNumber:3,m_SelectState:false,m_TypeName:"交替1"},
@@ -1224,7 +1250,7 @@ Item {
         }
     }
 
-    //
+    //保存数据
     function saveInterferencePodData(){
         var interferencePodData = {
             id:0,
@@ -1233,19 +1259,19 @@ Item {
             interferencePodId:"",
             usedUavModels:"",  //选择的机型
             description:"",  //描述
-            mainLength:0.0,//主舱长度
-            interferenceLength:0.0,//吊舱长度
-            mass:0.0,//单吊舱质量
-            frontCoverLength:0.0,//前罩长(mm)
-            rearCoverLength:0.0,//后罩长(mm)
-            mainCabinSection:0.0,//主舱截面(mm)
-            maximumWeightPodFullyLoaded:0.0,//单吊舱满载最大重量(kg)
+            mainLength:-1.0,//主舱长度
+            interferenceLength:-1.0,//吊舱长度
+            mass:-1.0,//单吊舱质量
+            frontCoverLength:-1.0,//前罩长(mm)
+            rearCoverLength:-1.0,//后罩长(mm)
+            mainCabinSection:-1.0,//主舱截面(mm)
+            maximumWeightPodFullyLoaded:-1.0,//单吊舱满载最大重量(kg)
             interferenceBand:"",//干扰波段
             effectiveReflectionArea:"",//有效反射面积
             deliveryControlWay:"",//投放控制方式
             deliverySpeed:"",//投放速度
             deliverWay:"",//投放方式
-            loadingCapacity:0.0,//装载容量(kg)
+            loadingCapacity:-1.0,//装载容量(kg)
             interferenceIntensity:"",//干扰强度
             image_name:"",
             image_url:"",
@@ -1259,19 +1285,63 @@ Item {
 
         //console.log("deliverySpeed"+interferencePodData.deliverySpeed)
         //主舱长度
-        interferencePodData.mainLength = textToFloat(text_MainCarbinLength.text)
+        // 检查输入框是否为空
+        if (text_MainCarbinLength.text.trim() === "") {
+            interferencePodData.mainLength = null
+            console.log("Input is empty or only contains spaces.");
+        } else {
+            interferencePodData.mainLength = textToFloat(text_MainCarbinLength.text)
+            console.log("Input is not empty:", text_MainCarbinLength.text);
+        }
+        console.log("mainLength",interferencePodData.mainLength)
         //吊舱长度
-        interferencePodData.interferenceLength = textToFloat(text_PodTotaloLength.text)
+        if (text_PodTotaloLength.text.trim() === "") {
+            interferencePodData.interferenceLength = null
+            console.log("Input is empty or only contains spaces.");
+        } else {
+            interferencePodData.interferenceLength = textToFloat(text_PodTotaloLength.text)
+            console.log("Input is not empty:", interferencePodData.interferenceLength);
+        }
         //主舱截面(m)
-        interferencePodData.mainCabinSection = textToFloat(text_MainCarbinSection.text)
+        if (text_MainCarbinSection.text.trim() === "") {
+            interferencePodData.mainCabinSection = null
+            console.log("Input is empty or only contains spaces.");
+        } else {
+            interferencePodData.mainCabinSection = textToFloat(text_MainCarbinSection.text)
+            console.log("Input is not empty:", interferencePodData.mainCabinSection);
+        }
         //单吊舱质量
-        interferencePodData.mass = textToFloat(text_SinglePodWeight.text)
+        if (text_SinglePodWeight.text.trim() === "") {
+            interferencePodData.mass = null
+            console.log("Input is empty or only contains spaces.");
+        } else {
+            interferencePodData.mass = textToFloat(text_SinglePodWeight.text)
+            console.log("Input is not empty:", interferencePodData.mass);
+        }
         //前罩长(m)
-        interferencePodData.frontCoverLength = textToFloat(text_FrontHoodLength.text)
+        if (text_FrontHoodLength.text.trim() === "") {
+            interferencePodData.frontCoverLength = null
+            console.log("Input is empty or only contains spaces.");
+        } else {
+            interferencePodData.frontCoverLength = textToFloat(text_FrontHoodLength.text)
+            console.log("Input is not empty:", interferencePodData.frontCoverLength);
+        }
         //后罩长(m)
-        interferencePodData.rearCoverLength = textToFloat(text_BackHoodLength.text)
+        if (text_BackHoodLength.text.trim() === "") {
+            interferencePodData.rearCoverLength = null
+            console.log("Input is empty or only contains spaces.");
+        } else {
+            interferencePodData.rearCoverLength = textToFloat(text_BackHoodLength.text)
+            console.log("Input is not empty:", interferencePodData.rearCoverLength);
+        }
         //单吊舱满载最大重量(kg)
-        interferencePodData.maximumWeightPodFullyLoaded = textToFloat(text_SinglePodFullLoadWeight.text)
+        if (text_SinglePodFullLoadWeight.text.trim() === "") {
+            interferencePodData.maximumWeightPodFullyLoaded = null
+            console.log("Input is empty or only contains spaces.");
+        } else {
+            interferencePodData.maximumWeightPodFullyLoaded = textToFloat(text_SinglePodFullLoadWeight.text)
+            console.log("Input is not empty:", interferencePodData.maximumWeightPodFullyLoaded);
+        }
         //干扰波段
         var bandStr = ""
         for(var i=0; i<listmodel_Box_Band.count; i++)
@@ -1286,8 +1356,18 @@ Item {
             interferencePodData.interferenceBand = bandStr.slice(0,-1)
 
         //干扰强度
-        interferencePodData.interferenceIntensity = (listmodel_Box_Intensity.get(iIntensity).m_PlanNumber).toString()
-        interferencePodData.deliverWay = (listmodel_Box_DeliveryWay.get(ideliveryWay).m_PlanNumber).toString()
+        if(iIntensity <0){
+          interferencePodData.interferenceIntensity = ""
+        }else{
+          interferencePodData.interferenceIntensity = (listmodel_Box_Intensity.get(iIntensity).m_PlanNumber).toString()
+        }
+        if(ideliveryWay<0){
+            interferencePodData.deliverWay = ""
+        }else{
+           interferencePodData.deliverWay = (listmodel_Box_DeliveryWay.get(ideliveryWay).m_PlanNumber).toString()
+        }
+
+
         //控制方式
         //interferencePodData.deliveryControlWay = (listmodel_Box_LaunchControlType.get(iLaunchControlType).m_PlanNumber).toString()
         var deliveryControlWayStr = ""
@@ -1304,7 +1384,13 @@ Item {
 
 
         //装载容量(kg)
-        interferencePodData.loadingCapacity = textToFloat(text_LoadCapacity.text)
+        if (text_LoadCapacity.text.trim() === "") {
+            interferencePodData.loadingCapacity = null
+            console.log("Input is empty or only contains spaces.");
+        } else {
+            interferencePodData.loadingCapacity = textToFloat(text_LoadCapacity.text)
+            console.log("Input is not empty:", interferencePodData.loadingCapacity);
+        }
 
         //图片地址
         interferencePodData.image_url = ammunitionImg.source.toString()
@@ -1321,20 +1407,26 @@ Item {
 
 
         if(loadState == 0){//新增
-            let result = interferencePodDaoTableModel.insertInterferencePodData(interferencePodData)
-              if(result === true){
-                  warningItem.text = "^_^干扰吊舱新增数据成功!^_^"
-                  warningPopup.open()
-                  // 2秒后自动关闭
-                  autoCloseTimer.start()
-              }else if(result === false){
-                  warningItem.text = "^_^干扰吊舱新增数据失败!^_^"
-                  warningPopup.open()
-                  // 2秒后自动关闭
-                  autoCloseTimer.start()
-               }else{
-                  console.log("unknown addAmmoAllDatView!")
-              }
+            if(isValidContent() === true){
+                let result = interferencePodDaoTableModel.insertInterferencePodData(interferencePodData)
+                  if(result === true){
+                      warningItem.text = "^_^干扰吊舱新增数据成功!^_^"
+                      warningPopup.open()
+                      // 2秒后自动关闭
+                      autoCloseTimer.start()
+                      custom_PassiveInterferencePod.visible = false
+                      backPayloadRecord()
+                  }else if(result === false){
+                      warningItem.text = "^_^干扰吊舱新增数据失败!^_^"
+                      warningPopup.open()
+                      // 2秒后自动关闭
+                      autoCloseTimer.start()
+                   }else{
+                      console.log("unknown addAmmoAllDatView!")
+                  }
+            }else{
+                console.log("InterencePad name is null!")
+            }
         }else if(loadState == 2)
         {//更新
             interferencePodData.id = parseInt(processInfo.podJsonStr.recordId)
@@ -1354,6 +1446,17 @@ Item {
             }
         }
         return true
+    }
+    function isValidContent(){
+        if(text_PodName.text && text_PodName.text.trim().length !== 0){
+            return true
+        }else{
+            warningItem.text = "^_^航弹名称不能为空!^_^"
+            warningPopup.open()
+            // 2秒后自动关闭
+            autoCloseTimer.start()
+            return false
+        }
     }
 
     function allComponentEnable(){

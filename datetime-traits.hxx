@@ -15,7 +15,7 @@ struct value_traits<QDateTime, id_timestamp>
 
     typedef QDateTime value_type;
     typedef QDateTime query_type;
-    typedef unsigned long long image_type;
+    typedef long long image_type;
 
     static void
     set_value (QDateTime& v, image_type i, bool is_null)

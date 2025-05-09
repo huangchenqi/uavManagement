@@ -662,12 +662,12 @@ namespace odb
     // mainLength_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.mainLength_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.mainLength_value, is_null, v);
       i.mainLength_null = is_null;
@@ -676,12 +676,12 @@ namespace odb
     // interferenceLength_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.interferenceLength_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.interferenceLength_value, is_null, v);
       i.interferenceLength_null = is_null;
@@ -690,12 +690,12 @@ namespace odb
     // mass_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.mass_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.mass_value, is_null, v);
       i.mass_null = is_null;
@@ -704,12 +704,12 @@ namespace odb
     // frontCoverLength_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.frontCoverLength_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.frontCoverLength_value, is_null, v);
       i.frontCoverLength_null = is_null;
@@ -718,12 +718,12 @@ namespace odb
     // rearCoverLength_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.rearCoverLength_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.rearCoverLength_value, is_null, v);
       i.rearCoverLength_null = is_null;
@@ -732,12 +732,12 @@ namespace odb
     // mainCabinSection_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.mainCabinSection_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.mainCabinSection_value, is_null, v);
       i.mainCabinSection_null = is_null;
@@ -746,12 +746,12 @@ namespace odb
     // maximumWeightPodFullyLoaded_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.maximumWeightPodFullyLoaded_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.maximumWeightPodFullyLoaded_value, is_null, v);
       i.maximumWeightPodFullyLoaded_null = is_null;
@@ -865,12 +865,12 @@ namespace odb
     // loadingCapacity_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.loadingCapacity_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.loadingCapacity_value, is_null, v);
       i.loadingCapacity_null = is_null;
@@ -1071,11 +1071,11 @@ namespace odb
     // mainLength_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.mainLength_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.mainLength_value,
@@ -1085,11 +1085,11 @@ namespace odb
     // interferenceLength_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.interferenceLength_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.interferenceLength_value,
@@ -1099,11 +1099,11 @@ namespace odb
     // mass_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.mass_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.mass_value,
@@ -1113,11 +1113,11 @@ namespace odb
     // frontCoverLength_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.frontCoverLength_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.frontCoverLength_value,
@@ -1127,11 +1127,11 @@ namespace odb
     // rearCoverLength_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.rearCoverLength_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.rearCoverLength_value,
@@ -1141,11 +1141,11 @@ namespace odb
     // mainCabinSection_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.mainCabinSection_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.mainCabinSection_value,
@@ -1155,11 +1155,11 @@ namespace odb
     // maximumWeightPodFullyLoaded_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.maximumWeightPodFullyLoaded_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.maximumWeightPodFullyLoaded_value,
@@ -1244,11 +1244,11 @@ namespace odb
     // loadingCapacity_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.loadingCapacity_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.loadingCapacity_value,

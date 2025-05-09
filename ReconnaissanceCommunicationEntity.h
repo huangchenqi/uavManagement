@@ -7,7 +7,10 @@
 //#include <odb/qt/date-time/pgsql/qdate-time-traits.hxx>
 #include <odb/core.hxx> // ODB核心头文件
 #include <QtCore/QDateTime>
+#ifndef ODB_COMPILER
 #include "datetime-traits.hxx"
+#endif
+#include "odb/nullable.hxx"
 #pragma once
 #pragma db object schema("uav_type_man") table("communication_reconnaissance") // 指定表名
 class ReconnaissanceCommunicationEntity
@@ -38,101 +41,101 @@ public:
 
 /******************** 基础物理特性 ********************/
 #pragma db column("frequency_minimum") type("real") // 频率(GHz)
-    float frequencyMinimum_;
+    odb::nullable<float> frequencyMinimum_;
 
 #pragma db column("frequency_maximum") type("real") // 频率(GHz)
-    float frequencyMaximum_;
+    odb::nullable<float> frequencyMaximum_;
 
 #pragma db column("first_reconnaissance_range") type("real") //      REAL ,--COMMENT '第一个侦察距离',
-    float firstReconnaissanceRange_;
+    odb::nullable<float> firstReconnaissanceRange_;
 
 #pragma db column("first_reconnaissance_frequency_minimum") type("real") //  REAL  ,--COMMENT '第一个最小侦察频率',
-    float firstReconnaissanceFrequencyMinimum_;
+    odb::nullable<float> firstReconnaissanceFrequencyMinimum_;
 
 #pragma db column("first_reconnaissance_frequency_maximum") type("real") // REAL ,--COMMENT '第一个最大侦察频率',
-    float firstReconnaissanceFrequencyMaximum_;
+    odb::nullable<float> firstReconnaissanceFrequencyMaximum_;
 
 #pragma db column("first_reconnaissance_radiated_power") type("real") //  REAL ,--COMMENT '第一个侦察辐射功率',
-    float firstReconnaissanceRadiatedPower_;
+    odb::nullable<float> firstReconnaissanceRadiatedPower_;
 
 
 #pragma db column("second_reconnaissance_range") type("real") //REAL ,--COMMENT '第二个侦察距离',
-    float secondReconnaissanceRange_;
+    odb::nullable<float> secondReconnaissanceRange_;
 
 #pragma db column("second_reconnaissance_frequency_minimum") type("real") //REAL  ,--COMMENT '第二个最小侦察频率',
-    float secondReconnaissanceFrequencyMinimum_;
+    odb::nullable<float> secondReconnaissanceFrequencyMinimum_;
 
 #pragma db column("second_reconnaissance_frequency_maximum") type("real") //REAL ,--COMMENT '第二个最大侦察频率',
-    float secondReconnaissanceFrequencyMaximum_;
+    odb::nullable<float> secondReconnaissanceFrequencyMaximum_;
 #pragma db column("second_reconnaissance_radiated_power") type("real") //REAL ,--COMMENT '第二个侦察辐射功率',
-    float secondReconnaissanceRadiatedPower_;
+    odb::nullable<float> secondReconnaissanceRadiatedPower_;
 
 #pragma db column("third_reconnaissance_range") type("real") //REAL ,--COMMENT '第三个侦察距离',
-    float thirdReconnaissanceRange_;
+    odb::nullable<float> thirdReconnaissanceRange_;
 
 #pragma db column("third_reconnaissance_frequency_minimum") type("real") //REAL  ,--COMMENT '第三个最小侦察频率',
-    float thirdReconnaissanceFrequencyMinimum_;
+    odb::nullable<float> thirdReconnaissanceFrequencyMinimum_;
 
 #pragma db column("third_reconnaissance_frequency_maximum") type("real") //REAL ,--COMMENT '第三个最大侦察频率',
-    float thirdReconnaissanceFrequencyMaximum_;
+    odb::nullable<float> thirdReconnaissanceFrequencyMaximum_;
 #pragma db column("third_reconnaissance_radiated_power") type("real") //REAL ,--COMMENT '第三个侦察辐射功率',
-    float thirdReconnaissanceRadiatedPower_;
+    odb::nullable<float> thirdReconnaissanceRadiatedPower_;
 #pragma db column("fourth_reconnaissance_range") type("real") //REAL ,--COMMENT '第四个侦察距离',
-    float fourthReconnaissanceRange_;
+    odb::nullable<float> fourthReconnaissanceRange_;
 #pragma db column("fourth_reconnaissance_frequency_minimum") type("real") //REAL  ,--COMMENT '第四个最小侦察频率',
-    float fourthReconnaissanceFrequencyMinimum_;
+    odb::nullable<float> fourthReconnaissanceFrequencyMinimum_;
 #pragma db column("fourth_reconnaissance_frequency_maximum") type("real") //REAL ,--COMMENT '第四个最大侦察频率',
-    float fourthReconnaissanceFrequencyMaximum_;
+    odb::nullable<float> fourthReconnaissanceFrequencyMaximum_;
 #pragma db column("fourth_reconnaissance_radiated_power") type("real") //REAL ,--COMMENT '第四个侦察辐射功率',
-    float fourthReconnaissanceRadiatedPower_;
+    odb::nullable<float> fourthReconnaissanceRadiatedPower_;
 #pragma db column("first_orientation_accuracy") type("real") //REAL ,--COMMENT '第一测向精度',
-    float firstOrientationAccuracy_;
+    odb::nullable<float> firstOrientationAccuracy_;
 #pragma db column("first_orientation_frequency_minimum") type("real") //REAL ,--COMMENT '第一测向精度频率最小',
-    float firstOrientationFrequencyMinimum_;
+    odb::nullable<float> firstOrientationFrequencyMinimum_;
 #pragma db column("first_orientation_frequency_maximum") type("real") //REAL ,--COMMENT '第一测向精度频率最大',
-    float firstOrientationFrequencyMaximum_;
+    odb::nullable<float> firstOrientationFrequencyMaximum_;
 #pragma db column("second_orientation_accuracy") type("real") //REAL ,--COMMENT '第二测向精度',
-    float secondOrientationAccuracy_;
+    odb::nullable<float> secondOrientationAccuracy_;
 #pragma db column("second_orientation_frequency_minimum") type("real") //REAL ,--COMMENT '第二测向精度频率最小',
-    float secondOrientationFrequencyMinimum_;
+    odb::nullable<float> secondOrientationFrequencyMinimum_;
 #pragma db column("second_orientation_frequency_maximum") type("real") //REAL ,--COMMENT '第二测向精度频率最大',
-    float secondOrientationFrequencyMaximum_;
+    odb::nullable<float> secondOrientationFrequencyMaximum_;
 #pragma db column("third_orientation_accuracy") type("real") //REAL ,--COMMENT '第三测向精度',
-    float thirdOrientationAccuracy_;
+    odb::nullable<float> thirdOrientationAccuracy_;
 #pragma db column("third_orientation_frequency_minimum") type("real") //REAL ,--COMMENT '第三测向精度频率最小',
-    float thirdOrientationFrequencyMinimum_;
+    odb::nullable<float> thirdOrientationFrequencyMinimum_;
 #pragma db column("third_orientation_frequency_maximum") type("real") //REAL ,--COMMENT '第三测向精度频率最大',
-    float thirdOrientationFrequencyMaximum_;
+    odb::nullable<float> thirdOrientationFrequencyMaximum_;
 #pragma db column("fourth_orientation_accuracy") type("real") //REAL ,--COMMENT '第四测向精度',
-    float fourthOrientationAccuracy_;
+    odb::nullable<float> fourthOrientationAccuracy_;
 #pragma db column("fourth_orientation_frequency_minimum") type("real") //REAL ,--COMMENT '第四测向精度频率最小',
-    float fourthOrientationFrequencyMinimum_;
+    odb::nullable<float> fourthOrientationFrequencyMinimum_;
 #pragma db column("fourth_orientation_frequency_maximum") type("real") //REAL ,--COMMENT '第四测向精度频率最大',
-    float fourthOrientationFrequencyMaximum_;
+    odb::nullable<float> fourthOrientationFrequencyMaximum_;
 #pragma db column("first_positioning_accuracy") type("real") //REAL ,--COMMENT '第一定位精度',
-    float firstPositioningAccuracy_;
+    odb::nullable<float> firstPositioningAccuracy_;
 #pragma db column("first_positioning_frequency_minimum") type("real") //REAL,--COMMENT '第一定位精度频率最小值',
-    float firstPositioningFrequencyMinimum_;
+    odb::nullable<float> firstPositioningFrequencyMinimum_;
 #pragma db column("first_positioning_frequency_maximum") type("real") //REAL ,--COMMENT '第一定位精度频率最大值',
-    float firstPositioningFrequencyMaximum_;
+    odb::nullable<float> firstPositioningFrequencyMaximum_;
 #pragma db column("second_positioning_accuracy") type("real") //REAL ,--COMMENT '第二定位精度',
-    float secondPositioningAccuracy_;
+    odb::nullable<float> secondPositioningAccuracy_;
 #pragma db column("second_positioning_frequency_minimum") type("real") //REAL,--COMMENT '第二定位精度频率最小值',
-    float secondPositioningFrequencyMinimum_;
+    odb::nullable<float> secondPositioningFrequencyMinimum_;
 #pragma db column("second_positioning_frequency_maximum") type("real") //REAL ,--COMMENT '第二定位精度频率最大值',
-    float secondPositioningFrequencyMaximum_;
+    odb::nullable<float> secondPositioningFrequencyMaximum_;
 #pragma db column("third_positioning_accuracy") type("real") //REAL ,--COMMENT '第三定位精度',
-    float thirdPositioningAccuracy_;
+    odb::nullable<float> thirdPositioningAccuracy_;
 #pragma db column("third_positioning_frequency_minimum") type("real") //REAL,--COMMENT '第三定位精度频率最小值',
-    float thirdPositioningFrequencyMinimum_;
+    odb::nullable<float> thirdPositioningFrequencyMinimum_;
 #pragma db column("third_positioning_frequency_maximum") type("real") //REAL ,--COMMENT '第三定位精度频率最大值',
-    float thirdPositioningFrequencyMaximum_;
+    odb::nullable<float> thirdPositioningFrequencyMaximum_;
 #pragma db column("fourth_positioning_accuracy") type("real") //REAL ,--COMMENT '第四定位精度',
-    float fourthPositioningAccuracy_;
+    odb::nullable<float> fourthPositioningAccuracy_;
 #pragma db column("fourth_positioning_frequency_minimum") type("real") //REAL,--COMMENT ''第四定位精度频率最小值',
-    float fourthPositioningFrequencyMinimum_;
+    odb::nullable<float> fourthPositioningFrequencyMinimum_;
 #pragma db column("fourth_positioning_frequency_maximum") type("real") //REAL ,--COMMENT '第四定位精度频率最大值',
-    float fourthPositioningFrequencyMaximum_;
+    odb::nullable<float> fourthPositioningFrequencyMaximum_;
 
 
 #pragma db column("image_name") type("BYTEA")//type("varchar(50)") // 图片名称

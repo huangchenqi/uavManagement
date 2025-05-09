@@ -1628,12 +1628,11 @@ Item {
 
             }else if(processInfo.loadViewType === "update"){
                 updateMountSchemeData()
+                backMountingScheme()
+                addMountSchemeData.visible = false
             }else{
                 console.log("processInfo.loadViewType Unknown")
             }
-
-            backMountingScheme()
-            addMountSchemeData.visible = false
 
         }
     }
@@ -2047,20 +2046,26 @@ Item {
    }
     function saveMountSchemrData(){
         console.log("AddMountSchemeData"+JSON.stringify(addMountSchemeData.mountSchemeData))
-        let result = mountingSchemeDaoTableModel.insertMountingSchemeData(addMountSchemeData.mountSchemeData)
-          if(result === true){
-              warningItem.text = "^_^挂载方案新增数据成功!^_^"
-              warningPopup.open()
-              // 2秒后自动关闭
-              autoCloseTimer.start()
-          }else if(result === false){
-              warningItem.text = "^_^挂载方案新增数据失败!^_^"
-              warningPopup.open()
-              // 2秒后自动关闭
-              autoCloseTimer.start()
-           }else{
-              console.log("unknown deleteMountLocation")
-          }
+        if(isValidContent() === true){
+            let result = mountingSchemeDaoTableModel.insertMountingSchemeData(addMountSchemeData.mountSchemeData)
+              if(result === true){
+                  warningItem.text = "^_^挂载方案新增数据成功!^_^"
+                  warningPopup.open()
+                  // 2秒后自动关闭
+                  autoCloseTimer.start()
+                  backMountingScheme()
+                  addMountSchemeData.visible = false
+              }else if(result === false){
+                  warningItem.text = "^_^挂载方案新增数据失败!^_^"
+                  warningPopup.open()
+                  // 2秒后自动关闭
+                  autoCloseTimer.start()
+               }else{
+                  console.log("unknown deleteMountLocation")
+              }
+        }else{
+         console.log("isValidContent false")
+        }
 
     }
     function textToFloat(data){
@@ -2250,6 +2255,17 @@ Item {
             }
         }
 
+    }
+    function isValidContent(){
+        if(planNameText.text.length != 0){
+            return true
+        }else{
+            warningItem.text = "^_^挂载方案名称不能为空!^_^"
+            warningPopup.open()
+            // 2秒后自动关闭
+            autoCloseTimer.start()
+            return false
+        }
     }
 
     function loadView(){

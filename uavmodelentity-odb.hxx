@@ -1237,7 +1237,7 @@ namespace odb
 
       // uavCreatModelTime_
       //
-      unsigned long long uavCreatModelTime_value;
+      long long uavCreatModelTime_value;
       bool uavCreatModelTime_null;
 
       // uavImgName_

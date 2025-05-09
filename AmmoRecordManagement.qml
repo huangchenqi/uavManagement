@@ -180,7 +180,7 @@ Rectangle {
                       width:parent.width
                       height: parent.height
                       color: "gray"
-                      property string name: value
+                      //property string name: value
 
                       Item {
                           anchors.fill: parent
