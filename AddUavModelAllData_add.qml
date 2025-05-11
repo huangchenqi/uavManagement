@@ -61,7 +61,8 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
     property int iUavType: -1
     //无人机型号
     property int iUavModelType: -1
-
+    property var uavTypeStr: ""
+    property var uavModelStr:""
 
     // 组件加载完成后生成测试数据
     Component.onCompleted:{
@@ -261,7 +262,12 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     text:{
                         if(iUavType < 0)
                         {
-                            return "请选择"
+                            if(processInfo.loadViewType === "query" || processInfo.loadViewType === "update"){
+                                return addUavModelData.uavTypeStr
+                            }else{
+                                return "请选择"
+                            }
+
                         }
                         else
                         {
@@ -300,19 +306,25 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                                 color:"#ffddaa00"
                                 borderColor: "#ffddaa00"
                                 pixelSize: 18
-//                                isSelect: m_SelectState
+                               isSelect: m_SelectState
                                 onClicked: {
                                     view_List_TypeSelect.visible = false
                                     iUavType = index
+                                    for (var i = 0; i < listmodel_Box.count; i++) {
+                                        listmodel_Box.setProperty(i, "m_SelectState", false);
+                                    }
                                     m_SelectState = !m_SelectState
                                 }
                             }
                         }
                     }
                     Component.onCompleted: {
-                        listmodel_Box.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"侦察型无人机"})
-                        listmodel_Box.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"攻击型无人机"})
-                        listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
+                        if(processInfo.loadViewType === "addUavData"){
+                            listmodel_Box.append({m_PlanNumber:0,m_SelectState:false,m_TypeName:"侦察型无人机"})
+                            listmodel_Box.append({m_PlanNumber:1,m_SelectState:false,m_TypeName:"攻击型无人机"})
+                            listmodel_Box.append({m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"})
+                        }
+
                     }
                 }
 
@@ -340,7 +352,12 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                     text:{
                         if(iUavModelType < 0)
                         {
-                            return "请选择"
+                            if(processInfo.loadViewType === "query" || processInfo.loadViewType === "update"){
+                                    return addUavModelData.uavModelStr
+                            }else{
+                                    return "请选择"
+                            }
+
                         }
                         else
                         {
@@ -379,25 +396,31 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
                                 color:"#ffddaa00"
                                 borderColor: "#ffddaa00"
                                 pixelSize: 18
+                                isSelect: m_SelectState
                                 onClicked: {
                                     view_List_uavModelTypeSelect.visible = false
                                     iUavModelType = index
+                                    for (var i = 0; i < listmodel_Box_UavModelType.count; i++) {
+                                        listmodel_Box_UavModelType.setProperty(i, "m_SelectState", false);
+                                    }
+                                    m_SelectState = !m_SelectState
                                 }
                             }
                         }
                     }
                     Component.onCompleted: {
-                        if(uavModelType.length > 0)
-                        {
-                            for(var i = 0; i < uavModelType.length; i++)
+                        if(processInfo.loadViewType === "addUavData"){
+                            if(uavModelType.length > 0)
                             {
-                                var RecordId = uavModelTypeOrigi[i]["recordId"]
-                                listmodel_Box_UavModelType.append({
-                                                                      m_PlanNumber:i,
-                                                                      m_SelectState:false,
-                                                                      m_RecordId:RecordId,
-                                                                      m_TypeName:uavModelType[i]
-                                                                 })
+                                for(var i = 0; i < uavModelType.length; i++)
+                                {
+                                    listmodel_Box_UavModelType.append({
+                                                                          m_PlanNumber:uavModelType[i].recordId,
+                                                                          m_SelectState:false,
+                                                                          m_RecordId:uavModelType[i].recordId,
+                                                                          m_TypeName:uavModelType[i].uavComponeName
+                                                                     })
+                                }
                             }
                         }
                     }
@@ -1990,22 +2013,16 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
 
     //判断是否加载新增、查看、编辑
     function loadView(){
-        var viewType = processInfo.loadViewType
+
         if(processInfo.loadViewType === "addUavData"){
 
             console.log("addUavDataView"+processInfo.loadViewType)
 
         }else if(processInfo.loadViewType === "query"){
             loadUavModelData()
-            // writeControl(false)
-            // saveButton.enabled = false
-            // cancleButton.enabled = false
             console.log("addUavDataView"+processInfo.loadViewType)
         }else if(processInfo.loadViewType === "update"){
             loadUavModelData()
-//             writeControl(true)
-//            saveButton.text = "编辑"
-            // console.log("addUavDataView"+processInfo.loadViewType)
             console.log("addUavDataView"+processInfo.loadViewType)
         }else{
             console.log("processInfo.loadViewType Unknown")
@@ -2099,7 +2116,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
         console.log("uavModelTypeDaoTableModel"+JSON.stringify(uavModelTypeData))
         var uavModelTypeArray = extractUavModelTypeComponentNames(uavModelTypeData)
         console.log(JSON.stringify(uavModelTypeArray));
-        addUavModelData.uavModelType  = uavModelTypeArray
+        addUavModelData.uavModelType  = uavModelTypeData
     }
 
     function extractUavModelTypeComponentNames(originalArray) {
@@ -2115,7 +2132,7 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
         }
         return resultArray;
     }
-
+    //加载组件的数据
     function loadUavComponentData(){
         var uavBombWay = uavBombingMethodDaoModel.selectUavModelBombingMethodAllData()//攻击方式
         var uavPayloadType = uavModelLoadTypeDaoModel.selectUavModelLoadTypeAllData()//侦察载荷
@@ -2175,6 +2192,20 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
         var selectUavData = uavModelDaoTable.selectSomeUavModelDate(uavDataStr)
         console.log("selectUavData"+JSON.stringify(selectUavData))
         uavNameText.enabled = false
+        var listModelUavTypeArray = [{m_PlanNumber:0,m_SelectState:false,m_TypeName:"侦察型无人机"},
+                {m_PlanNumber:1,m_SelectState:false,m_TypeName:"攻击型无人机"},
+                {m_PlanNumber:2,m_SelectState:false,m_TypeName:"查打一体无人机"}]
+        listmodel_Box.clear()
+        listmodel_Box.append(listModelUavTypeArray)
+        for(var index = 0; index < listmodel_Box.count; index++)
+        {
+            if(listmodel_Box.get(index).m_TypeName === selectUavData.uavType)
+            {
+                iUavType = index
+                listmodel_Box.set(index, { m_SelectState: true })
+            }
+        }
+        addUavModelData.uavTypeStr = selectUavData.uavType
         var imageUrlStr = "file:///"+selectUavData.image_url
         console.log("imageUrlStr"+imageUrlStr)
         uavImg.source = imageUrlStr
@@ -2182,15 +2213,32 @@ Item{//Rectangle{  这里作为整个界面使用Rectangle会导致上一个界�
         //加载文本数据
         //uavHangingLocationValue.text = selectUavData.hangingCapacity
         uavNameText.text = selectUavData.uavName
-        for(var index = 0; index < listmodel_Box_UavModelType.count; index++)
+        console.log("uavModelType!"+uavModelType)
+        listmodel_Box_UavModelType.clear()
+        if(uavModelType.length > 0)
         {
+            for(var i = 0; i < uavModelType.length; i++)
+            {
+                //var RecordId = uavModelTypeOrigi[i]["recordId"]
+                listmodel_Box_UavModelType.append({
+                                                      m_PlanNumber:uavModelType[i].recordId,
+                                                      m_SelectState:false,
+                                                      m_RecordId:uavModelType[i].recordId,
+                                                      m_TypeName:uavModelType[i].uavComponeName
+                                                 })
+            }
+        }
+        for(var index = 0; index < listmodel_Box_UavModelType.count; index++)
+        {   console.log("!@!@!@!!@")
             if(listmodel_Box_UavModelType.get(index).m_RecordId === selectUavData.uavId)
             {
                 iUavModelType = index
-                uavIdText.text = selectUavData.listmodel_Box_UavModelType.get(index).m_TypeName
+                listmodel_Box_UavModelType.set(index, { m_SelectState: true })
+                //uavIdText.text = selectUavData.listmodel_Box_UavModelType.get(index).m_TypeName
+                addUavModelData.uavModelStr = listmodel_Box_UavModelType.get(index).m_TypeName
             }
         }
-
+        console.log("addUavModelData.uavModelStr" +addUavModelData.uavModelStr)
         uavLengthText.text = selectUavData.uavLength
         uavWidthText.text = selectUavData.uavWidth
         uavHeightText.text = selectUavData.uavHeight

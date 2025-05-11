@@ -8555,6 +8555,7 @@ release/uavmodeldao.o: ../../uavmodeldao.cpp ../../uavmodeldao.h \
 		../../uavmodelrecoverymodedao.h \
 		../../uavmodeloperationwaydao.h \
 		../../uavmountlocationdao.h \
+		../../uavmodeltypedao.h \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/QJsonValue \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/QStringList \
 		B:/QT/5.15.2/mingw81_64/include/QtCore/QDebug \
@@ -8629,7 +8630,10 @@ release/uavmodeldao.o: ../../uavmodeldao.cpp ../../uavmodeldao.h \
 		../../UavModelRecoveryModeEntity-odb.ixx \
 		../../UavModelOperationWayEntity-odb.hxx \
 		../../UavModelOperationWayEntity.h \
-		../../UavModelOperationWayEntity-odb.ixx
+		../../UavModelOperationWayEntity-odb.ixx \
+		../../UavModelTypeEntity-odb.hxx \
+		../../UavModelTypeEntity.h \
+		../../UavModelTypeEntity-odb.ixx
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\uavmodeldao.o ..\..\uavmodeldao.cpp
 
 release/uavmodelentity-odb.o: ../../uavmodelentity-odb.cxx ../../pgsqlconnect/include/odb/pre.hxx \

@@ -209,30 +209,6 @@ QJsonObject InterferencePodDao::queryInterferencePodData(const QJsonObject &obje
         //     auto uav_type = object["uavType"].toString();
         //     q = q && (query_t::uavType == uav_type.toStdString());
         // }
-
-        // // 处理 name 字段（使用 == 条件）
-        // if (object.contains("uavName") && object["uavName"].isString()) {
-        //     QString uav_name = object["uavName"].toString();
-        //     if (!uav_name.isEmpty()) {
-        //         q = q && (query_t::uavName == uav_name.toStdString());
-        //     }
-        // }
-        // if (object.contains("uavId") && object["uavId"].isString()) {
-        //     QString uav_id = object["uavId"].toString();
-        //     if (!uav_id.isEmpty()) {
-        //         q = q && (query_t::uavId == uav_id.toStdString());
-        //     }
-        // }
-
-
-        // 执行查询
-        // auto r(db.query_one<UavModelEntity>(q));
-        // if(r){
-        //     auto val{r};
-        //     // interferencePodData = val;
-        //     nl::json json{*val};
-        //     qDebug() << QString::fromStdString(json.dump());
-        // }
         // 执行查询
         auto result = db.query_one<InterferencePodEntity>(q);
         if (result) {

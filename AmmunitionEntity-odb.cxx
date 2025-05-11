@@ -2221,12 +2221,12 @@ namespace odb
     // ammoLenth_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoLenth_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoLenth_value, is_null, v);
       i.ammoLenth_null = is_null;
@@ -2235,12 +2235,12 @@ namespace odb
     // ammoMass_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoMass_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoMass_value, is_null, v);
       i.ammoMass_null = is_null;
@@ -2249,12 +2249,12 @@ namespace odb
     // ammoDiameter_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoDiameter_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoDiameter_value, is_null, v);
       i.ammoDiameter_null = is_null;
@@ -2263,12 +2263,12 @@ namespace odb
     // ammoWingspan_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoWingspan_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoWingspan_value, is_null, v);
       i.ammoWingspan_null = is_null;
@@ -2277,12 +2277,12 @@ namespace odb
     // ammoWarheadCgDistance_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoWarheadCgDistance_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoWarheadCgDistance_value, is_null, v);
       i.ammoWarheadCgDistance_null = is_null;
@@ -2291,12 +2291,12 @@ namespace odb
     // ammoChargeMass_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoChargeMass_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoChargeMass_value, is_null, v);
       i.ammoChargeMass_null = is_null;
@@ -2305,12 +2305,12 @@ namespace odb
     // ammoChargeCoefficient_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoChargeCoefficient_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoChargeCoefficient_value, is_null, v);
       i.ammoChargeCoefficient_null = is_null;
@@ -2319,12 +2319,12 @@ namespace odb
     // ammoMaxReleaseHeight_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoMaxReleaseHeight_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoMaxReleaseHeight_value, is_null, v);
       i.ammoMaxReleaseHeight_null = is_null;
@@ -2333,12 +2333,12 @@ namespace odb
     // ammoMinReleaseHeight
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoMinReleaseHeight;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoMinReleaseHeight_value, is_null, v);
       i.ammoMinReleaseHeight_null = is_null;
@@ -2347,12 +2347,12 @@ namespace odb
     // ammoMinReleaseSpeed_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoMinReleaseSpeed_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoMinReleaseSpeed_value, is_null, v);
       i.ammoMinReleaseSpeed_null = is_null;
@@ -2361,12 +2361,12 @@ namespace odb
     // ammoMaxReleaseSpeed_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoMaxReleaseSpeed_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoMaxReleaseSpeed_value, is_null, v);
       i.ammoMaxReleaseSpeed_null = is_null;
@@ -2375,12 +2375,12 @@ namespace odb
     // ammoTailLength_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoTailLength_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoTailLength_value, is_null, v);
       i.ammoTailLength_null = is_null;
@@ -2389,12 +2389,12 @@ namespace odb
     // ammoLugSpacing_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoLugSpacing_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoLugSpacing_value, is_null, v);
       i.ammoLugSpacing_null = is_null;
@@ -2424,12 +2424,12 @@ namespace odb
     // ammoPenetrationDepth_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoPenetrationDepth_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoPenetrationDepth_value, is_null, v);
       i.ammoPenetrationDepth_null = is_null;
@@ -2438,12 +2438,12 @@ namespace odb
     // ammoQuantitySoilThrown_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoQuantitySoilThrown_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoQuantitySoilThrown_value, is_null, v);
       i.ammoQuantitySoilThrown_null = is_null;
@@ -2452,12 +2452,12 @@ namespace odb
     // ammoCraterDiameter_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoCraterDiameter_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoCraterDiameter_value, is_null, v);
       i.ammoCraterDiameter_null = is_null;
@@ -2466,12 +2466,12 @@ namespace odb
     // ammoCraterDepth_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoCraterDepth_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoCraterDepth_value, is_null, v);
       i.ammoCraterDepth_null = is_null;
@@ -2480,12 +2480,12 @@ namespace odb
     // ammoDamagedArea_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoDamagedArea_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoDamagedArea_value, is_null, v);
       i.ammoDamagedArea_null = is_null;
@@ -2494,12 +2494,12 @@ namespace odb
     // ammoDenseKillingRadius_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoDenseKillingRadius_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoDenseKillingRadius_value, is_null, v);
       i.ammoDenseKillingRadius_null = is_null;
@@ -2508,12 +2508,12 @@ namespace odb
     // ammoInitialVelocityFragments_
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ammoInitialVelocityFragments_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ammoInitialVelocityFragments_value, is_null, v);
       i.ammoInitialVelocityFragments_null = is_null;
@@ -2522,12 +2522,12 @@ namespace odb
     // ammoNumberFragments_
     //
     {
-      int const& v =
+      ::odb::nullable< int > const& v =
         o.ammoNumberFragments_;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_image (
         i.ammoNumberFragments_value, is_null, v);
       i.ammoNumberFragments_null = is_null;
@@ -2557,12 +2557,12 @@ namespace odb
     // bullet_density_range_minimum
     //
     {
-      int const& v =
+      ::odb::nullable< int > const& v =
         o.bullet_density_range_minimum;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_image (
         i.bullet_density_range_minimum_value, is_null, v);
       i.bullet_density_range_minimum_null = is_null;
@@ -2571,12 +2571,12 @@ namespace odb
     // bullet_density_range_maximum
     //
     {
-      int const& v =
+      ::odb::nullable< int > const& v =
         o.bullet_density_range_maximum;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_image (
         i.bullet_density_range_maximum_value, is_null, v);
       i.bullet_density_range_maximum_null = is_null;
@@ -2585,12 +2585,12 @@ namespace odb
     // ground_ignition_rate
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.ground_ignition_rate;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.ground_ignition_rate_value, is_null, v);
       i.ground_ignition_rate_null = is_null;
@@ -2599,12 +2599,12 @@ namespace odb
     // combustion_temperature
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combustion_temperature;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combustion_temperature_value, is_null, v);
       i.combustion_temperature_null = is_null;
@@ -2613,12 +2613,12 @@ namespace odb
     // combustion_time
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combustion_time;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combustion_time_value, is_null, v);
       i.combustion_time_null = is_null;
@@ -2627,12 +2627,12 @@ namespace odb
     // combustion_agent_spread_range
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combustion_agent_spread_range;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combustion_agent_spread_range_value, is_null, v);
       i.combustion_agent_spread_range_null = is_null;
@@ -2641,12 +2641,12 @@ namespace odb
     // number_of_fragments
     //
     {
-      int const& v =
+      ::odb::nullable< int > const& v =
         o.number_of_fragments;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_image (
         i.number_of_fragments_value, is_null, v);
       i.number_of_fragments_null = is_null;
@@ -2655,12 +2655,12 @@ namespace odb
     // breakdown_distance
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.breakdown_distance;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.breakdown_distance_value, is_null, v);
       i.breakdown_distance_null = is_null;
@@ -2669,12 +2669,12 @@ namespace odb
     // maximum_inclusive_coverage_quantity
     //
     {
-      int const& v =
+      ::odb::nullable< int > const& v =
         o.maximum_inclusive_coverage_quantity;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_image (
         i.maximum_inclusive_coverage_quantity_value, is_null, v);
       i.maximum_inclusive_coverage_quantity_null = is_null;
@@ -2683,12 +2683,12 @@ namespace odb
     // number_of_spread
     //
     {
-      int const& v =
+      ::odb::nullable< int > const& v =
         o.number_of_spread;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_image (
         i.number_of_spread_value, is_null, v);
       i.number_of_spread_null = is_null;
@@ -2697,12 +2697,12 @@ namespace odb
     // surface_dc_resistivity
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.surface_dc_resistivity;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.surface_dc_resistivity_value, is_null, v);
       i.surface_dc_resistivity_null = is_null;
@@ -2711,12 +2711,12 @@ namespace odb
     // probability_of_arc_discharge
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.probability_of_arc_discharge;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.probability_of_arc_discharge_value, is_null, v);
       i.probability_of_arc_discharge_null = is_null;
@@ -2725,12 +2725,12 @@ namespace odb
     // fuel_dispersion_radius
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fuel_dispersion_radius;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fuel_dispersion_radius_value, is_null, v);
       i.fuel_dispersion_radius_null = is_null;
@@ -2739,12 +2739,12 @@ namespace odb
     // distance_from_center_explosion
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.distance_from_center_explosion;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.distance_from_center_explosion_value, is_null, v);
       i.distance_from_center_explosion_null = is_null;
@@ -2753,12 +2753,12 @@ namespace odb
     // shock_wave_overpressure_value
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.shock_wave_overpressure_value;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.shock_wave_overpressure_value_value, is_null, v);
       i.shock_wave_overpressure_value_null = is_null;
@@ -2767,12 +2767,12 @@ namespace odb
     // spread_area
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.spread_area;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.spread_area_value, is_null, v);
       i.spread_area_null = is_null;
@@ -2802,12 +2802,12 @@ namespace odb
     // interference_duration
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.interference_duration;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.interference_duration_value, is_null, v);
       i.interference_duration_null = is_null;
@@ -2816,12 +2816,12 @@ namespace odb
     // interference_length_minimum
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.interference_length_minimum;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.interference_length_minimum_value, is_null, v);
       i.interference_length_minimum_null = is_null;
@@ -2830,12 +2830,12 @@ namespace odb
     // interference_length_maximum
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.interference_length_maximum;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.interference_length_maximum_value, is_null, v);
       i.interference_length_maximum_null = is_null;
@@ -2844,12 +2844,12 @@ namespace odb
     // interference_width_minimum
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.interference_width_minimum;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.interference_width_minimum_value, is_null, v);
       i.interference_width_minimum_null = is_null;
@@ -2858,12 +2858,12 @@ namespace odb
     // interference_width_maximum
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.interference_width_maximum;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.interference_width_maximum_value, is_null, v);
       i.interference_width_maximum_null = is_null;
@@ -2893,12 +2893,12 @@ namespace odb
     // number_of_fuses
     //
     {
-      int const& v =
+      ::odb::nullable< int > const& v =
         o.number_of_fuses;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_image (
         i.number_of_fuses_value, is_null, v);
       i.number_of_fuses_null = is_null;
@@ -2907,12 +2907,12 @@ namespace odb
     // storage_life
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.storage_life;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.storage_life_value, is_null, v);
       i.storage_life_null = is_null;
@@ -2921,12 +2921,12 @@ namespace odb
     // action_time
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.action_time;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.action_time_value, is_null, v);
       i.action_time_null = is_null;
@@ -2935,12 +2935,12 @@ namespace odb
     // available_extension_time
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.available_extension_time;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.available_extension_time_value, is_null, v);
       i.available_extension_time_null = is_null;
@@ -2949,12 +2949,12 @@ namespace odb
     // rudder_width
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.rudder_width;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.rudder_width_value, is_null, v);
       i.rudder_width_null = is_null;
@@ -3005,12 +3005,12 @@ namespace odb
     // working_temperature
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.working_temperature;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.working_temperature_value, is_null, v);
       i.working_temperature_null = is_null;
@@ -3019,12 +3019,12 @@ namespace odb
     // working_altitude
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.working_altitude;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.working_altitude_value, is_null, v);
       i.working_altitude_null = is_null;
@@ -3075,12 +3075,12 @@ namespace odb
     // minimum_visibility_emission
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.minimum_visibility_emission;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.minimum_visibility_emission_value, is_null, v);
       i.minimum_visibility_emission_null = is_null;
@@ -3089,12 +3089,12 @@ namespace odb
     // maximum_launch_altitude
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.maximum_launch_altitude;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.maximum_launch_altitude_value, is_null, v);
       i.maximum_launch_altitude_null = is_null;
@@ -3103,12 +3103,12 @@ namespace odb
     // launch_maximum_target_altitude
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.launch_maximum_target_altitude;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.launch_maximum_target_altitude_value, is_null, v);
       i.launch_maximum_target_altitude_null = is_null;
@@ -3117,12 +3117,12 @@ namespace odb
     // maximum_launch_relative_height
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.maximum_launch_relative_height;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.maximum_launch_relative_height_value, is_null, v);
       i.maximum_launch_relative_height_null = is_null;
@@ -3131,12 +3131,12 @@ namespace odb
     // minimum_relative_height_launch
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.minimum_relative_height_launch;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.minimum_relative_height_launch_value, is_null, v);
       i.minimum_relative_height_launch_null = is_null;
@@ -3145,12 +3145,12 @@ namespace odb
     // launch_speed
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.launch_speed;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.launch_speed_value, is_null, v);
       i.launch_speed_null = is_null;
@@ -3180,12 +3180,12 @@ namespace odb
     // launch_off_axis_angle
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.launch_off_axis_angle;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.launch_off_axis_angle_value, is_null, v);
       i.launch_off_axis_angle_null = is_null;
@@ -3215,12 +3215,12 @@ namespace odb
     // effective_range
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.effective_range;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.effective_range_value, is_null, v);
       i.effective_range_null = is_null;
@@ -3229,12 +3229,12 @@ namespace odb
     // hit_accuracy
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.hit_accuracy;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.hit_accuracy_value, is_null, v);
       i.hit_accuracy_null = is_null;
@@ -3243,12 +3243,12 @@ namespace odb
     // hit_probability
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.hit_probability;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.hit_probability_value, is_null, v);
       i.hit_probability_null = is_null;
@@ -3257,12 +3257,12 @@ namespace odb
     // preparation_time
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.preparation_time;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.preparation_time_value, is_null, v);
       i.preparation_time_null = is_null;
@@ -3271,12 +3271,12 @@ namespace odb
     // allow_continuous_flight_time
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.allow_continuous_flight_time;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.allow_continuous_flight_time_value, is_null, v);
       i.allow_continuous_flight_time_null = is_null;
@@ -3285,12 +3285,12 @@ namespace odb
     // guided_flight_time
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.guided_flight_time;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.guided_flight_time_value, is_null, v);
       i.guided_flight_time_null = is_null;
@@ -3299,12 +3299,12 @@ namespace odb
     // maximum_speed_of_missile
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.maximum_speed_of_missile;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.maximum_speed_of_missile_value, is_null, v);
       i.maximum_speed_of_missile_null = is_null;
@@ -3313,12 +3313,12 @@ namespace odb
     // guiding_head_working_wavelength
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.guiding_head_working_wavelength;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.guiding_head_working_wavelength_value, is_null, v);
       i.guiding_head_working_wavelength_null = is_null;
@@ -3327,12 +3327,12 @@ namespace odb
     // guidance_head_operating_distance
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.guidance_head_operating_distance;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.guidance_head_operating_distance_value, is_null, v);
       i.guidance_head_operating_distance_null = is_null;
@@ -3341,12 +3341,12 @@ namespace odb
     // blind_spot_of_guidance_head
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.blind_spot_of_guidance_head;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.blind_spot_of_guidance_head_value, is_null, v);
       i.blind_spot_of_guidance_head_null = is_null;
@@ -3355,12 +3355,12 @@ namespace odb
     // guidance_head_frame_angle
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.guidance_head_frame_angle;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.guidance_head_frame_angle_value, is_null, v);
       i.guidance_head_frame_angle_null = is_null;
@@ -3369,12 +3369,12 @@ namespace odb
     // guidance_head_field_of_view_angle
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.guidance_head_field_of_view_angle;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.guidance_head_field_of_view_angle_value, is_null, v);
       i.guidance_head_field_of_view_angle_null = is_null;
@@ -3383,12 +3383,12 @@ namespace odb
     // guidance_head_field_of_view_angle_linearregion
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.guidance_head_field_of_view_angle_linearregion;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.guidance_head_field_of_view_angle_linearregion_value, is_null, v);
       i.guidance_head_field_of_view_angle_linearregion_null = is_null;
@@ -3397,12 +3397,12 @@ namespace odb
     // guidance_head_field_of_view_angle_instantaneous
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.guidance_head_field_of_view_angle_instantaneous;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.guidance_head_field_of_view_angle_instantaneous_value, is_null, v);
       i.guidance_head_field_of_view_angle_instantaneous_null = is_null;
@@ -3432,12 +3432,12 @@ namespace odb
     // guidance_head_operating_frequency
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.guidance_head_operating_frequency;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.guidance_head_operating_frequency_value, is_null, v);
       i.guidance_head_operating_frequency_null = is_null;
@@ -3446,12 +3446,12 @@ namespace odb
     // fuse_firing_rate
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fuse_firing_rate;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fuse_firing_rate_value, is_null, v);
       i.fuse_firing_rate_null = is_null;
@@ -3481,12 +3481,12 @@ namespace odb
     // fuse_length
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fuse_length;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fuse_length_value, is_null, v);
       i.fuse_length_null = is_null;
@@ -3495,12 +3495,12 @@ namespace odb
     // fuse_diameter
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fuse_diameter;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fuse_diameter_value, is_null, v);
       i.fuse_diameter_null = is_null;
@@ -3509,12 +3509,12 @@ namespace odb
     // fuze_quality
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fuze_quality;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fuze_quality_value, is_null, v);
       i.fuze_quality_null = is_null;
@@ -3523,12 +3523,12 @@ namespace odb
     // safe_distance_of_fuse
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.safe_distance_of_fuse;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.safe_distance_of_fuse_value, is_null, v);
       i.safe_distance_of_fuse_null = is_null;
@@ -3537,12 +3537,12 @@ namespace odb
     // time_disarming_fuse
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.time_disarming_fuse;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.time_disarming_fuse_value, is_null, v);
       i.time_disarming_fuse_null = is_null;
@@ -3551,12 +3551,12 @@ namespace odb
     // first_level_release_time_of_fuse
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.first_level_release_time_of_fuse;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.first_level_release_time_of_fuse_value, is_null, v);
       i.first_level_release_time_of_fuse_null = is_null;
@@ -3565,12 +3565,12 @@ namespace odb
     // secondary_release_time_of_fuse
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.secondary_release_time_of_fuse;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.secondary_release_time_of_fuse_value, is_null, v);
       i.secondary_release_time_of_fuse_null = is_null;
@@ -3579,12 +3579,12 @@ namespace odb
     // reliability_rate_of_fuse_action
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.reliability_rate_of_fuse_action;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.reliability_rate_of_fuse_action_value, is_null, v);
       i.reliability_rate_of_fuse_action_null = is_null;
@@ -3593,12 +3593,12 @@ namespace odb
     // fuse_self_destruct_time
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.fuse_self_destruct_time;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.fuse_self_destruct_time_value, is_null, v);
       i.fuse_self_destruct_time_null = is_null;
@@ -3607,12 +3607,12 @@ namespace odb
     // combat_department_quality
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_department_quality;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_department_quality_value, is_null, v);
       i.combat_department_quality_null = is_null;
@@ -3621,12 +3621,12 @@ namespace odb
     // combat_quantity
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_quantity;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_quantity_value, is_null, v);
       i.combat_quantity_null = is_null;
@@ -3656,12 +3656,12 @@ namespace odb
     // combat_length
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_length;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_length_value, is_null, v);
       i.combat_length_null = is_null;
@@ -3670,12 +3670,12 @@ namespace odb
     // combat_diameter
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_diameter;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_diameter_value, is_null, v);
       i.combat_diameter_null = is_null;
@@ -3705,12 +3705,12 @@ namespace odb
     // combat_charge_density
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_charge_density;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_charge_density_value, is_null, v);
       i.combat_charge_density_null = is_null;
@@ -3719,12 +3719,12 @@ namespace odb
     // combat_loading_factor
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_loading_factor;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_loading_factor_value, is_null, v);
       i.combat_loading_factor_null = is_null;
@@ -3733,12 +3733,12 @@ namespace odb
     // combat_explosive
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_explosive;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_explosive_value, is_null, v);
       i.combat_explosive_null = is_null;
@@ -3747,12 +3747,12 @@ namespace odb
     // combat_fragments_number
     //
     {
-      int const& v =
+      ::odb::nullable< int > const& v =
         o.combat_fragments_number;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_image (
         i.combat_fragments_number_value, is_null, v);
       i.combat_fragments_number_null = is_null;
@@ -3782,12 +3782,12 @@ namespace odb
     // combat_effective_killing_radius_vehicles
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_effective_killing_radius_vehicles;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_effective_killing_radius_vehicles_value, is_null, v);
       i.combat_effective_killing_radius_vehicles_null = is_null;
@@ -3796,12 +3796,12 @@ namespace odb
     // combat_effective_killing_radius_personnel
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_effective_killing_radius_personnel;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_effective_killing_radius_personnel_value, is_null, v);
       i.combat_effective_killing_radius_personnel_null = is_null;
@@ -3810,12 +3810,12 @@ namespace odb
     // combat_vertical_static_armor_penetration_depth
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_vertical_static_armor_penetration_depth;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_vertical_static_armor_penetration_depth_value, is_null, v);
       i.combat_vertical_static_armor_penetration_depth_null = is_null;
@@ -3824,12 +3824,12 @@ namespace odb
     // combat_department_quality_add
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_department_quality_add;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_department_quality_add_value, is_null, v);
       i.combat_department_quality_add_null = is_null;
@@ -3838,12 +3838,12 @@ namespace odb
     // combat_quantity_add
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_quantity_add;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_quantity_add_value, is_null, v);
       i.combat_quantity_add_null = is_null;
@@ -3873,12 +3873,12 @@ namespace odb
     // combat_length_add
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_length_add;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_length_add_value, is_null, v);
       i.combat_length_add_null = is_null;
@@ -3887,12 +3887,12 @@ namespace odb
     // combat_diameter_add
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_diameter_add;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_diameter_add_value, is_null, v);
       i.combat_diameter_add_null = is_null;
@@ -3922,12 +3922,12 @@ namespace odb
     // combat_charge_density_add
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_charge_density_add;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_charge_density_add_value, is_null, v);
       i.combat_charge_density_add_null = is_null;
@@ -3936,12 +3936,12 @@ namespace odb
     // combat_loading_factor_add
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_loading_factor_add;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_loading_factor_add_value, is_null, v);
       i.combat_loading_factor_add_null = is_null;
@@ -3950,12 +3950,12 @@ namespace odb
     // combat_explosive_add
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_explosive_add;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_explosive_add_value, is_null, v);
       i.combat_explosive_add_null = is_null;
@@ -3964,12 +3964,12 @@ namespace odb
     // combat_fragments_number_add
     //
     {
-      int const& v =
+      ::odb::nullable< int > const& v =
         o.combat_fragments_number_add;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_image (
         i.combat_fragments_number_add_value, is_null, v);
       i.combat_fragments_number_add_null = is_null;
@@ -3999,12 +3999,12 @@ namespace odb
     // combat_effective_killing_radius_vehicles_add
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_effective_killing_radius_vehicles_add;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_effective_killing_radius_vehicles_add_value, is_null, v);
       i.combat_effective_killing_radius_vehicles_add_null = is_null;
@@ -4013,12 +4013,12 @@ namespace odb
     // combat_effective_killing_radius_personnel_add
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_effective_killing_radius_personnel_add;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_effective_killing_radius_personnel_add_value, is_null, v);
       i.combat_effective_killing_radius_personnel_add_null = is_null;
@@ -4027,12 +4027,12 @@ namespace odb
     // combat_vertical_static_armor_penetration_depth_add
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.combat_vertical_static_armor_penetration_depth_add;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.combat_vertical_static_armor_penetration_depth_add_value, is_null, v);
       i.combat_vertical_static_armor_penetration_depth_add_null = is_null;
@@ -4041,12 +4041,12 @@ namespace odb
     // service_life
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.service_life;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.service_life_value, is_null, v);
       i.service_life_null = is_null;
@@ -4055,12 +4055,12 @@ namespace odb
     // distance_between_center_mass_end
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.distance_between_center_mass_end;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.distance_between_center_mass_end_value, is_null, v);
       i.distance_between_center_mass_end_null = is_null;
@@ -4090,12 +4090,12 @@ namespace odb
     // distance_suspension_lifting_lug
     //
     {
-      float const& v =
+      ::odb::nullable< float > const& v =
         o.distance_suspension_lifting_lug;
 
-      bool is_null (false);
+      bool is_null (true);
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_image (
         i.distance_suspension_lifting_lug_value, is_null, v);
       i.distance_suspension_lifting_lug_null = is_null;
@@ -4290,11 +4290,11 @@ namespace odb
     // ammoLenth_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoLenth_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoLenth_value,
@@ -4304,11 +4304,11 @@ namespace odb
     // ammoMass_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoMass_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoMass_value,
@@ -4318,11 +4318,11 @@ namespace odb
     // ammoDiameter_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoDiameter_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoDiameter_value,
@@ -4332,11 +4332,11 @@ namespace odb
     // ammoWingspan_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoWingspan_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoWingspan_value,
@@ -4346,11 +4346,11 @@ namespace odb
     // ammoWarheadCgDistance_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoWarheadCgDistance_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoWarheadCgDistance_value,
@@ -4360,11 +4360,11 @@ namespace odb
     // ammoChargeMass_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoChargeMass_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoChargeMass_value,
@@ -4374,11 +4374,11 @@ namespace odb
     // ammoChargeCoefficient_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoChargeCoefficient_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoChargeCoefficient_value,
@@ -4388,11 +4388,11 @@ namespace odb
     // ammoMaxReleaseHeight_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoMaxReleaseHeight_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoMaxReleaseHeight_value,
@@ -4402,11 +4402,11 @@ namespace odb
     // ammoMinReleaseHeight
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoMinReleaseHeight;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoMinReleaseHeight_value,
@@ -4416,11 +4416,11 @@ namespace odb
     // ammoMinReleaseSpeed_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoMinReleaseSpeed_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoMinReleaseSpeed_value,
@@ -4430,11 +4430,11 @@ namespace odb
     // ammoMaxReleaseSpeed_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoMaxReleaseSpeed_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoMaxReleaseSpeed_value,
@@ -4444,11 +4444,11 @@ namespace odb
     // ammoTailLength_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoTailLength_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoTailLength_value,
@@ -4458,11 +4458,11 @@ namespace odb
     // ammoLugSpacing_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoLugSpacing_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoLugSpacing_value,
@@ -4487,11 +4487,11 @@ namespace odb
     // ammoPenetrationDepth_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoPenetrationDepth_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoPenetrationDepth_value,
@@ -4501,11 +4501,11 @@ namespace odb
     // ammoQuantitySoilThrown_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoQuantitySoilThrown_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoQuantitySoilThrown_value,
@@ -4515,11 +4515,11 @@ namespace odb
     // ammoCraterDiameter_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoCraterDiameter_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoCraterDiameter_value,
@@ -4529,11 +4529,11 @@ namespace odb
     // ammoCraterDepth_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoCraterDepth_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoCraterDepth_value,
@@ -4543,11 +4543,11 @@ namespace odb
     // ammoDamagedArea_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoDamagedArea_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoDamagedArea_value,
@@ -4557,11 +4557,11 @@ namespace odb
     // ammoDenseKillingRadius_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoDenseKillingRadius_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoDenseKillingRadius_value,
@@ -4571,11 +4571,11 @@ namespace odb
     // ammoInitialVelocityFragments_
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ammoInitialVelocityFragments_;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ammoInitialVelocityFragments_value,
@@ -4585,11 +4585,11 @@ namespace odb
     // ammoNumberFragments_
     //
     {
-      int& v =
+      ::odb::nullable< int >& v =
         o.ammoNumberFragments_;
 
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_value (
         v,
         i.ammoNumberFragments_value,
@@ -4614,11 +4614,11 @@ namespace odb
     // bullet_density_range_minimum
     //
     {
-      int& v =
+      ::odb::nullable< int >& v =
         o.bullet_density_range_minimum;
 
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_value (
         v,
         i.bullet_density_range_minimum_value,
@@ -4628,11 +4628,11 @@ namespace odb
     // bullet_density_range_maximum
     //
     {
-      int& v =
+      ::odb::nullable< int >& v =
         o.bullet_density_range_maximum;
 
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_value (
         v,
         i.bullet_density_range_maximum_value,
@@ -4642,11 +4642,11 @@ namespace odb
     // ground_ignition_rate
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.ground_ignition_rate;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.ground_ignition_rate_value,
@@ -4656,11 +4656,11 @@ namespace odb
     // combustion_temperature
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combustion_temperature;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combustion_temperature_value,
@@ -4670,11 +4670,11 @@ namespace odb
     // combustion_time
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combustion_time;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combustion_time_value,
@@ -4684,11 +4684,11 @@ namespace odb
     // combustion_agent_spread_range
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combustion_agent_spread_range;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combustion_agent_spread_range_value,
@@ -4698,11 +4698,11 @@ namespace odb
     // number_of_fragments
     //
     {
-      int& v =
+      ::odb::nullable< int >& v =
         o.number_of_fragments;
 
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_value (
         v,
         i.number_of_fragments_value,
@@ -4712,11 +4712,11 @@ namespace odb
     // breakdown_distance
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.breakdown_distance;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.breakdown_distance_value,
@@ -4726,11 +4726,11 @@ namespace odb
     // maximum_inclusive_coverage_quantity
     //
     {
-      int& v =
+      ::odb::nullable< int >& v =
         o.maximum_inclusive_coverage_quantity;
 
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_value (
         v,
         i.maximum_inclusive_coverage_quantity_value,
@@ -4740,11 +4740,11 @@ namespace odb
     // number_of_spread
     //
     {
-      int& v =
+      ::odb::nullable< int >& v =
         o.number_of_spread;
 
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_value (
         v,
         i.number_of_spread_value,
@@ -4754,11 +4754,11 @@ namespace odb
     // surface_dc_resistivity
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.surface_dc_resistivity;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.surface_dc_resistivity_value,
@@ -4768,11 +4768,11 @@ namespace odb
     // probability_of_arc_discharge
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.probability_of_arc_discharge;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.probability_of_arc_discharge_value,
@@ -4782,11 +4782,11 @@ namespace odb
     // fuel_dispersion_radius
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fuel_dispersion_radius;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fuel_dispersion_radius_value,
@@ -4796,11 +4796,11 @@ namespace odb
     // distance_from_center_explosion
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.distance_from_center_explosion;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.distance_from_center_explosion_value,
@@ -4810,11 +4810,11 @@ namespace odb
     // shock_wave_overpressure_value
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.shock_wave_overpressure_value;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.shock_wave_overpressure_value_value,
@@ -4824,11 +4824,11 @@ namespace odb
     // spread_area
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.spread_area;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.spread_area_value,
@@ -4853,11 +4853,11 @@ namespace odb
     // interference_duration
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.interference_duration;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.interference_duration_value,
@@ -4867,11 +4867,11 @@ namespace odb
     // interference_length_minimum
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.interference_length_minimum;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.interference_length_minimum_value,
@@ -4881,11 +4881,11 @@ namespace odb
     // interference_length_maximum
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.interference_length_maximum;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.interference_length_maximum_value,
@@ -4895,11 +4895,11 @@ namespace odb
     // interference_width_minimum
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.interference_width_minimum;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.interference_width_minimum_value,
@@ -4909,11 +4909,11 @@ namespace odb
     // interference_width_maximum
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.interference_width_maximum;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.interference_width_maximum_value,
@@ -4938,11 +4938,11 @@ namespace odb
     // number_of_fuses
     //
     {
-      int& v =
+      ::odb::nullable< int >& v =
         o.number_of_fuses;
 
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_value (
         v,
         i.number_of_fuses_value,
@@ -4952,11 +4952,11 @@ namespace odb
     // storage_life
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.storage_life;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.storage_life_value,
@@ -4966,11 +4966,11 @@ namespace odb
     // action_time
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.action_time;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.action_time_value,
@@ -4980,11 +4980,11 @@ namespace odb
     // available_extension_time
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.available_extension_time;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.available_extension_time_value,
@@ -4994,11 +4994,11 @@ namespace odb
     // rudder_width
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.rudder_width;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.rudder_width_value,
@@ -5038,11 +5038,11 @@ namespace odb
     // working_temperature
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.working_temperature;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.working_temperature_value,
@@ -5052,11 +5052,11 @@ namespace odb
     // working_altitude
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.working_altitude;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.working_altitude_value,
@@ -5096,11 +5096,11 @@ namespace odb
     // minimum_visibility_emission
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.minimum_visibility_emission;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.minimum_visibility_emission_value,
@@ -5110,11 +5110,11 @@ namespace odb
     // maximum_launch_altitude
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.maximum_launch_altitude;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.maximum_launch_altitude_value,
@@ -5124,11 +5124,11 @@ namespace odb
     // launch_maximum_target_altitude
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.launch_maximum_target_altitude;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.launch_maximum_target_altitude_value,
@@ -5138,11 +5138,11 @@ namespace odb
     // maximum_launch_relative_height
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.maximum_launch_relative_height;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.maximum_launch_relative_height_value,
@@ -5152,11 +5152,11 @@ namespace odb
     // minimum_relative_height_launch
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.minimum_relative_height_launch;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.minimum_relative_height_launch_value,
@@ -5166,11 +5166,11 @@ namespace odb
     // launch_speed
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.launch_speed;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.launch_speed_value,
@@ -5195,11 +5195,11 @@ namespace odb
     // launch_off_axis_angle
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.launch_off_axis_angle;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.launch_off_axis_angle_value,
@@ -5224,11 +5224,11 @@ namespace odb
     // effective_range
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.effective_range;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.effective_range_value,
@@ -5238,11 +5238,11 @@ namespace odb
     // hit_accuracy
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.hit_accuracy;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.hit_accuracy_value,
@@ -5252,11 +5252,11 @@ namespace odb
     // hit_probability
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.hit_probability;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.hit_probability_value,
@@ -5266,11 +5266,11 @@ namespace odb
     // preparation_time
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.preparation_time;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.preparation_time_value,
@@ -5280,11 +5280,11 @@ namespace odb
     // allow_continuous_flight_time
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.allow_continuous_flight_time;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.allow_continuous_flight_time_value,
@@ -5294,11 +5294,11 @@ namespace odb
     // guided_flight_time
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.guided_flight_time;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.guided_flight_time_value,
@@ -5308,11 +5308,11 @@ namespace odb
     // maximum_speed_of_missile
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.maximum_speed_of_missile;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.maximum_speed_of_missile_value,
@@ -5322,11 +5322,11 @@ namespace odb
     // guiding_head_working_wavelength
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.guiding_head_working_wavelength;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.guiding_head_working_wavelength_value,
@@ -5336,11 +5336,11 @@ namespace odb
     // guidance_head_operating_distance
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.guidance_head_operating_distance;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.guidance_head_operating_distance_value,
@@ -5350,11 +5350,11 @@ namespace odb
     // blind_spot_of_guidance_head
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.blind_spot_of_guidance_head;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.blind_spot_of_guidance_head_value,
@@ -5364,11 +5364,11 @@ namespace odb
     // guidance_head_frame_angle
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.guidance_head_frame_angle;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.guidance_head_frame_angle_value,
@@ -5378,11 +5378,11 @@ namespace odb
     // guidance_head_field_of_view_angle
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.guidance_head_field_of_view_angle;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.guidance_head_field_of_view_angle_value,
@@ -5392,11 +5392,11 @@ namespace odb
     // guidance_head_field_of_view_angle_linearregion
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.guidance_head_field_of_view_angle_linearregion;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.guidance_head_field_of_view_angle_linearregion_value,
@@ -5406,11 +5406,11 @@ namespace odb
     // guidance_head_field_of_view_angle_instantaneous
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.guidance_head_field_of_view_angle_instantaneous;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.guidance_head_field_of_view_angle_instantaneous_value,
@@ -5435,11 +5435,11 @@ namespace odb
     // guidance_head_operating_frequency
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.guidance_head_operating_frequency;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.guidance_head_operating_frequency_value,
@@ -5449,11 +5449,11 @@ namespace odb
     // fuse_firing_rate
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fuse_firing_rate;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fuse_firing_rate_value,
@@ -5478,11 +5478,11 @@ namespace odb
     // fuse_length
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fuse_length;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fuse_length_value,
@@ -5492,11 +5492,11 @@ namespace odb
     // fuse_diameter
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fuse_diameter;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fuse_diameter_value,
@@ -5506,11 +5506,11 @@ namespace odb
     // fuze_quality
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fuze_quality;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fuze_quality_value,
@@ -5520,11 +5520,11 @@ namespace odb
     // safe_distance_of_fuse
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.safe_distance_of_fuse;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.safe_distance_of_fuse_value,
@@ -5534,11 +5534,11 @@ namespace odb
     // time_disarming_fuse
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.time_disarming_fuse;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.time_disarming_fuse_value,
@@ -5548,11 +5548,11 @@ namespace odb
     // first_level_release_time_of_fuse
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.first_level_release_time_of_fuse;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.first_level_release_time_of_fuse_value,
@@ -5562,11 +5562,11 @@ namespace odb
     // secondary_release_time_of_fuse
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.secondary_release_time_of_fuse;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.secondary_release_time_of_fuse_value,
@@ -5576,11 +5576,11 @@ namespace odb
     // reliability_rate_of_fuse_action
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.reliability_rate_of_fuse_action;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.reliability_rate_of_fuse_action_value,
@@ -5590,11 +5590,11 @@ namespace odb
     // fuse_self_destruct_time
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.fuse_self_destruct_time;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.fuse_self_destruct_time_value,
@@ -5604,11 +5604,11 @@ namespace odb
     // combat_department_quality
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_department_quality;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_department_quality_value,
@@ -5618,11 +5618,11 @@ namespace odb
     // combat_quantity
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_quantity;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_quantity_value,
@@ -5647,11 +5647,11 @@ namespace odb
     // combat_length
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_length;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_length_value,
@@ -5661,11 +5661,11 @@ namespace odb
     // combat_diameter
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_diameter;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_diameter_value,
@@ -5690,11 +5690,11 @@ namespace odb
     // combat_charge_density
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_charge_density;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_charge_density_value,
@@ -5704,11 +5704,11 @@ namespace odb
     // combat_loading_factor
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_loading_factor;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_loading_factor_value,
@@ -5718,11 +5718,11 @@ namespace odb
     // combat_explosive
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_explosive;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_explosive_value,
@@ -5732,11 +5732,11 @@ namespace odb
     // combat_fragments_number
     //
     {
-      int& v =
+      ::odb::nullable< int >& v =
         o.combat_fragments_number;
 
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_value (
         v,
         i.combat_fragments_number_value,
@@ -5761,11 +5761,11 @@ namespace odb
     // combat_effective_killing_radius_vehicles
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_effective_killing_radius_vehicles;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_effective_killing_radius_vehicles_value,
@@ -5775,11 +5775,11 @@ namespace odb
     // combat_effective_killing_radius_personnel
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_effective_killing_radius_personnel;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_effective_killing_radius_personnel_value,
@@ -5789,11 +5789,11 @@ namespace odb
     // combat_vertical_static_armor_penetration_depth
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_vertical_static_armor_penetration_depth;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_vertical_static_armor_penetration_depth_value,
@@ -5803,11 +5803,11 @@ namespace odb
     // combat_department_quality_add
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_department_quality_add;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_department_quality_add_value,
@@ -5817,11 +5817,11 @@ namespace odb
     // combat_quantity_add
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_quantity_add;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_quantity_add_value,
@@ -5846,11 +5846,11 @@ namespace odb
     // combat_length_add
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_length_add;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_length_add_value,
@@ -5860,11 +5860,11 @@ namespace odb
     // combat_diameter_add
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_diameter_add;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_diameter_add_value,
@@ -5889,11 +5889,11 @@ namespace odb
     // combat_charge_density_add
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_charge_density_add;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_charge_density_add_value,
@@ -5903,11 +5903,11 @@ namespace odb
     // combat_loading_factor_add
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_loading_factor_add;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_loading_factor_add_value,
@@ -5917,11 +5917,11 @@ namespace odb
     // combat_explosive_add
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_explosive_add;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_explosive_add_value,
@@ -5931,11 +5931,11 @@ namespace odb
     // combat_fragments_number_add
     //
     {
-      int& v =
+      ::odb::nullable< int >& v =
         o.combat_fragments_number_add;
 
       pgsql::value_traits<
-          int,
+          ::odb::nullable< int >,
           pgsql::id_integer >::set_value (
         v,
         i.combat_fragments_number_add_value,
@@ -5960,11 +5960,11 @@ namespace odb
     // combat_effective_killing_radius_vehicles_add
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_effective_killing_radius_vehicles_add;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_effective_killing_radius_vehicles_add_value,
@@ -5974,11 +5974,11 @@ namespace odb
     // combat_effective_killing_radius_personnel_add
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_effective_killing_radius_personnel_add;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_effective_killing_radius_personnel_add_value,
@@ -5988,11 +5988,11 @@ namespace odb
     // combat_vertical_static_armor_penetration_depth_add
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.combat_vertical_static_armor_penetration_depth_add;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.combat_vertical_static_armor_penetration_depth_add_value,
@@ -6002,11 +6002,11 @@ namespace odb
     // service_life
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.service_life;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.service_life_value,
@@ -6016,11 +6016,11 @@ namespace odb
     // distance_between_center_mass_end
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.distance_between_center_mass_end;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.distance_between_center_mass_end_value,
@@ -6045,11 +6045,11 @@ namespace odb
     // distance_suspension_lifting_lug
     //
     {
-      float& v =
+      ::odb::nullable< float >& v =
         o.distance_suspension_lifting_lug;
 
       pgsql::value_traits<
-          float,
+          ::odb::nullable< float >,
           pgsql::id_real >::set_value (
         v,
         i.distance_suspension_lifting_lug_value,

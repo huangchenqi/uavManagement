@@ -1,7 +1,6 @@
 #include "ammodao.h"
 #include "AmmunitionEntity.h"
 #include "AmmunitionEntity-odb.hxx"
-
 #include <stdexcept>
 #include "iostream"
 // ODB 头文件
@@ -141,10 +140,27 @@ QJsonArray AmmoDao::selectAmmoAllData(const QJsonObject &selectedData)
             obj["ammoName"] = QString::fromStdString(entity.ammoName_);
             obj["ammoType"] = QString::fromStdString(entity.ammoType_);
             obj["ammoToUavModel"] = QString::fromStdString(entity.ammoToUavModel_);
-            obj["length"] = QString::number(entity.ammoLenth_);
-            obj["wingspan"] = QString::number(entity.ammoWingspan_);
-            obj["mass"] = QString::number(entity.ammoMass_);
-            obj["diameter"] = QString::number(entity.ammoDiameter_);
+            if(!entity.ammoLenth_){
+                obj["length"] = "";
+            }else{
+               obj["length"] = QString::number(entity.ammoLenth_.get());
+            }
+            if(!entity.ammoWingspan_){
+                obj["wingspan"] = "";
+            }else{
+              obj["wingspan"] = QString::number(entity.ammoWingspan_.get());
+            }
+            if(!entity.ammoMass_){
+                obj["mass"] = "";
+            }else{
+                obj["mass"] = QString::number(entity.ammoMass_.get());
+            }
+            if(!entity.ammoDiameter_){
+                obj["diameter"] = "";
+            }else{
+                obj["diameter"] = QString::number(entity.ammoDiameter_.get());
+            }
+
             obj["description"] = QString::fromStdString(entity.ammoDescription_);
 
             // obj["launch_angle"] = QString::number(entity.launchAngle_);
@@ -220,146 +236,568 @@ QJsonObject AmmoDao::selectSomeAmmoData(const QJsonObject &object)
             ammoData["ammoId"] = QString::fromStdString(entity.ammoId_);
             ammoData["ammoToUavModel"] = QString::fromStdString(entity.ammoToUavModel_);
             ammoData["ammoDescription"] = QString::fromStdString(entity.ammoDescription_);
+            if(!entity.ammoLenth_){
+                ammoData[""] = "";
+            }else{
+                ammoData["ammoLenth"] = QString::number(entity.ammoLenth_.get()); // 假设返回float// 使用 QString::number 方法转换 float
+            }
+            if(!entity.ammoMass_){
+                ammoData[""] = "";
+            }else{
+                ammoData["ammoMass"] = QString::number(entity.ammoMass_.get());
+            }
+            if(!entity.ammoDiameter_){
+                ammoData[""] = "";
+            }else{
+                ammoData["ammoDiameter"] = QString::number(entity.ammoDiameter_.get());
 
-            ammoData["ammoLenth"] = QString::number(entity.ammoLenth_); // 假设返回float// 使用 QString::number 方法转换 float
-            ammoData["ammoMass"] = QString::number(entity.ammoMass_);
-            ammoData["ammoDiameter"] = QString::number(entity.ammoDiameter_);
-
+            }
             // 格式化为字符串（保留5位小数）
             // QString formattedValue = QString::number(entity.uavLength_, 'f', 5);
             // ammoData["uavLengthhangingCapacityStr"] = formattedValue;
             /******************** 飞行性能 ********************/
-            ammoData["ammoWingspan"] = QString::number(entity.ammoWingspan_);
-            ammoData["ammoWarheadCgDistance"] = QString::number(entity.ammoWarheadCgDistance_) ;
-            ammoData["ammoChargeMass"] = QString::number(entity.ammoChargeMass_);
-            ammoData["ammoChargeCoefficient"] = QString::number(entity.ammoChargeCoefficient_);
-            ammoData["ammoMaxReleaseHeight"] = QString::number(entity.ammoMaxReleaseHeight_);
-            ammoData["ammoMinReleaseHeight"] = QString::number(entity.ammoMinReleaseHeight);
-            ammoData["ammoMinReleaseSpeed"] = QString::number(entity.ammoMinReleaseSpeed_);
-            ammoData["ammoMaxReleaseSpeed"] = QString::number(entity.ammoMaxReleaseSpeed_);
-            ammoData["ammoTailLength"] = QString::number(entity.ammoTailLength_);
-            ammoData["ammoLugSpacing"] = QString::number(entity.ammoLugSpacing_);
+            if(!entity.ammoWingspan_){
+                ammoData["ammoWingspan"] = "";
+            }else{
+                ammoData["ammoWingspan"] = QString::number(entity.ammoWingspan_.get());
+            }
+            if(!entity.ammoWarheadCgDistance_){
+                ammoData["ammoWarheadCgDistance"] = "";
+            }else{
+                ammoData["ammoWarheadCgDistance"] = QString::number(entity.ammoWarheadCgDistance_.get()) ;
+            }
+            if(!entity.ammoChargeMass_){
+                ammoData["ammoChargeMass"] = "";
+            }else{
+                ammoData["ammoChargeMass"] = QString::number(entity.ammoChargeMass_.get());
+            }
+            if(!entity.ammoChargeCoefficient_){
+                ammoData["ammoChargeCoefficient"] = "";
+            }else{
+                ammoData["ammoChargeCoefficient"] = QString::number(entity.ammoChargeCoefficient_.get());
+            }
+            if(!entity.ammoMaxReleaseHeight_){
+                ammoData["ammoMaxReleaseHeight"] = "";
+            }else{
+                ammoData["ammoMaxReleaseHeight"] = QString::number(entity.ammoMaxReleaseHeight_.get());
+            }
+            if(!entity.ammoMinReleaseHeight){
+                ammoData["ammoMinReleaseHeight"] = "";
+            }else{
+                ammoData["ammoMinReleaseHeight"] = QString::number(entity.ammoMinReleaseHeight.get());
+            }
+            if(!entity.ammoMinReleaseSpeed_){
+                ammoData["ammoMinReleaseSpeed"] = "";
+            }else{
+                ammoData["ammoMinReleaseSpeed"] = QString::number(entity.ammoMinReleaseSpeed_.get());
+            }
 
+            if(!entity.ammoMaxReleaseSpeed_){
+                ammoData["ammoMaxReleaseSpeed"] = "";
+            }else{
+                ammoData["ammoMaxReleaseSpeed"] = QString::number(entity.ammoMaxReleaseSpeed_.get());
+            }
             ammoData["ammoKillingWay"] = QString::fromStdString(entity.ammoKillingWway_);
-            ammoData["ammoPenetrationDepth"] = QString::number(entity.ammoPenetrationDepth_);
-            ammoData["ammoQuantitySoilThrown"] = QString::number(entity.ammoQuantitySoilThrown_);
-            ammoData["ammoCraterDiameter"] = QString::number(entity.ammoCraterDiameter_);
-            ammoData["ammoCraterDepth"] = QString::number(entity.ammoCraterDepth_);
-            ammoData["ammoDamagedArea"] = QString::number(entity.ammoDamagedArea_);
-            ammoData["ammoDenseKillingRadius"] = QString::number(entity.ammoDenseKillingRadius_);
-            ammoData["ammoInitialVelocityFragments"] = QString::number(entity.ammoInitialVelocityFragments_);
-            ammoData["ammoNumberFragments"] = QString::number(entity.ammoNumberFragments_);
+            if(!entity.ammoTailLength_){
+                ammoData["ammoTailLength"] = "";
+            }else{
+                ammoData["ammoTailLength"] = QString::number(entity.ammoTailLength_.get());
+            }
+            if(!entity.ammoLugSpacing_){
+                ammoData["ammoLugSpacing"] = "";
+            }else{
+                ammoData["ammoLugSpacing"] = QString::number(entity.ammoLugSpacing_.get());
+            }
+            if(!entity.ammoPenetrationDepth_){
+                ammoData["ammoPenetrationDepth"] = "";
+            }else{
+                ammoData["ammoPenetrationDepth"] = QString::number(entity.ammoPenetrationDepth_.get());
+            }
+            if(!entity.ammoQuantitySoilThrown_){
+                ammoData["ammoQuantitySoilThrown"] = "";
+            }else{
+                ammoData["ammoQuantitySoilThrown"] = QString::number(entity.ammoQuantitySoilThrown_.get());
+            }
+            if(!entity.ammoCraterDiameter_){
+                ammoData["ammoCraterDiameter"] = "";
+            }else{
+                ammoData["ammoCraterDiameter"] = QString::number(entity.ammoCraterDiameter_.get());
+            }
+            if(!entity.ammoCraterDepth_){
+                ammoData["ammoCraterDepth"] = "";
+            }else{
+                ammoData["ammoCraterDepth"] = QString::number(entity.ammoCraterDepth_.get());
+            }
+            if(!entity.ammoDamagedArea_){
+                ammoData["ammoDamagedArea"] = "";
+            }else{
+                ammoData["ammoDamagedArea"] = QString::number(entity.ammoDamagedArea_.get());
+            }
+            if(!entity.ammoDenseKillingRadius_){
+                ammoData["ammoDenseKillingRadius"] = "";
+            }else{
+                ammoData["ammoDenseKillingRadius"] = QString::number(entity.ammoDenseKillingRadius_.get());
+            }
+            if(!entity.ammoInitialVelocityFragments_){
+                ammoData["ammoInitialVelocityFragments"] = "";
+            }else{
+                ammoData["ammoInitialVelocityFragments"] = QString::number(entity.ammoInitialVelocityFragments_.get());
+            }
+            if(!entity.ammoNumberFragments_){
+                ammoData["ammoNumberFragments"] = "";
+            }else{
+                ammoData["ammoNumberFragments"] = QString::number(entity.ammoNumberFragments_.get());
+            }
             ammoData["ammoArmorBreakingAbility"] = QString::fromStdString(entity.ammoArmorBreakingAbility_);
-            ammoData["bullet_density_range_minimum"] = QString::number(entity.bullet_density_range_minimum);
-            ammoData["bullet_density_range_maximum"] = QString::number(entity.bullet_density_range_maximum);
-            ammoData["ground_ignition_rate"] = QString::number(entity.ground_ignition_rate);
-            ammoData["combustion_temperature"] = QString::number(entity.combustion_temperature);
-            ammoData["combustion_time"] = QString::number(entity.combustion_time);
-            ammoData["combustion_agent_spread_range"] = QString::number(entity.combustion_agent_spread_range);
-            ammoData["number_of_fragments"] = QString::number(entity.number_of_fragments);
-            ammoData["breakdown_distance"] = QString::number(entity.breakdown_distance);
-            ammoData["maximum_inclusive_coverage_quantity"] = QString::number(entity.maximum_inclusive_coverage_quantity);
-            ammoData["number_of_spread"] = QString::number(entity.number_of_spread);
-            ammoData["surface_dc_resistivity"] = QString::number(entity.surface_dc_resistivity);
-            ammoData["probability_of_arc_discharge"] = QString::number(entity.probability_of_arc_discharge);
-            ammoData["fuel_dispersion_radius"] = QString::number(entity.fuel_dispersion_radius);
-            ammoData["distance_from_center_explosion"] = QString::number(entity.distance_from_center_explosion);
-            ammoData["shock_wave_overpressure_value"] = QString::number(entity.shock_wave_overpressure_value);
-            ammoData["spread_area"] = QString::number(entity.spread_area);
+            if(!entity.bullet_density_range_minimum){
+                ammoData["bullet_density_range_minimum"] = "";
+            }else{
+                ammoData["bullet_density_range_minimum"] = QString::number(entity.bullet_density_range_minimum.get());
+            }
+            if(!entity.bullet_density_range_maximum){
+                ammoData["bullet_density_range_maximum"] = "";
+            }else{
+                ammoData["bullet_density_range_maximum"] = QString::number(entity.bullet_density_range_maximum.get());
+            }
+            if(!entity.ground_ignition_rate){
+                ammoData["ground_ignition_rate"] = "";
+            }else{
+                ammoData["ground_ignition_rate"] = QString::number(entity.ground_ignition_rate.get());
+            }
+            if(!entity.combustion_temperature){
+                ammoData["combustion_temperature"] = "";
+            }else{
+                ammoData["combustion_temperature"] = QString::number(entity.combustion_temperature.get());
+            }
+            if(!entity.combustion_time){
+                ammoData["combustion_time"] = "";
+            }else{
+                ammoData["combustion_time"] = QString::number(entity.combustion_time.get());
+            }
+            if(!entity.combustion_agent_spread_range){
+                ammoData["combustion_agent_spread_range"] = "";
+            }else{
+                ammoData["combustion_agent_spread_range"] = QString::number(entity.combustion_agent_spread_range.get());
+            }
+            if(!entity.number_of_fragments){
+                ammoData["number_of_fragments"] = "";
+            }else{
+                ammoData["number_of_fragments"] = QString::number(entity.number_of_fragments.get());
+            }
+            if(!entity.breakdown_distance){
+                ammoData["breakdown_distance"] = "";
+            }else{
+                ammoData["breakdown_distance"] = QString::number(entity.breakdown_distance.get());
+            }
+            if(!entity.maximum_inclusive_coverage_quantity){
+                ammoData["maximum_inclusive_coverage_quantity"] = "";
+            }else{
+                ammoData["maximum_inclusive_coverage_quantity"] = QString::number(entity.maximum_inclusive_coverage_quantity.get());
+            }
+            if(!entity.number_of_spread){
+                ammoData["number_of_spread"] = "";
+            }else{
+                ammoData["number_of_spread"] = QString::number(entity.number_of_spread.get());
+            }
+            if(!entity.surface_dc_resistivity){
+                ammoData["surface_dc_resistivity"] = "";
+            }else{
+                ammoData["surface_dc_resistivity"] = QString::number(entity.surface_dc_resistivity.get());
+            }
+            if(!entity.probability_of_arc_discharge){
+                ammoData["probability_of_arc_discharge"] = "";
+            }else{
+                ammoData["probability_of_arc_discharge"] = QString::number(entity.probability_of_arc_discharge.get());
+            }
+            if(!entity.fuel_dispersion_radius){
+                ammoData["fuel_dispersion_radius"] = "";
+            }else{
+                ammoData["fuel_dispersion_radius"] = QString::number(entity.fuel_dispersion_radius.get());
+            }
+            if(!entity.distance_from_center_explosion){
+                ammoData["distance_from_center_explosion"] = "";
+            }else{
+                ammoData["distance_from_center_explosion"] = QString::number(entity.distance_from_center_explosion.get());
+            }
+            if(!entity.shock_wave_overpressure_value){
+                ammoData["shock_wave_overpressure_value"] = "";
+            }else{
+                ammoData["shock_wave_overpressure_value"] = QString::number(entity.shock_wave_overpressure_value.get());
+            }
+            if(!entity.spread_area){
+                ammoData["spread_area"] = "";
+            }else{
+                ammoData["spread_area"] = QString::number(entity.spread_area.get());
+            }
+            if(!entity.interference_duration){
+                ammoData["interference_duration"] = "";
+            }else{
+                ammoData["interference_duration"] = QString::number(entity.interference_duration.get());
+            }
+            if(!entity.interference_length_minimum){
+                ammoData["interference_length_minimum"] = "";
+            }else{
+                ammoData["interference_length_minimum"] = QString::number(entity.interference_length_minimum.get());
+            }
             ammoData["use_description"] = QString::fromStdString(entity.use_description);
-            ammoData["interference_duration"] = QString::number(entity.interference_duration);
-            ammoData["interference_length_minimum"] = QString::number(entity.interference_length_minimum);
-
             /******************** 挂载能力 ********************/
             //ammoData["hardpoint_loc"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
             // entity.uavHangingpoints_ = ammoData["hardpoint_num"].toInt();
             // entity.uavPayloadcapacity_ = ammoData["payload_capacity"].toInt();
-
-            ammoData["interference_length_maximum"] = QString::number(entity.interference_length_maximum);
-            ammoData["interference_width_minimum"] = QString::number(entity.interference_width_minimum);
-            ammoData["interference_width_maximum"] = QString::number(entity.interference_width_maximum);
+            if(!entity.interference_length_maximum){
+                ammoData["interference_length_maximum"] = "";
+            }else{
+                ammoData["interference_length_maximum"] = QString::number(entity.interference_length_maximum.get());
+            }
+            if(!entity.interference_width_minimum){
+                ammoData["interference_width_minimum"] = "";
+            }else{
+                ammoData["interference_width_minimum"] = QString::number(entity.interference_width_minimum.get());
+            }
+            if(!entity.interference_width_maximum){
+                ammoData["interference_width_maximum"] = "";
+            }else{
+                ammoData["interference_width_maximum"] = QString::number(entity.interference_width_maximum.get());
+            }
+            if(!entity.number_of_fuses){
+                ammoData["number_of_fuses"] = "";
+            }else{
+                ammoData["number_of_fuses"] = QString::number(entity.number_of_fuses.get());
+            }
+            if(!entity.storage_life){
+                ammoData["storage_life"] = "";
+            }else{
+                ammoData["storage_life"] = QString::number(entity.storage_life.get());
+            }
+            if(!entity.action_time){
+                ammoData["action_time"] = "";
+            }else{
+                ammoData["action_time"] = QString::number(entity.action_time.get());
+            }
+            if(!entity.available_extension_time){
+                ammoData["available_extension_time"] = "";
+            }else{
+                ammoData["available_extension_time"] = QString::number(entity.available_extension_time.get());
+            }
+            if(!entity.rudder_width){
+                ammoData["rudder_width"] = "";
+            }else{
+                ammoData["rudder_width"] = QString::number(entity.rudder_width.get());
+            }
             ammoData["fuze_model"] = QString::fromStdString(entity.fuze_model);
-            ammoData["number_of_fuses"] = QString::number(entity.number_of_fuses);
-            ammoData["storage_life"] = QString::number(entity.storage_life);
-            ammoData["action_time"] = QString::number(entity.action_time);
-            ammoData["available_extension_time"] = QString::number(entity.available_extension_time);
-            ammoData["rudder_width"] = QString::number(entity.rudder_width);
             ammoData["aerodynamic_configuration"] = QString::fromStdString(entity.aerodynamic_configuration);
             ammoData["working_conditions"] = QString::fromStdString(entity.working_conditions);
-            ammoData["working_temperature"] = QString::number(entity.working_temperature);
-            ammoData["working_altitude"] = QString::number(entity.working_altitude);
+            if(!entity.working_temperature){
+                ammoData["working_temperature"] = "";
+            }else{
+                ammoData["working_temperature"] = QString::number(entity.working_temperature.get());
+            }
+            if(!entity.working_altitude){
+                ammoData["working_altitude"] = "";
+            }else{
+                ammoData["working_altitude"] = QString::number(entity.working_altitude.get());
+            }
+            if(!entity.minimum_visibility_emission){
+                ammoData["minimum_visibility_emission"] = "";
+            }else{
+                ammoData["minimum_visibility_emission"] = QString::number(entity.minimum_visibility_emission.get());
+            }
+            if(!entity.maximum_launch_altitude){
+                ammoData["maximum_launch_altitude"] = "";
+            }else{
+                ammoData["maximum_launch_altitude"] = QString::number(entity.maximum_launch_altitude.get());
+            }
             ammoData["launch_way"] = QString::fromStdString(entity.launch_way);
             ammoData["guidance_rule"] = QString::fromStdString(entity.guidance_rule);
-            ammoData["minimum_visibility_emission"] = QString::number(entity.minimum_visibility_emission);
-            ammoData["maximum_launch_altitude"] = QString::number(entity.maximum_launch_altitude);
-            ammoData["launch_maximum_target_altitude"] = QString::number(entity.launch_maximum_target_altitude);
-            ammoData["maximum_launch_relative_height"] = QString::number(entity.maximum_launch_relative_height);
-            ammoData["minimum_relative_height_launch"] = QString::number(entity.minimum_relative_height_launch);
-            ammoData["launch_speed"] = QString::number(entity.launch_speed);
             ammoData["launch_conditions"] = QString::fromStdString(entity.launch_conditions);
-            ammoData["launch_off_axis_angle"] = QString::number(entity.launch_off_axis_angle);
             ammoData["guidance_way"] = QString::fromStdString(entity.guidance_way);
-            ammoData["effective_range"] = QString::number(entity.effective_range);
-            ammoData["hit_accuracy"] = QString::number(entity.hit_accuracy);
-            ammoData["hit_probability"] = QString::number(entity.hit_probability);
-            ammoData["preparation_time"] = QString::number(entity.preparation_time);
-            ammoData["allow_continuous_flight_time"] = QString::number(entity.allow_continuous_flight_time);
-            ammoData["guided_flight_time"] = QString::number(entity.guided_flight_time);
-            ammoData["maximum_speed_of_missile"] = QString::number(entity.maximum_speed_of_missile);
-            ammoData["guiding_head_working_wavelength"] = QString::number(entity.guiding_head_working_wavelength);
-            ammoData["blind_spot_of_guidance_head"] = QString::number(entity.blind_spot_of_guidance_head);
-            ammoData["guidance_head_frame_angle"] = QString::number(entity.guidance_head_frame_angle);
-            ammoData["guidance_head_operating_distance"] = QString::number(entity.guidance_head_operating_distance);
-            ammoData["guidance_head_field_of_view_angle"] = QString::number(entity.guidance_head_field_of_view_angle);
-            ammoData["guidance_head_field_of_view_angle_linearregion"] = QString::number(entity.guidance_head_field_of_view_angle_linearregion);
-            ammoData["guidance_head_field_of_view_angle_instantaneous"] = QString::number(entity.guidance_head_field_of_view_angle_instantaneous);
-
+            if(!entity.launch_maximum_target_altitude){
+                ammoData["launch_maximum_target_altitude"] = "";
+            }else{
+                ammoData["launch_maximum_target_altitude"] = QString::number(entity.launch_maximum_target_altitude.get());
+            }
+            if(!entity.maximum_launch_relative_height){
+                ammoData["maximum_launch_relative_height"] = "";
+            }else{
+                ammoData["maximum_launch_relative_height"] = QString::number(entity.maximum_launch_relative_height.get());
+            }
+            if(!entity.minimum_relative_height_launch){
+                ammoData["minimum_relative_height_launch"] = "";
+            }else{
+                ammoData["minimum_relative_height_launch"] = QString::number(entity.minimum_relative_height_launch.get());
+            }
+            if(!entity.launch_speed){
+                ammoData["launch_speed"] = "";
+            }else{
+                ammoData["launch_speed"] = QString::number(entity.launch_speed.get());
+            }
+            if(!entity.launch_off_axis_angle){
+                ammoData["launch_off_axis_angle"] = "";
+            }else{
+                ammoData["launch_off_axis_angle"] = QString::number(entity.launch_off_axis_angle.get());
+            }
+            if(!entity.effective_range){
+                ammoData["effective_range"] = "";
+            }else{
+                ammoData["effective_range"] = QString::number(entity.effective_range.get());
+            }
+            if(!entity.hit_accuracy){
+                ammoData["hit_accuracy"] = "";
+            }else{
+                ammoData["hit_accuracy"] = QString::number(entity.hit_accuracy.get());
+            }
+            if(!entity.hit_probability){
+                ammoData["hit_probability"] = "";
+            }else{
+                ammoData["hit_probability"] = QString::number(entity.hit_probability.get());
+            }
+            if(!entity.preparation_time){
+                ammoData["preparation_time"] = "";
+            }else{
+                ammoData["preparation_time"] = QString::number(entity.preparation_time.get());
+            }
+            if(!entity.allow_continuous_flight_time){
+                ammoData["allow_continuous_flight_time"] = "";
+            }else{
+                ammoData["allow_continuous_flight_time"] = QString::number(entity.allow_continuous_flight_time.get());
+            }
+            if(!entity.guided_flight_time){
+                ammoData["guided_flight_time"] = "";
+            }else{
+                ammoData["guided_flight_time"] = QString::number(entity.guided_flight_time.get());
+            }
+            if(!entity.maximum_speed_of_missile){
+                ammoData["maximum_speed_of_missile"] = "";
+            }else{
+                ammoData["maximum_speed_of_missile"] = QString::number(entity.maximum_speed_of_missile.get());
+            }
+            if(!entity.guiding_head_working_wavelength){
+                ammoData["guiding_head_working_wavelength"] = "";
+            }else{
+                ammoData["guiding_head_working_wavelength"] = QString::number(entity.guiding_head_working_wavelength.get());
+            }
+            if(!entity.blind_spot_of_guidance_head){
+                ammoData["blind_spot_of_guidance_head"] = "";
+            }else{
+                ammoData["blind_spot_of_guidance_head"] = QString::number(entity.blind_spot_of_guidance_head.get());
+            }
+            if(!entity.guidance_head_frame_angle){
+                ammoData["guidance_head_frame_angle"] = "";
+            }else{
+                ammoData["guidance_head_frame_angle"] = QString::number(entity.guidance_head_frame_angle.get());
+            }
+            if(!entity.guidance_head_operating_distance){
+                ammoData["guidance_head_operating_distance"] = "";
+            }else{
+                ammoData["guidance_head_operating_distance"] = QString::number(entity.guidance_head_operating_distance.get());
+            }
+            if(!entity.guidance_head_field_of_view_angle){
+                ammoData["guidance_head_field_of_view_angle"] = "";
+            }else{
+                ammoData["guidance_head_field_of_view_angle"] = QString::number(entity.guidance_head_field_of_view_angle.get());
+            }
+            if(!entity.guidance_head_field_of_view_angle_linearregion){
+                ammoData["guidance_head_field_of_view_angle_linearregion"] = "";
+            }else{
+                ammoData["guidance_head_field_of_view_angle_linearregion"] = QString::number(entity.guidance_head_field_of_view_angle_linearregion.get());
+            }
+            if(!entity.guidance_head_field_of_view_angle_instantaneous){
+                ammoData["guidance_head_field_of_view_angle_instantaneous"] = "";
+            }else{
+                ammoData["guidance_head_field_of_view_angle_instantaneous"] = QString::number(entity.guidance_head_field_of_view_angle_instantaneous.get());
+            }
+            if(!entity.guidance_head_operating_frequency){
+                ammoData["guidance_head_operating_frequency"] = "";
+            }else{
+                ammoData["guidance_head_operating_frequency"] = QString::number(entity.guidance_head_operating_frequency.get());
+            }
+            if(!entity.fuse_firing_rate){
+                ammoData["fuse_firing_rate"] = "";
+            }else{
+                ammoData["fuse_firing_rate"] = QString::number(entity.fuse_firing_rate.get());
+            }
+            if(!entity.fuse_length){
+                ammoData["fuse_length"] = "";
+            }else{
+                ammoData["fuse_length"] = QString::number(entity.fuse_length.get());
+            }
+            if(!entity.fuse_diameter){
+                ammoData["fuse_diameter"] = "";
+            }else{
+                ammoData["fuse_diameter"] = QString::number(entity.fuse_diameter.get());
+            }
+            if(!entity.fuze_quality){
+                ammoData["fuze_quality"] = "";
+            }else{
+                ammoData["fuze_quality"] = QString::number(entity.fuze_quality.get());
+            }
+            if(!entity.safe_distance_of_fuse){
+                ammoData["safe_distance_of_fuse"] = "";
+            }else{
+                ammoData["safe_distance_of_fuse"] = QString::number(entity.safe_distance_of_fuse.get());
+            }
+            if(!entity.time_disarming_fuse){
+                ammoData["time_disarming_fuse"] = "";
+            }else{
+                ammoData["time_disarming_fuse"] = QString::number(entity.time_disarming_fuse.get());
+            }
+            if(!entity.first_level_release_time_of_fuse){
+                ammoData["first_level_release_time_of_fuse"] = "";
+            }else{
+                ammoData["first_level_release_time_of_fuse"] = QString::number(entity.first_level_release_time_of_fuse.get());
+            }
+            if(!entity.secondary_release_time_of_fuse){
+                ammoData["secondary_release_time_of_fuse"] = "";
+            }else{
+                ammoData["secondary_release_time_of_fuse"] = QString::number(entity.secondary_release_time_of_fuse.get());
+            }
+            if(!entity.reliability_rate_of_fuse_action){
+                ammoData["reliability_rate_of_fuse_action"] = "";
+            }else{
+                ammoData["reliability_rate_of_fuse_action"] = QString::number(entity.reliability_rate_of_fuse_action.get());
+            }
+            if(!entity.fuse_self_destruct_time){
+                ammoData["fuse_self_destruct_time"] = "";
+            }else{
+                ammoData["fuse_self_destruct_time"] = QString::number(entity.fuse_self_destruct_time.get());
+            }
+            if(!entity.combat_department_quality){
+                ammoData["combat_department_quality"] = "";
+            }else{
+                ammoData["combat_department_quality"] = QString::number(entity.combat_department_quality.get());
+            }
+            if(!entity.combat_quantity){
+                ammoData["combat_quantity"] = "";
+            }else{
+                ammoData["combat_quantity"] = QString::number(entity.combat_quantity.get());
+            }
             ammoData["adaptability_of_guidance_head_sunlight"] = QString::fromStdString(entity.adaptability_of_guidance_head_sunlight);
-            ammoData["guidance_head_operating_frequency"] = QString::number(entity.guidance_head_operating_frequency);
-            ammoData["fuse_firing_rate"] = QString::number(entity.fuse_firing_rate);
             ammoData["fuse_type"] = QString::fromStdString(entity.fuse_type);
-            ammoData["fuse_length"] = QString::number(entity.fuse_length);
-            ammoData["fuse_diameter"] = QString::number(entity.fuse_diameter);
-            ammoData["fuze_quality"] = QString::number(entity.fuze_quality);
-            ammoData["safe_distance_of_fuse"] = QString::number(entity.safe_distance_of_fuse);
-            ammoData["time_disarming_fuse"] = QString::number(entity.time_disarming_fuse);
-            ammoData["first_level_release_time_of_fuse"] = QString::number(entity.first_level_release_time_of_fuse);
-            ammoData["secondary_release_time_of_fuse"] = QString::number(entity.secondary_release_time_of_fuse);
-            ammoData["reliability_rate_of_fuse_action"] = QString::number(entity.reliability_rate_of_fuse_action);
-            ammoData["fuse_self_destruct_time"] = QString::number(entity.fuse_self_destruct_time);
-            ammoData["combat_department_quality"] = QString::number(entity.combat_department_quality);
-            ammoData["combat_quantity"] = QString::number(entity.combat_quantity);
+            if(!entity.combat_length){
+                ammoData["combat_length"] = "";
+            }else{
+                ammoData["combat_length"] = QString::number(entity.combat_length.get());
+            }
+            if(!entity.combat_diameter){
+                ammoData["combat_diameter"] = "";
+            }else{
+                ammoData["combat_diameter"] = QString::number(entity.combat_diameter.get());
+            }
+            if(!entity.combat_charge_density){
+                ammoData["combat_charge_density"] = "";
+            }else{
+                ammoData["combat_charge_density"] = QString::number(entity.combat_charge_density.get());
+            }
+            if(!entity.combat_loading_factor){
+                ammoData["combat_loading_factor"] = "";
+            }else{
+                ammoData["combat_loading_factor"] = QString::number(entity.combat_loading_factor.get());
+            }
+            if(!entity.combat_explosive){
+                ammoData["combat_explosive"] = "";
+            }else{
+                ammoData["combat_explosive"] = QString::number(entity.combat_explosive.get());
+            }
+            if(!entity.combat_fragments_number){
+                ammoData["combat_fragments_number"] = "";
+            }else{
+                ammoData["combat_fragments_number"] = QString::number(entity.combat_fragments_number.get());
+            }
+            if(!entity.combat_effective_killing_radius_vehicles){
+                ammoData["combat_effective_killing_radius_vehicles"] = "";
+            }else{
+                ammoData["combat_effective_killing_radius_vehicles"] = QString::number(entity.combat_effective_killing_radius_vehicles.get());
+            }
+            if(!entity.combat_effective_killing_radius_personnel){
+                ammoData["combat_effective_killing_radius_personnel"] = "";
+            }else{
+                ammoData["combat_effective_killing_radius_personnel"] = QString::number(entity.combat_effective_killing_radius_personnel.get());
+            }
             ammoData["combat_unit_type"] = QString::fromStdString(entity.combat_unit_type);
-            ammoData["combat_length"] = QString::number(entity.combat_length);
-            ammoData["combat_diameter"] = QString::number(entity.combat_diameter);
             ammoData["combat_main_charge_type"] = QString::fromStdString(entity.combat_main_charge_type);
-            ammoData["combat_charge_density"] = QString::number(entity.combat_charge_density);
-            ammoData["combat_loading_factor"] = QString::number(entity.combat_loading_factor);
-            ammoData["combat_explosive"] = QString::number(entity.combat_explosive);
-            ammoData["combat_fragments_number"] = QString::number(entity.combat_fragments_number);
             ammoData["combat_unit_invasion_capability"] = QString::fromStdString(entity.combat_unit_invasion_capability);
-            ammoData["combat_effective_killing_radius_vehicles"] = QString::number(entity.combat_effective_killing_radius_vehicles);
-            ammoData["combat_effective_killing_radius_personnel"] = QString::number(entity.combat_effective_killing_radius_personnel);
-            ammoData["combat_vertical_static_armor_penetration_depth"] = QString::number(entity.combat_vertical_static_armor_penetration_depth);
-            ammoData["combat_department_quality_add"] = QString::number(entity.combat_department_quality_add);
-            ammoData["combat_quantity_add"] = QString::number(entity.combat_quantity_add);
-
+            if(!entity.combat_vertical_static_armor_penetration_depth){
+                ammoData["combat_vertical_static_armor_penetration_depth"] = "";
+            }else{
+                ammoData["combat_vertical_static_armor_penetration_depth"] = QString::number(entity.combat_vertical_static_armor_penetration_depth.get());
+            }
+            if(!entity.combat_department_quality_add){
+                ammoData["combat_department_quality_add"] = "";
+            }else{
+                ammoData["combat_department_quality_add"] = QString::number(entity.combat_department_quality_add.get());
+            }
+            if(!entity.combat_quantity_add){
+                ammoData["combat_quantity_add"] = "";
+            }else{
+                ammoData["combat_quantity_add"] = QString::number(entity.combat_quantity_add.get());
+            }
+            if(!entity.combat_length_add){
+                ammoData["combat_length_add"] = "";
+            }else{
+                ammoData["combat_length_add"] = QString::number(entity.combat_length_add.get());
+            }
+            if(!entity.combat_diameter_add){
+                ammoData["combat_diameter_add"] = "";
+            }else{
+                ammoData["combat_diameter_add"] = QString::number(entity.combat_diameter_add.get());
+            }
+            if(!entity.combat_charge_density_add){
+                ammoData["combat_charge_density_add"] = "";
+            }else{
+                ammoData["combat_charge_density_add"] = QString::number(entity.combat_charge_density_add.get());
+            }
+            if(!entity.combat_loading_factor_add){
+                ammoData["combat_loading_factor_add"] = "";
+            }else{
+                ammoData["combat_loading_factor_add"] = QString::number(entity.combat_loading_factor_add.get());
+            }
+            if(!entity.combat_explosive_add){
+                ammoData["combat_explosive_add"] = "";
+            }else{
+                ammoData["combat_explosive_add"] = QString::number(entity.combat_explosive_add.get());
+            }
+            if(!entity.combat_fragments_number_add){
+                ammoData["combat_fragments_number_add"] = "";
+            }else{
+                ammoData["combat_fragments_number_add"] = QString::number(entity.combat_fragments_number_add.get());
+            }
+            if(!entity.combat_effective_killing_radius_vehicles_add){
+                ammoData["combat_effective_killing_radius_vehicles_add"] = "";
+            }else{
+                ammoData["combat_effective_killing_radius_vehicles_add"] = QString::number(entity.combat_effective_killing_radius_vehicles_add.get());
+            }
+            if(!entity.combat_effective_killing_radius_personnel_add){
+                ammoData["combat_effective_killing_radius_personnel_add"] = "";
+            }else{
+                ammoData["combat_effective_killing_radius_personnel_add"] = QString::number(entity.combat_effective_killing_radius_personnel_add.get());
+            }
             ammoData["combat_unit_type_add"] = QString::fromStdString(entity.combat_unit_type_add);
-            ammoData["combat_length_add"] = QString::number(entity.combat_length_add);
-            ammoData["combat_diameter_add"] = QString::number(entity.combat_diameter_add);
             ammoData["combat_main_charge_type_add"] = QString::fromStdString(entity.combat_main_charge_type_add);
-            ammoData["combat_charge_density_add"] = QString::number(entity.combat_charge_density_add);
-            ammoData["combat_loading_factor_add"] = QString::number(entity.combat_loading_factor_add);
-            ammoData["combat_explosive_add"] = QString::number(entity.combat_explosive_add);
-            ammoData["combat_fragments_number_add"] = QString::number(entity.combat_fragments_number_add);
             ammoData["combat_unit_invasion_capability_add"] = QString::fromStdString(entity.combat_unit_invasion_capability_add);
-            ammoData["combat_effective_killing_radius_vehicles_add"] = QString::number(entity.combat_effective_killing_radius_vehicles_add);
-            ammoData["combat_effective_killing_radius_personnel_add"] = QString::number(entity.combat_effective_killing_radius_personnel_add);
-            ammoData["combat_vertical_static_armor_penetration_depth_add"] = QString::number(entity.combat_vertical_static_armor_penetration_depth_add);
-            ammoData["service_life"] = QString::number(entity.service_life);
-            ammoData["distance_between_center_mass_end"] = QString::number(entity.distance_between_center_mass_end);
+
+            if(!entity.combat_vertical_static_armor_penetration_depth_add){
+                ammoData["combat_vertical_static_armor_penetration_depth_add"] = "";
+            }else{
+                ammoData["combat_vertical_static_armor_penetration_depth_add"] = QString::number(entity.combat_vertical_static_armor_penetration_depth_add.get());
+            }
+            if(!entity.service_life){
+                ammoData["service_life"] = "";
+            }else{
+                ammoData["service_life"] = QString::number(entity.service_life.get());
+            }
+            if(!entity.distance_between_center_mass_end){
+                ammoData["distance_between_center_mass_end"] = "";
+            }else{
+                ammoData["distance_between_center_mass_end"] = QString::number(entity.distance_between_center_mass_end.get());
+            }
+            if(!entity.distance_suspension_lifting_lug){
+                ammoData["distance_suspension_lifting_lug"] = "";
+            }else{
+                ammoData["distance_suspension_lifting_lug"] = QString::number(entity.distance_suspension_lifting_lug.get());
+            }
+
             ammoData["lifting_lug"] = QString::fromStdString(entity.lifting_lug);
-            ammoData["distance_suspension_lifting_lug"] = QString::number(entity.distance_suspension_lifting_lug);
+
             //ammoData["image_url"] = QString::fromStdString(entity.image_url);
            /******************** 系统记录 ********************/
             //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();

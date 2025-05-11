@@ -457,16 +457,6 @@ QJsonObject ReconnaissanceCommunicationDao::queryReconnaissanceCommunicationData
                reconnaissanceCommunicationData["fourthPositioningFrequencyMaximum"] = QString::number(entity.fourthPositioningFrequencyMaximum_.get());
             }
             // 格式化为字符串（保留5位小数）
-            // QString formattedValue = QString::number(entity.uavLength_, 'f', 5);
-            // reconnaissanceCommunicationData["uavLengthhangingCapacityStr"] = formattedValue;
-            //reconnaissanceCommunicationData["hardpoint_loc"] = QString::fromStdString(entity.uavHangingLoctionCapacity_);
-            // entity.uavHangingpoints_ = reconnaissanceCommunicationData["hardpoint_num"].toInt();
-            // entity.uavPayloadcapacity_ = reconnaissanceCommunicationData["payload_capacity"].toInt();
-
-            //reconnaissanceCommunicationData["imageUrl"] = QString::fromStdString(entity.imageUrl_);
-
-            /******************** 系统记录 ********************/
-            //entity.uavCreatModelTime_ = recordCreationTime.toTime_t();
             //reconnaissanceCommunicationData["image_name"] = QString::fromStdString(entity.uavImgName_);
 
             // QByteArray imageData(entity.imageName_.data(), entity.imageName_.size());
@@ -594,48 +584,6 @@ bool ReconnaissanceCommunicationDao::updateReconnaissanceCommunicationData(const
         entity.usedUavModels_ = object["usedUavModels"].toString().toStdString();;
         entity.description_ =  object["description"].toString().toStdString();
         // 处理数值类型（示例）/******************** 尺寸参数 ********************/
-        // entity.frequencyMinimum_ = object["frequencyMinimum"].toDouble(); // 假设返回float// 使用 QString::number 方法转换 float
-        // entity.frequencyMaximum_ = object["frequencyMaximum"].toDouble();
-        // entity.firstReconnaissanceRange_ = object["firstReconnaissanceRange"].toDouble();
-        // entity.firstReconnaissanceFrequencyMinimum_ = object["firstReconnaissanceFrequencyMinimum"].toDouble();
-        // entity.firstReconnaissanceFrequencyMaximum_ = object["firstReconnaissanceFrequencyMaximum"].toDouble();
-        // entity.firstReconnaissanceRadiatedPower_ = object["firstReconnaissanceRadiatedPower"].toDouble();
-        // entity.secondReconnaissanceRange_ = object["secondReconnaissanceRange"].toDouble();
-        // entity.secondReconnaissanceFrequencyMinimum_ = object["secondReconnaissanceFrequencyMinimum"].toDouble();
-        // entity.secondReconnaissanceFrequencyMaximum_ = object["secondReconnaissanceFrequencyMaximum"].toDouble();
-        // entity.secondReconnaissanceRadiatedPower_ = object["secondReconnaissanceRadiatedPower"].toDouble();
-        // entity.thirdReconnaissanceRange_ = object["thirdReconnaissanceRange"].toDouble();
-        // entity.thirdReconnaissanceFrequencyMinimum_ = object["thirdReconnaissanceFrequencyMinimum"].toDouble();
-        // entity.thirdReconnaissanceFrequencyMaximum_ = object["thirdReconnaissanceFrequencyMaximum"].toDouble();
-        // entity.thirdReconnaissanceRadiatedPower_ = object["thirdReconnaissanceRadiatedPower"].toDouble();
-        // entity.fourthReconnaissanceRange_ = object["fourthReconnaissanceRange"].toDouble();
-        // entity.fourthReconnaissanceFrequencyMinimum_ = object["fourthReconnaissanceFrequencyMinimum"].toDouble();
-        // entity.fourthReconnaissanceFrequencyMaximum_ = object["fourthReconnaissanceFrequencyMaximum"].toDouble();
-        // entity.fourthReconnaissanceRadiatedPower_ = object["fourthReconnaissanceRadiatedPower"].toDouble();
-        // entity.firstOrientationAccuracy_ = object["firstOrientationAccuracy"].toDouble();
-        // entity.firstOrientationFrequencyMinimum_ = object["firstOrientationFrequencyMinimum"].toDouble();
-        // entity.firstOrientationFrequencyMaximum_ = object["firstOrientationFrequencyMaximum"].toDouble();
-        // entity.secondOrientationAccuracy_ = object["secondOrientationAccuracy"].toDouble();
-        // entity.secondOrientationFrequencyMinimum_ = object["secondOrientationFrequencyMinimum"].toDouble();
-        // entity.secondOrientationFrequencyMaximum_ = object["secondOrientationFrequencyMaximum"].toDouble();
-        // entity.thirdOrientationAccuracy_ = object["thirdOrientationAccuracy"].toDouble();
-        // entity.thirdOrientationFrequencyMinimum_ = object["thirdOrientationFrequencyMinimum"].toDouble();
-        // entity.thirdOrientationFrequencyMaximum_ = object["thirdOrientationFrequencyMaximum"].toDouble();
-        // entity.fourthOrientationAccuracy_ = object["fourthOrientationAccuracy"].toDouble();
-        // entity.fourthOrientationFrequencyMinimum_ = object["fourthOrientationFrequencyMinimum"].toDouble();
-        // entity.fourthOrientationFrequencyMaximum_ = object["fourthOrientationFrequencyMaximum"].toDouble();
-        // entity.firstPositioningAccuracy_ = object["firstPositioningAccuracy"].toDouble();
-        // entity.firstPositioningFrequencyMinimum_ = object["firstPositioningFrequencyMinimum"].toDouble();
-        // entity.firstPositioningFrequencyMaximum_ = object["firstPositioningFrequencyMaximum"].toDouble();
-        // entity.secondPositioningAccuracy_ = object["secondPositioningAccuracy"].toDouble();
-        // entity.secondPositioningFrequencyMinimum_ = object["secondPositioningFrequencyMinimum"].toDouble();
-        // entity.secondPositioningFrequencyMaximum_ = object["secondPositioningFrequencyMaximum"].toDouble();
-        // entity.thirdPositioningAccuracy_ = object["thirdPositioningAccuracy"].toDouble();
-        // entity.thirdPositioningFrequencyMinimum_ = object["thirdPositioningFrequencyMinimum"].toDouble();
-        // entity.thirdPositioningFrequencyMaximum_ = object["thirdPositioningFrequencyMaximum"].toDouble();
-        // entity.fourthPositioningAccuracy_ = object["fourthPositioningAccuracy"].toDouble();
-        // entity.fourthPositioningFrequencyMinimum_ = object["fourthPositioningFrequencyMinimum"].toDouble();
-        // entity.fourthPositioningFrequencyMaximum_ = object["fourthPositioningFrequencyMaximum"].toDouble();
         if(object["frequencyMinimum"].isNull()){
 
         }else{
@@ -999,22 +947,18 @@ bool ReconnaissanceCommunicationDao::insertReconnaissanceCommunicationData(const
         entity.description_ =  object["description"].toString().toStdString();
         // 处理数值类型（示例）/******************** 尺寸参数 ********************/
         if(object["frequencyMinimum"].isNull()){
-
         }else{
           entity.frequencyMinimum_ = object["frequencyMinimum"].toDouble(); // 假设返回float// 使用 QString::number 方法转换 float
         }
         if(object["frequencyMaximum"].isNull()){
-
         }else{
             entity.frequencyMaximum_ = object["frequencyMaximum"].toDouble();
         }
         if(object["firstReconnaissanceRange"].isNull()){
-
         }else{
            entity.firstReconnaissanceRange_ = object["firstReconnaissanceRange"].toDouble();
         }
         if(object["firstReconnaissanceFrequencyMinimum"].isNull()){
-
         }else{
             entity.firstReconnaissanceFrequencyMinimum_ = object["firstReconnaissanceFrequencyMinimum"].toDouble();
         }

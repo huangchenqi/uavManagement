@@ -691,7 +691,7 @@ QJsonObject UavModelDao::queryMountSchemeToUavMod(const QJsonObject &object)
                     QJsonObject uavLoadAmmoObj;
                     uavLoadAmmoObj["ammoId"] = QString::number(load.id_);
                     uavLoadAmmoObj["ammoName"] = QString::fromStdString(load.ammoName_);
-                    uavLoadAmmoObj["ammoWeight"] = QString::number(load.ammoMass_);
+                    uavLoadAmmoObj["ammoWeight"] = QString::number(load.ammoMass_.get());
                     //qDebug() << "loaded: " << load.ammoName_.c_str();
                     arr.append(uavLoadAmmoObj);//QString::fromStdString(load.ammoName_
                 }
